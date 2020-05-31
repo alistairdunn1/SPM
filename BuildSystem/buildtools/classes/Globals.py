@@ -4,7 +4,7 @@ using throughout the build system
 """
 import os
 
-SPM_version_number= "2.0.2"
+SPM_version_number= "2.0.3"
 operating_system_ = ""
 path_             = ""
 compiler_path_    = ""

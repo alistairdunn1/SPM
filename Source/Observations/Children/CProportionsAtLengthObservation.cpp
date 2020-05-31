@@ -305,9 +305,9 @@ void CProportionsAtLengthObservation::execute() {
         double dStartValue  = pStartSquare->getValue(i, j);
         double dEndValue    = pSquare->getValue(i, j);
         if(sProportionMethod == PARAM_MEAN) {
-          vTemp[j] = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          vTemp[j] = std::abs(dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep));
         } else {
-          vTemp[j] = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+          vTemp[j] = std::abs((dStartValue - dEndValue) * dProportionTimeStep);
         }
       }
       for (int j = 0; j < (int)pSquare->getWidth(); ++j) {

@@ -226,6 +226,7 @@ void CHollingMortalityRateProcess::execute() {
           }
         } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
+		  continue;
         }
 
         // Loop Through Categories & remove number based on calcuated exploitation rate

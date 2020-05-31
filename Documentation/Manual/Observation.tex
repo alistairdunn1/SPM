@@ -19,9 +19,9 @@ The definitions for each type of observation are described below, including how 
 
 \SPM\ evaluates the observations at the end of a time-step (i.e., after all of the processes for that time-step have been applied). However, the observation can be applied to the abundance at the start of a time-step or part-way through a time-step by the use of the \subcommand{proportion\_time\_step} subcommand. 
 
-By default (i.e., if \subcommand{proportion\_method} \texttt{= mean}), the partition at some point $p$ during the time-step is then evaluated as the weighted sum between the start and end of the time-step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$. Note that it may not be sensible to use a value other than one, depending on the processes that happen during the time-step (for example, if the time-step contains an ageing process).
+By default (i.e., if \subcommand{proportion\_method} \texttt{= mean}), the partition at some point $p$ during the time-step is then evaluated as the weighted sum between the start and end of the time-step, i.e, for any element $i$ in the partition, $n_i=\left|(1-p) n_i^{start} + p n_i^{end}\right|$. Note that it may not be sensible to use a value other than zero or one, depending on the processes that happen during the time-step (for example, if the time-step contains an ageing process).
 
-If the \subcommand{proportion\_method} \texttt{= difference}, then the observation is of the \emph{difference} between the population state at the start of the time-step and the end. This can be used to generate expected values for observations of, for example removals due to a mortality event, by only having a single process in the time-step. In this case, the proportion\_time\_step is simply a multiplier of the population state.
+If the \subcommand{proportion\_method} \texttt{= difference}, then the observation is of the \emph{difference} between the population state at the start of the time-step and the end, i.e., for any element $i$ in the partition, $n_i=\left|p(n_i^{start} - n_i^{end})\right|$. This can be used to generate expected values for observations of, for example removals due to a mortality event, by only having a single process in the time-step. In this case, the proportion\_time\_step is simply a multiplier of the population state.
 
 \subsection{\I{Proportions-at-age observations}}
 
@@ -911,8 +911,8 @@ Methods for generating the random error, and hence simulated values, depend on t
   \end{enumerate}
   \item{} Multinomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and let $N$ be the sample size (adjusted by process error if applicable, and then rounded up to the next whole number). The robustification parameter $\delta$ is ignored. Then, 
   \begin{enumerate}
-    \item{} A sample of $N$ values from $1$ to $n$ is generated using the binomial distribution, using sample probabilities proportional to the values of $E_i$
-    \item{} Each simulated observation value $S_i$ is calculated as the proportion of the $N$ sampled values equalling $i$
+    \item{} A sample of $N$ values from $1$ to $n$ is generated using the multinomial distribution, using sample probabilities proportional to the values of $E_i$
+    \item{} Each simulated observation value $S_i$ is calculated as the proportion of the $N$ values equalling $i$
     \item{} The simulated observation values $S_i$ are then rescaled so that their sum is equal to $1$
   \end{enumerate}
 \item{} Binomial and the normal approximation to the binomial likelihoods: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and $N_i$ the corresponding equivalent sample size (adjusted by process error if applicable, and then rounded up to the next whole number). The robustification parameter $\delta$ is ignored. Then, 

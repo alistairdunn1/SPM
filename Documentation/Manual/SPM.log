@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.4.23)  30 APR 2020 18:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7420 64-bit) (preloaded format=pdflatex 2020.5.31)  31 MAY 2020 16:24
 entering extended mode
 **./SPM.tex
 (SPM.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-04-06>
+L3 programming layer <2020-05-11>
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size11.clo"
@@ -23,11 +23,11 @@ File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption.st
 y"
-Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+Package: caption 2020/05/10 v3.4j Customizing captions (AR)
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption3.s
 ty"
-Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package: caption3 2020/05/10 v1.11 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.st
@@ -517,7 +517,7 @@ Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
 d-pdfmode.def"
-File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count279
 \l__pdf_internal_box=\box53
 ) (SPM.aux (Introduction.aux) (Overview.aux) (RunningSPM.aux)
@@ -953,10 +953,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
 ### simple group (level 1) entered at line 84 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12286 strings out of 480896
- 189147 string characters out of 2898165
- 585519 words of memory out of 3000000
- 26474 multiletter control sequences out of 15000+200000
+ 12338 strings out of 480777
+ 190465 string characters out of 2894567
+ 585361 words of memory out of 3000000
+ 26647 multiletter control sequences out of 15000+200000
  608580 words of font info for 178 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,15n,45p,1464b,2281s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -977,9 +977,9 @@ type1/urw/times/utmb8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SPM.pdf (237 pages, 1201583 bytes).
+Output written on SPM.pdf (237 pages, 1202035 bytes).
 PDF statistics:
- 4038 PDF objects out of 4296 (max. 8388607)
- 1166 named destinations out of 1200 (max. 500000)
+ 4039 PDF objects out of 4296 (max. 8388607)
+ 1167 named destinations out of 1200 (max. 500000)
  2351 words of extra memory for PDF output out of 10000 (max. 10000000)
 

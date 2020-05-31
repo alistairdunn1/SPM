@@ -195,6 +195,7 @@ void CBiomassEventMortalityProcess::execute() {
           }
         } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
+		  continue;
         }
 
         // Loop Through Categories & remove number based on calculated exploitation rate

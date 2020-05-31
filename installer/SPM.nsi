@@ -170,7 +170,7 @@ SectionEnd
 
 Section /o "Copy the R library" SEC06
   SetOutPath "$INSTDIR"
-  File "..\\Build\\spm_2.0.2.zip"
+  File "..\\Build\\spm_2.0.3.zip"
 SectionEnd
 
 Section /o "Copy the syntax files" SEC08
