@@ -340,7 +340,7 @@ void CProportionsByCategoryObservation::execute() {
 	  vAdjustedObserved.push_back(vObserved[i] * dDetectionProbability);
     pLikelihood->simulateObserved(vKeys, vAdjustedObserved, vExpected, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vObserved.size(); ++i)
-      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 1.0, 0.0);
+      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vAdjustedObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 1.0, 0.0);
 
   } else { // Generate Score
     dScore = 0.0;

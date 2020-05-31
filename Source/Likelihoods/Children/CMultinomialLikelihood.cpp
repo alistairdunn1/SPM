@@ -91,8 +91,8 @@ void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector
 	// Get expected values for this key
     for (int j = 0; j < (int)keys.size(); ++j) {
 	  if(vUniqueKeys[i] == keys[j]) {
-		vExpected.push_back(expected[i]);
-		dTotal += expected[i];
+		vExpected.push_back(expected[j]);
+		dTotal += expected[j];
 	  }
 	}
 	// rescale to ensure the total expected = 1
