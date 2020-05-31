@@ -1,4 +1,4 @@
-SPM v2.0.2-2020-04-24
+SPM v2.0.3-2020-05-31
 =====================
 
 Spatial Population Model (SPM)
@@ -11,5 +11,5 @@ This repository is a fork of the NIWA SPM code base from 2018 and is actively un
 
 The suitable reference for citing the original version of SPM is: Dunn, A.; Rasmussen, S.; Mormede, S. (2018). Spatial Population Model User Manual, SPM v1.1-2018-05-31 (rev. 1291) NIWA Technical Report 138. NIWA, Wellington, New Zealand, 210 p.
 
-The current release version is 2.0.2-2020-04-24 (rev. 2020-04-24 01:19:01 UTC). See the user manual for more information and a suitable reference for this version.
+The current release version is 2.0.3-2020-05-31. See the user manual for more information and a suitable reference for this version.
 
