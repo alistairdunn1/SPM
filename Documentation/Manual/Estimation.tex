@@ -48,6 +48,17 @@ All parameters are estimated within bounds\index{Bounds}. For each parameter to 
 
 The estimation of parameters can be phased. Here, some of the estimated parameters are initially held fixed, and a minimisation is carried out. Next, some or all of the remaining parameters that were initially held fixed are freed, and another minimisation is carried out. This process continues until all phases have been carried out.
 
+In addition, two or more parameters can be forced to be equal during estimation by using the \subcommand{same} subcommand, i.e.,
+{\small{\begin{verbatim}
+  @estimate process[SelectivityOne].a50
+  same process[SelectivityTwo].a50 process[SelectivityThree].a50
+  lower_bound 3
+  upper_bound 15
+  type uniform
+\end{verbatim}}}
+
+Parameters specified using the \subcommand{same} argument cannot be specified in a separate \command{estimate} block.
+
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
 Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser \index{Differential evolution minimiser}. However, the second minimiser does not produce an estimate of the covariance matrix, and hence cannot be used to start an MCMC.

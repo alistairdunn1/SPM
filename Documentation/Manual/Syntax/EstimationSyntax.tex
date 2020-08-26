@@ -91,8 +91,8 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \defSub{max\_generations} {Define the maximum generations for the minimiser convergence}
 \defType{Constant}
-\defDefault{0.002}
-\defValue{A positive real number}
+\defDefault{1000}
+\defValue{A positive integer}
 
 \defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
@@ -207,7 +207,7 @@ Only one method of carrying out MCMCs is available, Markov Chain Monte Carlo usi
 \defSub{same}{Names of the other parameters which are constrained to have the same value}
 \defType{String Vector}
 \defDefault{No default}
-\defValue{Defines the names of all the other parameters which are constrained to have the same value as this parameter}
+\defValue{Defines the names of all the other parameters which are constrained to have the same value as this parameter. Do \emph{not} put these parameters in as a separate \command{estimate} block as well.}
 
 \defSub{lower\_bound}{Lower bounds on this parameter}
 \defType{Constant vector, of length equal to the parameter length}

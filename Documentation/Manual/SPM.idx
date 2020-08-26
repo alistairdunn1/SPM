@@ -268,26 +268,26 @@
 \indexentry{Finite differences minimiser|hyperpage}{58}
 \indexentry{Differential evolution minimiser|hyperpage}{58}
 \indexentry{The numerical differences minimiser|hyperpage}{58}
-\indexentry{Quasi-Newton iterations|hyperpage}{58}
-\indexentry{Objective function evaluations|hyperpage}{58}
-\indexentry{Convergence failure|hyperpage}{58}
-\indexentry{Successful convergence|hyperpage}{58}
+\indexentry{Quasi-Newton iterations|hyperpage}{59}
+\indexentry{Objective function evaluations|hyperpage}{59}
+\indexentry{Convergence failure|hyperpage}{59}
+\indexentry{Successful convergence|hyperpage}{59}
 \indexentry{Local minimums|hyperpage}{59}
 \indexentry{Covariance matrix|hyperpage}{59}
 \indexentry{Hessian|hyperpage}{59}
 \indexentry{Correlation matrix|hyperpage}{59}
 \indexentry{The differential evolution minimiser|hyperpage}{59}
-\indexentry{Posterior profiles|hyperpage}{59}
+\indexentry{Posterior profiles|hyperpage}{60}
 \indexentry{Bayesian estimation|hyperpage}{60}
 \indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{60}
 \indexentry{MCMC|hyperpage}{60}
 \indexentry{Bayesian estimation|hyperpage}{60}
-\indexentry{Uniform prior|hyperpage}{62}
-\indexentry{Priors ! Uniform|hyperpage}{62}
-\indexentry{Uniform-log prior|hyperpage}{62}
-\indexentry{Priors ! Uniform-log|hyperpage}{62}
-\indexentry{Normal prior|hyperpage}{62}
-\indexentry{Priors ! Normal|hyperpage}{62}
+\indexentry{Uniform prior|hyperpage}{63}
+\indexentry{Priors ! Uniform|hyperpage}{63}
+\indexentry{Uniform-log prior|hyperpage}{63}
+\indexentry{Priors ! Uniform-log|hyperpage}{63}
+\indexentry{Normal prior|hyperpage}{63}
+\indexentry{Priors ! Normal|hyperpage}{63}
 \indexentry{Lognormal prior|hyperpage}{63}
 \indexentry{Priors ! Lognormal|hyperpage}{63}
 \indexentry{Beta prior|hyperpage}{63}

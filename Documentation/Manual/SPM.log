@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7420 64-bit) (preloaded format=pdflatex 2020.5.31)  31 MAY 2020 20:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.8.26)  26 AUG 2020 12:21
 entering extended mode
 **./SPM.tex
 (SPM.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-05-11>
+L3 programming layer <2020-06-18>
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size11.clo"
@@ -23,11 +23,11 @@ File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption.st
 y"
-Package: caption 2020/05/10 v3.4j Customizing captions (AR)
+Package: caption 2020/05/30 v3.4k Customizing captions (AR)
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption3.s
 ty"
-Package: caption3 2020/05/10 v1.11 caption3 kernel (AR)
+Package: caption3 2020/05/30 v1.12 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.st
@@ -90,7 +90,7 @@ y"
  Excluding comment 'comment')
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperref.
 sty"
-Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcmds\ltxcmds.
 sty"
@@ -101,7 +101,7 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 )
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdftexcmds\pdftexc
 mds.sty"
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/generic/infwarerr\infwar
@@ -146,7 +146,7 @@ Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\pd1enc.de
 f"
-File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -159,23 +159,23 @@ s.sty"
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count181
-Package hyperref Info: Option `bookmarks' set `true' on input line 4421.
-Package hyperref Info: Option `bookmarksopen' set `false' on input line 4421.
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 4421
+Package hyperref Info: Option `bookmarks' set `true' on input line 4338.
+Package hyperref Info: Option `bookmarksopen' set `false' on input line 4338.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 4338
 .
-Package hyperref Info: Hyper figures OFF on input line 4547.
-Package hyperref Info: Link nesting OFF on input line 4552.
-Package hyperref Info: Hyper index ON on input line 4555.
-Package hyperref Info: Plain pages OFF on input line 4562.
-Package hyperref Info: Backreferencing OFF on input line 4567.
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4800.
+Package hyperref Info: Bookmarks ON on input line 4717.
 \c@Hy@tempcnt=\count182
  ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty"
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5159.
+LaTeX Info: Redefining \url on input line 5076.
 \XeTeXLinkMargin=\dimen149
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bitset\bitset.st
@@ -190,15 +190,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 \Fld@menulength=\count183
 \Field@Width=\dimen150
 \Fld@charsize=\dimen151
-Package hyperref Info: Hyper figures OFF on input line 6430.
-Package hyperref Info: Link nesting OFF on input line 6435.
-Package hyperref Info: Hyper index ON on input line 6438.
-Package hyperref Info: backreferencing OFF on input line 6445.
-Package hyperref Info: Link coloring OFF on input line 6450.
-Package hyperref Info: Link coloring with OCG OFF on input line 6455.
-Package hyperref Info: PDF/A mode OFF on input line 6460.
-LaTeX Info: Redefining \ref on input line 6500.
-LaTeX Info: Redefining \pageref on input line 6504.
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/generic/atbegshi\atbegsh
 i.sty"
@@ -212,7 +212,7 @@ Package hyperref Info: Driver: hpdftex.
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hpdftex.d
 ef"
-File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
 
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/atveryend\atveryen
 d.sty"
@@ -517,7 +517,7 @@ Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
 ("C:\Users\alist\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
 d-pdfmode.def"
-File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-06-18 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count279
 \l__pdf_internal_box=\box53
 ) (SPM.aux (Introduction.aux) (Overview.aux) (RunningSPM.aux)
@@ -758,15 +758,14 @@ Package pdftex.def Info: Figures/SquareStructure.png  used on input line 36.
 
 
 
-] [58.70] [59.71] [60.72] [61.73] [62.74])
-[63.75] [64.76
-
-
-
-]
+] [58.70] [59.71] [60.72] [61.73] [62.74]
+[63.75]) [64.76]
 \openout2 = `Observation.aux'.
 
  (Observation.tex [65.77
+
+
+
 
 ] [66.78]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
@@ -953,10 +952,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
 ### simple group (level 1) entered at line 84 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12338 strings out of 480777
- 190465 string characters out of 2894567
- 585361 words of memory out of 3000000
- 26647 multiletter control sequences out of 15000+200000
+ 12341 strings out of 480756
+ 190516 string characters out of 2893794
+ 585520 words of memory out of 3000000
+ 26668 multiletter control sequences out of 15000+200000
  608580 words of font info for 178 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,15n,45p,1464b,2281s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -977,7 +976,7 @@ type1/urw/times/utmb8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SPM.pdf (237 pages, 1202033 bytes).
+Output written on SPM.pdf (237 pages, 1202830 bytes).
 PDF statistics:
  4039 PDF objects out of 4296 (max. 8388607)
  1167 named destinations out of 1200 (max. 500000)

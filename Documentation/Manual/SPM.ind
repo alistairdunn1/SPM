@@ -93,7 +93,7 @@
   \item Constant mortality, \hyperpage{31}
   \item Constant preference function, \hyperpage{44}
   \item Constant Recruitment, \hyperpage{27}
-  \item Convergence failure, \hyperpage{58}
+  \item Convergence failure, \hyperpage{59}
   \item Copulas, \hyperpage{46}
   \item Correlation matrix, \hyperpage{59}
   \item Covariance matrix, \hyperpage{57}, \hyperpage{59}
@@ -251,7 +251,7 @@
     \subitem  abundance, \hyperpage{80}
     \subitem  biomass, \hyperpage{80}
   \item Normal preference function, \hyperpage{44}
-  \item Normal prior, \hyperpage{62}
+  \item Normal prior, \hyperpage{63}
   \item Notifying errors, \hyperpage{2}
   \item Numeric layers, \hyperpage{18}
   \item Numeric meta-layers, \hyperpage{22}
@@ -259,7 +259,7 @@
   \indexspace
 
   \item Objective function, \hyperpage{58}
-  \item Objective function evaluations, \hyperpage{58}
+  \item Objective function evaluations, \hyperpage{59}
   \item Observation section, \hyperpage{6, 7}
   \item Observation types, \hyperpage{143}
   \item Observations, \hyperpage{65}
@@ -275,7 +275,7 @@
   \item Population processes, \hyperpage{25, 26}
   \item Population section, \hyperpage{6}, \hyperpage{15}
   \item Population structure, \hyperpage{16}
-  \item Posterior profiles, \hyperpage{59}
+  \item Posterior profiles, \hyperpage{60}
   \item Preference function, \hyperpage{43, 44}
   \item Preference function 
     \subitem  Categorical, \hyperpage{45}
@@ -322,9 +322,9 @@
   \item Priors 
     \subitem  Beta, \hyperpage{63}
     \subitem  Lognormal, \hyperpage{63}
-    \subitem  Normal, \hyperpage{62}
-    \subitem  Uniform, \hyperpage{62}
-    \subitem  Uniform-log, \hyperpage{62}
+    \subitem  Normal, \hyperpage{63}
+    \subitem  Uniform, \hyperpage{63}
+    \subitem  Uniform-log, \hyperpage{63}
   \item Probability Density Functions, \hyperpage{114}
   \item Probability Distribution Functions (PDF), \hyperpage{46}
   \item process error, \hyperpage{82}
@@ -347,7 +347,7 @@
 
   \indexspace
 
-  \item Quasi-Newton iterations, \hyperpage{58}
+  \item Quasi-Newton iterations, \hyperpage{59}
 
   \indexspace
 
@@ -424,7 +424,7 @@
   \item standard output, \hyperpage{10}
   \item State, \hyperpage{5}
   \item Subcommand argument type, \hyperpage{12}
-  \item Successful convergence, \hyperpage{58}
+  \item Successful convergence, \hyperpage{59}
   \item System requirements, \hyperpage{2}
 
   \indexspace
@@ -449,8 +449,8 @@
   \indexspace
 
   \item Uniform density function, \hyperpage{46}
-  \item Uniform prior, \hyperpage{62}
-  \item Uniform-log prior, \hyperpage{62}
+  \item Uniform prior, \hyperpage{63}
+  \item Uniform-log prior, \hyperpage{63}
   \item User assistance, \hyperpage{2}
   \item Using \texttt  {SPM}, \hyperpage{9}
 
