@@ -13,7 +13,7 @@ from Builder import *
 EX_OK = getattr(os, "EX_OK", 0)
 
 """
-This class is responsible for building the main code base of the project
+This class is responsible for combining the project binaries into a simple archive
 """
 class Archiver:
   cmake_compiler_ = ""
@@ -92,12 +92,14 @@ class Archiver:
     os.system('cp -r ../Installer/README.make ' + output_directory)
 
     os.system('cp -r Setup_SPM.exe ' + output_directory)
-    os.system('cp -r SPM*.* ' + output_directory)\
+    os.system('cp -r SPM*.* ' + output_directory)
     
     if Globals.operating_system_ == "windows":
+      os.system('cp -r windows/spm*.* ' + output_directory)
       os.chdir(output_directory)
       os.system("zip -r ../spm_archive.zip *")
     else:
+      os.system('cp -r linux/spm*.* ' + output_directory)
       os.system('tar cvf spm.tar spm/')
       os.system('gzip spm.tar')
       os.system('mv spm.tar.gz ' + output_directory + 'spm.tar.gz')
