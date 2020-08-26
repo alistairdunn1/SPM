@@ -77,9 +77,16 @@ void CAbundanceObservation::validate() {
         string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
         throw Ex;
       }
-      // Check for non-positive values in our observation values (for all likihoods)
-      if(mProportionMatrix[vOBS[i]] <= 0.0)
-        CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
+
+      // Check for non-positive values in our observation values (for all likelihoods except normal)
+	  //       or negative values in the normal likelihood
+      if(sLikelihood==PARAM_NORMAL) {
+        if(mProportionMatrix[vOBS[i]] < 0.0)
+          CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
+	  } else {
+        if(mProportionMatrix[vOBS[i]] <= 0.0)
+          CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
+      }
     }
 
     if (dProcessError < 0)
