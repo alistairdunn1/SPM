@@ -13,6 +13,7 @@ from System import *
 from Globals import *
 from Builder import *
 from Documentation import *
+from Examples import *
 from Archiver import *
 from UnitTests import *
 from Installer import *
@@ -63,9 +64,9 @@ def start():
 	elif build_target == "unittests":
 		unit_tests = UnitTests()
 		return unit_tests.start()
-	#elif build_target == "examples":
-	#	examples = Examples()
-	#	return examples.start()
+	elif build_target == "examples":
+		examples = Examples()
+		return examples.start()
 	elif build_target == "clean":
 		cleaner = Cleaner()
 		return cleaner.clean()

@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: ..\..\Build\windows\spm -m -q -g 0 
-Date: Wed Apr 22 15:15:32 2020
-v2.0.2-2020-04-21 (rev. 2020-04-21 11:34:49 UTC). Copyright (c) 2008-2020, NIWA
+Date: Sat Aug 29 10:43:09 2020
+v2.0.3-2020-08-26 (rev. 2020-08-26 10:11:36 UTC). Copyright (c) 2008-2020, NIWA
 User name: alist
-Machine name: HP1040 (Windows_NT, PID=7088)
+Machine name: HP1040 (Windows_NT, PID=17764)
 
 [MCMC]
 report.type: MCMC

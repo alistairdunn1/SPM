@@ -33,7 +33,7 @@ target_release_lib_path_ = ""
 threads_          = "8"
 boost_version     = 'boost_1_71_0'
 
-allowed_build_targets_ = [ "release", "documentation", "boost", "archive", "clean", 
+allowed_build_targets_ = [ "release", "examples", "documentation", "boost", "archive", "clean", 
                            "check", "unittests", "installer", "deb", "rlibrary", "version"]
 
 EX_OK = getattr(os, "EX_OK", 0)

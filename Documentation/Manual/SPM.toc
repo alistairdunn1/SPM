@@ -268,21 +268,21 @@
 \contentsline {section}{\numberline {13}Examples}{175}{section.13}%
 \contentsline {subsection}{\numberline {13.1}An example of a simple $ 1 \times 1 $\ non-spatial model}{175}{subsection.13.1}%
 \contentsline {subsection}{\numberline {13.2}An example of a simple $ 10 \times 6 $\ spatial model with movement}{179}{subsection.13.2}%
-\contentsline {section}{\numberline {14}Post processing output using \textbf {R}}{185}{section.14}%
-\contentsline {subsection}{\numberline {14.1}Read and extract reports from a SPM output file.}{185}{subsection.14.1}%
-\contentsline {subsection}{\numberline {14.2}Read and write \texttt {SPM}\ config files.}{185}{subsection.14.2}%
-\contentsline {section}{\numberline {15}Changes from previous versions}{187}{section.15}%
-\contentsline {section}{\numberline {16}Troubleshooting}{189}{section.16}%
-\contentsline {subsection}{\numberline {16.1}Introduction}{189}{subsection.16.1}%
-\contentsline {subsection}{\numberline {16.2}Reporting errors}{189}{subsection.16.2}%
-\contentsline {subsection}{\numberline {16.3}Guidelines for reporting a bug in \texttt {SPM}}{189}{subsection.16.3}%
-\contentsline {section}{\numberline {17}Acknowledgements}{191}{section.17}%
-\contentsline {section}{\numberline {18}Quick reference}{193}{section.18}%
-\contentsline {subsection}{\numberline {18.1}Population command and subcommand syntax}{193}{subsection.18.1}%
-\contentsline {subsection}{\numberline {18.2}Estimation command and subcommand syntax}{205}{subsection.18.2}%
-\contentsline {subsection}{\numberline {18.3}Observation command and subcommand syntax}{207}{subsection.18.3}%
-\contentsline {subsection}{\numberline {18.4}Report command and subcommand syntax}{211}{subsection.18.4}%
-\contentsline {subsection}{\numberline {18.5}Other commands and subcommands}{215}{subsection.18.5}%
-\contentsline {section}{\numberline {19}References}{217}{section.19}%
-\contentsline {section}{\numberline {20}Spatial Population Model\ software license}{219}{section.20}%
-\contentsline {section}{\numberline {21}Index}{221}{section.21}%
+\contentsline {section}{\numberline {14}Post processing output using \textbf {R}}{183}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Read and extract reports from a SPM output file.}{183}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Read and write \texttt {SPM}\ config files.}{183}{subsection.14.2}%
+\contentsline {section}{\numberline {15}Changes from previous versions}{185}{section.15}%
+\contentsline {section}{\numberline {16}Troubleshooting}{187}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Introduction}{187}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Reporting errors}{187}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Guidelines for reporting a bug in \texttt {SPM}}{187}{subsection.16.3}%
+\contentsline {section}{\numberline {17}Acknowledgements}{189}{section.17}%
+\contentsline {section}{\numberline {18}Quick reference}{191}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Population command and subcommand syntax}{191}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Estimation command and subcommand syntax}{203}{subsection.18.2}%
+\contentsline {subsection}{\numberline {18.3}Observation command and subcommand syntax}{205}{subsection.18.3}%
+\contentsline {subsection}{\numberline {18.4}Report command and subcommand syntax}{209}{subsection.18.4}%
+\contentsline {subsection}{\numberline {18.5}Other commands and subcommands}{213}{subsection.18.5}%
+\contentsline {section}{\numberline {19}References}{215}{section.19}%
+\contentsline {section}{\numberline {20}Spatial Population Model\ software license}{217}{section.20}%
+\contentsline {section}{\numberline {21}Index}{219}{section.21}%

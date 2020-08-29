@@ -20,6 +20,7 @@ class CommandLineInterface:
 		print( '  check         - Do a check of the build system')
 		print( '  boost         - Build boost libraries (build this before building the release)')
 		print( '  release       - Build standalone release executable')
+		print( '  examples      - Build the SPM examples')
 		print( '  documentation - Build the user manual')
 		print( '  rlibrary      - Build the R library')
 		print( '  unittests     - Run the unit tests')
