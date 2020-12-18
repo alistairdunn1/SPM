@@ -36,7 +36,7 @@ class RLibrary:
     os.system("R CMD INSTALL --build spm")
     os.system("R CMD check spm")
     os.system("del spm.html")
-    os.system("mv -f spm_" + Globals.SPM_version_number + "* " + Globals.root_directory_ + "/Build")
+    #os.system("mv -f spm_" + Globals.SPM_version_number + "* " + Globals.root_directory_ + "/Build")
 
     #os.system("R CMD build --force spmTest")
     #os.system("R CMD INSTALL --build spmTest")

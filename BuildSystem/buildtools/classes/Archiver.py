@@ -81,6 +81,8 @@ class Archiver:
 
     if not os.path.exists(output_directory + "/Linux"):
       os.makedirs(output_directory + "/Linux");
+    if not os.path.exists(output_directory + "/R-libraries"):
+      os.makedirs(output_directory + "/R-libraries");
 
     print("-- Target output directory: " + output_directory)
     
@@ -88,12 +90,15 @@ class Archiver:
       print("-- Removing old Archive")
       os.system("rm -rf " + binary_path + "/spm_archive.zip")
 
-
     os.system('cp -r ../Examples/ ' + output_directory)
     print("-- Example code copied")
     os.system('cp -r ../Installer/README.txt ' + output_directory)
     os.system('cp -r ../Installer/README.make ' + output_directory)
 
+    print("-- R-libraries copied")
+    os.system("cp -f ../R-libraries/spm_" + Globals.SPM_version_number + ".* " + output_directory + "/R-libraries")
+
+    print("-- Setup and binaries copied")
     os.system('cp -r Setup_SPM.exe ' + output_directory)
     os.system('cp -r SPM*.* ' + output_directory)
     
