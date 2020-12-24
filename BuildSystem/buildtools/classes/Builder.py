@@ -144,7 +144,9 @@ class Boost:
         print( "")
         print('-- Moving headers and libraries')
         if os.path.exists(Globals.target_include_path_ + 'boost/'):
+          print('--Cleaning old directory')
           shutil.rmtree(Globals.target_include_path_ + 'boost/')
+        print('copy ' + 'boost' + ' to ' + target_include_path_ + 'boost/')
         shutil.copytree('boost', Globals.target_include_path_ + 'boost/')
         print(Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/')
         os.system("cp -f " + Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/*-mt-s-* ' + Globals.boost_directory_ + '\lib')
@@ -152,7 +154,6 @@ class Boost:
       else:
         return Globals.PrintError('Boost library ' + Globals.boost_directory_ + ' had an error during the build. Check log files for more information')
       del sys.modules["windows"]
-      
     else:
       if not os.path.exists(Globals.boost_source_directory_ + '/linux.py'):
         return Globals.PrintError('Boost library ' + Globals.boost_source_directory_ + ' does not have a linux.py file.\nThis file is required to build this library on Linux')
@@ -163,16 +164,21 @@ class Boost:
       success = builder.start()
       if success:
         os.system('echo ' + 'boost' + Globals.boost_version + ' > ' + Globals.boost_directory_ + '.success')
-        print( "")
+        print("")
+        print('-- Moving headers and libraries')
         if os.path.exists(Globals.target_include_path_ + 'boost/'):
+          print('--Cleaning old directory')
           shutil.rmtree(Globals.target_include_path_ + 'boost/')
-        #print(Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/')
+        print('copy ' + 'boost' + ' to ' + Globals.target_include_path_ + 'boost/')
+        shutil.copytree('boost', Globals.target_include_path_ + 'boost/')
+        print(Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/')
         os.system("cp -f " + Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/* ' + Globals.boost_directory_ + '/lib')
       else:
         return Globals.PrintError('Boost library ' + Globals.boost_directory_ + ' had an error during the build. Check log files for more information')
       del sys.modules["linux"]
           
     if not success:
+      print( "--> Boost libraries failed")
       return False
   
     print( "")
