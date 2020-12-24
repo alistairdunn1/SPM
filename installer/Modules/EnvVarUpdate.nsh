@@ -25,8 +25,8 @@
  *  http://nsis.sourceforge.net/Environmental_Variables:_append%2C_prepend%2C_and_remove_entries
  *
  */
- 
- 
+
+
 !ifndef ENVVARUPDATE_FUNCTION
 !define ENVVARUPDATE_FUNCTION
 !verbose push
@@ -34,7 +34,7 @@
 !include "LogicLib.nsh"
 !include "WinMessages.NSH"
 !include "StrFunc.nsh"
- 
+
 ; ---- Fix for conflict if StrFunc.nsh is already includes in main file -----------------------
 !macro _IncludeStrFunction StrFuncName
   !ifndef ${StrFuncName}_INCLUDED
@@ -45,11 +45,11 @@
   !endif
   !define un.${StrFuncName} "${Un${StrFuncName}}"
 !macroend
- 
+
 !insertmacro _IncludeStrFunction StrTok
 !insertmacro _IncludeStrFunction StrStr
 !insertmacro _IncludeStrFunction StrRep
- 
+
 ; ---------------------------------- Macro Definitions ----------------------------------------
 !macro _EnvVarUpdateConstructor ResultVar EnvVarName Action Regloc PathString
   Push "${EnvVarName}"

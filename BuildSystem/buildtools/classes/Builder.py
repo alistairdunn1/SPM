@@ -146,7 +146,7 @@ class Boost:
         if os.path.exists(Globals.target_include_path_ + 'boost/'):
           print('--Cleaning old directory')
           shutil.rmtree(Globals.target_include_path_ + 'boost/')
-        print('copy ' + 'boost' + ' to ' + target_include_path_ + 'boost/')
+        print('copy ' + 'boost' + ' to ' + Globals.target_include_path_ + 'boost/')
         shutil.copytree('boost', Globals.target_include_path_ + 'boost/')
         print(Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/')
         os.system("cp -f " + Globals.boost_directory_ + '/' + Globals.boost_version + '/stage/lib/*-mt-s-* ' + Globals.boost_directory_ + '\lib')

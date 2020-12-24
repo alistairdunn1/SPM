@@ -10,7 +10,7 @@ CRCCheck on ;CRC check
 SilentInstall normal ;normal install
 SilentUnInstall normal ;uninstall quietly
 XPStyle on ;graphic
-BrandingText "http://www.niwa.co.nz"
+BrandingText "http://www.OceanEnvironmental.co.nz"
 
 ;includes
 !include Modules\EnvVarUpdate.nsh
@@ -24,8 +24,8 @@ BrandingText "http://www.niwa.co.nz"
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SPM"
-!define PRODUCT_PUBLISHER "NIWA"
-!define PRODUCT_WEB_SITE "http://www.niwa.co.nz"
+!define PRODUCT_PUBLISHER "Ocean Environmental Ltd."
+!define PRODUCT_WEB_SITE "http://www.OceanEnvironmental.co.nz"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\spm.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -42,7 +42,7 @@ Function .onInit
   UserInfo::GetOriginalAccountType
   Pop $0
   StrCmp $0 "Admin" +3 0
-		MessageBox MB_OK "You need to have adminstrator rights to install ${PRODUCT_NAME}. Aborting install."
+		MessageBox MB_OK "You need to have administrator rights to install ${PRODUCT_NAME}. Aborting install."
 		abort
   ;Force install for all users
   !insertmacro MULTIUSER_INIT
@@ -170,7 +170,7 @@ SectionEnd
 
 Section /o "Copy the R library" SEC06
   SetOutPath "$INSTDIR"
-  File "..\\Build\\spm_2.0.3.zip"
+  File "..\\R-libraries\\spm_2.0.3.*"
 SectionEnd
 
 Section /o "Copy the syntax files" SEC08
@@ -215,7 +215,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
   WriteRegDword ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "NoModify" 1
   WriteRegDword ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "NoRepair" 1
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "HelpLink" "http://www.niwa.co.nz"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "HelpLink" "http://www.OceanEnvironmental.co.nz"
   ;DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SPM"
 SectionEnd
 
