@@ -121,20 +121,20 @@ The arguments for a subcommand are either\index{Subcommand argument type},
 
 \begin{description}
 \item \textbf{switch} true/false 
-\item \textbf{integer} an integer number
-\item \textbf{integer vector} a vector of integer numbers
-\item \textbf{integer range} a range of integer numbers separated by a hyphen (-), for example 1994-1996 2000 is expanded to an integer vector of values 1994 1995 1996 2000). 
-\item \textbf{constant} a real number (i.e., double)
-\item \textbf{constant vector} a vector of real numbers (i.e., vector of doubles)
-\item \textbf{estimable} a real number that can be estimated (i.e., estimable double)
-\item \textbf{estimable vector} a vector of real numbers that can be estimated (i.e., vector of estimable doubles)
-\item \textbf{string} a categorical (string) value
+\item \textbf{integer} an integer number (which must be a valid integer. Missing numbers or `NA's will generate an error)
+\item \textbf{integer vector} a vector of integer numbers (which must be a vector of valid integers. Missing numbers or `NA's will generate an error)
+\item \textbf{integer range} a range of integer numbers separated by a hyphen (-), for example 1994-1996 2000 is expanded to the vector of integers 1994 1995 1996 2000). 
+\item \textbf{constant} a real number (i.e., a 'double'. Missing numbers or `NA's will generate an error)
+\item \textbf{constant vector} a vector of real numbers (i.e., vector of `doubles'. Missing numbers or `NA's will generate an error)
+\item \textbf{estimable} a real number that can be estimated (i.e., estimable `double'. Missing numbers or `NA's will generate an error)
+\item \textbf{estimable vector} a vector of real numbers that can be estimated (i.e., vector of estimable `doubles'. Missing numbers or `NA's will generate an error)
+\item \textbf{string} a categorical (string) value.
 \item \textbf{string vector} a vector of categorical values
 \end{description}
 
 Switches are parameters which are either true or false. Enter \emph{true} as \argument{true} or \argument{t}, and \emph{false} as \argument{false} or \argument{f}. 
 
-Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer then use 2008, not 2008.0)
+Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer then use 2008, not 2008.0). 
 
 Arguments of type integer vector, integer range, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
 
