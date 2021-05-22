@@ -2,7 +2,7 @@
 // Name        : CSelectivityReport.h
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,18 +19,19 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CSelectivityReport: public CFileReport {
+class CSelectivityReport : public CFileReport
+{
 public:
   CSelectivityReport();
-  virtual                     ~CSelectivityReport();
-  CReport*                    clone() { return new CSelectivityReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CSelectivityReport();
+  CReport *clone() { return new CSelectivityReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
-  string                      sSelectivity;
-  CSelectivity                *pSelectivity;
+  string sSelectivity;
+  CSelectivity *pSelectivity;
 };
 
 #endif /* CSELECTIVITYREPORT_H_ */

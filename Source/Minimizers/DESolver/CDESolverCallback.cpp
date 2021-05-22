@@ -2,7 +2,7 @@
 // Name        : CDESolverCallback.cpp
 // Author      : S.Rasmussen
 // Date        : 2/05/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -22,27 +22,31 @@
 // Default Constructor
 //**********************************************************************
 CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize, double tolerance)
-: DESolverEngine(vectorsize, populationsize, tolerance) {
+    : DESolverEngine(vectorsize, populationsize, tolerance)
+{
 
   // Vars
-  pEstimateManager    = CEstimateManager::Instance();
+  pEstimateManager = CEstimateManager::Instance();
 }
 
 //**********************************************************************
 // double CDESolverCallback::EnergyFunction(double trial[],bool &bAtSolution)
 // Our CallBack Function. Returns our Score
 //**********************************************************************
-double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
+double CDESolverCallback::EnergyFunction(vector<double> vTrialValues)
+{
 
   // Update our Components with the New Parameters
   int iCount = pEstimateManager->getEnabledEstimateCount();
-  for (int i = 0; i < iCount; ++i) {
+  for (int i = 0; i < iCount; ++i)
+  {
     pEstimateManager->getEnabledEstimate(i)->setValue(vTrialValues[i]);
   }
 
   CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
 
-  try {
+  try
+  {
     // Rebuild and Run
     CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
@@ -50,13 +54,14 @@ double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
 
     // Workout our Objective Score
     pObjectiveFunction->execute();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDESolverCallback.EnergyFunction()->" + Ex;
     throw Ex;
   }
 
-//  std::cout << "total_score: " << pObjectiveFunction->getScore() << std::endl;
+  //  std::cout << "total_score: " << pObjectiveFunction->getScore() << std::endl;
 
   return pObjectiveFunction->getScore();
 }
@@ -65,5 +70,6 @@ double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
 // CDESolverCallback::~CDESolverCallback()
 // Default De-Constructor
 //**********************************************************************
-CDESolverCallback::~CDESolverCallback() {
+CDESolverCallback::~CDESolverCallback()
+{
 }

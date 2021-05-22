@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CSplineSelectivity.cpp
 // Author      : A. Dunn
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
@@ -15,26 +15,28 @@
 // CLogisticproducingSelectivity::CSplineSelectivity()
 // Default Constructor
 //**********************************************************************
-CSplineSelectivity::CSplineSelectivity() {
+CSplineSelectivity::CSplineSelectivity()
+{
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_KNOTS);
   pParameterList->registerAllowed(PARAM_VALUES);
   pParameterList->registerAllowed(PARAM_METHOD);
-
 }
 
 //**********************************************************************
 // void CSplineSelectivity::validate()
 // validate
 //**********************************************************************
-void CSplineSelectivity::validate() {
-  try {
+void CSplineSelectivity::validate()
+{
+  try
+  {
 
     // Populate our variables
     pParameterList->fillVector(vKnots, PARAM_KNOTS);
     pParameterList->fillVector(vValues, PARAM_VALUES);
-    sMethod = pParameterList->getString(PARAM_METHOD,true,PARAM_NATURAL);
+    sMethod = pParameterList->getString(PARAM_METHOD, true, PARAM_NATURAL);
 
     // Validate parent
     CSelectivity::validate();
@@ -48,35 +50,43 @@ void CSplineSelectivity::validate() {
     if (iN < 2)
       CError::errorNotEnough(PARAM_KNOTS);
 
-     for(int i = 0; i < (int)vValues.size(); ++i) {
-       if (vValues[i] < 0)
-         CError::errorLessThanEqualTo(PARAM_VALUES, PARAM_ZERO);
-       if (vValues[i] > 1)
-         CError::errorGreaterThanEqualTo(PARAM_VALUES, PARAM_ONE);
-     }
+    for (int i = 0; i < (int)vValues.size(); ++i)
+    {
+      if (vValues[i] < 0)
+        CError::errorLessThanEqualTo(PARAM_VALUES, PARAM_ZERO);
+      if (vValues[i] > 1)
+        CError::errorGreaterThanEqualTo(PARAM_VALUES, PARAM_ONE);
+    }
 
-    if(sMethod==PARAM_NATURAL) {
+    if (sMethod == PARAM_NATURAL)
+    {
       //A "natural spline" where the second derivatives are set to 0 at the boundaries
       spline.setLowBC(Spline::FIXED_2ND_DERIV_BC, 0);
       spline.setHighBC(Spline::FIXED_2ND_DERIV_BC, 0);
-    } else if(sMethod==PARAM_FIXED) {
+    }
+    else if (sMethod == PARAM_FIXED)
+    {
       //A spline with a fixed first derivative at the boundaries
       spline.setLowBC(Spline::FIXED_1ST_DERIV_BC, 0);
       spline.setHighBC(Spline::FIXED_1ST_DERIV_BC, 0);
-    } else if(sMethod==PARAM_PARABOLA) {
+    }
+    else if (sMethod == PARAM_PARABOLA)
+    {
       //A spline which turns into a parabola at the boundaries
       spline.setLowBC(Spline::PARABOLIC_RUNOUT_BC);
       spline.setHighBC(Spline::PARABOLIC_RUNOUT_BC);
-    } else {
+    }
+    else
+    {
       CError::errorUnknown(PARAM_METHOD, sMethod);
     }
 
     // Register our values vector as estimable
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_VALUES, i, &vValues[i]);
-
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSplineSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -86,12 +96,15 @@ void CSplineSelectivity::validate() {
 // void CCachedSelectivity::build()
 // Rebuild the selectivity
 //**********************************************************************
-void CSplineSelectivity::build() {
-  try {
+void CSplineSelectivity::build()
+{
+  try
+  {
 
     rebuild();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCachedSelectivity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -101,16 +114,20 @@ void CSplineSelectivity::build() {
 // void CCachedSelectivity::rebuild()
 // Rebuild the selectivity
 //**********************************************************************
-void CSplineSelectivity::rebuild() {
-  try {
+void CSplineSelectivity::rebuild()
+{
+  try
+  {
 
-    for (int i=0; i < iN; ++i) {
-      spline.addPoint(vKnots[i],transform(vValues[i]) );
+    for (int i = 0; i < iN; ++i)
+    {
+      spline.addPoint(vKnots[i], transform(vValues[i]));
     }
 
     CCachedSelectivity::rebuild();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCachedSelectivity.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -120,7 +137,8 @@ void CSplineSelectivity::rebuild() {
 // void CSplineSelectivity::transform()
 // transformation using logit
 //**********************************************************************
-double CSplineSelectivity::transform(double x) {
+double CSplineSelectivity::transform(double x)
+{
   //double result = log( x / CMath::zeroFun(1.0 - x, ZERO) );
   //double result = tan( 3.141592653589793238463 * ( x - 0.5 ) );
   double result = log(CMath::zeroFun(x, ZERO));
@@ -131,7 +149,8 @@ double CSplineSelectivity::transform(double x) {
 // void CSplineSelectivity::inverse()
 // inverse transformation using logit
 //**********************************************************************
-double CSplineSelectivity::inverseTransform(double x) {
+double CSplineSelectivity::inverseTransform(double x)
+{
   //double result = 1.0 / ( 1.0 + exp(-x) );
   //double result = 1/3.141592653589793238463 * atan( x ) + 0.5;
   double result = exp(x);
@@ -142,11 +161,15 @@ double CSplineSelectivity::inverseTransform(double x) {
 // double CSplineSelectivity::calculateResult(int Age)
 // Calculate Our Result
 //**********************************************************************
-double CSplineSelectivity::calculateResult(int Age) {
+double CSplineSelectivity::calculateResult(int Age)
+{
 
-  try {
-    return ( inverseTransform( spline( (double)Age ) ));
-  } catch (string &Ex) {
+  try
+  {
+    return (inverseTransform(spline((double)Age)));
+  }
+  catch (string &Ex)
+  {
     Ex = "CSplineSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -157,5 +180,6 @@ double CSplineSelectivity::calculateResult(int Age) {
 // CSplineSelectivity::~CSplineSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CSplineSelectivity::~CSplineSelectivity() {
+CSplineSelectivity::~CSplineSelectivity()
+{
 }

@@ -2,7 +2,7 @@
 // Name        : CCategoricalPreferenceFunction.cpp
 // Author      : A.Dunn
 // Date        : 20/04/2012
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,7 +19,8 @@
 // CCategoricalPreferenceFunction::CCategoricalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CCategoricalPreferenceFunction::CCategoricalPreferenceFunction() {
+CCategoricalPreferenceFunction::CCategoricalPreferenceFunction()
+{
 
   sType = PARAM_CATEGORICAL;
 
@@ -33,8 +34,10 @@ CCategoricalPreferenceFunction::CCategoricalPreferenceFunction() {
 // void CCategoricalPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CCategoricalPreferenceFunction::validate() {
-  try {
+void CCategoricalPreferenceFunction::validate()
+{
+  try
+  {
 
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
@@ -54,9 +57,9 @@ void CCategoricalPreferenceFunction::validate() {
     // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
-
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoricalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,8 +69,10 @@ void CCategoricalPreferenceFunction::validate() {
 // void CCategoricalPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CCategoricalPreferenceFunction::build() {
-  try {
+void CCategoricalPreferenceFunction::build()
+{
+  try
+  {
 
     // Get our Layer Pointer
     CLayerManager *pLayerManager = CLayerManager::Instance();
@@ -75,8 +80,10 @@ void CCategoricalPreferenceFunction::build() {
 
     // Get list of layer values
     std::vector<std::string> vLayerLabels;
-    for (int i=0; i<pLayer->getHeight(); ++i) {
-      for (int j=0; j<pLayer->getWidth(); ++j) {
+    for (int i = 0; i < pLayer->getHeight(); ++i)
+    {
+      for (int j = 0; j < pLayer->getWidth(); ++j)
+      {
         vLayerLabels.push_back(pLayer->getValue(i, j));
       }
     }
@@ -95,8 +102,9 @@ void CCategoricalPreferenceFunction::build() {
     //    break;
     //  }
     //}
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoricalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -106,7 +114,8 @@ void CCategoricalPreferenceFunction::build() {
 // CCategoricalPreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CCategoricalPreferenceFunction::getIsStatic() {
+bool CCategoricalPreferenceFunction::getIsStatic()
+{
   return true;
 }
 
@@ -114,36 +123,43 @@ bool CCategoricalPreferenceFunction::getIsStatic() {
 // double CCategoricalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // Get Result
 //**********************************************************************
-double CCategoricalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
+double CCategoricalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
+{
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     //TODO: Scott to check code for efficiency
     //Function should identify the label, and then return the corresponding value
     sLayerValue = pLayer->getValue(TRIndex, TCIndex);
 
-    for (int i = 0; i < (int)vLabels.size(); i++) {
-      if(vLabels[i] == sLayerValue) {
+    for (int i = 0; i < (int)vLabels.size(); i++)
+    {
+      if (vLabels[i] == sLayerValue)
+      {
         dRet = vValues[i];
         break;
       }
     }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoricalPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 
-  return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
+  return CMath::zeroFun(pow(dRet, dAlpha), ZERO);
 }
 //**********************************************************************
 // CCategoricalPreferenceFunction::~CCategoricalPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CCategoricalPreferenceFunction::~CCategoricalPreferenceFunction() {
+CCategoricalPreferenceFunction::~CCategoricalPreferenceFunction()
+{
 }

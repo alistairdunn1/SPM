@@ -2,7 +2,7 @@
 // Name        : CPDFFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 7/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -21,7 +21,8 @@
 // CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager)
 // Build our buildPDF
 //**********************************************************************
-CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager) {
+CPDF *CPDFFactory::buildPDF(string type, bool registerWithManager)
+{
 
   CPDF *pFunction = 0;
 

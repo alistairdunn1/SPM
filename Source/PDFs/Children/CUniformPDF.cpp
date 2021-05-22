@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CUniformPDF.cpp
 // Author      : C. Marsh
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
@@ -13,7 +13,8 @@
 // CUniformPDF::CUniformPDF()
 // Default Constructor
 //**********************************************************************
-CUniformPDF::CUniformPDF() {
+CUniformPDF::CUniformPDF()
+{
 
   sType = PARAM_UNIFORM;
 
@@ -30,12 +31,14 @@ CUniformPDF::CUniformPDF() {
 // void CUniformPDF::validate()
 // Validate
 //**********************************************************************
-void CUniformPDF::validate() {
-  try {
+void CUniformPDF::validate()
+{
+  try
+  {
 
     // Assign our variables
-    dA    = pParameterList->getDouble(PARAM_A);
-    dB    = pParameterList->getDouble(PARAM_B);
+    dA = pParameterList->getDouble(PARAM_A);
+    dB = pParameterList->getDouble(PARAM_B);
 
     // Validate parent
     CPDF::validate();
@@ -43,8 +46,9 @@ void CUniformPDF::validate() {
     //Local validation
     if (dB <= dA)
       CError::errorLessThanEqualTo(PARAM_B, PARAM_A);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CUniformPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -54,20 +58,25 @@ void CUniformPDF::validate() {
 // double CUniformPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CUniformPDF::getPDFResult(double value) {
+double CUniformPDF::getPDFResult(double value)
+{
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-  if(value >=dA  && value <=dB) {
-    dRet = 1.0/(dB- dA);
-  }
+    if (value >= dA && value <= dB)
+    {
+      dRet = 1.0 / (dB - dA);
+    }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CUniformPDF.getPDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -80,24 +89,33 @@ double CUniformPDF::getPDFResult(double value) {
 // double CUniformPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CUniformPDF::getCDFResult(double value) {
+double CUniformPDF::getCDFResult(double value)
+{
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-  if(value <dA) {
-    dRet = 0.0;
-  } else if (value >=dA  && value <=dB) {
-    dRet = (value-dA)/(dB-dA);
-  } else {
-    dRet = 1.0;
-  }
+    if (value < dA)
+    {
+      dRet = 0.0;
+    }
+    else if (value >= dA && value <= dB)
+    {
+      dRet = (value - dA) / (dB - dA);
+    }
+    else
+    {
+      dRet = 1.0;
+    }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CUniformPDF.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -109,5 +127,6 @@ double CUniformPDF::getCDFResult(double value) {
 // CUniformPDF::~CUniformPDF()
 // Default De-Constructor
 //**********************************************************************
-CUniformPDF::~CUniformPDF() {
+CUniformPDF::~CUniformPDF()
+{
 }

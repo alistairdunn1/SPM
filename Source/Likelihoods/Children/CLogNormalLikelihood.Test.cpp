@@ -2,7 +2,7 @@
 // Name        : CLogNormalLikelihood.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 29/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -25,7 +25,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
+BOOST_AUTO_TEST_CASE(LogNormalLikelihood)
+{
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
@@ -40,14 +41,16 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
   vector<double> processError;
   double delta = 1e-05;
 
-  for (int i = 0; i < 4; ++i) {
+  for (int i = 0; i < 4; ++i)
+  {
     keys.push_back("A");
     observed.push_back(0.25);
     expected.push_back(0.25);
     errorValue.push_back(0.0001);
     processError.push_back(0);
   }
-  for (int i = 0; i < 4; ++i) {
+  for (int i = 0; i < 4; ++i)
+  {
     keys.push_back("B");
     observed.push_back(0.25);
     expected.push_back(0.25);
@@ -88,7 +91,8 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( LogNormalLikelihood_1x1, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(LogNormalLikelihood_1x1, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -106,11 +110,11 @@ BOOST_FIXTURE_TEST_CASE( LogNormalLikelihood_1x1, C1x1_Fixture ) {
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
 
   // Check results
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99845193414953692);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 1.0010263962677095);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99947282571698015);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99945174404156234);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.9992072565815735);
+  //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99845193414953692);
+  //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 1.0010263962677095);
+  //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99947282571698015);
+  //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99945174404156234);
+  //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.9992072565815735);
 
   // clear memory
   delete pLikelihood;

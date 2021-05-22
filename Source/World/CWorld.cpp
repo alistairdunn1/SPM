@@ -34,16 +34,17 @@ boost::thread_specific_ptr<CWorld> CWorld::clInstance;
 // CWorld::CWorld()
 // Default Constructor
 //**********************************************************************
-CWorld::CWorld() {
+CWorld::CWorld()
+{
   // Set Default Variable Values
-  pGrid                       = 0;
-  pDifferenceGrid             = 0;
-  iWidth                      = 0;
-  iHeight                     = 0;
-  dCellLength                 = 0;
-  sBaseLayer                  = "";
-  pBaseLayer                  = 0;
-  iEnabledSquareCount         = 0;
+  pGrid = 0;
+  pDifferenceGrid = 0;
+  iWidth = 0;
+  iHeight = 0;
+  dCellLength = 0;
+  sBaseLayer = "";
+  pBaseLayer = 0;
+  iEnabledSquareCount = 0;
 
   // Register user defined variables
   pParameterList->registerAllowed(PARAM_CELL_LENGTH);
@@ -57,7 +58,7 @@ CWorld::CWorld() {
   pParameterList->registerAllowed(PARAM_INITIALIZATION_PHASES);
   pParameterList->registerAllowed(PARAM_INITIAL_YEAR);
   pParameterList->registerAllowed(PARAM_CURRENT_YEAR);
-//pParameterList->registerAllowed(PARAM_FINAL_YEAR);
+  //pParameterList->registerAllowed(PARAM_FINAL_YEAR);
   pParameterList->registerAllowed(PARAM_TIME_STEPS);
   pParameterList->registerAllowed(PARAM_AGE_SIZE);
 }
@@ -66,8 +67,10 @@ CWorld::CWorld() {
 // CWorld* CWorld::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CWorld* CWorld::Instance() {
-  if (clInstance.get() == 0) {
+CWorld *CWorld::Instance()
+{
+  if (clInstance.get() == 0)
+  {
     clInstance.reset(new CWorld());
   }
   return clInstance.get();
@@ -77,8 +80,10 @@ CWorld* CWorld::Instance() {
 // void CWorld::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CWorld::Destroy() {
-  if (clInstance.get() != 0) {
+void CWorld::Destroy()
+{
+  if (clInstance.get() != 0)
+  {
     clInstance.reset();
   }
 }
@@ -87,14 +92,17 @@ void CWorld::Destroy() {
 // void CWorld::clone(CWorld *World)
 // Clone our World
 //**********************************************************************
-void CWorld::clone(CWorld *World) {
-  try {
-    iWidth                      = World->getWidth();
-    iHeight                     = World->getHeight();
-    dCellLength                 = World->getCellLength();
-    sBaseLayer                  = World->getBaseLayer();
-
-  } catch (string &Ex) {
+void CWorld::clone(CWorld *World)
+{
+  try
+  {
+    iWidth = World->getWidth();
+    iHeight = World->getHeight();
+    dCellLength = World->getCellLength();
+    sBaseLayer = World->getBaseLayer();
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.clone()->" + Ex;
     throw Ex;
   }
@@ -104,22 +112,24 @@ void CWorld::clone(CWorld *World) {
 // void CWorld::validateWorld()
 // Validate The World
 //**********************************************************************
-void CWorld::validate() {
-  try {
+void CWorld::validate()
+{
+  try
+  {
     // Check our parameters
     pParameterList->checkInvalidParameters();
 
     // Load our Variable values
-    dCellLength       = pParameterList->getDouble(PARAM_CELL_LENGTH,true,1.0);
-    iHeight           = pParameterList->getInt(PARAM_NROWS);
-    iWidth            = pParameterList->getInt(PARAM_NCOLS);
-    sBaseLayer        = pParameterList->getString(PARAM_LAYER);
-    iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
-    iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
-    bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP,true,true);
-    iInitialYear      = pParameterList->getInt(PARAM_INITIAL_YEAR);
-    iCurrentYear      = pParameterList->getInt(PARAM_CURRENT_YEAR);
-//  iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
+    dCellLength = pParameterList->getDouble(PARAM_CELL_LENGTH, true, 1.0);
+    iHeight = pParameterList->getInt(PARAM_NROWS);
+    iWidth = pParameterList->getInt(PARAM_NCOLS);
+    sBaseLayer = pParameterList->getString(PARAM_LAYER);
+    iMinAge = pParameterList->getInt(PARAM_MIN_AGE);
+    iMaxAge = pParameterList->getInt(PARAM_MAX_AGE);
+    bAgePlusGroup = pParameterList->getBool(PARAM_AGE_PLUS_GROUP, true, true);
+    iInitialYear = pParameterList->getInt(PARAM_INITIAL_YEAR);
+    iCurrentYear = pParameterList->getInt(PARAM_CURRENT_YEAR);
+    //  iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
 
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
     pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES, true);
@@ -133,12 +143,13 @@ void CWorld::validate() {
       CError::errorGreaterThan(PARAM_NCOLS, PARAM_ONE_THOUSAND);
     if (iCurrentYear < iInitialYear)
       CError::errorLessThan(PARAM_CURRENT_YEAR, PARAM_INITIAL_YEAR);
-    if (dCellLength <= ZERO )
+    if (dCellLength <= ZERO)
       CError::errorLessThan(PARAM_CELL_LENGTH, PARAM_ZERO);
     if (vAgeSizeList.size() != vCategories.size())
       CError::errorNotEqual(PARAM_AGE_SIZE, PARAM_CATEGORIES);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.validateWorld->" + Ex;
     throw Ex;
   }
@@ -147,8 +158,10 @@ void CWorld::validate() {
 // void CWorld::buildWorld()
 // Build our World
 //**********************************************************************
-void CWorld::build() {
-  try {
+void CWorld::build()
+{
+  try
+  {
     // Load TimeStep Order
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
     pTimeStepManager->setTimeStepOrder(vTimeSteps);
@@ -157,34 +170,41 @@ void CWorld::build() {
     CInitializationPhaseManager *pInitialManager = CInitializationPhaseManager::Instance();
     pInitialManager->loadInitializationPhaseOrder(vInitializationPhases);
 
-    if (pGrid == 0) {
+    if (pGrid == 0)
+    {
       // Allocate Space for our X (Height)
-      pGrid = new CWorldSquare*[iHeight];
-      for (int i = 0; i < iHeight; ++i) {
+      pGrid = new CWorldSquare *[iHeight];
+      for (int i = 0; i < iHeight; ++i)
+      {
         pGrid[i] = new CWorldSquare[iWidth];
       }
 
       // Allocate Our Difference Grid
-      pDifferenceGrid = new CWorldSquare*[iHeight];
-      for (int i = 0; i < iHeight; ++i) {
+      pDifferenceGrid = new CWorldSquare *[iHeight];
+      for (int i = 0; i < iHeight; ++i)
+      {
         pDifferenceGrid[i] = new CWorldSquare[iWidth];
       }
 
       // Set Variables (Can't do it above. Stupid blah ISO C++)
-      for (int i = 0; i < iHeight; ++i) {
-        for (int j = 0; j < iWidth; ++j) {
+      for (int i = 0; i < iHeight; ++i)
+      {
+        for (int j = 0; j < iWidth; ++j)
+        {
           pGrid[i][j].build();
           pDifferenceGrid[i][j].build();
         }
       }
     }
 
-    if (pBaseLayer == 0) {
+    if (pBaseLayer == 0)
+    {
       // Get Our Base Layer
       CLayerManager *pLayerManager = CLayerManager::Instance();
       pBaseLayer = pLayerManager->getNumericLayer(getBaseLayer());
 
-      if(pBaseLayer->getLayerType()==PARAM_META_NUMERIC) {
+      if (pBaseLayer->getLayerType() == PARAM_META_NUMERIC)
+      {
         throw string("The base layer (" + sBaseLayer + ") cannot be a meta-layer");
       }
 
@@ -192,15 +212,21 @@ void CWorld::build() {
       iEnabledSquareCount = iHeight * iWidth;
 
       // Flag any as Disabled if they don't match our Base_Layer
-      for (int i = 0; i < iHeight; ++i) {
-        for (int j = 0; j < iWidth; ++j) {
-          if (pBaseLayer->getValue(i, j) == 0) {
+      for (int i = 0; i < iHeight; ++i)
+      {
+        for (int j = 0; j < iWidth; ++j)
+        {
+          if (pBaseLayer->getValue(i, j) == 0)
+          {
             pGrid[i][j].setEnabled(false);
             iEnabledSquareCount--;
-          } else if (pBaseLayer->getValue(i,j) < 0) {
+          }
+          else if (pBaseLayer->getValue(i, j) < 0)
+          {
             throw string(ERROR_NEGATIVE_BASE_LAYER);
-          } else
-            pGrid[i][j].setArea(pBaseLayer->getValue(i,j));
+          }
+          else
+            pGrid[i][j].setArea(pBaseLayer->getValue(i, j));
         }
       }
 
@@ -209,11 +235,13 @@ void CWorld::build() {
     }
 
     // Build our AgeSize object
-    foreach(string label, vAgeSizeList) {
+    foreach (string label, vAgeSizeList)
+    {
       vAgeSizeIndex.push_back(CAgeSizeManager::Instance()->getAgeSize(label));
     }
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.buildWorld()->" + Ex;
     throw Ex;
   }
@@ -223,7 +251,8 @@ void CWorld::build() {
 // void CWorld::rebuild()
 // Rebuild our World
 //**********************************************************************
-void CWorld::rebuild() {
+void CWorld::rebuild()
+{
   // Clear the Grid
   zeroGrid();
 }
@@ -232,10 +261,12 @@ void CWorld::rebuild() {
 // void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names)
 // Fill A Vector with Category Indexes.
 //**********************************************************************
-void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names) {
+void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names)
+{
   list.clear();
 
-  foreach(string Name, names) {
+  foreach (string Name, names)
+  {
     list.push_back(getCategoryIndexForName(Name));
   }
 }
@@ -244,21 +275,25 @@ void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names) {
 // CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex)
 // Get a square from our Base Grid
 //**********************************************************************
-CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
+CWorldSquare *CWorld::getBaseSquare(int RowIndex, int ColIndex)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_WIDTH);
 #endif
-    CWorldSquare *pPtr = dynamic_cast<CWorldSquare*>(&pGrid[RowIndex][ColIndex]);
+    CWorldSquare *pPtr = dynamic_cast<CWorldSquare *>(&pGrid[RowIndex][ColIndex]);
     if (pPtr == 0)
       throw string(ERROR_BAD_CAST_WOLD_SQUARE);
 
     return pPtr;
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.getBaseSquare()->" + Ex;
     throw Ex;
   }
@@ -270,9 +305,11 @@ CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
 // CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex)
 // Get a square from our Difference Grid
 //**********************************************************************
-CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
+CWorldSquare *CWorld::getDifferenceSquare(int RowIndex, int ColIndex)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (ColIndex >= iWidth)
@@ -282,7 +319,9 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
     return &pDifferenceGrid[RowIndex][ColIndex];
 
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.getDifferenceSquare()->" + Ex;
     throw Ex;
   }
@@ -295,17 +334,21 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
 // int CWorld::getCategoryIndexForName(string Name)
 //
 //**********************************************************************
-int CWorld::getCategoryIndexForName(string Name) {
-  try {
+int CWorld::getCategoryIndexForName(string Name)
+{
+  try
+  {
     // Validate
-    for (int i = 0; i < (int)vCategories.size(); ++i) {
+    for (int i = 0; i < (int)vCategories.size(); ++i)
+    {
       if (vCategories[i] == Name)
         return i;
     }
 
     CError::errorUnknown(PARAM_CATEGORY, Name);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.getCategoryNameForIndex()->" + Ex;
     throw Ex;
   }
@@ -317,31 +360,35 @@ int CWorld::getCategoryIndexForName(string Name) {
 // CWorldSquare* CWorld::getMeanWeight(int AgeIndex, int CategoryIndex)
 // Get a square from our Difference Grid
 //**********************************************************************
-double CWorld::getMeanWeight(int AgeIndex, int CategoryIndex) {
-   double dAge = (double)(AgeIndex+iMinAge);
-   double dWeight = vAgeSizeIndex[CategoryIndex]->getMeanWeight(dAge);
-   return dWeight;
+double CWorld::getMeanWeight(int AgeIndex, int CategoryIndex)
+{
+  double dAge = (double)(AgeIndex + iMinAge);
+  double dWeight = vAgeSizeIndex[CategoryIndex]->getMeanWeight(dAge);
+  return dWeight;
 }
 
 //**********************************************************************
 // CWorldSquare* CWorld::getLengthFreqency(int AgeIndex, int CategoryIndex, vector<double> LengthBins)
 // Get a square from our Difference Grid
 //**********************************************************************
-vector<double> CWorld::getLengthFrequency(int AgeIndex, int CategoryIndex, vector<double> &LengthBins) {
-   double dAge = (double)(AgeIndex+iMinAge);
-   vector<double> expected;
-   for (int i=0; i < ((int)LengthBins.size() -1); ++i) {
-	 double dProportion = vAgeSizeIndex[CategoryIndex]->getProportionInLengthBin(dAge, LengthBins[i], LengthBins[i+1]);
-	 expected.push_back( dProportion );
-   }
-   return( expected );
+vector<double> CWorld::getLengthFrequency(int AgeIndex, int CategoryIndex, vector<double> &LengthBins)
+{
+  double dAge = (double)(AgeIndex + iMinAge);
+  vector<double> expected;
+  for (int i = 0; i < ((int)LengthBins.size() - 1); ++i)
+  {
+    double dProportion = vAgeSizeIndex[CategoryIndex]->getProportionInLengthBin(dAge, LengthBins[i], LengthBins[i + 1]);
+    expected.push_back(dProportion);
+  }
+  return (expected);
 }
 
 //**********************************************************************
 // string CWorld::getCategoryNameForIndex(int Index)
 //
 //**********************************************************************
-string CWorld::getCategoryNameForIndex(int Index) {
+string CWorld::getCategoryNameForIndex(int Index)
+{
   return vCategories[Index];
 }
 
@@ -349,15 +396,17 @@ string CWorld::getCategoryNameForIndex(int Index) {
 // int CWorld::getColIndexForAge(int Age)
 //
 //**********************************************************************
-int CWorld::getColIndexForAge(int Age) {
-  return (Age-iMinAge);
+int CWorld::getColIndexForAge(int Age)
+{
+  return (Age - iMinAge);
 }
 
 //**********************************************************************
 // string CWorld::getInitializationPhase(int index)
 //
 //**********************************************************************
-string CWorld::getInitializationPhase(int index) {
+string CWorld::getInitializationPhase(int index)
+{
   return vInitializationPhases[index];
 }
 
@@ -365,17 +414,22 @@ string CWorld::getInitializationPhase(int index) {
 // void CWorld::mergeDifferenceGrid()
 // Merge Difference Grid onto our Main Grid
 //**********************************************************************
-void CWorld::mergeDifferenceGrid() {
+void CWorld::mergeDifferenceGrid()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j) {
+      for (int j = 0; j < iWidth; ++j)
+      {
         pGrid[i][j].makeAdjustments(&pDifferenceGrid[i][j]);
         pDifferenceGrid[i][j].zeroGrid();
       }
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.mergeDifferenceGrid->" + Ex;
     throw Ex;
   }
@@ -386,9 +440,11 @@ void CWorld::mergeDifferenceGrid() {
 // void CWorld::zeroGrid()
 // Reset the WorldGrid To 0
 //**********************************************************************
-void CWorld::zeroGrid() {
+void CWorld::zeroGrid()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     // Zero our Grid
@@ -397,7 +453,9 @@ void CWorld::zeroGrid() {
         pGrid[i][j].zeroGrid();
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorld.zeroGrid()->" + Ex;
     throw Ex;
   }
@@ -408,45 +466,50 @@ void CWorld::zeroGrid() {
 // void CWorld::debugToScreen()
 // Debug the World To Screen
 //**********************************************************************
-void CWorld::debugToScreen() {
+void CWorld::debugToScreen()
+{
 
-//
-//  for (int i = 0; i < iHeight; ++i) {
-//    for (int j = 0; j < iWidth; ++j) {
-//      CWorldSquare *pS = &pGrid[i][j];
-//
-//      cout << "Cat: ";
-//      for (int k = 0; k < vCategories.size(); ++k) {
-//        for (int L = 0; L < (iMaxAge+1)-iMinAge; ++L)
-//          cout << pS->getValue(k, L) << " ";
-//        cout << endl;
-//      }
-//      cout << "----------------" << endl;
-//    }
-//  }
-
+  //
+  //  for (int i = 0; i < iHeight; ++i) {
+  //    for (int j = 0; j < iWidth; ++j) {
+  //      CWorldSquare *pS = &pGrid[i][j];
+  //
+  //      cout << "Cat: ";
+  //      for (int k = 0; k < vCategories.size(); ++k) {
+  //        for (int L = 0; L < (iMaxAge+1)-iMinAge; ++L)
+  //          cout << pS->getValue(k, L) << " ";
+  //        cout << endl;
+  //      }
+  //      cout << "----------------" << endl;
+  //    }
+  //  }
 }
 
 //**********************************************************************
 // CWorld::~CWorld()
 // Default De-Constructor
 //**********************************************************************
-CWorld::~CWorld() {
+CWorld::~CWorld()
+{
   // Clean Our DifferenceGrid
-  if (pDifferenceGrid != 0) {
-    for (int i = 0; i < iHeight; ++i) {
-      delete [] pDifferenceGrid[i];
+  if (pDifferenceGrid != 0)
+  {
+    for (int i = 0; i < iHeight; ++i)
+    {
+      delete[] pDifferenceGrid[i];
       pDifferenceGrid[i] = 0;
     }
-    delete [] pDifferenceGrid;
+    delete[] pDifferenceGrid;
   }
 
   // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iHeight; ++i) {
-      delete [] pGrid[i];
+  if (pGrid != 0)
+  {
+    for (int i = 0; i < iHeight; ++i)
+    {
+      delete[] pGrid[i];
       pGrid[i] = 0;
     }
-    delete [] pGrid;
+    delete[] pGrid;
   }
 }

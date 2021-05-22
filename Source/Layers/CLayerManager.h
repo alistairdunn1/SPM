@@ -2,7 +2,7 @@
 // Name        : CLayerManager.h
 // Author      : S.Rasmussen
 // Date        : 3/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : This class is responsible for maintaining a list of our
 //       Layers. Like all classes it is responsible for the validate and
 //       build calls to the children.
@@ -41,30 +41,31 @@ class CCategoricalLayer;
 //
 //
 //**********************************************************************
-class CLayerManager : public CBaseManager {
+class CLayerManager : public CBaseManager
+{
 public:
-  static CLayerManager*     Instance();
-  static void               Destroy();
-  virtual                   ~CLayerManager();
-  void                      clone(CLayerManager *Manager);
-  void                      addLayer(CLayer* Layer);
-  CLayer*                   getLayer(int index);
-  std::string               getLayerType(string Label);
-  CNumericLayer*            getNumericLayer(string Label);
-  CIntLayer*                getIntLayer(string Label);
-  CCategoricalLayer*        getCategoricalLayer(string Label);
-  int                       getLayerCount() { return (int)vLayerList.size(); }
-  void                      fillVector(vector<CNumericLayer*> &list, vector<string> &names);
-  void                      fillVector(vector<CIntLayer*> &list, vector<string> &names);
-  void                      validate();
-  void                      build();
+  static CLayerManager *Instance();
+  static void Destroy();
+  virtual ~CLayerManager();
+  void clone(CLayerManager *Manager);
+  void addLayer(CLayer *Layer);
+  CLayer *getLayer(int index);
+  std::string getLayerType(string Label);
+  CNumericLayer *getNumericLayer(string Label);
+  CIntLayer *getIntLayer(string Label);
+  CCategoricalLayer *getCategoricalLayer(string Label);
+  int getLayerCount() { return (int)vLayerList.size(); }
+  void fillVector(vector<CNumericLayer *> &list, vector<string> &names);
+  void fillVector(vector<CIntLayer *> &list, vector<string> &names);
+  void validate();
+  void build();
 
 protected:
   // Functions
   CLayerManager();
 
   // Variables
-  vector<CLayer*>           vLayerList;
+  vector<CLayer *> vLayerList;
 
 private:
   static boost::thread_specific_ptr<CLayerManager> clInstance;

@@ -2,7 +2,7 @@
 // Name        : CMinimizerFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 12/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,9 +19,10 @@
 // CMinimizer* CMinimizerFactory::buildMinimizer(string type)
 // Build our Minimizer based on type
 //**********************************************************************
-CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithManager) {
+CMinimizer *CMinimizerFactory::buildMinimizer(string type, bool registerWithManager)
+{
 
-  CMinimizer* pMinimizer = 0;
+  CMinimizer *pMinimizer = 0;
 
   if (type == PARAM_GAMMADIFF)
     pMinimizer = new CGammaDiff();

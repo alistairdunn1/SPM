@@ -2,7 +2,7 @@
 // Name        : CProfileManager.h
 // Author      : S.Rasmussen
 // Date        : 2/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : This class is responsible for mantaining a list of Profiles.
 //       Like all managers it's responsible for validate, build and execute
 //       calls to children.
@@ -31,30 +31,31 @@ class CProfile;
 //
 //
 //**********************************************************************
-class CProfileManager : public CBaseManager {
+class CProfileManager : public CBaseManager
+{
 public:
-  static CProfileManager*    Instance();
-  static void                Destroy();
+  static CProfileManager *Instance();
+  static void Destroy();
 
   // Functions
-  void                       addProfile(CProfile *Profile);
-	int                        getProfileCount() { return vProfileList.size(); }
-	CProfile*                  getProfile(int index);
-	void                       clone(CProfileManager *Manager);
-	void                       validate();
-	void                       build();
-	void                       execute();
-  virtual                    ~CProfileManager();
+  void addProfile(CProfile *Profile);
+  int getProfileCount() { return vProfileList.size(); }
+  CProfile *getProfile(int index);
+  void clone(CProfileManager *Manager);
+  void validate();
+  void build();
+  void execute();
+  virtual ~CProfileManager();
 
 protected:
   // Functions
   CProfileManager();
-  void                       saveState();
-  void                       resetState();
+  void saveState();
+  void resetState();
 
   // Variables
-  vector<CProfile*>          vProfileList;
-  vector<double>             vCurrentState;
+  vector<CProfile *> vProfileList;
+  vector<double> vCurrentState;
 
 private:
   static boost::thread_specific_ptr<CProfileManager> clInstance;

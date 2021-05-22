@@ -2,7 +2,7 @@
 // Name        : CNormalByStdevEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -13,7 +13,8 @@
 /**
  * Default constructor
  */
-CNormalByStdevEstimate::CNormalByStdevEstimate() {
+CNormalByStdevEstimate::CNormalByStdevEstimate()
+{
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);
@@ -26,19 +27,22 @@ CNormalByStdevEstimate::CNormalByStdevEstimate() {
 /**
  * Validate the Prior/Estimate
  */
-void CNormalByStdevEstimate::validate() {
+void CNormalByStdevEstimate::validate()
+{
   CEstimate::validate();
 
-  try {
+  try
+  {
     // Assign parameters
-    dMu     = pParameterList->getDouble(PARAM_MU);
-    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
+    dMu = pParameterList->getDouble(PARAM_MU);
+    dSigma = pParameterList->getDouble(PARAM_SIGMA);
 
     // Local validation
     if (dSigma <= 0.0)
       CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNormalByStdevPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -47,7 +51,7 @@ void CNormalByStdevEstimate::validate() {
 /**
  * Get our score
  */
-double CNormalByStdevEstimate::getScore() {
-  return 0.5 * ((getValue()-dMu)/dSigma) * ((getValue()-dMu)/dSigma);
+double CNormalByStdevEstimate::getScore()
+{
+  return 0.5 * ((getValue() - dMu) / dSigma) * ((getValue() - dMu) / dSigma);
 }
-

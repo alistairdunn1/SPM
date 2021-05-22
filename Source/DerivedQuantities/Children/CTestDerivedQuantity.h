@@ -2,7 +2,7 @@
 // Name        : CSampleDerivedQuantity.h
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 
 #ifndef CTESTDERIVEDQUANTITY_H_
@@ -14,13 +14,14 @@
 //
 //
 //**********************************************************************
-class CTestDerivedQuantity : public CDerivedQuantity {
+class CTestDerivedQuantity : public CDerivedQuantity
+{
 public:
   CTestDerivedQuantity();
-  virtual                     ~CTestDerivedQuantity();
-  void                        calculate();
-  void                        calculate(int initialisationPhase);
-  void                        build() { };
+  virtual ~CTestDerivedQuantity();
+  void calculate();
+  void calculate(int initialisationPhase);
+  void build(){};
 };
 
 #endif /* CTESTDERIVEDQUANTITY_H_ */

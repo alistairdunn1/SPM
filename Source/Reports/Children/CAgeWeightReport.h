@@ -2,7 +2,7 @@
 // Name        : CAgeWeightReport.h
 // Author      : A.Dunn
 // Date        : 24/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,20 +19,20 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CAgeWeightReport: public CFileReport {
+class CAgeWeightReport : public CFileReport
+{
 public:
   CAgeWeightReport();
-  virtual                     ~CAgeWeightReport();
-  CReport*                    clone() { return new CAgeWeightReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CAgeWeightReport();
+  CReport *clone() { return new CAgeWeightReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
-  string                      sAgeSize;
-  CAgeSize                    *pAgeSize;
-  vector<double>              vAgeList;
-
+  string sAgeSize;
+  CAgeSize *pAgeSize;
+  vector<double> vAgeList;
 };
 
 #endif /* CAGEWEIGHTREPORT_H_ */

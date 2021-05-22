@@ -2,7 +2,7 @@
 // Name        : CAgeingErrorFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 18/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -15,12 +15,12 @@
 #include "../Children/CNormalAgeingError.h"
 #include "../../Helpers/CError.h"
 
-
 //**********************************************************************
 // CAgeingError* CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager)
 //
 //**********************************************************************
-CAgeingError* CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager) {
+CAgeingError *CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager)
+{
 
   CAgeingError *pError = 0;
 

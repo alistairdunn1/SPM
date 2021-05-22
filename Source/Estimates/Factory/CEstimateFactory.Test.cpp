@@ -2,7 +2,7 @@
 //// Name        : CEstimateFactory.Test.cpp
 //// Author      : S.Rasmussen
 //// Date        : 23/01/2009
-//// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+//// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //// Description : Unit tests for CEstimateFactory
 //// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 ////============================================================================

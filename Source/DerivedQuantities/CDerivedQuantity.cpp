@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantity.cpp
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -13,35 +13,41 @@
 // Local headers
 #include "CDerivedQuantity.h"
 
-
 //**********************************************************************
 // CDerivedQuantity::CDerivedQuantity()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantity::CDerivedQuantity() :iCurrentInitialisationPhase(0) {
+CDerivedQuantity::CDerivedQuantity() : iCurrentInitialisationPhase(0)
+{
 }
 
 //**********************************************************************
 // CDerivedQuantity::~CDerivedQuantity()
 // Destructor
 //**********************************************************************
-CDerivedQuantity::~CDerivedQuantity() {
+CDerivedQuantity::~CDerivedQuantity()
+{
 }
 
 //**********************************************************************
 // double CDerivedQuantity::getValue(int offset)
 // Get Value From our Derived Quantity
 //**********************************************************************
-double CDerivedQuantity::getValue(int offset) {
+double CDerivedQuantity::getValue(int offset)
+{
 
   int phasesCrossed = 0;
 
-  if (vValues.size() > 0) {
-    if (offset >= (int)vValues.size()) {
+  if (vValues.size() > 0)
+  {
+    if (offset >= (int)vValues.size())
+    {
       offset -= vValues.size();
       phasesCrossed = 1;
-    } else {
-      return vValues[vValues.size() - (offset+1)];
+    }
+    else
+    {
+      return vValues[vValues.size() - (offset + 1)];
     }
   }
 
@@ -56,23 +62,29 @@ double CDerivedQuantity::getValue(int offset) {
    * or we've crossed because the offset was too large we need to start working
    * backwards through the initialisation values
    */
-  vector<vector<double> >::reverse_iterator vvIter;
-  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter) {
+  vector<vector<double>>::reverse_iterator vvIter;
+  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter)
+  {
 
-    if (offset >= (int)vvIter->size()) {
+    if (offset >= (int)vvIter->size())
+    {
       /**
        * If we have already crossed a phase then we want to return the first element
        * of the new phase, we cannot ever cross more than 1 phase
        */
-      if (phasesCrossed == 1) {
+      if (phasesCrossed == 1)
+      {
         return (*vvIter->begin());
-      } else {
+      }
+      else
+      {
         offset -= vvIter->size();
         phasesCrossed = 1;
       }
-
-    } else {
-      return vvIter->at(vvIter->size() - (offset+1));
+    }
+    else
+    {
+      return vvIter->at(vvIter->size() - (offset + 1));
     }
   }
 

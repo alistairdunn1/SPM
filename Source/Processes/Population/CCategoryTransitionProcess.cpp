@@ -2,7 +2,7 @@
 // Name        : CCategoryTransitionProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -28,28 +28,29 @@
 // CCategoryTransitionProcess::CCategoryTransitionProcess()
 // Default Constructor
 //**********************************************************************
-CCategoryTransitionProcess::CCategoryTransitionProcess() {
+CCategoryTransitionProcess::CCategoryTransitionProcess()
+{
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
   sType = PARAM_CATEGORY_TRANSITION;
   pPenalty = 0;
-  
+
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_FROM);     //categories
+  pParameterList->registerAllowed(PARAM_FROM);          //categories
   pParameterList->registerAllowed(PARAM_SELECTIVITIES); //selectivities for FROM to calculate vulnerable
-  pParameterList->registerAllowed(PARAM_TO);       //categories
-  pParameterList->registerAllowed(PARAM_YEARS);    //years for layers
-  pParameterList->registerAllowed(PARAM_LAYERS);   //n to move
+  pParameterList->registerAllowed(PARAM_TO);            //categories
+  pParameterList->registerAllowed(PARAM_YEARS);         //years for layers
+  pParameterList->registerAllowed(PARAM_LAYERS);        //n to move
   pParameterList->registerAllowed(PARAM_U_MAX);
   pParameterList->registerAllowed(PARAM_PENALTY);
-
 }
 
 //**********************************************************************
 // int CCategoryTransitionProcess::getYears(int index)
 // Return the years entry from vector @ index
 //**********************************************************************
-int CCategoryTransitionProcess::getYears(int index) {
+int CCategoryTransitionProcess::getYears(int index)
+{
   return vYearsList[index];
 }
 
@@ -57,7 +58,8 @@ int CCategoryTransitionProcess::getYears(int index) {
 // string CCategoryTransitionProcess::getLayers(int index)
 // Return the layers entry in vector at index
 //**********************************************************************
-string CCategoryTransitionProcess::getLayers(int index) {
+string CCategoryTransitionProcess::getLayers(int index)
+{
   return vLayersList[index];
 }
 
@@ -65,7 +67,8 @@ string CCategoryTransitionProcess::getLayers(int index) {
 // string CCategoryTransitionProcess::getCategoryTo(int index)
 // Get category from vector at index
 //**********************************************************************
-string CCategoryTransitionProcess::getCategoryTo(int index) {
+string CCategoryTransitionProcess::getCategoryTo(int index)
+{
   return vCategoryToList[index];
 }
 
@@ -73,12 +76,14 @@ string CCategoryTransitionProcess::getCategoryTo(int index) {
 // void CCategoryTransitionProcess::validate()
 // Validate This Object
 //**********************************************************************
-void CCategoryTransitionProcess::validate() {
-  try {
+void CCategoryTransitionProcess::validate()
+{
+  try
+  {
 
     // Get our Parameters
-    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
-    dUMax  = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
+    dUMax = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
     pParameterList->fillVector(vCategoryList, PARAM_FROM);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vCategoryToList, PARAM_TO);
@@ -91,7 +96,8 @@ void CCategoryTransitionProcess::validate() {
     // Local validation
     // Check for Duplicate Year
     map<int, int> mYears;
-    foreach(int Year, vYearsList) {
+    foreach (int Year, vYearsList)
+    {
       mYears[Year]++;
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
@@ -108,8 +114,9 @@ void CCategoryTransitionProcess::validate() {
       CError::errorGreaterThan(PARAM_U_MAX, PARAM_ONE);
     if (dUMax <= TRUE_ZERO)
       CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -119,8 +126,10 @@ void CCategoryTransitionProcess::validate() {
 // void CCategoryTransitionProcess::build()
 // Build our Relationships and Indexes
 //**********************************************************************
-void CCategoryTransitionProcess::build() {
-  try {
+void CCategoryTransitionProcess::build()
+{
+  try
+  {
     // Base Build
     CProcess::build();
 
@@ -129,15 +138,17 @@ void CCategoryTransitionProcess::build() {
     pLayerManager->fillVector(vLayersIndex, vLayersList);
 
     // Build the category to list
-    foreach(string Name, vCategoryToList) {
+    foreach (string Name, vCategoryToList)
+    {
       vCategoryToIndex.push_back(pWorld->getCategoryIndexForName(Name));
     }
 
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoryTransitionProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -147,15 +158,19 @@ void CCategoryTransitionProcess::build() {
 // void CCategoryTransitionProcess::execute()
 // Execute This Process
 //**********************************************************************
-void CCategoryTransitionProcess::execute() {
+void CCategoryTransitionProcess::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     // See if we are suppose to be executing first
-    bYearMatch    = false;
-    iCurrentYear  = pTimeStepManager->getCurrentYear();
-    for (int i = 0; i < (int)vYearsList.size(); ++i) {
-      if (vYearsList[i] == iCurrentYear) {
+    bYearMatch = false;
+    iCurrentYear = pTimeStepManager->getCurrentYear();
+    for (int i = 0; i < (int)vYearsList.size(); ++i)
+    {
+      if (vYearsList[i] == iCurrentYear)
+      {
         bYearMatch = true;
         pLayer = vLayersIndex[i];
         break;
@@ -169,10 +184,11 @@ void CCategoryTransitionProcess::execute() {
     // Base execute
     CProcess::execute();
 
-
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
+    for (int i = 0; i < iWorldHeight; ++i)
+    {
+      for (int j = 0; j < iWorldWidth; ++j)
+      {
         // Get Current Square
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -187,30 +203,38 @@ void CCategoryTransitionProcess::execute() {
         dVulnerable = 0.0;
 
         // Loop Through Categories & Work out Vulnerable Stock
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
+        {
+          for (int l = 0; l < iBaseColCount; ++l)
+          {
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             // Increase Vulnerable Amount
             dVulnerable += dCurrent;
           }
         }
 
         // Work out exploitation rate to move
-        dExploitation = dN / CMath::zeroFun(dVulnerable,ZERO);
-        if (dExploitation > dUMax) {
+        dExploitation = dN / CMath::zeroFun(dVulnerable, ZERO);
+        if (dExploitation > dUMax)
+        {
           dExploitation = dUMax;
-          if (pPenalty != 0) { // Throw Penalty
+          if (pPenalty != 0)
+          { // Throw Penalty
             pPenalty->trigger(sLabel, dN, (dVulnerable * dUMax));
           }
-        } else if (dExploitation < 0.0) {
+        }
+        else if (dExploitation < 0.0)
+        {
           dExploitation = 0.0;
         }
 
         // Loop Through Categories & remove individuals
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
+        {
+          for (int l = 0; l < iBaseColCount; ++l)
+          {
             // Get Amount to move
-            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
@@ -226,7 +250,9 @@ void CCategoryTransitionProcess::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoryTransitionProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -237,5 +263,6 @@ void CCategoryTransitionProcess::execute() {
 // CCategoryTransitionProcess::~CCategoryTransitionProcess()
 // Default De-Constructor
 //**********************************************************************
-CCategoryTransitionProcess::~CCategoryTransitionProcess() {
+CCategoryTransitionProcess::~CCategoryTransitionProcess()
+{
 }

@@ -2,7 +2,7 @@
 // Name        : CConfigurationLoader.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 29/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -33,7 +33,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ConfigurationLoader_NoEstimateValues, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -54,9 +55,9 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1351.1097549101755, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311 };
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707 };
-  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  double immature[] = {100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311};
+  double mature[] = {0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707};
+  double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // Check Expected against model
   BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
@@ -97,7 +98,8 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ConfigurationLoader_EstimateValues, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -139,9 +141,9 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1321.6237024688548, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 100.0, 100.0, 100.0, 100.0, 96.5, 91.298853501138851, 80.406144692466285, 62.810438831323388, 42.813956761878572, 64.982319957953905 };
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 3.4682778817886466, 8.5797029794486157, 18.944535868720013, 34.918273762480382, 51.592800873478531, 365.3083973581779 };
-  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  double immature[] = {100.0, 100.0, 100.0, 100.0, 96.5, 91.298853501138851, 80.406144692466285, 62.810438831323388, 42.813956761878572, 64.982319957953905};
+  double mature[] = {0.0, 0.0, 0.0, 0.0, 3.4682778817886466, 8.5797029794486157, 18.944535868720013, 34.918273762480382, 51.592800873478531, 365.3083973581779};
+  double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // Check Expected against model
   BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
@@ -182,7 +184,8 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ConfigurationLoader_EstimateValuesx5, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -228,9 +231,9 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1351.1097549101755, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311 };
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707 };
-  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  double immature[] = {100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311};
+  double mature[] = {0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707};
+  double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // Check Expected against model
   BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);

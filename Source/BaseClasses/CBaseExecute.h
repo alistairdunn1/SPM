@@ -2,7 +2,7 @@
 // Name        : CBaseExecute.h
 // Author      : S.Rasmussen
 // Date        : 28/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,12 +16,13 @@
 //
 //
 //**********************************************************************
-class CBaseExecute : public CBaseBuild {
+class CBaseExecute : public CBaseBuild
+{
 public:
   CBaseExecute();
-  virtual                     ~CBaseExecute();
-  virtual void                validate() { CBaseBuild::validate(); }
-  virtual void                execute() = 0;
+  virtual ~CBaseExecute();
+  virtual void validate() { CBaseBuild::validate(); }
+  virtual void execute() = 0;
 };
 
 #endif /* CBASEEXECUTE_H_ */

@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityByCellFactory.h
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifndef CDERIVEDQUANTITYBYCELLFACTORY_H_
 #define CDERIVEDQUANTITYBYCELLFACTORY_H_
@@ -20,14 +20,15 @@ using std::string;
 //
 //
 //**********************************************************************
-class CDerivedQuantityByCellFactory {
+class CDerivedQuantityByCellFactory
+{
 public:
-  static CDerivedQuantityByCell*    buildDerivedQuantityByCell(string type, bool registerWithManager = true);
+  static CDerivedQuantityByCell *buildDerivedQuantityByCell(string type, bool registerWithManager = true);
 
 private:
   // Functions
-  CDerivedQuantityByCellFactory() { };
-  virtual ~CDerivedQuantityByCellFactory() { };
+  CDerivedQuantityByCellFactory(){};
+  virtual ~CDerivedQuantityByCellFactory(){};
 };
 
 #endif /* CDERIVEDQUANTITYBYCELLFACTORY_H_ */

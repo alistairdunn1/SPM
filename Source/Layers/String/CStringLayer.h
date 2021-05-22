@@ -2,7 +2,7 @@
 // Name        : CStringLayer.h
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -16,19 +16,20 @@
 //
 //
 //**********************************************************************
-class CStringLayer : public CCategoricalLayer {
+class CStringLayer : public CCategoricalLayer
+{
 public:
   // Functions
   CStringLayer();
-  virtual                    ~CStringLayer();
-  CLayer*                    clone() { return new CStringLayer(*this); }
-  string                     getValue(int RowIndex, int ColIndex);
-  void                       validate();
-  void                       build() { };
+  virtual ~CStringLayer();
+  CLayer *clone() { return new CStringLayer(*this); }
+  string getValue(int RowIndex, int ColIndex);
+  void validate();
+  void build(){};
 
 protected:
   // Variables
-  string                     **pGrid;
+  string **pGrid;
 };
 
 #endif /*CSTRINGLAYER_H_*/

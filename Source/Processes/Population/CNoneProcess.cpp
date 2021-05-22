@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : CNoneProcess.cpp
-// Author      : 
-// Date        : 
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Author      :
+// Date        :
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -15,33 +15,36 @@
 // CNoneProcess::CNoneProcess()
 // Default Constructor
 //**********************************************************************
-CNoneProcess::CNoneProcess() {
+CNoneProcess::CNoneProcess()
+{
 
   // Variables
   sType = PARAM_NONE;
   bRequiresMerge = false;
-
 }
 
 //**********************************************************************
 // void CNoneProcess:validate()
 // Validate This
 //**********************************************************************
-void CNoneProcess::validate() {
+void CNoneProcess::validate()
+{
 }
 
 //**********************************************************************
 // void CNoneProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CNoneProcess::build() {
+void CNoneProcess::build()
+{
 }
 
 //**********************************************************************
 // void CNoneProcess::execute()
 // execute this Process
 //**********************************************************************
-void CNoneProcess::execute() {
+void CNoneProcess::execute()
+{
 
   CProcess::execute();
 }
@@ -50,5 +53,6 @@ void CNoneProcess::execute() {
 // CNoneProcess::~CNoneProcess()
 // Default De-Constructor
 //**********************************************************************
-CNoneProcess::~CNoneProcess() {
+CNoneProcess::~CNoneProcess()
+{
 }

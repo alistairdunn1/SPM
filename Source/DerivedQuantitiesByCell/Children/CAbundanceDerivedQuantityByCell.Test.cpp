@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityByCell.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -28,7 +28,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Abundance_Derived_QuantityByCell, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(Abundance_Derived_QuantityByCell, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -43,38 +44,37 @@ BOOST_FIXTURE_TEST_CASE( Abundance_Derived_QuantityByCell, C1x1_Fixture ) {
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedQuantityByCellManager *pManager  = CDerivedQuantityByCellManager::Instance();
-  CDerivedQuantityByCell        *pLayer    = pManager->getDerivedQuantityByCell("derived_quantity_by_cell_abundance");
-//  CWorldSquare         *pSquare   = getSquare();
+  CDerivedQuantityByCellManager *pManager = CDerivedQuantityByCellManager::Instance();
+  CDerivedQuantityByCell *pLayer = pManager->getDerivedQuantityByCell("derived_quantity_by_cell_abundance");
+  //  CWorldSquare         *pSquare   = getSquare();
 
   // Check Results
 
   BOOST_CHECK_EQUAL(1, pLayer->getWidth());
   BOOST_CHECK_EQUAL(1, pLayer->getHeight());
 
-//  int                         getInitialisationSize() { return vvInitialisationValues.size(); }
-//  int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
-//  vector<vector<double> >     getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
+  //  int                         getInitialisationSize() { return vvInitialisationValues.size(); }
+  //  int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
+  //  vector<vector<double> >     getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
 
   BOOST_CHECK_EQUAL(0, pLayer->getInitialisationSize());
-//  BOOST_CHECK_EQUAL(0, pLayer->getInitialisationValuesSize(1));
-//  BOOST_CHECK_EQUAL(0, pLayer->getInitialisationValue(1,1));
-//  BOOST_CHECK_EQUAL(pLayer->getValue(3), 1200.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(4), 1100.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(5), 1000.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(6), 900.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(7), 800.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(8), 700.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(9), 600.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(10), 500.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(11), 400.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(12), 300.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(13), 200.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(14), 100.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(15), 0.0);
-//  BOOST_CHECK_EQUAL(pLayer->getValue(16), 0.0); // Too Large, should return 0.0
-//  BOOST_CHECK_EQUAL(pLayer->getValue(17), 0.0); // ""
-
+  //  BOOST_CHECK_EQUAL(0, pLayer->getInitialisationValuesSize(1));
+  //  BOOST_CHECK_EQUAL(0, pLayer->getInitialisationValue(1,1));
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(3), 1200.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(4), 1100.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(5), 1000.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(6), 900.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(7), 800.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(8), 700.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(9), 600.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(10), 500.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(11), 400.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(12), 300.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(13), 200.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(14), 100.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(15), 0.0);
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(16), 0.0); // Too Large, should return 0.0
+  //  BOOST_CHECK_EQUAL(pLayer->getValue(17), 0.0); // ""
 }
 
 #endif

@@ -2,7 +2,7 @@
 // Name        : CAgeSizeFactory.cpp
 // Author      : A.Dunn
 // Date        : 24/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -18,12 +18,12 @@
 #include "../Children/CMeanAgeSize.h"
 #include "../../Helpers/CError.h"
 
-
 //**********************************************************************
 // CAgeSize* CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager)
 //
 //**********************************************************************
-CAgeSize* CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager) {
+CAgeSize *CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager)
+{
 
   CAgeSize *pAgeSize = 0;
 

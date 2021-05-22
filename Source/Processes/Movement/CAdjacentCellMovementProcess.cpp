@@ -2,7 +2,7 @@
 // Name        : CAdjacentCellMovementProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 4/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,8 @@
 // CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
 // Default Constructor
 //**********************************************************************
-CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
+CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
+{
 
   // Default Values
   pLayer = 0;
@@ -31,19 +32,20 @@ CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_PROPORTION);
-
 }
 
 //**********************************************************************
 // void CAdjacentCellMovementProcess::validate()
 // validate
 //**********************************************************************
-void CAdjacentCellMovementProcess::validate() {
-  try {
+void CAdjacentCellMovementProcess::validate()
+{
+  try
+  {
 
     // Get our Variables
-    sLayer = pParameterList->getString(PARAM_LAYER,true,"");
-    dProportion = pParameterList->getDouble(PARAM_PROPORTION,true,1.0);
+    sLayer = pParameterList->getString(PARAM_LAYER, true, "");
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION, true, 1.0);
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
@@ -65,8 +67,9 @@ void CAdjacentCellMovementProcess::validate() {
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
     registerEstimable(PARAM_PROPORTION, &dProportion);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAdjacentCellMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -76,8 +79,10 @@ void CAdjacentCellMovementProcess::validate() {
 // void CAdjacentCellMovementProcess::build()
 // build
 //**********************************************************************
-void CAdjacentCellMovementProcess::build() {
-  try {
+void CAdjacentCellMovementProcess::build()
+{
+  try
+  {
     // Base Building
     CMovementProcess::build();
 
@@ -88,8 +93,9 @@ void CAdjacentCellMovementProcess::build() {
     // Get our Layer
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAdjacentCellMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -99,66 +105,78 @@ void CAdjacentCellMovementProcess::build() {
 // void CAdjacentCellMovementProcess::execute()
 // execute
 //**********************************************************************
-void CAdjacentCellMovementProcess::execute() {
+void CAdjacentCellMovementProcess::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     // Base Execution
     CMovementProcess::execute();
 
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
+    for (int i = 0; i < iWorldHeight; ++i)
+    {
+      for (int j = 0; j < iWorldWidth; ++j)
+      {
         // Get Current Squares
         pBaseSquare = pWorld->getBaseSquare(i, j);
-        pDiff       = pWorld->getDifferenceSquare(i, j);
+        pDiff = pWorld->getDifferenceSquare(i, j);
 
         if (!pBaseSquare->getEnabled())
           continue;
 
         // Loop Through Categories and Ages
-        for (int k = 0; k < getCategoryCount(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
+        for (int k = 0; k < getCategoryCount(); ++k)
+        {
+          for (int l = 0; l < iBaseColCount; ++l)
+          {
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l);
 
-            if(CComparer::isZero(dCurrent))
+            if (CComparer::isZero(dCurrent))
               continue;
             // get up/down/left/right layer values and convert to proportions
 
-            if (sLayer != "") {
-              if ( (i+1) < pWorld->getHeight() )
-                dLayerValueDown = pLayer->getValue(i+1, j);
+            if (sLayer != "")
+            {
+              if ((i + 1) < pWorld->getHeight())
+                dLayerValueDown = pLayer->getValue(i + 1, j);
               else
                 dLayerValueDown = 0.0;
-              if ( (i-1) >= 0 )
-                dLayerValueUp = pLayer->getValue(i-1, j);
+              if ((i - 1) >= 0)
+                dLayerValueUp = pLayer->getValue(i - 1, j);
               else
                 dLayerValueUp = 0.0;
-              if ( (j+1) < pWorld->getWidth() )
-                dLayerValueRight = pLayer->getValue(i, j+1);
+              if ((j + 1) < pWorld->getWidth())
+                dLayerValueRight = pLayer->getValue(i, j + 1);
               else
                 dLayerValueRight = 0.0;
-              if ( (j-1) >= 0 )
-                dLayerValueLeft = pLayer->getValue(i, j-1);
+              if ((j - 1) >= 0)
+                dLayerValueLeft = pLayer->getValue(i, j - 1);
               else
                 dLayerValueLeft = 0.0;
 
               dLayerTotal = dLayerValueUp + dLayerValueDown + dLayerValueLeft + dLayerValueRight;
 
-              if(dLayerTotal > 0.0) {
+              if (dLayerTotal > 0.0)
+              {
                 dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueUp = dValue * dLayerValueUp/dLayerTotal;
-                dLayerValueDown = dValue * dLayerValueDown/dLayerTotal;
-                dLayerValueLeft = dValue * dLayerValueLeft/dLayerTotal;
-                dLayerValueRight = dValue * dLayerValueRight/dLayerTotal;
-              } else {
+                dLayerValueUp = dValue * dLayerValueUp / dLayerTotal;
+                dLayerValueDown = dValue * dLayerValueDown / dLayerTotal;
+                dLayerValueLeft = dValue * dLayerValueLeft / dLayerTotal;
+                dLayerValueRight = dValue * dLayerValueRight / dLayerTotal;
+              }
+              else
+              {
                 dLayerValueUp = 0.0;
                 dLayerValueDown = 0.0;
                 dLayerValueLeft = 0.0;
                 dLayerValueRight = 0.0;
               }
-             // or if no layer defined, then just move 1/4 each way
-            } else {
+              // or if no layer defined, then just move 1/4 each way
+            }
+            else
+            {
               dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
               dLayerValueUp = 0.25 * dValue;
               dLayerValueDown = 0.25 * dValue;
@@ -176,7 +194,9 @@ void CAdjacentCellMovementProcess::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAdjacentCellMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -187,5 +207,6 @@ void CAdjacentCellMovementProcess::execute() {
 // CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess()
 // Default De-Constructor
 //**********************************************************************
-CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess() {
+CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess()
+{
 }

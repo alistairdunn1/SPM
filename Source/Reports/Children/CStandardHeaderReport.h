@@ -2,7 +2,7 @@
 // Name        : CStandardHeaderReport.h
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -13,11 +13,11 @@
 #include <string>
 
 #ifdef __MINGW32__
-  #include <process.h>
+#include <process.h>
 #else
-  #include <sys/utsname.h>
-  #include <sys/times.h>
-  #include <unistd.h>
+#include <sys/utsname.h>
+#include <sys/times.h>
+#include <unistd.h>
 #endif
 
 // Local headers
@@ -30,26 +30,27 @@ using std::string;
 //
 //
 //**********************************************************************
-class CStandardHeaderReport: public CReport {
+class CStandardHeaderReport : public CReport
+{
 public:
   // Functions
   CStandardHeaderReport();
-  virtual                     ~CStandardHeaderReport();
-  CReport*                    clone() { return new CStandardHeaderReport(*this); }
-  void                        start();
-  void                        execute();
-  void                        end();
+  virtual ~CStandardHeaderReport();
+  CReport *clone() { return new CStandardHeaderReport(*this); }
+  void start();
+  void execute();
+  void end();
 
 protected:
   // Variables
-  string                      sHeader;
-  string                      sVersion;
-  time_t                      tmeStart;
+  string sHeader;
+  string sVersion;
+  time_t tmeStart;
 
   // Linux Vars
 #ifndef __MINGW32__
-  tms                         cpu_start;
-  tms                         cpu_stop;
+  tms cpu_start;
+  tms cpu_stop;
 #endif
 };
 

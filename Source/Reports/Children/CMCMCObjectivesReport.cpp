@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CMCMCObjectivesReport.cpp
 // Author      : A. Dunn
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -20,10 +20,11 @@
 // CMCMCObjectivesReport::CMCMCObjectivesReport()
 // Default Constructor
 //**********************************************************************
-CMCMCObjectivesReport::CMCMCObjectivesReport() {
+CMCMCObjectivesReport::CMCMCObjectivesReport()
+{
   // Variables
   eExecutionState = STATE_ITERATION_COMPLETE;
-  bWrittenHeader  = false;
+  bWrittenHeader = false;
 
   pParameterList->registerAllowed(PARAM_MCMC);
 }
@@ -32,16 +33,19 @@ CMCMCObjectivesReport::CMCMCObjectivesReport() {
 // void CMCMCObjectivesReport::validate()
 // Validate this reporter
 //**********************************************************************
-void CMCMCObjectivesReport::validate() {
-  try {
+void CMCMCObjectivesReport::validate()
+{
+  try
+  {
 
     // Validate parent
     CFileReport::validate();
 
-    sFileName   = pParameterList->getString(PARAM_FILE_NAME);
+    sFileName = pParameterList->getString(PARAM_FILE_NAME);
     //sMCMC       = pParameterList->getString(PARAM_MCMC);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCObjectivesReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -51,14 +55,17 @@ void CMCMCObjectivesReport::validate() {
 // void CMCMCObjectivesReport::build()
 // Build this reporter
 //**********************************************************************
-void CMCMCObjectivesReport::build() {
-  try {
+void CMCMCObjectivesReport::build()
+{
+  try
+  {
     // Base
     CFileReport::build();
 
     pMCMC = CMCMCManager::Instance()->getMCMC();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCObjectivesReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -68,8 +75,10 @@ void CMCMCObjectivesReport::build() {
 // void CMCMCObjectivesReport::execute()
 // Execute reporter
 //**********************************************************************
-void CMCMCObjectivesReport::execute() {
-  try {
+void CMCMCObjectivesReport::execute()
+{
+  try
+  {
 
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
@@ -80,7 +89,8 @@ void CMCMCObjectivesReport::execute() {
     this->start();
 
     // Print Out
-    if(!bWrittenHeader) {
+    if (!bWrittenHeader)
+    {
 
       ublas::matrix<double> mxCovariance = pMCMC->getCovariance();
       ublas::matrix<double> mxOriginalCovariance = pMCMC->getOriginalCovariance();
@@ -91,21 +101,27 @@ void CMCMCObjectivesReport::execute() {
       cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
 
       cout << "Original " << PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
-      for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
-        for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
-          cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      for (int i = 0; i < (int)mxOriginalCovariance.size1(); ++i)
+      {
+        for (int j = 0; j < (int)mxOriginalCovariance.size2(); ++j)
+        {
+          cout << mxOriginalCovariance(i, j) << ((j < (int)mxOriginalCovariance.size2() - 1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
       cout << "Proposal distribution " PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
-      for(int i=0; i < (int)mxCovariance.size1(); ++i) {
-        for(int j=0; j < (int)mxCovariance.size2(); ++j) {
-          cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      for (int i = 0; i < (int)mxCovariance.size1(); ++i)
+      {
+        for (int j = 0; j < (int)mxCovariance.size2(); ++j)
+        {
+          cout << mxCovariance(i, j) << ((j < (int)mxCovariance.size2() - 1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
       cout << "Cholesky decomposition " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
-      for(int i=0; i < (int)mxCovarianceLT.size1(); ++i) {
-        for(int j=0; j < (int)mxCovarianceLT.size2(); ++j) {
-          cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      for (int i = 0; i < (int)mxCovarianceLT.size1(); ++i)
+      {
+        for (int j = 0; j < (int)mxCovarianceLT.size2(); ++j)
+        {
+          cout << mxCovarianceLT(i, j) << ((j < (int)mxCovarianceLT.size2() - 1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
 
@@ -125,13 +141,16 @@ void CMCMCObjectivesReport::execute() {
     cout << CONFIG_SPACE_SEPARATOR << vChain.dAcceptanceRate << CONFIG_SPACE_SEPARATOR;
     cout << vChain.dAcceptanceRateSinceAdapt << CONFIG_SPACE_SEPARATOR << vChain.dStepSize << "\n";
 
-    if( pMCMC->isLastItem() ) {
-      cout << CONFIG_END_REPORT << "\n" << endl;
+    if (pMCMC->isLastItem())
+    {
+      cout << CONFIG_END_REPORT << "\n"
+           << endl;
     }
 
     this->end();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCObjectivesReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -141,5 +160,6 @@ void CMCMCObjectivesReport::execute() {
 // CMCMCObjectivesReport::~CMCMCObjectivesReport()
 // Destructor
 //**********************************************************************
-CMCMCObjectivesReport::~CMCMCObjectivesReport() {
+CMCMCObjectivesReport::~CMCMCObjectivesReport()
+{
 }

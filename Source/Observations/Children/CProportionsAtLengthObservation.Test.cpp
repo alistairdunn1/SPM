@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : CProportionsAtLengthObservation.Test.cpp
-// Author      : 
-// Date        : 
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Author      :
+// Date        :
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 //============================================================================
 #ifdef TEST
@@ -33,7 +33,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservation, C3x3_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ProportionsAtLengthObservation, C3x3_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -52,10 +53,10 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservation, C3x3_Fixture ) {
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager       = CObservationManager::Instance();
-  CObservation        *pObservation   = pManager->getObservation("proportions_at_length_observation");
+  CObservationManager *pManager = CObservationManager::Instance();
+  CObservation *pObservation = pManager->getObservation("proportions_at_length_observation");
 
-  vector<SComparison*> vComparisons;
+  vector<SComparison *> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 18.0);
@@ -123,16 +124,18 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservation, C3x3_Fixture ) {
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.78983491904005387, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 2032.7126680893093, 1e-9);
 
-  for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-      CWorldSquare *pSquare = getSquare(i,j);
+  for (int i = 0; i < 3; ++i)
+  {
+    for (int j = 0; j < 3; ++j)
+    {
+      CWorldSquare *pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = { 11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675 };
-      double mature[] = { 0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224 };
-      double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
+      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model
       BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
@@ -175,7 +178,8 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservation, C3x3_Fixture ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservationWithCompoundCategories, C3x3_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ProportionsAtLengthObservationWithCompoundCategories, C3x3_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -194,10 +198,10 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservationWithCompoundCategories, C
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager       = CObservationManager::Instance();
-  CObservation        *pObservation   = pManager->getObservation("proportions_at_length_observation_with_compound_categories");
+  CObservationManager *pManager = CObservationManager::Instance();
+  CObservation *pObservation = pManager->getObservation("proportions_at_length_observation_with_compound_categories");
 
-  vector<SComparison*> vComparisons;
+  vector<SComparison *> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 36.0);
@@ -265,16 +269,18 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservationWithCompoundCategories, C
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.35625852383574208, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 1724.5354362839362, 1e-9);
 
-  for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-      CWorldSquare *pSquare = getSquare(i,j);
+  for (int i = 0; i < 3; ++i)
+  {
+    for (int j = 0; j < 3; ++j)
+    {
+      CWorldSquare *pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = { 11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675 };
-      double mature[] = { 0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224 };
-      double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
+      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model
       BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
@@ -312,6 +318,5 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtLengthObservationWithCompoundCategories, C
     }
   }
 }
-
 
 #endif /* TEST */

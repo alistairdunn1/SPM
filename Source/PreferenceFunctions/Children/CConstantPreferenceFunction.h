@@ -2,7 +2,7 @@
 // Name        : CConstantPreferenceFunction.h
 // Author      : A. Dunn
 // Date        : 15/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,20 +16,20 @@
 //
 //
 //**********************************************************************
-class CConstantPreferenceFunction : public CPreferenceFunction {
+class CConstantPreferenceFunction : public CPreferenceFunction
+{
 public:
   // Functions
   CConstantPreferenceFunction();
-  virtual                    ~CConstantPreferenceFunction();
-  CPreferenceFunction*       clone() { return new CConstantPreferenceFunction(*this); }
-  double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void                       validate();
-  void                       build();
+  virtual ~CConstantPreferenceFunction();
+  CPreferenceFunction *clone() { return new CConstantPreferenceFunction(*this); }
+  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void validate();
+  void build();
 
 protected:
   // Variables
-  double                     dC;
-
+  double dC;
 };
 
 #endif /*CCONSTANTPREFERENCEFUNCTION_H_*/

@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPDFManager.h
 // Author      : A. Dunn
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 #ifndef CPDFMANAGER_H_
 #define CPDFMANAGER_H_
@@ -16,27 +16,28 @@ class CPDF;
 //
 //
 //**********************************************************************
-class CPDFManager : public CBaseManager {
+class CPDFManager : public CBaseManager
+{
 public:
-  static CPDFManager*   Instance();
-  static void                          Destroy();
+  static CPDFManager *Instance();
+  static void Destroy();
 
   // Functions
-  void                       addPDF(CPDF *Function);
-  int                        getPDFCount() { return (int)vPDFs.size(); }
-  CPDF*                      getPDF(int index);
-  CPDF*                      getPDF(string Label);
-  void                       clone(CPDFManager *Manager);
-  void                       validate();
-  void                       build();
-  virtual                    ~CPDFManager();
+  void addPDF(CPDF *Function);
+  int getPDFCount() { return (int)vPDFs.size(); }
+  CPDF *getPDF(int index);
+  CPDF *getPDF(string Label);
+  void clone(CPDFManager *Manager);
+  void validate();
+  void build();
+  virtual ~CPDFManager();
 
 protected:
   // Functions
   CPDFManager();
 
   // Variables
-  vector<CPDF*>  vPDFs;
+  vector<CPDF *> vPDFs;
 
 private:
   static boost::thread_specific_ptr<CPDFManager> clInstance;

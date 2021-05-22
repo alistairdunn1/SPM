@@ -2,7 +2,7 @@
 // Name        : CSizeWeight.cpp
 // Author      : A.Dunn
 // Date        : 24/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -14,24 +14,28 @@
 // CSizeWeight::CSizeWeight()
 // Default Constructor
 //**********************************************************************
-CSizeWeight::CSizeWeight() {
+CSizeWeight::CSizeWeight()
+{
 }
 
 //**********************************************************************
 // void CLayer::validate()
 // Validate
 //**********************************************************************
-void CSizeWeight::validate() {
-  try {
+void CSizeWeight::validate()
+{
+  try
+  {
     CBaseBuild::validate();
 
     // Get Variables from World
-    iMinAge           = pWorld->getMinAge();
-    iMaxAge           = pWorld->getMaxAge();
-    bAgePlusGroup     = pWorld->getAgePlusGroup();
-    iNAges            = pWorld->getAgeSpread();
-
-  } catch (string &Ex) {
+    iMinAge = pWorld->getMinAge();
+    iMaxAge = pWorld->getMaxAge();
+    bAgePlusGroup = pWorld->getAgePlusGroup();
+    iNAges = pWorld->getAgeSpread();
+  }
+  catch (string &Ex)
+  {
     Ex = "CSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -41,10 +45,13 @@ void CSizeWeight::validate() {
 // void CSizeWeight::build()
 // Build our size-weight relationship
 //**********************************************************************
-void CSizeWeight::build() {
-  try {
-
-  } catch (string &Ex) {
+void CSizeWeight::build()
+{
+  try
+  {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -54,11 +61,13 @@ void CSizeWeight::build() {
 // void CSizeWeight::rebuild()
 // Rebuild our size-weight relationship
 //**********************************************************************
-void CSizeWeight::rebuild() {
-  try {
-
-
-  } catch (string &Ex) {
+void CSizeWeight::rebuild()
+{
+  try
+  {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -68,5 +77,6 @@ void CSizeWeight::rebuild() {
 // CSizeWeight::~CSizeWeight()
 // Destructor
 //**********************************************************************
-CSizeWeight::~CSizeWeight() {
+CSizeWeight::~CSizeWeight()
+{
 }

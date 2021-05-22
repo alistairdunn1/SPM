@@ -2,7 +2,7 @@
 // Name        : CSelectivity.cpp
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -14,14 +14,16 @@
 // CSelectivity::CSelectivity(CSelectivity *Selectivity = 0);
 // Default Constructor
 //**********************************************************************
-CSelectivity::CSelectivity() {
+CSelectivity::CSelectivity()
+{
 }
 
 //**********************************************************************
 // void CSelectivity::validate()
 // Validate Selectivity
 //**********************************************************************
-void CSelectivity::validate() {
+void CSelectivity::validate()
+{
   CBaseBuild::validate();
 }
 
@@ -29,5 +31,6 @@ void CSelectivity::validate() {
 // CSelectivity::~CSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CSelectivity::~CSelectivity() {
+CSelectivity::~CSelectivity()
+{
 }

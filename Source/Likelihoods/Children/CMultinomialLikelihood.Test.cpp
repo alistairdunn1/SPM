@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : CMultinomialLikelihood.Test.cpp
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -16,7 +16,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
+BOOST_AUTO_TEST_CASE(MultinomialLikelihood)
+{
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
@@ -82,27 +83,25 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   BOOST_CHECK_CLOSE(16.300417207752272, scores[0], 1e-9);
   BOOST_CHECK_CLOSE(12.834681304952547, scores[1], 1e-9);
   BOOST_CHECK_CLOSE(10.807355764411724, scores[2], 1e-9);
-  BOOST_CHECK_CLOSE( 9.368945402152817, scores[3], 1e-9);
-  BOOST_CHECK_CLOSE( 8.253227645581770, scores[4], 1e-9);
-  BOOST_CHECK_CLOSE( 0.516444725003769, scores[5], 1e-9);
-  BOOST_CHECK_CLOSE( 0.872226985105489, scores[6], 1e-9);
+  BOOST_CHECK_CLOSE(9.368945402152817, scores[3], 1e-9);
+  BOOST_CHECK_CLOSE(8.253227645581770, scores[4], 1e-9);
+  BOOST_CHECK_CLOSE(0.516444725003769, scores[5], 1e-9);
+  BOOST_CHECK_CLOSE(0.872226985105489, scores[6], 1e-9);
 
   // Get results
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(observed[0], 0.11864406779661017,  1e-9);
-  BOOST_CHECK_CLOSE(observed[1], 0.23728813559322035,  1e-9);
-  BOOST_CHECK_CLOSE(observed[2], 0.22033898305084745,  1e-9);
-  BOOST_CHECK_CLOSE(observed[3], 0.42372881355932202,  1e-9);
-  BOOST_CHECK_CLOSE(observed[4], 0.95999999999999996,  1e-9);
+  BOOST_CHECK_CLOSE(observed[0], 0.11864406779661017, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.23728813559322035, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.22033898305084745, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.42372881355932202, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.95999999999999996, 1e-9);
   BOOST_CHECK_CLOSE(observed[5], 0.040000000000000001, 1e-9);
-  BOOST_CHECK_CLOSE(observed[6], 1.0000000000000000,   1e-9);
-
+  BOOST_CHECK_CLOSE(observed[6], 1.0000000000000000, 1e-9);
 
   // clean up memory
   delete pLikelihood;
-
 }
 
 #endif /* TEST */

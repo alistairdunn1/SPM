@@ -2,7 +2,7 @@
 // Name        : CBinomialLikelihood.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 29/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
+BOOST_AUTO_TEST_CASE(BinomialLikelihood)
+{
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
@@ -81,13 +82,13 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE( 1.687807099701715, scores[0], 1e-9);
-  BOOST_CHECK_CLOSE( 3.522307801439243, scores[1], 1e-9);
-  BOOST_CHECK_CLOSE( 7.503894929001944, scores[2], 1e-9);
+  BOOST_CHECK_CLOSE(1.687807099701715, scores[0], 1e-9);
+  BOOST_CHECK_CLOSE(3.522307801439243, scores[1], 1e-9);
+  BOOST_CHECK_CLOSE(7.503894929001944, scores[2], 1e-9);
   BOOST_CHECK_CLOSE(13.002265158969662, scores[3], 1e-9);
   BOOST_CHECK_CLOSE(20.091017458126572, scores[4], 1e-9);
-  BOOST_CHECK_CLOSE( 3.939720847325895, scores[5], 1e-9);
-  BOOST_CHECK_CLOSE( 5.256187812442846, scores[6], 1e-9);
+  BOOST_CHECK_CLOSE(3.939720847325895, scores[5], 1e-9);
+  BOOST_CHECK_CLOSE(5.256187812442846, scores[6], 1e-9);
 
   // Get results
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
@@ -98,7 +99,7 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   BOOST_CHECK_CLOSE(observed[2], 0.26000000000000001, 1e-9);
   BOOST_CHECK_CLOSE(observed[3], 0.5, 1e-9);
   BOOST_CHECK_CLOSE(observed[4], 0.47999999999999998, 1e-9);
-  BOOST_CHECK_CLOSE(observed[5], 0.1111111111111111,  1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.1111111111111111, 1e-9);
   BOOST_CHECK_CLOSE(observed[6], 0.41666666666666669, 1e-9);
 
   // clean up memory

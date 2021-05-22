@@ -2,7 +2,7 @@
 // Name        : CEstimate.h
 // Author      : S.Rasmussen
 // Date        : 27/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : The estimate info class is built from the configuration
 //                file parameters. It's then processed to build the
 //                actual estimate objects.
@@ -18,22 +18,23 @@
 //
 //
 //**********************************************************************
-class CEstimateInfo : public CBaseObject {
+class CEstimateInfo : public CBaseObject
+{
 public:
   // Methods
   CEstimateInfo();
-  virtual                     ~CEstimateInfo();
-  string                      getTargetParameter() { return ""; }
-  void                        fillSameVector(vector<string> &sames);
-  void                        generateEstimates();
+  virtual ~CEstimateInfo();
+  string getTargetParameter() { return ""; }
+  void fillSameVector(vector<string> &sames);
+  void generateEstimates();
 
 private:
   // Members
-  vector<string>              vSameList;
-  string                      sObjectType;
-  string                      sObjectLabel;
-  string                      sObjectParameter;
-  int                         iObjectIndex;
+  vector<string> vSameList;
+  string sObjectType;
+  string sObjectLabel;
+  string sObjectParameter;
+  int iObjectIndex;
 };
 
 #endif /* CESTIMATEINFO_H_ */

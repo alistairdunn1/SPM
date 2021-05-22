@@ -2,7 +2,7 @@
 // Name        : CPreferenceFunctionReport.cpp
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -24,10 +24,11 @@
 // CPreferenceFunctionReport::CPreferenceFunctionReport()
 // Constructor
 //**********************************************************************
-CPreferenceFunctionReport::CPreferenceFunctionReport() {
+CPreferenceFunctionReport::CPreferenceFunctionReport()
+{
   // Variables
-  eExecutionState   = STATE_FINALIZATION;
-  pPreferenceFunction      = 0;
+  eExecutionState = STATE_FINALIZATION;
+  pPreferenceFunction = 0;
 
   // Register allowed
   pParameterList->registerAllowed(PARAM_PREFERENCE_FUNCTION);
@@ -37,8 +38,10 @@ CPreferenceFunctionReport::CPreferenceFunctionReport() {
 // void CPreferenceFunctionReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CPreferenceFunctionReport::validate() {
-  try {
+void CPreferenceFunctionReport::validate()
+{
+  try
+  {
 
     sPreferenceFunction = pParameterList->getString(PARAM_PREFERENCE_FUNCTION);
 
@@ -46,8 +49,9 @@ void CPreferenceFunctionReport::validate() {
     CFileReport::validate();
 
     // Local validation
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -57,8 +61,10 @@ void CPreferenceFunctionReport::validate() {
 // void CPreferenceFunctionReport::build()
 // Build our Report
 //**********************************************************************
-void CPreferenceFunctionReport::build() {
-  try {
+void CPreferenceFunctionReport::build()
+{
+  try
+  {
     // Parent
     CFileReport::build();
 
@@ -67,41 +73,70 @@ void CPreferenceFunctionReport::build() {
     pPreferenceFunction = pManager->getPreferenceFunction(sPreferenceFunction);
 
     std::string sType = pPreferenceFunction->getType();
-    if ( sType == PARAM_FRANK_COPULA || sType == PARAM_GAUSSIAN_COPULA || sType == PARAM_GUMBEL_COPULA || sType == PARAM_INDEPENDENCE_COPULA)  {
+    if (sType == PARAM_FRANK_COPULA || sType == PARAM_GAUSSIAN_COPULA || sType == PARAM_GUMBEL_COPULA || sType == PARAM_INDEPENDENCE_COPULA)
+    {
       pLayer = 0;
-    } else {
+    }
+    else
+    {
       std::string sLayerName = pPreferenceFunction->getLayerName();
       sLayerType = CLayerManager::Instance()->getLayerType(sLayerName);
-      if ( sLayerType==PARAM_DOUBLE ) {
+      if (sLayerType == PARAM_DOUBLE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_DISTANCE ) {
+      }
+      else if (sLayerType == PARAM_DISTANCE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_LAT_LONG_DISTANCE ) {
+      }
+      else if (sLayerType == PARAM_LAT_LONG_DISTANCE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_LAT_LONG_DIJKSTRA_DISTANCE ) {
+      }
+      else if (sLayerType == PARAM_LAT_LONG_DIJKSTRA_DISTANCE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_DIJKSTRA_DISTANCE ) {
+      }
+      else if (sLayerType == PARAM_DIJKSTRA_DISTANCE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_ABUNDANCE ) {
+      }
+      else if (sLayerType == PARAM_ABUNDANCE)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_ABUNDANCE_DENSITY ) {
+      }
+      else if (sLayerType == PARAM_ABUNDANCE_DENSITY)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_BIOMASS ) {
+      }
+      else if (sLayerType == PARAM_BIOMASS)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_BIOMASS_DENSITY ) {
+      }
+      else if (sLayerType == PARAM_BIOMASS_DENSITY)
+      {
         pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-      } else if ( sLayerType==PARAM_CATEGORICAL ) {
+      }
+      else if (sLayerType == PARAM_CATEGORICAL)
+      {
         pLayer = 0;
-      } else if ( sLayerType==PARAM_META_NUMERIC ) {
+      }
+      else if (sLayerType == PARAM_META_NUMERIC)
+      {
         pLayer = 0;
-      } else if ( sLayerType==PARAM_META_STRING ) {
+      }
+      else if (sLayerType == PARAM_META_STRING)
+      {
         pLayer = 0;
-      } else {
+      }
+      else
+      {
         CError::errorUnknown(PARAM_LAYER, sLayerName);
       }
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -111,9 +146,11 @@ void CPreferenceFunctionReport::build() {
 // void CPreferenceFunctionReport::execute()
 // Execute
 //**********************************************************************
-void CPreferenceFunctionReport::execute() {
+void CPreferenceFunctionReport::execute()
+{
 
-  try {
+  try
+  {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -134,7 +171,8 @@ void CPreferenceFunctionReport::execute() {
     pList->fillDefinedParameterVector(vDefinedParameters);
 
     vector<string> vValues;
-    foreach(string Parameter, vDefinedParameters) {
+    foreach (string Parameter, vDefinedParameters)
+    {
       pList->fillVector(vValues, Parameter);
 
       cout << Parameter << ": ";
@@ -143,32 +181,43 @@ void CPreferenceFunctionReport::execute() {
        * Check if this parameter is estimated
        * First check if there is only 1 value
        */
-      if (vValues.size() == 1) {
+      if (vValues.size() == 1)
+      {
         string estimableName = "preference_function[" + pPreferenceFunction->getLabel() + "]." + Parameter;
 
-        if (pEstimateManager->hasEstimate(estimableName)) {
+        if (pEstimateManager->hasEstimate(estimableName))
+        {
           CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
           cout << pEstimate->getValue();
-        } else {
+        }
+        else
+        {
           cout << vValues[0];
         }
+      }
+      else if (vValues.size() > 1)
+      {
 
-      } else if (vValues.size() > 1) {
-
-        for (int i = 0; i < (int)vValues.size(); ++i) {
+        for (int i = 0; i < (int)vValues.size(); ++i)
+        {
           string estimableName = "preference_function[" + pPreferenceFunction->getLabel() + "]." + Parameter + "(" + boost::lexical_cast<string>(i + 1) + ")";
 
-          if (pEstimateManager->hasEstimate(estimableName)) {
+          if (pEstimateManager->hasEstimate(estimableName))
+          {
             CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
-            cout << pEstimate->getValue() << (i<(int)vValues.size()?CONFIG_SPACE_SEPARATOR:"");
-          } else {
-            cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SPACE_SEPARATOR:"");
+            cout << pEstimate->getValue() << (i < (int)vValues.size() ? CONFIG_SPACE_SEPARATOR : "");
+          }
+          else
+          {
+            cout << vValues[i] << (i < ((int)vValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
           }
         }
-
-      } else {
-        for (int i = 0; i < (int)vValues.size(); ++i) {
-          cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SPACE_SEPARATOR:"");
+      }
+      else
+      {
+        for (int i = 0; i < (int)vValues.size(); ++i)
+        {
+          cout << vValues[i] << (i < ((int)vValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
         }
       }
 
@@ -178,17 +227,20 @@ void CPreferenceFunctionReport::execute() {
     // print out layer type, and
     // value minimum and maximum if a double layer
     cout << "layer_type" << CONFIG_RATIO_SEPARATOR << " " << sLayerType << endl;
-    CDoubleLayer *pDoubleLayer = dynamic_cast<CDoubleLayer*>(pLayer);
-    if (pDoubleLayer != 0) {
+    CDoubleLayer *pDoubleLayer = dynamic_cast<CDoubleLayer *>(pLayer);
+    if (pDoubleLayer != 0)
+    {
       cout << "layer_min" << CONFIG_RATIO_SEPARATOR << " " << pDoubleLayer->getLayerMin() << endl;
       cout << "layer_max" << CONFIG_RATIO_SEPARATOR << " " << pDoubleLayer->getLayerMax() << endl;
     }
 
-    cout << CONFIG_END_REPORT << "\n" << endl;
+    cout << CONFIG_END_REPORT << "\n"
+         << endl;
 
     this->end();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -198,5 +250,6 @@ void CPreferenceFunctionReport::execute() {
 // CPreferenceFunctionReport::~CPreferenceFunctionReport()
 // Destuctor
 //**********************************************************************
-CPreferenceFunctionReport::~CPreferenceFunctionReport() {
+CPreferenceFunctionReport::~CPreferenceFunctionReport()
+{
 }

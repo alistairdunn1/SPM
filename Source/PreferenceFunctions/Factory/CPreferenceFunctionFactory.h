@@ -2,7 +2,7 @@
 // Name        : CPreferenceFunctionFactory.h
 // Author      : S.Rasmussen
 // Date        : 7/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -22,15 +22,16 @@ using std::string;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionFactory {
+class CPreferenceFunctionFactory
+{
 public:
   // Functions
-  static CPreferenceFunction*    buildPreferenceFunction(string type, bool registerWithManager = true);
+  static CPreferenceFunction *buildPreferenceFunction(string type, bool registerWithManager = true);
 
 private:
   // Functions
-  CPreferenceFunctionFactory() { }
-  virtual ~CPreferenceFunctionFactory() { }
+  CPreferenceFunctionFactory() {}
+  virtual ~CPreferenceFunctionFactory() {}
 };
 
 #endif /* CPREFERENCEFUNCTIONFACTORY_H_ */

@@ -2,7 +2,7 @@
 // Name        : CNoneSizeWeight.h
 // Author      : A.Dunn
 // Date        : 24/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -15,17 +15,17 @@
 //
 //
 //**********************************************************************
-class CNoneSizeWeight: public CSizeWeight {
+class CNoneSizeWeight : public CSizeWeight
+{
 public:
   // Functions
   CNoneSizeWeight();
-  virtual                     ~CNoneSizeWeight();
-  CSizeWeight*                clone() { return new CNoneSizeWeight(*this); }
-  void                        validate();
-  void                        build();
-  void                        rebuild();
-  double                      getMeanWeight(double &size, string &distribution, double &cv) { return 1; }
-
+  virtual ~CNoneSizeWeight();
+  CSizeWeight *clone() { return new CNoneSizeWeight(*this); }
+  void validate();
+  void build();
+  void rebuild();
+  double getMeanWeight(double &size, string &distribution, double &cv) { return 1; }
 };
 
 #endif /* CNONESIZEWEIGHT_H_ */

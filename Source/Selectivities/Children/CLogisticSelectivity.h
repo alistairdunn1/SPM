@@ -2,7 +2,7 @@
 // Name        : CLogisticSelectivity.h
 // Author      : S.Rasmussen
 // Date        : 6/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,22 +16,23 @@
 //
 //
 //**********************************************************************
-class CLogisticSelectivity : public CCachedSelectivity {
+class CLogisticSelectivity : public CCachedSelectivity
+{
 public:
   // Functions
   CLogisticSelectivity();
-  virtual                    ~CLogisticSelectivity();
-  CSelectivity*               clone() { return new CLogisticSelectivity(*this); }
-  void                       validate();
+  virtual ~CLogisticSelectivity();
+  CSelectivity *clone() { return new CLogisticSelectivity(*this); }
+  void validate();
 
 protected:
   // Functions
-  double                     calculateResult(int Age);
+  double calculateResult(int Age);
 
   // Variables
-  double                     dA50;
-  double                     dAto95;
-  double                     dAlpha;
+  double dA50;
+  double dAto95;
+  double dAlpha;
 };
 
 #endif /*CLOGISTICSELECTIVITY_H_*/

@@ -2,7 +2,7 @@
 // Name        : CEstimateValueReport.cpp
 // Author      : S.Rasmussen
 // Date        : 4/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,12 +20,13 @@
 // CEstimateValueReport::CEstimateValueReport()
 // Default Constructor
 //**********************************************************************
-CEstimateValueReport::CEstimateValueReport() {
+CEstimateValueReport::CEstimateValueReport()
+{
   eExecutionState = STATE_FINALIZATION;
-  bWrittenHeader  = false;
+  bWrittenHeader = false;
   bStandardHeader = false;
 
-    // Register allowed
+  // Register allowed
   pParameterList->registerAllowed(PARAM_HEADER);
 }
 
@@ -33,16 +34,19 @@ CEstimateValueReport::CEstimateValueReport() {
 // void CEstimateValueReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CEstimateValueReport::validate() {
-  try {
+void CEstimateValueReport::validate()
+{
+  try
+  {
 
     // Validate parent
     CFileReport::validate();
 
     // Local validation
-    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,sFileName==""?true:false);
-
-  } catch (string & ex) {
+    bStandardHeader = pParameterList->getBool(PARAM_HEADER, true, sFileName == "" ? true : false);
+  }
+  catch (string &ex)
+  {
     ex = "CEstimateValueReport.validate(" + getLabel() + ")->" + ex;
     throw ex;
   }
@@ -52,9 +56,11 @@ void CEstimateValueReport::validate() {
 //
 //
 //**********************************************************************
-void CEstimateValueReport::execute() {
+void CEstimateValueReport::execute()
+{
 
-  try {
+  try
+  {
 
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
@@ -64,11 +70,12 @@ void CEstimateValueReport::execute() {
     // Check if File Already Exists for overwrite
     // If file already exists, and we not overwriting we don't
     // want to re-write the original header
-    if ( (sFileName != "") && (!bOverwrite) ) {
+    if ((sFileName != "") && (!bOverwrite))
+    {
       struct stat stFileInfo;
-      int intStat = stat(sFileName.c_str(),&stFileInfo);
+      int intStat = stat(sFileName.c_str(), &stFileInfo);
 
-      if (intStat == 0) // File Exists
+      if (intStat == 0)        // File Exists
         bWrittenHeader = true; // Don't write the header
     }
     // Start IO
@@ -76,42 +83,49 @@ void CEstimateValueReport::execute() {
 
     // Variables
     CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    int              iCount            = pEstimateManager->getEstimateCount();
+    int iCount = pEstimateManager->getEstimateCount();
 
-    if (bStandardHeader) {
+    if (bStandardHeader)
+    {
       cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
       cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
       cout << PARAM_PARAMETER << CONFIG_RATIO_SEPARATOR << " ";
     }
 
-    if (!bWrittenHeader) {
+    if (!bWrittenHeader)
+    {
       bWrittenHeader = true;
 
       // Output Header
-      for (int i = 0; i < iCount; ++i) {
+      for (int i = 0; i < iCount; ++i)
+      {
         CEstimate *pEstimate = pEstimateManager->getEstimate(i);
         cout << pEstimate->getParameter();
 
-        if((i+1)<iCount)
+        if ((i + 1) < iCount)
           cout << CONFIG_SPACE_SEPARATOR;
       }
       cout << "\n";
     }
 
-    for (int i = 0; i < iCount; ++i) {
+    for (int i = 0; i < iCount; ++i)
+    {
       CEstimate *pEstimate = pEstimateManager->getEstimate(i);
       cout << pEstimate->getValue();
-      if((i+1)<iCount) cout << CONFIG_SPACE_SEPARATOR;
+      if ((i + 1) < iCount)
+        cout << CONFIG_SPACE_SEPARATOR;
     }
     cout << endl;
 
     if (bStandardHeader)
-      cout << CONFIG_END_REPORT << "\n" << endl;
+      cout << CONFIG_END_REPORT << "\n"
+           << endl;
 
     // End IO
     this->end();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CEstimateValueReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -121,5 +135,6 @@ void CEstimateValueReport::execute() {
 // CEstimateValueReport::~CEstimateValueReport()
 // Destructor
 //**********************************************************************
-CEstimateValueReport::~CEstimateValueReport() {
+CEstimateValueReport::~CEstimateValueReport()
+{
 }

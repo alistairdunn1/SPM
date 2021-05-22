@@ -2,7 +2,7 @@
 // Name        : CBaseValidate.cpp
 // Author      : S.Rasmussen
 // Date        : 28/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,10 +19,11 @@
 // CBaseValidate::CBaseValidate()
 // Default Constructor
 //**********************************************************************
-CBaseValidate::CBaseValidate() {
+CBaseValidate::CBaseValidate()
+{
 
   // Default sLabel
-  sLabel  = "";
+  sLabel = "";
 
   // Register Variable
   pParameterList->registerAllowed(PARAM_LABEL);
@@ -33,21 +34,25 @@ CBaseValidate::CBaseValidate() {
 // void CBaseValidate::validate()
 // Validate
 //**********************************************************************
-void CBaseValidate::validate() {
-  try {
+void CBaseValidate::validate()
+{
+  try
+  {
     // Populate our variable
-    sLabel  = pParameterList->getString(PARAM_LABEL);
+    sLabel = pParameterList->getString(PARAM_LABEL);
 
     string temp = CConvertor::stringToLowercase(sLabel);
     bool invalid_label = temp.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789[]-_.()") != std::string::npos;
-    if (invalid_label) {
+    if (invalid_label)
+    {
       CError::error("The label " + sLabel + " contains invalid characters. Please ensure it is alphanumeric with the following special characters: []-_.()");
     }
 
     // Validate known parameters against bad ones
     pParameterList->checkInvalidParameters();
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CBaseValidate.validate(" + getLabel() + ")->" + Ex; // No label defined yet.
     throw Ex;
   }
@@ -57,5 +62,6 @@ void CBaseValidate::validate() {
 // CBaseValidate::~CBaseValidate()
 // Destructor
 //**********************************************************************
-CBaseValidate::~CBaseValidate() {
+CBaseValidate::~CBaseValidate()
+{
 }

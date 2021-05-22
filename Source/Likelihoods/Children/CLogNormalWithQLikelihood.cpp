@@ -2,7 +2,7 @@
 // Name        : CLogNormalWithQLikelihood.cpp
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,17 +19,19 @@
 // CLogNormalWithQLikelihood::CLogNormalWithQLikelihood()
 // Default Constructor
 //**********************************************************************
-CLogNormalWithQLikelihood::CLogNormalWithQLikelihood() {
+CLogNormalWithQLikelihood::CLogNormalWithQLikelihood()
+{
 }
 
 //**********************************************************************
 // double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, const double errorValue)
 // Adjust our ErrorValue based on Process Error
 //**********************************************************************
-double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, const double errorValue) {
+double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, const double errorValue)
+{
   // adjust for c.v. process error
-  if(processError > 0.0)
-    return (sqrt(errorValue*errorValue + processError*processError));
+  if (processError > 0.0)
+    return (sqrt(errorValue * errorValue + processError * processError));
 
   return errorValue;
 }
@@ -40,14 +42,16 @@ double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, co
 // Get the result from our likelihood for the observation
 //**********************************************************************
 void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
-    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
+                                          const vector<double> &errorValue, const vector<double> &processError, const double delta)
+{
 
   // Loop through expected
-  for (int i = 0; i < (int)expected.size(); ++i) {
+  for (int i = 0; i < (int)expected.size(); ++i)
+  {
     // Calculate score
     double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
-    double dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
-    double dScore = log(observed[i] / CMath::zeroFun(expected[i],delta)) / dSigma + 0.5*dSigma;
+    double dSigma = sqrt(log(1 + dErrorValue * dErrorValue));
+    double dScore = log(observed[i] / CMath::zeroFun(expected[i], delta)) / dSigma + 0.5 * dSigma;
     dScore = log(dSigma) + 0.5 * (dScore * dScore);
 
     scores.push_back(dScore);
@@ -60,20 +64,25 @@ void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<d
 // Simulate our observed values
 //**********************************************************************
 void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
-    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
+                                                 const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta)
+{
 
   // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
   // Loop through our expected values
   map<string, double> mTotals;
-  for (int i = 0; i < (int)expected.size(); ++i) {
+  for (int i = 0; i < (int)expected.size(); ++i)
+  {
 
-    double dCV  = adjustErrorValue(processError[i], errorValue[i]);
+    double dCV = adjustErrorValue(processError[i], errorValue[i]);
     // Check for invalid values
-    if (expected[i] <= 0.0 || dCV <= 0.0) {
+    if (expected[i] <= 0.0 || dCV <= 0.0)
+    {
       observed[i] = delta;
-    } else {
+    }
+    else
+    {
       // Generate random observation
       observed[i] = pRandom->getRandomLogNormal(expected[i], dCV);
     }
@@ -84,5 +93,6 @@ void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vec
 // CLogNormalWithQLikelihood::~CLogNormalWithQLikelihood()
 // Destructor
 //**********************************************************************
-CLogNormalWithQLikelihood::~CLogNormalWithQLikelihood() {
+CLogNormalWithQLikelihood::~CLogNormalWithQLikelihood()
+{
 }

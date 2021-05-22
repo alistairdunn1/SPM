@@ -2,7 +2,7 @@
 // Name        : CTimeStepManager.cpp
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : << See CTimeStepManager.h >>
 // $Date$
 //============================================================================
@@ -33,20 +33,22 @@ boost::thread_specific_ptr<CTimeStepManager> CTimeStepManager::clInstance;
 // CTimeStepManager::CTimeStepManager()
 // Default Constructor
 //**********************************************************************
-CTimeStepManager::CTimeStepManager() {
-  pObservationManager             = 0;
-  pReporterManager                = 0;
-  pDerivedQuantityManager         = 0;
-  pDerivedQuantityByCellManager   = 0;
+CTimeStepManager::CTimeStepManager()
+{
+  pObservationManager = 0;
+  pReporterManager = 0;
+  pDerivedQuantityManager = 0;
+  pDerivedQuantityByCellManager = 0;
 
-  iCurrentYear                    = 0;
+  iCurrentYear = 0;
 }
 
 //**********************************************************************
 // CTimeStepManager* CTimeStepManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CTimeStepManager* CTimeStepManager::Instance() {
+CTimeStepManager *CTimeStepManager::Instance()
+{
   if (clInstance.get() == 0)
     clInstance.reset(new CTimeStepManager());
   return clInstance.get();
@@ -56,8 +58,10 @@ CTimeStepManager* CTimeStepManager::Instance() {
 // void CTimeStepManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CTimeStepManager::Destroy() {
-  if (clInstance.get() != 0) {
+void CTimeStepManager::Destroy()
+{
+  if (clInstance.get() != 0)
+  {
     clInstance.reset();
   }
 }
@@ -66,7 +70,8 @@ void CTimeStepManager::Destroy() {
 // void CTimeStepManager::addTimeStep(CTimeStep *value)
 // Add New Time Step To The List
 //**********************************************************************
-void CTimeStepManager::addTimeStep(CTimeStep *value) {
+void CTimeStepManager::addTimeStep(CTimeStep *value)
+{
   vMasterTimeStepList.push_back(value);
 }
 
@@ -74,10 +79,14 @@ void CTimeStepManager::addTimeStep(CTimeStep *value) {
 // void CTimeStepManager::fillVector(vector<string> &labels, vector<CTimeStep*> &result)
 // Populate the <result> vector with timesteps that have matching <labels>
 //**********************************************************************
-void CTimeStepManager::fillVector(vector<string> &labels, vector<CTimeStep*> &result) {
-  foreach(string label, labels) {
-    foreach(CTimeStep* timeStep, vMasterTimeStepList) {
-      if (timeStep->getLabel() == label) {
+void CTimeStepManager::fillVector(vector<string> &labels, vector<CTimeStep *> &result)
+{
+  foreach (string label, labels)
+  {
+    foreach (CTimeStep *timeStep, vMasterTimeStepList)
+    {
+      if (timeStep->getLabel() == label)
+      {
         result.push_back(timeStep);
         break;
       }
@@ -89,12 +98,16 @@ void CTimeStepManager::fillVector(vector<string> &labels, vector<CTimeStep*> &re
 // void CTimeStepManager::setTimeStepOrder(vector<string> &order)
 // Load the TimeStep Order for Execution
 //**********************************************************************
-void CTimeStepManager::setTimeStepOrder(vector<string> &order) {
+void CTimeStepManager::setTimeStepOrder(vector<string> &order)
+{
   vTimeSteps.clear();
 
-  foreach(string Label, order) {
-    foreach(CTimeStep *TimeStep, vMasterTimeStepList) {
-      if (TimeStep->getLabel() == Label) {
+  foreach (string Label, order)
+  {
+    foreach (CTimeStep *TimeStep, vMasterTimeStepList)
+    {
+      if (TimeStep->getLabel() == Label)
+      {
         vTimeSteps.push_back(TimeStep);
         break;
       }
@@ -106,9 +119,11 @@ void CTimeStepManager::setTimeStepOrder(vector<string> &order) {
 // int CTimeStepManager::getTimeStepOrderIndex(string label)
 // Get the Index of a TimeStep in our Order
 //**********************************************************************
-int CTimeStepManager::getTimeStepOrderIndex(string label) {
+int CTimeStepManager::getTimeStepOrderIndex(string label)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     for (int i = 0; i < (int)vTimeSteps.size(); ++i)
       if (vTimeSteps[i]->getLabel() == label)
@@ -117,7 +132,9 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
     CError::errorUnknown(PARAM_TIME_STEP, label);
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CTimeStepManager.getTimeStepOrderIndex()->" + Ex;
     throw Ex;
   }
@@ -130,11 +147,14 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
 // string getFirstTimeStepLabel()
 // Get the label of the first TimeStep in our Order
 //**********************************************************************
-string CTimeStepManager::getFirstTimeStepLabel() {
-  try {
+string CTimeStepManager::getFirstTimeStepLabel()
+{
+  try
+  {
     return (vTimeSteps[0]->getLabel());
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CTimeStepManager.getFirstTimeStep()->" + Ex;
     throw Ex;
   }
@@ -142,15 +162,17 @@ string CTimeStepManager::getFirstTimeStepLabel() {
   return 0;
 }
 
-
 //**********************************************************************
 // void CTimeStepManager::getTimeStepIndexForProcess(string &label)
 // get Time Step Index For Process
 //**********************************************************************
-int CTimeStepManager::getTimeStepIndexForProcess(string &label) {
-  for (int i = 0; i < (int)vTimeSteps.size(); ++i) {
+int CTimeStepManager::getTimeStepIndexForProcess(string &label)
+{
+  for (int i = 0; i < (int)vTimeSteps.size(); ++i)
+  {
     vector<string> processes = vTimeSteps[i]->getProcessNames();
-    for (int j = 0; j < (int)processes.size(); ++j) {
+    for (int j = 0; j < (int)processes.size(); ++j)
+    {
       if (processes[j] == label)
         return i;
     }
@@ -164,19 +186,23 @@ int CTimeStepManager::getTimeStepIndexForProcess(string &label) {
 // void CTimeStepManager::validate()
 // Validate The Time Steps
 //**********************************************************************
-void CTimeStepManager::validate() {
-  try {
+void CTimeStepManager::validate()
+{
+  try
+  {
     if ((int)vMasterTimeStepList.size() == 0)
       CError::errorMissing(PARAM_TIME_STEPS);
 
     // Call TimeStep Validations
-    foreach( CTimeStep *TimeStep, vMasterTimeStepList) {
+    foreach (CTimeStep *TimeStep, vMasterTimeStepList)
+    {
       TimeStep->validate();
     }
 
     // Look for Duplicate Labels
-    map<string, int>            mLabelList;
-    foreach(CTimeStep *TimeStep, vMasterTimeStepList) {
+    map<string, int> mLabelList;
+    foreach (CTimeStep *TimeStep, vMasterTimeStepList)
+    {
       // Increase Count for this label
       mLabelList[TimeStep->getLabel()] += 1;
 
@@ -184,8 +210,9 @@ void CTimeStepManager::validate() {
       if (mLabelList[TimeStep->getLabel()] > 1)
         CError::errorDuplicate(PARAM_TIME_STEP, TimeStep->getLabel());
     }
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CTimeStepManager.validate()->" + Ex;
     throw Ex;
   }
@@ -195,26 +222,31 @@ void CTimeStepManager::validate() {
 // void CTimeStepManager::build()
 // Build out TimeSteps
 //**********************************************************************
-void CTimeStepManager::build() {
+void CTimeStepManager::build()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-    foreach(CTimeStep *TimeStep, vMasterTimeStepList) {
+    foreach (CTimeStep *TimeStep, vMasterTimeStepList)
+    {
       TimeStep->build();
     }
 
-    CWorld *pWorld  = CWorld::Instance();
+    CWorld *pWorld = CWorld::Instance();
     iFirstHumanYear = pWorld->getInitialYear();
-    iNumberOfYears  = pWorld->getCurrentYear() - iFirstHumanYear;
+    iNumberOfYears = pWorld->getCurrentYear() - iFirstHumanYear;
 
     pDerivedQuantityByCellManager = CDerivedQuantityByCellManager::Instance();
-    pDerivedQuantityManager       = CDerivedQuantityManager::Instance();
-    pObservationManager           = CObservationManager::Instance();
-    pReporterManager              = CReportManager::Instance();
+    pDerivedQuantityManager = CDerivedQuantityManager::Instance();
+    pObservationManager = CObservationManager::Instance();
+    pReporterManager = CReportManager::Instance();
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CTimeStepManager.build()->" + Ex;
     throw Ex;
   }
@@ -225,12 +257,15 @@ void CTimeStepManager::build() {
 // void CTimeStepManager::execute()
 // Execute Our TimeSteps
 //**********************************************************************
-void CTimeStepManager::execute() {
+void CTimeStepManager::execute()
+{
 
-  for (int i = 0; i <= iNumberOfYears; ++i) {
+  for (int i = 0; i <= iNumberOfYears; ++i)
+  {
     iCurrentYear = i + iFirstHumanYear;
 
-    for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
+    for (int j = 0; j < (int)vTimeSteps.size(); ++j)
+    {
       iCurrentTimeStep = j;
 
       // Prepare our Observations
@@ -252,9 +287,11 @@ void CTimeStepManager::execute() {
 // CTimeStepManager::~CTimeStepManager()
 // Default De-constructor
 //**********************************************************************
-CTimeStepManager::~CTimeStepManager() {
+CTimeStepManager::~CTimeStepManager()
+{
   // Delete Our Layers
-  foreach( CTimeStep *TimeStep, vMasterTimeStepList) {
+  foreach (CTimeStep *TimeStep, vMasterTimeStepList)
+  {
     delete TimeStep;
   }
 }

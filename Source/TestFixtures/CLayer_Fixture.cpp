@@ -2,7 +2,7 @@
 // Name        : CLayer_Fixture.cpp
 // Author      : S.Rasmussen
 // Date        : 18/02/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -27,13 +27,14 @@ using std::endl;
 // CLayer_Fixture::CLayer_Fixture()
 // Constructor
 //**********************************************************************
-CLayer_Fixture::CLayer_Fixture() {
+CLayer_Fixture::CLayer_Fixture()
+{
 
   // Create a Double Layer
   CLayer *pLayer = CLayerFactory::buildLayer(PARAM_DOUBLE);
   pLayer->addParameter(PARAM_LABEL, "double_layer");
   for (int i = 0; i < 25; ++i)
-    pLayer->addParameter(PARAM_DATA, boost::lexical_cast<string>(i+1));
+    pLayer->addParameter(PARAM_DATA, boost::lexical_cast<string>(i + 1));
   pLayer->validate();
   pLayer->build();
 
@@ -104,14 +105,14 @@ CLayer_Fixture::CLayer_Fixture() {
   pLayer->addParameter(PARAM_DATA, "-60");
   pLayer->validate();
   pLayer->build();
-
 }
 
 //**********************************************************************
 // CLayer_Fixture::~CLayer_Fixture()
 // Destructor
 //**********************************************************************
-CLayer_Fixture::~CLayer_Fixture() {
+CLayer_Fixture::~CLayer_Fixture()
+{
   CLayerManager::Destroy();
 }
 

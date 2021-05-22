@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CExponentialPDF.cpp
 // Author      : C. Marsh
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
@@ -14,27 +14,29 @@
 // CExponentialPDF::CExponentialPDF()
 // Default Constructor
 //**********************************************************************
-CExponentialPDF::CExponentialPDF() {
+CExponentialPDF::CExponentialPDF()
+{
 
-  sType = PARAM_EXPONENTIAL;    // This syntax comes into the Copula setting
+  sType = PARAM_EXPONENTIAL; // This syntax comes into the Copula setting
 
   // Register Estimables
   registerEstimable(PARAM_LAMBDA, &dLambda);
 
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_LAMBDA);
-
 }
 
 //**********************************************************************
 // void CExponentialPDF::validate()
 // Validate
 //**********************************************************************
-void CExponentialPDF::validate() {
-  try {
+void CExponentialPDF::validate()
+{
+  try
+  {
 
     // Assign our variables
-    dLambda       = pParameterList->getDouble(PARAM_LAMBDA);
+    dLambda = pParameterList->getDouble(PARAM_LAMBDA);
 
     // Validate parent
     CPDF::validate();
@@ -42,8 +44,9 @@ void CExponentialPDF::validate() {
     //Local validation
     if (dLambda <= 0.0)
       CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CExponentialPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -53,19 +56,23 @@ void CExponentialPDF::validate() {
 // double CExponentialPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CExponentialPDF::getPDFResult(double value) {
-// not required ?
+double CExponentialPDF::getPDFResult(double value)
+{
+  // not required ?
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-    dRet = dLambda*exp(-dLambda*value);   // PDF definition
+    dRet = dLambda * exp(-dLambda * value); // PDF definition
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNormalPDF.getPDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -78,19 +85,23 @@ double CExponentialPDF::getPDFResult(double value) {
 // double CExponentialPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CExponentialPDF::getCDFResult(double value) {
-// not required ?
+double CExponentialPDF::getCDFResult(double value)
+{
+  // not required ?
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-    dRet = 1-exp(-dLambda*value);     // CDF definition
+    dRet = 1 - exp(-dLambda * value); // CDF definition
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CExponentialPDF.getCDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -102,5 +113,6 @@ double CExponentialPDF::getCDFResult(double value) {
 // CExponentialPDF::~CExponentialPDF()
 // Default De-Constructor
 //**********************************************************************
-CExponentialPDF::~CExponentialPDF() {
+CExponentialPDF::~CExponentialPDF()
+{
 }

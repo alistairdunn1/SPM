@@ -2,7 +2,7 @@
 // Name        : CBetaEstimate.h
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 #ifndef CBETAESTIMATE_H_
@@ -14,26 +14,27 @@
 /**
  * class definition
  */
-class CBetaEstimate : public CEstimate {
+class CBetaEstimate : public CEstimate
+{
 public:
   CBetaEstimate();
-  virtual                     ~CBetaEstimate() = default;
-  void                        validate();
-  double                      getScore();
+  virtual ~CBetaEstimate() = default;
+  void validate();
+  double getScore();
 
 protected:
   // Variables
-  double                     dMu;
-  double                     dSigma;
-  double                     dA;
-  double                     dB;
+  double dMu;
+  double dSigma;
+  double dA;
+  double dB;
 
 private:
-   // Variables
-  double                     dV;
-  double                     dT;
-  double                     dM;
-  double                     dN;
+  // Variables
+  double dV;
+  double dT;
+  double dM;
+  double dN;
 };
 
 #endif /* CBETAESTIMATE_H_ */

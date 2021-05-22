@@ -2,7 +2,7 @@
 // Name        : CEstimateFactory.h
 // Author      : S.Rasmussen
 // Date        : 12/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : This is the factory for creating different types of estimates.
 //      It uses a basic factory design pattern to make it easier to add new types
 //      of estimates later
@@ -24,10 +24,11 @@ using std::string;
 //
 //
 //**********************************************************************
-class CMCMCFactory {
+class CMCMCFactory
+{
 public:
   // Functions
-  static CMCMC*           buildMCMC(const string& type, bool registerWithManager = true);
+  static CMCMC *buildMCMC(const string &type, bool registerWithManager = true);
 
 private:
   // Functions

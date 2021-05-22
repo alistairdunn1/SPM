@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 28/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2013-04-23 15:41:09 +1200 (Tue, 23 Apr 2013) $
 //============================================================================
@@ -20,7 +20,8 @@
 // CDerivedQuantityLayer::CDerivedQuantityLayer()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantityLayer::CDerivedQuantityLayer() {
+CDerivedQuantityLayer::CDerivedQuantityLayer()
+{
 
   // Variables
   sType = PARAM_DERIVED_QUANTITY;
@@ -36,31 +37,36 @@ CDerivedQuantityLayer::CDerivedQuantityLayer() {
 // void CDerivedQuantityLayer::validate()
 // Validate
 //**********************************************************************
-void CDerivedQuantityLayer::validate() {
- try {
-   // Base Validate
-   CNumericLayer::validate();
+void CDerivedQuantityLayer::validate()
+{
+  try
+  {
+    // Base Validate
+    CNumericLayer::validate();
 
-   // Populate our Parameters
-   sDerivedQuantity = pParameterList->getString(PARAM_DERIVED_QUANTITY);
-   iOffset          = pParameterList->getInt(PARAM_YEAR_OFFSET);
+    // Populate our Parameters
+    sDerivedQuantity = pParameterList->getString(PARAM_DERIVED_QUANTITY);
+    iOffset = pParameterList->getInt(PARAM_YEAR_OFFSET);
 
     //Check iOffset is a non-negative int
     if (iOffset < 0)
       CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
-
- } catch (string &Ex) {
-   Ex = "CDerivedQuantityLayer.validate(" + getLabel() + ")->" + Ex;
-   throw Ex;
- }
+  }
+  catch (string &Ex)
+  {
+    Ex = "CDerivedQuantityLayer.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
 // void CDerivedQuantityLayer::build()
 // Build
 //**********************************************************************
-void CDerivedQuantityLayer::build() {
-  try {
+void CDerivedQuantityLayer::build()
+{
+  try
+  {
 
     // Get our derived layer (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sDerivedQuantity);
@@ -68,16 +74,21 @@ void CDerivedQuantityLayer::build() {
     // Figure out the order of timesteps
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep())
+    {
       iActualOffset = iOffset - 1;
-      if (iActualOffset < 0) {
+      if (iActualOffset < 0)
+      {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
       }
-    } else {
+    }
+    else
+    {
       iActualOffset = iOffset;
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDerivedQuantityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,16 +98,21 @@ void CDerivedQuantityLayer::build() {
 // double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
 // get Value
 //**********************************************************************
-double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
+double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-    double dResult = pDerivedQuantity->getValue(iActualOffset);;
+    double dResult = pDerivedQuantity->getValue(iActualOffset);
+    ;
     return dResult;
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDerivedQuantityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -109,5 +125,6 @@ double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow
 // CDerivedQuantityLayer::~CDerivedQuantityLayer()
 // Default De-Constructor
 //**********************************************************************
-CDerivedQuantityLayer::~CDerivedQuantityLayer() {
+CDerivedQuantityLayer::~CDerivedQuantityLayer()
+{
 }

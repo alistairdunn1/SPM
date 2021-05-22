@@ -2,7 +2,7 @@
 // Name        : CEstimateInfo.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 25/06/2012
-// Copyright   : Copyright NIWA Science ©2012 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2012 - www.niwa.co.nz
 // Description : Unit tests for CEstimateInfo
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -32,7 +32,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( CEstimateInfo_1_Estimate, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_1_Estimate, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -60,7 +61,8 @@ BOOST_FIXTURE_TEST_CASE( CEstimateInfo_1_Estimate, C1x1_Fixture ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( CEstimateInfo_2_Estimates, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_2_Estimates, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -88,7 +90,8 @@ BOOST_FIXTURE_TEST_CASE( CEstimateInfo_2_Estimates, C1x1_Fixture ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( CEstimateInfo_Vector, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_Vector, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -113,4 +116,3 @@ BOOST_FIXTURE_TEST_CASE( CEstimateInfo_Vector, C1x1_Fixture ) {
 }
 
 #endif
-

@@ -2,7 +2,7 @@
 // Name        : CConstantRecruitmentProcess.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 20/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -23,7 +23,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( ConstantRecruitmentProcess, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(ConstantRecruitmentProcess, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -49,6 +50,5 @@ BOOST_FIXTURE_TEST_CASE( ConstantRecruitmentProcess, C1x1_Fixture ) {
     for (int j = 0; j < 10; ++j)
       BOOST_CHECK_EQUAL(pSquare->getValue(i, j), 0.0);
 }
-
 
 #endif /* TEST */

@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityByCellFactory.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -20,7 +20,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell) {
+BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell)
+{
 
   CDerivedQuantityByCell *pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ABUNDANCE, false));
@@ -31,7 +32,8 @@ BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell) {
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell) {
+BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell)
+{
 
   CDerivedQuantityByCell *pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_BIOMASS, false));
@@ -42,7 +44,8 @@ BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell) {
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedQuantityByCell_PARAM_INVALID) {
+BOOST_AUTO_TEST_CASE(Build_DerivedQuantityByCell_PARAM_INVALID)
+{
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ZERO, false), string);
 }

@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CGumbelPreferenceFunction.cpp
 // Author      : C. Marsh
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
@@ -18,7 +18,8 @@
 // CGumbelPreferenceFunction::CGumbelPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CGumbelPreferenceFunction::CGumbelPreferenceFunction() {
+CGumbelPreferenceFunction::CGumbelPreferenceFunction()
+{
 
   sType = PARAM_GUMBEL_COPULA;
 
@@ -29,18 +30,19 @@ CGumbelPreferenceFunction::CGumbelPreferenceFunction() {
   pParameterList->registerAllowed(PARAM_RHO);
   pParameterList->registerAllowed(PARAM_PDFS);
   pParameterList->registerAllowed(PARAM_LAYERS);
-
 }
 
 //**********************************************************************
 // void CGumbelPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CGumbelPreferenceFunction::validate() {
-  try {
+void CGumbelPreferenceFunction::validate()
+{
+  try
+  {
 
     // Assign our variables
-    dRho  = pParameterList->getDouble(PARAM_RHO);
+    dRho = pParameterList->getDouble(PARAM_RHO);
     pParameterList->fillVector(vPDFNames, PARAM_PDFS);
     pParameterList->fillVector(vLayerNames, PARAM_LAYERS);
 
@@ -63,8 +65,9 @@ void CGumbelPreferenceFunction::validate() {
     //Ensure exactly 2 layers
     if (vLayerNames.size() != 2)
       CError::errorNotEqual(PARAM_LAYERS, "two");
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CGumbelPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -74,7 +77,8 @@ void CGumbelPreferenceFunction::validate() {
 // void CGumbelPreferenceFunction::build()
 // Validate
 //**********************************************************************
-void CGumbelPreferenceFunction::build() {
+void CGumbelPreferenceFunction::build()
+{
 
   // Build parent
   CPreferenceFunction::build();
@@ -82,16 +86,18 @@ void CGumbelPreferenceFunction::build() {
   // Get PDFs
   CPDFManager *pPDFManager = CPDFManager::Instance();
 
-  for (int i=0; i< (int)vPDFNames.size(); ++i) {
-    vPDFs.push_back( pPDFManager->getPDF(vPDFNames[i]) );
+  for (int i = 0; i < (int)vPDFNames.size(); ++i)
+  {
+    vPDFs.push_back(pPDFManager->getPDF(vPDFNames[i]));
     vPDFTypes.push_back(vPDFs[i]->getPDFType());
   }
 
   // Get Layers
   CLayerManager *pLayerManager = CLayerManager::Instance();
 
-  for (int i=0; i< (int)vLayerNames.size(); ++i) {
-    vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
+  for (int i = 0; i < (int)vLayerNames.size(); ++i)
+  {
+    vLayers.push_back(pLayerManager->getNumericLayer(vLayerNames[i]));
   }
 }
 
@@ -99,10 +105,12 @@ void CGumbelPreferenceFunction::build() {
 // CGumbelPreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CGumbelPreferenceFunction::getIsStatic() {
+bool CGumbelPreferenceFunction::getIsStatic()
+{
 
-  for (int i=0; i< (int)vLayers.size(); ++i) {
-    if (!( vLayers[i]->getIsStatic() ))
+  for (int i = 0; i < (int)vLayers.size(); ++i)
+  {
+    if (!(vLayers[i]->getIsStatic()))
       return false;
   }
   return true;
@@ -112,12 +120,14 @@ bool CGumbelPreferenceFunction::getIsStatic() {
 // double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // get Result
 //**********************************************************************
-double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
+double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
+{
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     vector<double> dValue;
@@ -132,23 +142,26 @@ double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
     double dCDF1 = vPDFs[0]->getCDFResult(x1);
     double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-    dRet = exp(- pow((pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho)),(1/dRho))) *
-           (pow(-log(dCDF1),(dRho-1))/dCDF1) * (pow(-log(dCDF2),(dRho-1))/dCDF2) *
-           (pow((pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho)),((2/dRho)-2)) + (dRho-1) * pow((pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho)),((1/(dRho)-2)))) *
-           dPDF1* dPDF2;
+    dRet = exp(-pow((pow(-log(dCDF1), dRho) + pow(-log(dCDF2), dRho)), (1 / dRho))) *
+           (pow(-log(dCDF1), (dRho - 1)) / dCDF1) * (pow(-log(dCDF2), (dRho - 1)) / dCDF2) *
+           (pow((pow(-log(dCDF1), dRho) + pow(-log(dCDF2), dRho)), ((2 / dRho) - 2)) + (dRho - 1) * pow((pow(-log(dCDF1), dRho) + pow(-log(dCDF2), dRho)), ((1 / (dRho)-2)))) *
+           dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CGumbelPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 
-  return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
+  return CMath::zeroFun(pow(dRet, dAlpha), ZERO);
 }
 //**********************************************************************
 // CGumbelPreferenceFunction::~CGumbelPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CGumbelPreferenceFunction::~CGumbelPreferenceFunction() {
+CGumbelPreferenceFunction::~CGumbelPreferenceFunction()
+{
 }

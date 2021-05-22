@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : CHMC.h
-// Author      : 
-// Date        : 
-// Copyright   : 
+// Author      :
+// Date        :
+// Copyright   :
 // Description : Based on Keith O'Hara MCMC C++ library
 //============================================================================
 
@@ -26,19 +26,19 @@ using namespace boost::numeric;
 //
 //
 //**********************************************************************
-class CHMC : public CMCMC {
+class CHMC : public CMCMC
+{
 public:
   // Methods
   CHMC();
-  virtual                    ~CHMC();
-  void                       validate() final;
-  void                       build() final;
-  void                       execute() final;
-  void                       leapfrog();
-  void                       generateNewCandidate();
+  virtual ~CHMC();
+  void validate() final;
+  void build() final;
+  void execute() final;
+  void leapfrog();
+  void generateNewCandidate();
 
 protected:
-
 };
 
 #endif /*CHMC_H_*/

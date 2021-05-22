@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CBiomassDerivedQuantity.Test.cpp
 // Author      : A.Dunn
-// Copyright   : Copyright NIWA Science ©2013 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2013 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -27,7 +27,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Biomass_Derived_Quantity, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(Biomass_Derived_Quantity, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -42,9 +43,9 @@ BOOST_FIXTURE_TEST_CASE( Biomass_Derived_Quantity, C1x1_Fixture ) {
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedQuantityManager *pManager     = CDerivedQuantityManager::Instance();
-  CDerivedQuantity        *pQuantity    = pManager->getDerivedQuantity("derived_quantity");
-  CWorldSquare            *pSquare      = getSquare();
+  CDerivedQuantityManager *pManager = CDerivedQuantityManager::Instance();
+  CDerivedQuantity *pQuantity = pManager->getDerivedQuantity("derived_quantity");
+  CWorldSquare *pSquare = getSquare();
 
   // Check Results
   BOOST_CHECK_EQUAL(15, pQuantity->getValuesSize());

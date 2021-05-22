@@ -2,7 +2,7 @@
 // Name        : CBiomassPartitionReport.h
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,22 +19,23 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CBiomassPartitionReport: public CFileReport {
+class CBiomassPartitionReport : public CFileReport
+{
 public:
   // Functions
   CBiomassPartitionReport();
-  virtual                     ~CBiomassPartitionReport();
-  CReport*                    clone() { return new CBiomassPartitionReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CBiomassPartitionReport();
+  CReport *clone() { return new CBiomassPartitionReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
   // Variables
-  vector<int>                 vYear;
-  int                         iTimeStep;
-  string                      sTimeStep;
-  CTimeStepManager            *pTimeStepManager;
+  vector<int> vYear;
+  int iTimeStep;
+  string sTimeStep;
+  CTimeStepManager *pTimeStepManager;
 };
 
 #endif /* CBIOMASSPARTITIONREPORT_H_ */

@@ -2,7 +2,7 @@
 // Name        : CFileReport.cpp
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -15,13 +15,14 @@
 // CFileReport::CFileReport()
 // Default constructor
 //**********************************************************************
-CFileReport::CFileReport() {
+CFileReport::CFileReport()
+{
   // Default Values
-  sFileName           = "";
-  sFullFileName       = "";
-  bOverwrite          = true;
-  bStartedWrite       = false;
-  fFile               = 0;
+  sFileName = "";
+  sFullFileName = "";
+  bOverwrite = true;
+  bStartedWrite = false;
+  fFile = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FILE_NAME);
@@ -32,17 +33,21 @@ CFileReport::CFileReport() {
 // void CFileReport::validate()
 // Validate file reporter
 //**********************************************************************
-void CFileReport::validate() {
-  try {
+void CFileReport::validate()
+{
+  try
+  {
     // Base
     CReport::validate();
 
     // Assign variables
-    sFileName   = pParameterList->getString(PARAM_FILE_NAME, true, "");
-    bOverwrite  = pParameterList->getBool(PARAM_OVERWRITE, true, true);
+    sFileName = pParameterList->getString(PARAM_FILE_NAME, true, "");
+    bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
 
     fFile = new ofstream();
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CFileReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -52,15 +57,18 @@ void CFileReport::validate() {
 // void CFileReport::start()
 // Start the Reporting
 //**********************************************************************
-void CFileReport::start() {
-  if (sFileName != "") {
+void CFileReport::start()
+{
+  if (sFileName != "")
+  {
     /**
      * Check if our suffix has changed. If it has we need to reset
      * our overwrite variable otherwise all reports after the
      * first one will append.
      */
     string sSuffix = CReportManager::Instance()->getReportSuffix();
-    if (sSuffix != sLastSuffix) {
+    if (sSuffix != sLastSuffix)
+    {
       bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
     }
     sLastSuffix = sSuffix;
@@ -70,7 +78,7 @@ void CFileReport::start() {
     sFullFileName = sFileName + sSuffix;
 
     // Variables
-    sCoutBackup     = cout.rdbuf();
+    sCoutBackup = cout.rdbuf();
 
     // Set our Open Flag
     ios_base::openmode mode = ios_base::out;
@@ -94,22 +102,24 @@ void CFileReport::start() {
 // void CFileReport::end()
 // End the Reporting
 //**********************************************************************
-void CFileReport::end() {
+void CFileReport::end()
+{
 
   cout.flush();
 
-  if (sFileName != "") {
+  if (sFileName != "")
+  {
     fFile->close();
     cout.rdbuf(sCoutBackup);
   }
 }
 
-
 //**********************************************************************
 // CFileReport::~CFileReport()
 // Destructor
 //**********************************************************************
-CFileReport::~CFileReport() {
+CFileReport::~CFileReport()
+{
   if (fFile != 0)
     delete fFile;
 }

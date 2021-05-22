@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityByCellLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 28/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2013-04-23 15:41:09 +1200 (Tue, 23 Apr 2013) $
 //============================================================================
@@ -20,7 +20,8 @@
 // CDerivedQuantityByCellLayer::CDerivedQuantityByCellLayer()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantityByCellLayer::CDerivedQuantityByCellLayer() {
+CDerivedQuantityByCellLayer::CDerivedQuantityByCellLayer()
+{
 
   // Variables
   sType = PARAM_DERIVED_QUANTITY_BY_CELL;
@@ -36,31 +37,36 @@ CDerivedQuantityByCellLayer::CDerivedQuantityByCellLayer() {
 // void CDerivedQuantityByCellLayer::validate()
 // Validate
 //**********************************************************************
-void CDerivedQuantityByCellLayer::validate() {
- try {
-   // Base Validate
-   CNumericLayer::validate();
+void CDerivedQuantityByCellLayer::validate()
+{
+  try
+  {
+    // Base Validate
+    CNumericLayer::validate();
 
-   // Populate our Parameters
-   sDerivedQuantityByCell = pParameterList->getString(PARAM_DERIVED_QUANTITY_BY_CELL);
-   iOffset          = pParameterList->getInt(PARAM_YEAR_OFFSET);
+    // Populate our Parameters
+    sDerivedQuantityByCell = pParameterList->getString(PARAM_DERIVED_QUANTITY_BY_CELL);
+    iOffset = pParameterList->getInt(PARAM_YEAR_OFFSET);
 
     //Check iOffset is a non-negative int
     if (iOffset < 0)
       CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
-
- } catch (string &Ex) {
-   Ex = "CDerivedQuantityByCellLayer.validate(" + getLabel() + ")->" + Ex;
-   throw Ex;
- }
+  }
+  catch (string &Ex)
+  {
+    Ex = "CDerivedQuantityByCellLayer.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
 // void CDerivedQuantityByCellLayer::build()
 // Build
 //**********************************************************************
-void CDerivedQuantityByCellLayer::build() {
-  try {
+void CDerivedQuantityByCellLayer::build()
+{
+  try
+  {
 
     // Get our derived layer (SSB)
     pDerivedQuantityByCell = CDerivedQuantityByCellManager::Instance()->getDerivedQuantityByCell(sDerivedQuantityByCell);
@@ -68,16 +74,21 @@ void CDerivedQuantityByCellLayer::build() {
     // Figure out the order of timesteps
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantityByCell->getTimeStep()) {
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantityByCell->getTimeStep())
+    {
       iActualOffset = iOffset - 1;
-      if (iActualOffset < 0) {
+      if (iActualOffset < 0)
+      {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
       }
-    } else {
+    }
+    else
+    {
       iActualOffset = iOffset;
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDerivedQuantityByCellLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,16 +98,20 @@ void CDerivedQuantityByCellLayer::build() {
 // double CDerivedQuantityByCellLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
 // get Value
 //**********************************************************************
-double CDerivedQuantityByCellLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
+double CDerivedQuantityByCellLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     double dResult = pDerivedQuantityByCell->getValue(iActualOffset, RowIndex, ColIndex);
     return dResult;
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDerivedQuantityByCellLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -109,5 +124,6 @@ double CDerivedQuantityByCellLayer::getValue(int RowIndex, int ColIndex, int Tar
 // CDerivedQuantityByCellLayer::~CDerivedQuantityByCellLayer()
 // Default De-Constructor
 //**********************************************************************
-CDerivedQuantityByCellLayer::~CDerivedQuantityByCellLayer() {
+CDerivedQuantityByCellLayer::~CDerivedQuantityByCellLayer()
+{
 }

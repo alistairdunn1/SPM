@@ -2,7 +2,7 @@
 // Name        : CSpatialMapReport.h
 // Author      : S.Rasmussen
 // Date        : 15/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,12 +16,13 @@
 //
 //
 //**********************************************************************
-class CSpatialMapReport: public CFileReport {
+class CSpatialMapReport : public CFileReport
+{
 public:
   CSpatialMapReport();
-  virtual                     ~CSpatialMapReport();
-  CReport*                    clone() { return new CSpatialMapReport(*this); }
-  void                        execute();
+  virtual ~CSpatialMapReport();
+  CReport *clone() { return new CSpatialMapReport(*this); }
+  void execute();
 };
 
 #endif /* CSPATIALMAPREPORT_H_ */

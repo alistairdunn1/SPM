@@ -2,7 +2,7 @@
 // Name        : CLayerManager.cpp
 // Author      : S.Rasmussen
 // Date        : 11/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : << See CLayerManager.h >>
 // $Date$
 //============================================================================
@@ -23,7 +23,8 @@ boost::thread_specific_ptr<CLayerManager> CLayerManager::clInstance;
 // CLayerManager::CLayerManager()
 // Default Constructor
 //**********************************************************************
-CLayerManager::CLayerManager() {
+CLayerManager::CLayerManager()
+{
   // Default Vars
   vLayerList.clear();
 }
@@ -32,7 +33,8 @@ CLayerManager::CLayerManager() {
 // CLayerManager* CLayerManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CLayerManager* CLayerManager::Instance() {
+CLayerManager *CLayerManager::Instance()
+{
   if (clInstance.get() == 0)
     clInstance.reset(new CLayerManager());
   return clInstance.get();
@@ -42,8 +44,10 @@ CLayerManager* CLayerManager::Instance() {
 // void CLayerManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CLayerManager::Destroy() {
-  if (clInstance.get() != 0) {
+void CLayerManager::Destroy()
+{
+  if (clInstance.get() != 0)
+  {
     clInstance.reset();
   }
 }
@@ -52,7 +56,8 @@ void CLayerManager::Destroy() {
 // void CLayerManager::addLayer(CLayer *Layer)
 // Add A Layer to our List
 //**********************************************************************
-void CLayerManager::addLayer(CLayer* Layer) {
+void CLayerManager::addLayer(CLayer *Layer)
+{
   vLayerList.push_back(Layer);
 }
 
@@ -60,14 +65,17 @@ void CLayerManager::addLayer(CLayer* Layer) {
 // CLayer* CLayerManager::getLayer(int index)
 // Get layer from our vector @ index
 //**********************************************************************
-CLayer* CLayerManager::getLayer(int index) {
-  try {
+CLayer *CLayerManager::getLayer(int index)
+{
+  try
+  {
     if (index >= (int)vLayerList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_LAYERS);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.getLayer()->" + Ex;
     throw Ex;
   }
@@ -79,17 +87,22 @@ CLayer* CLayerManager::getLayer(int index) {
 // CLayer* CLayerManager::getLayerType(string Label)
 // Get layer type
 //**********************************************************************
-std::string CLayerManager::getLayerType(string Label) {
-  try {
-    foreach(CLayer* Layer, vLayerList) {
-      if (Layer->getLabel() == Label) {
+std::string CLayerManager::getLayerType(string Label)
+{
+  try
+  {
+    foreach (CLayer *Layer, vLayerList)
+    {
+      if (Layer->getLabel() == Label)
+      {
         return Layer->getLayerType();
       }
     }
 
     CError::errorUnknown(PARAM_LAYER, Label);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.getLayerType()->" + Ex;
     throw Ex;
   }
@@ -101,13 +114,17 @@ std::string CLayerManager::getLayerType(string Label) {
 // CNumericLayer* CLayerManager::getNumericLayer(string Label)
 // Return our Numeric Layer
 //**********************************************************************
-CNumericLayer* CLayerManager::getNumericLayer(string Label) {
-  try {
+CNumericLayer *CLayerManager::getNumericLayer(string Label)
+{
+  try
+  {
     // Loop Through Layers
-    foreach(CLayer* Layer, vLayerList) {
-       if (Layer->getLabel() == Label) {
+    foreach (CLayer *Layer, vLayerList)
+    {
+      if (Layer->getLabel() == Label)
+      {
         // Cast and Check if is Numeric
-        CNumericLayer *pPtr = dynamic_cast<CNumericLayer*>(Layer);
+        CNumericLayer *pPtr = dynamic_cast<CNumericLayer *>(Layer);
         if (pPtr == 0)
           throw string(ERROR_INVALID_LAYER_TYPE_NUMERIC + Label);
 
@@ -117,8 +134,9 @@ CNumericLayer* CLayerManager::getNumericLayer(string Label) {
     }
 
     CError::errorUnknown(PARAM_LAYER, Label);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.getNumericLayer()->" + Ex;
     throw Ex;
   }
@@ -130,26 +148,31 @@ CNumericLayer* CLayerManager::getNumericLayer(string Label) {
 // void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &names)
 // Fill Our Vector Of Labels
 //**********************************************************************
-void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &names) {
+void CLayerManager::fillVector(vector<CNumericLayer *> &list, vector<string> &names)
+{
   list.clear();
 
-  foreach(string Name, names) {
+  foreach (string Name, names)
+  {
     list.push_back(getNumericLayer(Name));
   }
 }
-
 
 //**********************************************************************
 // CIntLayer* CLayerManager::getIntLayer(string Label)
 // Return our Integer Layer
 //**********************************************************************
-CIntLayer* CLayerManager::getIntLayer(string Label) {
-  try {
+CIntLayer *CLayerManager::getIntLayer(string Label)
+{
+  try
+  {
     // Loop Through Layers
-    foreach(CLayer* Layer, vLayerList) {
-       if (Layer->getLabel() == Label) {
+    foreach (CLayer *Layer, vLayerList)
+    {
+      if (Layer->getLabel() == Label)
+      {
         // Cast and Check if is Integer
-        CIntLayer *pPtr = dynamic_cast<CIntLayer*>(Layer);
+        CIntLayer *pPtr = dynamic_cast<CIntLayer *>(Layer);
         if (pPtr == 0)
           throw string(ERROR_INVALID_LAYER_TYPE_INT + Label);
 
@@ -159,8 +182,9 @@ CIntLayer* CLayerManager::getIntLayer(string Label) {
     }
 
     CError::errorUnknown(PARAM_LAYER, Label);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.getIntLayer()->" + Ex;
     throw Ex;
   }
@@ -172,10 +196,12 @@ CIntLayer* CLayerManager::getIntLayer(string Label) {
 // void CLayerManager::fillVector(vector<CIntLayer*> &list, vector<string> &names)
 // Fill Our Vector Of Labels
 //**********************************************************************
-void CLayerManager::fillVector(vector<CIntLayer*> &list, vector<string> &names) {
+void CLayerManager::fillVector(vector<CIntLayer *> &list, vector<string> &names)
+{
   list.clear();
 
-  foreach(string Name, names) {
+  foreach (string Name, names)
+  {
     list.push_back(getIntLayer(Name));
   }
 }
@@ -184,13 +210,17 @@ void CLayerManager::fillVector(vector<CIntLayer*> &list, vector<string> &names) 
 // CStringLayer* CLayerManager::getCategoricalLayer(string Label)
 // Get String Layer
 //**********************************************************************
-CCategoricalLayer* CLayerManager::getCategoricalLayer(string Label) {
-  try {
+CCategoricalLayer *CLayerManager::getCategoricalLayer(string Label)
+{
+  try
+  {
     // Loop Through Layers
-    foreach(CLayer* Layer, vLayerList) {
-      if (Layer->getLabel() == Label) {
+    foreach (CLayer *Layer, vLayerList)
+    {
+      if (Layer->getLabel() == Label)
+      {
         // Cast and Check if is String
-        CCategoricalLayer *pPtr = dynamic_cast<CCategoricalLayer*>(Layer);
+        CCategoricalLayer *pPtr = dynamic_cast<CCategoricalLayer *>(Layer);
         if (pPtr == 0)
           throw string(ERROR_INVALID_LAYER_TYPE_STRING + Label);
 
@@ -200,8 +230,9 @@ CCategoricalLayer* CLayerManager::getCategoricalLayer(string Label) {
     }
 
     CError::errorUnknown(PARAM_LAYER, Label);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.getCategoricalLayer()->" + Ex;
     throw Ex;
   }
@@ -213,14 +244,18 @@ CCategoricalLayer* CLayerManager::getCategoricalLayer(string Label) {
 // void CLayerManager::clone(CLayerManager *Manager)
 // Clone the target layer manager
 //**********************************************************************
-void CLayerManager::clone(CLayerManager *Manager) {
-  try {
-    for (int i = 0; i < Manager->getLayerCount(); ++i) {
+void CLayerManager::clone(CLayerManager *Manager)
+{
+  try
+  {
+    for (int i = 0; i < Manager->getLayerCount(); ++i)
+    {
       CLayer *pLayer = Manager->getLayer(i);
-      vLayerList.push_back( pLayer->clone());
+      vLayerList.push_back(pLayer->clone());
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.clone()->" + Ex;
     throw Ex;
   }
@@ -230,16 +265,20 @@ void CLayerManager::clone(CLayerManager *Manager) {
 // void CLayerManager::validate()
 // Validate Layers
 //**********************************************************************
-void CLayerManager::validate() {
-  try {
+void CLayerManager::validate()
+{
+  try
+  {
     // Validate The Layers
-    foreach(CLayer *Layer, vLayerList) {
+    foreach (CLayer *Layer, vLayerList)
+    {
       Layer->validate();
     }
 
     // Look for Duplicate Labels
-    map<string, int>            mLabelList;
-    foreach(CLayer* Layer, vLayerList) {
+    map<string, int> mLabelList;
+    foreach (CLayer *Layer, vLayerList)
+    {
       // Increase Count for this label
       mLabelList[Layer->getLabel()] += 1;
 
@@ -247,8 +286,9 @@ void CLayerManager::validate() {
       if (mLabelList[Layer->getLabel()] > 1)
         CError::errorDuplicate(PARAM_LAYER, Layer->getLabel());
     }
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.validate->" + Ex;
     throw Ex;
   }
@@ -258,12 +298,17 @@ void CLayerManager::validate() {
 // void CLayerManager::build()
 // Build our Dynamic Layers
 //**********************************************************************
-void CLayerManager::build() {
-  try {
-    foreach(CLayer *Layer, vLayerList) {
+void CLayerManager::build()
+{
+  try
+  {
+    foreach (CLayer *Layer, vLayerList)
+    {
       Layer->build();
     }
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLayerManager.build()->" + Ex;
     throw Ex;
   }
@@ -273,9 +318,11 @@ void CLayerManager::build() {
 // CLayerManager::~CLayerManager()
 // Default De-Constructor
 //**********************************************************************
-CLayerManager::~CLayerManager() {
+CLayerManager::~CLayerManager()
+{
   // Delete Our Layers
-  foreach(CLayer *Layer, vLayerList) {
+  foreach (CLayer *Layer, vLayerList)
+  {
     delete Layer;
   }
 }

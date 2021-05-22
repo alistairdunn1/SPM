@@ -2,7 +2,7 @@
 // Name        : CPartitionReport.h
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,22 +19,23 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CPartitionReport: public CFileReport {
+class CPartitionReport : public CFileReport
+{
 public:
   // Functions
   CPartitionReport();
-  virtual                     ~CPartitionReport();
-  CReport*                    clone() { return new CPartitionReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CPartitionReport();
+  CReport *clone() { return new CPartitionReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
   // Variables
-  vector<int>                 vYear;
-  int                         iTimeStep;
-  string                      sTimeStep;
-  CTimeStepManager            *pTimeStepManager;
+  vector<int> vYear;
+  int iTimeStep;
+  string sTimeStep;
+  CTimeStepManager *pTimeStepManager;
 };
 
 #endif /* CPARTITIONREPORT_H_ */

@@ -2,7 +2,7 @@
 // Name        : CInverseLogisticPreferenceFunction.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 19/02/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,12 +16,12 @@
 #include "../Factory/CPreferenceFunctionFactory.h"
 #include "../../TestFixtures/CLayer_Fixture.h"
 
-
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( InverseLogisticPreferenceFunction_DoubleLayer, CLayer_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DoubleLayer, CLayer_Fixture)
+{
 
   CPreferenceFunction *pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_INVERSE_LOGISTIC, false));
@@ -66,7 +66,8 @@ BOOST_FIXTURE_TEST_CASE( InverseLogisticPreferenceFunction_DoubleLayer, CLayer_F
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( InverseLogisticPreferenceFunction_DistanceLayer, CLayer_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DistanceLayer, CLayer_Fixture)
+{
 
   CPreferenceFunction *pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_INVERSE_LOGISTIC, false));

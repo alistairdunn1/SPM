@@ -2,7 +2,7 @@
 // Name        : CPreferenceFunctionFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 7/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -32,7 +32,8 @@
 // CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
 // Build our buildPreferenceFunction
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager) {
+CPreferenceFunction *CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
+{
 
   CPreferenceFunction *pFunction = 0;
 
@@ -56,8 +57,8 @@ CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string 
     pFunction = new CCategoricalPreferenceFunction();
   else if (type == PARAM_CATEGORICAL_MONOTONIC)
     pFunction = new CCategoricalMonotonicPreferenceFunction();
-//  else if (type == PARAM_CLAYTON_COPULA)
-//    pFunction = new CClaytonPreferenceFunction();
+  //  else if (type == PARAM_CLAYTON_COPULA)
+  //    pFunction = new CClaytonPreferenceFunction();
   else if (type == PARAM_FRANK_COPULA)
     pFunction = new CFrankPreferenceFunction();
   else if (type == PARAM_GAUSSIAN_COPULA)

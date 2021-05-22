@@ -2,7 +2,7 @@
 // Name        : CExponentialPreferenceFunction.cpp
 // Author      : S.Rasmussen
 // Date        : 16/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -24,10 +24,11 @@ using std::endl;
 // CExponentialPreferenceFunction::CExponentialPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
+CExponentialPreferenceFunction::CExponentialPreferenceFunction()
+{
 
   sType = PARAM_EXPONENTIAL;
-  dLambda     = -1.0;
+  dLambda = -1.0;
 
   // Register Estimable
   registerEstimable(PARAM_LAMBDA, &dLambda);
@@ -41,11 +42,13 @@ CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
 // void CExponentialPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CExponentialPreferenceFunction::validate() {
-  try {
+void CExponentialPreferenceFunction::validate()
+{
+  try
+  {
 
     // Assign Variables
-    dLambda    = pParameterList->getDouble(PARAM_LAMBDA);
+    dLambda = pParameterList->getDouble(PARAM_LAMBDA);
     sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
@@ -54,8 +57,9 @@ void CExponentialPreferenceFunction::validate() {
     //Local validation
     if (dLambda <= 0.0)
       CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CExponentialPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,13 +69,16 @@ void CExponentialPreferenceFunction::validate() {
 // void CExponentialPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CExponentialPreferenceFunction::build() {
-  try {
+void CExponentialPreferenceFunction::build()
+{
+  try
+  {
     // Get our Layer
     CLayerManager *pLayerManager = CLayerManager::Instance();
     pLayer = pLayerManager->getNumericLayer(sLayerName);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CExponentialPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -81,15 +88,19 @@ void CExponentialPreferenceFunction::build() {
 // double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // get Result
 //**********************************************************************
-double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
+double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-    return CMath::zeroFun(pow(exp(-dLambda * pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex)),dAlpha),ZERO);
+    return CMath::zeroFun(pow(exp(-dLambda * pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex)), dAlpha), ZERO);
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CExponentialPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -101,5 +112,6 @@ double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRI
 // CExponentialPreferenceFunction::~CExponentialPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CExponentialPreferenceFunction::~CExponentialPreferenceFunction() {
+CExponentialPreferenceFunction::~CExponentialPreferenceFunction()
+{
 }

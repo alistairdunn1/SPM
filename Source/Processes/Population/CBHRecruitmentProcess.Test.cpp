@@ -23,7 +23,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( BHRecruitmentProcess, C1x1_Initialisation_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(BHRecruitmentProcess, C1x1_Initialisation_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -62,7 +63,6 @@ BOOST_FIXTURE_TEST_CASE( BHRecruitmentProcess, C1x1_Initialisation_Fixture ) {
   BOOST_CHECK_CLOSE(pSquare->getValue(1, 7), 35.481968729562840, 1e-4);
   BOOST_CHECK_CLOSE(pSquare->getValue(1, 8), 30.674033360532228, 1e-4);
   BOOST_CHECK_CLOSE(pSquare->getValue(1, 9), 144.43098380651526, 1e-4);
-
 }
 
 #endif /* TEST */

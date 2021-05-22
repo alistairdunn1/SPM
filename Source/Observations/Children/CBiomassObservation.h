@@ -2,7 +2,7 @@
 // Name        : CBiomassObservation.h
 // Author      : S.Rasmussen
 // Date        : 4/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,26 +19,27 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CBiomassObservation : public CObservation {
+class CBiomassObservation : public CObservation
+{
 public:
   // Functions
   CBiomassObservation();
-  virtual                     ~CBiomassObservation();
-  CObservation*               clone() { return new CBiomassObservation(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
-  string                      getType() {return (PARAM_BIOMASS); }
-  double                      getCatchability();
+  virtual ~CBiomassObservation();
+  CObservation *clone() { return new CBiomassObservation(*this); }
+  void validate();
+  void build();
+  void execute();
+  string getType() { return (PARAM_BIOMASS); }
+  double getCatchability();
 
 protected:
   // Variables
-  map<string, double>        mProportionMatrix;
-  map<string, double>        mErrorValue;
-  string                     sCatchability;
-  CCatchability              *pCatchability;
-  double                     dDelta;
-  double                     dProcessError;
+  map<string, double> mProportionMatrix;
+  map<string, double> mErrorValue;
+  string sCatchability;
+  CCatchability *pCatchability;
+  double dDelta;
+  double dProcessError;
 };
 
 #endif /*CBIOMASSOBSERVATION_H_*/

@@ -2,7 +2,7 @@
 // Name        : CWorld_Fixture.cpp
 // Author      : S.Rasmussen
 // Date        : 12/02/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,7 +19,8 @@
 // CWorld_Fixture::CWorld_Fixture()
 // Default Constructor
 //**********************************************************************
-CWorld_Fixture::CWorld_Fixture() {
+CWorld_Fixture::CWorld_Fixture()
+{
 
   CWorld *pWorld = CWorld::Instance();
 
@@ -55,7 +56,8 @@ CWorld_Fixture::CWorld_Fixture() {
 // CWorld_Fixture::~CWorld_Fixture()
 // Destructor
 //**********************************************************************
-CWorld_Fixture::~CWorld_Fixture() {
+CWorld_Fixture::~CWorld_Fixture()
+{
   CWorld::Destroy();
 }
 

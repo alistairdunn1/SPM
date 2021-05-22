@@ -2,7 +2,7 @@
 // Name        : CAgeingProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -16,7 +16,8 @@
 // CAgeingProcess::CAgeingProcess()
 // Default Constructor
 //**********************************************************************
-CAgeingProcess::CAgeingProcess() {
+CAgeingProcess::CAgeingProcess()
+{
 
   // Variables
   sType = PARAM_AGEING;
@@ -30,8 +31,10 @@ CAgeingProcess::CAgeingProcess() {
 // void CAgeingProcess:validate()
 // Validate This
 //**********************************************************************
-void CAgeingProcess::validate() {
-  try {
+void CAgeingProcess::validate()
+{
+  try
+  {
 
     // populate our vector
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
@@ -40,8 +43,9 @@ void CAgeingProcess::validate() {
     CProcess::validate();
 
     // local validation
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAgeingProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -51,12 +55,15 @@ void CAgeingProcess::validate() {
 // void CAgeingProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CAgeingProcess::build() {
-  try {
+void CAgeingProcess::build()
+{
+  try
+  {
     // Call Our Base Build
     CProcess::build();
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAgeingProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,34 +73,46 @@ void CAgeingProcess::build() {
 // void CAgeingProcess::execute()
 // execute this Process
 //**********************************************************************
-void CAgeingProcess::execute() {
+void CAgeingProcess::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     // Base Execute
     CProcess::execute();
     // Loop through World Grid (i, j)
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
+    for (int i = 0; i < iWorldHeight; ++i)
+    {
+      for (int j = 0; j < iWorldWidth; ++j)
+      {
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
           continue;
 
         // Loop Through Categories and Ages (vPtr, k)
         vector<int>::iterator vPtr = vCategoryIndex.begin();
-        while (vPtr != vCategoryIndex.end()) {
-          if( (iBaseColCount - 1) > 1 ) {
-            if(pBaseSquare->getAgePlus()) {
-              pBaseSquare->addValue((*vPtr), iBaseColCount-1, pBaseSquare->getValue((*vPtr), iBaseColCount-2));
-            } else {
-              pBaseSquare->setValue((*vPtr), iBaseColCount-1, pBaseSquare->getValue((*vPtr), iBaseColCount-2));
+        while (vPtr != vCategoryIndex.end())
+        {
+          if ((iBaseColCount - 1) > 1)
+          {
+            if (pBaseSquare->getAgePlus())
+            {
+              pBaseSquare->addValue((*vPtr), iBaseColCount - 1, pBaseSquare->getValue((*vPtr), iBaseColCount - 2));
             }
-            for (int k = (iBaseColCount - 2); k > 0; --k) {
-              pBaseSquare->setValue((*vPtr), k, pBaseSquare->getValue((*vPtr), k-1));
+            else
+            {
+              pBaseSquare->setValue((*vPtr), iBaseColCount - 1, pBaseSquare->getValue((*vPtr), iBaseColCount - 2));
+            }
+            for (int k = (iBaseColCount - 2); k > 0; --k)
+            {
+              pBaseSquare->setValue((*vPtr), k, pBaseSquare->getValue((*vPtr), k - 1));
             }
             pBaseSquare->setValue((*vPtr), 0, 0.0);
-          } else {
-            if(!pBaseSquare->getAgePlus())
+          }
+          else
+          {
+            if (!pBaseSquare->getAgePlus())
               pBaseSquare->setValue((*vPtr), 0, 0.0);
           }
 
@@ -102,7 +121,9 @@ void CAgeingProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAgeingProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -113,5 +134,6 @@ void CAgeingProcess::execute() {
 // CAgeingProcess::~CAgeingProcess()
 // Default De-Constructor
 //**********************************************************************
-CAgeingProcess::~CAgeingProcess() {
+CAgeingProcess::~CAgeingProcess()
+{
 }

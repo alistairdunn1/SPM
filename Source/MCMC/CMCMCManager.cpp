@@ -2,7 +2,7 @@
 // Name        : CMCMCManager.cpp
 // Author      : S.Rasmussen
 // Date        : 11/01/2020
-// Copyright   : Copyright NIWA Science ©2020 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2020 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -21,13 +21,14 @@
 #include "../Helpers/ForEach.h"
 
 // Singleton Variable
-CMCMCManager* CMCMCManager::clInstance = 0;
+CMCMCManager *CMCMCManager::clInstance = 0;
 
 //**********************************************************************
 // CMinimizerManager::CMinimizerManager()
 // Default Constructor
 //**********************************************************************
-CMCMCManager::CMCMCManager() {
+CMCMCManager::CMCMCManager()
+{
 
   // Set Vars
   pMCMC = 0;
@@ -42,7 +43,8 @@ CMCMCManager::CMCMCManager() {
 // CMCMCManager* CMCMCManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CMCMCManager* CMCMCManager::Instance() {
+CMCMCManager *CMCMCManager::Instance()
+{
   if (clInstance == 0)
     clInstance = new CMCMCManager();
   return clInstance;
@@ -52,8 +54,10 @@ CMCMCManager* CMCMCManager::Instance() {
 // void CMCMCManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CMCMCManager::Destroy() {
-  if (clInstance != 0) {
+void CMCMCManager::Destroy()
+{
+  if (clInstance != 0)
+  {
     delete clInstance;
     clInstance = 0;
   }
@@ -63,7 +67,8 @@ void CMCMCManager::Destroy() {
 // void CMinimizerManager::addMinimizer(CMinimizer *value)
 // Add A Minimizer to our List
 //**********************************************************************
-void CMCMCManager::addMCMC(CMCMC *value) {
+void CMCMCManager::addMCMC(CMCMC *value)
+{
   vMCMCList.push_back(value);
 }
 
@@ -71,21 +76,25 @@ void CMCMCManager::addMCMC(CMCMC *value) {
 // void CMinimizer::validate()
 // Validate our MinizerManager
 //**********************************************************************
-void CMCMCManager::validate() {
-  try {
+void CMCMCManager::validate()
+{
+  try
+  {
     if (CRuntimeController::Instance()->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
       return;
 
     pParameterList->checkInvalidParameters();
 
     // Validate our Minimizers
-    foreach(CMCMC *MCMC, vMCMCList) {
+    foreach (CMCMC *MCMC, vMCMCList)
+    {
       MCMC->validate();
     }
 
     // Look for Duplicate Labels
-    map<string, int>            mLabelList;
-    foreach(CMCMC *mcmc, vMCMCList) {
+    map<string, int> mLabelList;
+    foreach (CMCMC *mcmc, vMCMCList)
+    {
       // Increase Count for this label
       mLabelList[mcmc->getLabel()] += 1;
 
@@ -97,17 +106,21 @@ void CMCMCManager::validate() {
     // Reset Variable
     pMCMC = 0;
 
-    if (vMCMCList.size() == 1) {
+    if (vMCMCList.size() == 1)
+    {
       pMCMC = vMCMCList[0];
-    } else {
+    }
+    else
+    {
       throw std::string("Doesn't support multiple MCMCs yet");
     }
 
     // See if we have a valid minimizer defined
     if (pMCMC == 0)
       CError::errorUnknown(PARAM_MCMC, sMCMC);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCManager.validate()->" + Ex;
     throw Ex;
   }
@@ -117,32 +130,37 @@ void CMCMCManager::validate() {
 // void CMCMCManager::build()
 // Build our Minimizer
 //**********************************************************************
-void CMCMCManager::build() {
-  try {
+void CMCMCManager::build()
+{
+  try
+  {
     if (CRuntimeController::Instance()->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
-        return;
+      return;
 
     pMCMC->build();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCManager.build()->" + Ex;
     throw Ex;
   }
 }
 
-
 //**********************************************************************
 // void CMCMCManager::execute()
 // Execute Our Minimisation
 //**********************************************************************
-void CMCMCManager::execute() {
-  try {
+void CMCMCManager::execute()
+{
+  try
+  {
     if (pMCMC == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
     pMCMC->execute();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CMCMCManager.execute()->" + Ex;
     throw Ex;
   }
@@ -152,5 +170,6 @@ void CMCMCManager::execute() {
 // CMCMCManager::~CMCMCManager()
 // Default De-Constructor
 //**********************************************************************
-CMCMCManager::~CMCMCManager() {
+CMCMCManager::~CMCMCManager()
+{
 }

@@ -2,7 +2,7 @@
 // Name        : CAgeingErrorReport.h
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,18 +19,19 @@ class CAgeingError;
 //
 //
 //**********************************************************************
-class CAgeingErrorReport: public CFileReport {
+class CAgeingErrorReport : public CFileReport
+{
 public:
   CAgeingErrorReport();
-  virtual                     ~CAgeingErrorReport();
-  CReport*                    clone() { return new CAgeingErrorReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CAgeingErrorReport();
+  CReport *clone() { return new CAgeingErrorReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
-  string                      sAgeingError;
-  CAgeingError                *pAgeingError;
+  string sAgeingError;
+  CAgeingError *pAgeingError;
 };
 
 #endif /* CAGEINGERRORREPORT_H_ */

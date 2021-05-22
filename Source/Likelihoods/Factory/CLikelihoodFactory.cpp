@@ -2,7 +2,7 @@
 // Name        : CLikelihoodFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 14/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -25,11 +25,13 @@
 // CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string type)
 // Build likelihood based on type
 //**********************************************************************
-CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string type) {
+CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string type)
+{
 
   CLikelihood *pLikelihood = 0;
 
-  if (observationType == PARAM_ABUNDANCE) {
+  if (observationType == PARAM_ABUNDANCE)
+  {
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
     else if (type == PARAM_LOGNORMAL)
@@ -38,8 +40,9 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_BIOMASS) {
+  }
+  else if (observationType == PARAM_BIOMASS)
+  {
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
     else if (type == PARAM_LOGNORMAL)
@@ -48,16 +51,18 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_PRESENCE) {
+  }
+  else if (observationType == PARAM_PRESENCE)
+  {
     if (type == PARAM_BINOMIAL)
       pLikelihood = new CBinomialwithQLikelihood();
     else if (type == PARAM_PSEUDO)
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_PROPORTIONS_AT_AGE) {
+  }
+  else if (observationType == PARAM_PROPORTIONS_AT_AGE)
+  {
     if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
@@ -68,8 +73,9 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_PROPORTIONS_BY_CATEGORY) {
+  }
+  else if (observationType == PARAM_PROPORTIONS_BY_CATEGORY)
+  {
     if (type == PARAM_BINOMIAL_APPROX)
       pLikelihood = new CBinomialApproxLikelihood();
     else if (type == PARAM_BINOMIAL)
@@ -78,8 +84,9 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_PROPORTIONS_AT_LENGTH) {
+  }
+  else if (observationType == PARAM_PROPORTIONS_AT_LENGTH)
+  {
     if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
@@ -90,8 +97,9 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else if (observationType == PARAM_PROPORTIONS_AT_LENGTH_BY_CATEGORY) {
+  }
+  else if (observationType == PARAM_PROPORTIONS_AT_LENGTH_BY_CATEGORY)
+  {
     if (type == PARAM_BINOMIAL_APPROX)
       pLikelihood = new CBinomialApproxLikelihood();
     else if (type == PARAM_BINOMIAL)
@@ -100,8 +108,8 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-
-  } else
+  }
+  else
     CError::errorUnknown(PARAM_OBSERVATION, observationType);
 
   return pLikelihood;

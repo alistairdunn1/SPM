@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPDF.h
 // Author      : A.Dunn
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 #ifndef CPDF_H_
 #define CPDF_H_
@@ -16,21 +16,22 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPDF : public CBaseBuild {
+class CPDF : public CBaseBuild
+{
 public:
   CPDF();
-  virtual                     ~CPDF();
-  virtual CPDF* clone() = 0;
-  virtual double             getPDFResult(double Value) = 0;
-  virtual double             getCDFResult(double Value) = 0;
-  string                     getPDFType() { return sType; };
-  virtual void               validate();
-  void                       build();
+  virtual ~CPDF();
+  virtual CPDF *clone() = 0;
+  virtual double getPDFResult(double Value) = 0;
+  virtual double getCDFResult(double Value) = 0;
+  string getPDFType() { return sType; };
+  virtual void validate();
+  void build();
 
 protected:
   // Variables
-  double                     dRet;
-  string                     sType;
+  double dRet;
+  string sType;
 };
 
 #endif /* CPDF_H_ */

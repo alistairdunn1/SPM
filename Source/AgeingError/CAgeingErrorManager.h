@@ -2,7 +2,7 @@
 // Name        : CAgeingErrorManager.h
 // Author      : S.Rasmussen
 // Date        : 18/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,26 +19,27 @@ class CAgeingError;
 //
 //
 //**********************************************************************
-class CAgeingErrorManager: public CBaseManager {
+class CAgeingErrorManager : public CBaseManager
+{
 public:
-  static CAgeingErrorManager* Instance();
-  static void                 Destroy();
+  static CAgeingErrorManager *Instance();
+  static void Destroy();
 
   // Functions
-  void                        clone(CAgeingErrorManager *Manager);
-  void                        addAgeingError(CAgeingError *ageingError);
-  CAgeingError*               getAgeingError(string label);
-  void                        validate();
-  void                        build();
-  void                        rebuild();
-  virtual                     ~CAgeingErrorManager();
+  void clone(CAgeingErrorManager *Manager);
+  void addAgeingError(CAgeingError *ageingError);
+  CAgeingError *getAgeingError(string label);
+  void validate();
+  void build();
+  void rebuild();
+  virtual ~CAgeingErrorManager();
 
 protected:
   // Function
   CAgeingErrorManager();
 
   // Variables
-  vector<CAgeingError*>       vAgeingErrors;
+  vector<CAgeingError *> vAgeingErrors;
 
 private:
   // Variables

@@ -2,7 +2,7 @@
 // Name        : CAnnualMortalityRateProcess.h
 // Author      : S.Rasmussen
 // Date        : 15/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -21,23 +21,24 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CAnnualMortalityRateProcess : public CProcess {
+class CAnnualMortalityRateProcess : public CProcess
+{
 public:
   // Functions
   CAnnualMortalityRateProcess();
-  virtual                     ~CAnnualMortalityRateProcess();
-  CProcess*                   clone() { return new CAnnualMortalityRateProcess(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CAnnualMortalityRateProcess();
+  CProcess *clone() { return new CAnnualMortalityRateProcess(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
   // Variables
-  vector<int>                 vYears;
-  vector<double>              vMortalityRates;
-  string                      sLayer;
-  CNumericLayer               *pLayer;
-  CTimeStepManager            *pTimeStepManager;
+  vector<int> vYears;
+  vector<double> vMortalityRates;
+  string sLayer;
+  CNumericLayer *pLayer;
+  CTimeStepManager *pTimeStepManager;
 };
 
 #endif /* CANNUALMORTALITYRATEPROCESS_H_ */

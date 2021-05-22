@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantity.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 
 #ifdef TEST
@@ -30,7 +30,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Test_Derived_Quantity, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
+{
 
   CTestDerivedQuantity tdq;
 

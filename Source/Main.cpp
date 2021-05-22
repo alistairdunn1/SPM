@@ -20,7 +20,6 @@
 #include <boost/test/included/unit_test.hpp>
 #else
 
-
 // Global Headers
 #include <iostream>
 
@@ -38,7 +37,8 @@ using namespace std;
 // Application Entry Point
 //**********************************************************************
 //test_suite* init_unit_test_suite( int argc, char* argv[] ) {
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[])
+{
 
   // Load Command Line into Configuration
   CConfiguration *pConfig = CConfiguration::Instance();
@@ -49,14 +49,16 @@ int main(int argc, char * argv[]) {
   CStandardHeaderReport clReporter;
 
   // Create Runtime Controller
-  CRuntimeController  *pRuntime = 0;
+  CRuntimeController *pRuntime = 0;
   pRuntime = CRuntimeController::Instance();
 
   // Try to Parse the command line.
-  try {
+  try
+  {
     pRuntime->parseCommandLine(argc, (const char **)argv);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     clReporter.start();
     cerr << "[ERROR] " << Ex << endl;
     clReporter.end();
@@ -66,37 +68,48 @@ int main(int argc, char * argv[]) {
   // If we are just printing the Version, then do so.
   std::stringstream sRevisionNumber;
   sRevisionNumber << SOURCE_CONTROL_VERSION;
-  if (pRuntime->getRunMode() == RUN_MODE_VERSION) {
+  if (pRuntime->getRunMode() == RUN_MODE_VERSION)
+  {
     cout << string(VERSION) << "-" << string(SOURCE_CONTROL_DATE) << " (rev. " << sRevisionNumber.str() << ")" << endl;
     return 0;
   }
 
-  try {
+  try
+  {
     if (!pRuntime->getDisableHeader())
       clReporter.start();
 
     // Check Run-Mode
-    if (pRuntime->getRunMode() == RUN_MODE_LICENSE) {
+    if (pRuntime->getRunMode() == RUN_MODE_LICENSE)
+    {
       cout << sLicense << endl;
-    } else if (pRuntime->getRunMode() == RUN_MODE_HELP) {
+    }
+    else if (pRuntime->getRunMode() == RUN_MODE_HELP)
+    {
       cout << pRuntime->getCommandLineOptions() << endl;
-    } else {
+    }
+    else
+    {
       pRuntime->loadConfiguration();
       pRuntime->run();
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     cerr << "[ERROR] SPM has encountered a problem" << endl;
 
     // Un-Wind our Exception Stack
     int iLastLocation = 0;
-    while (iLastLocation != -1) {
-      int iLoc = Ex.find_first_of(">", iLastLocation+1);
-      cout << Ex.substr(iLastLocation+1, (iLoc-iLastLocation)) << endl;
+    while (iLastLocation != -1)
+    {
+      int iLoc = Ex.find_first_of(">", iLastLocation + 1);
+      cout << Ex.substr(iLastLocation + 1, (iLoc - iLastLocation)) << endl;
       iLastLocation = iLoc;
     }
     cerr << endl;
-  } catch(exception &Ex) {
+  }
+  catch (exception &Ex)
+  {
     // Do Nothing
     cerr << "[ERROR] SPM encountered an exception" << endl;
     cerr << "[EXCEPTION] " << Ex.what() << endl;

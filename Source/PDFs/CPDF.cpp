@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPDF.cpp
 // Author      : A.Dunn
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local headers
@@ -12,9 +12,10 @@
 // CPDF::CPDF()
 // Default Constructor
 //**********************************************************************
-CPDF::CPDF() {
+CPDF::CPDF()
+{
 
-   sType = "";
+  sType = "";
   // Register our Estimables
 
   // Register User Allowed Parameters
@@ -24,14 +25,17 @@ CPDF::CPDF() {
 // void CPDF::validate()
 // Validate
 //**********************************************************************
-void CPDF::validate() {
-  try {
+void CPDF::validate()
+{
+  try
+  {
     // Base Validation
     CBaseBuild::validate();
 
     // Populate our Parameters.
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -41,19 +45,22 @@ void CPDF::validate() {
 // void CPDF::build()
 // Build our Object
 //**********************************************************************
-void CPDF::build() {
-  try {
-
-  } catch (string &Ex) {
+void CPDF::build()
+{
+  try
+  {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPDF.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
-
 //**********************************************************************
 // CPDF::~CPDF()
 // Destructor
 //**********************************************************************
-CPDF::~CPDF() {
+CPDF::~CPDF()
+{
 }

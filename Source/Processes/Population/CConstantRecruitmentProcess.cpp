@@ -2,7 +2,7 @@
 // Name        : CConstantRecruitmentProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -28,9 +28,10 @@ using std::numeric_limits;
 // CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
-CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
+CConstantRecruitmentProcess::CConstantRecruitmentProcess()
+{
   // Default Vars
-  pLayer          = 0;
+  pLayer = 0;
   sType = PARAM_CONSTANT_RECRUITMENT;
   bRequiresMerge = false;
 
@@ -43,20 +44,21 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGE);
   pParameterList->registerAllowed(PARAM_LAYER);
-
 }
 
 //**********************************************************************
 // void CConstantRecruitmentProcess::validate()
 // Validate Our Parameters
 //**********************************************************************
-void CConstantRecruitmentProcess::validate() {
-  try {
+void CConstantRecruitmentProcess::validate()
+{
+  try
+  {
 
     // Populate our Variables
-    dR0         = pParameterList->getDouble(PARAM_R0);
-    iAge        = pParameterList->getInt(PARAM_AGE,pWorld->getMinAge());
-    sLayer      = pParameterList->getString(PARAM_LAYER, true, "");
+    dR0 = pParameterList->getDouble(PARAM_R0);
+    iAge = pParameterList->getInt(PARAM_AGE, pWorld->getMinAge());
+    sLayer = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
@@ -67,9 +69,9 @@ void CConstantRecruitmentProcess::validate() {
     // Local validation
     // iAge must be a valid age
     if (iAge < pWorld->getMinAge())
-      CError::errorLessThan(PARAM_AGE,PARAM_MIN_AGE);
+      CError::errorLessThan(PARAM_AGE, PARAM_MIN_AGE);
     if (iAge > pWorld->getMaxAge())
-      CError::errorGreaterThan(PARAM_AGE,PARAM_MAX_AGE);
+      CError::errorGreaterThan(PARAM_AGE, PARAM_MAX_AGE);
 
     // The 2 Vectors must be same size
     if (getCategoryCount() != (int)vProportions.size())
@@ -81,14 +83,16 @@ void CConstantRecruitmentProcess::validate() {
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
-    foreach(double Prop, vProportions) {
+    foreach (double Prop, vProportions)
+    {
       dRunningTotal += Prop;
     }
     // See If It is close enough to 1.0
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,8 +102,10 @@ void CConstantRecruitmentProcess::validate() {
 // void CConstantRecruitmentProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CConstantRecruitmentProcess::build() {
-  try {
+void CConstantRecruitmentProcess::build()
+{
+  try
+  {
     // Base Build
     CProcess::build();
 
@@ -113,8 +119,9 @@ void CConstantRecruitmentProcess::build() {
     // Validate our Vectors are all same size
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -124,9 +131,11 @@ void CConstantRecruitmentProcess::build() {
 // void CConstantRecruitmentProcess::execute()
 // Execute
 //**********************************************************************
-void CConstantRecruitmentProcess::execute() {
+void CConstantRecruitmentProcess::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     // Base Execute
     CProcess::execute();
@@ -134,13 +143,17 @@ void CConstantRecruitmentProcess::execute() {
     // Setup Our Variables
     double dAmountPer = dR0;
 
-    if (pLayer != 0) {
+    if (pLayer != 0)
+    {
       double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i) {
-        for (int j = 0; j < iWorldWidth; ++j) {
+      for (int i = 0; i < iWorldHeight; ++i)
+      {
+        for (int j = 0; j < iWorldWidth; ++j)
+        {
           pBaseSquare = pWorld->getBaseSquare(i, j);
-          if (pBaseSquare->getEnabled()) {
+          if (pBaseSquare->getEnabled())
+          {
             dTotal += pLayer->getValue(i, j);
           }
         }
@@ -148,12 +161,15 @@ void CConstantRecruitmentProcess::execute() {
 
       if (!CComparer::isZero(dTotal))
         dAmountPer /= dTotal;
-    } else
+    }
+    else
       dAmountPer /= pWorld->getEnabledSquareCount();
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
+    for (int i = 0; i < iWorldHeight; ++i)
+    {
+      for (int j = 0; j < iWorldWidth; ++j)
+      {
         // Get Current Square, and Difference Equal
         pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check if this square is enabled or not.
@@ -166,12 +182,14 @@ void CConstantRecruitmentProcess::execute() {
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < getCategoryCount(); ++k)
-          pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]) );
+          pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
       }
     }
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
-    Ex = "CRecruitmentProcess.execute(" + getLabel() +")->" + Ex;
+  }
+  catch (string &Ex)
+  {
+    Ex = "CRecruitmentProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -181,6 +199,7 @@ void CConstantRecruitmentProcess::execute() {
 // CConstantRecruitmentProcess::~CConstantRecruitmentProcess()
 // Default De-Constructor
 //**********************************************************************
-CConstantRecruitmentProcess::~CConstantRecruitmentProcess() {
+CConstantRecruitmentProcess::~CConstantRecruitmentProcess()
+{
   vProportions.clear();
 }

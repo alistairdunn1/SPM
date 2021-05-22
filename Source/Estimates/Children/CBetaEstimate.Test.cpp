@@ -2,7 +2,7 @@
 // Name        : CBetaPrior.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,7 @@
 
 // strings
 const std::string beta_estimate =
-R"(
+    R"(
 @estimate
 parameter selectivity[FishingSel].a50
 lower_bound 1
@@ -36,13 +36,14 @@ b 10
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( BetaEstimate, C1x1_Empty_Fixture) {
+BOOST_FIXTURE_TEST_CASE(BetaEstimate, C1x1_Empty_Fixture)
+{
 
   addToConfiguration(two_sex_no_estimates);
   addToConfiguration(beta_estimate);
   loadAndRunEnvironment();
 
-  CObjectiveFunction* obj_func = CObjectiveFunction::Instance();
+  CObjectiveFunction *obj_func = CObjectiveFunction::Instance();
   obj_func->execute();
   BOOST_CHECK_CLOSE(obj_func->getScore(), 1726.6295023192379, 1e-9);
 
@@ -61,7 +62,6 @@ BOOST_FIXTURE_TEST_CASE( BetaEstimate, C1x1_Empty_Fixture) {
   BOOST_CHECK_CLOSE(estimate->getScore(), -2066.4915312599851, 1e-9);
   estimate->setValue(5.0);
   BOOST_CHECK_CLOSE(estimate->getScore(), -1868.5574163359895, 1e-9);
-
 }
 
 #endif /* TEST */

@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CMHMCMC.h
-// Author      : 
-// Date        : 
+// Author      :
+// Date        :
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
 // Description :
 //============================================================================
@@ -25,17 +25,17 @@ using namespace boost::numeric;
 //
 //
 //**********************************************************************
-class CMHMCMC : public CMCMC {
+class CMHMCMC : public CMCMC
+{
 public:
   // Methods
   CMHMCMC();
-  virtual                    ~CMHMCMC();
-  void                       validate() final;
-  void                       build() final;
-  void                       execute() final;
+  virtual ~CMHMCMC();
+  void validate() final;
+  void build() final;
+  void execute() final;
 
 protected:
-
 };
 
 #endif /*CMHMCMC_H_*/

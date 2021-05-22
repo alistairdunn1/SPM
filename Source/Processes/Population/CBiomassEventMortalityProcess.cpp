@@ -2,7 +2,7 @@
 // Name        : CBiomassEventMortalityProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 9/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -33,13 +33,14 @@ using std::endl;
 // CBiomassEventMortalityProcess::CBiomassEventMortalityProcess()
 // Default Constructor
 //**********************************************************************
-CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
+CBiomassEventMortalityProcess::CBiomassEventMortalityProcess()
+{
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
   sType = PARAM_BIOMASS_EVENT_MORTALITY;
   bRequiresMerge = false;
   pPenalty = 0;
-  
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_YEARS);
@@ -53,7 +54,8 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
 // int CBiomassEventMortalityProcess::getYears(int index)
 // Return the years entry from vector @ index
 //**********************************************************************
-int CBiomassEventMortalityProcess::getYears(int index) {
+int CBiomassEventMortalityProcess::getYears(int index)
+{
   return vYearsList[index];
 }
 
@@ -61,7 +63,8 @@ int CBiomassEventMortalityProcess::getYears(int index) {
 // string CBiomassEventMortalityProcess::getLayers(int index)
 // Return the layers entry in vector at index
 //**********************************************************************
-string CBiomassEventMortalityProcess::getLayers(int index) {
+string CBiomassEventMortalityProcess::getLayers(int index)
+{
   return vLayersList[index];
 }
 
@@ -69,12 +72,14 @@ string CBiomassEventMortalityProcess::getLayers(int index) {
 // void CBiomassEventMortalityProcess:validate()
 // Validate This
 //**********************************************************************
-void CBiomassEventMortalityProcess::validate() {
-  try {
+void CBiomassEventMortalityProcess::validate()
+{
+  try
+  {
 
     // Get our Parameters
-    dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
-    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
+    dUMax = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
@@ -97,13 +102,15 @@ void CBiomassEventMortalityProcess::validate() {
 
     // Duplicate Year check
     map<int, int> mYears;
-    foreach(int Year, vYearsList) {
+    foreach (int Year, vYearsList)
+    {
       mYears[Year]++;
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CBiomassEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -113,8 +120,10 @@ void CBiomassEventMortalityProcess::validate() {
 // void CBiomassEventMortalityProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CBiomassEventMortalityProcess::build() {
-  try {
+void CBiomassEventMortalityProcess::build()
+{
+  try
+  {
     // Base Build
     CProcess::build();
 
@@ -125,8 +134,9 @@ void CBiomassEventMortalityProcess::build() {
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CBiomassEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -136,15 +146,19 @@ void CBiomassEventMortalityProcess::build() {
 // void CBiomassEventMortalityProcess::execute()
 // execute this Process
 //**********************************************************************
-void CBiomassEventMortalityProcess::execute() {
+void CBiomassEventMortalityProcess::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     // See if we are suppose to be executing first
-    bYearMatch    = false;
-    iCurrentYear  = pTimeStepManager->getCurrentYear();
-    for (int i = 0; i < (int)vYearsList.size(); ++i) {
-      if (vYearsList[i] == iCurrentYear) {
+    bYearMatch = false;
+    iCurrentYear = pTimeStepManager->getCurrentYear();
+    for (int i = 0; i < (int)vYearsList.size(); ++i)
+    {
+      if (vYearsList[i] == iCurrentYear)
+      {
         bYearMatch = true;
         pLayer = vLayersIndex[i];
         break;
@@ -156,15 +170,17 @@ void CBiomassEventMortalityProcess::execute() {
       return;
 
     // pLayer contains no positive values
-    if(pLayer->getIsZero())
+    if (pLayer->getIsZero())
       return;
 
     // Base execute
     CProcess::execute();
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
+    for (int i = 0; i < iWorldHeight; ++i)
+    {
+      for (int j = 0; j < iWorldWidth; ++j)
+      {
         // Get Current Square
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -176,33 +192,41 @@ void CBiomassEventMortalityProcess::execute() {
         dVulnerable = 0.0;
 
         // Loop Through Categories & Work out Vulnerable Stock in BIOMASS
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
-            if (dCurrent <0.0)
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
+        {
+          for (int l = 0; l < iBaseColCount; ++l)
+          {
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
+            if (dCurrent < 0.0)
               dCurrent = 0.0;
             // Increase Vulnerable biomass
-            dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
+            dVulnerable += dCurrent * pWorld->getMeanWeight(l, vCategoryIndex[k]);
           }
         }
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
-        dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
-        if (dExploitation > dUMax) {
+        dExploitation = dCatch / CMath::zeroFun(dVulnerable, ZERO);
+        if (dExploitation > dUMax)
+        {
           dExploitation = dUMax;
-          if (pPenalty != 0) { // Throw Penalty
+          if (pPenalty != 0)
+          { // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
-        } else if (dExploitation < ZERO) {
+        }
+        else if (dExploitation < ZERO)
+        {
           dExploitation = 0.0;
-		  continue;
+          continue;
         }
 
         // Loop Through Categories & remove number based on calculated exploitation rate
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
+        {
+          for (int l = 0; l < iBaseColCount; ++l)
+          {
             // Get Amount to remove
-            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
             // If is Zero, Cont
             if (dCurrent <= 0.0)
               continue;
@@ -214,7 +238,9 @@ void CBiomassEventMortalityProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CBiomassEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -225,5 +251,6 @@ void CBiomassEventMortalityProcess::execute() {
 // CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess()
 // Default De-Constructor
 //**********************************************************************
-CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess() {
+CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess()
+{
 }

@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantityByCellLayer.h
 // Author      : A.Dunn
 // Date        : 02/09/2013
-// Copyright   : Copyright NIWA Science ©2013 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2013 - www.niwa.co.nz
 //============================================================================
 #ifndef CDERIVEDQUANTITYBYCELLLAYER_H_
 #define CDERIVEDQUANTITYBYCELLLAYER_H_
@@ -24,34 +24,34 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CDerivedQuantityByCellLayer : public CNumericLayer {
+class CDerivedQuantityByCellLayer : public CNumericLayer
+{
 public:
   // Functions
   CDerivedQuantityByCellLayer();
-  virtual                    ~CDerivedQuantityByCellLayer();
-  CLayer*                    clone() { return (new CDerivedQuantityByCellLayer(*this)); }
-  void                       addCategory(string value);
-  int                        getCategoryCount() { return (int)vCategoryNames.size(); }
-  void                       addSelectivity(string value);
-  int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
-  double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  void                       validate();
-  void                       build();
+  virtual ~CDerivedQuantityByCellLayer();
+  CLayer *clone() { return (new CDerivedQuantityByCellLayer(*this)); }
+  void addCategory(string value);
+  int getCategoryCount() { return (int)vCategoryNames.size(); }
+  void addSelectivity(string value);
+  int getSelectivityCount() { return (int)vSelectivityNames.size(); }
+  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  void validate();
+  void build();
 
 protected:
   // Members
-  CTimeStepManager           *pTimeStepManager;
-  CWorld                     *pWorld;
+  CTimeStepManager *pTimeStepManager;
+  CWorld *pWorld;
   // Variables
-  vector<string>             vCategoryNames;
-  vector<int>                vCategories;
-  vector<string>             vSelectivityNames;
-  vector<CSelectivity*>      vSelectivities;
-  string                     sDerivedQuantityByCell;
-  int                        iOffset;
-  int                        iActualOffset;
-  CDerivedQuantityByCell     *pDerivedQuantityByCell;
-
+  vector<string> vCategoryNames;
+  vector<int> vCategories;
+  vector<string> vSelectivityNames;
+  vector<CSelectivity *> vSelectivities;
+  string sDerivedQuantityByCell;
+  int iOffset;
+  int iActualOffset;
+  CDerivedQuantityByCell *pDerivedQuantityByCell;
 };
 
 #endif /*CDERIVEDQUANTITYBYCELLLAYER_H_*/

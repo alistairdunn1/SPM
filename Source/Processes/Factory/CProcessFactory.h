@@ -2,7 +2,7 @@
 // Name        : CProcessFactory.h
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -22,15 +22,16 @@ using std::string;
 //
 //
 //**********************************************************************
-class CProcessFactory {
+class CProcessFactory
+{
 public:
   // Functions
-  static CProcess*            buildProcess(string type, bool registerWithManager = true);
+  static CProcess *buildProcess(string type, bool registerWithManager = true);
 
 private:
   // Functions
-  CProcessFactory() { };
-  virtual                     ~CProcessFactory() { };
+  CProcessFactory(){};
+  virtual ~CProcessFactory(){};
 };
 
 #endif /* CPROCESSFACTORY_H_ */

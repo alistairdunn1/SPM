@@ -2,7 +2,7 @@
 // Name        : CAllValuesBoundedSelectivity.cpp
 // Author      : S.Rasmussen
 // Date        : 20/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -22,7 +22,8 @@ using std::endl;
 // CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
 // Default Constructor
 //**********************************************************************
-CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity() {
+CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
+{
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
@@ -33,12 +34,14 @@ CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity() {
 // void CAllValuesBoundedSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CAllValuesBoundedSelectivity::validate() {
-  try {
+void CAllValuesBoundedSelectivity::validate()
+{
+  try
+  {
 
     // Get our variables
-    iL      = pParameterList->getInt(PARAM_L);
-    iH      = pParameterList->getInt(PARAM_H);
+    iL = pParameterList->getInt(PARAM_L);
+    iH = pParameterList->getInt(PARAM_H);
 
     pParameterList->fillVector(vVs, PARAM_V);
 
@@ -60,8 +63,9 @@ void CAllValuesBoundedSelectivity::validate() {
       registerEstimable(PARAM_V, i, &vVs[i]);
 
     iMinAge = pWorld->getMinAge();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -71,16 +75,17 @@ void CAllValuesBoundedSelectivity::validate() {
 // double CAllValuesBoundedSelectivity::calculateResult(int Age)
 // Calculate a cached result for this selectivity
 //**********************************************************************
-double CAllValuesBoundedSelectivity::calculateResult(int Age) {
+double CAllValuesBoundedSelectivity::calculateResult(int Age)
+{
 
   double dRet = 0.0;
 
-  if ( Age < iL)
+  if (Age < iL)
     dRet = 0.0;
-  else  if ( Age >= iH)
+  else if (Age >= iH)
     dRet = vVs[vVs.size() - 1];
   else
-    dRet = vVs[(Age-iL)];
+    dRet = vVs[(Age - iL)];
 
   return dRet;
 }
@@ -89,5 +94,6 @@ double CAllValuesBoundedSelectivity::calculateResult(int Age) {
 // CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity()
 // Destructor
 //**********************************************************************
-CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity() {
+CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity()
+{
 }

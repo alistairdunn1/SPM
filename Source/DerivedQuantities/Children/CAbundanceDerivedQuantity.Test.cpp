@@ -2,7 +2,7 @@
 // Name        : CDerivedQuantity.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -30,7 +30,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Quantity, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(Abundance_Derived_Quantity, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -45,9 +46,9 @@ BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Quantity, C1x1_Fixture ) {
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedQuantityManager *pManager     = CDerivedQuantityManager::Instance();
-  CDerivedQuantity        *pQuantity    = pManager->getDerivedQuantity("derived_quantity");
-  CWorldSquare            *pSquare      = getSquare();
+  CDerivedQuantityManager *pManager = CDerivedQuantityManager::Instance();
+  CDerivedQuantity *pQuantity = pManager->getDerivedQuantity("derived_quantity");
+  CWorldSquare *pSquare = getSquare();
 
   // Check Results
   BOOST_CHECK_EQUAL(15, pQuantity->getValuesSize());

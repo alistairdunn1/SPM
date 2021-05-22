@@ -2,7 +2,7 @@
 // Name        : CDoubleExponentialSelectivity.cpp
 // Author      : S.Rasmussen
 // Date        : 20/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,7 +16,8 @@
 // CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
 // Default constructor
 //**********************************************************************
-CDoubleExponentialSelectivity::CDoubleExponentialSelectivity() {
+CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
+{
   // Register estimables
   registerEstimable(PARAM_X0, &dX0);
   registerEstimable(PARAM_Y0, &dY0);
@@ -38,17 +39,19 @@ CDoubleExponentialSelectivity::CDoubleExponentialSelectivity() {
 // void CDoubleExponentialSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CDoubleExponentialSelectivity::validate() {
-  try {
+void CDoubleExponentialSelectivity::validate()
+{
+  try
+  {
 
     // Populate our parameters
-    dX0    = pParameterList->getDouble(PARAM_X0);
-    dX1    = pParameterList->getDouble(PARAM_X1);
-    dX2    = pParameterList->getDouble(PARAM_X2);
-    dY0    = pParameterList->getDouble(PARAM_Y0);
-    dY1    = pParameterList->getDouble(PARAM_Y1);
-    dY2    = pParameterList->getDouble(PARAM_Y2);
-    dAlpha = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
+    dX0 = pParameterList->getDouble(PARAM_X0);
+    dX1 = pParameterList->getDouble(PARAM_X1);
+    dX2 = pParameterList->getDouble(PARAM_X2);
+    dY0 = pParameterList->getDouble(PARAM_Y0);
+    dY1 = pParameterList->getDouble(PARAM_Y1);
+    dY2 = pParameterList->getDouble(PARAM_Y2);
+    dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
     // Validate parent
     CSelectivity::validate();
@@ -64,8 +67,9 @@ void CDoubleExponentialSelectivity::validate() {
       CError::errorLessThan(PARAM_Y1, PARAM_ZERO);
     if (dY2 < 0)
       CError::errorLessThan(PARAM_Y2, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDoubleExponentialSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -75,22 +79,26 @@ void CDoubleExponentialSelectivity::validate() {
 // double CDoubleExponentialSelectivity::getResult(int Index)
 // Get the result from our selectivity
 //**********************************************************************
-double CDoubleExponentialSelectivity::calculateResult(int Age) {
+double CDoubleExponentialSelectivity::calculateResult(int Age)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-  double dRet = 0.0;
+    double dRet = 0.0;
 
-  if(Age <= dX0)
-    dRet = dAlpha * dY0 * pow((dY1 / dY0), ((double)Age - dX0)/(dX1 - dX0));
-  else
-    dRet = dAlpha * dY0 * pow((dY2 / dY0), ((double)Age - dX0)/(dX2 - dX0));
+    if (Age <= dX0)
+      dRet = dAlpha * dY0 * pow((dY1 / dY0), ((double)Age - dX0) / (dX1 - dX0));
+    else
+      dRet = dAlpha * dY0 * pow((dY2 / dY0), ((double)Age - dX0) / (dX2 - dX0));
 
-  return dRet;
+    return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CDoubleExponentialSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -102,5 +110,6 @@ double CDoubleExponentialSelectivity::calculateResult(int Age) {
 // CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity()
 // Destructor
 //**********************************************************************
-CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity() {
+CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity()
+{
 }

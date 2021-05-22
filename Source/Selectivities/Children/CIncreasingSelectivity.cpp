@@ -2,7 +2,7 @@
 // Name        : CIncreasingSelectivity.cpp
 // Author      : S.Rasmussen
 // Date        : 20/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -15,26 +15,28 @@
 // CIncreasingSelectivity::CIncreasingSelectivity()
 // Default constructor
 //**********************************************************************
-CIncreasingSelectivity::CIncreasingSelectivity() {
+CIncreasingSelectivity::CIncreasingSelectivity()
+{
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
   pParameterList->registerAllowed(PARAM_V);
   pParameterList->registerAllowed(PARAM_ALPHA);
-
 }
 
 //**********************************************************************
 // void CIncreasingSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CIncreasingSelectivity::validate() {
-  try {
+void CIncreasingSelectivity::validate()
+{
+  try
+  {
 
     // Get our values
-    iL     = pParameterList->getInt(PARAM_L);
-    iH     = pParameterList->getInt(PARAM_H);
-    dAlpha = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
+    iL = pParameterList->getInt(PARAM_L);
+    iH = pParameterList->getInt(PARAM_H);
+    dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
     pParameterList->fillVector(vVs, PARAM_V);
 
@@ -52,7 +54,8 @@ void CIncreasingSelectivity::validate() {
       CError::errorLessThanEqualTo(PARAM_H, PARAM_L);
     if ((int)vVs.size() != (iH - iL + 1))
       CError::errorListNotSize(PARAM_V, (iH - iL + 1));
-    for (int i = 0; i < (int)vVs.size(); ++i) {
+    for (int i = 0; i < (int)vVs.size(); ++i)
+    {
       if ((vVs[i] > 1.0) || (vVs[i] < 0.0))
         CError::errorNotBetween(PARAM_V, PARAM_ZERO, PARAM_ONE);
     }
@@ -61,8 +64,9 @@ void CIncreasingSelectivity::validate() {
     registerEstimable(PARAM_ALPHA, &dAlpha);
     for (int i = 0; i < (int)vVs.size(); ++i)
       registerEstimable(PARAM_V, i, &vVs[i]);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CIncreasingSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -72,28 +76,39 @@ void CIncreasingSelectivity::validate() {
 // double CIncreasingSelectivity::getResult(int Index)
 // Get the result from the selectivity
 //**********************************************************************
-double CIncreasingSelectivity::calculateResult(int Age) {
+double CIncreasingSelectivity::calculateResult(int Age)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     double dRet = 0.0;
 
-    if (Age <= iL) {
+    if (Age <= iL)
+    {
       dRet = 0.0;
-    } else if (Age > iH) {
+    }
+    else if (Age > iH)
+    {
       dRet = vVs[iH - iL];
-    } else {
+    }
+    else
+    {
       dRet = vVs[0];
-      for (int i=(iL+1); i < Age; i++) {
-        if (i > iH || dRet >= dAlpha) break;
-        dRet += (dAlpha-dRet) * vVs[i - iL];
+      for (int i = (iL + 1); i < Age; i++)
+      {
+        if (i > iH || dRet >= dAlpha)
+          break;
+        dRet += (dAlpha - dRet) * vVs[i - iL];
       }
     }
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CIncreasingSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -105,5 +120,6 @@ double CIncreasingSelectivity::calculateResult(int Age) {
 // CIncreasingSelectivity::~CIncreasingSelectivity()
 // Destructor
 //**********************************************************************
-CIncreasingSelectivity::~CIncreasingSelectivity() {
+CIncreasingSelectivity::~CIncreasingSelectivity()
+{
 }

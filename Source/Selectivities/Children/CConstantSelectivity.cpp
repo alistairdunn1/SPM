@@ -2,7 +2,7 @@
 // Name        : CConstantSelectivity.cpp
 // Author      : S.Rasmussen
 // Date        : 6/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -15,7 +15,8 @@
 // CConstantSelectivity::CConstantSelectivity()
 // Default Constructor
 //**********************************************************************
-CConstantSelectivity::CConstantSelectivity() {
+CConstantSelectivity::CConstantSelectivity()
+{
   // Register estimable
   registerEstimable(PARAM_C, &dC);
 
@@ -27,8 +28,10 @@ CConstantSelectivity::CConstantSelectivity() {
 // void CConstantSelectivity::validate()
 // validate
 //**********************************************************************
-void CConstantSelectivity::validate() {
-  try {
+void CConstantSelectivity::validate()
+{
+  try
+  {
 
     // Populate our variables
     dC = pParameterList->getDouble(PARAM_C);
@@ -37,7 +40,9 @@ void CConstantSelectivity::validate() {
     CSelectivity::validate();
 
     // Local validation
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CConstantSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -47,12 +52,16 @@ void CConstantSelectivity::validate() {
 // double CConstantSelectivity::getResult(int Index)
 // get Result
 //**********************************************************************
-double CConstantSelectivity::getResult(int Index) {
+double CConstantSelectivity::getResult(int Index)
+{
 #ifndef OPTIMIZE
-  try {
-    if ((Index+pWorld->getMinAge()) > pWorld->getMaxAge())
+  try
+  {
+    if ((Index + pWorld->getMinAge()) > pWorld->getMaxAge())
       CError::errorSumGreaterThan(PARAM_INDEX, PARAM_MIN_AGE, PARAM_MAX_AGE);
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CConstantSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,5 +74,6 @@ double CConstantSelectivity::getResult(int Index) {
 // CConstantSelectivity::~CConstantSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CConstantSelectivity::~CConstantSelectivity() {
+CConstantSelectivity::~CConstantSelectivity()
+{
 }

@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : CNormalLikelihood.Test.cpp
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -21,7 +21,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(NormalLikelihood ) {
+BOOST_AUTO_TEST_CASE(NormalLikelihood)
+{
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
@@ -65,9 +66,9 @@ BOOST_AUTO_TEST_CASE(NormalLikelihood ) {
 
   // Check results
   BOOST_CHECK_CLOSE(12.8283137373, scores[0], 1e-9);
-  BOOST_CHECK_CLOSE( 9.9537106387, scores[1], 1e-9);
-  BOOST_CHECK_CLOSE( 4.8283137373, scores[2], 1e-9);
-  BOOST_CHECK_CLOSE( 5.0756618582, scores[3], 1e-9);
+  BOOST_CHECK_CLOSE(9.9537106387, scores[1], 1e-9);
+  BOOST_CHECK_CLOSE(4.8283137373, scores[2], 1e-9);
+  BOOST_CHECK_CLOSE(5.0756618582, scores[3], 1e-9);
 
   // Get results
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
@@ -86,7 +87,8 @@ BOOST_AUTO_TEST_CASE(NormalLikelihood ) {
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( NormalLikelihood_1x1, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(NormalLikelihood_1x1, C1x1_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model

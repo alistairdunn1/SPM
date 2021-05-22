@@ -2,7 +2,7 @@
 // Name        : CRuntimeController.h
 // Author      : S.Rasmussen
 // Date        : 29/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -26,7 +26,8 @@ using std::string;
 class CRuntimeThread;
 
 // Enums
-typedef enum {
+typedef enum
+{
   RUN_MODE_INVALID,
   RUN_MODE_LICENSE,
   RUN_MODE_VERSION,
@@ -39,7 +40,8 @@ typedef enum {
   RUN_MODE_SIMULATION
 } ERunMode;
 
-typedef enum {
+typedef enum
+{
   STATE_INVALID,
   STATE_VALIDATION,
   STATE_CONSTRUCTION,
@@ -53,43 +55,44 @@ typedef enum {
 //
 //
 //**********************************************************************
-class CRuntimeController {
+class CRuntimeController
+{
 public:
-  static CRuntimeController* Instance();
-  static void                Destroy();
+  static CRuntimeController *Instance();
+  static void Destroy();
 
   // Functions
-  void                       parseCommandLine(int argc, const char* argv[]);
-  string                     getCommandLineOptions() { return sCommandLineOptions; }
-  void                       setRunMode(ERunMode value) { eRunMode = value; }
-  ERunMode                   getRunMode() { return eRunMode; }
-  bool                       getDisableHeader() { return bDisableHeader; }
-  EState                     getCurrentState();
-  CRuntimeThread*            getCurrentThread();
-  void                       loadConfiguration();
-  void                       run();
+  void parseCommandLine(int argc, const char *argv[]);
+  string getCommandLineOptions() { return sCommandLineOptions; }
+  void setRunMode(ERunMode value) { eRunMode = value; }
+  ERunMode getRunMode() { return eRunMode; }
+  bool getDisableHeader() { return bDisableHeader; }
+  EState getCurrentState();
+  CRuntimeThread *getCurrentThread();
+  void loadConfiguration();
+  void run();
 
 protected:
   // Functions
   CRuntimeController();
-  virtual                    ~CRuntimeController();
-  void                       startEstimation();
-  static void                initEstimationThread();
-  void                       startMCMC();
-  static void                initMCMCThread();
+  virtual ~CRuntimeController();
+  void startEstimation();
+  static void initEstimationThread();
+  void startMCMC();
+  static void initMCMCThread();
 
   // Variables
-  ERunMode                   eRunMode;
-  bool                       bDisableHeader;
-  int                        iCurrentEstimateValue;
-  CRuntimeThread*            pBaseThread;
-  string                     sCommandLineOptions;
+  ERunMode eRunMode;
+  bool bDisableHeader;
+  int iCurrentEstimateValue;
+  CRuntimeThread *pBaseThread;
+  string sCommandLineOptions;
 
 private:
   // Variables
-  static CRuntimeController* clInstance;
-  boost::mutex               runtimeLock;
-  boost::barrier             *runtimeBarrier;
+  static CRuntimeController *clInstance;
+  boost::mutex runtimeLock;
+  boost::barrier *runtimeBarrier;
 };
 
 #endif /*CRUNTIMECONTROLLER_H_*/

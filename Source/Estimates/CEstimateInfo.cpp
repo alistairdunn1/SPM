@@ -2,7 +2,7 @@
 // Name        : CEstimate.h
 // Author      : S.Rasmussen
 // Date        : 27/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // $Date: 2012-06-08 17:29:15 +1200 (Fri, 08 Jun 2012) $
 //============================================================================
 
@@ -26,7 +26,8 @@ using std::endl;
 // CEstimateInfo::CEstimateInfo()
 // Default Constructor
 //**********************************************************************
-CEstimateInfo::CEstimateInfo() {
+CEstimateInfo::CEstimateInfo()
+{
 
   // Add default parameters to be passed to any CEstimate objects
   // we create from here.
@@ -46,14 +47,16 @@ CEstimateInfo::CEstimateInfo() {
 // CEstimateInfo::~CEstimateInfo()
 // Destructor
 //**********************************************************************
-CEstimateInfo::~CEstimateInfo() {
+CEstimateInfo::~CEstimateInfo()
+{
 }
 
 //**********************************************************************
 // void CEstimateInfo::fillSameVector(vector<string> &sames)
 // Fill a Vector with our "Same" parameters
 //**********************************************************************
-void CEstimateInfo::fillSameVector(vector<string> &sames) {
+void CEstimateInfo::fillSameVector(vector<string> &sames)
+{
   sames.assign(vSameList.begin(), vSameList.end());
 }
 
@@ -61,18 +64,23 @@ void CEstimateInfo::fillSameVector(vector<string> &sames) {
 // void CEstimateInfo::generateEstimates()
 // Generate all of our estimates
 //**********************************************************************
-void CEstimateInfo::generateEstimates() {
-  try {
-    if (!pParameterList->hasParameter(PARAM_PARAMETER)) {
+void CEstimateInfo::generateEstimates()
+{
+  try
+  {
+    if (!pParameterList->hasParameter(PARAM_PARAMETER))
+    {
       string label = pParameterList->getString(PARAM_LABEL);
       pParameterList->addParameter(PARAM_PARAMETER, label);
-    } else if (!pParameterList->hasParameter(PARAM_LABEL)) {
+    }
+    else if (!pParameterList->hasParameter(PARAM_LABEL))
+    {
       string param = pParameterList->getString(PARAM_PARAMETER);
       pParameterList->addParameter(PARAM_LABEL, param);
     }
 
     string parameter = pParameterList->getString(PARAM_PARAMETER);
-    string type      = pParameterList->getString(PARAM_TYPE);
+    string type = pParameterList->getString(PARAM_TYPE);
 
     /**
      * First thing we want to split our parameter
@@ -85,7 +93,8 @@ void CEstimateInfo::generateEstimates() {
     CBaseObject *target = CObjectFinder::getObject(parameter);
 
     // Do we have to create 1 or n Estimates
-    if (iObjectIndex != -1 || !target->isEstimableAVector(sObjectParameter)) {
+    if (iObjectIndex != -1 || !target->isEstimableAVector(sObjectParameter))
+    {
       // 1 Estimate
       CEstimate *newEstimate = CEstimateFactory::buildEstimate(type);
       newEstimate->getParameterList()->copyFrom(pParameterList);
@@ -93,23 +102,27 @@ void CEstimateInfo::generateEstimates() {
       if (iObjectIndex != -1)
         sObjectParameter += "(" + boost::lexical_cast<string>(iObjectIndex) + ")";
       newEstimate->setTarget(target->getEstimableVariable(sObjectParameter, parameter));
-
-    } else {
+    }
+    else
+    {
       // N Estimates
       int size = target->getEstimableVectorSize(sObjectParameter);
 
-      for (int i = 0; i < size; ++i) {
+      for (int i = 0; i < size; ++i)
+      {
         CEstimate *newEstimate = CEstimateFactory::buildEstimate(type);
         newEstimate->getParameterList()->copyFrom(pParameterList);
 
-        string newShortParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i+1) + ")";
-        string newParameter = parameter + "(" + boost::lexical_cast<string>(i+1) + ")";
+        string newShortParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i + 1) + ")";
+        string newParameter = parameter + "(" + boost::lexical_cast<string>(i + 1) + ")";
 
         newEstimate->getParameterList()->setParameter(PARAM_PARAMETER, newParameter);
         newEstimate->setTarget(target->getEstimableVariable(newShortParameter, newParameter));
       }
     }
-  } catch(const string &ex) {
+  }
+  catch (const string &ex)
+  {
     RETHROW_EXCEPTION(ex);
   }
 }

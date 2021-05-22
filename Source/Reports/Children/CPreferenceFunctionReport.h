@@ -2,7 +2,7 @@
 // Name        : CPreferenceFunctionReport.h
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,21 +20,21 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionReport: public CFileReport {
+class CPreferenceFunctionReport : public CFileReport
+{
 public:
   CPreferenceFunctionReport();
-  virtual                     ~CPreferenceFunctionReport();
-  CReport*                    clone() { return new CPreferenceFunctionReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CPreferenceFunctionReport();
+  CReport *clone() { return new CPreferenceFunctionReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
-  string                      sPreferenceFunction;
-  CPreferenceFunction         *pPreferenceFunction;
-  CNumericLayer               *pLayer;
-  std::string                 sLayerType;
-
+  string sPreferenceFunction;
+  CPreferenceFunction *pPreferenceFunction;
+  CNumericLayer *pLayer;
+  std::string sLayerType;
 };
 
 #endif /* CPREFERENCEFUNCTIONREPORT_H_ */

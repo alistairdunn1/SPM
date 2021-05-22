@@ -2,7 +2,7 @@
 // Name        : CNormalByStdevPrior.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,7 @@
 
 // strings
 const std::string normal_by_stdev_esimate =
-R"(
+    R"(
 @estimate
 parameter selectivity[FishingSel].a50
 lower_bound 1
@@ -34,12 +34,13 @@ sigma 2
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( NormalByStdevEstimate, C1x1_Empty_Fixture) {
+BOOST_FIXTURE_TEST_CASE(NormalByStdevEstimate, C1x1_Empty_Fixture)
+{
   addToConfiguration(two_sex_no_estimates);
   addToConfiguration(normal_by_stdev_esimate);
   loadAndRunEnvironment();
 
-  CObjectiveFunction* obj_func = CObjectiveFunction::Instance();
+  CObjectiveFunction *obj_func = CObjectiveFunction::Instance();
   obj_func->execute();
   BOOST_CHECK_CLOSE(obj_func->getScore(), 2567.7578345278534, 1e-9);
 

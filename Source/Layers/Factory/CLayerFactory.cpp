@@ -2,7 +2,7 @@
 // Name        : CLayerFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 7/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : << See CLayerFactory.h >>
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -32,7 +32,8 @@
 // CLayer* CLayerFactory::buildLayer(string type)
 // Build us a layer based on type
 //**********************************************************************
-CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
+CLayer *CLayerFactory::buildLayer(string type, bool registerWithManager)
+{
 
   CLayer *pLayer = 0;
 

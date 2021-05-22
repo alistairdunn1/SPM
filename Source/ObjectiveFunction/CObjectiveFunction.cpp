@@ -2,7 +2,7 @@
 // Name        : CObjectiveFunction.cpp
 // Author      : S.Rasmussen
 // Date        : 24/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -28,7 +28,8 @@ boost::thread_specific_ptr<CObjectiveFunction> CObjectiveFunction::clInstance;
 // CObjectiveFunction::CObjectiveFunction()
 // Default Constructor
 //**********************************************************************
-CObjectiveFunction::CObjectiveFunction() {
+CObjectiveFunction::CObjectiveFunction()
+{
 
   // Variables
   sLabel = PARAM_OBJECTIVE;
@@ -39,7 +40,8 @@ CObjectiveFunction::CObjectiveFunction() {
 // CObjectiveFunction* CObjectiveFunction::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CObjectiveFunction* CObjectiveFunction::Instance() {
+CObjectiveFunction *CObjectiveFunction::Instance()
+{
   if (clInstance.get() == 0)
     clInstance.reset(new CObjectiveFunction());
   return clInstance.get();
@@ -49,8 +51,10 @@ CObjectiveFunction* CObjectiveFunction::Instance() {
 // void CObjectiveFunction::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CObjectiveFunction::Destroy() {
-  if (clInstance.get() != 0) {
+void CObjectiveFunction::Destroy()
+{
+  if (clInstance.get() != 0)
+  {
     clInstance.reset();
   }
 }
@@ -59,16 +63,19 @@ void CObjectiveFunction::Destroy() {
 // SScore* CObjectiveFunction::getScore(int Index)
 // Get A Score From Our List
 //**********************************************************************
-SScore* CObjectiveFunction::getScore(int Index) {
+SScore *CObjectiveFunction::getScore(int Index)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     // Validate
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (Index >= (int)vScoreList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SCORES_INDEX);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CObjectiveFunction.getScore()->" + Ex;
     throw Ex;
   }
@@ -81,7 +88,8 @@ SScore* CObjectiveFunction::getScore(int Index) {
 // void CObjectiveFunction::addScore(string Label, double Value)
 // Add a score to our Vector
 //**********************************************************************
-void CObjectiveFunction::addScore(string Label, double Value) {
+void CObjectiveFunction::addScore(string Label, double Value)
+{
   // Create Structure
   SScore stScore;
   stScore.Label = Label;
@@ -95,50 +103,54 @@ void CObjectiveFunction::addScore(string Label, double Value) {
 // void CObjectiveFunction::execute()
 // Execute our Object Function
 //**********************************************************************
-void CObjectiveFunction::execute() {
+void CObjectiveFunction::execute()
+{
 
   // Variables
-                        dScore                = 0;
-                        dLikelihoods          = 0;
-                        dPenalties            = 0;
-                        dPriors               = 0;
-                        vScoreList.clear();
-  string                sLabel;
-  double                dValue;
+  dScore = 0;
+  dLikelihoods = 0;
+  dPenalties = 0;
+  dPriors = 0;
+  vScoreList.clear();
+  string sLabel;
+  double dValue;
 
   // Loop Through Observations
-  vector<CObservation*> vObservations;
+  vector<CObservation *> vObservations;
   CObservationManager::Instance()->fillVector(vObservations);
 
-  foreach(CObservation *Observation, vObservations) {
+  foreach (CObservation *Observation, vObservations)
+  {
     // Get Vars
-   sLabel = PARAM_OBS + string("->") + Observation->getLabel();
-   dValue = Observation->getScore();
+    sLabel = PARAM_OBS + string("->") + Observation->getLabel();
+    dValue = Observation->getScore();
 
-   // Increment Score, and Add Value to Vector
-   dLikelihoods += dValue;
-   addScore(sLabel, dValue);
+    // Increment Score, and Add Value to Vector
+    dLikelihoods += dValue;
+    addScore(sLabel, dValue);
   }
 
   // Loop Through Penalties
-  vector<SFlaggedPenalty*> vPenalties;
+  vector<SFlaggedPenalty *> vPenalties;
   CPenaltyManager::Instance()->fillVectorWithFlagged(vPenalties);
 
-  foreach(SFlaggedPenalty *Penalty, vPenalties) {
-     // Get Vars
-     sLabel = PARAM_PENALTY + string("->") + Penalty->Label;
-     dValue = Penalty->Score;
+  foreach (SFlaggedPenalty *Penalty, vPenalties)
+  {
+    // Get Vars
+    sLabel = PARAM_PENALTY + string("->") + Penalty->Label;
+    dValue = Penalty->Score;
 
-     // Inc Score, Add Value to Vector
-     dPenalties += dValue;
-     addScore(sLabel, dValue);
+    // Inc Score, Add Value to Vector
+    dPenalties += dValue;
+    addScore(sLabel, dValue);
   }
 
   // Loop Through Priors
-  vector<CEstimate*> vEstimates;
+  vector<CEstimate *> vEstimates;
   CEstimateManager::Instance()->fillVector(vEstimates);
 
-  foreach(CEstimate *Estimate, vEstimates) {
+  foreach (CEstimate *Estimate, vEstimates)
+  {
     // Get Vars
     sLabel = PARAM_PRIOR + string("->") + Estimate->getParameter();
     dValue = Estimate->getScore();
@@ -150,12 +162,12 @@ void CObjectiveFunction::execute() {
 
   // Now sum for out total score
   dScore = dLikelihoods + dPenalties + dPriors;
-
 }
 
 //**********************************************************************
 // CObjectiveFunction::~CObjectiveFunction()
 // Default De-Constructor
 //**********************************************************************
-CObjectiveFunction::~CObjectiveFunction() {
+CObjectiveFunction::~CObjectiveFunction()
+{
 }

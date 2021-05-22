@@ -2,7 +2,7 @@
 // Name        : CLogisticPreferenceFunction.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 19/02/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( LogisticPreferenceFunction_DoubleLayer, CLayer_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(LogisticPreferenceFunction_DoubleLayer, CLayer_Fixture)
+{
 
   CPreferenceFunction *pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_LOGISTIC, false));
@@ -65,7 +66,8 @@ BOOST_FIXTURE_TEST_CASE( LogisticPreferenceFunction_DoubleLayer, CLayer_Fixture 
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( LogisticPreferenceFunction_DistanceLayer, CLayer_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(LogisticPreferenceFunction_DistanceLayer, CLayer_Fixture)
+{
 
   CPreferenceFunction *pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_LOGISTIC, false));

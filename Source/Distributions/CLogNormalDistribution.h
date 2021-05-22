@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : CLogNormalDistribution.h
-// Author      : 
-// Date        : 
-// Copyright   : 
+// Author      :
+// Date        :
+// Copyright   :
 // Description :
 //============================================================================
 #ifndef CLOGNORMALDISTRIBUTION_H_
@@ -12,15 +12,16 @@
 //
 //
 //**********************************************************************
-class CLogNormalDistribution {
+class CLogNormalDistribution
+{
 public:
-  static double               getCDF(double x, double mu, double sigma);
-  static double               getQuantile(double x, double mu, double sigma);
+  static double getCDF(double x, double mu, double sigma);
+  static double getQuantile(double x, double mu, double sigma);
 
 protected:
   // Functions
-  CLogNormalDistribution() { };
-  virtual                     ~CLogNormalDistribution() { };
+  CLogNormalDistribution(){};
+  virtual ~CLogNormalDistribution(){};
 };
 
 #endif /* CLOGNORMALDISTRIBUTION_H_ */

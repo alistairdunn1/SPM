@@ -2,7 +2,7 @@
 // Name        : CBaseManager.h
 // Author      : S.Rasmussen
 // Date        : 27/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description : This is a base class for all the managers.
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,20 +19,21 @@
 #include "CBaseObject.h"
 
 // Namespaces
-using std::vector;
 using std::string;
+using std::vector;
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CBaseManager : public CBaseObject {
+class CBaseManager : public CBaseObject
+{
 public:
   CBaseManager();
-  virtual                     ~CBaseManager();
-  virtual void                validate() = 0;
-  virtual void                build() = 0;
-  virtual void                rebuild() { }
+  virtual ~CBaseManager();
+  virtual void validate() = 0;
+  virtual void build() = 0;
+  virtual void rebuild() {}
 };
 
 #endif /* CBASEMANAGER_H_ */

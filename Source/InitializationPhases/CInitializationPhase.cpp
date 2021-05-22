@@ -2,7 +2,7 @@
 // Name        : CInitializationPhase.cpp
 // Author      : S.Rasmussen
 // Date        : 13/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -28,13 +28,14 @@ using std::endl;
 // CInitializationPhase::CInitializationPhase()
 // Default constructor
 //**********************************************************************
-CInitializationPhase::CInitializationPhase() {
+CInitializationPhase::CInitializationPhase()
+{
   // Vars
-  iYears            = 0;
-  iCurrentTimeStep  = 0;
-  dLambda           = 0;
-  dTotalLambda      = 0.0;
-  dDiffLambda       = 0.0;
+  iYears = 0;
+  iCurrentTimeStep = 0;
+  dLambda = 0;
+  dTotalLambda = 0.0;
+  dDiffLambda = 0.0;
   bConvergenceCheck = false;
 
   // Register parameters
@@ -48,45 +49,54 @@ CInitializationPhase::CInitializationPhase() {
 // void CInitializationPhase::validate()
 // Validate our Initialization Phase
 //**********************************************************************
-void CInitializationPhase::validate() {
-  try {
+void CInitializationPhase::validate()
+{
+  try
+  {
     // Base
     CBaseExecute::validate();
 
     // Fill our Variables
-    iYears  = pParameterList->getInt(PARAM_YEARS);
+    iYears = pParameterList->getInt(PARAM_YEARS);
     pParameterList->fillVector(vTimeStepNames, PARAM_TIME_STEPS);
-    if(pParameterList->hasParameter(PARAM_LAMBDA) || pParameterList->hasParameter(PARAM_LAMBDA_YEARS)) {
+    if (pParameterList->hasParameter(PARAM_LAMBDA) || pParameterList->hasParameter(PARAM_LAMBDA_YEARS))
+    {
       bConvergenceCheck = true;
-      dLambda = pParameterList->getDouble(PARAM_LAMBDA,true,0.0);
-      if(pParameterList->hasParameter(PARAM_LAMBDA_YEARS)) {
+      dLambda = pParameterList->getDouble(PARAM_LAMBDA, true, 0.0);
+      if (pParameterList->hasParameter(PARAM_LAMBDA_YEARS))
+      {
         pParameterList->fillVector(vLambdaYears, PARAM_LAMBDA_YEARS);
-     } else {
-       vLambdaYears.resize(0);
-       vLambdaYears.push_back(iYears);
-     }
-   }
+      }
+      else
+      {
+        vLambdaYears.resize(0);
+        vLambdaYears.push_back(iYears);
+      }
+    }
 
     // Validate
-    if(iYears < 1)
+    if (iYears < 1)
       CError::errorLessThan(PARAM_YEARS, PARAM_ONE);
 
-    if(bConvergenceCheck) {
-      if(dLambda < 0)
+    if (bConvergenceCheck)
+    {
+      if (dLambda < 0)
         CError::errorLessThan(PARAM_LAMBDA, PARAM_ZERO);
-      if(dLambda >= 1)
+      if (dLambda >= 1)
         CError::errorGreaterThan(PARAM_LAMBDA, PARAM_ONE);
-      for (int i=0; i < (int)vLambdaYears.size(); ++i) {
+      for (int i = 0; i < (int)vLambdaYears.size(); ++i)
+      {
         if (vLambdaYears[i] < 1)
           CError::errorLessThan(PARAM_LAMBDA_YEARS, PARAM_ONE);
         if (vLambdaYears[i] > iYears)
           CError::errorGreaterThan(PARAM_LAMBDA_YEARS, PARAM_YEARS);
-        if ((i > 0) & (vLambdaYears[i]==vLambdaYears[i-1]))
+        if ((i > 0) & (vLambdaYears[i] == vLambdaYears[i - 1]))
           CError::errorDuplicate(PARAM_LAMBDA_YEARS, boost::lexical_cast<string>(vLambdaYears[i]));
       }
     }
-
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CInitializationPhase.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -96,38 +106,50 @@ void CInitializationPhase::validate() {
 // void CInitializationPhase::build()
 // Build this Initilization phase
 //**********************************************************************
-void CInitializationPhase::build() {
-  try {
+void CInitializationPhase::build()
+{
+  try
+  {
     // Now Lets Build Our Relationships
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
     pTimeStepManager->fillVector(vTimeStepNames, vTimeSteps);
 
     // TimeStep Validation
-    for(int i=0; i < (int)vTimeStepNames.size(); ++i) {
+    for (int i = 0; i < (int)vTimeStepNames.size(); ++i)
+    {
       bool bValid = false;
-      foreach( CTimeStep *TimeStep, vTimeSteps) {
-        if( TimeStep->getLabel() == vTimeStepNames[i] ) {
+      foreach (CTimeStep *TimeStep, vTimeSteps)
+      {
+        if (TimeStep->getLabel() == vTimeStepNames[i])
+        {
           bValid = true;
         }
       }
-      if(bValid == false) {
+      if (bValid == false)
+      {
         CError::errorUnknown(PARAM_TIME_STEP, vTimeStepNames[i]);
       }
     }
 
-    if( bConvergenceCheck ) {
+    if (bConvergenceCheck)
+    {
       vvWorldCopy.resize(pWorld->getHeight());
-      for( int i =0; i < pWorld->getHeight(); ++i)  {
+      for (int i = 0; i < pWorld->getHeight(); ++i)
+      {
         vvWorldCopy[i].resize(pWorld->getWidth());
-        for(int j=0; j < (int)pWorld->getWidth(); ++j) {
+        for (int j = 0; j < (int)pWorld->getWidth(); ++j)
+        {
           vvWorldCopy[i][j].resize(pWorld->getCategoryCount());
-          for(int k=0; k < pWorld->getCategoryCount(); ++k) {
+          for (int k = 0; k < pWorld->getCategoryCount(); ++k)
+          {
             vvWorldCopy[i][j][k].resize(pWorld->getAgeSpread());
           }
         }
       }
     }
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -137,9 +159,11 @@ void CInitializationPhase::build() {
 // void CInitializationPhase::rebuild()
 // Rebuild this Initialisation phase
 //**********************************************************************
-void CInitializationPhase::rebuild() {
+void CInitializationPhase::rebuild()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     // reset holding container for lambda
@@ -147,7 +171,9 @@ void CInitializationPhase::rebuild() {
     vLambdaHatYears.resize(0);
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CInitializationPhase.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -158,70 +184,86 @@ void CInitializationPhase::rebuild() {
 // void CInitializationPhase::execute()
 // Execute the TimeSteps for this initialisation phase
 //**********************************************************************
-void CInitializationPhase::execute() {
+void CInitializationPhase::execute()
+{
   CDerivedQuantityByCellManager *pDerivedQuantityByCellManager = CDerivedQuantityByCellManager::Instance();
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
-
   iActualYears = iYears;
   // Loop Through and Execute
-  for (int i = 0; i < iYears; ++i) {
-    for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
+  for (int i = 0; i < iYears; ++i)
+  {
+    for (int j = 0; j < (int)vTimeSteps.size(); ++j)
+    {
       iCurrentTimeStep = j;
       vTimeSteps[j]->execute();
       pDerivedQuantityByCellManager->calculate(iExecutionOrderIndex);
       pDerivedQuantityManager->calculate(iExecutionOrderIndex);
     }
 
-    if(bConvergenceCheck) {
-    // If convergence checks are enabled, then...
+    if (bConvergenceCheck)
+    {
+      // If convergence checks are enabled, then...
 
       bool bExit = false;
-      for (int k=0; k < (int)vLambdaYears.size(); ++k) {
+      for (int k = 0; k < (int)vLambdaYears.size(); ++k)
+      {
 
-        if ((i+1)==(vLambdaYears[k]-1)) {
+        if ((i + 1) == (vLambdaYears[k] - 1))
+        {
           // record state from previous year
 
-          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2) {
-            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2) {
+          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2)
+          {
+            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2)
+            {
               pPreviousSquare = pWorld->getBaseSquare(i2, j2);
-              for(int i3 = 0; i3 < pWorld->getCategoryCount(); ++i3) {
-                for(int j3 = 0; j3 < pWorld->getAgeSpread(); ++j3) {
-                  vvWorldCopy[i2][j2][i3][j3] = pPreviousSquare->getValue(i3,j3);
+              for (int i3 = 0; i3 < pWorld->getCategoryCount(); ++i3)
+              {
+                for (int j3 = 0; j3 < pWorld->getAgeSpread(); ++j3)
+                {
+                  vvWorldCopy[i2][j2][i3][j3] = pPreviousSquare->getValue(i3, j3);
                 }
               }
             }
           }
-
-        } else if((i+1)==vLambdaYears[k]) {
+        }
+        else if ((i + 1) == vLambdaYears[k])
+        {
           // record state in this year and compare
-          dDiffLambda  = 0.0;
+          dDiffLambda = 0.0;
           dTotalLambda = 0.0;
 
-          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2) {
-            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2) {
+          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2)
+          {
+            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2)
+            {
 
               pBaseSquare = pWorld->getBaseSquare(i2, j2);
               if (!pBaseSquare->getEnabled())
                 continue;
-              for (int k = 0; k < pBaseSquare->getHeight(); ++k) {
-                for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+              for (int k = 0; k < pBaseSquare->getHeight(); ++k)
+              {
+                for (int l = 0; l < pBaseSquare->getWidth(); ++l)
+                {
                   dTotalLambda += pBaseSquare->getValue(k, l);
-                  dDiffLambda += fabs( pBaseSquare->getValue(k, l) - vvWorldCopy[i2][j2][k][l]);
+                  dDiffLambda += fabs(pBaseSquare->getValue(k, l) - vvWorldCopy[i2][j2][k][l]);
                 }
               }
             }
           }
-          vLambdaHat.push_back(dDiffLambda/dTotalLambda);
-          vLambdaHatYears.push_back(i+1);
+          vLambdaHat.push_back(dDiffLambda / dTotalLambda);
+          vLambdaHatYears.push_back(i + 1);
           // Compare with  dPreviousLambdaValue and exit loop if converged
-          if ( (dDiffLambda/dTotalLambda) < dLambda ) {
-            iActualYears = i+1;
+          if ((dDiffLambda / dTotalLambda) < dLambda)
+          {
+            iActualYears = i + 1;
             bExit = true;
           }
         }
       }
-      if(bExit) break;
+      if (bExit)
+        break;
     }
   }
 }
@@ -230,5 +272,6 @@ void CInitializationPhase::execute() {
 // CInitializationPhase::~CInitializationPhase()
 // Destructor
 //**********************************************************************
-CInitializationPhase::~CInitializationPhase() {
+CInitializationPhase::~CInitializationPhase()
+{
 }

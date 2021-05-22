@@ -2,7 +2,7 @@
 // Name        : CNormalEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -13,7 +13,8 @@
 /**
  * Constructor
  */
-CNormalEstimate::CNormalEstimate() {
+CNormalEstimate::CNormalEstimate()
+{
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_CV, &dCv);
@@ -26,19 +27,22 @@ CNormalEstimate::CNormalEstimate() {
 /**
  * Validate the Prior/Estimate
  */
-void CNormalEstimate::validate() {
+void CNormalEstimate::validate()
+{
   CEstimate::validate();
 
-  try {
+  try
+  {
     // Assign parameters
-    dMu   = pParameterList->getDouble(PARAM_MU);
-    dCv   = pParameterList->getDouble(PARAM_CV);
+    dMu = pParameterList->getDouble(PARAM_MU);
+    dCv = pParameterList->getDouble(PARAM_CV);
 
     // Local validation
     if (dCv <= 0.0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNormalPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -47,8 +51,7 @@ void CNormalEstimate::validate() {
 /**
  * get the score
  */
-double CNormalEstimate::getScore() {
-  return 0.5 * ((getValue()-dMu)/(dCv*dMu)) * ((getValue()-dMu)/(dCv*dMu));
+double CNormalEstimate::getScore()
+{
+  return 0.5 * ((getValue() - dMu) / (dCv * dMu)) * ((getValue() - dMu) / (dCv * dMu));
 }
-
-

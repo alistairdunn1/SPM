@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CIndependencePreferenceFunction.cpp
 // Author      : C. Marsh
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
@@ -18,7 +18,8 @@
 // CIndependencePreferenceFunction::CIndependencePreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CIndependencePreferenceFunction::CIndependencePreferenceFunction() {
+CIndependencePreferenceFunction::CIndependencePreferenceFunction()
+{
 
   sType = PARAM_INDEPENDENCE_COPULA;
 
@@ -31,8 +32,10 @@ CIndependencePreferenceFunction::CIndependencePreferenceFunction() {
 // void CIndependencePreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CIndependencePreferenceFunction::validate() {
-  try {
+void CIndependencePreferenceFunction::validate()
+{
+  try
+  {
 
     // Assign our variables
     pParameterList->fillVector(vPDFNames, PARAM_PDFS);
@@ -51,8 +54,9 @@ void CIndependencePreferenceFunction::validate() {
     //Ensure exactly 2 layers
     if (vLayerNames.size() != vPDFNames.size())
       CError::errorListSameSize(PARAM_LAYERS, PARAM_PDFS);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CIndependencePreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,7 +66,8 @@ void CIndependencePreferenceFunction::validate() {
 // void CIndependencePreferenceFunction::build()
 // Validate
 //**********************************************************************
-void CIndependencePreferenceFunction::build() {
+void CIndependencePreferenceFunction::build()
+{
 
   // Build parent
   CPreferenceFunction::build();
@@ -70,16 +75,18 @@ void CIndependencePreferenceFunction::build() {
   // Get PDFs
   CPDFManager *pPDFManager = CPDFManager::Instance();
 
-  for (int i=0; i< (int)vPDFNames.size(); ++i) {
-    vPDFs.push_back( pPDFManager->getPDF(vPDFNames[i]) );
+  for (int i = 0; i < (int)vPDFNames.size(); ++i)
+  {
+    vPDFs.push_back(pPDFManager->getPDF(vPDFNames[i]));
     vPDFTypes.push_back(vPDFs[i]->getPDFType());
   }
 
   // Get Layers
   CLayerManager *pLayerManager = CLayerManager::Instance();
 
-  for (int i=0; i< (int)vLayerNames.size(); ++i) {
-    vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
+  for (int i = 0; i < (int)vLayerNames.size(); ++i)
+  {
+    vLayers.push_back(pLayerManager->getNumericLayer(vLayerNames[i]));
   }
 }
 
@@ -87,10 +94,12 @@ void CIndependencePreferenceFunction::build() {
 // CIndependencePreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CIndependencePreferenceFunction::getIsStatic() {
+bool CIndependencePreferenceFunction::getIsStatic()
+{
 
-  for (int i=0; i< (int)vLayers.size(); ++i) {
-    if (!( vLayers[i]->getIsStatic() ))
+  for (int i = 0; i < (int)vLayers.size(); ++i)
+  {
+    if (!(vLayers[i]->getIsStatic()))
       return false;
   }
   return true;
@@ -100,42 +109,49 @@ bool CIndependencePreferenceFunction::getIsStatic() {
 // double CIndependencePreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // get Result
 //**********************************************************************
-double CIndependencePreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
+double CIndependencePreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
+{
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
-     if(vPDFs.size()==1) {
+    if (vPDFs.size() == 1)
+    {
 
-       double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
-       dRet = vPDFs[0]->getPDFResult(x1);
+      double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+      dRet = vPDFs[0]->getPDFResult(x1);
+    }
+    else
+    {
 
-     } else {
+      double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+      double x2 = vLayers[1]->getValue(TRIndex, TCIndex, RIndex, CIndex);
 
-       double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
-       double x2 = vLayers[1]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+      double dPDF1 = vPDFs[0]->getPDFResult(x1);
+      double dPDF2 = vPDFs[1]->getPDFResult(x2);
 
-       double dPDF1 = vPDFs[0]->getPDFResult(x1);
-       double dPDF2 = vPDFs[1]->getPDFResult(x2);
-
-       dRet = dPDF1 * dPDF2;
-     }
+      dRet = dPDF1 * dPDF2;
+    }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CIndependencePreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 
-  return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
+  return CMath::zeroFun(pow(dRet, dAlpha), ZERO);
 }
 //**********************************************************************
 // CCIndependencePreferenceFunction::~CIndependencePreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CIndependencePreferenceFunction::~CIndependencePreferenceFunction() {
+CIndependencePreferenceFunction::~CIndependencePreferenceFunction()
+{
 }

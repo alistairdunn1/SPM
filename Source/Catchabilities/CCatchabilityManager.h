@@ -2,7 +2,7 @@
 // Name        : CCatchabilityManager.h
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,25 +19,26 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CCatchabilityManager : public CBaseManager {
+class CCatchabilityManager : public CBaseManager
+{
 public:
-  static CCatchabilityManager*    Instance();
-  static void                     Destroy();
+  static CCatchabilityManager *Instance();
+  static void Destroy();
 
   // Functions
-  void                       clone(CCatchabilityManager *Manager);
-  void                       addCatchability(CCatchability *Q);
-  CCatchability*             getCatchability(string label);
-  void                       validate();
-  void                       build() { }
-  virtual                    ~CCatchabilityManager();
+  void clone(CCatchabilityManager *Manager);
+  void addCatchability(CCatchability *Q);
+  CCatchability *getCatchability(string label);
+  void validate();
+  void build() {}
+  virtual ~CCatchabilityManager();
 
 protected:
   // Functions
-	CCatchabilityManager();
+  CCatchabilityManager();
 
-	// Variables
-	vector<CCatchability*>                vCatchabilities;
+  // Variables
+  vector<CCatchability *> vCatchabilities;
 
 private:
   // Variables

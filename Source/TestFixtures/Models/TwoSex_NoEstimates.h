@@ -2,7 +2,7 @@
 // Name        : TwoSex_NoEstimates.h
 // Author      : S.Rasmussen
 // Date        : 11/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 #ifndef TESTFIXTURES_MODELS_TWOSEX_NOESTIMATES_H_
@@ -11,7 +11,7 @@
 #include <string>
 
 const std::string two_sex_no_estimates =
-R"(
+    R"(
 @model
 nrows 1
 ncols 1

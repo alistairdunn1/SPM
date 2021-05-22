@@ -2,7 +2,7 @@
 // Name        : CCatchability.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,7 +19,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( Catchability ) {
+BOOST_AUTO_TEST_CASE(Catchability)
+{
   // Get prior
   CCatchability *pCatchability = CCatchabilityFactory::buildCatchability("", false);
 

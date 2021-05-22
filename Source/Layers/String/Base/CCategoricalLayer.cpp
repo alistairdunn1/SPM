@@ -2,7 +2,7 @@
 // Name        : CCategoricalLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 1/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -23,22 +23,26 @@ using std::endl;
 // CCategoricalLayer::CCategoricalLayer();
 // Default Constructor
 //**********************************************************************
-CCategoricalLayer::CCategoricalLayer() {
+CCategoricalLayer::CCategoricalLayer()
+{
 
   // Default Variables
   sType = "";
-  pGrid             = 0;
+  pGrid = 0;
 }
 
 //**********************************************************************
 // void CCategoricalLayer::setValue(int X, int Y, string Value)
 // Default Set Value
 //**********************************************************************
-void CCategoricalLayer::setValue(int X, int Y, string Value) {
-  try {
+void CCategoricalLayer::setValue(int X, int Y, string Value)
+{
+  try
+  {
     CError::errorSupported(PARAM_FUNCTION);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoricalLayer.setValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -48,13 +52,16 @@ void CCategoricalLayer::setValue(int X, int Y, string Value) {
 // int CCategoricalLayer::countValidSpaces()
 // count Valid Spaces
 //**********************************************************************
-int CCategoricalLayer::countValidSpaces() {
+int CCategoricalLayer::countValidSpaces()
+{
 
   int iValidSquares = 0;
 
   // Loop Through World
-  for (int i = 0; i < iHeight; ++i) {
-    for (int j = 0; j < iWidth; ++j) {
+  for (int i = 0; i < iHeight; ++i)
+  {
+    for (int j = 0; j < iWidth; ++j)
+    {
       // Check if Space is disabled on World first
       if (!pWorld->getBaseSquare(i, j)->getEnabled())
         continue;
@@ -70,17 +77,20 @@ int CCategoricalLayer::countValidSpaces() {
 // void CCategoricalLayer::validate()
 // validate
 //**********************************************************************
-void CCategoricalLayer::validate() {
-  try {
+void CCategoricalLayer::validate()
+{
+  try
+  {
     // Base Validate
     CLayer::validate();
 
     // Allocate Space for our X (Width)
-    pGrid = new double*[iHeight];
+    pGrid = new double *[iHeight];
     for (int i = 0; i < iHeight; ++i)
       pGrid[i] = new double[iWidth];
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CCategoricalLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -90,13 +100,16 @@ void CCategoricalLayer::validate() {
 // CCategoricalLayer::~CCategoricalLayer()
 // Default De-Constructor
 //**********************************************************************
-CCategoricalLayer::~CCategoricalLayer() {
+CCategoricalLayer::~CCategoricalLayer()
+{
   // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iHeight; ++i) {
-      delete [] pGrid[i];
+  if (pGrid != 0)
+  {
+    for (int i = 0; i < iHeight; ++i)
+    {
+      delete[] pGrid[i];
       pGrid[i] = 0;
     }
-    delete [] pGrid;
+    delete[] pGrid;
   }
 }

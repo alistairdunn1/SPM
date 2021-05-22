@@ -2,7 +2,7 @@
 // Name        : CSimulatedObservationReport.cpp
 // Author      : S.Rasmussen
 // Date        : 13/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,9 +20,10 @@
 // CSimulatedObservationReport::CSimulatedObservationReport()
 // Default Constructor
 //**********************************************************************
-CSimulatedObservationReport::CSimulatedObservationReport() {
+CSimulatedObservationReport::CSimulatedObservationReport()
+{
   // Variables
-  eExecutionState   = STATE_FINALIZATION;
+  eExecutionState = STATE_FINALIZATION;
 
   // Register Allowed
   pParameterList->registerAllowed(PARAM_OBSERVATION);
@@ -32,8 +33,10 @@ CSimulatedObservationReport::CSimulatedObservationReport() {
 // void CSimulatedObservationReport::validate()
 // Validate our Observation Report
 //**********************************************************************
-void CSimulatedObservationReport::validate() {
-  try {
+void CSimulatedObservationReport::validate()
+{
+  try
+  {
 
     // Get Params
     sObservation = pParameterList->getString(PARAM_OBSERVATION);
@@ -42,8 +45,9 @@ void CSimulatedObservationReport::validate() {
     CFileReport::validate();
 
     // Local validation
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSimulatedObservationReport.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -53,9 +57,11 @@ void CSimulatedObservationReport::validate() {
 // void CSimulatedObservationReport::execute()
 // Execute our Print State
 //**********************************************************************
-void CSimulatedObservationReport::execute() {
+void CSimulatedObservationReport::execute()
+{
 
-  try {
+  try
+  {
 
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
@@ -65,7 +71,7 @@ void CSimulatedObservationReport::execute() {
 
     cout << CONFIG_SINGLE_COMMENT << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << CONFIG_SINGLE_COMMENT << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << CONFIG_SINGLE_COMMENT << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
+    cout << CONFIG_SINGLE_COMMENT << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel() << "\n";
 
     CParameterList *pList = pObservation->getParameterList();
 
@@ -77,39 +83,47 @@ void CSimulatedObservationReport::execute() {
 
     // Loop through and print values
     vector<string> vValues;
-    foreach(string Parameter, vDefinedParameters) {
-      if ( CConvertor::stringToLowercase(Parameter) == PARAM_LIKELIHOOD ) {
+    foreach (string Parameter, vDefinedParameters)
+    {
+      if (CConvertor::stringToLowercase(Parameter) == PARAM_LIKELIHOOD)
+      {
 
-        if ( pList->getString(PARAM_LIKELIHOOD) == PARAM_PSEUDO ) {
+        if (pList->getString(PARAM_LIKELIHOOD) == PARAM_PSEUDO)
+        {
           cout << PARAM_LIKELIHOOD << " " << pList->getString(PARAM_SIMULATION_LIKELIHOOD) << endl;
           cout << CONFIG_SINGLE_COMMENT << PARAM_SIMULATION_LIKELIHOOD << " " << pList->getString(PARAM_SIMULATION_LIKELIHOOD) << endl;
-        } else {
+        }
+        else
+        {
           cout << PARAM_LIKELIHOOD << " " << pList->getString(PARAM_LIKELIHOOD) << endl;
         }
 
         continue;
       }
 
-      if ( (Parameter == PARAM_OBS) || (Parameter == PARAM_ERROR_VALUE) || (Parameter == PARAM_LABEL) || (Parameter == PARAM_SIMULATION_LIKELIHOOD))
+      if ((Parameter == PARAM_OBS) || (Parameter == PARAM_ERROR_VALUE) || (Parameter == PARAM_LABEL) || (Parameter == PARAM_SIMULATION_LIKELIHOOD))
         continue;
 
       pList->fillVector(vValues, Parameter);
 
       cout << Parameter << " ";
-      foreach(string Value, vValues) {
+      foreach (string Value, vValues)
+      {
         cout << Value << " ";
       }
       cout << endl;
     }
 
     // Now, Print our Observations
-    vector<SComparison*> vComparisons;
+    vector<SComparison *> vComparisons;
     pObservation->fillComparisons(vComparisons);
 
     // Print OBS
     string sLastKey = "";
-    foreach(SComparison *Comparison, vComparisons) {
-      if (sLastKey != Comparison->sKey) {
+    foreach (SComparison *Comparison, vComparisons)
+    {
+      if (sLastKey != Comparison->sKey)
+      {
         if (sLastKey != "")
           cout << "\n";
         cout << PARAM_OBS << " " << Comparison->sKey << " ";
@@ -122,9 +136,12 @@ void CSimulatedObservationReport::execute() {
     // Print Error Values
     sLastKey = "";
     bool bWriteErrorValue = false;
-    foreach(SComparison *Comparison, vComparisons) {
-      if (sLastKey != Comparison->sKey) {
-        cout << "\n" << PARAM_ERROR_VALUE << " " << Comparison->sKey << " ";
+    foreach (SComparison *Comparison, vComparisons)
+    {
+      if (sLastKey != Comparison->sKey)
+      {
+        cout << "\n"
+             << PARAM_ERROR_VALUE << " " << Comparison->sKey << " ";
         sLastKey = Comparison->sKey;
         bWriteErrorValue = true;
       }
@@ -137,15 +154,16 @@ void CSimulatedObservationReport::execute() {
 
       if (pList->getString(PARAM_TYPE) == PARAM_PROPORTIONS_AT_LENGTH)
         bWriteErrorValue = false;
-
     }
 
     cout << "\n";
-    cout << "#end\n" << endl;
+    cout << "#end\n"
+         << endl;
 
     this->end();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSimulatedObservationReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -155,15 +173,18 @@ void CSimulatedObservationReport::execute() {
 // void CSimulatedObservationReport::build()
 // Build our Observation Report
 //**********************************************************************
-void CSimulatedObservationReport::build() {
-  try {
+void CSimulatedObservationReport::build()
+{
+  try
+  {
     // Base
     CFileReport::build();
 
     // Get our Obs
     pObservation = CObservationManager::Instance()->getObservation(sObservation);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSimulatedObservationReport.build(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -173,5 +194,6 @@ void CSimulatedObservationReport::build() {
 // CSimulatedObservationReport::~CSimulatedObservationReport()
 // Destructor
 //**********************************************************************
-CSimulatedObservationReport::~CSimulatedObservationReport() {
+CSimulatedObservationReport::~CSimulatedObservationReport()
+{
 }

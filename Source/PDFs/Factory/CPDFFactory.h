@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPDFFactory.h
 // Author      : A.Dunn
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 //============================================================================
 #ifndef CPDFFACTORY_H_
 #define CPDFFACTORY_H_
@@ -19,15 +19,16 @@ using std::string;
 //
 //
 //**********************************************************************
-class CPDFFactory {
+class CPDFFactory
+{
 public:
   // Functions
-  static CPDF*    buildPDF(string type, bool registerWithManager = true);
+  static CPDF *buildPDF(string type, bool registerWithManager = true);
 
 private:
   // Functions
-  CPDFFactory() { }
-  virtual ~CPDFFactory() { }
+  CPDFFactory() {}
+  virtual ~CPDFFactory() {}
 };
 
 #endif /* CPDFFACTORY_H_ */

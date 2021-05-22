@@ -2,7 +2,7 @@
 // Name        : CLayerDerivedWorldView.h
 // Author      : S.Rasmussen
 // Date        : 7/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description : This class gives us an organised snapshot of the world based
 //            on a categorical layer. This allows us to organise the world into
 //            categorical based pockets.
@@ -25,21 +25,22 @@ class CWorldSquare;
 //
 //
 //**********************************************************************
-class CLayerDerivedWorldView : public CBaseExecute {
+class CLayerDerivedWorldView : public CBaseExecute
+{
 public:
   CLayerDerivedWorldView(CCategoricalLayer *sourceLayer);
-  virtual                     ~CLayerDerivedWorldView();
-  CWorldSquare*               getSquare(string area);
-  vector<CWorldSquare*>       getWorldSquares(string area);
-  void                        cleanUp();
-  void                        build();
-  void                        execute();
+  virtual ~CLayerDerivedWorldView();
+  CWorldSquare *getSquare(string area);
+  vector<CWorldSquare *> getWorldSquares(string area);
+  void cleanUp();
+  void build();
+  void execute();
 
 protected:
   // Variables
-  CCategoricalLayer                     *pSourceLayer;
-  map<string,vector<CWorldSquare*> >    mvAreas;
-  map<string,CWorldSquare*>             mView;
+  CCategoricalLayer *pSourceLayer;
+  map<string, vector<CWorldSquare *>> mvAreas;
+  map<string, CWorldSquare *> mView;
 };
 
 #endif /* CLAYERDERIVEDWORLDVIEW_H_ */

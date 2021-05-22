@@ -2,7 +2,7 @@
 // Name        : CEstimateValueReport.h
 // Author      : S.Rasmussen
 // Date        : 4/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,17 +16,18 @@
 //
 //
 //**********************************************************************
-class CEstimateValueReport: public CFileReport {
+class CEstimateValueReport : public CFileReport
+{
 public:
   CEstimateValueReport();
-  virtual                     ~CEstimateValueReport();
-  CReport*                    clone() { return new CEstimateValueReport(*this); }
-  void                        validate();
-  void                        execute();
+  virtual ~CEstimateValueReport();
+  CReport *clone() { return new CEstimateValueReport(*this); }
+  void validate();
+  void execute();
 
 protected:
-  bool                        bWrittenHeader;
-  bool                        bStandardHeader;
+  bool bWrittenHeader;
+  bool bStandardHeader;
 };
 
 #endif /* CESTIMATEVALUEREPORT_H_ */

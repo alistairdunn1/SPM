@@ -2,7 +2,7 @@
 // Name        : CUniformEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -12,6 +12,6 @@
 /**
  * Default constructor
  */
-CUniformEstimate::CUniformEstimate() {
+CUniformEstimate::CUniformEstimate()
+{
 }
-

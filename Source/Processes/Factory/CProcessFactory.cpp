@@ -2,7 +2,7 @@
 // Name        : CProcessFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -41,7 +41,8 @@
 // CProcessFactory::CProcessFactory()
 // Default Constructor
 //**********************************************************************
-CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
+CProcess *CProcessFactory::buildProcess(string type, bool registerWithManager)
+{
 
   CProcess *pProcess = 0;
 
@@ -61,7 +62,7 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CAgeMortalityRateProcess();
   else if (type == PARAM_CONSTANT_EXPLOITATION_RATE)
     pProcess = new CConstantExploitationRateProcess();
-   else if (type == PARAM_ANNUAL_MORTALITY_RATE)
+  else if (type == PARAM_ANNUAL_MORTALITY_RATE)
     pProcess = new CAnnualMortalityRateProcess();
   else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE)
     pProcess = new CLayerVaryingExploitationRateProcess();

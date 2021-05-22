@@ -2,7 +2,7 @@
 // Name        : CLogisticProducingSelectivity.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 12/02/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( KnifeEdgeSelectivity, CWorld_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(KnifeEdgeSelectivity, CWorld_Fixture)
+{
 
   CSelectivity *pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_KNIFE_EDGE, false));

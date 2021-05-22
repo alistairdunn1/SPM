@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : CDirichletLikelihood.Test.cpp
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -16,7 +16,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( DirichletLikelihood ) {
+BOOST_AUTO_TEST_CASE(DirichletLikelihood)
+{
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
@@ -79,12 +80,12 @@ BOOST_AUTO_TEST_CASE( DirichletLikelihood ) {
   pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(  8.723231274827508, scores[0], 1e-9);
-  BOOST_CHECK_CLOSE( 25.278476730160975, scores[1], 1e-9);
-  BOOST_CHECK_CLOSE( 44.599342238420959, scores[2], 1e-9);
-  BOOST_CHECK_CLOSE( 65.679477048487513, scores[3], 1e-9);
-  BOOST_CHECK_CLOSE(  1.659118968284150, scores[4], 1e-9);
-  BOOST_CHECK_CLOSE(  1.050921306121904, scores[5], 1e-9);
+  BOOST_CHECK_CLOSE(8.723231274827508, scores[0], 1e-9);
+  BOOST_CHECK_CLOSE(25.278476730160975, scores[1], 1e-9);
+  BOOST_CHECK_CLOSE(44.599342238420959, scores[2], 1e-9);
+  BOOST_CHECK_CLOSE(65.679477048487513, scores[3], 1e-9);
+  BOOST_CHECK_CLOSE(1.659118968284150, scores[4], 1e-9);
+  BOOST_CHECK_CLOSE(1.050921306121904, scores[5], 1e-9);
   BOOST_CHECK_CLOSE(110.046771629987430, scores[6], 1e-9);
 
   // Get results
@@ -99,10 +100,8 @@ BOOST_AUTO_TEST_CASE( DirichletLikelihood ) {
   BOOST_CHECK_CLOSE(observed[5], 0.58554501634847189, 1e-9);
   BOOST_CHECK_CLOSE(observed[6], 1.00000000000000000, 1e-9);
 
-
   // clean up memory
   delete pLikelihood;
-
 }
 
 #endif /* TEST */

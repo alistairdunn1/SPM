@@ -2,7 +2,7 @@
 // Name        : CWorldSquare.cpp
 // Author      : S.Rasmussen
 // Date        : 10/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : << See CWorldSquare.h >>
 // $Date$
 //============================================================================
@@ -18,11 +18,12 @@
 // CWorldSquare::CWorldSquare();
 // Default Constructor
 //**********************************************************************
-CWorldSquare::CWorldSquare() {
+CWorldSquare::CWorldSquare()
+{
 
   // Local Vars
-  dArea   = 0.0;
-  iWidth  = 0;
+  dArea = 0.0;
+  iWidth = 0;
   iHeight = 0;
   iMinAge = 0;
   iMaxAge = 0;
@@ -34,9 +35,12 @@ CWorldSquare::CWorldSquare() {
 // bool CWorldSquare::makeAdjustments(CWorldSquare *WorldSquare)
 // Make Adjustments. This will be Adjusting it against a Difference WorldSquare
 //**********************************************************************
-bool CWorldSquare::makeAdjustments(CWorldSquare *WorldSquare) {
-  for (int i = 0; i < iHeight; ++i) {
-    for (int j = 0; j < iWidth; ++j) {
+bool CWorldSquare::makeAdjustments(CWorldSquare *WorldSquare)
+{
+  for (int i = 0; i < iHeight; ++i)
+  {
+    for (int j = 0; j < iWidth; ++j)
+    {
       pGrid[i][j] += WorldSquare->getValue(i, j);
       if (pGrid[i][j] < TRUE_ZERO)
         pGrid[i][j] = TRUE_ZERO;
@@ -49,19 +53,22 @@ bool CWorldSquare::makeAdjustments(CWorldSquare *WorldSquare) {
 // void CWorldSquare::zeroGrid()
 // Zero our Grid Out
 //**********************************************************************
-void CWorldSquare::zeroGrid() {
+void CWorldSquare::zeroGrid()
+{
   for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        pGrid[i][j] = 0.0;
+    for (int j = 0; j < iWidth; ++j)
+      pGrid[i][j] = 0.0;
 }
 
 //**********************************************************************
 // double CWorldSquare::getValue(int RowIndex, int ColIndex)
 // Get Value From Our Square
 //**********************************************************************
-double CWorldSquare::getValue(int RowIndex, int ColIndex) {
+double CWorldSquare::getValue(int RowIndex, int ColIndex)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (RowIndex < 0)
@@ -75,7 +82,9 @@ double CWorldSquare::getValue(int RowIndex, int ColIndex) {
     return pGrid[RowIndex][ColIndex];
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.getValue->" + Ex;
     throw Ex;
   }
@@ -88,9 +97,11 @@ double CWorldSquare::getValue(int RowIndex, int ColIndex) {
 // void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value)
 // Set Value
 //**********************************************************************
-void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
+void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (RowIndex < 0)
@@ -104,7 +115,9 @@ void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
     pGrid[RowIndex][ColIndex] = Value;
 
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.setValue->" + Ex;
     throw Ex;
   }
@@ -115,9 +128,11 @@ void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
 // void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value)
 // Add Value To Our Square
 //**********************************************************************
-void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
+void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (RowIndex < 0)
@@ -128,11 +143,13 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
       CError::errorLessThan(PARAM_COLUMN_INDEX, PARAM_ZERO);
 #endif
 
-    #pragma omp atomic
+#pragma omp atomic
     pGrid[RowIndex][ColIndex] += Value;
 
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.addValue->" + Ex;
     throw Ex;
   }
@@ -143,9 +160,11 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
 // void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value)
 // Sub Value From Our Square
 //**********************************************************************
-void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
+void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value)
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
     if (RowIndex < 0)
@@ -156,11 +175,13 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
       CError::errorLessThan(PARAM_COLUMN_INDEX, PARAM_ZERO);
 #endif
 
-    #pragma omp atomic
+#pragma omp atomic
     pGrid[RowIndex][ColIndex] -= Value;
 
 #ifndef OPTIMIZE
-  } catch(string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.subValue->" + Ex;
     throw Ex;
   }
@@ -171,12 +192,14 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
 // double CWorldSquare::getAbundance()
 // get Population for this square
 //**********************************************************************
-double CWorldSquare::getAbundance() {
+double CWorldSquare::getAbundance()
+{
   // Variables
   double dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     // Loop Through Grid
@@ -185,7 +208,9 @@ double CWorldSquare::getAbundance() {
         dRet += pGrid[i][j];
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.getAbundance()->" + Ex;
     throw Ex;
   }
@@ -198,12 +223,14 @@ double CWorldSquare::getAbundance() {
 // double CWorldSquare::getAbundanceForAge(int AgeIndex)
 // Get Population for Age across all categories
 //**********************************************************************
-double CWorldSquare::getAbundanceForAge(int AgeIndex) {
+double CWorldSquare::getAbundanceForAge(int AgeIndex)
+{
   // Variables
   double dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (AgeIndex > iWidth)
       CError::errorGreaterThan(PARAM_AGE_INDEX, PARAM_WIDTH);
     if (AgeIndex < 0)
@@ -214,7 +241,9 @@ double CWorldSquare::getAbundanceForAge(int AgeIndex) {
       dRet += pGrid[i][AgeIndex];
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.getAbundanceForAge()->" + Ex;
     throw Ex;
   }
@@ -227,12 +256,14 @@ double CWorldSquare::getAbundanceForAge(int AgeIndex) {
 // double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryIndex)
 // Get Population for an Age and Category
 //**********************************************************************
-double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryIndex) {
+double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryIndex)
+{
   // Variables
   double dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (AgeIndex > iWidth)
       CError::errorGreaterThan(PARAM_AGE_INDEX, PARAM_WIDTH);
     if (AgeIndex < 0)
@@ -246,7 +277,9 @@ double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryInde
     dRet = pGrid[CategoryIndex][AgeIndex];
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.getAbundanceInCategoryForAge()->" + Ex;
     throw Ex;
   }
@@ -259,12 +292,14 @@ double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryInde
 // double CWorldSquare::getAbundanceForCategory(int CategoryIndex)
 // Get Population for a Category
 //**********************************************************************
-double CWorldSquare::getAbundanceForCategory(int CategoryIndex) {
+double CWorldSquare::getAbundanceForCategory(int CategoryIndex)
+{
   // Variables
   double dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try {
+  try
+  {
     if (CategoryIndex > iHeight)
       CError::errorGreaterThan(PARAM_CATEGORY_INDEX, PARAM_HEIGHT);
     if (CategoryIndex < 0)
@@ -275,7 +310,9 @@ double CWorldSquare::getAbundanceForCategory(int CategoryIndex) {
       dRet += pGrid[CategoryIndex][i];
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.getAbundanceForCategory()->" + Ex;
     throw Ex;
   }
@@ -288,15 +325,18 @@ double CWorldSquare::getAbundanceForCategory(int CategoryIndex) {
 // void CWorldSquare::loadDummyData()
 // Populate the square with Random dummy data for testing
 //**********************************************************************
-void CWorldSquare::loadDummyData() {
+void CWorldSquare::loadDummyData()
+{
 
   // Set up Seed
   static int iTime = time(0);
   srand(iTime);
-  iTime+=rand() % 696;
+  iTime += rand() % 696;
 
-  for (int i = 0; i < iHeight; ++i) {
-    for (int j = 0; j < iWidth; ++j) {
+  for (int i = 0; i < iHeight; ++i)
+  {
+    for (int j = 0; j < iWidth; ++j)
+    {
       pGrid[i][j] = 100;
       //pGrid[i][j] = rand() % 20 + 1;
     }
@@ -307,17 +347,19 @@ void CWorldSquare::loadDummyData() {
 // void CWorldSquare::build()
 // Build
 //**********************************************************************
-void CWorldSquare::build() {
+void CWorldSquare::build()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
 
     // Get our Values From World
     CWorld *pWorld = CWorld::Instance();
     iNumberOfCategories = pWorld->getCategoryCount();
-    iMinAge             = pWorld->getMinAge();
-    iMaxAge             = pWorld->getMaxAge();
-    bAgePlus            = pWorld->getAgePlusGroup();
+    iMinAge = pWorld->getMinAge();
+    iMaxAge = pWorld->getMaxAge();
+    bAgePlus = pWorld->getAgePlusGroup();
 
 #ifndef OPTIMIZE
     if (iNumberOfCategories <= 0)
@@ -332,9 +374,9 @@ void CWorldSquare::build() {
 
     // Build our Grid
     iHeight = iNumberOfCategories;
-    iWidth  = (iMaxAge+1)-iMinAge;
+    iWidth = (iMaxAge + 1) - iMinAge;
 
-    pGrid = new double*[iHeight];
+    pGrid = new double *[iHeight];
     for (int i = 0; i < iHeight; ++i)
       pGrid[i] = new double[iWidth];
 
@@ -342,7 +384,9 @@ void CWorldSquare::build() {
     zeroGrid();
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CWorldSquare.build()->" + Ex;
     throw Ex;
   }
@@ -353,13 +397,16 @@ void CWorldSquare::build() {
 // CWorldSquare::~CWorldSquare()
 // Default De-Constructor
 //**********************************************************************
-CWorldSquare::~CWorldSquare() {
+CWorldSquare::~CWorldSquare()
+{
   // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iHeight; ++i) {
-      delete [] pGrid[i];
+  if (pGrid != 0)
+  {
+    for (int i = 0; i < iHeight; ++i)
+    {
+      delete[] pGrid[i];
       pGrid[i] = 0;
     }
-    delete [] pGrid;
+    delete[] pGrid;
   }
 }

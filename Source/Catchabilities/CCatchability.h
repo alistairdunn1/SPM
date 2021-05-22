@@ -2,7 +2,7 @@
 // Name        : CCatchability.h
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,18 +16,19 @@
 //
 //
 //**********************************************************************
-class CCatchability : public CBaseValidate {
+class CCatchability : public CBaseValidate
+{
 public:
-  // Functions
+	// Functions
 	CCatchability();
-	virtual                    ~CCatchability();
-	CCatchability*             clone() { return new CCatchability(*this); }
-	double                     getQ() { return dQ; }
-	void                       validate();
+	virtual ~CCatchability();
+	CCatchability *clone() { return new CCatchability(*this); }
+	double getQ() { return dQ; }
+	void validate();
 
 protected:
-  // Variables
-  double                     dQ;
+	// Variables
+	double dQ;
 };
 
 #endif /*CCATCHABILITY_H_*/

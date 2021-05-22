@@ -2,7 +2,7 @@
 // Name        : CLogisticSelectivity.Test.cpp
 // Author      : A.Dunn
 // Date        : 12/03/2012
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 //============================================================================
 #ifdef TEST
@@ -20,7 +20,8 @@
 //
 //**********************************************************************
 // this test case will use struct F as fixture
-BOOST_FIXTURE_TEST_CASE( InverseLogisticSelectivity, CWorld_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(InverseLogisticSelectivity, CWorld_Fixture)
+{
 
   CSelectivity *pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_INVERSE_LOGISTIC, false));
@@ -53,5 +54,3 @@ BOOST_FIXTURE_TEST_CASE( InverseLogisticSelectivity, CWorld_Fixture ) {
   delete pSelectivity;
 }
 #endif
-
-

@@ -1,7 +1,7 @@
 // Name        : CRuntimeController.cpp
 // Author      : S.Rasmussen
 // Date        : 29/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -26,7 +26,7 @@
 #include "Translations/Translations.h"
 
 // Singleton Variable
-CRuntimeController* CRuntimeController::clInstance = 0;
+CRuntimeController *CRuntimeController::clInstance = 0;
 
 // Typedefs
 typedef boost::mutex::scoped_lock lock;
@@ -41,21 +41,23 @@ using std::ostringstream;
 // CRuntimeController::CRuntimeController()
 // Default Constructor
 //**********************************************************************
-CRuntimeController::CRuntimeController() {
+CRuntimeController::CRuntimeController()
+{
   // Setup Variables
-  bDisableHeader          = false;
-  eRunMode                = RUN_MODE_INVALID;
-  iCurrentEstimateValue   = 0;
-  runtimeBarrier          = new boost::barrier(2);
-  sCommandLineOptions     = "Undefined";
-  pBaseThread             = 0;
+  bDisableHeader = false;
+  eRunMode = RUN_MODE_INVALID;
+  iCurrentEstimateValue = 0;
+  runtimeBarrier = new boost::barrier(2);
+  sCommandLineOptions = "Undefined";
+  pBaseThread = 0;
 }
 
 //**********************************************************************
 // CRuntimeController* CRuntimeController::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CRuntimeController* CRuntimeController::Instance() {
+CRuntimeController *CRuntimeController::Instance()
+{
   if (clInstance == 0)
     clInstance = new CRuntimeController();
 
@@ -66,8 +68,10 @@ CRuntimeController* CRuntimeController::Instance() {
 // void CRuntimeController::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CRuntimeController::Destroy() {
-  if (clInstance != 0) {
+void CRuntimeController::Destroy()
+{
+  if (clInstance != 0)
+  {
     delete clInstance;
     clInstance = 0;
   }
@@ -77,32 +81,18 @@ void CRuntimeController::Destroy() {
 // bool CRuntimeController::parseCommandLine(int argc, const char* argv[])
 // Parse out command line
 //**********************************************************************
-void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
+void CRuntimeController::parseCommandLine(int argc, const char *argv[])
+{
 
   // Build some hidden options
   options_description oHidden("Hidden");
-  oHidden.add_options()
-      ("disable_reports,D", "Disable all reports")
-      ("disable_header,d", "Disable standard header");
+  oHidden.add_options()("disable_reports,D", "Disable all reports")("disable_header,d", "Disable standard header");
 
   // Build Options menu
   options_description oDesc("Usage");
-  oDesc.add_options()
-      ("help,h", "Print help")
-      ("license,l", "Display SPM license")
-      ("version,v", "Display version information")
-      ("config,c", value<string>(), "Input configuration file")
-      ("run,r", "Basic model run")
-      ("estimate,e", "Point estimation")
-      ("profile,p", "Likelihood profiles")
-      ("mcmc,m", "MCMC")
+  oDesc.add_options()("help,h", "Print help")("license,l", "Display SPM license")("version,v", "Display version information")("config,c", value<string>(), "Input configuration file")("run,r", "Basic model run")("estimate,e", "Point estimation")("profile,p", "Likelihood profiles")("mcmc,m", "MCMC")
       //("forward,f", "Forward projections")
-      ("simulate,s", value<int>(), "Simulate observations")
-      ("input,i", value<string>(), "Load free parameter values from file")
-      ("estimates,o", value<string>(), "Create estimate values report")
-      ("threads,t", value<int>(), "Maximum number of threads to use in multi-threaded processes")
-      ("quiet,q", "Run in quiet mode")
-      ("seed,g", value<int>(), "Random number seed");
+      ("simulate,s", value<int>(), "Simulate observations")("input,i", value<string>(), "Load free parameter values from file")("estimates,o", value<string>(), "Create estimate values report")("threads,t", value<int>(), "Maximum number of threads to use in multi-threaded processes")("quiet,q", "Run in quiet mode")("seed,g", value<int>(), "Random number seed");
 
   options_description oAllOptions("All");
   oAllOptions.add(oDesc);
@@ -114,27 +104,33 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
 
   // Read our Parameters
   variables_map vmParams;
-  try {
+  try
+  {
     store(parse_command_line(argc, argv, oAllOptions), vmParams);
     notify(vmParams);
-  } catch (std::exception &ex) {
+  }
+  catch (std::exception &ex)
+  {
     throw string(ex.what());
   }
 
   // Check for Help Command
-  if ( (vmParams.count("help")) || (vmParams.size() == 0) ) {
+  if ((vmParams.count("help")) || (vmParams.size() == 0))
+  {
     setRunMode(RUN_MODE_HELP);
     return;
   }
 
   // Check for Version
-  if (vmParams.count("version")) {
+  if (vmParams.count("version"))
+  {
     setRunMode(RUN_MODE_VERSION);
     return;
   }
 
   // Check For License
-  if (vmParams.count("license")) {
+  if (vmParams.count("license"))
+  {
     setRunMode(RUN_MODE_LICENSE);
     return;
   }
@@ -182,11 +178,14 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
     pConfig->setQuietMode(true);
 
   // Random Seed
-  if (vmParams.count("seed")) {
+  if (vmParams.count("seed"))
+  {
     pConfig->setRandomSeed(vmParams["seed"].as<int>());
-  } else {
-    long iSeed = time (0);
-    iSeed = (long)(iSeed-(floor((double)iSeed/100000)*100000));
+  }
+  else
+  {
+    long iSeed = time(0);
+    iSeed = (long)(iSeed - (floor((double)iSeed / 100000) * 100000));
     pConfig->setRandomSeed(iSeed);
   }
 
@@ -198,30 +197,33 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
   if (vmParams.count("simulate"))
     pConfig->setSimulationCandidates(vmParams["simulate"].as<int>());
 
-  if (vmParams.count("estimates")) {
+  if (vmParams.count("estimates"))
+  {
     string sReportName = vmParams["estimates"].as<string>();
 
-    CReport* report = CReportFactory::buildReport(PARAM_ESTIMATE_VALUE, true);
+    CReport *report = CReportFactory::buildReport(PARAM_ESTIMATE_VALUE, true);
     report->addParameter(PARAM_LABEL, string(""));
     report->addParameter(PARAM_TYPE, PARAM_ESTIMATE_VALUE);
     report->addParameter(PARAM_FILE_NAME, sReportName);
   }
 
-  if (vmParams.count("disable_reports")) {
+  if (vmParams.count("disable_reports"))
+  {
     pConfig->setDisableReports(true);
   }
 
-  if (vmParams.count("disable_header")) {
+  if (vmParams.count("disable_header"))
+  {
     bDisableHeader = true;
   }
-
 }
 
 //**********************************************************************
 // EState CRuntimeController::getCurrentState()
 // Get the current state from the base thread
 //**********************************************************************
-EState CRuntimeController::getCurrentState() {
+EState CRuntimeController::getCurrentState()
+{
   return pBaseThread->getCurrentState();
 }
 
@@ -229,7 +231,8 @@ EState CRuntimeController::getCurrentState() {
 // CRuntimeThread* CRuntimeController::getCurrentThread()
 // Return the Current Thread
 //**********************************************************************
-CRuntimeThread* CRuntimeController::getCurrentThread() {
+CRuntimeThread *CRuntimeController::getCurrentThread()
+{
   return pBaseThread;
 }
 
@@ -237,15 +240,18 @@ CRuntimeThread* CRuntimeController::getCurrentThread() {
 // void CRuntimeController::loadConfiguration()
 // Load our Configurations
 //**********************************************************************
-void CRuntimeController::loadConfiguration() {
-  try {
+void CRuntimeController::loadConfiguration()
+{
+  try
+  {
     // Estimation
     CConfigurationLoader clLoader = CConfigurationLoader();
 
     clLoader.loadConfigFile();
     clLoader.loadEstimateValuesFile();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CRuntimeController.loadConfiguration()->" + Ex;
     throw Ex;
   }
@@ -255,10 +261,12 @@ void CRuntimeController::loadConfiguration() {
 // void CRuntimeController::run()
 // Run our Model. Break up Flow into Correct Functions
 //**********************************************************************
-void CRuntimeController::run() {
-  try {
-    CConfiguration    *pConfig          = CConfiguration::Instance();
-    CEstimateManager  *pEstimateManager = CEstimateManager::Instance();
+void CRuntimeController::run()
+{
+  try
+  {
+    CConfiguration *pConfig = CConfiguration::Instance();
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
 
     // Create our Base Thread
     pBaseThread = new CRuntimeThread();
@@ -266,8 +274,10 @@ void CRuntimeController::run() {
     pBaseThread->build();
 
     // Verify (if an input file was given) that the correct number of values was supplied
-    if (pConfig->getWasInputFileSupplied()) {
-      if (pConfig->getNumberSuppliedEstimateValues() != pEstimateManager->getEnabledEstimateCount()) {
+    if (pConfig->getWasInputFileSupplied())
+    {
+      if (pConfig->getNumberSuppliedEstimateValues() != pEstimateManager->getEnabledEstimateCount())
+      {
         CError::error("Incorrect number of values in the input file supplied with -i");
       }
     }
@@ -281,41 +291,45 @@ void CRuntimeController::run() {
     if (pConfig->getUseEstimateValues())
       iEstimateValueCount = pEstimateManager->getEstimateValueCount();
 
-    for (int i = 0; i < iEstimateValueCount; ++i) {
+    for (int i = 0; i < iEstimateValueCount; ++i)
+    {
       // If we are using loaded estimate values, set them now.
-      if (pConfig->getUseEstimateValues()) {
+      if (pConfig->getUseEstimateValues())
+      {
         pEstimateManager->loadEstimateValues(i);
         pBaseThread->rebuild();
       }
 
       // Run the model.
-      switch(eRunMode) {
-        case RUN_MODE_BASIC:
-          pBaseThread->executeBasicRun();
-          break;
+      switch (eRunMode)
+      {
+      case RUN_MODE_BASIC:
+        pBaseThread->executeBasicRun();
+        break;
 
-        case RUN_MODE_ESTIMATION:
-          pBaseThread->executeEstimationRun();
-          break;
-        case RUN_MODE_PROFILE:
-          pBaseThread->executeProfileRun();
-          break;
-        case RUN_MODE_MONTE_CARLO_MARKOV_CHAIN:
-          pBaseThread->executeMCMC();
-          break;
-        case RUN_MODE_SIMULATION:
-          pBaseThread->executeSimulationRun();
-          break;
-        case RUN_MODE_FORWARD_PROJECTION:
-          cout << "Forward projections are not yet implemented" << endl;
-          break;
-        default:
-          CError::errorUnknown(PARAM_RUN_MODE, "");
-          break;
+      case RUN_MODE_ESTIMATION:
+        pBaseThread->executeEstimationRun();
+        break;
+      case RUN_MODE_PROFILE:
+        pBaseThread->executeProfileRun();
+        break;
+      case RUN_MODE_MONTE_CARLO_MARKOV_CHAIN:
+        pBaseThread->executeMCMC();
+        break;
+      case RUN_MODE_SIMULATION:
+        pBaseThread->executeSimulationRun();
+        break;
+      case RUN_MODE_FORWARD_PROJECTION:
+        cout << "Forward projections are not yet implemented" << endl;
+        break;
+      default:
+        CError::errorUnknown(PARAM_RUN_MODE, "");
+        break;
       }
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CRuntimeController.run()->" + Ex;
     throw Ex;
   }
@@ -325,7 +339,8 @@ void CRuntimeController::run() {
 // CRuntimeController::~CRuntimeController()
 // Default De-Constructor
 //**********************************************************************
-CRuntimeController::~CRuntimeController() {
+CRuntimeController::~CRuntimeController()
+{
   if (pBaseThread != 0)
     delete pBaseThread;
 

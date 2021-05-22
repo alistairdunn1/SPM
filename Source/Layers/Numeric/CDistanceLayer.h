@@ -2,7 +2,7 @@
 // Name        : CDistanceLayer.h
 // Author      : S.Rasmussen
 // Date        : 28/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -16,19 +16,20 @@
 //
 //
 //**********************************************************************
-class CDistanceLayer : public CNumericLayer {
+class CDistanceLayer : public CNumericLayer
+{
 public:
   // Functions
-	CDistanceLayer();
-	virtual                    ~CDistanceLayer();
-	CLayer*                    clone() { return (new CDistanceLayer(*this)); }
-  double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  double                     getCellLength() { return dCellLength; }
-  void                       validate();
-  void                       build();
+  CDistanceLayer();
+  virtual ~CDistanceLayer();
+  CLayer *clone() { return (new CDistanceLayer(*this)); }
+  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  double getCellLength() { return dCellLength; }
+  void validate();
+  void build();
 
 protected:
-  double                    dCellLength;
+  double dCellLength;
 };
 
 #endif /*CDISTANCELAYER_H_*/

@@ -2,7 +2,7 @@
 // Name        : CSelectivityReport.cpp
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,10 +16,11 @@
 // CSelectivityReport::CSelectivityReport()
 // Constructor
 //**********************************************************************
-CSelectivityReport::CSelectivityReport() {
+CSelectivityReport::CSelectivityReport()
+{
   // Variables
-  eExecutionState   = STATE_FINALIZATION;
-  pSelectivity      = 0;
+  eExecutionState = STATE_FINALIZATION;
+  pSelectivity = 0;
 
   // Register allowed
   pParameterList->registerAllowed(PARAM_SELECTIVITY);
@@ -29,8 +30,10 @@ CSelectivityReport::CSelectivityReport() {
 // void CSelectivityReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CSelectivityReport::validate() {
-  try {
+void CSelectivityReport::validate()
+{
+  try
+  {
 
     sSelectivity = pParameterList->getString(PARAM_SELECTIVITY);
 
@@ -38,8 +41,9 @@ void CSelectivityReport::validate() {
     CFileReport::validate();
 
     // Local validation
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSelectivityReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,16 +53,19 @@ void CSelectivityReport::validate() {
 // void CSelectivityReport::build()
 // Build our Report
 //**********************************************************************
-void CSelectivityReport::build() {
-  try {
+void CSelectivityReport::build()
+{
+  try
+  {
     // Parent
     CFileReport::build();
 
     // Get our selectivity
     CSelectivityManager *pManager = CSelectivityManager::Instance();
     pSelectivity = pManager->getSelectivity(sSelectivity);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -68,9 +75,11 @@ void CSelectivityReport::build() {
 // void CSelectivityReport::execute()
 // Execute
 //**********************************************************************
-void CSelectivityReport::execute() {
+void CSelectivityReport::execute()
+{
 
-  try {
+  try
+  {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -97,11 +106,13 @@ void CSelectivityReport::execute() {
     for (int i = 1; i < iSpread; ++i)
       cout << CONFIG_SPACE_SEPARATOR << pSelectivity->getResult(i);
     cout << "\n";
-    cout << CONFIG_END_REPORT << "\n" << endl;
+    cout << CONFIG_END_REPORT << "\n"
+         << endl;
 
     this->end();
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -111,5 +122,6 @@ void CSelectivityReport::execute() {
 // CSelectivityReport::~CSelectivityReport()
 // Destuctor
 //**********************************************************************
-CSelectivityReport::~CSelectivityReport() {
+CSelectivityReport::~CSelectivityReport()
+{
 }

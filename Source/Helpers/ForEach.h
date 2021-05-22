@@ -2,7 +2,7 @@
 // Name        : ForEach.h
 // Author      : S.Rasmussen
 // Date        : 6/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 //============================================================================
 #ifndef FOREACH_H_
 #define FOREACH_H_

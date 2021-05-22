@@ -2,7 +2,7 @@
 // Name        : CDoubleLayer.h
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -16,22 +16,23 @@
 //
 //
 //**********************************************************************
-class CDoubleLayer : public CNumericLayer  {
+class CDoubleLayer : public CNumericLayer
+{
 public:
   // Functions
   CDoubleLayer();
-  virtual                     ~CDoubleLayer();
-  CLayer*                     clone() { return (new CDoubleLayer(*this)); }
-  double                      getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  void                        setValue(int RowIndex, int ColIndex, double Value);
-  double                      getLayerMin();
-  double                      getLayerMax();
-  void                        validate();
-  void                        build();
+  virtual ~CDoubleLayer();
+  CLayer *clone() { return (new CDoubleLayer(*this)); }
+  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  void setValue(int RowIndex, int ColIndex, double Value);
+  double getLayerMin();
+  double getLayerMax();
+  void validate();
+  void build();
 
 protected:
   // Variables
-  double                      dRescale;
+  double dRescale;
 };
 
 #endif /*CDOUBLELAYER_H_*/

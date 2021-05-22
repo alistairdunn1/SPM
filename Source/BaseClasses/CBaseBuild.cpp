@@ -2,7 +2,7 @@
 // Name        : CBaseBuild.cpp
 // Author      : S.Rasmussen
 // Date        : 28/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -14,24 +14,28 @@
 // CBaseBuild::CBaseBuild()
 // Constructor
 //**********************************************************************
-CBaseBuild::CBaseBuild() {
+CBaseBuild::CBaseBuild()
+{
 }
 
 //**********************************************************************
 // void CBaseBuild::validate()
 // Build
 //**********************************************************************
-void CBaseBuild::validate() {
-  try {
+void CBaseBuild::validate()
+{
+  try
+  {
     // Base
     CBaseValidate::validate();
 
     // Assign
-    pWorld               = CWorld::Instance();
-    iWorldWidth          = pWorld->getWidth();
-    iWorldHeight         = pWorld->getHeight();
-
-  } catch (string &Ex) {
+    pWorld = CWorld::Instance();
+    iWorldWidth = pWorld->getWidth();
+    iWorldHeight = pWorld->getHeight();
+  }
+  catch (string &Ex)
+  {
     Ex = "CBaseBuild.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -41,5 +45,6 @@ void CBaseBuild::validate() {
 // CBaseBuild::~CBaseBuild()
 // Destructor
 //**********************************************************************
-CBaseBuild::~CBaseBuild() {
+CBaseBuild::~CBaseBuild()
+{
 }

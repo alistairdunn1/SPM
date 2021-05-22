@@ -2,7 +2,7 @@
 // Name        : CGammaDiffCallback.h
 // Author      : S.Rasmussen
 // Date        : 8/09/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,15 +20,16 @@ class CEstimateManager;
 //
 //
 //**********************************************************************
-class CGammaDiffCallback : public CBaseObject {
+class CGammaDiffCallback : public CBaseObject
+{
 public:
   CGammaDiffCallback();
-  virtual                     ~CGammaDiffCallback();
-  double                      operator()(const vector<double>& Parameters);
+  virtual ~CGammaDiffCallback();
+  double operator()(const vector<double> &Parameters);
 
 protected:
   // Variables
-  CEstimateManager           *pEstimateManager;
+  CEstimateManager *pEstimateManager;
 };
 
 #endif /* CGAMMADIFFCALLBACK_H_ */

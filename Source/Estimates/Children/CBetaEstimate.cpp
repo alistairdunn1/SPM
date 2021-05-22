@@ -2,7 +2,7 @@
 // Name        : CBetaEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -20,7 +20,8 @@ using std::endl;
 /**
  * Default constructor
  */
-CBetaEstimate::CBetaEstimate() {
+CBetaEstimate::CBetaEstimate()
+{
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);
@@ -35,25 +36,28 @@ CBetaEstimate::CBetaEstimate() {
 /**
  * Validate our Beta prior/estimate
  */
-void CBetaEstimate::validate() {
+void CBetaEstimate::validate()
+{
   CEstimate::validate();
 
-  try {
+  try
+  {
     // Assign our parameters
-    dMu     = pParameterList->getDouble(PARAM_MU);
-    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
-    dA      = pParameterList->getDouble(PARAM_A);
-    dB      = pParameterList->getDouble(PARAM_B);
+    dMu = pParameterList->getDouble(PARAM_MU);
+    dSigma = pParameterList->getDouble(PARAM_SIGMA);
+    dA = pParameterList->getDouble(PARAM_A);
+    dB = pParameterList->getDouble(PARAM_B);
 
     // Local validation
     if (dSigma <= 0.0)
       CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
     if (dA >= dB)
       CError::errorGreaterThanEqualTo(PARAM_A, PARAM_B);
-    if( ((((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1) <=0 )
-      CError::error(PARAM_SIGMA + string(" is too large")) ;
-
-  } catch (string &Ex) {
+    if (((((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1) <= 0)
+      CError::error(PARAM_SIGMA + string(" is too large"));
+  }
+  catch (string &Ex)
+  {
     Ex = "CBetaEstimate.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,7 +66,8 @@ void CBetaEstimate::validate() {
 /**
  *
  */
-double CBetaEstimate::getScore() {
+double CBetaEstimate::getScore()
+{
   double dRet = 0.0;
 
   dV = (dMu - dA) / (dB - dA);

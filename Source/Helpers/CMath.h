@@ -2,7 +2,7 @@
 // Name        : CMath.h
 // Author      : S.Rasmussen
 // Date        : 6/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 //============================================================================
 #ifndef CMATH_H_
 #define CMATH_H_
@@ -14,17 +14,18 @@
 //
 //
 //**********************************************************************
-class CMath {
+class CMath
+{
 public:
   // Functions
-  static double         lnGamma(double t);
-  static double         lnFactorial(double t);
-  static double         zeroFun(double x, double delta);
+  static double lnGamma(double t);
+  static double lnFactorial(double t);
+  static double zeroFun(double x, double delta);
 
 private:
   // Functions
-  CMath() { }
-  virtual ~CMath() { }
+  CMath() {}
+  virtual ~CMath() {}
 };
 
 #endif /* CMATH_H_ */

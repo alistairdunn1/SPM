@@ -2,7 +2,7 @@
 // Name        : CLogNormalPrior.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,7 +20,7 @@
 
 // strings
 const std::string log_normal__estimate =
-R"(
+    R"(
 @estimate
 parameter selectivity[FishingSel].a50
 lower_bound 1
@@ -34,13 +34,14 @@ cv 5
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( LogNormalEstimate, C1x1_Empty_Fixture) {
+BOOST_FIXTURE_TEST_CASE(LogNormalEstimate, C1x1_Empty_Fixture)
+{
 
   addToConfiguration(two_sex_no_estimates);
   addToConfiguration(log_normal__estimate);
   loadAndRunEnvironment();
 
-  CObjectiveFunction* obj_func = CObjectiveFunction::Instance();
+  CObjectiveFunction *obj_func = CObjectiveFunction::Instance();
   obj_func->execute();
   BOOST_CHECK_CLOSE(obj_func->getScore(), 2563.1357030902504, 1e-9);
 

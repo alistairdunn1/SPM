@@ -2,7 +2,7 @@
 // Name        : CLogNormalEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -13,7 +13,8 @@
 /**
  * Default constructor
  */
-CLogNormalEstimate::CLogNormalEstimate() {
+CLogNormalEstimate::CLogNormalEstimate()
+{
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_CV, &dCv);
@@ -26,34 +27,37 @@ CLogNormalEstimate::CLogNormalEstimate() {
 /**
  * Validate our Prior/Estimate
  */
-void CLogNormalEstimate::validate() {
+void CLogNormalEstimate::validate()
+{
   CEstimate::validate();
 
-  try {
+  try
+  {
 
     // Populate our variables
-    dMu   = pParameterList->getDouble(PARAM_MU);
-    dCv   = pParameterList->getDouble(PARAM_CV);
+    dMu = pParameterList->getDouble(PARAM_MU);
+    dCv = pParameterList->getDouble(PARAM_CV);
 
     // Local validation
     if (dMu <= 0.0)
       CError::errorLessThanEqualTo(PARAM_MU, PARAM_ZERO);
     if (dCv <= 0.0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CLogNormalPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-
 }
 
 /**
  *
  */
-double CLogNormalEstimate::getScore() {
+double CLogNormalEstimate::getScore()
+{
   double dRet = 0.0;
-  dSigma = sqrt(log(1+dCv*dCv));
-  dRet = log(getValue()) + 0.5 * pow(log(getValue()/dMu)/dSigma + dSigma*0.5, 2);
+  dSigma = sqrt(log(1 + dCv * dCv));
+  dRet = log(getValue()) + 0.5 * pow(log(getValue() / dMu) / dSigma + dSigma * 0.5, 2);
   return dRet;
 }

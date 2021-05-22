@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : CKnifeedgePreferenceFunction.h
-// Author      : 
-// Date        : 
-// Copyright   : 
+// Author      :
+// Date        :
+// Copyright   :
 // Description :
 //============================================================================
 #ifndef CKNIFEEDGEPREFERENCEFUNCTION_H_
@@ -15,20 +15,20 @@
 //
 //
 //**********************************************************************
-class CKnifeedgePreferenceFunction : public CPreferenceFunction {
+class CKnifeedgePreferenceFunction : public CPreferenceFunction
+{
 public:
   // Functions
   CKnifeedgePreferenceFunction();
-  virtual                    ~CKnifeedgePreferenceFunction();
-  CPreferenceFunction*       clone() { return new CKnifeedgePreferenceFunction(*this); }
-  double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void                       validate();
-  void                       build();
+  virtual ~CKnifeedgePreferenceFunction();
+  CPreferenceFunction *clone() { return new CKnifeedgePreferenceFunction(*this); }
+  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void validate();
+  void build();
 
 protected:
   // Variables
-  double                     dC;
-
+  double dC;
 };
 
 #endif /*CKNIFEEDGEPREFERENCEFUNCTION_H_*/

@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : CPseudoLikelihood.Test.cpp
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -15,7 +15,8 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( PseudoLikelihood ) {
+BOOST_AUTO_TEST_CASE(PseudoLikelihood)
+{
 
   // Generate data
   vector<double> scores;
@@ -116,8 +117,6 @@ BOOST_AUTO_TEST_CASE( PseudoLikelihood ) {
   BOOST_CHECK_EQUAL(0.0, scores[4]);
   BOOST_CHECK_EQUAL(0.0, scores[5]);
   BOOST_CHECK_EQUAL(0.0, scores[6]);
-
 }
 
 #endif /* TEST */
-

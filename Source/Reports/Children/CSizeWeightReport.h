@@ -2,7 +2,7 @@
 // Name        : CSizeWeightReport.h
 // Author      : A.Dunn
 // Date        : 24/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,22 +19,22 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CSizeWeightReport: public CFileReport {
+class CSizeWeightReport : public CFileReport
+{
 public:
   CSizeWeightReport();
-  virtual                     ~CSizeWeightReport();
-  CReport*                    clone() { return new CSizeWeightReport(*this); }
-  void                        validate();
-  void                        build();
-  void                        execute();
+  virtual ~CSizeWeightReport();
+  CReport *clone() { return new CSizeWeightReport(*this); }
+  void validate();
+  void build();
+  void execute();
 
 protected:
-  string                      sAgeSize;
-  CAgeSize                   *pAgeSize;
-  vector<double>              vSizeList;
-  bool                        bByLength;
-  double                      dCV;
-
+  string sAgeSize;
+  CAgeSize *pAgeSize;
+  vector<double> vSizeList;
+  bool bByLength;
+  double dCV;
 };
 
 #endif /* CSIZEWEIGHTREPORT_H_ */

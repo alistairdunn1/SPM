@@ -2,7 +2,7 @@
 // Name        : CCatchability.cpp
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -14,7 +14,8 @@
 // CCatchability::CCatchability()
 // Default Constructor
 //**********************************************************************
-CCatchability::CCatchability() {
+CCatchability::CCatchability()
+{
   // Register estimables
   registerEstimable(PARAM_Q, &dQ);
 
@@ -26,15 +27,18 @@ CCatchability::CCatchability() {
 // void CCatchability::validate()
 // Validate the Catchability
 //**********************************************************************
-void CCatchability::validate() {
-  try {
+void CCatchability::validate()
+{
+  try
+  {
     // Base
     CBaseValidate::validate();
 
     // Populate Vars
-    dQ  = pParameterList->getDouble(PARAM_Q);
-
-  } catch (string &Ex) {
+    dQ = pParameterList->getDouble(PARAM_Q);
+  }
+  catch (string &Ex)
+  {
     Ex = "CCatchability.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -44,5 +48,6 @@ void CCatchability::validate() {
 // CCatchability::~CCatchability()
 // Default De-Constructor
 //**********************************************************************
-CCatchability::~CCatchability() {
+CCatchability::~CCatchability()
+{
 }

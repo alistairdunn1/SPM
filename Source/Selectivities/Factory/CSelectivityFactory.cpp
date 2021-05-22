@@ -2,7 +2,7 @@
 // Name        : CSelectivityFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 9/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -28,9 +28,10 @@
 // CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
 // Build a selectivity based on type
 //**********************************************************************
-CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager) {
+CSelectivity *CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
+{
 
-  CSelectivity *pSelectivity    = 0;
+  CSelectivity *pSelectivity = 0;
 
   if (type == PARAM_ALL_VALUES_BOUNDED)
     pSelectivity = new CAllValuesBoundedSelectivity();

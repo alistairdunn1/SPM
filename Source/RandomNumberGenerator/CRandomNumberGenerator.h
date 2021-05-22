@@ -2,7 +2,7 @@
 // Name        : CRandomNumberGenerator.h
 // Author      : S.Rasmussen
 // Date        : 7/05/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -19,31 +19,32 @@
 //
 //
 //**********************************************************************
-class CRandomNumberGenerator: public CBaseManager {
+class CRandomNumberGenerator : public CBaseManager
+{
 public:
-  static CRandomNumberGenerator* Instance();
-  void                        Reset(unsigned new_seed = 12345u);
-  static void                 Destroy();
-  void                        validate();
-  void                        build();
-  double                      getRandomUniform(double min, double max);
-  double                      getRandomUniform_01();
-  double                      getRandomNormal(double mean, double sigma);
-  double                      getRandomStandardNormal();
-  double                      getRandomLogNormal(double mean, double cv);
-  double                      getRandomBinomial(double p, double N);
-  double                      getRandomChiSquare(int df);
-  double                      getRandomGamma(double shape);
+  static CRandomNumberGenerator *Instance();
+  void Reset(unsigned new_seed = 12345u);
+  static void Destroy();
+  void validate();
+  void build();
+  double getRandomUniform(double min, double max);
+  double getRandomUniform_01();
+  double getRandomNormal(double mean, double sigma);
+  double getRandomStandardNormal();
+  double getRandomLogNormal(double mean, double cv);
+  double getRandomBinomial(double p, double N);
+  double getRandomChiSquare(int df);
+  double getRandomGamma(double shape);
 
 protected:
   // Functions
   CRandomNumberGenerator();
-  virtual                     ~CRandomNumberGenerator();
+  virtual ~CRandomNumberGenerator();
   // Variables
-  boost::mt19937              clGenerator;
+  boost::mt19937 clGenerator;
 
 private:
-  static CRandomNumberGenerator* clInstance;
+  static CRandomNumberGenerator *clInstance;
 };
 
 #endif /* CRANDOMNUMBERGENERATOR_H_ */

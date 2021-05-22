@@ -2,7 +2,7 @@
 // Name        : CReportManager.h
 // Author      : S.Rasmussen
 // Date        : 30/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -20,30 +20,31 @@ class CReport;
 //
 //
 //**********************************************************************
-class CReportManager: public CBaseManager {
+class CReportManager : public CBaseManager
+{
 public:
   // Function
-  static CReportManager*      Instance();
-  static void                 Destroy();
-  virtual                     ~CReportManager();
-  void                        addReporter(CReport *value);
-  void                        setReportSuffix(string newSuffix) { sReportSuffix = newSuffix; }
-  string                      getReportSuffix() {  return sReportSuffix; }
-  void                        clone(CReportManager *Manager);
-  void                        validate();
-  void                        build();
-  void                        execute();
-  void                        execute(EState state);
+  static CReportManager *Instance();
+  static void Destroy();
+  virtual ~CReportManager();
+  void addReporter(CReport *value);
+  void setReportSuffix(string newSuffix) { sReportSuffix = newSuffix; }
+  string getReportSuffix() { return sReportSuffix; }
+  void clone(CReportManager *Manager);
+  void validate();
+  void build();
+  void execute();
+  void execute(EState state);
+
 protected:
   // Functions
   CReportManager();
 
   // Variables
-  vector<CReport*>          vReporters;
-  vector<CReport*>          vModellingReporters;
-  bool                      bDisableReports;
-  string                    sReportSuffix;
-
+  vector<CReport *> vReporters;
+  vector<CReport *> vModellingReporters;
+  bool bDisableReports;
+  string sReportSuffix;
 
 private:
   static boost::thread_specific_ptr<CReportManager> clInstance;

@@ -2,7 +2,7 @@
 // Name        : CSelectivityFactory.h
 // Author      : S.Rasmussen
 // Date        : 9/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -22,10 +22,11 @@ using std::string;
 //
 //
 //**********************************************************************
-class CSelectivityFactory {
+class CSelectivityFactory
+{
 public:
   // Functions
-  static CSelectivity*        buildSelectivity(string type, bool registerWithManager = true);
+  static CSelectivity *buildSelectivity(string type, bool registerWithManager = true);
 
 private:
   // Functions

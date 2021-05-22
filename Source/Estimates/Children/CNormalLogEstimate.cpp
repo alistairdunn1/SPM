@@ -2,7 +2,7 @@
 // Name        : CNormalLogEstimate.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2014
-// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2014 - www.niwa.co.nz
 // Description :
 //============================================================================
 
@@ -13,7 +13,8 @@
 /**
  * Constructor
  */
-CNormalLogEstimate::CNormalLogEstimate() {
+CNormalLogEstimate::CNormalLogEstimate()
+{
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);
@@ -26,19 +27,22 @@ CNormalLogEstimate::CNormalLogEstimate() {
 /**
  * Validate the Prior/Estimate
  */
-void CNormalLogEstimate::validate() {
+void CNormalLogEstimate::validate()
+{
   CEstimate::validate();
 
-  try {
+  try
+  {
     // Assign parameters
-    dMu     = pParameterList->getDouble(PARAM_MU);
-    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
+    dMu = pParameterList->getDouble(PARAM_MU);
+    dSigma = pParameterList->getDouble(PARAM_SIGMA);
 
     // Local validation
     if (dSigma <= 0.0)
       CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNormalLogPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -47,11 +51,9 @@ void CNormalLogEstimate::validate() {
 /**
  * Get the score
  */
-double CNormalLogEstimate::getScore() {
+double CNormalLogEstimate::getScore()
+{
   double dRet = 0.0;
-  dRet = log(getValue()) + 0.5 * pow((log(getValue())-dMu)/dSigma, 2);
+  dRet = log(getValue()) + 0.5 * pow((log(getValue()) - dMu) / dSigma, 2);
   return dRet;
 }
-
-
-

@@ -2,7 +2,7 @@
 // Name        : CInitializationPhaseFactory.cpp
 // Author      : S.Rasmussen
 // Date        : 23/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -16,9 +16,10 @@
 //                                        (string type, bool registerWithManager)
 // Build our Initialization Phase based on type
 //**********************************************************************
-CInitializationPhase* CInitializationPhaseFactory::buildInitializationPhase(string type, bool registerWithManager) {
+CInitializationPhase *CInitializationPhaseFactory::buildInitializationPhase(string type, bool registerWithManager)
+{
 
-  CInitializationPhase *pPhase  = 0;
+  CInitializationPhase *pPhase = 0;
 
   if (type == "")
     pPhase = new CInitializationPhase();
@@ -30,4 +31,3 @@ CInitializationPhase* CInitializationPhaseFactory::buildInitializationPhase(stri
 
   return pPhase;
 }
-

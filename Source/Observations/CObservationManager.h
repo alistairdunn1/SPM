@@ -2,7 +2,7 @@
 // Name        : CObservationManager.h
 // Author      : S.Rasmussen
 // Date        : 17/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : This class is responsible for maintaining a list of our
 //       Observations. Like all Manager it is responsible for the validate
 //       and execute calls to the children.
@@ -31,26 +31,27 @@ class CObservation;
 //
 //
 //**********************************************************************
-class CObservationManager : public CBaseManager {
+class CObservationManager : public CBaseManager
+{
 public:
-  static CObservationManager* Instance();
-  static void                Destroy();
-  void                       clone(CObservationManager *Manager);
-  void                       addObservation(CObservation *pObservation);
-  void                       fillVector(vector<CObservation*> &list);
-  CObservation*              getObservation(string label);
-  void                       validate();
-  void                       build();
-  void                       prepare(int year, int step);
-  void                       execute(int year, int step);
-  virtual                    ~CObservationManager();
+  static CObservationManager *Instance();
+  static void Destroy();
+  void clone(CObservationManager *Manager);
+  void addObservation(CObservation *pObservation);
+  void fillVector(vector<CObservation *> &list);
+  CObservation *getObservation(string label);
+  void validate();
+  void build();
+  void prepare(int year, int step);
+  void execute(int year, int step);
+  virtual ~CObservationManager();
 
 protected:
   // Functions
-	CObservationManager();
+  CObservationManager();
 
-	// Variables
-	vector<CObservation*>      vObservationList;
+  // Variables
+  vector<CObservation *> vObservationList;
 
 private:
   static boost::thread_specific_ptr<CObservationManager> clInstance;

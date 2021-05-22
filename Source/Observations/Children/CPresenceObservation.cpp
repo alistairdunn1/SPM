@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPresenceObservation.cpp
 // Author      : C.Marsh, A. Dunn
-// Copyright   : Copyright NIWA Science ©2015 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2015 - www.niwa.co.nz
 //============================================================================
 
 // Headers
@@ -19,11 +19,12 @@
 // CPresenceObservation::CPresenceObservation()
 // Default Constructor
 //**********************************************************************
-CPresenceObservation::CPresenceObservation() {
+CPresenceObservation::CPresenceObservation()
+{
 
   // Variables
-  sCatchability   = "";
-  pCatchability   = 0;
+  sCatchability = "";
+  pCatchability = 0;
 
   // Register estimables
   registerEstimable(PARAM_PROCESS_ERROR, &dProcessError);
@@ -40,8 +41,10 @@ CPresenceObservation::CPresenceObservation() {
 // void CPresenceObservation::validate()
 // validate
 //**********************************************************************
-void CPresenceObservation::validate() {
-  try {
+void CPresenceObservation::validate()
+{
+  try
+  {
     // Base Validate
     CObservation::validate();
 
@@ -53,9 +56,9 @@ void CPresenceObservation::validate() {
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
     // Get our Parameters
-    sCatchability       = pParameterList->getString(PARAM_CATCHABILITY);
-    dDelta              = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
-    dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
+    sCatchability = pParameterList->getString(PARAM_CATCHABILITY);
+    dDelta = pParameterList->getDouble(PARAM_DELTA, true, DELTA);
+    dProcessError = pParameterList->getDouble(PARAM_PROCESS_ERROR, true, 0);
 
     if (dDelta < 0)
       CError::errorLessThan(PARAM_DELTA, PARAM_ZERO);
@@ -67,17 +70,24 @@ void CPresenceObservation::validate() {
     if ((vOBS.size() % 2) != 0)
       CError::errorPairs(PARAM_OBS);
 
-    for (int i = 0; i < (int)vOBS.size(); i+=2) {
-      try {
-        mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i+1]);
-      } catch (boost::bad_lexical_cast&) {
+    for (int i = 0; i < (int)vOBS.size(); i += 2)
+    {
+      try
+      {
+        mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i + 1]);
+      }
+      catch (boost::bad_lexical_cast &)
+      {
         string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
         throw Ex;
       }
       // Check for non-positive values in our observation values (for all likihoods)
-      if(mProportionMatrix[vOBS[i]] < 0.0) {
+      if (mProportionMatrix[vOBS[i]] < 0.0)
+      {
         CError::errorGreaterThan(PARAM_OBS, PARAM_ZERO);
-      } else if(mProportionMatrix[vOBS[i]] > 1.0) {
+      }
+      else if (mProportionMatrix[vOBS[i]] > 1.0)
+      {
         CError::errorGreaterThan(PARAM_OBS, PARAM_ONE);
       }
     }
@@ -92,32 +102,39 @@ void CPresenceObservation::validate() {
     if ((vErrorValues.size() % 2) != 0)
       CError::errorPairs(PARAM_ERROR_VALUE);
 
-    for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
-      try {
-        mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
-      } catch (boost::bad_lexical_cast&) {
+    for (int i = 0; i < (int)vErrorValues.size(); i += 2)
+    {
+      try
+      {
+        mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i + 1]);
+      }
+      catch (boost::bad_lexical_cast &)
+      {
         string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
         throw Ex;
       }
 
       // Check for non-positive values in our error values (for all likihoods)
-      if(mErrorValue[vErrorValues[i]] <= 0.0)
+      if (mErrorValue[vErrorValues[i]] <= 0.0)
         CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
     }
 
     // Validate our vErrorValues's to make sure we have the right amount for our
     // Observations
     bool bMatch = false;
-    map<string, double>::iterator mErrorValuePtr  = mErrorValue.begin();
-    map<string, double>::iterator mPropPtr        = mProportionMatrix.begin();
+    map<string, double>::iterator mErrorValuePtr = mErrorValue.begin();
+    map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
 
-    while (mErrorValuePtr != mErrorValue.end()) {
+    while (mErrorValuePtr != mErrorValue.end())
+    {
       // Reset Vars
-      bMatch      = false;
-      mPropPtr    = mProportionMatrix.begin();
+      bMatch = false;
+      mPropPtr = mProportionMatrix.begin();
 
-      while (mPropPtr != mProportionMatrix.end()) {
-        if ( (*mPropPtr).first == (*mErrorValuePtr).first ) {
+      while (mPropPtr != mProportionMatrix.end())
+      {
+        if ((*mPropPtr).first == (*mErrorValuePtr).first)
+        {
           bMatch = true;
           break;
         }
@@ -129,8 +146,9 @@ void CPresenceObservation::validate() {
 
       mErrorValuePtr++;
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPresenceObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -140,8 +158,10 @@ void CPresenceObservation::validate() {
 // void CPresenceObservation::build()
 // build
 //**********************************************************************
-void CPresenceObservation::build() {
-  try {
+void CPresenceObservation::build()
+{
+  try
+  {
     // Base build
     CObservation::build();
 
@@ -151,8 +171,9 @@ void CPresenceObservation::build() {
     // Build relationships
     CCatchabilityManager *pCatchabilityManager = CCatchabilityManager::Instance();
     pCatchability = pCatchabilityManager->getCatchability(sCatchability);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPresenceObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -162,19 +183,21 @@ void CPresenceObservation::build() {
 // void CPresenceObservation::execute()
 // Execute
 //**********************************************************************
-void CPresenceObservation::execute() {
+void CPresenceObservation::execute()
+{
 #ifndef OPTIMIZE
-  try {
+  try
+  {
 #endif
     // Variables
-                        dScore           = 0.0;
-    double              dExpectedTotal   = 0.0;
-    vector<string>      vKeys;
-    vector<double>      vExpected;
-    vector<double>      vObserved;
-    vector<double>      vProcessError;
-    vector<double>      vErrorValue;
-    vector<double>      vScores;
+    dScore = 0.0;
+    double dExpectedTotal = 0.0;
+    vector<string> vKeys;
+    vector<double> vExpected;
+    vector<double> vObserved;
+    vector<double> vProcessError;
+    vector<double> vErrorValue;
+    vector<double> vScores;
 
     // Base
     CObservation::execute();
@@ -183,24 +206,30 @@ void CPresenceObservation::execute() {
 
     // Loop Through Obs
     map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
-    while (mPropPtr != mProportionMatrix.end()) {
+    while (mPropPtr != mProportionMatrix.end())
+    {
       // Reset Vars
       dExpectedTotal = 0.0;
 
-      CWorldSquare *pStartSquare  = pStartWorldView->getSquare((*mPropPtr).first);
-      CWorldSquare *pSquare     = pWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare *pSquare = pWorldView->getSquare((*mPropPtr).first);
 
-      for (int i = 0; i < (int)vCategories.size(); ++i) {
-        for (int j = 0; j < pSquare->getWidth(); ++j) {
+      for (int i = 0; i < (int)vCategories.size(); ++i)
+      {
+        for (int j = 0; j < pSquare->getWidth(); ++j)
+        {
           double dSelectResult = vSelectivities[i]->getResult(j);
 
           double dStartValue = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
-          double dEndValue   = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
+          double dEndValue = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dFinalValue = 0.0;
 
-          if(sProportionMethod == PARAM_MEAN) {
+          if (sProportionMethod == PARAM_MEAN)
+          {
             dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
-          } else {
+          }
+          else
+          {
             dFinalValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
           }
           dExpectedTotal += dSelectResult * dFinalValue;
@@ -209,9 +238,10 @@ void CPresenceObservation::execute() {
 
       // Calculate area
       double dArea = 0.0;
-      vector<CWorldSquare*> vWorldSquares = pWorldView->getWorldSquares((*mPropPtr).first);
-      for (int k=0; k < (int)vWorldSquares.size(); ++k) {
-         dArea += vWorldSquares[k]->getArea();
+      vector<CWorldSquare *> vWorldSquares = pWorldView->getWorldSquares((*mPropPtr).first);
+      for (int k = 0; k < (int)vWorldSquares.size(); ++k)
+      {
+        dArea += vWorldSquares[k]->getArea();
       }
 
       // Divide by area for a density
@@ -220,7 +250,7 @@ void CPresenceObservation::execute() {
       dExpectedTotal *= pCatchability->getQ();
       // Error check to ensure dExpectedTotal never goes above 1.0
 
-      if(dExpectedTotal > 1.0)
+      if (dExpectedTotal > 1.0)
         dExpectedTotal = 1.0;
       double dErrorValue = mErrorValue[(*mPropPtr).first];
       // Store our Values
@@ -234,25 +264,30 @@ void CPresenceObservation::execute() {
     }
 
     // Simulate or Generate Result?
-    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION)
+    {
       // Simulate our values, then save them
       pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vObserved.size(); ++i)
         saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 1.00, 0.0);
-
-    } else { // Generate Score
+    }
+    else
+    { // Generate Score
       dScore = 0.0;
 
       // Generate Results and save them
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
-      for (int i = 0; i < (int)vScores.size(); ++i) {
+      for (int i = 0; i < (int)vScores.size(); ++i)
+      {
         dScore += (vScores[i] * dMultiplier);
         saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), dMultiplier, vScores[i]);
       }
     }
 
 #ifndef OPTIMIZE
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPresenceObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -263,14 +298,16 @@ void CPresenceObservation::execute() {
 // CPresenceObservation::getCatchability()
 // Get catchabilty
 //**********************************************************************
-double CPresenceObservation::getCatchability() {
+double CPresenceObservation::getCatchability()
+{
   double Q = pCatchability->getQ();
-  return(Q);
+  return (Q);
 }
 
 //**********************************************************************
 // CPresenceObservation::~CPresenceObservation()
 // Default De-Constructor
 //**********************************************************************
-CPresenceObservation::~CPresenceObservation() {
+CPresenceObservation::~CPresenceObservation()
+{
 }

@@ -2,7 +2,7 @@
 // Name        : CNumericLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 1/04/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -23,22 +23,26 @@ using std::endl;
 // CNumericLayer::CNumericLayer();
 // Default Constructor
 //**********************************************************************
-CNumericLayer::CNumericLayer() {
+CNumericLayer::CNumericLayer()
+{
 
   // Default Variables
   sType = "";
-  pGrid             = 0;
+  pGrid = 0;
 }
 
 //**********************************************************************
 // void CNumericLayer::setValue(int X, int Y, double Value)
 // Default Set Value
 //**********************************************************************
-void CNumericLayer::setValue(int X, int Y, double Value) {
-  try {
+void CNumericLayer::setValue(int X, int Y, double Value)
+{
+  try
+  {
     CError::errorSupported(PARAM_FUNCTION);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNumericLayer.setValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -48,13 +52,16 @@ void CNumericLayer::setValue(int X, int Y, double Value) {
 // int CNumericLayer::countValidSpaces()
 // count Valid Spaces
 //**********************************************************************
-int CNumericLayer::countValidSpaces() {
+int CNumericLayer::countValidSpaces()
+{
 
   int iValidSquares = 0;
 
   // Loop Through World
-  for (int i = 0; i < iHeight; ++i) {
-    for (int j = 0; j < iWidth; ++j) {
+  for (int i = 0; i < iHeight; ++i)
+  {
+    for (int j = 0; j < iWidth; ++j)
+    {
       // Check if Space is disabled on World first
       if (!pWorld->getBaseSquare(i, j)->getEnabled())
         continue;
@@ -70,17 +77,20 @@ int CNumericLayer::countValidSpaces() {
 // void CNumericLayer::validate()
 // validate
 //**********************************************************************
-void CNumericLayer::validate() {
-  try {
+void CNumericLayer::validate()
+{
+  try
+  {
     // Base Validate
     CLayer::validate();
 
     // Allocate Space for our X (Width)
-    pGrid = new double*[iHeight];
+    pGrid = new double *[iHeight];
     for (int i = 0; i < iHeight; ++i)
       pGrid[i] = new double[iWidth];
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CNumericLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -90,13 +100,16 @@ void CNumericLayer::validate() {
 // CNumericLayer::~CNumericLayer()
 // Default De-Constructor
 //**********************************************************************
-CNumericLayer::~CNumericLayer() {
+CNumericLayer::~CNumericLayer()
+{
   // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iHeight; ++i) {
-      delete [] pGrid[i];
+  if (pGrid != 0)
+  {
+    for (int i = 0; i < iHeight; ++i)
+    {
+      delete[] pGrid[i];
       pGrid[i] = 0;
     }
-    delete [] pGrid;
+    delete[] pGrid;
   }
 }

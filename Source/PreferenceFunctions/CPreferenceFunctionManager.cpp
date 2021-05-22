@@ -2,7 +2,7 @@
 // Name        : CPreferenceFunctionManager.cpp
 // Author      : S.Rasmussen
 // Date        : 28/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description : << See CPreferenceFunctionManager.h >>
 // $Date: 2009-01-12 11:44:49 +1300 (Mon, 12 Jan 2009) $
 //============================================================================
@@ -20,14 +20,16 @@ boost::thread_specific_ptr<CPreferenceFunctionManager> CPreferenceFunctionManage
 // CPreferenceFunctionManager::CPreferenceFunctionManager()
 // Default Constructor
 //**********************************************************************
-CPreferenceFunctionManager::CPreferenceFunctionManager() {
+CPreferenceFunctionManager::CPreferenceFunctionManager()
+{
 }
 
 //**********************************************************************
 // CPreferenceFunctionManager* CPreferenceFunctionManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CPreferenceFunctionManager* CPreferenceFunctionManager::Instance() {
+CPreferenceFunctionManager *CPreferenceFunctionManager::Instance()
+{
   if (clInstance.get() == 0)
     clInstance.reset(new CPreferenceFunctionManager());
   return clInstance.get();
@@ -37,8 +39,10 @@ CPreferenceFunctionManager* CPreferenceFunctionManager::Instance() {
 // void CPreferenceFunctionManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CPreferenceFunctionManager::Destroy() {
-  if (clInstance.get() != 0) {
+void CPreferenceFunctionManager::Destroy()
+{
+  if (clInstance.get() != 0)
+  {
     clInstance.reset();
   }
 }
@@ -47,7 +51,8 @@ void CPreferenceFunctionManager::Destroy() {
 // void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function)
 // Add Preference Functions to our list
 //**********************************************************************
-void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function) {
+void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function)
+{
   vPreferenceFunctions.push_back(Function);
 }
 
@@ -55,16 +60,19 @@ void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Func
 // CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(int index)
 // Get A PreferenceFunction by Index
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(int index) {
-  try {
+CPreferenceFunction *CPreferenceFunctionManager::getPreferenceFunction(int index)
+{
+  try
+  {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (index >= (int)vPreferenceFunctions.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PREFERENCE_FUNCTIONS);
 
     return vPreferenceFunctions[index];
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionManager.getPreferenceFunction()->" + Ex;
   }
 
@@ -75,17 +83,21 @@ CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(int index
 // CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(string Label)
 // get The PreferenceFunction Pointer For Label
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(string Label) {
-  try {
+CPreferenceFunction *CPreferenceFunctionManager::getPreferenceFunction(string Label)
+{
+  try
+  {
     // Loop Through And Find
-    foreach(CPreferenceFunction *PreferenceFunction, vPreferenceFunctions) {
+    foreach (CPreferenceFunction *PreferenceFunction, vPreferenceFunctions)
+    {
       if (PreferenceFunction->getLabel() == Label)
         return PreferenceFunction;
     }
 
     CError::errorUnknown(PARAM_PREFERENCE_FUNCTION, Label);
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionManager.getPreferenceFunction()->" + Ex;
     throw Ex;
   }
@@ -96,9 +108,11 @@ CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(string La
 // void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager)
 // Load our Preference Function Manager From Another One. Multi-Threaded Thing
 //**********************************************************************
-void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
+void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager)
+{
 
-  foreach(CPreferenceFunction *preferenceFunction, Manager->vPreferenceFunctions) {
+  foreach (CPreferenceFunction *preferenceFunction, Manager->vPreferenceFunctions)
+  {
     vPreferenceFunctions.push_back(preferenceFunction->clone());
   }
 }
@@ -107,20 +121,24 @@ void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
 // void CPreferenceFunctionManager::validate()
 // validate
 //**********************************************************************
-void CPreferenceFunctionManager::validate() {
+void CPreferenceFunctionManager::validate()
+{
 
-  try {
+  try
+  {
     // Loop through and Validate
-    vector<CPreferenceFunction*>::iterator vPtr = vPreferenceFunctions.begin();
-    while (vPtr != vPreferenceFunctions.end()) {
+    vector<CPreferenceFunction *>::iterator vPtr = vPreferenceFunctions.begin();
+    while (vPtr != vPreferenceFunctions.end())
+    {
       (*vPtr)->validate();
       vPtr++;
     }
 
     // Look for Duplicate Labels
-    map<string, int>            mLabelList;
+    map<string, int> mLabelList;
     vPtr = vPreferenceFunctions.begin();
-    while (vPtr != vPreferenceFunctions.end()) {
+    while (vPtr != vPreferenceFunctions.end())
+    {
       // Increase Count for this label
       mLabelList[(*vPtr)->getLabel()] += 1;
       // Check if we have more than 1
@@ -128,8 +146,9 @@ void CPreferenceFunctionManager::validate() {
         CError::errorDuplicate(PARAM_PREFERENCE_FUNCTION, (*vPtr)->getLabel());
       vPtr++;
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionManager.validate()->" + Ex;
     throw Ex;
   }
@@ -139,16 +158,20 @@ void CPreferenceFunctionManager::validate() {
 // void CPreferenceFunctionManager::build()
 // build
 //**********************************************************************
-void CPreferenceFunctionManager::build() {
-  try {
+void CPreferenceFunctionManager::build()
+{
+  try
+  {
     // Loop through and build
-    vector<CPreferenceFunction*>::iterator vPtr = vPreferenceFunctions.begin();
-    while (vPtr != vPreferenceFunctions.end()) {
+    vector<CPreferenceFunction *>::iterator vPtr = vPreferenceFunctions.begin();
+    while (vPtr != vPreferenceFunctions.end())
+    {
       (*vPtr)->build();
       vPtr++;
     }
-
-  } catch (string &Ex) {
+  }
+  catch (string &Ex)
+  {
     Ex = "CPreferenceFunctionManager.build()->" + Ex;
     throw Ex;
   }
@@ -158,10 +181,12 @@ void CPreferenceFunctionManager::build() {
 // CPreferenceFunctionManager::~CPreferenceFunctionManager()
 // Default De-Constructor
 //**********************************************************************
-CPreferenceFunctionManager::~CPreferenceFunctionManager() {
-  vector<CPreferenceFunction*>::iterator vPtr;
+CPreferenceFunctionManager::~CPreferenceFunctionManager()
+{
+  vector<CPreferenceFunction *>::iterator vPtr;
   vPtr = vPreferenceFunctions.begin();
-  while (vPtr != vPreferenceFunctions.end()) {
+  while (vPtr != vPreferenceFunctions.end())
+  {
     delete (*vPtr);
     vPtr++;
   }

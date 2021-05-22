@@ -2,7 +2,7 @@
 // Name        : CAdjacentCellMovementProcess.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 20/04/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -25,7 +25,8 @@
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( AdjacentCellMovementProcess, C3x3_Fixture ) {
+BOOST_FIXTURE_TEST_CASE(AdjacentCellMovementProcess, C3x3_Fixture)
+{
 
   // Add What we need to configuration
   // Then run our model
@@ -39,12 +40,14 @@ BOOST_FIXTURE_TEST_CASE( AdjacentCellMovementProcess, C3x3_Fixture ) {
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  double immature[] = { 11.110772026909721,159.72208987616949,151.97735027125543,159.72208987616943,292.84392851560114,215.27791012383045,151.97735027125543,215.27791012383045,142.0905989149781 };
+  double immature[] = {11.110772026909721, 159.72208987616949, 151.97735027125543, 159.72208987616943, 292.84392851560114, 215.27791012383045, 151.97735027125543, 215.27791012383045, 142.0905989149781};
 
-  for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-      CWorldSquare *pSquare = getSquare(i,j);
-      BOOST_CHECK_CLOSE(pSquare->getAbundance(), immature[3*i+j], 1e-9);
+  for (int i = 0; i < 3; ++i)
+  {
+    for (int j = 0; j < 3; ++j)
+    {
+      CWorldSquare *pSquare = getSquare(i, j);
+      BOOST_CHECK_CLOSE(pSquare->getAbundance(), immature[3 * i + j], 1e-9);
     }
   }
 }
