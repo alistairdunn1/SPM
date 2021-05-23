@@ -126,165 +126,166 @@
 \BOOKMARK [2][-]{subsection.8.4}{8.4 Processes}{section.8}% 126
 \BOOKMARK [3][-]{subsubsection.8.4.1}{8.4.1 None}{subsection.8.4}% 127
 \BOOKMARK [3][-]{subsubsection.8.4.2}{8.4.2 Constant recruitment process}{subsection.8.4}% 128
-\BOOKMARK [3][-]{subsubsection.8.4.3}{8.4.3 Beverton-Holt recruitment process}{subsection.8.4}% 129
-\BOOKMARK [3][-]{subsubsection.8.4.4}{8.4.4 Local Beverton-Holt recruitment process}{subsection.8.4}% 130
-\BOOKMARK [3][-]{subsubsection.8.4.5}{8.4.5 Ageing process}{subsection.8.4}% 131
-\BOOKMARK [3][-]{subsubsection.8.4.6}{8.4.6 Constant mortality rate process}{subsection.8.4}% 132
-\BOOKMARK [3][-]{subsubsection.8.4.7}{8.4.7 Age mortality rate process}{subsection.8.4}% 133
-\BOOKMARK [3][-]{subsubsection.8.4.8}{8.4.8 Constant exploitation rate process}{subsection.8.4}% 134
-\BOOKMARK [3][-]{subsubsection.8.4.9}{8.4.9 Annual mortality rate process}{subsection.8.4}% 135
-\BOOKMARK [3][-]{subsubsection.8.4.10}{8.4.10 Layer varying exploitation rate process}{subsection.8.4}% 136
-\BOOKMARK [3][-]{subsubsection.8.4.11}{8.4.11 Event mortality process}{subsection.8.4}% 137
-\BOOKMARK [3][-]{subsubsection.8.4.12}{8.4.12 Biomass event mortality process}{subsection.8.4}% 138
-\BOOKMARK [3][-]{subsubsection.8.4.13}{8.4.13 Holling mortality rate}{subsection.8.4}% 139
-\BOOKMARK [3][-]{subsubsection.8.4.14}{8.4.14 Prey-suitability predation process}{subsection.8.4}% 140
-\BOOKMARK [3][-]{subsubsection.8.4.15}{8.4.15 Category state by age process}{subsection.8.4}% 141
-\BOOKMARK [3][-]{subsubsection.8.4.16}{8.4.16 Category transition process}{subsection.8.4}% 142
-\BOOKMARK [3][-]{subsubsection.8.4.17}{8.4.17 Category transition rate process}{subsection.8.4}% 143
-\BOOKMARK [3][-]{subsubsection.8.4.18}{8.4.18 Category transition by age process}{subsection.8.4}% 144
-\BOOKMARK [3][-]{subsubsection.8.4.19}{8.4.19 Migration movement}{subsection.8.4}% 145
-\BOOKMARK [3][-]{subsubsection.8.4.20}{8.4.20 Adjacent cell movement}{subsection.8.4}% 146
-\BOOKMARK [3][-]{subsubsection.8.4.21}{8.4.21 Preference movement}{subsection.8.4}% 147
-\BOOKMARK [3][-]{subsubsection.8.4.22}{8.4.22 Multi-threaded preference movement}{subsection.8.4}% 148
-\BOOKMARK [2][-]{subsection.8.5}{8.5 Preference functions}{section.8}% 149
-\BOOKMARK [3][-]{subsubsection.8.5.1}{8.5.1 Constant}{subsection.8.5}% 150
-\BOOKMARK [3][-]{subsubsection.8.5.2}{8.5.2 Normal}{subsection.8.5}% 151
-\BOOKMARK [3][-]{subsubsection.8.5.3}{8.5.3 Double-normal}{subsection.8.5}% 152
-\BOOKMARK [3][-]{subsubsection.8.5.4}{8.5.4 Logistic}{subsection.8.5}% 153
-\BOOKMARK [3][-]{subsubsection.8.5.5}{8.5.5 Inverse-logistic}{subsection.8.5}% 154
-\BOOKMARK [3][-]{subsubsection.8.5.6}{8.5.6 Exponential}{subsection.8.5}% 155
-\BOOKMARK [3][-]{subsubsection.8.5.7}{8.5.7 Threshold}{subsection.8.5}% 156
-\BOOKMARK [3][-]{subsubsection.8.5.8}{8.5.8 Knife-edge}{subsection.8.5}% 157
-\BOOKMARK [3][-]{subsubsection.8.5.9}{8.5.9 Categorical}{subsection.8.5}% 158
-\BOOKMARK [3][-]{subsubsection.8.5.10}{8.5.10 Monotonic categorical}{subsection.8.5}% 159
-\BOOKMARK [3][-]{subsubsection.8.5.11}{8.5.11 Gaussian copula}{subsection.8.5}% 160
-\BOOKMARK [3][-]{subsubsection.8.5.12}{8.5.12 Gumbel copula}{subsection.8.5}% 161
-\BOOKMARK [3][-]{subsubsection.8.5.13}{8.5.13 Frank copula}{subsection.8.5}% 162
-\BOOKMARK [3][-]{subsubsection.8.5.14}{8.5.14 Independence copula}{subsection.8.5}% 163
-\BOOKMARK [2][-]{subsection.8.6}{8.6 Probability Density Functions}{section.8}% 164
-\BOOKMARK [3][-]{subsubsection.8.6.1}{8.6.1 Normal}{subsection.8.6}% 165
-\BOOKMARK [3][-]{subsubsection.8.6.2}{8.6.2 Lognormal}{subsection.8.6}% 166
-\BOOKMARK [3][-]{subsubsection.8.6.3}{8.6.3 Exponential}{subsection.8.6}% 167
-\BOOKMARK [3][-]{subsubsection.8.6.4}{8.6.4 Uniform}{subsection.8.6}% 168
-\BOOKMARK [2][-]{subsection.8.7}{8.7 Layers}{section.8}% 169
-\BOOKMARK [3][-]{subsubsection.8.7.1}{8.7.1 Numeric}{subsection.8.7}% 170
-\BOOKMARK [3][-]{subsubsection.8.7.2}{8.7.2 Categorical}{subsection.8.7}% 171
-\BOOKMARK [3][-]{subsubsection.8.7.3}{8.7.3 Distance}{subsection.8.7}% 172
-\BOOKMARK [3][-]{subsubsection.8.7.4}{8.7.4 Haversine}{subsection.8.7}% 173
-\BOOKMARK [3][-]{subsubsection.8.7.5}{8.7.5 Dijkstra}{subsection.8.7}% 174
-\BOOKMARK [3][-]{subsubsection.8.7.6}{8.7.6 Haversine Dijkstra}{subsection.8.7}% 175
-\BOOKMARK [3][-]{subsubsection.8.7.7}{8.7.7 Abundance}{subsection.8.7}% 176
-\BOOKMARK [3][-]{subsubsection.8.7.8}{8.7.8 Biomass}{subsection.8.7}% 177
-\BOOKMARK [3][-]{subsubsection.8.7.9}{8.7.9 Abundance-density}{subsection.8.7}% 178
-\BOOKMARK [3][-]{subsubsection.8.7.10}{8.7.10 Biomass-density}{subsection.8.7}% 179
-\BOOKMARK [3][-]{subsubsection.8.7.11}{8.7.11 Numeric meta-layer}{subsection.8.7}% 180
-\BOOKMARK [3][-]{subsubsection.8.7.12}{8.7.12 Categorical meta-layer}{subsection.8.7}% 181
-\BOOKMARK [3][-]{subsubsection.8.7.13}{8.7.13 Derived quantity layer}{subsection.8.7}% 182
-\BOOKMARK [3][-]{subsubsection.8.7.14}{8.7.14 Derived quantity by cell layer}{subsection.8.7}% 183
-\BOOKMARK [2][-]{subsection.8.8}{8.8 Derived quantities by cell}{section.8}% 184
-\BOOKMARK [3][-]{subsubsection.8.8.1}{8.8.1 Abundance}{subsection.8.8}% 185
-\BOOKMARK [3][-]{subsubsection.8.8.2}{8.8.2 Biomass}{subsection.8.8}% 186
-\BOOKMARK [2][-]{subsection.8.9}{8.9 Derived quantities}{section.8}% 187
-\BOOKMARK [3][-]{subsubsection.8.9.1}{8.9.1 Abundance}{subsection.8.9}% 188
-\BOOKMARK [3][-]{subsubsection.8.9.2}{8.9.2 Biomass}{subsection.8.9}% 189
-\BOOKMARK [2][-]{subsection.8.10}{8.10 Age-size relationship}{section.8}% 190
-\BOOKMARK [3][-]{subsubsection.8.10.1}{8.10.1 None}{subsection.8.10}% 191
-\BOOKMARK [3][-]{subsubsection.8.10.2}{8.10.2 von Bertalanffy}{subsection.8.10}% 192
-\BOOKMARK [3][-]{subsubsection.8.10.3}{8.10.3 Schnute}{subsection.8.10}% 193
-\BOOKMARK [3][-]{subsubsection.8.10.4}{8.10.4 von Bertalanffy k-at-age}{subsection.8.10}% 194
-\BOOKMARK [3][-]{subsubsection.8.10.5}{8.10.5 mean size-at-age}{subsection.8.10}% 195
-\BOOKMARK [2][-]{subsection.8.11}{8.11 Size-weight}{section.8}% 196
-\BOOKMARK [3][-]{subsubsection.8.11.1}{8.11.1 None}{subsection.8.11}% 197
-\BOOKMARK [3][-]{subsubsection.8.11.2}{8.11.2 Basic}{subsection.8.11}% 198
-\BOOKMARK [2][-]{subsection.8.12}{8.12 Selectivities}{section.8}% 199
-\BOOKMARK [3][-]{subsubsection.8.12.1}{8.12.1 Constant}{subsection.8.12}% 200
-\BOOKMARK [3][-]{subsubsection.8.12.2}{8.12.2 Knife-edge}{subsection.8.12}% 201
-\BOOKMARK [3][-]{subsubsection.8.12.3}{8.12.3 All-values}{subsection.8.12}% 202
-\BOOKMARK [3][-]{subsubsection.8.12.4}{8.12.4 All-values-bounded}{subsection.8.12}% 203
-\BOOKMARK [3][-]{subsubsection.8.12.5}{8.12.5 Increasing}{subsection.8.12}% 204
-\BOOKMARK [3][-]{subsubsection.8.12.6}{8.12.6 Logistic}{subsection.8.12}% 205
-\BOOKMARK [3][-]{subsubsection.8.12.7}{8.12.7 InverseLogistic}{subsection.8.12}% 206
-\BOOKMARK [3][-]{subsubsection.8.12.8}{8.12.8 Logistic producing}{subsection.8.12}% 207
-\BOOKMARK [3][-]{subsubsection.8.12.9}{8.12.9 Double-normal}{subsection.8.12}% 208
-\BOOKMARK [3][-]{subsubsection.8.12.10}{8.12.10 Double-exponential}{subsection.8.12}% 209
-\BOOKMARK [3][-]{subsubsection.8.12.11}{8.12.11 Spline}{subsection.8.12}% 210
-\BOOKMARK [1][-]{section.9}{9 Estimation command and subcommand syntax}{}% 211
-\BOOKMARK [2][-]{subsection.9.1}{9.1 Estimation methods}{section.9}% 212
-\BOOKMARK [2][-]{subsection.9.2}{9.2 Point estimation}{section.9}% 213
-\BOOKMARK [3][-]{subsubsection.9.2.1}{9.2.1 Numerical differences minimiser}{subsection.9.2}% 214
-\BOOKMARK [3][-]{subsubsection.9.2.2}{9.2.2 Differential evolution minimiser}{subsection.9.2}% 215
-\BOOKMARK [2][-]{subsection.9.3}{9.3 Markov Chain Monte Carlo \(MCMC\)}{section.9}% 216
-\BOOKMARK [3][-]{subsubsection.9.3.1}{9.3.1 Metropolis-Hastings}{subsection.9.3}% 217
-\BOOKMARK [2][-]{subsection.9.4}{9.4 Profiles}{section.9}% 218
-\BOOKMARK [2][-]{subsection.9.5}{9.5 Defining the parameters to be estimated and their priors}{section.9}% 219
-\BOOKMARK [3][-]{subsubsection.9.5.1}{9.5.1 Uniform prior}{subsection.9.5}% 220
-\BOOKMARK [3][-]{subsubsection.9.5.2}{9.5.2 Uniform-log prior}{subsection.9.5}% 221
-\BOOKMARK [3][-]{subsubsection.9.5.3}{9.5.3 Normal prior}{subsection.9.5}% 222
-\BOOKMARK [3][-]{subsubsection.9.5.4}{9.5.4 Normal-by-stdev prior}{subsection.9.5}% 223
-\BOOKMARK [3][-]{subsubsection.9.5.5}{9.5.5 Lognormal prior}{subsection.9.5}% 224
-\BOOKMARK [3][-]{subsubsection.9.5.6}{9.5.6 Beta prior}{subsection.9.5}% 225
-\BOOKMARK [2][-]{subsection.9.6}{9.6 Defining catchability constants}{section.9}% 226
-\BOOKMARK [2][-]{subsection.9.7}{9.7 Defining penalties}{section.9}% 227
-\BOOKMARK [1][-]{section.10}{10 Observation command and subcommand syntax}{}% 228
-\BOOKMARK [2][-]{subsection.10.1}{10.1 Observation types}{section.10}% 229
-\BOOKMARK [3][-]{subsubsection.10.1.1}{10.1.1 Proportions at age}{subsection.10.1}% 230
-\BOOKMARK [3][-]{subsubsection.10.1.2}{10.1.2 Proportions by category}{subsection.10.1}% 231
-\BOOKMARK [3][-]{subsubsection.10.1.3}{10.1.3 Proportions at length}{subsection.10.1}% 232
-\BOOKMARK [3][-]{subsubsection.10.1.4}{10.1.4 Proportions by category at length}{subsection.10.1}% 233
-\BOOKMARK [3][-]{subsubsection.10.1.5}{10.1.5 Abundance}{subsection.10.1}% 234
-\BOOKMARK [3][-]{subsubsection.10.1.6}{10.1.6 Biomass}{subsection.10.1}% 235
-\BOOKMARK [3][-]{subsubsection.10.1.7}{10.1.7 Presence}{subsection.10.1}% 236
-\BOOKMARK [2][-]{subsection.10.2}{10.2 Defining ageing error}{section.10}% 237
-\BOOKMARK [3][-]{subsubsection.10.2.1}{10.2.1 No ageing error}{subsection.10.2}% 238
-\BOOKMARK [3][-]{subsubsection.10.2.2}{10.2.2 Normal ageing error}{subsection.10.2}% 239
-\BOOKMARK [3][-]{subsubsection.10.2.3}{10.2.3 Off-by-one ageing error}{subsection.10.2}% 240
-\BOOKMARK [1][-]{section.11}{11 Report command and subcommand syntax}{}% 241
-\BOOKMARK [2][-]{subsection.11.1}{11.1 Available reports}{section.11}% 242
-\BOOKMARK [2][-]{subsection.11.2}{11.2 Report commands and subcommands}{section.11}% 243
-\BOOKMARK [3][-]{subsubsection.11.2.1}{11.2.1 Print the co-ordinates of the spatial map}{subsection.11.2}% 244
-\BOOKMARK [3][-]{subsubsection.11.2.2}{11.2.2 Print the partition}{subsection.11.2}% 245
-\BOOKMARK [3][-]{subsubsection.11.2.3}{11.2.3 Print the partition biomass}{subsection.11.2}% 246
-\BOOKMARK [3][-]{subsubsection.11.2.4}{11.2.4 Print the partition at initialisation}{subsection.11.2}% 247
-\BOOKMARK [3][-]{subsubsection.11.2.5}{11.2.5 Print a summary of a process}{subsection.11.2}% 248
-\BOOKMARK [3][-]{subsubsection.11.2.6}{11.2.6 Print a summary of a preference function}{subsection.11.2}% 249
-\BOOKMARK [3][-]{subsubsection.11.2.7}{11.2.7 Print a derived quantity}{subsection.11.2}% 250
-\BOOKMARK [3][-]{subsubsection.11.2.8}{11.2.8 Print a derived quantity by cell}{subsection.11.2}% 251
-\BOOKMARK [3][-]{subsubsection.11.2.9}{11.2.9 Print a summary of the estimated parameters}{subsection.11.2}% 252
-\BOOKMARK [3][-]{subsubsection.11.2.10}{11.2.10 Print the estimated parameter values out as a vector}{subsection.11.2}% 253
-\BOOKMARK [3][-]{subsubsection.11.2.11}{11.2.11 Print the objective function values}{subsection.11.2}% 254
-\BOOKMARK [3][-]{subsubsection.11.2.12}{11.2.12 Print the covariance matrix}{subsection.11.2}% 255
-\BOOKMARK [3][-]{subsubsection.11.2.13}{11.2.13 Print a summary of the an observation, including fits, and residuals}{subsection.11.2}% 256
-\BOOKMARK [3][-]{subsubsection.11.2.14}{11.2.14 Print an observation using simulated values}{subsection.11.2}% 257
-\BOOKMARK [3][-]{subsubsection.11.2.15}{11.2.15 Print an ageing error misclassification matrix}{subsection.11.2}% 258
-\BOOKMARK [3][-]{subsubsection.11.2.16}{11.2.16 Print a layer}{subsection.11.2}% 259
-\BOOKMARK [3][-]{subsubsection.11.2.17}{11.2.17 Print a derived view via a categorical layer}{subsection.11.2}% 260
-\BOOKMARK [3][-]{subsubsection.11.2.18}{11.2.18 Print a selectivity}{subsection.11.2}% 261
-\BOOKMARK [3][-]{subsubsection.11.2.19}{11.2.19 Print the random number seed used}{subsection.11.2}% 262
-\BOOKMARK [3][-]{subsubsection.11.2.20}{11.2.20 Print mean size at age}{subsection.11.2}% 263
-\BOOKMARK [3][-]{subsubsection.11.2.21}{11.2.21 Print mean weight at size}{subsection.11.2}% 264
-\BOOKMARK [3][-]{subsubsection.11.2.22}{11.2.22 Print mean weight at age}{subsection.11.2}% 265
-\BOOKMARK [3][-]{subsubsection.11.2.23}{11.2.23 Print the results of an MCMC}{subsection.11.2}% 266
-\BOOKMARK [3][-]{subsubsection.11.2.24}{11.2.24 Print the MCMC samples as they are calculated}{subsection.11.2}% 267
-\BOOKMARK [3][-]{subsubsection.11.2.25}{11.2.25 Print the MCMC objective function values as they are calculated}{subsection.11.2}% 268
-\BOOKMARK [1][-]{section.12}{12 Other commands and subcommands}{}% 269
-\BOOKMARK [1][-]{section.13}{13 Examples}{}% 270
-\BOOKMARK [2][-]{subsection.13.1}{13.1 An example of a simple 1 x 1 \040non-spatial model}{section.13}% 271
-\BOOKMARK [2][-]{subsection.13.2}{13.2 An example of a simple 10 x 6 \040spatial model with movement}{section.13}% 272
-\BOOKMARK [1][-]{section.14}{14 Post processing output using R}{}% 273
-\BOOKMARK [2][-]{subsection.14.1}{14.1 Read and extract reports from a SPM output file.}{section.14}% 274
-\BOOKMARK [2][-]{subsection.14.2}{14.2 Read and write SPM config files.}{section.14}% 275
-\BOOKMARK [1][-]{section.15}{15 Changes from previous versions}{}% 276
-\BOOKMARK [1][-]{section.16}{16 Troubleshooting}{}% 277
-\BOOKMARK [2][-]{subsection.16.1}{16.1 Introduction}{section.16}% 278
-\BOOKMARK [2][-]{subsection.16.2}{16.2 Reporting errors}{section.16}% 279
-\BOOKMARK [2][-]{subsection.16.3}{16.3 Guidelines for reporting a bug in SPM}{section.16}% 280
-\BOOKMARK [1][-]{section.17}{17 Acknowledgements}{}% 281
-\BOOKMARK [1][-]{section.18}{18 Quick reference}{}% 282
-\BOOKMARK [2][-]{subsection.18.1}{18.1 Population command and subcommand syntax}{section.18}% 283
-\BOOKMARK [2][-]{subsection.18.2}{18.2 Estimation command and subcommand syntax}{section.18}% 284
-\BOOKMARK [2][-]{subsection.18.3}{18.3 Observation command and subcommand syntax}{section.18}% 285
-\BOOKMARK [2][-]{subsection.18.4}{18.4 Report command and subcommand syntax}{section.18}% 286
-\BOOKMARK [2][-]{subsection.18.5}{18.5 Other commands and subcommands}{section.18}% 287
-\BOOKMARK [1][-]{section.19}{19 References}{}% 288
-\BOOKMARK [1][-]{section.20}{20 Spatial Population Model software license}{}% 289
-\BOOKMARK [1][-]{section.21}{21 Index}{}% 290
+\BOOKMARK [3][-]{subsubsection.8.4.3}{8.4.3 Beverton-Holt recruitment process parameterised by YCS}{subsection.8.4}% 129
+\BOOKMARK [3][-]{subsubsection.8.4.4}{8.4.4 Beverton-Holt recruitment process parameterised by absolute annual recruitments}{subsection.8.4}% 130
+\BOOKMARK [3][-]{subsubsection.8.4.5}{8.4.5 Local Beverton-Holt recruitment process}{subsection.8.4}% 131
+\BOOKMARK [3][-]{subsubsection.8.4.6}{8.4.6 Ageing process}{subsection.8.4}% 132
+\BOOKMARK [3][-]{subsubsection.8.4.7}{8.4.7 Constant mortality rate process}{subsection.8.4}% 133
+\BOOKMARK [3][-]{subsubsection.8.4.8}{8.4.8 Age mortality rate process}{subsection.8.4}% 134
+\BOOKMARK [3][-]{subsubsection.8.4.9}{8.4.9 Constant exploitation rate process}{subsection.8.4}% 135
+\BOOKMARK [3][-]{subsubsection.8.4.10}{8.4.10 Annual mortality rate process}{subsection.8.4}% 136
+\BOOKMARK [3][-]{subsubsection.8.4.11}{8.4.11 Layer varying exploitation rate process}{subsection.8.4}% 137
+\BOOKMARK [3][-]{subsubsection.8.4.12}{8.4.12 Event mortality process}{subsection.8.4}% 138
+\BOOKMARK [3][-]{subsubsection.8.4.13}{8.4.13 Biomass event mortality process}{subsection.8.4}% 139
+\BOOKMARK [3][-]{subsubsection.8.4.14}{8.4.14 Holling mortality rate}{subsection.8.4}% 140
+\BOOKMARK [3][-]{subsubsection.8.4.15}{8.4.15 Prey-suitability predation process}{subsection.8.4}% 141
+\BOOKMARK [3][-]{subsubsection.8.4.16}{8.4.16 Category state by age process}{subsection.8.4}% 142
+\BOOKMARK [3][-]{subsubsection.8.4.17}{8.4.17 Category transition process}{subsection.8.4}% 143
+\BOOKMARK [3][-]{subsubsection.8.4.18}{8.4.18 Category transition rate process}{subsection.8.4}% 144
+\BOOKMARK [3][-]{subsubsection.8.4.19}{8.4.19 Category transition by age process}{subsection.8.4}% 145
+\BOOKMARK [3][-]{subsubsection.8.4.20}{8.4.20 Migration movement}{subsection.8.4}% 146
+\BOOKMARK [3][-]{subsubsection.8.4.21}{8.4.21 Adjacent cell movement}{subsection.8.4}% 147
+\BOOKMARK [3][-]{subsubsection.8.4.22}{8.4.22 Preference movement}{subsection.8.4}% 148
+\BOOKMARK [3][-]{subsubsection.8.4.23}{8.4.23 Multi-threaded preference movement}{subsection.8.4}% 149
+\BOOKMARK [2][-]{subsection.8.5}{8.5 Preference functions}{section.8}% 150
+\BOOKMARK [3][-]{subsubsection.8.5.1}{8.5.1 Constant}{subsection.8.5}% 151
+\BOOKMARK [3][-]{subsubsection.8.5.2}{8.5.2 Normal}{subsection.8.5}% 152
+\BOOKMARK [3][-]{subsubsection.8.5.3}{8.5.3 Double-normal}{subsection.8.5}% 153
+\BOOKMARK [3][-]{subsubsection.8.5.4}{8.5.4 Logistic}{subsection.8.5}% 154
+\BOOKMARK [3][-]{subsubsection.8.5.5}{8.5.5 Inverse-logistic}{subsection.8.5}% 155
+\BOOKMARK [3][-]{subsubsection.8.5.6}{8.5.6 Exponential}{subsection.8.5}% 156
+\BOOKMARK [3][-]{subsubsection.8.5.7}{8.5.7 Threshold}{subsection.8.5}% 157
+\BOOKMARK [3][-]{subsubsection.8.5.8}{8.5.8 Knife-edge}{subsection.8.5}% 158
+\BOOKMARK [3][-]{subsubsection.8.5.9}{8.5.9 Categorical}{subsection.8.5}% 159
+\BOOKMARK [3][-]{subsubsection.8.5.10}{8.5.10 Monotonic categorical}{subsection.8.5}% 160
+\BOOKMARK [3][-]{subsubsection.8.5.11}{8.5.11 Gaussian copula}{subsection.8.5}% 161
+\BOOKMARK [3][-]{subsubsection.8.5.12}{8.5.12 Gumbel copula}{subsection.8.5}% 162
+\BOOKMARK [3][-]{subsubsection.8.5.13}{8.5.13 Frank copula}{subsection.8.5}% 163
+\BOOKMARK [3][-]{subsubsection.8.5.14}{8.5.14 Independence copula}{subsection.8.5}% 164
+\BOOKMARK [2][-]{subsection.8.6}{8.6 Probability Density Functions}{section.8}% 165
+\BOOKMARK [3][-]{subsubsection.8.6.1}{8.6.1 Normal}{subsection.8.6}% 166
+\BOOKMARK [3][-]{subsubsection.8.6.2}{8.6.2 Lognormal}{subsection.8.6}% 167
+\BOOKMARK [3][-]{subsubsection.8.6.3}{8.6.3 Exponential}{subsection.8.6}% 168
+\BOOKMARK [3][-]{subsubsection.8.6.4}{8.6.4 Uniform}{subsection.8.6}% 169
+\BOOKMARK [2][-]{subsection.8.7}{8.7 Layers}{section.8}% 170
+\BOOKMARK [3][-]{subsubsection.8.7.1}{8.7.1 Numeric}{subsection.8.7}% 171
+\BOOKMARK [3][-]{subsubsection.8.7.2}{8.7.2 Categorical}{subsection.8.7}% 172
+\BOOKMARK [3][-]{subsubsection.8.7.3}{8.7.3 Distance}{subsection.8.7}% 173
+\BOOKMARK [3][-]{subsubsection.8.7.4}{8.7.4 Haversine}{subsection.8.7}% 174
+\BOOKMARK [3][-]{subsubsection.8.7.5}{8.7.5 Dijkstra}{subsection.8.7}% 175
+\BOOKMARK [3][-]{subsubsection.8.7.6}{8.7.6 Haversine Dijkstra}{subsection.8.7}% 176
+\BOOKMARK [3][-]{subsubsection.8.7.7}{8.7.7 Abundance}{subsection.8.7}% 177
+\BOOKMARK [3][-]{subsubsection.8.7.8}{8.7.8 Biomass}{subsection.8.7}% 178
+\BOOKMARK [3][-]{subsubsection.8.7.9}{8.7.9 Abundance-density}{subsection.8.7}% 179
+\BOOKMARK [3][-]{subsubsection.8.7.10}{8.7.10 Biomass-density}{subsection.8.7}% 180
+\BOOKMARK [3][-]{subsubsection.8.7.11}{8.7.11 Numeric meta-layer}{subsection.8.7}% 181
+\BOOKMARK [3][-]{subsubsection.8.7.12}{8.7.12 Categorical meta-layer}{subsection.8.7}% 182
+\BOOKMARK [3][-]{subsubsection.8.7.13}{8.7.13 Derived quantity layer}{subsection.8.7}% 183
+\BOOKMARK [3][-]{subsubsection.8.7.14}{8.7.14 Derived quantity by cell layer}{subsection.8.7}% 184
+\BOOKMARK [2][-]{subsection.8.8}{8.8 Derived quantities by cell}{section.8}% 185
+\BOOKMARK [3][-]{subsubsection.8.8.1}{8.8.1 Abundance}{subsection.8.8}% 186
+\BOOKMARK [3][-]{subsubsection.8.8.2}{8.8.2 Biomass}{subsection.8.8}% 187
+\BOOKMARK [2][-]{subsection.8.9}{8.9 Derived quantities}{section.8}% 188
+\BOOKMARK [3][-]{subsubsection.8.9.1}{8.9.1 Abundance}{subsection.8.9}% 189
+\BOOKMARK [3][-]{subsubsection.8.9.2}{8.9.2 Biomass}{subsection.8.9}% 190
+\BOOKMARK [2][-]{subsection.8.10}{8.10 Age-size relationship}{section.8}% 191
+\BOOKMARK [3][-]{subsubsection.8.10.1}{8.10.1 None}{subsection.8.10}% 192
+\BOOKMARK [3][-]{subsubsection.8.10.2}{8.10.2 von Bertalanffy}{subsection.8.10}% 193
+\BOOKMARK [3][-]{subsubsection.8.10.3}{8.10.3 Schnute}{subsection.8.10}% 194
+\BOOKMARK [3][-]{subsubsection.8.10.4}{8.10.4 von Bertalanffy k-at-age}{subsection.8.10}% 195
+\BOOKMARK [3][-]{subsubsection.8.10.5}{8.10.5 mean size-at-age}{subsection.8.10}% 196
+\BOOKMARK [2][-]{subsection.8.11}{8.11 Size-weight}{section.8}% 197
+\BOOKMARK [3][-]{subsubsection.8.11.1}{8.11.1 None}{subsection.8.11}% 198
+\BOOKMARK [3][-]{subsubsection.8.11.2}{8.11.2 Basic}{subsection.8.11}% 199
+\BOOKMARK [2][-]{subsection.8.12}{8.12 Selectivities}{section.8}% 200
+\BOOKMARK [3][-]{subsubsection.8.12.1}{8.12.1 Constant}{subsection.8.12}% 201
+\BOOKMARK [3][-]{subsubsection.8.12.2}{8.12.2 Knife-edge}{subsection.8.12}% 202
+\BOOKMARK [3][-]{subsubsection.8.12.3}{8.12.3 All-values}{subsection.8.12}% 203
+\BOOKMARK [3][-]{subsubsection.8.12.4}{8.12.4 All-values-bounded}{subsection.8.12}% 204
+\BOOKMARK [3][-]{subsubsection.8.12.5}{8.12.5 Increasing}{subsection.8.12}% 205
+\BOOKMARK [3][-]{subsubsection.8.12.6}{8.12.6 Logistic}{subsection.8.12}% 206
+\BOOKMARK [3][-]{subsubsection.8.12.7}{8.12.7 InverseLogistic}{subsection.8.12}% 207
+\BOOKMARK [3][-]{subsubsection.8.12.8}{8.12.8 Logistic producing}{subsection.8.12}% 208
+\BOOKMARK [3][-]{subsubsection.8.12.9}{8.12.9 Double-normal}{subsection.8.12}% 209
+\BOOKMARK [3][-]{subsubsection.8.12.10}{8.12.10 Double-exponential}{subsection.8.12}% 210
+\BOOKMARK [3][-]{subsubsection.8.12.11}{8.12.11 Spline}{subsection.8.12}% 211
+\BOOKMARK [1][-]{section.9}{9 Estimation command and subcommand syntax}{}% 212
+\BOOKMARK [2][-]{subsection.9.1}{9.1 Estimation methods}{section.9}% 213
+\BOOKMARK [2][-]{subsection.9.2}{9.2 Point estimation}{section.9}% 214
+\BOOKMARK [3][-]{subsubsection.9.2.1}{9.2.1 Numerical differences minimiser}{subsection.9.2}% 215
+\BOOKMARK [3][-]{subsubsection.9.2.2}{9.2.2 Differential evolution minimiser}{subsection.9.2}% 216
+\BOOKMARK [2][-]{subsection.9.3}{9.3 Markov Chain Monte Carlo \(MCMC\)}{section.9}% 217
+\BOOKMARK [3][-]{subsubsection.9.3.1}{9.3.1 Metropolis-Hastings}{subsection.9.3}% 218
+\BOOKMARK [2][-]{subsection.9.4}{9.4 Profiles}{section.9}% 219
+\BOOKMARK [2][-]{subsection.9.5}{9.5 Defining the parameters to be estimated and their priors}{section.9}% 220
+\BOOKMARK [3][-]{subsubsection.9.5.1}{9.5.1 Uniform prior}{subsection.9.5}% 221
+\BOOKMARK [3][-]{subsubsection.9.5.2}{9.5.2 Uniform-log prior}{subsection.9.5}% 222
+\BOOKMARK [3][-]{subsubsection.9.5.3}{9.5.3 Normal prior}{subsection.9.5}% 223
+\BOOKMARK [3][-]{subsubsection.9.5.4}{9.5.4 Normal-by-stdev prior}{subsection.9.5}% 224
+\BOOKMARK [3][-]{subsubsection.9.5.5}{9.5.5 Lognormal prior}{subsection.9.5}% 225
+\BOOKMARK [3][-]{subsubsection.9.5.6}{9.5.6 Beta prior}{subsection.9.5}% 226
+\BOOKMARK [2][-]{subsection.9.6}{9.6 Defining catchability constants}{section.9}% 227
+\BOOKMARK [2][-]{subsection.9.7}{9.7 Defining penalties}{section.9}% 228
+\BOOKMARK [1][-]{section.10}{10 Observation command and subcommand syntax}{}% 229
+\BOOKMARK [2][-]{subsection.10.1}{10.1 Observation types}{section.10}% 230
+\BOOKMARK [3][-]{subsubsection.10.1.1}{10.1.1 Proportions at age}{subsection.10.1}% 231
+\BOOKMARK [3][-]{subsubsection.10.1.2}{10.1.2 Proportions by category}{subsection.10.1}% 232
+\BOOKMARK [3][-]{subsubsection.10.1.3}{10.1.3 Proportions at length}{subsection.10.1}% 233
+\BOOKMARK [3][-]{subsubsection.10.1.4}{10.1.4 Proportions by category at length}{subsection.10.1}% 234
+\BOOKMARK [3][-]{subsubsection.10.1.5}{10.1.5 Abundance}{subsection.10.1}% 235
+\BOOKMARK [3][-]{subsubsection.10.1.6}{10.1.6 Biomass}{subsection.10.1}% 236
+\BOOKMARK [3][-]{subsubsection.10.1.7}{10.1.7 Presence}{subsection.10.1}% 237
+\BOOKMARK [2][-]{subsection.10.2}{10.2 Defining ageing error}{section.10}% 238
+\BOOKMARK [3][-]{subsubsection.10.2.1}{10.2.1 No ageing error}{subsection.10.2}% 239
+\BOOKMARK [3][-]{subsubsection.10.2.2}{10.2.2 Normal ageing error}{subsection.10.2}% 240
+\BOOKMARK [3][-]{subsubsection.10.2.3}{10.2.3 Off-by-one ageing error}{subsection.10.2}% 241
+\BOOKMARK [1][-]{section.11}{11 Report command and subcommand syntax}{}% 242
+\BOOKMARK [2][-]{subsection.11.1}{11.1 Available reports}{section.11}% 243
+\BOOKMARK [2][-]{subsection.11.2}{11.2 Report commands and subcommands}{section.11}% 244
+\BOOKMARK [3][-]{subsubsection.11.2.1}{11.2.1 Print the co-ordinates of the spatial map}{subsection.11.2}% 245
+\BOOKMARK [3][-]{subsubsection.11.2.2}{11.2.2 Print the partition}{subsection.11.2}% 246
+\BOOKMARK [3][-]{subsubsection.11.2.3}{11.2.3 Print the partition biomass}{subsection.11.2}% 247
+\BOOKMARK [3][-]{subsubsection.11.2.4}{11.2.4 Print the partition at initialisation}{subsection.11.2}% 248
+\BOOKMARK [3][-]{subsubsection.11.2.5}{11.2.5 Print a summary of a process}{subsection.11.2}% 249
+\BOOKMARK [3][-]{subsubsection.11.2.6}{11.2.6 Print a summary of a preference function}{subsection.11.2}% 250
+\BOOKMARK [3][-]{subsubsection.11.2.7}{11.2.7 Print a derived quantity}{subsection.11.2}% 251
+\BOOKMARK [3][-]{subsubsection.11.2.8}{11.2.8 Print a derived quantity by cell}{subsection.11.2}% 252
+\BOOKMARK [3][-]{subsubsection.11.2.9}{11.2.9 Print a summary of the estimated parameters}{subsection.11.2}% 253
+\BOOKMARK [3][-]{subsubsection.11.2.10}{11.2.10 Print the estimated parameter values out as a vector}{subsection.11.2}% 254
+\BOOKMARK [3][-]{subsubsection.11.2.11}{11.2.11 Print the objective function values}{subsection.11.2}% 255
+\BOOKMARK [3][-]{subsubsection.11.2.12}{11.2.12 Print the covariance matrix}{subsection.11.2}% 256
+\BOOKMARK [3][-]{subsubsection.11.2.13}{11.2.13 Print a summary of the an observation, including fits, and residuals}{subsection.11.2}% 257
+\BOOKMARK [3][-]{subsubsection.11.2.14}{11.2.14 Print an observation using simulated values}{subsection.11.2}% 258
+\BOOKMARK [3][-]{subsubsection.11.2.15}{11.2.15 Print an ageing error misclassification matrix}{subsection.11.2}% 259
+\BOOKMARK [3][-]{subsubsection.11.2.16}{11.2.16 Print a layer}{subsection.11.2}% 260
+\BOOKMARK [3][-]{subsubsection.11.2.17}{11.2.17 Print a derived view via a categorical layer}{subsection.11.2}% 261
+\BOOKMARK [3][-]{subsubsection.11.2.18}{11.2.18 Print a selectivity}{subsection.11.2}% 262
+\BOOKMARK [3][-]{subsubsection.11.2.19}{11.2.19 Print the random number seed used}{subsection.11.2}% 263
+\BOOKMARK [3][-]{subsubsection.11.2.20}{11.2.20 Print mean size at age}{subsection.11.2}% 264
+\BOOKMARK [3][-]{subsubsection.11.2.21}{11.2.21 Print mean weight at size}{subsection.11.2}% 265
+\BOOKMARK [3][-]{subsubsection.11.2.22}{11.2.22 Print mean weight at age}{subsection.11.2}% 266
+\BOOKMARK [3][-]{subsubsection.11.2.23}{11.2.23 Print the results of an MCMC}{subsection.11.2}% 267
+\BOOKMARK [3][-]{subsubsection.11.2.24}{11.2.24 Print the MCMC samples as they are calculated}{subsection.11.2}% 268
+\BOOKMARK [3][-]{subsubsection.11.2.25}{11.2.25 Print the MCMC objective function values as they are calculated}{subsection.11.2}% 269
+\BOOKMARK [1][-]{section.12}{12 Other commands and subcommands}{}% 270
+\BOOKMARK [1][-]{section.13}{13 Examples}{}% 271
+\BOOKMARK [2][-]{subsection.13.1}{13.1 An example of a simple 1 x 1 \040non-spatial model}{section.13}% 272
+\BOOKMARK [2][-]{subsection.13.2}{13.2 An example of a simple 10 x 6 \040spatial model with movement}{section.13}% 273
+\BOOKMARK [1][-]{section.14}{14 Post processing output using R}{}% 274
+\BOOKMARK [2][-]{subsection.14.1}{14.1 Read and extract reports from a SPM output file.}{section.14}% 275
+\BOOKMARK [2][-]{subsection.14.2}{14.2 Read and write SPM config files.}{section.14}% 276
+\BOOKMARK [1][-]{section.15}{15 Changes from previous versions}{}% 277
+\BOOKMARK [1][-]{section.16}{16 Troubleshooting}{}% 278
+\BOOKMARK [2][-]{subsection.16.1}{16.1 Introduction}{section.16}% 279
+\BOOKMARK [2][-]{subsection.16.2}{16.2 Reporting errors}{section.16}% 280
+\BOOKMARK [2][-]{subsection.16.3}{16.3 Guidelines for reporting a bug in SPM}{section.16}% 281
+\BOOKMARK [1][-]{section.17}{17 Acknowledgements}{}% 282
+\BOOKMARK [1][-]{section.18}{18 Quick reference}{}% 283
+\BOOKMARK [2][-]{subsection.18.1}{18.1 Population command and subcommand syntax}{section.18}% 284
+\BOOKMARK [2][-]{subsection.18.2}{18.2 Estimation command and subcommand syntax}{section.18}% 285
+\BOOKMARK [2][-]{subsection.18.3}{18.3 Observation command and subcommand syntax}{section.18}% 286
+\BOOKMARK [2][-]{subsection.18.4}{18.4 Report command and subcommand syntax}{section.18}% 287
+\BOOKMARK [2][-]{subsection.18.5}{18.5 Other commands and subcommands}{section.18}% 288
+\BOOKMARK [1][-]{section.19}{19 References}{}% 289
+\BOOKMARK [1][-]{section.20}{20 Spatial Population Model software license}{}% 290
+\BOOKMARK [1][-]{section.21}{21 Index}{}% 291

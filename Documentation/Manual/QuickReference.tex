@@ -43,6 +43,18 @@
 \defSub{ycs\_values} {YCS values}
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
+\par\textbf{\commandlabsubarg{process}{type}{bh\_recruitment2}}\par
+\defSub{categories} {Define the categories into which recruitment occurs}
+\defSub{proportions} {Define the proportion of recruitment that occurs into each category}
+\defSub{age} {Define the age that receives recruitment}
+\defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
+\defSub{b0} {Define the \command{initialisation\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$)}
+\defSub{ssb} {Define the label of the \command{derived\_quantity} that defines the spawning stock biomass (SSB)}
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
+\defSub{values} {The amount of recruitment in each year in \texttt{years}}
+\defSub{years} {Years from which recruitments are specified in \texttt{values}}
+\defSub{standardise\_recruitment\_years} {Years from which recruitments are used to derive $R_0$}
+\defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \par\textbf{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}\par
 \defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the amount of recruitment in each cell at equilibrium abundance levels}
 \defSub{categories} {Define the categories into which recruitment occurs}

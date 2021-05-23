@@ -19,6 +19,7 @@
 #include "../Population/CAgeMortalityRateProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
+#include "../Population/CBHRecruitmentProcess2.h"
 #include "../Population/CBiomassEventMortalityProcess.h"
 #include "../Population/CCategoryStateByAgeProcess.h"
 #include "../Population/CCategoryTransitionByAgeProcess.h"
@@ -50,6 +51,8 @@ CProcess *CProcessFactory::buildProcess(string type, bool registerWithManager)
     pProcess = new CConstantRecruitmentProcess();
   else if (type == PARAM_BH_RECRUITMENT)
     pProcess = new CBHRecruitmentProcess();
+  else if (type == PARAM_BH_RECRUITMENT2)
+    pProcess = new CBHRecruitmentProcess2();
   else if (type == PARAM_LOCAL_BH_RECRUITMENT)
     pProcess = new CLocalBHRecruitmentProcess();
   else if (type == PARAM_PROPORTIONAL_RECRUITMENT)

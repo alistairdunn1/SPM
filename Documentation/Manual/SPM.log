@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.2)  24 DEC 2020 15:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.2)  23 MAY 2021 20:18
 entering extended mode
 **./SPM.tex
 (SPM.tex
@@ -635,7 +635,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EveryShipout initializing macros
-<Figures/SPM.png, id=1164, 203.5605pt x 203.5605pt>
+<Figures/SPM.png, id=1168, 203.5605pt x 203.5605pt>
 File: Figures/SPM.png Graphic file (type png)
 <use Figures/SPM.png>
 Package pdftex.def Info: Figures/SPM.png  used on input line 217.
@@ -735,7 +735,7 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 \openout2 = `Population.aux'.
 
  (Population.tex
-<Figures/SquareStructure.png, id=1673, 493.845pt x 345.54094pt>
+<Figures/SquareStructure.png, id=1679, 493.845pt x 345.54094pt>
 File: Figures/SquareStructure.png Graphic file (type png)
 <use Figures/SquareStructure.png>
 Package pdftex.def Info: Figures/SquareStructure.png  used on input line 36.
@@ -747,76 +747,88 @@ Package pdftex.def Info: Figures/SquareStructure.png  used on input line 36.
 
 ] [16.28 <./Figures/SquareStructure.png>] [17.29] [18.30] [19.31]
 [20.32] [21.33] [22.34] [23.35] [24.36] [25.37] [26.38] [27.39] [28.40]
+Overfull \hbox (59.65474pt too wide) in paragraph at lines 572--572
+[]\OT1/pcr/m/n/10 years    1994   1995   1996   1997   1998   1999   2000   200
+1   2002   2003   2004   2005   2006[] 
+ []
+
+
+Overfull \hbox (59.65474pt too wide) in paragraph at lines 572--572
+[]\OT1/pcr/m/n/10 values 500000 500000 500000 500000 500000 500000 500000 50000
+0 500000 500000 500000 500000 500000[] 
+ []
+
 [29.41] [30.42] [31.43] [32.44] [33.45] [34.46] [35.47] [36.48] [37.49]
 [38.50] [39.51] [40.52] [41.53] [42.54] [43.55] [44.56] [45.57] [46.58]
-[47.59] [48.60] [49.61] [50.62] [51.63] [52.64] [53.65] [54.66] [55.67])
-[56.68]
+[47.59] [48.60] [49.61] [50.62] [51.63] [52.64] [53.65] [54.66] [55.67]
+[56.68]) [57.69] [58.70
+
+
+
+]
 \openout2 = `Estimation.aux'.
 
- (Estimation.tex [57.69
+ (Estimation.tex [59.71
 
-
-
-
-] [58.70] [59.71] [60.72] [61.73] [62.74]
-[63.75]) [64.76]
+] [60.72] [61.73] [62.74]
+[63.75] [64.76] [65.77]) [66.78]
 \openout2 = `Observation.aux'.
 
- (Observation.tex [65.77
+ (Observation.tex [67.79
 
 
 
 
-] [66.78]
+] [68.80]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 111.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 111.
- [67.79] [68.80] [69.81]
+ [69.81]
 [70.82] [71.83] [72.84] [73.85] [74.86] [75.87] [76.88] [77.89] [78.90]
-[79.91] [80.92] [81.93] [82.94] [83.95]) [84.96]
+[79.91] [80.92] [81.93] [82.94] [83.95] [84.96] [85.97]) [86.98]
 \openout2 = `Report.aux'.
 
- (Report.tex [85.97
+ (Report.tex
+[87.99
 
 
 
 
-] [86.98]
-[87.99]) [88.100] (syntax/PopulationSyntax.tex [89.101
+] [88.100] [89.101]) [90.102] (syntax/PopulationSyntax.tex [91.103
 
 
 
-] [90.102] [91.103]
+]
 [92.104] [93.105] [94.106] [95.107] [96.108] [97.109] [98.110] [99.111]
 [100.112] [101.113] [102.114] [103.115] [104.116] [105.117] [106.118] [107.119]
 [108.120] [109.121] [110.122] [111.123] [112.124] [113.125] [114.126] [115.127]
 [116.128] [117.129] [118.130] [119.131] [120.132] [121.133] [122.134] [123.135]
 [124.136] [125.137] [126.138] [127.139] [128.140] [129.141] [130.142] [131.143]
-[132.144]) [133.145] [134.146
+[132.144] [133.145] [134.146] [135.147] [136.148]) [137.149] [138.150
 
 
-] (syntax/EstimationSyntax.tex [135.147] [136.148] [137.149] [138.150] [139.151
-] [140.152] [141.153]) [142.154]
-(syntax/ObservationSyntax.tex [143.155
+]
+(syntax/EstimationSyntax.tex [139.151] [140.152] [141.153] [142.154] [143.155]
+[144.156] [145.157]) [146.158] (syntax/ObservationSyntax.tex [147.159
 
 
-] [144.156] [145.157] [146.158] [147.159] [148.160] [149.161]
+] [148.160] [149.161] [150.162] [151.163] [152.164] [153.165]
 Overfull \hbox (14.86246pt too wide) in paragraph at lines 312--312
 []\OT1/pcr/b/n/12 @observation[label].type=proportions[]by[]category[]at[]lengt
 h 
  []
 
-[150.162] [151.163] [152.164] [153.165] [154.166] [155.167] [156.168] [157.169]
-[158.170]) [159.171] [160.172
+[154.166] [155.167] [156.168] [157.169] [158.170] [159.171] [160.172] [161.173]
+[162.174]) [163.175] [164.176
 
 
-] (syntax/ReportSyntax.tex [161.173] [162.174]
-[163.175] [164.176] [165.177] [166.178] [167.179] [168.180] [169.181] [170.182]
-[171.183]) [172.184] (syntax/GeneralSyntax.tex) [173.185
+] (syntax/ReportSyntax.tex [165.177] [166.178]
+[167.179] [168.180] [169.181] [170.182] [171.183] [172.184] [173.185] [174.186]
+[175.187]) [176.188] (syntax/GeneralSyntax.tex) [177.189
 
 
-] [174.186
+] [178.190
 
 
 ]
@@ -833,38 +845,38 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
  (Examples/Example1.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 20.
- (../../examples/1x1/config.spm [175.187
+ (../../examples/1x1/config.spm [179.191
 
 ])
-(../../examples/1x1/objective_values.dat [176.188]) (../../examples/1x1/MPD.dat
+(../../examples/1x1/objective_values.dat [180.192]) (../../examples/1x1/MPD.dat
 ) (../../examples/1x1/simulations/observations.01) (../../examples/1x1/MCMC.log
-[177.189]) (../../examples/1x1/MCMC.log
+[181.193]) (../../examples/1x1/MCMC.log
 consecutive:
 ) (../../examples/1x1/MCMC.log
 consecutive:
-[178.190])) (Examples/Example2.tex (../../examples/simple_spatial/config.spm
-[179.191]) [180.192] (../../examples/simple_spatial/objective.dat [181.193])
+[182.194])) (Examples/Example2.tex (../../examples/simple_spatial/config.spm
+[183.195]) [184.196] (../../examples/simple_spatial/objective.dat [185.197])
 (../../examples/simple_spatial/MPD.dat)
 (../../examples/simple_spatial/simulations/observations.01)
-(../../examples/simple_spatial/MCMC.log))) [182.194]
+(../../examples/simple_spatial/MCMC.log))) [186.198]
 \openout2 = `PostProcessing.aux'.
 
  (PostProcessing.tex)
-[183.195
+[187.199
 
 
 
 
-] [184.196
+] [188.200
 
 
 
 ]
 \openout2 = `ChangesEnhancements.aux'.
 
- (ChangesEnhancements.tex) [185.197
+ (ChangesEnhancements.tex) [189.201
 
-] [186.198
+] [190.202
 
 
 
@@ -872,54 +884,54 @@ consecutive:
 \openout2 = `Troubleshooting.aux'.
 
 
-(Troubleshooting.tex [187.199
+(Troubleshooting.tex [191.203
 
-]) [188.200]
+]) [192.204]
 \openout2 = `Acknowledgments.aux'.
 
- (Acknowledgments.tex) [189.201
+ (Acknowledgments.tex) [193.205
 
 
 
 
 ]
-[190.202
+[194.206
 
 
 
 ]
 \openout2 = `QuickReference.aux'.
 
- (QuickReference.tex [191.203
+ (QuickReference.tex [195.207
 
-] [192.204] [193.205] [194.206] [195.207] [196.208] [197.209] [198.210] [199.21
-1] [200.212] [201.213] [202.214] [203.215] [204.216] [205.217] [206.218] [207.2
-19] [208.220] [209.221] [210.222]
-[211.223]) [212.224] [213.225] [214.226
+] [196.208] [197.209] [198.210] [199.211] [200.212] [201.213] [202.214] [203.21
+5] [204.216] [205.217] [206.218] [207.219] [208.220] [209.221] [210.222] [211.2
+23] [212.224] [213.225] [214.226]
+[215.227] [216.228]) [217.229] [218.230
 
 
 
 ]
 \openout2 = `References.aux'.
 
- (References.tex (SPM.bbl [215.227
+ (References.tex (SPM.bbl [219.231
 
 ]))
-[216.228]
+[220.232]
 \openout2 = `License.aux'.
 
- (License.tex [217.229
+ (License.tex [221.233
 
 
 
 
-]) [218.230] (SPM.ind [219.231
+]) [222.234] (SPM.ind [223.235
 
 
 
 
-] [220.232]
-[221.233] [222.234] [223.235
+] [224.236]
+[225.237] [226.238] [227.239
 
 ])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 358.
@@ -932,7 +944,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 358.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 358.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 358.
 Package rerunfilecheck Info: File `SPM.out' has not changed.
-(rerunfilecheck)             Checksum: 9416F81C48F04699D8EA1B36821B040B;24285.
+(rerunfilecheck)             Checksum: 2DE86AF744F4AD225A91B11107457D09;24454.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
  )
 (\end occurred inside a group at level 12)
@@ -951,13 +963,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
 ### simple group (level 1) entered at line 84 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12286 strings out of 480896
- 189147 string characters out of 2898166
- 587522 words of memory out of 3000000
- 26474 multiletter control sequences out of 15000+200000
+ 12295 strings out of 480896
+ 189258 string characters out of 2898166
+ 587517 words of memory out of 3000000
+ 26475 multiletter control sequences out of 15000+200000
  608580 words of font info for 178 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,15n,45p,1464b,2281s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,15n,45p,1464b,2283s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
 ps/base/8r.enc}<C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmex10.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/f
@@ -975,9 +987,9 @@ type1/urw/times/utmb8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SPM.pdf (235 pages, 1201806 bytes).
+Output written on SPM.pdf (239 pages, 1213695 bytes).
 PDF statistics:
- 4032 PDF objects out of 4296 (max. 8388607)
- 1166 named destinations out of 1200 (max. 500000)
- 2351 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4066 PDF objects out of 4296 (max. 8388607)
+ 1174 named destinations out of 1200 (max. 500000)
+ 2359 words of extra memory for PDF output out of 10000 (max. 10000000)
 

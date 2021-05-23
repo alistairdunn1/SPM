@@ -1,10 +1,9 @@
 //============================================================================
-// Name        : CBHRecruitmentProcess.cpp
-// Author      : S.Rasmussen
-// Date        : 13/01/2009
-// Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+// Name        : CBHRecruitmentProcess2.cpp
+// Author      : A.Dunn
+// Date        : 23/05/2021
+// Copyright   :
+// Description : This is a Beverton-Holt stock recruitment, parametersed with absolute annual recruitment
 //============================================================================
 
 // Global headers
@@ -12,7 +11,7 @@
 #include <limits>
 
 // Local headers
-#include "CBHRecruitmentProcess.h"
+#include "CBHRecruitmentProcess2.h"
 #include "../../DerivedQuantities/CDerivedQuantity.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
@@ -28,12 +27,11 @@ using std::endl;
 using std::numeric_limits;
 
 //**********************************************************************
-// CBHRecruitmentProcess::CBHRecruitmentProcess()
+// CBHRecruitmentProcess2::CBHRecruitmentProcess2()
 // Default constructor
 //**********************************************************************
-CBHRecruitmentProcess::CBHRecruitmentProcess()
+CBHRecruitmentProcess2::CBHRecruitmentProcess2()
 {
-
   pTimeStepManager = CTimeStepManager::Instance();
   pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
@@ -43,50 +41,47 @@ CBHRecruitmentProcess::CBHRecruitmentProcess()
   bRequiresMerge = false;
 
   // Register allowed estimables
-  registerEstimable(PARAM_R0, &dR0);
   registerEstimable(PARAM_STEEPNESS, &dSteepness);
-  //registerEstimable(PARAM_SIGMA_R, &dSigmaR);
-  //registerEstimable(PARAM_RHO, &dRho);
+  //  registerEstimable(PARAM_SIGMA_R, &dSigmaR);
+  //  registerEstimable(PARAM_RHO, &dRho);
 
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_R0);
+  pParameterList->registerAllowed(PARAM_VALUES);
+  pParameterList->registerAllowed(PARAM_YEARS);
+  pParameterList->registerAllowed(PARAM_STANDARDISE_RECRUITMENT_YEARS);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGE);
   pParameterList->registerAllowed(PARAM_STEEPNESS);
-  //pParameterList->registerAllowed(PARAM_SIGMA_R);
-  //pParameterList->registerAllowed(PARAM_RHO);
+  // pParameterList->registerAllowed(PARAM_SIGMA_R);
+  // pParameterList->registerAllowed(PARAM_RHO);
   pParameterList->registerAllowed(PARAM_SSB);
   pParameterList->registerAllowed(PARAM_B0);
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
-  pParameterList->registerAllowed(PARAM_YCS_VALUES);
-  pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
   pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
-// void CBHRecruitmentProcess::validate()
+// void CBHRecruitmentProcess2::validate()
 // Validate the process
 //**********************************************************************
-void CBHRecruitmentProcess::validate()
+void CBHRecruitmentProcess2::validate()
 {
   try
   {
-
     // Assign our variables
-    dR0 = pParameterList->getDouble(PARAM_R0);
     iAge = pParameterList->getInt(PARAM_AGE, true, pWorld->getMinAge());
     dSteepness = pParameterList->getDouble(PARAM_STEEPNESS, true, 1.0);
     sSSB = pParameterList->getString(PARAM_SSB);
     sB0 = pParameterList->getString(PARAM_B0, true, "");
     iSSBOffset = pParameterList->getInt(PARAM_SSB_OFFSET);
     sLayer = pParameterList->getString(PARAM_LAYER, true, "");
-    //dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
-    //dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
-
+    //dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
+    //dRho = pParameterList->getDouble(PARAM_RHO,true,0.0);
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
-    pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
-    pParameterList->fillVector(vStandardiseYCSYears, PARAM_STANDARDISE_YCS_YEARS, true);
+    pParameterList->fillVector(vRecruitmentValues, PARAM_VALUES);
+    pParameterList->fillVector(vStandardiseRecruitmentYears, PARAM_STANDARDISE_RECRUITMENT_YEARS);
+    pParameterList->fillVector(vRecruitmentYears, PARAM_YEARS);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
     // Validate parent
@@ -124,33 +119,33 @@ void CBHRecruitmentProcess::validate()
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
 
     //***************************************************
-    //Check that a value of YCSValues supplied for each YCSYear
-    if ((int)vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
-      CError::errorListSameSize(PARAM_YCS_VALUES, string("model years"));
+    //Check that a value of RecruitmentValues supplied for each RecruitmentYear in
+    if ((int)vRecruitmentValues.size() != (int)vRecruitmentYears.size())
+      CError::errorListSameSize(PARAM_YEARS, PARAM_VALUES);
 
-    // Register our YCS as Estimable
-    for (int i = 0; i < (int)vYCSValues.size(); ++i)
-      registerEstimable(PARAM_YCS_VALUES, i, &vYCSValues[i]);
+    // Register our RecruitmentValues as Estimable
+    for (int i = 0; i < (int)vRecruitmentValues.size(); ++i)
+      registerEstimable(PARAM_VALUES, i, &vRecruitmentValues[i]);
 
-    // Loop Through YCS. Make Sure They Are > 0.0
-    foreach (double dValue, vYCSValues)
+    // Loop Through RecruitmentValues. Make Sure They Are > 0.0
+    foreach (double dValue, vRecruitmentValues)
     {
       if (!CComparer::isPositive(dValue))
-        CError::errorLessThanEqualTo(PARAM_YCS_VALUES, PARAM_ZERO);
+        CError::errorLessThanEqualTo(PARAM_VALUES, PARAM_ZERO);
     }
   }
   catch (string &Ex)
   {
-    Ex = "CBHRecruitment.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CBHRecruitment2.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CBHRecruitmentProcess::build()
+// void CBHRecruitmentProcess2::build()
 // Build the process
 //**********************************************************************
-void CBHRecruitmentProcess::build()
+void CBHRecruitmentProcess2::build()
 {
   try
   {
@@ -181,7 +176,7 @@ void CBHRecruitmentProcess::build()
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
-    // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
+    // Figure out the when SSB is calculated w.r.t. recruitment, and then the default iActualOffset
     pTimeStepManager = CTimeStepManager::Instance();
 
     if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantity->getTimeStep())
@@ -197,43 +192,51 @@ void CBHRecruitmentProcess::build()
       iActualOffset = iSSBOffset;
     }
 
-    // Build the Standardise YCS Year Range
-    if (vStandardiseYCSYears.size() == 0)
+    // Check the Year Range
+    if (vRecruitmentYears.size() > 1)
     {
-      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i)
+      for (int i = 1; i < (int)vRecruitmentYears.size(); ++i)
       {
-        vStandardiseYCSYears.push_back(i - iSSBOffset);
-      }
-    }
-    else if (vStandardiseYCSYears.size() > 1)
-    {
-      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i)
-      {
-        if (vStandardiseYCSYears[i - 1] >= vStandardiseYCSYears[i])
-          CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
+        if (vRecruitmentYears[i - 1] >= vRecruitmentYears[i])
+          CError::error(PARAM_YEARS + string(" is not in numeric order"));
       }
     }
 
-    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iSSBOffset))
-      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYears[vStandardiseYCSYears.size() - 1] > (pWorld->getCurrentYear() - iSSBOffset))
-      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
+    if (vRecruitmentYears[0] < (pWorld->getInitialYear() - iSSBOffset))
+      CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
+    if (vRecruitmentYears[vRecruitmentYears.size() - 1] > (pWorld->getCurrentYear() - iSSBOffset))
+      CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
+
+    // Check the Year Range for standardising
+    if (vStandardiseRecruitmentYears.size() > 1)
+    {
+      for (int i = 1; i < (int)vStandardiseRecruitmentYears.size(); ++i)
+      {
+        if (vStandardiseRecruitmentYears[i - 1] >= vStandardiseRecruitmentYears[i])
+          CError::error(PARAM_STANDARDISE_RECRUITMENT_YEARS + string(" is not in numeric order"));
+      }
+    }
+
+    if (vStandardiseRecruitmentYears[0] < vRecruitmentYears[0])
+      CError::errorLessThan(PARAM_STANDARDISE_RECRUITMENT_YEARS, PARAM_YEARS);
+    if (vStandardiseRecruitmentYears[vStandardiseRecruitmentYears.size() - 1] > vRecruitmentYears[vRecruitmentYears.size() - 1])
+      CError::errorGreaterThan(PARAM_STANDARDISE_RECRUITMENT_YEARS, PARAM_YEARS);
 
     // rebuild
     rebuild();
   }
   catch (string &Ex)
   {
-    Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
+    Ex = "CBHRecruitment2.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CBHRecruitmentProcess::rebuild()
+// void CBHRecruitmentProcess2::rebuild()
 // Build the process
 //**********************************************************************
-void CBHRecruitmentProcess::rebuild()
+void CBHRecruitmentProcess2::rebuild()
 {
 #ifndef OPTIMIZE
   try
@@ -245,59 +248,62 @@ void CBHRecruitmentProcess::rebuild()
 
     // reset values
     vSSBValues.resize(0);
-    vYCSYears.resize(0);
+    vYCSValues.resize(0);
     vTrueYCSValues.resize(0);
-    vRecruitmentValues.resize(0);
+    vAllRecruitmentValues.resize(0);
+    vTrueRecruitmentValues.resize(0);
+    vAllRecruitmentYears.resize(0);
 
-    // Create vector of YCS years
+    // Create R0
+    dR0 = 0.0;
+    for (int i = 0; i < (int)vRecruitmentYears.size(); ++i)
+    {
+      for (int j = 0; j < (int)vStandardiseRecruitmentYears.size(); ++j)
+      {
+        if (vRecruitmentYears[i] == vStandardiseRecruitmentYears[j])
+        {
+          dR0 += vRecruitmentValues[i];
+          break;
+        }
+      }
+    }
+    dR0 = dR0 / (double)vStandardiseRecruitmentYears.size();
+
+    // Create vector of AllRecruitment years, values, and YCS
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
     {
-      vYCSYears.push_back(i - iSSBOffset);
+      vAllRecruitmentYears.push_back(i - iSSBOffset);
+      vAllRecruitmentValues.push_back(-1);
     }
-
-    // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
-    double dMeanYCS = 0;
-    for (int i = 0; i < (int)vYCSYears.size(); ++i)
+    for (int i = 0; i < (int)vAllRecruitmentYears.size(); ++i)
     {
-      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j)
+      vAllRecruitmentValues[i] = dR0;
+      for (int j = 0; j < (int)vRecruitmentYears.size(); ++j)
       {
-        if (vYCSYears[i] == vStandardiseYCSYears[j])
+        if (vAllRecruitmentYears[i] == vRecruitmentYears[j])
         {
-          dMeanYCS += vYCSValues[i];
+          vAllRecruitmentValues[i] = vRecruitmentValues[j];
           break;
         }
       }
-    }
-    dMeanYCS /= vStandardiseYCSYears.size();
-
-    for (int i = 0; i < (int)vYCSYears.size(); ++i)
-    {
-      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j)
-      {
-        if (vYCSYears[i] == vStandardiseYCSYears[j])
-        {
-          // rescale
-          vYCSValues[i] = vYCSValues[i] / dMeanYCS;
-          break;
-        }
-      }
+      vYCSValues.push_back(vAllRecruitmentValues[i] / dR0);
     }
 
 #ifndef OPTIMIZE
   }
   catch (string &Ex)
   {
-    Ex = "CBHRecruitmentProcess.rebuild(" + getLabel() + ")->" + Ex;
+    Ex = "CBHRecruitmentProcess2.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 }
 
 //**********************************************************************
-// void CBHRecruitmentProcess::execute()
+// void CBHRecruitmentProcess2::execute()
 // Execute this process
 //**********************************************************************
-void CBHRecruitmentProcess::execute()
+void CBHRecruitmentProcess2::execute()
 {
 #ifndef OPTIMIZE
   try
@@ -337,21 +343,21 @@ void CBHRecruitmentProcess::execute()
     {
       // We are not in an initialisation phase
       // Setup Our Variables
-      double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
+      double dRecruitment = vAllRecruitmentValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
       // Get SSB (and SSB:B0 ratio)
       dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0, (pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
       double dSSBRatio = pDerivedQuantity->getValue(iActualOffset) / dB0;
       // Calculate the Stock-recruit relationship
-      double dTrueYCS = dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness)) * (1 - dSSBRatio));
+      double dTrueYCS = (dRecruitment / dR0) * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness)) * (1 - dSSBRatio));
       // And apply to calculate this events recruitment
       dAmountPer = dR0 * dTrueYCS;
       // Retain these for later reporting
       vTrueYCSValues.push_back(dTrueYCS);
-      vRecruitmentValues.push_back(dAmountPer);
+      vTrueRecruitmentValues.push_back(dAmountPer);
       vSSBValues.push_back(pDerivedQuantity->getValue(iActualOffset));
     }
 
-    //Allocate our recruitment across the cells
+    // Allocate recruitment across the cells
     if (pLayer != 0)
     {
       double dTotal = 0.0;
@@ -405,17 +411,17 @@ void CBHRecruitmentProcess::execute()
   }
   catch (string &Ex)
   {
-    Ex = "CBHRecruitment.execute(" + getLabel() + ")->" + Ex;
+    Ex = "CBHRecruitment2.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 }
 
 //**********************************************************************
-// CBHRecruitmentProcess::~CBHRecruitmentProcess()
+// CBHRecruitmentProcess2::~CBHRecruitmentProcess2()
 // Destructor
 //**********************************************************************
-CBHRecruitmentProcess::~CBHRecruitmentProcess()
+CBHRecruitmentProcess2::~CBHRecruitmentProcess2()
 {
   vProportions.clear();
 }

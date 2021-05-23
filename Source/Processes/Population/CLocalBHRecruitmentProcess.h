@@ -3,7 +3,7 @@
 // Author      : S.Rasmussen
 // Date        : 13/01/2009
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description : This is a Beverton-Hold stock recruitment
+// Description : This is a Beverton-Holt stock recruitment
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CLOCALBHRECRUITMENTPROCESS_H_

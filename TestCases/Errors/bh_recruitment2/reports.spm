@@ -1,0 +1,16 @@
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report state-1
+type partition
+time_step step_one
+years 1994 #-2007
+
+@report SSB
+type derived_quantity
+derived_quantity SSB
+
+@report Recruitment2
+type process
+process BHrecruitment2

@@ -18,6 +18,7 @@
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/CProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
+#include "../../Processes/Population/CBHRecruitmentProcess2.h"
 #include "../../Processes/Population/CLocalBHRecruitmentProcess.h"
 #include "../../Processes/Population/CProportionalRecruitmentProcess.h"
 #include "../../Processes/Population/CHollingMortalityRateProcess.h"
@@ -199,6 +200,71 @@ void CProcessReport::execute()
       cout << "\n";
       //True YCS
       vector<double> vTrueYCSValues = pRecruit->getTrueYCSValues();
+      cout << PARAM_TRUE_YCS_VALUES << ": ";
+      for (int i = 0; i < (int)vTrueYCSValues.size(); ++i)
+      {
+        cout << vTrueYCSValues[i] << (i < ((int)vTrueYCSValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+    }
+
+    // BH Recruitment2
+    CBHRecruitmentProcess2 *pRecruit2 = dynamic_cast<CBHRecruitmentProcess2 *>(pTarget);
+    if (pRecruit2 != 0)
+    {
+      //B0 & R0
+      cout << PARAM_B0_VALUE << ": " << pRecruit2->getB0Value() << "\n";
+      cout << PARAM_R0_VALUE << ": " << pRecruit2->getR0Value() << "\n";
+      //Recruitment years
+      vector<int> vAllRecruitmentYears = pRecruit2->getAllRecruitmentYears();
+      cout << PARAM_RECRUITMENT_YEARS << ": ";
+      for (int i = 0; i < (int)vAllRecruitmentYears.size(); ++i)
+      {
+        cout << vAllRecruitmentYears[i] << (i < ((int)vAllRecruitmentYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      //Standardising years
+      vector<int> vStandardiseRecruitmentYears = pRecruit2->getStandariseRecruitmentYears();
+      cout << PARAM_STANDARDISE_RECRUITMENT_YEARS << ": ";
+      for (int i = 0; i < (int)vStandardiseRecruitmentYears.size(); ++i)
+      {
+        cout << vStandardiseRecruitmentYears[i] << (i < ((int)vStandardiseRecruitmentYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      //SSBs
+      vector<double> vSSBValues = pRecruit2->getSSBValues();
+      cout << PARAM_SSB_VALUES << ": ";
+      for (int i = 0; i < (int)vSSBValues.size(); ++i)
+      {
+        cout << vSSBValues[i] << (i < ((int)vSSBValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      //Recruitment
+      vector<double> vAllRecruitmentValues = pRecruit2->getAllRecruitmentValues();
+      cout << PARAM_RECRUITMENT_VALUES << ": ";
+      for (int i = 0; i < (int)vAllRecruitmentValues.size(); ++i)
+      {
+        cout << vAllRecruitmentValues[i] << (i < ((int)vAllRecruitmentValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      //Actual Recruitment
+      vector<double> vTrueRecruitmentValues = pRecruit2->getTrueRecruitmentValues();
+      cout << PARAM_TRUE_RECRUITMENT_VALUES << ": ";
+      for (int i = 0; i < (int)vTrueRecruitmentValues.size(); ++i)
+      {
+        cout << vTrueRecruitmentValues[i] << (i < ((int)vTrueRecruitmentValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      // YCS
+      vector<double> vYCSValues = pRecruit2->getYCSValues();
+      cout << PARAM_YCS_VALUES << ": ";
+      for (int i = 0; i < (int)vYCSValues.size(); ++i)
+      {
+        cout << vYCSValues[i] << (i < ((int)vYCSValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      //True YCS
+      vector<double> vTrueYCSValues = pRecruit2->getTrueYCSValues();
       cout << PARAM_TRUE_YCS_VALUES << ": ";
       for (int i = 0; i < (int)vTrueYCSValues.size(); ++i)
       {

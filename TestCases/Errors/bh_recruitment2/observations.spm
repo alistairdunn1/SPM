@@ -1,0 +1,380 @@
+# OBSERVATIONS: CATCH AT AGE
+@observation CAA-year-1998
+type proportions_at_age
+year 1998
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0 0 0.0416667 0 0 0.0833333 0.0833333 0.0833333 0.0833333 0.125 0.125 0.0416667 0.0416667 0 0 0.0416667 0.0416667 0.0833333 0.0416667 0 0.0416667 0 0 0 0 0 0 0 0.0416667 0 0
+error_value All 343
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-1999
+type proportions_at_age
+year 1999
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0 0.0416667 0.0416667 0.0833333 0.0416667 0 0.0833333 0 0.125 0 0 0.0833333 0 0.0416667 0.0833333 0.0833333 0 0.0833333 0.0833333 0 0 0 0 0.0416667 0 0 0 0.0416667 0 0 0.0416667
+error_value All 564
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2000
+type proportions_at_age
+year 2000
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0 0.04 0 0.08 0.2 0.04 0.08 0.08 0.08 0.08 0.12 0 0 0.04 0.08 0 0 0 0 0 0 0 0 0 0 0.08 0 0 0 0 0
+error_value All 651
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2001
+type proportions_at_age
+year 2001
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0 0 0.08 0.08 0.08 0 0.2 0.12 0 0.04 0.12 0.12 0.04 0.04 0 0 0 0 0 0 0 0.04 0 0 0 0 0 0 0 0 0.04
+error_value All 840
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2002
+type proportions_at_age
+year 2002
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+age_plus_group True
+layer SSRU
+max_age 35
+obs All 0 0 0 0 0 0 0 0.125 0.166667 0.0833333 0.0833333 0.0833333 0.0416667 0.0416667 0.0833333 0.166667 0 0 0.0416667 0 0 0 0 0 0 0 0 0 0 0 0.0416667 0 0 0 0.0416667
+error_value All 598
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2003
+type proportions_at_age
+year 2003
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0.0416667 0.0833333 0.0416667 0.125 0 0.0416667 0.0416667 0.125 0.0416667 0 0.0833333 0.0416667 0 0.0416667 0 0 0.0416667 0.0416667 0 0.0416667 0 0 0 0 0 0 0 0 0 0 0.166667
+error_value All 456
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2004
+type proportions_at_age
+year 2004
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0.0416667 0 0.0833333 0.0833333 0.0416667 0.166667 0 0.0416667 0.0833333 0.125 0 0.0833333 0 0 0 0 0 0 0.0416667 0.0416667 0 0.0416667 0.0833333 0.0416667 0 0 0 0 0 0 0
+error_value All 538
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2005
+type proportions_at_age
+year 2005
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0.0416667 0.0416667 0 0 0.125 0.0416667 0.166667 0.0833333 0.0416667 0.0416667 0.0833333 0.0416667 0.0833333 0.0833333 0 0 0 0.0833333 0 0 0 0 0 0 0 0 0 0 0.0416667 0 0 0
+error_value All 438
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2006
+type proportions_at_age
+year 2006
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0 0 0 0.04 0.08 0.04 0.12 0.08 0.08 0.08 0.08 0.08 0 0.04 0 0.04 0.04 0 0.04 0.08 0 0 0 0 0 0.04 0 0 0 0 0.04
+error_value All 817
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+@observation CAA-year-2007
+type proportions_at_age
+year 2007
+time_step step_one
+categories immature + mature
+selectivities FishingSel FishingSel
+min_age 1
+max_age 35
+age_plus_group True
+layer SSRU
+obs All 0 0 0 0 0.04 0 0 0 0.04 0.12 0.12 0.16 0.04 0.16 0.08 0.12 0.04 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0 0.04 0 0 0
+error_value All 915
+likelihood multinomial
+delta 1e-11
+process_error 25
+ageing_error normal
+
+# OBSERVATIONS: CPUE
+@observation CPUE-1998
+type abundance
+catchability CPUEq
+year 1998
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 103.012
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-1999
+type abundance
+catchability CPUEq
+year 1999
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 103.413
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2000
+type abundance
+catchability CPUEq
+year 2000
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 153.399
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2001
+type abundance
+catchability CPUEq
+year 2001
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 194.992
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2002
+type abundance
+catchability CPUEq
+year 2002
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 94.3754
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2003
+type abundance
+catchability CPUEq
+year 2003
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 104.182
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2004
+type abundance
+catchability CPUEq
+year 2004
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 87.5232
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2005
+type abundance
+catchability CPUEq
+year 2005
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 98.4496
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2006
+type abundance
+catchability CPUEq
+year 2006
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 78.1727
+error_value All 0.2
+likelihood lognormal
+
+@observation CPUE-2007
+type abundance
+catchability CPUEq
+year 2007
+time_step step_one
+categories immature mature
+selectivities FishingSel FishingSel
+layer SSRU
+obs All 59.0832
+error_value All 0.2
+likelihood lognormal
+
+@report CAA-1998
+type observation
+observation CAA-year-1998
+
+@report CAA-1999
+type observation
+observation CAA-year-1999
+
+@report CAA-2000
+type observation
+observation CAA-year-2000
+
+@report CAA-2001
+type observation
+observation CAA-year-2001
+
+@report CAA-2002
+type observation
+observation CAA-year-2002
+
+@report CAA-2003
+type observation
+observation CAA-year-2003
+
+@report CAA-2004
+type observation
+observation CAA-year-2004
+
+@report CAA-2005
+type observation
+observation CAA-year-2005
+
+@report CAA-2006
+type observation
+observation CAA-year-2006
+
+@report CAA-2007
+type observation
+observation CAA-year-2007
+
+@report CPUE-1998
+type observation
+observation CPUE-1998
+
+@report CPUE-1999
+type observation
+observation CPUE-1999
+
+@report CPUE-2000
+type observation
+observation CPUE-2000
+
+@report CPUE-2001
+type observation
+observation CPUE-2001
+
+@report CPUE-2002
+type observation
+observation CPUE-2002
+
+@report CPUE-2003
+type observation
+observation CPUE-2003
+
+@report CPUE-2004
+type observation
+observation CPUE-2004
+
+@report CPUE-2005
+type observation
+observation CPUE-2005
+
+@report CPUE-2006
+type observation
+observation CPUE-2006
+
+@report CPUE-2007
+type observation
+observation CPUE-2007
+
+@ageing_error offbyone
+type off_by_one
+p1 0.05
+p2 0.10
+
+@ageing_error normal
+type normal
+cv 0.1

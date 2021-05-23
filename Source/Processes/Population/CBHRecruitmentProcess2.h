@@ -1,13 +1,12 @@
 //============================================================================
-// Name        : CBHRecruitmentProcess.h
-// Author      : S.Rasmussen
-// Date        : 13/01/2009
-// Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description : This is a Beverton-Holt stock recruitment
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+// Name        : CBHRecruitmentProcess2.h
+// Author      : A.Dunn
+// Date        : 23/05/2021
+// Copyright   :
+// Description : This is a Beverton-Holt stock recruitment, parametersed with absolute annual recruitment
 //============================================================================
-#ifndef CBHRECRUITMENTPROCESS_H_
-#define CBHRECRUITMENTPROCESS_H_
+#ifndef CBHRECRUITMENTPROCESS2_H_
+#define CBHRECRUITMENTPROCESS2_H_
 
 // Local Headers
 #include "../CProcess.h"
@@ -23,21 +22,27 @@ class CDerivedQuantity;
 //
 //
 //**********************************************************************
-class CBHRecruitmentProcess : public CProcess
+class CBHRecruitmentProcess2 : public CProcess
 {
 public:
-  CBHRecruitmentProcess();
-  virtual ~CBHRecruitmentProcess();
-  CProcess *clone() { return new CBHRecruitmentProcess(*this); }
+  CBHRecruitmentProcess2();
+  virtual ~CBHRecruitmentProcess2();
+  CProcess *clone() { return new CBHRecruitmentProcess2(*this); }
   void validate();
   void build();
   void rebuild();
   void execute();
   vector<double> getTrueYCSValues() { return vTrueYCSValues; }
+  vector<double> getYCSValues() { return vYCSValues; }
+  vector<double> getAllRecruitmentValues() { return vAllRecruitmentValues; }
+  vector<int> getAllRecruitmentYears() { return vAllRecruitmentYears; }
   vector<double> getRecruitmentValues() { return vRecruitmentValues; }
-  vector<int> getYCSYears() { return vYCSYears; }
+  vector<int> getRecruitmentYears() { return vRecruitmentYears; }
+  vector<int> getStandariseRecruitmentYears() { return vStandardiseRecruitmentYears; }
+  vector<double> getTrueRecruitmentValues() { return vTrueRecruitmentValues; }
   vector<double> getSSBValues() { return vSSBValues; }
   double getB0Value() { return dB0; }
+  double getR0Value() { return dR0; }
 
 protected:
   // Variables
@@ -48,15 +53,18 @@ protected:
   int iAge;
   int iAgeIndex;
   double dSteepness;
-  //double                    dSigmaR;
-  //double                    dRho;
+  //double dSigmaR;
+  //double dRho;
   string sSSB;
   string sB0;
-  vector<double> vYCSValues;
-  vector<int> vYCSYears;
-  vector<int> vStandardiseYCSYears;
-  vector<double> vTrueYCSValues;
+  vector<double> vAllRecruitmentValues;
+  vector<double> vTrueRecruitmentValues;
+  vector<int> vAllRecruitmentYears;
   vector<double> vRecruitmentValues;
+  vector<int> vRecruitmentYears;
+  vector<int> vStandardiseRecruitmentYears;
+  vector<double> vTrueYCSValues;
+  vector<double> vYCSValues;
   vector<double> vSSBValues;
   int iSSBOffset;
   int iActualOffset;
@@ -70,4 +78,4 @@ private:
   double dAmountPer;
 };
 
-#endif /* CBHRECRUITMENTPROCESS_H_ */
+#endif /* CBHRECRUITMENTPROCESS2_H_ */

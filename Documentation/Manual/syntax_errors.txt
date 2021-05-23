@@ -55,7 +55,9 @@ In SPM, but not in manual
   prior
   profiles
   proportional_recruitment
+  r0_value
   recruitment_values
+  recruitment_years
   row
   row_index
   run_mode
@@ -68,6 +70,7 @@ In SPM, but not in manual
   t
   threshold_biomass
   total_score
+  true_recruitment_values
   true_ycs_values
   value
   weights

@@ -197,7 +197,7 @@ There are no other subcommands for \commandlabsubarg{process}{type}{none}.
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. Note that the layer values must be non-negative}
 
-\subsubsection[Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{bh\_recruitment}}
+\subsubsection[Beverton-Holt recruitment process parameterised by YCS]{\commandlabsubarg{process}{type}{bh\_recruitment}}
 
 \defSub{r0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -255,12 +255,77 @@ There are no other subcommands for \commandlabsubarg{process}{type}{none}.
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defType{Integer vector or integer range}
 \defDefault{No default}
-\defValue{The expanded vector must have values of years between \commandsub{model}{initial} and \commandsub{model}{current}}
+\defValue{The expanded vector must have values of years between \commandsub{model}{initial}-offset and \commandsub{model}{current}-offset}
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then the total recruitment $R_0$ in each cell is scaled to be proportional to the value of the layer in that cell.}
+
+\subsubsection[Beverton-Holt recruitment process parameterised by absolute annual recruitments]{\commandlabsubarg{process}{type}{bh\_recruitment2}}
+
+\defSub{categories} {Define the categories into which recruitment occurs}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{proportions} {Define the proportion of recruitment that occurs into each category}
+\defType{Estimable vector, of length \commandlabsub{process}{categories}}
+\defDefault{No default}
+\defValue{Proportion of the annual recruitment that is applied to each category}
+
+\defSub{age} {Define the age that receives recruitment}
+\defType{Integer}
+\defDefault{The minimum age of the population}
+\defValue{The age class that receives recruitment}
+
+\defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{Steepness value between 0.2 and 1.0}
+
+%\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{1.0}
+
+%\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{0.0}
+
+\defSub{b0} {Define the \command{initialisation\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$)}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{initialisation\_phase} label}
+
+\defSub{ssb} {Define the label of the \command{derived\_quantity} that defines the spawning stock biomass (SSB)}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{derived\_quantity} label}
+
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
+\defType{Integer}
+\defDefault{No default}
+\defValue{Must be a value $\ge 0$}
+
+\defSub{values} {The amount of recruitment in each year in \texttt{years}}
+\defType{Estimable vector}
+\defDefault{No default}
+\defValue{The expanded vector must have values of years between \commandsub{model}{initial}-offset and \commandsub{model}{current}-offset}
+
+\defSub{years} {Years from which recruitments are specified in \texttt{values}}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{The expanded vector must have values of years that are members of }
+
+\defSub{standardise\_recruitment\_years} {Years from which recruitments are used to derive $R_0$}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{The expanded vector must have values of years that are members of \texttt{years}}
+
+\defSub{layer} {Name of the layer used to determine where recruitment occurs}
+\defType{String}
+\defDefault{No layer}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then the total recruitment in each cell is scaled to be proportional to the value of the layer in that cell.}
 
 \subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
 

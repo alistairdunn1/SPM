@@ -155,307 +155,310 @@
 \indexentry{\|hyperpage}{26}
 \indexentry{Recruitment|hyperpage}{26}
 \indexentry{Recruitment ! Constant|hyperpage}{26}
-\indexentry{Beverton-Holt recruitment|hyperpage}{26}
-\indexentry{Recruitment ! Beverton-Holt|hyperpage}{26}
+\indexentry{Beverton-Holt recruitment with YCS|hyperpage}{26}
+\indexentry{Recruitment ! Beverton-Holt with YCS|hyperpage}{26}
+\indexentry{Beverton-Holt recruitment with absolute recruitments|hyperpage}{26}
+\indexentry{Recruitment ! Beverton-Holt with absolute recruitments|hyperpage}{26}
 \indexentry{local Beverton-Holt recruitment|hyperpage}{26}
 \indexentry{Recruitment ! Local Beverton-Holt|hyperpage}{26}
 \indexentry{Proportional recruitment|hyperpage}{26}
 \indexentry{Recruitment ! proportional|hyperpage}{26}
 \indexentry{Constant Recruitment|hyperpage}{27}
-\indexentry{Beverton-Holt recruitment|hyperpage}{27}
-\indexentry{Local Beverton-Holt recruitment|hyperpage}{28}
-\indexentry{Proportional recruitment|hyperpage}{29}
-\indexentry{Ageing|hyperpage}{30}
-\indexentry{Mortality|hyperpage}{31}
-\indexentry{Constant mortality|hyperpage}{31}
-\indexentry{Age mortality|hyperpage}{32}
-\indexentry{Constant exploitation rate|hyperpage}{32}
-\indexentry{Annual mortality|hyperpage}{33}
-\indexentry{Layer varying exploitation rate|hyperpage}{33}
-\indexentry{Event mortality|hyperpage}{33}
-\indexentry{Maximum exploitation rate|hyperpage}{34}
-\indexentry{Holling mortality|hyperpage}{34}
+\indexentry{Beverton-Holt recruitment (parametrised by year class strengths|hyperpage}{27}
+\indexentry{Beverton-Holt recruitment parameterised with absolute recruitments|hyperpage}{28}
+\indexentry{Local Beverton-Holt recruitment|hyperpage}{29}
+\indexentry{Proportional recruitment|hyperpage}{31}
+\indexentry{Ageing|hyperpage}{31}
+\indexentry{Mortality|hyperpage}{32}
+\indexentry{Constant mortality|hyperpage}{32}
+\indexentry{Age mortality|hyperpage}{33}
+\indexentry{Constant exploitation rate|hyperpage}{33}
+\indexentry{Annual mortality|hyperpage}{34}
+\indexentry{Layer varying exploitation rate|hyperpage}{34}
+\indexentry{Event mortality|hyperpage}{35}
 \indexentry{Maximum exploitation rate|hyperpage}{35}
-\indexentry{Density-dependent prey-suitability|hyperpage}{35}
+\indexentry{Holling mortality|hyperpage}{36}
 \indexentry{Maximum exploitation rate|hyperpage}{36}
-\indexentry{Category state|hyperpage}{37}
-\indexentry{Category state by age process|hyperpage}{37}
-\indexentry{Category state by age|hyperpage}{37}
-\indexentry{Category transition|hyperpage}{38}
-\indexentry{Category transition process|hyperpage}{38}
-\indexentry{Category transition|hyperpage}{38}
-\indexentry{Category transition rate process|hyperpage}{39}
+\indexentry{Density-dependent prey-suitability|hyperpage}{37}
+\indexentry{Maximum exploitation rate|hyperpage}{38}
+\indexentry{Category state|hyperpage}{38}
+\indexentry{Category state by age process|hyperpage}{39}
+\indexentry{Category state by age|hyperpage}{39}
 \indexentry{Category transition|hyperpage}{39}
-\indexentry{Category transition by age process|hyperpage}{39}
-\indexentry{Category transition|hyperpage}{39}
-\indexentry{Movement processes|hyperpage}{41}
-\indexentry{Movement|hyperpage}{41}
-\indexentry{Migration movement|hyperpage}{41}
-\indexentry{Adjacent cell movement|hyperpage}{42}
-\indexentry{Preference movement|hyperpage}{43}
-\indexentry{Preference function|hyperpage}{43}
-\indexentry{Threads!preference functions|hyperpage}{43}
-\indexentry{Multi-threaded CPU process|hyperpage}{43}
-\indexentry{Single-threaded CPU process|hyperpage}{43}
-\indexentry{Total preference function|hyperpage}{43}
+\indexentry{Category transition process|hyperpage}{40}
+\indexentry{Category transition|hyperpage}{40}
+\indexentry{Category transition rate process|hyperpage}{40}
+\indexentry{Category transition|hyperpage}{40}
+\indexentry{Category transition by age process|hyperpage}{41}
+\indexentry{Category transition|hyperpage}{41}
+\indexentry{Movement processes|hyperpage}{42}
+\indexentry{Movement|hyperpage}{42}
+\indexentry{Migration movement|hyperpage}{42}
+\indexentry{Adjacent cell movement|hyperpage}{43}
+\indexentry{Preference movement|hyperpage}{44}
 \indexentry{Preference function|hyperpage}{44}
-\indexentry{Constant preference function|hyperpage}{44}
-\indexentry{Preference function ! Constant|hyperpage}{44}
-\indexentry{Normal preference function|hyperpage}{44}
-\indexentry{Preference function ! Normal|hyperpage}{44}
-\indexentry{Double-normal preference function|hyperpage}{44}
-\indexentry{Preference function ! Double-Normal|hyperpage}{44}
-\indexentry{Logistic preference function|hyperpage}{44}
-\indexentry{Preference function ! Logistic|hyperpage}{44}
-\indexentry{Inverse-Logistic preference function|hyperpage}{44}
-\indexentry{Preference function ! Inverse-Logistic|hyperpage}{44}
-\indexentry{Exponential preference function|hyperpage}{45}
-\indexentry{Preference function ! Exponential|hyperpage}{45}
-\indexentry{Threshold preference function|hyperpage}{45}
-\indexentry{Preference function ! Threshold|hyperpage}{45}
-\indexentry{Knife-edge preference function|hyperpage}{45}
-\indexentry{Preference function ! Knife-edge|hyperpage}{45}
-\indexentry{Categorical preference function|hyperpage}{45}
-\indexentry{Preference function ! Categorical|hyperpage}{45}
-\indexentry{Monotonic categorical preference function|hyperpage}{45}
-\indexentry{Preference function ! Monotonic categorical|hyperpage}{45}
-\indexentry{Copulas|hyperpage}{46}
-\indexentry{Probability Distribution Functions (PDF)|hyperpage}{46}
-\indexentry{Normal density function|hyperpage}{46}
-\indexentry{Lognormal density function|hyperpage}{46}
-\indexentry{Exponential density function|hyperpage}{46}
-\indexentry{Uniform density function|hyperpage}{46}
-\indexentry{Gaussian copula|hyperpage}{46}
-\indexentry{Gumbel copula|hyperpage}{47}
-\indexentry{Frank copula|hyperpage}{47}
-\indexentry{Independence copula|hyperpage}{47}
-\indexentry{Derived quantities|hyperpage}{48}
-\indexentry{Derived quantities by cell|hyperpage}{48}
-\indexentry{Size-age relationship|hyperpage}{49}
-\indexentry{von Bertalanffy growth curve|hyperpage}{49}
-\indexentry{Schnute growth curve|hyperpage}{50}
-\indexentry{von Bertalanffy k-at-age growth curve|hyperpage}{50}
-\indexentry{mean size-at-age growth curve|hyperpage}{50}
-\indexentry{Size-weight relationship|hyperpage}{50}
-\indexentry{Basic size-weight relationship|hyperpage}{51}
-\indexentry{Selectivities|hyperpage}{51}
-\indexentry{Selectivities!Constant|hyperpage}{52}
-\indexentry{Selectivities!Knife-edge|hyperpage}{52}
-\indexentry{Selectivities!All-values|hyperpage}{52}
-\indexentry{Selectivities!All-values-bounded|hyperpage}{53}
-\indexentry{Selectivities!Increasing|hyperpage}{53}
-\indexentry{Selectivities!Logistic|hyperpage}{53}
-\indexentry{Selectivities!Inverse-logistic|hyperpage}{54}
-\indexentry{Selectivities!Logistic-producing|hyperpage}{54}
-\indexentry{Selectivities!Double-normal|hyperpage}{55}
-\indexentry{Selectivities!Double-exponential|hyperpage}{55}
-\indexentry{Selectivities!Spline|hyperpage}{55}
-\indexentry{The estimation section|hyperpage}{57}
-\indexentry{Maximum posterior density estimate (MPD)|hyperpage}{57}
-\indexentry{MPD (Maximum posterior density estimate)|hyperpage}{57}
-\indexentry{Profiles|hyperpage}{57}
-\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{57}
-\indexentry{MCMC|hyperpage}{57}
-\indexentry{Hessian|hyperpage}{57}
-\indexentry{Covariance matrix|hyperpage}{57}
-\indexentry{The objective function|hyperpage}{57}
-\indexentry{Specifying the parameters to be estimated|hyperpage}{57}
-\indexentry{Estimating parameters|hyperpage}{57}
-\indexentry{Bounds|hyperpage}{58}
-\indexentry{Priors|hyperpage}{58}
-\indexentry{Point estimation|hyperpage}{58}
-\indexentry{Objective function|hyperpage}{58}
-\indexentry{Finite differences minimiser|hyperpage}{58}
-\indexentry{Differential evolution minimiser|hyperpage}{58}
-\indexentry{The numerical differences minimiser|hyperpage}{58}
-\indexentry{Quasi-Newton iterations|hyperpage}{59}
-\indexentry{Objective function evaluations|hyperpage}{59}
-\indexentry{Convergence failure|hyperpage}{59}
-\indexentry{Successful convergence|hyperpage}{59}
-\indexentry{Local minimums|hyperpage}{59}
-\indexentry{Covariance matrix|hyperpage}{59}
+\indexentry{Threads!preference functions|hyperpage}{44}
+\indexentry{Multi-threaded CPU process|hyperpage}{44}
+\indexentry{Single-threaded CPU process|hyperpage}{44}
+\indexentry{Total preference function|hyperpage}{45}
+\indexentry{Preference function|hyperpage}{45}
+\indexentry{Constant preference function|hyperpage}{45}
+\indexentry{Preference function ! Constant|hyperpage}{45}
+\indexentry{Normal preference function|hyperpage}{46}
+\indexentry{Preference function ! Normal|hyperpage}{46}
+\indexentry{Double-normal preference function|hyperpage}{46}
+\indexentry{Preference function ! Double-Normal|hyperpage}{46}
+\indexentry{Logistic preference function|hyperpage}{46}
+\indexentry{Preference function ! Logistic|hyperpage}{46}
+\indexentry{Inverse-Logistic preference function|hyperpage}{46}
+\indexentry{Preference function ! Inverse-Logistic|hyperpage}{46}
+\indexentry{Exponential preference function|hyperpage}{46}
+\indexentry{Preference function ! Exponential|hyperpage}{46}
+\indexentry{Threshold preference function|hyperpage}{46}
+\indexentry{Preference function ! Threshold|hyperpage}{46}
+\indexentry{Knife-edge preference function|hyperpage}{46}
+\indexentry{Preference function ! Knife-edge|hyperpage}{46}
+\indexentry{Categorical preference function|hyperpage}{46}
+\indexentry{Preference function ! Categorical|hyperpage}{46}
+\indexentry{Monotonic categorical preference function|hyperpage}{46}
+\indexentry{Preference function ! Monotonic categorical|hyperpage}{46}
+\indexentry{Copulas|hyperpage}{47}
+\indexentry{Probability Distribution Functions (PDF)|hyperpage}{47}
+\indexentry{Normal density function|hyperpage}{47}
+\indexentry{Lognormal density function|hyperpage}{47}
+\indexentry{Exponential density function|hyperpage}{47}
+\indexentry{Uniform density function|hyperpage}{48}
+\indexentry{Gaussian copula|hyperpage}{48}
+\indexentry{Gumbel copula|hyperpage}{48}
+\indexentry{Frank copula|hyperpage}{48}
+\indexentry{Independence copula|hyperpage}{48}
+\indexentry{Derived quantities|hyperpage}{49}
+\indexentry{Derived quantities by cell|hyperpage}{50}
+\indexentry{Size-age relationship|hyperpage}{50}
+\indexentry{von Bertalanffy growth curve|hyperpage}{51}
+\indexentry{Schnute growth curve|hyperpage}{51}
+\indexentry{von Bertalanffy k-at-age growth curve|hyperpage}{51}
+\indexentry{mean size-at-age growth curve|hyperpage}{51}
+\indexentry{Size-weight relationship|hyperpage}{52}
+\indexentry{Basic size-weight relationship|hyperpage}{52}
+\indexentry{Selectivities|hyperpage}{52}
+\indexentry{Selectivities!Constant|hyperpage}{53}
+\indexentry{Selectivities!Knife-edge|hyperpage}{53}
+\indexentry{Selectivities!All-values|hyperpage}{54}
+\indexentry{Selectivities!All-values-bounded|hyperpage}{54}
+\indexentry{Selectivities!Increasing|hyperpage}{54}
+\indexentry{Selectivities!Logistic|hyperpage}{55}
+\indexentry{Selectivities!Inverse-logistic|hyperpage}{55}
+\indexentry{Selectivities!Logistic-producing|hyperpage}{55}
+\indexentry{Selectivities!Double-normal|hyperpage}{56}
+\indexentry{Selectivities!Double-exponential|hyperpage}{56}
+\indexentry{Selectivities!Spline|hyperpage}{57}
+\indexentry{The estimation section|hyperpage}{59}
+\indexentry{Maximum posterior density estimate (MPD)|hyperpage}{59}
+\indexentry{MPD (Maximum posterior density estimate)|hyperpage}{59}
+\indexentry{Profiles|hyperpage}{59}
+\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{59}
+\indexentry{MCMC|hyperpage}{59}
 \indexentry{Hessian|hyperpage}{59}
-\indexentry{Correlation matrix|hyperpage}{59}
-\indexentry{The differential evolution minimiser|hyperpage}{59}
-\indexentry{Posterior profiles|hyperpage}{60}
-\indexentry{Bayesian estimation|hyperpage}{60}
-\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{60}
-\indexentry{MCMC|hyperpage}{60}
-\indexentry{Bayesian estimation|hyperpage}{60}
-\indexentry{Uniform prior|hyperpage}{63}
-\indexentry{Priors ! Uniform|hyperpage}{63}
-\indexentry{Uniform-log prior|hyperpage}{63}
-\indexentry{Priors ! Uniform-log|hyperpage}{63}
-\indexentry{Normal prior|hyperpage}{63}
-\indexentry{Priors ! Normal|hyperpage}{63}
-\indexentry{Lognormal prior|hyperpage}{63}
-\indexentry{Priors ! Lognormal|hyperpage}{63}
-\indexentry{Beta prior|hyperpage}{63}
-\indexentry{Priors ! Beta|hyperpage}{63}
-\indexentry{Observations|hyperpage}{65}
-\indexentry{Likelihoods|hyperpage}{65}
-\indexentry{Proportions-at-age observations|hyperpage}{65}
-\indexentry{Proportions-at-age for a single category|hyperpage}{66}
-\indexentry{Proportions-at-age for multiple categories|hyperpage}{67}
-\indexentry{Proportions-at-age across aggregated categories|hyperpage}{68}
-\indexentry{Dirichlet likelihood ! proportions-at-age|hyperpage}{69}
-\indexentry{Multinomial likelihood ! proportions-at-age|hyperpage}{69}
-\indexentry{Lognormal likelihood ! proportions-at-age|hyperpage}{69}
-\indexentry{Proportions-by-category observations|hyperpage}{70}
-\indexentry{Binomial likelihood ! proportions-by-category|hyperpage}{71}
-\indexentry{Binomial likelihood (normal approximation) ! proportions-by-category|hyperpage}{72}
-\indexentry{Proportions-at-length observations|hyperpage}{72}
-\indexentry{Proportions-at-length for a single category|hyperpage}{72}
-\indexentry{Proportions-at-length for multiple categories|hyperpage}{73}
-\indexentry{Proportions-at-length across aggregated categories|hyperpage}{74}
-\indexentry{Dirichlet likelihood ! proportions-at-length|hyperpage}{75}
-\indexentry{Multinomial likelihood ! proportions-at-length|hyperpage}{75}
-\indexentry{Lognormal likelihood ! proportions-at-length|hyperpage}{76}
-\indexentry{Proportions-by-category-at-length observations|hyperpage}{76}
-\indexentry{Binomial likelihood ! proportions-by-category-at-length|hyperpage}{77}
-\indexentry{Binomial likelihood (normal approximation) ! proportions-by-category-at-length|hyperpage}{78}
-\indexentry{Abundance or biomass observations|hyperpage}{78}
-\indexentry{Lognormal likelihood ! abundance|hyperpage}{80}
-\indexentry{Lognormal likelihood ! biomass|hyperpage}{80}
-\indexentry{Normal likelihood ! abundance|hyperpage}{80}
-\indexentry{Normal likelihood ! biomass|hyperpage}{80}
-\indexentry{Relative proportions present observations|hyperpage}{80}
-\indexentry{Binomial likelihood ! presence|hyperpage}{82}
-\indexentry{Binomial likelihood ! presence|hyperpage}{82}
-\indexentry{Process error and likelihood multipliers|hyperpage}{82}
-\indexentry{process error|hyperpage}{82}
-\indexentry{likelihood multiplier|hyperpage}{82}
-\indexentry{over-dispersion|hyperpage}{83}
-\indexentry{Ageing error|hyperpage}{83}
-\indexentry{Simulating observations|hyperpage}{83}
-\indexentry{Pseudo-observations|hyperpage}{84}
-\indexentry{The report section|hyperpage}{85}
-\indexentry{Reports|hyperpage}{85}
-\indexentry{Reports section|hyperpage}{85}
-\indexentry{Reports ! standard style|hyperpage}{85}
-\indexentry{Print the model spatial map|hyperpage}{85}
-\indexentry{Reports ! Spatial map|hyperpage}{85}
-\indexentry{Print the partition|hyperpage}{85}
-\indexentry{Reports ! Partition|hyperpage}{85}
-\indexentry{Print the partition biomass|hyperpage}{86}
-\indexentry{Reports ! Partition biomass|hyperpage}{86}
-\indexentry{Print the partition at the end of an initialisation|hyperpage}{86}
-\indexentry{Reports ! Initialisation|hyperpage}{86}
-\indexentry{Print a process summary|hyperpage}{86}
-\indexentry{Reports ! Processes|hyperpage}{86}
-\indexentry{Print a preference function summary|hyperpage}{86}
-\indexentry{Reports ! Preference Functions|hyperpage}{86}
-\indexentry{Print derived quantities|hyperpage}{86}
-\indexentry{Reports ! Derived quantities|hyperpage}{86}
-\indexentry{Print derived quantities by cell|hyperpage}{86}
-\indexentry{Reports ! Derived quantities by cell|hyperpage}{86}
-\indexentry{Print the estimated parameters|hyperpage}{86}
-\indexentry{Reports ! Estimated parameters|hyperpage}{86}
-\indexentry{Print the estimated parameters in a vector format|hyperpage}{86}
-\indexentry{Reports ! Estimated parameters|hyperpage}{86}
-\indexentry{Print the objective function|hyperpage}{87}
-\indexentry{Reports ! Objective function|hyperpage}{87}
-\indexentry{Print the covariance matrix|hyperpage}{87}
-\indexentry{Reports ! Covariance Matrix|hyperpage}{87}
-\indexentry{Reports ! Hessian|hyperpage}{87}
-\indexentry{Print observations, fits, and residuals|hyperpage}{87}
-\indexentry{Reports ! Observations|hyperpage}{87}
-\indexentry{Print simulated observations|hyperpage}{87}
-\indexentry{Reports ! Simulated observations|hyperpage}{87}
-\indexentry{Print the ageing error misclassification matrix|hyperpage}{87}
-\indexentry{Reports ! Ageing error misclassification matrix|hyperpage}{87}
-\indexentry{Print layers and meta-layers|hyperpage}{87}
-\indexentry{Reports ! Layers and meta-layers|hyperpage}{87}
-\indexentry{Print a derived view via a categorical layer|hyperpage}{87}
-\indexentry{Reports ! Derived view|hyperpage}{87}
-\indexentry{Print selectivities|hyperpage}{88}
-\indexentry{Reports ! Selectivities|hyperpage}{88}
-\indexentry{Print the random number seed|hyperpage}{88}
-\indexentry{Reports ! Random number seed|hyperpage}{88}
-\indexentry{Print the size-weight relationship|hyperpage}{88}
-\indexentry{Reports ! Size-weight|hyperpage}{88}
-\indexentry{Print the size-at-age relationship|hyperpage}{88}
-\indexentry{Reports ! Size-at-age|hyperpage}{88}
-\indexentry{Print the weight-at-age relationship|hyperpage}{88}
-\indexentry{Reports ! Weight-at-age|hyperpage}{88}
-\indexentry{Print the results of an MCMC|hyperpage}{88}
-\indexentry{Reports ! MCMC|hyperpage}{88}
-\indexentry{Print the MCMC samples as they are calculated|hyperpage}{88}
-\indexentry{Reports ! MCMC samples|hyperpage}{88}
-\indexentry{Print the MCMC objective function values as they are calculated|hyperpage}{88}
-\indexentry{Reports ! MCMC objective functions|hyperpage}{88}
-\indexentry{Model structure|hyperpage}{89}
-\indexentry{Command ! model|hyperpage}{89}
-\indexentry{Initialisation|hyperpage}{90}
-\indexentry{Command ! initialisation\_phase|hyperpage}{90}
-\indexentry{Time-steps|hyperpage}{91}
-\indexentry{Command ! time\_step|hyperpage}{91}
-\indexentry{Processes|hyperpage}{91}
-\indexentry{Command ! process|hyperpage}{92}
-\indexentry{Preference functions|hyperpage}{108}
-\indexentry{Command ! preference\_function|hyperpage}{108}
-\indexentry{Probability Density Functions|hyperpage}{114}
-\indexentry{Command ! pdf|hyperpage}{114}
-\indexentry{Layers|hyperpage}{116}
-\indexentry{Command ! layer|hyperpage}{116}
-\indexentry{Derived quantities by cell|hyperpage}{120}
-\indexentry{Command ! derived\_quantity\_by\_cell|hyperpage}{120}
-\indexentry{Derived quantities|hyperpage}{122}
-\indexentry{Command ! derived\_quantity|hyperpage}{122}
-\indexentry{Age-size relationship|hyperpage}{123}
-\indexentry{Command ! age\_size|hyperpage}{124}
-\indexentry{Size-weight|hyperpage}{128}
-\indexentry{Command ! size\_weight|hyperpage}{128}
-\indexentry{Selectivities|hyperpage}{128}
-\indexentry{Command ! selectivity|hyperpage}{129}
-\indexentry{Estimation methods|hyperpage}{135}
-\indexentry{Command ! estimation|hyperpage}{135}
-\indexentry{Point estimation|hyperpage}{135}
-\indexentry{Command ! minimiser|hyperpage}{135}
-\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{137}
-\indexentry{Command ! mcmc|hyperpage}{137}
-\indexentry{Profiles|hyperpage}{139}
-\indexentry{Command ! profile|hyperpage}{139}
-\indexentry{Command ! estimate|hyperpage}{139}
-\indexentry{Defining catchability constants|hyperpage}{142}
-\indexentry{Command ! catchability|hyperpage}{142}
-\indexentry{Defining penalties|hyperpage}{142}
-\indexentry{Command ! penalty|hyperpage}{142}
-\indexentry{Observation types|hyperpage}{143}
-\indexentry{Command ! observation|hyperpage}{143}
-\indexentry{Defining ageing error|hyperpage}{158}
-\indexentry{Command ! ageing\_error|hyperpage}{158}
-\indexentry{Available reports|hyperpage}{161}
-\indexentry{Report commands and subcommands|hyperpage}{161}
-\indexentry{Command ! report|hyperpage}{161}
-\indexentry{Command ! include|hyperpage}{173}
-\indexentry{Include an external file|hyperpage}{173}
-\indexentry{Examples|hyperpage}{175}
-\indexentry{Examples ! Example 1|hyperpage}{175}
-\indexentry{Examples ! A simple non-spatial model|hyperpage}{175}
-\indexentry{Examples ! Example 2|hyperpage}{179}
-\indexentry{Examples ! A $10 \times 6$ spatial model|hyperpage}{179}
-\indexentry{Command ! model|hyperpage}{191}
-\indexentry{Command ! initialisation\_phase|hyperpage}{191}
-\indexentry{Command ! time\_step|hyperpage}{191}
-\indexentry{Command ! process|hyperpage}{191}
-\indexentry{Command ! preference\_function|hyperpage}{195}
-\indexentry{Command ! pdf|hyperpage}{197}
-\indexentry{Command ! layer|hyperpage}{198}
-\indexentry{Command ! derived\_quantity\_by\_cell|hyperpage}{199}
-\indexentry{Command ! derived\_quantity|hyperpage}{200}
-\indexentry{Command ! age\_size|hyperpage}{200}
-\indexentry{Command ! size\_weight|hyperpage}{201}
-\indexentry{Command ! selectivity|hyperpage}{201}
-\indexentry{Command ! estimation|hyperpage}{203}
-\indexentry{Command ! minimiser|hyperpage}{203}
-\indexentry{Command ! mcmc|hyperpage}{203}
-\indexentry{Command ! profile|hyperpage}{204}
-\indexentry{Command ! estimate|hyperpage}{204}
-\indexentry{Command ! catchability|hyperpage}{205}
-\indexentry{Command ! penalty|hyperpage}{205}
-\indexentry{Command ! observation|hyperpage}{205}
-\indexentry{Command ! ageing\_error|hyperpage}{209}
-\indexentry{Command ! report|hyperpage}{209}
-\indexentry{Command ! include|hyperpage}{213}
-\indexentry{Include an external file|hyperpage}{213}
+\indexentry{Covariance matrix|hyperpage}{59}
+\indexentry{The objective function|hyperpage}{59}
+\indexentry{Specifying the parameters to be estimated|hyperpage}{59}
+\indexentry{Estimating parameters|hyperpage}{59}
+\indexentry{Bounds|hyperpage}{60}
+\indexentry{Priors|hyperpage}{60}
+\indexentry{Point estimation|hyperpage}{60}
+\indexentry{Objective function|hyperpage}{60}
+\indexentry{Finite differences minimiser|hyperpage}{60}
+\indexentry{Differential evolution minimiser|hyperpage}{60}
+\indexentry{The numerical differences minimiser|hyperpage}{60}
+\indexentry{Quasi-Newton iterations|hyperpage}{61}
+\indexentry{Objective function evaluations|hyperpage}{61}
+\indexentry{Convergence failure|hyperpage}{61}
+\indexentry{Successful convergence|hyperpage}{61}
+\indexentry{Local minimums|hyperpage}{61}
+\indexentry{Covariance matrix|hyperpage}{61}
+\indexentry{Hessian|hyperpage}{61}
+\indexentry{Correlation matrix|hyperpage}{61}
+\indexentry{The differential evolution minimiser|hyperpage}{61}
+\indexentry{Posterior profiles|hyperpage}{62}
+\indexentry{Bayesian estimation|hyperpage}{62}
+\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{62}
+\indexentry{MCMC|hyperpage}{62}
+\indexentry{Bayesian estimation|hyperpage}{62}
+\indexentry{Uniform prior|hyperpage}{65}
+\indexentry{Priors ! Uniform|hyperpage}{65}
+\indexentry{Uniform-log prior|hyperpage}{65}
+\indexentry{Priors ! Uniform-log|hyperpage}{65}
+\indexentry{Normal prior|hyperpage}{65}
+\indexentry{Priors ! Normal|hyperpage}{65}
+\indexentry{Lognormal prior|hyperpage}{65}
+\indexentry{Priors ! Lognormal|hyperpage}{65}
+\indexentry{Beta prior|hyperpage}{65}
+\indexentry{Priors ! Beta|hyperpage}{65}
+\indexentry{Observations|hyperpage}{67}
+\indexentry{Likelihoods|hyperpage}{67}
+\indexentry{Proportions-at-age observations|hyperpage}{67}
+\indexentry{Proportions-at-age for a single category|hyperpage}{68}
+\indexentry{Proportions-at-age for multiple categories|hyperpage}{69}
+\indexentry{Proportions-at-age across aggregated categories|hyperpage}{70}
+\indexentry{Dirichlet likelihood ! proportions-at-age|hyperpage}{71}
+\indexentry{Multinomial likelihood ! proportions-at-age|hyperpage}{71}
+\indexentry{Lognormal likelihood ! proportions-at-age|hyperpage}{71}
+\indexentry{Proportions-by-category observations|hyperpage}{72}
+\indexentry{Binomial likelihood ! proportions-by-category|hyperpage}{73}
+\indexentry{Binomial likelihood (normal approximation) ! proportions-by-category|hyperpage}{74}
+\indexentry{Proportions-at-length observations|hyperpage}{74}
+\indexentry{Proportions-at-length for a single category|hyperpage}{74}
+\indexentry{Proportions-at-length for multiple categories|hyperpage}{75}
+\indexentry{Proportions-at-length across aggregated categories|hyperpage}{76}
+\indexentry{Dirichlet likelihood ! proportions-at-length|hyperpage}{77}
+\indexentry{Multinomial likelihood ! proportions-at-length|hyperpage}{77}
+\indexentry{Lognormal likelihood ! proportions-at-length|hyperpage}{78}
+\indexentry{Proportions-by-category-at-length observations|hyperpage}{78}
+\indexentry{Binomial likelihood ! proportions-by-category-at-length|hyperpage}{79}
+\indexentry{Binomial likelihood (normal approximation) ! proportions-by-category-at-length|hyperpage}{80}
+\indexentry{Abundance or biomass observations|hyperpage}{80}
+\indexentry{Lognormal likelihood ! abundance|hyperpage}{82}
+\indexentry{Lognormal likelihood ! biomass|hyperpage}{82}
+\indexentry{Normal likelihood ! abundance|hyperpage}{82}
+\indexentry{Normal likelihood ! biomass|hyperpage}{82}
+\indexentry{Relative proportions present observations|hyperpage}{82}
+\indexentry{Binomial likelihood ! presence|hyperpage}{84}
+\indexentry{Binomial likelihood ! presence|hyperpage}{84}
+\indexentry{Process error and likelihood multipliers|hyperpage}{84}
+\indexentry{process error|hyperpage}{84}
+\indexentry{likelihood multiplier|hyperpage}{84}
+\indexentry{over-dispersion|hyperpage}{85}
+\indexentry{Ageing error|hyperpage}{85}
+\indexentry{Simulating observations|hyperpage}{85}
+\indexentry{Pseudo-observations|hyperpage}{86}
+\indexentry{The report section|hyperpage}{87}
+\indexentry{Reports|hyperpage}{87}
+\indexentry{Reports section|hyperpage}{87}
+\indexentry{Reports ! standard style|hyperpage}{87}
+\indexentry{Print the model spatial map|hyperpage}{87}
+\indexentry{Reports ! Spatial map|hyperpage}{87}
+\indexentry{Print the partition|hyperpage}{87}
+\indexentry{Reports ! Partition|hyperpage}{87}
+\indexentry{Print the partition biomass|hyperpage}{88}
+\indexentry{Reports ! Partition biomass|hyperpage}{88}
+\indexentry{Print the partition at the end of an initialisation|hyperpage}{88}
+\indexentry{Reports ! Initialisation|hyperpage}{88}
+\indexentry{Print a process summary|hyperpage}{88}
+\indexentry{Reports ! Processes|hyperpage}{88}
+\indexentry{Print a preference function summary|hyperpage}{88}
+\indexentry{Reports ! Preference Functions|hyperpage}{88}
+\indexentry{Print derived quantities|hyperpage}{88}
+\indexentry{Reports ! Derived quantities|hyperpage}{88}
+\indexentry{Print derived quantities by cell|hyperpage}{88}
+\indexentry{Reports ! Derived quantities by cell|hyperpage}{88}
+\indexentry{Print the estimated parameters|hyperpage}{88}
+\indexentry{Reports ! Estimated parameters|hyperpage}{88}
+\indexentry{Print the estimated parameters in a vector format|hyperpage}{88}
+\indexentry{Reports ! Estimated parameters|hyperpage}{88}
+\indexentry{Print the objective function|hyperpage}{89}
+\indexentry{Reports ! Objective function|hyperpage}{89}
+\indexentry{Print the covariance matrix|hyperpage}{89}
+\indexentry{Reports ! Covariance Matrix|hyperpage}{89}
+\indexentry{Reports ! Hessian|hyperpage}{89}
+\indexentry{Print observations, fits, and residuals|hyperpage}{89}
+\indexentry{Reports ! Observations|hyperpage}{89}
+\indexentry{Print simulated observations|hyperpage}{89}
+\indexentry{Reports ! Simulated observations|hyperpage}{89}
+\indexentry{Print the ageing error misclassification matrix|hyperpage}{89}
+\indexentry{Reports ! Ageing error misclassification matrix|hyperpage}{89}
+\indexentry{Print layers and meta-layers|hyperpage}{89}
+\indexentry{Reports ! Layers and meta-layers|hyperpage}{89}
+\indexentry{Print a derived view via a categorical layer|hyperpage}{89}
+\indexentry{Reports ! Derived view|hyperpage}{89}
+\indexentry{Print selectivities|hyperpage}{90}
+\indexentry{Reports ! Selectivities|hyperpage}{90}
+\indexentry{Print the random number seed|hyperpage}{90}
+\indexentry{Reports ! Random number seed|hyperpage}{90}
+\indexentry{Print the size-weight relationship|hyperpage}{90}
+\indexentry{Reports ! Size-weight|hyperpage}{90}
+\indexentry{Print the size-at-age relationship|hyperpage}{90}
+\indexentry{Reports ! Size-at-age|hyperpage}{90}
+\indexentry{Print the weight-at-age relationship|hyperpage}{90}
+\indexentry{Reports ! Weight-at-age|hyperpage}{90}
+\indexentry{Print the results of an MCMC|hyperpage}{90}
+\indexentry{Reports ! MCMC|hyperpage}{90}
+\indexentry{Print the MCMC samples as they are calculated|hyperpage}{90}
+\indexentry{Reports ! MCMC samples|hyperpage}{90}
+\indexentry{Print the MCMC objective function values as they are calculated|hyperpage}{90}
+\indexentry{Reports ! MCMC objective functions|hyperpage}{90}
+\indexentry{Model structure|hyperpage}{91}
+\indexentry{Command ! model|hyperpage}{91}
+\indexentry{Initialisation|hyperpage}{92}
+\indexentry{Command ! initialisation\_phase|hyperpage}{92}
+\indexentry{Time-steps|hyperpage}{93}
+\indexentry{Command ! time\_step|hyperpage}{93}
+\indexentry{Processes|hyperpage}{93}
+\indexentry{Command ! process|hyperpage}{94}
+\indexentry{Preference functions|hyperpage}{111}
+\indexentry{Command ! preference\_function|hyperpage}{112}
+\indexentry{Probability Density Functions|hyperpage}{117}
+\indexentry{Command ! pdf|hyperpage}{118}
+\indexentry{Layers|hyperpage}{119}
+\indexentry{Command ! layer|hyperpage}{119}
+\indexentry{Derived quantities by cell|hyperpage}{124}
+\indexentry{Command ! derived\_quantity\_by\_cell|hyperpage}{124}
+\indexentry{Derived quantities|hyperpage}{125}
+\indexentry{Command ! derived\_quantity|hyperpage}{125}
+\indexentry{Age-size relationship|hyperpage}{127}
+\indexentry{Command ! age\_size|hyperpage}{127}
+\indexentry{Size-weight|hyperpage}{131}
+\indexentry{Command ! size\_weight|hyperpage}{131}
+\indexentry{Selectivities|hyperpage}{132}
+\indexentry{Command ! selectivity|hyperpage}{132}
+\indexentry{Estimation methods|hyperpage}{139}
+\indexentry{Command ! estimation|hyperpage}{139}
+\indexentry{Point estimation|hyperpage}{139}
+\indexentry{Command ! minimiser|hyperpage}{139}
+\indexentry{Markov Chain Monte Carlo (MCMC)|hyperpage}{141}
+\indexentry{Command ! mcmc|hyperpage}{141}
+\indexentry{Profiles|hyperpage}{143}
+\indexentry{Command ! profile|hyperpage}{143}
+\indexentry{Command ! estimate|hyperpage}{143}
+\indexentry{Defining catchability constants|hyperpage}{146}
+\indexentry{Command ! catchability|hyperpage}{146}
+\indexentry{Defining penalties|hyperpage}{146}
+\indexentry{Command ! penalty|hyperpage}{146}
+\indexentry{Observation types|hyperpage}{147}
+\indexentry{Command ! observation|hyperpage}{147}
+\indexentry{Defining ageing error|hyperpage}{162}
+\indexentry{Command ! ageing\_error|hyperpage}{162}
+\indexentry{Available reports|hyperpage}{165}
+\indexentry{Report commands and subcommands|hyperpage}{165}
+\indexentry{Command ! report|hyperpage}{165}
+\indexentry{Command ! include|hyperpage}{177}
+\indexentry{Include an external file|hyperpage}{177}
+\indexentry{Examples|hyperpage}{179}
+\indexentry{Examples ! Example 1|hyperpage}{179}
+\indexentry{Examples ! A simple non-spatial model|hyperpage}{179}
+\indexentry{Examples ! Example 2|hyperpage}{183}
+\indexentry{Examples ! A $10 \times 6$ spatial model|hyperpage}{183}
+\indexentry{Command ! model|hyperpage}{195}
+\indexentry{Command ! initialisation\_phase|hyperpage}{195}
+\indexentry{Command ! time\_step|hyperpage}{195}
+\indexentry{Command ! process|hyperpage}{195}
+\indexentry{Command ! preference\_function|hyperpage}{200}
+\indexentry{Command ! pdf|hyperpage}{202}
+\indexentry{Command ! layer|hyperpage}{202}
+\indexentry{Command ! derived\_quantity\_by\_cell|hyperpage}{204}
+\indexentry{Command ! derived\_quantity|hyperpage}{204}
+\indexentry{Command ! age\_size|hyperpage}{204}
+\indexentry{Command ! size\_weight|hyperpage}{205}
+\indexentry{Command ! selectivity|hyperpage}{206}
+\indexentry{Command ! estimation|hyperpage}{207}
+\indexentry{Command ! minimiser|hyperpage}{207}
+\indexentry{Command ! mcmc|hyperpage}{208}
+\indexentry{Command ! profile|hyperpage}{208}
+\indexentry{Command ! estimate|hyperpage}{208}
+\indexentry{Command ! catchability|hyperpage}{209}
+\indexentry{Command ! penalty|hyperpage}{209}
+\indexentry{Command ! observation|hyperpage}{209}
+\indexentry{Command ! ageing\_error|hyperpage}{213}
+\indexentry{Command ! report|hyperpage}{213}
+\indexentry{Command ! include|hyperpage}{217}
+\indexentry{Include an external file|hyperpage}{217}
