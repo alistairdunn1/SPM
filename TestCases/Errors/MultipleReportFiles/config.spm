@@ -1,0 +1,169 @@
+###########################################################################
+# Example 1: Simple 1x1 spatial model without movement
+###########################################################################
+
+# Model structure
+@model
+nrows 1
+ncols 1
+layer Base
+categories immature mature
+min_age 1
+max_age 35
+age_plus_group True
+initial_year 1994
+current_year 2007
+cell_length 1
+initialisation_phases Phase1
+time_steps step_one
+age_size VB VB
+
+@age_size VB
+type von_bertalanffy
+size_weight basic
+k      0.093
+t0    -0.256
+linf 169.07
+
+@size_weight basic
+type basic
+a 1.387e-008
+b 2.965
+
+# Initalisation
+@initialisation_phase Phase1
+years 200
+time_steps Phase1
+lambda 1e-10
+lambda_years 100 125 150 175 200
+
+@time_step Phase1
+processes BHrecruitment Maturation halfM halfM Ageing
+
+# Annual cycle
+@time_step step_one
+processes BHrecruitment Maturation halfM Fishing halfM Ageing
+
+# Derived quantities
+@derived_quantity SSB
+type biomass
+time_step step_one
+initialisation_time_steps Phase1
+categories mature
+selectivities One
+layer Base
+
+# Population processes
+@process Ageing
+type ageing
+categories immature mature
+
+@process BHrecruitment
+type bh_recruitment
+categories immature
+proportions 1.0
+r0 550000
+age 1
+ssb SSB
+b0 Phase1
+ssb_offset 1
+standardise_YCS_years 1993-1999
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+
+@process halfM
+type constant_mortality_rate
+categories immature mature
+m 0.065 0.065
+selectivities One One
+
+@process Fishing
+type event_mortality
+categories immature mature
+years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
+u_max 0.99
+selectivities FishingSel FishingSel
+penalty event_mortality_penalty
+
+@process Maturation
+type category_transition_rate
+from immature
+to mature
+proportions 1.0
+selectivities Maturation
+
+# Definition of layers
+@layer Base
+type numeric
+@include "layers/Base.spm"
+
+@layer constant
+type numeric
+@include "layers/constant.spm"
+
+@layer SSRU
+type categorical
+@include "layers/SSRU.spm"
+
+@layer Fishing_1998
+type numeric
+@include "layers/Fishing_1998.spm"
+
+@layer Fishing_1999
+type numeric
+@include "layers/Fishing_1999.spm"
+
+@layer Fishing_2000
+type numeric
+@include "layers/Fishing_2000.spm"
+
+@layer Fishing_2001
+type numeric
+@include "layers/Fishing_2001.spm"
+
+@layer Fishing_2002
+type numeric
+@include "layers/Fishing_2002.spm"
+
+@layer Fishing_2003
+type numeric
+@include "layers/Fishing_2003.spm"
+
+@layer Fishing_2004
+type numeric
+@include "layers/Fishing_2004.spm"
+
+@layer Fishing_2005
+type numeric
+@include "layers/Fishing_2005.spm"
+
+@layer Fishing_2006
+type numeric
+@include "layers/Fishing_2006.spm"
+
+@layer Fishing_2007
+type numeric
+@include "layers/Fishing_2007.spm"
+
+# Definition of selectivities
+@selectivity One
+type constant
+c 1
+
+@selectivity Maturation
+type logistic_producing
+l 5
+h 30
+a50 10
+ato95 3
+
+@selectivity FishingSel
+type logistic
+a50 8
+ato95 3
+
+# Include external files
+@include "estimation.spm"
+@include "observations.spm"
+@include "reports.spm"

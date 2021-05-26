@@ -59,6 +59,8 @@ public:
   string getCommandLineParameter(int index);
   void setSimulationCandidates(int value) { iSimulationCandidates = value; }
   int getSimulationCandidates() { return iSimulationCandidates; }
+  void setSuffixFileOutput(bool value) { bSuffixFileOutput = value; }
+  bool getSuffixFileOutput() { return bSuffixFileOutput; }
   void setDisableReports(bool value) { bDisableReports = value; }
   bool getDisableReports() { return bDisableReports; }
 
@@ -77,6 +79,7 @@ protected:
   int iRandomSeed;
   vector<string> vCommandLineParameters;
   int iSimulationCandidates;
+  bool bSuffixFileOutput;
   bool bDisableReports;
   int iNumberSuppliedEstimateValues;
   bool bWasInputFileSupplied;

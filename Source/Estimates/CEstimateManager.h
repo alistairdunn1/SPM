@@ -46,6 +46,7 @@ public:
   CEstimate *getEstimate(string Parameter);
   void addEstimateValue(string estimate, double value);
   int getEstimateValueCount();
+  int getEstimateValueNumber() { return iEstimateNumber; }
   void loadEstimateValues(int index);
   void setCurrentPhase(int phase);
   void validate();
@@ -60,6 +61,7 @@ protected:
   vector<CEstimateInfo *> vEstimateInfoList;
   vector<CEstimate *> vEstimateList;
   map<string, vector<double>> mvEstimateValues;
+  int iEstimateNumber;
 
 private:
   static boost::thread_specific_ptr<CEstimateManager> clInstance;

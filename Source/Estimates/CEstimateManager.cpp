@@ -34,6 +34,7 @@ boost::thread_specific_ptr<CEstimateManager> CEstimateManager::clInstance;
 //**********************************************************************
 CEstimateManager::CEstimateManager()
 {
+  iEstimateNumber = 0;
 }
 
 //**********************************************************************
@@ -287,6 +288,7 @@ void CEstimateManager::loadEstimateValues(int index)
     {
       Estimate->loadValue(index);
     }
+    iEstimateNumber = index;
   }
   catch (string &Ex)
   {

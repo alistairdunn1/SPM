@@ -92,7 +92,7 @@ void CRuntimeController::parseCommandLine(int argc, const char *argv[])
   options_description oDesc("Usage");
   oDesc.add_options()("help,h", "Print help")("license,l", "Display SPM license")("version,v", "Display version information")("config,c", value<string>(), "Input configuration file")("run,r", "Basic model run")("estimate,e", "Point estimation")("profile,p", "Likelihood profiles")("mcmc,m", "MCMC")
       //("forward,f", "Forward projections")
-      ("simulate,s", value<int>(), "Simulate observations")("input,i", value<string>(), "Load free parameter values from file")("estimates,o", value<string>(), "Create estimate values report")("threads,t", value<int>(), "Maximum number of threads to use in multi-threaded processes")("quiet,q", "Run in quiet mode")("seed,g", value<int>(), "Random number seed");
+      ("simulate,s", value<int>(), "Simulate observations")("input,i", value<string>(), "Load free parameter values from file")("estimates,o", value<string>(), "Create estimate values report")("threads,t", value<int>(), "Maximum number of threads to use in multi-threaded processes")("quiet,q", "Run in quiet mode")("seed,g", value<int>(), "Random number seed")("suffix,u", "Modify output file names using a unique suffix for each run when using (-r -i)");
 
   options_description oAllOptions("All");
   oAllOptions.add(oDesc);
@@ -205,6 +205,11 @@ void CRuntimeController::parseCommandLine(int argc, const char *argv[])
     report->addParameter(PARAM_LABEL, string(""));
     report->addParameter(PARAM_TYPE, PARAM_ESTIMATE_VALUE);
     report->addParameter(PARAM_FILE_NAME, sReportName);
+  }
+
+  if (vmParams.count("suffix"))
+  {
+    pConfig->setSuffixFileOutput(true);
   }
 
   if (vmParams.count("disable_reports"))

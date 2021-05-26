@@ -28,6 +28,7 @@ CConfiguration::CConfiguration()
   iNumberOfThreads = 0;
   bUseEstimateValues = false;
   iSimulationCandidates = 0;
+  bSuffixFileOutput = false;
   bDisableReports = false;
   iRandomSeed = 123;
   iNumberSuppliedEstimateValues = 0;

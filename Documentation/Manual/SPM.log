@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.2)  23 MAY 2021 20:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.2)  26 MAY 2021 15:02
 entering extended mode
 **./SPM.tex
 (SPM.tex
@@ -725,13 +725,14 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10.95> not available
  [10.22]
 LaTeX Font Info:    Font shape `OT1/pcr/b/it' in size <10.95> not available
 (Font)              Font shape `OT1/pcr/b/sl' tried instead on input line 61.
+ [11.23]
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 9.85492pt on input line 102.
- [11.23] [12.24]
+(Font)              scaled to size 9.85492pt on input line 104.
+ [12.24] [13.25]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 172.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 174.
 
- [13.25]) [14.26]
+) [14.26]
 \openout2 = `Population.aux'.
 
  (Population.tex
@@ -790,6 +791,9 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 \openout2 = `Report.aux'.
 
  (Report.tex
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 20.
+
 [87.99
 
 
@@ -963,11 +967,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
 ### simple group (level 1) entered at line 84 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12295 strings out of 480896
- 189258 string characters out of 2898166
+ 12301 strings out of 480896
+ 189330 string characters out of 2898166
  587517 words of memory out of 3000000
- 26475 multiletter control sequences out of 15000+200000
- 608580 words of font info for 178 fonts, out of 3000000 for 9000
+ 26477 multiletter control sequences out of 15000+200000
+ 609197 words of font info for 180 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,15n,45p,1464b,2283s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
@@ -987,9 +991,9 @@ type1/urw/times/utmb8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SPM.pdf (239 pages, 1213695 bytes).
+Output written on SPM.pdf (239 pages, 1214541 bytes).
 PDF statistics:
- 4066 PDF objects out of 4296 (max. 8388607)
- 1174 named destinations out of 1200 (max. 500000)
+ 4068 PDF objects out of 4296 (max. 8388607)
+ 1176 named destinations out of 1200 (max. 500000)
  2359 words of extra memory for PDF output out of 10000 (max. 10000000)
 

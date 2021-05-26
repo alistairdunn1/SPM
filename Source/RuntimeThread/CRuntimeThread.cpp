@@ -193,6 +193,26 @@ void CRuntimeThread::executeBasicRun()
 
   // Change State
   eCurrentState = STATE_FINALIZATION;
+
+  if (pConfig->getSuffixFileOutput() && CConfiguration::Instance()->getWasInputFileSupplied()) {
+    int iEstimateValueCount = pEstimateManager->getEstimateValueCount();
+    int iEstimateValueNumber = pEstimateManager->getEstimateValueNumber();
+    string reportSuffix = CReportManager::Instance()->getReportSuffix();
+    int iSuffixIterationWidth = (int)floor(log10((double)iEstimateValueCount + 1)) + 1;
+    string sReportSuffix = ".";
+    int iThisIterationWidth = (int)floor(log10(iEstimateValueNumber + 1)) + 1;
+    int iCount = iSuffixIterationWidth - iThisIterationWidth;
+    if (iCount > 0)
+    {
+      for (int j = 0; j < iCount; ++j)
+      {
+        sReportSuffix += "0";
+      }
+    }
+    sReportSuffix += boost::lexical_cast<string>(iEstimateValueNumber + 1);
+    CReportManager::Instance()->setReportSuffix(sReportSuffix);
+  }
+
   CReportManager::Instance()->execute(eCurrentState);
 }
 

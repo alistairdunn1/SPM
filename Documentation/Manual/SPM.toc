@@ -21,7 +21,7 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Commands}{12}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Subcommands}{12}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}The command-block format}{13}{subsubsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.4}Commenting out lines}{13}{subsubsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.4}Commenting out lines}{14}{subsubsection.3.5.4}%
 \contentsline {subsubsection}{\numberline {3.5.5}Determining parameter names}{14}{subsubsection.3.5.5}%
 \contentsline {subsection}{\numberline {3.6}\texttt {SPM}\ exit status values}{14}{subsection.3.6}%
 \contentsline {section}{\numberline {4}The population section}{15}{section.4}%

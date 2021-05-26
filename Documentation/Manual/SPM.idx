@@ -83,8 +83,8 @@
 \indexentry{Estimated parameters|hyperpage}{13}
 \indexentry{Command block format|hyperpage}{13}
 \indexentry{Command ! Include files|hyperpage}{13}
-\indexentry{Commenting out lines|hyperpage}{13}
-\indexentry{Comments|hyperpage}{13}
+\indexentry{Commenting out lines|hyperpage}{14}
+\indexentry{Comments|hyperpage}{14}
 \indexentry{Determining parameter names|hyperpage}{14}
 \indexentry{Parameter names|hyperpage}{14}
 \indexentry{Exit status value|hyperpage}{14}
@@ -164,7 +164,7 @@
 \indexentry{Proportional recruitment|hyperpage}{26}
 \indexentry{Recruitment ! proportional|hyperpage}{26}
 \indexentry{Constant Recruitment|hyperpage}{27}
-\indexentry{Beverton-Holt recruitment (parametrised by year class strengths|hyperpage}{27}
+\indexentry{Beverton-Holt recruitment parametrised by year class strengths|hyperpage}{27}
 \indexentry{Beverton-Holt recruitment parameterised with absolute recruitments|hyperpage}{28}
 \indexentry{Local Beverton-Holt recruitment|hyperpage}{29}
 \indexentry{Proportional recruitment|hyperpage}{31}

@@ -25,10 +25,10 @@
   \item Basic size-weight relationship, \hyperpage{52}
   \item Bayesian estimation, \hyperpage{62}
   \item Beta prior, \hyperpage{65}
-  \item Beverton-Holt recruitment (parametrised by year class strengths, 
-		\hyperpage{27}
   \item Beverton-Holt recruitment parameterised with absolute recruitments, 
 		\hyperpage{28}
+  \item Beverton-Holt recruitment parametrised by year class strengths, 
+		\hyperpage{27}
   \item Beverton-Holt recruitment with absolute recruitments, 
 		\hyperpage{26}
   \item Beverton-Holt recruitment with YCS, \hyperpage{26}
@@ -92,8 +92,8 @@
   \item Commands, \hyperpage{12}
   \item Commands 
     \subitem  Subcommands, \hyperpage{12}
-  \item Commenting out lines, \hyperpage{13}
-  \item Comments, \hyperpage{13}
+  \item Commenting out lines, \hyperpage{14}
+  \item Comments, \hyperpage{14}
   \item Common Public License, \hyperpage{1}
   \item Constant exploitation rate, \hyperpage{33}
   \item Constant mortality, \hyperpage{32}
