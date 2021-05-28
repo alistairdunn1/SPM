@@ -1,0 +1,10 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.preferredGenerators": [
+        "MinGW Makefiles"
+    ],
+    "cmake.generator": "Unix Makefiles",
+    "cmake.buildArgs": ["--parallel 8"],
+    "editor.formatOnSave": true,
+    "C_Cpp.dimInactiveRegions": false
+}

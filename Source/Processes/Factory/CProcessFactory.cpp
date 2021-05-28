@@ -32,7 +32,7 @@
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
-#include "../Population/CLayerVaryingExploitationRateByeventProcess.h"
+//#include "../Population/CLayerVaryingExploitationRateByeventProcess.h"
 #include "../Population/CLayerVaryingExploitationRateProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
 #include "../Population/CNoneProcess.h"
@@ -68,8 +68,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CAnnualMortalityRateProcess();
   else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE)
     pProcess = new CLayerVaryingExploitationRateProcess();
-  else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE_BYEVENT)
-    pProcess = new CLayerVaryingExploitationRateByeventProcess();
+//else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE_BYEVENT)
+//  pProcess = new CLayerVaryingExploitationRateByeventProcess();
   else if (type == PARAM_EVENT_MORTALITY)
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_BIOMASS_EVENT_MORTALITY)

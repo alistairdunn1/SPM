@@ -53,12 +53,13 @@ void CHollingMortalityRateProcess::validate() {
     dA           = pParameterList->getDouble(PARAM_A);
     dB           = pParameterList->getDouble(PARAM_B);
     dX           = pParameterList->getDouble(PARAM_X, true, 2.0);
+    dUMax        = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    sPenalty     = pParameterList->getString(PARAM_PENALTY, true, "");
+
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vPredatorCategoryList, PARAM_PREDATOR_CATEGORIES);
     pParameterList->fillVector(vPredatorSelectivityList, PARAM_PREDATOR_SELECTIVITIES);
-    dUMax    = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
-    sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
 
     // Base Validation
     CProcess::validate();
@@ -88,6 +89,7 @@ void CHollingMortalityRateProcess::validate() {
 
     if (dX < ONE)
       CError::errorLessThanEqualTo(PARAM_X, PARAM_ONE);
+
   } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

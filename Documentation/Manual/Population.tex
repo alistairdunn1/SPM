@@ -676,7 +676,7 @@ The constant rate, age mortality, constant exploitation rate, annually varying r
 
 \subsubsection*{Constant mortality rate}
 
-To specify an constant annual mortality rate \index{Constant mortality}(i.e., $M=0.2$) for categories `male' and `female', then, 
+The constant annual mortality rate process applies an instantaneous mortality rate. To specify an constant annual mortality rate \index{Constant mortality}(i.e., $M=0.2$) for categories `male' and `female', then use, 
 {\small{\begin{verbatim}
 @process NaturalMortality
 type constant_mortality_rate
@@ -704,7 +704,7 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 \subsubsection*{Age mortality rate}
 
-To specify an constant annual mortality rate by age \index{Age mortality} for categories `male' and `female' for a model with age classes 1--5, then, 
+The age mortality rate process applies an instantaneous mortality rate by age. To specify an constant annual mortality rate by age \index{Age mortality} for categories `male' and `female' for a model with age classes 1--5, then, 
 {\small{\begin{verbatim}
 @process NaturalMortality
 type age_mortality_rate
@@ -726,7 +726,7 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 \subsubsection*{Constant exploitation rate}
 
-To specify an constant annual exploitation rate \index{Constant exploitation rate}(i.e., $U=0.2$) for categories `male' and `female', then, 
+The constant exploitation rate process applies an exploitation rate --- note this is not an instantaneous rate. To specify an constant annual exploitation rate \index{Constant exploitation rate}(i.e., $U=0.2$) for categories `male' and `female', then, 
 {\small{\begin{verbatim}
 @process ExploitationMortality
 type constant_exploitation_rate
@@ -756,7 +756,7 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 \subsubsection*{Annual mortality rate}
 
-Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
+The annual mortality rate process applies an instantaneous rate by year. Mortality for the annual rate\index{Annual mortality} is similar to the constant mortality rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
 {\small{\begin{verbatim}
 @process AnnualMortality
 type annual_mortality_rate

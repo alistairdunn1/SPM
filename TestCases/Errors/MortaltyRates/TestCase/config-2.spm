@@ -1,0 +1,110 @@
+# Constant-Recruitment Process
+# 1x1 Example
+
+# Spatial structure
+@model
+nrows 1
+ncols 1
+layer Base
+categories immature
+min_age 1
+max_age 5
+age_plus_group True
+initial_year 2000
+current_year 2010
+cell_length 1
+time_steps One
+age_size schnute
+
+@age_size schnute
+type schnute
+size_weight none
+y1 1
+y2 100
+tau1 1
+tau2 50
+a 1
+b 1
+#cv 0.10
+
+@size_weight none
+type basic
+a 1
+b 0
+
+@time_step One
+processes Recruitment Age Mortality
+
+@process Age
+type ageing
+categories immature
+
+@process Mortality
+type annual_mortality_rate
+categories immature
+selectivities One
+years 2001 2002 2003 2004
+M      0.0  0.9  0.1  0.0 
+{
+@process Mortality
+type constant_exploitation_rate
+U 1.0
+categories immature
+selectivities One
+layer AnnualFootprint 
+}
+@layer AnnualFootprint
+type numeric_meta
+default_layer Zero
+years    2001   2002   2003   2004
+layers EM2001 EM2002 EM2003 EM2004
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 1000
+age 1
+
+@layer Zero
+type numeric
+data 0.0
+
+@layer One
+type numeric
+data 1.0
+
+@layer EM2001
+type numeric
+data 0.0
+
+@layer EM2002
+type numeric
+data 0.59343034
+
+@layer EM2003
+type numeric
+data 0.09516258
+
+@layer EM2004
+type numeric
+data 0.0
+
+@layer Base
+type numeric
+data 1
+
+@selectivity One
+type constant
+c 1
+
+@report TimeStep_One
+type partition
+time_step One
+years 2000-2010
+
+@report EM
+type layer
+layer AnnualFootprint
+years 2000-2010
+

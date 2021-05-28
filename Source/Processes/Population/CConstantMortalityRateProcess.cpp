@@ -177,9 +177,6 @@ void CConstantMortalityRateProcess::execute() {
             // Get Amount To Subtract
             dCurrent *= pGrid[i][j].getValue(vCategoryIndex[k], l);
 
-            if (pLayer != 0)
-              dCurrent *= pLayer->getValue(i, j);
-
             // Do Add/Subs
             pBaseSquare->subValue(vCategoryIndex[k], l, dCurrent);
           }
