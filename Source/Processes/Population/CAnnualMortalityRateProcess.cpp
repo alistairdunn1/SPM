@@ -104,10 +104,31 @@ void CAnnualMortalityRateProcess::build() {
 
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
+
+    // Rebuild
+    rebuild();
+
   } catch (string& Ex) {
     Ex = "CAnnualMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// void CAnnualMortalityProcess::rebuild()
+// Rebuild
+//**********************************************************************
+void CAnnualMortalityRateProcess::rebuild() {
+#ifndef OPTIMIZE
+  try {
+#endif
+
+#ifndef OPTIMIZE
+  } catch (string& Ex) {
+    Ex = "CAnnualMortalityRateProcess.rebuild(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+#endif
 }
 
 //**********************************************************************
@@ -132,6 +153,13 @@ void CAnnualMortalityRateProcess::execute() {
 
     if (CComparer::isEqual(dM, 0.0))
       return;  // Don't run this year
+
+    // If a meta-layer, then we need to rebuild the Process to take account of changes in layer values by year
+    if (pLayer != 0) {
+      if (pLayer->getLayerType() == PARAM_META_NUMERIC) {
+        rebuild();
+      }
+    }
 
     // Loop through World Grid (i, j)
     for (int i = 0; i < iWorldHeight; ++i) {

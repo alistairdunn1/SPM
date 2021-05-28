@@ -29,6 +29,7 @@ public:
   CProcess* clone() { return new CAnnualMortalityRateProcess(*this); }
   void      validate();
   void      build();
+  void      rebuild();
   void      execute();
 
 protected:
