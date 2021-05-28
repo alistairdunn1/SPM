@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CObservationFactory
-{
+class CObservationFactory {
 public:
   // Functions
-  static CObservation *buildObservation(string type, bool registerWithManager = true);
+  static CObservation* buildObservation(string type, bool registerWithManager = true);
 
 private:
   // Functions

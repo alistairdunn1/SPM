@@ -13,18 +13,16 @@
 #include <string>
 
 // Local Includes
-#include "CRandomNumberGenerator.h"
 #include "../CConfiguration.h"
 #include "../TestFixtures/CWorld_Fixture.h"
+#include "CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_Reset, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_Reset, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
 
   // Test
   pGenerator->Reset(2468);
@@ -48,10 +46,8 @@ BOOST_FIXTURE_TEST_CASE(RandomNumber_Reset, CWorld_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
 
   // Test
   pGenerator->Reset(123);
@@ -74,10 +70,8 @@ BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform, CWorld_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform01, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform01, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
 
   // Test
   pGenerator->Reset(31337);
@@ -99,10 +93,8 @@ BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateUniform01, CWorld_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateNormal, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateNormal, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
 
   // Test
   pGenerator->Reset(123);
@@ -125,11 +117,9 @@ BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateNormal, CWorld_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateLogNormal, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
-  CConfiguration *pConfig = CConfiguration::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateLogNormal, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
+  CConfiguration*         pConfig    = CConfiguration::Instance();
 
   // Test
   BOOST_CHECK_EQUAL(pConfig->getRandomSeed(), 123);
@@ -152,10 +142,8 @@ BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateLogNormal, CWorld_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateBinomial, CWorld_Fixture)
-{
-
-  CRandomNumberGenerator *pGenerator = CRandomNumberGenerator::Instance();
+BOOST_FIXTURE_TEST_CASE(RandomNumber_GenerateBinomial, CWorld_Fixture) {
+  CRandomNumberGenerator* pGenerator = CRandomNumberGenerator::Instance();
 
   // Test
   pGenerator->Reset(123);

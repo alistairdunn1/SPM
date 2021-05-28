@@ -14,28 +14,22 @@
 // CBaseBuild::CBaseBuild()
 // Constructor
 //**********************************************************************
-CBaseBuild::CBaseBuild()
-{
-}
+CBaseBuild::CBaseBuild() {}
 
 //**********************************************************************
 // void CBaseBuild::validate()
 // Build
 //**********************************************************************
-void CBaseBuild::validate()
-{
-  try
-  {
+void CBaseBuild::validate() {
+  try {
     // Base
     CBaseValidate::validate();
 
     // Assign
-    pWorld = CWorld::Instance();
-    iWorldWidth = pWorld->getWidth();
+    pWorld       = CWorld::Instance();
+    iWorldWidth  = pWorld->getWidth();
     iWorldHeight = pWorld->getHeight();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBaseBuild.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -45,6 +39,4 @@ void CBaseBuild::validate()
 // CBaseBuild::~CBaseBuild()
 // Destructor
 //**********************************************************************
-CBaseBuild::~CBaseBuild()
-{
-}
+CBaseBuild::~CBaseBuild() {}

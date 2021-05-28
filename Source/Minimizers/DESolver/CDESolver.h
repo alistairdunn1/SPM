@@ -16,8 +16,7 @@
 //
 //
 //**********************************************************************
-class CDESolver : public CMinimizer
-{
+class CDESolver : public CMinimizer {
 public:
   // Functions
   CDESolver();
@@ -29,8 +28,8 @@ protected:
   // Variables
   double dDifferenceScale;
   double dCrossoverProbability;
-  int iPopulationSize;
-  int iMaxGenerations;
+  int    iPopulationSize;
+  int    iMaxGenerations;
   double dTolerance;
 };
 

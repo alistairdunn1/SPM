@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CPreySuitabilityPredationProcess.h"
+
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CCompoundCategories.h"
 #include "../../Helpers/CError.h"
@@ -26,13 +27,12 @@
 // CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess()
 // Default Constructor
 //**********************************************************************
-CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess()
-{
+CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess() {
   // Variables
-  sType = PARAM_PREY_SUITABILITY_PREDATION;
+  sType           = PARAM_PREY_SUITABILITY_PREDATION;
   pPreyCategories = 0;
-  pCRLayer = 0;
-  pPenalty = 0;
+  pCRLayer        = 0;
+  pPenalty        = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_IS_ABUNDANCE);
@@ -51,21 +51,18 @@ CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess()
 // void CPreySuitabilityPredationProcess::validate()
 // Validate our process
 //**********************************************************************
-void CPreySuitabilityPredationProcess::validate()
-{
-  try
-  {
-
+void CPreySuitabilityPredationProcess::validate() {
+  try {
     // Get our parameters
     bIsAbundance = pParameterList->getBool(PARAM_IS_ABUNDANCE);
-    dCR = pParameterList->getDouble(PARAM_CONSUMPTION_RATE);
-    sCRLayer = pParameterList->getString(PARAM_CONSUMPTION_RATE_LAYER, true, "");
+    dCR          = pParameterList->getDouble(PARAM_CONSUMPTION_RATE);
+    sCRLayer     = pParameterList->getString(PARAM_CONSUMPTION_RATE_LAYER, true, "");
     pParameterList->fillVector(vElectivityList, PARAM_ELECTIVITIES);
     pParameterList->fillVector(vPreyCategoryList, PARAM_PREY_CATEGORIES);
     pParameterList->fillVector(vPreySelectivityList, PARAM_PREY_SELECTIVITIES);
     pParameterList->fillVector(vPredatorCategoryList, PARAM_PREDATOR_CATEGORIES);
     pParameterList->fillVector(vPredatorSelectivityList, PARAM_PREDATOR_SELECTIVITIES);
-    dUMax = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    dUMax    = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
     sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
 
     // Base Validation
@@ -74,10 +71,8 @@ void CPreySuitabilityPredationProcess::validate()
 
     // Check For Duplicate Prey Categories, ignoring '+'
     map<string, int> mList;
-    if (vPreyCategoryList.size() > 0)
-    {
-      foreach (string Category, vPreyCategoryList)
-      {
+    if (vPreyCategoryList.size() > 0) {
+      foreach (string Category, vPreyCategoryList) {
         if (Category != CONFIG_AND)
           mList[Category] += 1;
 
@@ -89,10 +84,8 @@ void CPreySuitabilityPredationProcess::validate()
 
     // Check For Duplicate Predator Categories
     mList.clear();
-    if (vPredatorCategoryList.size() > 0)
-    {
-      foreach (string Category, vPredatorCategoryList)
-      {
+    if (vPredatorCategoryList.size() > 0) {
+      foreach (string Category, vPredatorCategoryList) {
         mList[Category] += 1;
 
         if (mList[Category] > 1)
@@ -103,8 +96,7 @@ void CPreySuitabilityPredationProcess::validate()
 
     // Register Estimables
     registerEstimable(PARAM_CONSUMPTION_RATE, &dCR);
-    for (int i = 0; i < (int)vElectivityList.size(); ++i)
-      registerEstimable(PARAM_ELECTIVITIES, i, &vElectivityList[i]);
+    for (int i = 0; i < (int)vElectivityList.size(); ++i) registerEstimable(PARAM_ELECTIVITIES, i, &vElectivityList[i]);
 
     // Assign compound categories
     pPreyCategories = new CCompoundCategories;
@@ -130,8 +122,7 @@ void CPreySuitabilityPredationProcess::validate()
 
     // Loop Through Electivities. Make Sure They have sum one, and they are always non-negative
     double dRunningTotal = 0.0;
-    foreach (double Prop, vElectivityList)
-    {
+    foreach (double Prop, vElectivityList) {
       dRunningTotal += Prop;
       if (Prop < TRUE_ZERO)
         CError::errorLessThan(PARAM_ELECTIVITIES, PARAM_ZERO);
@@ -139,9 +130,7 @@ void CPreySuitabilityPredationProcess::validate()
     // Check if equal to one
     if (dRunningTotal != 1.0)
       CError::errorNotEqual(PARAM_ELECTIVITIES, PARAM_ONE);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -151,38 +140,30 @@ void CPreySuitabilityPredationProcess::validate()
 // void CPreySuitabilityPredationProcess::build()
 // Build our process
 //**********************************************************************
-void CPreySuitabilityPredationProcess::build()
-{
-  try
-  {
+void CPreySuitabilityPredationProcess::build() {
+  try {
     // Base Build
-    //CProcess::build();
+    // CProcess::build();
 
     // Get our CR Layer
-    if (sCRLayer != "")
-    {
+    if (sCRLayer != "") {
       pCRLayer = CLayerManager::Instance()->getNumericLayer(sCRLayer);
       // Loop Through The World Grid (i,j)
-      for (int i = 0; i < iWorldHeight; ++i)
-      {
-        for (int j = 0; j < iWorldWidth; ++j)
-        {
-          if (pCRLayer->getValue(i, j) < 0)
-          {
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
+          if (pCRLayer->getValue(i, j) < 0) {
             CError::errorLessThan(PARAM_CONSUMPTION_RATE_LAYER, PARAM_ZERO);
           }
         }
       }
     }
 
-    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    CSelectivityManager* pSelectivityManager = CSelectivityManager::Instance();
     // Prey
-    int count = 0;
-    vector<CSelectivity *> tempSelectivityIndex;
-    for (int i = 0; i < pPreyCategories->getNRows(); ++i)
-    {
-      for (int j = 0; j < pPreyCategories->getNElements(i); ++j)
-      {
+    int                   count = 0;
+    vector<CSelectivity*> tempSelectivityIndex;
+    for (int i = 0; i < pPreyCategories->getNRows(); ++i) {
+      for (int j = 0; j < pPreyCategories->getNElements(i); ++j) {
         tempSelectivityIndex.push_back(pSelectivityManager->getSelectivity(vPreySelectivityList[count]));
         count++;
       }
@@ -190,14 +171,8 @@ void CPreySuitabilityPredationProcess::build()
     }
 
     // Predator
-    foreach (string Name, vPredatorSelectivityList)
-    {
-      vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-    }
-    foreach (string Name, vPredatorCategoryList)
-    {
-      vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-    }
+    foreach (string Name, vPredatorSelectivityList) { vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name)); }
+    foreach (string Name, vPredatorCategoryList) { vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name)); }
 
     // Setup Vars
     iBaseColCount = pWorld->getBaseSquare(0, 0)->getWidth();
@@ -211,9 +186,7 @@ void CPreySuitabilityPredationProcess::build()
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -223,31 +196,26 @@ void CPreySuitabilityPredationProcess::build()
 // void CPreySuitabilityPredationProcess::rebuild()
 // Rebuild
 //**********************************************************************
-void CPreySuitabilityPredationProcess::rebuild()
-{
+void CPreySuitabilityPredationProcess::rebuild() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
-    //reset holding vectors
+    // reset holding vectors
     vMortalityRate.resize(pPreyCategories->getNRows());
     vMortalityN.resize(pPreyCategories->getNRows());
     vMortalityBiomass.resize(pPreyCategories->getNRows());
     vMortalityYears.resize(0);
     vPredatorBiomass.resize(0);
 
-    for (int i = 0; i < pPreyCategories->getNRows(); ++i)
-    {
+    for (int i = 0; i < pPreyCategories->getNRows(); ++i) {
       vMortalityRate[i].resize(0);
       vMortalityN[i].resize(0);
       vMortalityBiomass[i].resize(0);
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -258,13 +226,10 @@ void CPreySuitabilityPredationProcess::rebuild()
 // vector<string> CPreySuitabilityPredationProcess::getPreyGroups()
 //
 //**********************************************************************
-vector<string> CPreySuitabilityPredationProcess::getPreyGroups()
-{
-
+vector<string> CPreySuitabilityPredationProcess::getPreyGroups() {
   vector<string> result;
 
-  for (int i = 0; i < pPreyCategories->getNRows(); ++i)
-  {
+  for (int i = 0; i < pPreyCategories->getNRows(); ++i) {
     result.push_back(pPreyCategories->getGroup(i));
   }
 
@@ -275,11 +240,9 @@ vector<string> CPreySuitabilityPredationProcess::getPreyGroups()
 // void CPreySuitabilityPredationProcess::execute()
 // Execute our process
 //**********************************************************************
-void CPreySuitabilityPredationProcess::execute()
-{
+void CPreySuitabilityPredationProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base execute
     CProcess::execute();
@@ -287,14 +250,11 @@ void CPreySuitabilityPredationProcess::execute()
     vector<double> vSumMortality(pPreyCategories->getNRows());
     vector<double> vSumAbundance(pPreyCategories->getNRows());
     vector<double> vSumMortalityBiomass(pPreyCategories->getNRows());
-    double dTotalPredatorVulnerable = 0.0;
+    double         dTotalPredatorVulnerable = 0.0;
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
-
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -306,29 +266,23 @@ void CPreySuitabilityPredationProcess::execute()
         vVulnerable.resize(pPreyCategories->getNRows());
         vMortality.resize(pPreyCategories->getNRows());
         vExploitation.resize(pPreyCategories->getNRows());
-        dPredatorVulnerable = 0.0;
-        double dTotalVulnerable = 0.0;
+        dPredatorVulnerable       = 0.0;
+        double dTotalVulnerable   = 0.0;
         double dTotalAvailability = 0.0;
 
         // Loop Through Groups then Categories & Work out Vulnerable Stock in abundance or biomass
-        for (int m = 0; m < pPreyCategories->getNRows(); ++m)
-        {
+        for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
           vVulnerable[m] = 0.0;
-          for (int k = 0; k < pPreyCategories->getNElements(m); ++k)
-          {
-            for (int l = 0; l < iBaseColCount; ++l)
-            {
+          for (int k = 0; k < pPreyCategories->getNElements(m); ++k) {
+            for (int l = 0; l < iBaseColCount; ++l) {
               // get current prey abundance in age/category
               dCurrent = pBaseSquare->getValue(pPreyCategories->getCategoryIndex(m, k), l) * vvPreySelectivityIndex[m][k]->getResult(l);
               if (dCurrent < 0.0)
                 dCurrent = 0.0;
               // Increase Vulnerable biomass
-              if (bIsAbundance)
-              {
+              if (bIsAbundance) {
                 vVulnerable[m] += dCurrent;
-              }
-              else
-              {
+              } else {
                 vVulnerable[m] += dCurrent * pWorld->getMeanWeight(l, pPreyCategories->getCategoryIndex(m, k));
               }
             }
@@ -338,13 +292,11 @@ void CPreySuitabilityPredationProcess::execute()
         }
 
         dTotalAvailability = CMath::zeroFun(dTotalAvailability, ZERO);
-        dTotalVulnerable = CMath::zeroFun(dTotalVulnerable / dTotalAvailability, ZERO);
+        dTotalVulnerable   = CMath::zeroFun(dTotalVulnerable / dTotalAvailability, ZERO);
 
         // Loop Through Categories & Work out Predators in abundance or biomass
-        for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // get current prey abundance in age/category
             dPredatorCurrent = pBaseSquare->getValue(vPredatorCategoryIndex[k], l) * vPredatorSelectivityIndex[k]->getResult(l);
 
@@ -352,12 +304,9 @@ void CPreySuitabilityPredationProcess::execute()
               dPredatorCurrent = 0.0;
 
             // Increase Predator biomass
-            if (bIsAbundance)
-            {
+            if (bIsAbundance) {
               dPredatorVulnerable += dPredatorCurrent;
-            }
-            else
-            {
+            } else {
               dPredatorVulnerable += dPredatorCurrent * pWorld->getMeanWeight(l, vPredatorCategoryIndex[k]);
             }
           }
@@ -365,33 +314,25 @@ void CPreySuitabilityPredationProcess::execute()
         dTotalPredatorVulnerable += dPredatorVulnerable;
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
-        for (int m = 0; m < pPreyCategories->getNRows(); ++m)
-        {
+        for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
           vMortality[m] = dPredatorVulnerable * dCR * ((vVulnerable[m] / dTotalAvailability) * vElectivityList[m]) / dTotalVulnerable;
           if (pCRLayer != 0)
             vMortality[m] *= pCRLayer->getValue(i, j);
           vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m], ZERO);
-          if (vExploitation[m] > dUMax)
-          {
+          if (vExploitation[m] > dUMax) {
             vExploitation[m] = dUMax;
-            if (pPenalty != 0)
-            { // Throw Penalty
+            if (pPenalty != 0) {  // Throw Penalty
               pPenalty->trigger(sLabel, vMortality[m], (vVulnerable[m] * dUMax));
             }
-          }
-          else if (vExploitation[m] < ZERO)
-          {
+          } else if (vExploitation[m] < ZERO) {
             vExploitation[m] = 0.0;
           }
         }
 
         // Loop Through Categories & remove number based on calculated exploitation rate
-        for (int m = 0; m < pPreyCategories->getNRows(); ++m)
-        {
-          for (int k = 0; k < pPreyCategories->getNElements(m); ++k)
-          {
-            for (int l = 0; l < iBaseColCount; ++l)
-            {
+        for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
+          for (int k = 0; k < pPreyCategories->getNElements(m); ++k) {
+            for (int l = 0; l < iBaseColCount; ++l) {
               // Get Amount to remove
               dCurrent = pBaseSquare->getValue(pPreyCategories->getCategoryIndex(m, k), l) * vvPreySelectivityIndex[m][k]->getResult(l) * vExploitation[m];
               // If is Zero, Cont
@@ -408,12 +349,10 @@ void CPreySuitabilityPredationProcess::execute()
         }
       }
     }
-    if (pRuntimeController->getCurrentState() != STATE_INITIALIZATION)
-    {
+    if (pRuntimeController->getCurrentState() != STATE_INITIALIZATION) {
       vMortalityYears.push_back(pTimeStepManager->getCurrentYear());
       vPredatorBiomass.push_back(dTotalPredatorVulnerable);
-      for (int m = 0; m < pPreyCategories->getNRows(); ++m)
-      {
+      for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
         vMortalityRate[m].push_back(vSumMortality[m] / vSumAbundance[m]);
         vMortalityN[m].push_back(vSumMortality[m]);
         if (!bIsAbundance)
@@ -422,9 +361,7 @@ void CPreySuitabilityPredationProcess::execute()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -435,6 +372,4 @@ void CPreySuitabilityPredationProcess::execute()
 // CPreySuitabilityPredationProcess::~CPreySuitabilityPredationProcess()
 // Destructor
 //**********************************************************************
-CPreySuitabilityPredationProcess::~CPreySuitabilityPredationProcess()
-{
-}
+CPreySuitabilityPredationProcess::~CPreySuitabilityPredationProcess() {}

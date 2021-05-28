@@ -9,9 +9,10 @@
 
 // Local Headers
 #include "CPenaltyManager.h"
-#include "CPenalty.h"
+
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "CPenalty.h"
 
 // Single Static variable
 boost::thread_specific_ptr<CPenaltyManager> CPenaltyManager::clInstance;
@@ -20,16 +21,13 @@ boost::thread_specific_ptr<CPenaltyManager> CPenaltyManager::clInstance;
 // CPenaltyManager::CPenaltyManager()
 // Default Constructor
 //**********************************************************************
-CPenaltyManager::CPenaltyManager()
-{
-}
+CPenaltyManager::CPenaltyManager() {}
 
 //**********************************************************************
 // CPenaltyManager* CPenaltyManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CPenaltyManager *CPenaltyManager::Instance()
-{
+CPenaltyManager* CPenaltyManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CPenaltyManager());
   return clInstance.get();
@@ -39,10 +37,8 @@ CPenaltyManager *CPenaltyManager::Instance()
 // void CPenaltyManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CPenaltyManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CPenaltyManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -51,8 +47,7 @@ void CPenaltyManager::Destroy()
 // void CPenaltyManager::addPenalty(CPenalty *Penalty)
 // add Penalty to our list
 //**********************************************************************
-void CPenaltyManager::addPenalty(CPenalty *Penalty)
-{
+void CPenaltyManager::addPenalty(CPenalty* Penalty) {
   vPenaltyList.push_back(Penalty);
 }
 
@@ -60,34 +55,25 @@ void CPenaltyManager::addPenalty(CPenalty *Penalty)
 // void CPenaltyManager::fillVectorWithFlagged(vector<SFlaggedPenalty*> &list)
 // Fill our vector with the penalties
 //**********************************************************************
-void CPenaltyManager::fillVectorWithFlagged(vector<SFlaggedPenalty *> &list)
-{
+void CPenaltyManager::fillVectorWithFlagged(vector<SFlaggedPenalty*>& list) {
   list.clear();
 
-  foreach (SFlaggedPenalty *Penalty, vFlaggedPenaltyList)
-  {
-    list.push_back(Penalty);
-  }
+  foreach (SFlaggedPenalty* Penalty, vFlaggedPenaltyList) { list.push_back(Penalty); }
 }
 
 //**********************************************************************
 // CPenalty* CPenaltyManager::getPenalty(string Label)
 // Get Penalty Pointer
 //**********************************************************************
-CPenalty *CPenaltyManager::getPenalty(string Label)
-{
-  try
-  {
-    foreach (CPenalty *Penalty, vPenaltyList)
-    {
+CPenalty* CPenaltyManager::getPenalty(string Label) {
+  try {
+    foreach (CPenalty* Penalty, vPenaltyList) {
       if (Penalty->getLabel() == Label)
         return Penalty;
     }
 
     CError::errorUnknown(PARAM_PENALTY, Label);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPenaltyManager.getPenalty()->" + Ex;
     throw Ex;
   }
@@ -99,17 +85,13 @@ CPenalty *CPenaltyManager::getPenalty(string Label)
 // CPenalty* CPenaltyManager::getPenalty(int index)
 // Get the penalty from our vector @ index
 //**********************************************************************
-CPenalty *CPenaltyManager::getPenalty(int index)
-{
-  try
-  {
+CPenalty* CPenaltyManager::getPenalty(int index) {
+  try {
     if (index >= (int)vPenaltyList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PENALTY);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPenaltyManager.getPenalty()->" + Ex;
     throw Ex;
   }
@@ -121,11 +103,10 @@ CPenalty *CPenaltyManager::getPenalty(int index)
 // void CPenaltyManager::addPenalty(string Label, double Value)
 // Add A Penalty to our list of Executed ones.
 //**********************************************************************
-void CPenaltyManager::flagPenalty(string Label, double Value)
-{
-  SFlaggedPenalty *stPenalty = new SFlaggedPenalty();
-  stPenalty->Label = Label;
-  stPenalty->Score = Value;
+void CPenaltyManager::flagPenalty(string Label, double Value) {
+  SFlaggedPenalty* stPenalty = new SFlaggedPenalty();
+  stPenalty->Label           = Label;
+  stPenalty->Score           = Value;
 
   vFlaggedPenaltyList.push_back(stPenalty);
 }
@@ -134,8 +115,7 @@ void CPenaltyManager::flagPenalty(string Label, double Value)
 // void CPenaltyManager::clearFlaggedPenaltyList()
 // Clear Our Penalty List
 //**********************************************************************
-void CPenaltyManager::clearFlaggedPenaltyList()
-{
+void CPenaltyManager::clearFlaggedPenaltyList() {
   vFlaggedPenaltyList.clear();
 }
 
@@ -143,11 +123,9 @@ void CPenaltyManager::clearFlaggedPenaltyList()
 // SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index)
 //
 //**********************************************************************
-SFlaggedPenalty *CPenaltyManager::getFlaggedPenalty(int Index)
-{
+SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (Index >= (int)vFlaggedPenaltyList.size())
@@ -157,9 +135,7 @@ SFlaggedPenalty *CPenaltyManager::getFlaggedPenalty(int Index)
     return vFlaggedPenaltyList[Index];
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPenaltyManager.getFlaggedPenalty()->" + Ex;
     throw Ex;
   }
@@ -172,18 +148,13 @@ SFlaggedPenalty *CPenaltyManager::getFlaggedPenalty(int Index)
 // void CPenaltyManager::clone(CPenaltyManager *Manager)
 // Clone the Manager to match the one passed in
 //**********************************************************************
-void CPenaltyManager::clone(CPenaltyManager *Manager)
-{
-  try
-  {
-    for (int i = 0; i < Manager->getPenaltyCount(); ++i)
-    {
-      CPenalty *pPenalty = Manager->getPenalty(i);
+void CPenaltyManager::clone(CPenaltyManager* Manager) {
+  try {
+    for (int i = 0; i < Manager->getPenaltyCount(); ++i) {
+      CPenalty* pPenalty = Manager->getPenalty(i);
       vPenaltyList.push_back(new CPenalty(*pPenalty));
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPenaltyManager.clone()->" + Ex;
     throw Ex;
   }
@@ -192,20 +163,14 @@ void CPenaltyManager::clone(CPenaltyManager *Manager)
 // void CPenaltyManager::validate()
 // validate
 //**********************************************************************
-void CPenaltyManager::validate()
-{
-  try
-  {
+void CPenaltyManager::validate() {
+  try {
     // Loop and Validate
-    foreach (CPenalty *Penalty, vPenaltyList)
-    {
-      Penalty->validate();
-    }
+    foreach (CPenalty* Penalty, vPenaltyList) { Penalty->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CPenalty *Penalty, vPenaltyList)
-    {
+    foreach (CPenalty* Penalty, vPenaltyList) {
       // Increase Count for this label
       mLabelList[Penalty->getLabel()] += 1;
 
@@ -213,9 +178,7 @@ void CPenaltyManager::validate()
       if (mLabelList[Penalty->getLabel()] > 1)
         CError::errorDuplicate(PARAM_PENALTY, Penalty->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPenaltyManager.validate()->" + Ex;
     throw Ex;
   }
@@ -225,9 +188,7 @@ void CPenaltyManager::validate()
 // void CPenaltyManager::rebuild()
 // Rebuild our Penalty Manager
 //**********************************************************************
-void CPenaltyManager::rebuild()
-{
-
+void CPenaltyManager::rebuild() {
   // Clear the Flagged Penalties
   clearFlaggedPenaltyList();
 }
@@ -236,16 +197,9 @@ void CPenaltyManager::rebuild()
 // CPenaltyManager::~CPenaltyManager()
 // Default De-Constructor
 //**********************************************************************
-CPenaltyManager::~CPenaltyManager()
-{
+CPenaltyManager::~CPenaltyManager() {
   // De-Allocate our Memory
-  foreach (CPenalty *Penalty, vPenaltyList)
-  {
-    delete Penalty;
-  }
+  foreach (CPenalty* Penalty, vPenaltyList) { delete Penalty; }
 
-  foreach (SFlaggedPenalty *Penalty, vFlaggedPenaltyList)
-  {
-    delete Penalty;
-  }
+  foreach (SFlaggedPenalty* Penalty, vFlaggedPenaltyList) { delete Penalty; }
 }

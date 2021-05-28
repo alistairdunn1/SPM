@@ -20,28 +20,27 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CAbundanceLayer : public CNumericLayer
-{
+class CAbundanceLayer : public CNumericLayer {
 public:
   // Functions
   CAbundanceLayer();
   virtual ~CAbundanceLayer();
-  CLayer *clone() { return (new CAbundanceLayer(*this)); }
-  void addCategory(string value);
-  int getCategoryCount() { return (int)vCategoryNames.size(); }
-  void addSelectivity(string value);
-  int getSelectivityCount() { return (int)vSelectivityNames.size(); }
-  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  void validate();
-  void build();
+  CLayer* clone() { return (new CAbundanceLayer(*this)); }
+  void    addCategory(string value);
+  int     getCategoryCount() { return (int)vCategoryNames.size(); }
+  void    addSelectivity(string value);
+  int     getSelectivityCount() { return (int)vSelectivityNames.size(); }
+  double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  void    validate();
+  void    build();
 
 protected:
   // Variables
-  CWorld *pWorld;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CWorld*               pWorld;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /*CABUNDANCELAYER_H_*/

@@ -9,15 +9,14 @@
 
 // Local headers
 #include "COffByOneAgeingError.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // COffByOneAgeingError::COffByOneAgeingError()
 // Default Constructor
 //**********************************************************************
-COffByOneAgeingError::COffByOneAgeingError()
-{
-
+COffByOneAgeingError::COffByOneAgeingError() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_P1);
   pParameterList->registerAllowed(PARAM_P2);
@@ -32,15 +31,12 @@ COffByOneAgeingError::COffByOneAgeingError()
 // voidCOffByOneAgeingError::validate()
 // Validate the ageing error
 //**********************************************************************
-void COffByOneAgeingError::validate()
-{
-  try
-  {
-
+void COffByOneAgeingError::validate() {
+  try {
     // Get our variables
     dP1 = pParameterList->getDouble(PARAM_P1);
     dP2 = pParameterList->getDouble(PARAM_P2);
-    iK = pParameterList->getInt(PARAM_K, true, 0);
+    iK  = pParameterList->getInt(PARAM_K, true, 0);
 
     // Parent validation
     CAgeingError::validate();
@@ -54,9 +50,7 @@ void COffByOneAgeingError::validate()
       CError::errorLessThan(PARAM_P1, PARAM_ZERO);
     if (dP2 < 0.0)
       CError::errorLessThan(PARAM_P2, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "COffByOneAgeingError.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,18 +60,14 @@ void COffByOneAgeingError::validate()
 // voidCOffByOneAgeingError::build()
 // Validate the ageing error
 //**********************************************************************
-void COffByOneAgeingError::build()
-{
-  try
-  {
+void COffByOneAgeingError::build() {
+  try {
     // Base
     CAgeingError::build();
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "COffByOneAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,10 +77,8 @@ void COffByOneAgeingError::build()
 // voidCOffByOneAgeingError::rebuild()
 // Validate the ageing error
 //**********************************************************************
-void COffByOneAgeingError::rebuild()
-{
-  try
-  {
+void COffByOneAgeingError::rebuild() {
+  try {
     // Base
     CAgeingError::rebuild();
 
@@ -98,38 +86,29 @@ void COffByOneAgeingError::rebuild()
     mMisMatrix[0][0] = 1 - dP2;
     mMisMatrix[0][1] = dP2;
 
-    for (int i = 1; i < (iNAges - 1); ++i)
-    {
+    for (int i = 1; i < (iNAges - 1); ++i) {
       mMisMatrix[i][i - 1] = dP1;
-      mMisMatrix[i][i] = 1 - (dP1 + dP2);
+      mMisMatrix[i][i]     = 1 - (dP1 + dP2);
       mMisMatrix[i][i + 1] = dP2;
     }
 
     mMisMatrix[iNAges - 1][iNAges - 2] = dP1;
 
-    if (bAgePlusGroup)
-    {
+    if (bAgePlusGroup) {
       mMisMatrix[iNAges - 1][iNAges - 1] = 1 - dP1;
-    }
-    else
-    {
+    } else {
       mMisMatrix[iNAges - 1][iNAges - 1] = 1 - (dP1 + dP2);
     }
 
-    if (iK > iMinAge)
-    {
-      for (int i = 0; i < (iK - iMinAge); ++i)
-      {
-        for (int j = 0; j < (iK - iMinAge); ++j)
-        {
+    if (iK > iMinAge) {
+      for (int i = 0; i < (iK - iMinAge); ++i) {
+        for (int j = 0; j < (iK - iMinAge); ++j) {
           mMisMatrix[i][j] = 0;
         }
         mMisMatrix[i][i] = 1;
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "COffByOneAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -139,25 +118,18 @@ void COffByOneAgeingError::rebuild()
 // void COffByOneAgeingError::getExpected(vector<double> &expected)
 // Apply ageing error
 //**********************************************************************
-void COffByOneAgeingError::getExpected(vector<double> &expected)
-{
-  try
-  {
+void COffByOneAgeingError::getExpected(vector<double>& expected) {
+  try {
     vector<double> vResult(expected.size(), 0);
 
-    for (int i = 0; i < (int)mMisMatrix.size(); ++i)
-    {
-      for (int j = 0; j < (int)mMisMatrix[i].size(); ++j)
-      {
+    for (int i = 0; i < (int)mMisMatrix.size(); ++i) {
+      for (int j = 0; j < (int)mMisMatrix[i].size(); ++j) {
         vResult[j] += expected[i] * mMisMatrix[i][j];
       }
     }
 
-    for (int i = 0; i < (int)expected.size(); ++i)
-      expected[i] = vResult[i];
-  }
-  catch (string &Ex)
-  {
+    for (int i = 0; i < (int)expected.size(); ++i) expected[i] = vResult[i];
+  } catch (string& Ex) {
     Ex = "COffByOneAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -167,9 +139,7 @@ void COffByOneAgeingError::getExpected(vector<double> &expected)
 // COffByOneAgeingError::~COffByOneAgeingError()
 // Destructor
 //**********************************************************************
-COffByOneAgeingError::~COffByOneAgeingError()
-{
-}
+COffByOneAgeingError::~COffByOneAgeingError() {}
 
 /*
 # Off By One ageing error

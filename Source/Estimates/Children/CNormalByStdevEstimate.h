@@ -13,13 +13,12 @@
 /**
  * Class definition
  */
-class CNormalByStdevEstimate : public CEstimate
-{
+class CNormalByStdevEstimate : public CEstimate {
 public:
   // methods
   CNormalByStdevEstimate();
   virtual ~CNormalByStdevEstimate() = default;
-  void validate();
+  void   validate();
   double getScore();
 
 protected:

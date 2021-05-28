@@ -16,19 +16,18 @@
 //
 //
 //**********************************************************************
-class CReport : public CBaseExecute
-{
+class CReport : public CBaseExecute {
 public:
   // Functions
   CReport();
   virtual ~CReport();
-  virtual CReport *clone() = 0;
-  virtual void validate() { CBaseExecute::validate(); };
-  virtual void build(){};
-  virtual void start() = 0;
-  virtual void execute() = 0;
-  virtual void end() = 0;
-  EState getExecutionState() { return eExecutionState; }
+  virtual CReport* clone() = 0;
+  virtual void     validate() { CBaseExecute::validate(); };
+  virtual void     build(){};
+  virtual void     start()   = 0;
+  virtual void     execute() = 0;
+  virtual void     end()     = 0;
+  EState           getExecutionState() { return eExecutionState; }
 
 protected:
   // Variables

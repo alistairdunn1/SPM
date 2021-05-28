@@ -11,10 +11,10 @@
 #include <iostream>
 
 // Local headers
-#include "CSizeWeightManager.h"
-#include "CSizeWeight.h"
-#include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "CSizeWeight.h"
+#include "CSizeWeightManager.h"
 
 // Using
 using std::cout;
@@ -27,16 +27,13 @@ boost::thread_specific_ptr<CSizeWeightManager> CSizeWeightManager::clInstance;
 // CSizeWeightManager::CSizeWeightManager()
 // Default Constructor
 //**********************************************************************
-CSizeWeightManager::CSizeWeightManager()
-{
-}
+CSizeWeightManager::CSizeWeightManager() {}
 
 //**********************************************************************
 // CSizeWeightManager* CSizeWeightManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CSizeWeightManager *CSizeWeightManager::Instance()
-{
+CSizeWeightManager* CSizeWeightManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CSizeWeightManager());
   return clInstance.get();
@@ -46,10 +43,8 @@ CSizeWeightManager *CSizeWeightManager::Instance()
 // void CSizeWeightManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CSizeWeightManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CSizeWeightManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -58,21 +53,15 @@ void CSizeWeightManager::Destroy()
 // void CSizeWeightManager::clone(CSizeWeightManager *Manager)
 // Clone our Ageing Errors
 //**********************************************************************
-void CSizeWeightManager::clone(CSizeWeightManager *Manager)
-{
-
-  foreach (CSizeWeight *sizeWeight, Manager->vSizeWeights)
-  {
-    vSizeWeights.push_back(sizeWeight->clone());
-  }
+void CSizeWeightManager::clone(CSizeWeightManager* Manager) {
+  foreach (CSizeWeight* sizeWeight, Manager->vSizeWeights) { vSizeWeights.push_back(sizeWeight->clone()); }
 }
 
 //**********************************************************************
 // void CSizeWeightManager::addSizeWeight(CSizeWeight *SizeWeight)
 // Add Ageing Error to the List
 //**********************************************************************
-void CSizeWeightManager::addSizeWeight(CSizeWeight *SizeWeight)
-{
+void CSizeWeightManager::addSizeWeight(CSizeWeight* SizeWeight) {
   vSizeWeights.push_back(SizeWeight);
 }
 
@@ -80,20 +69,15 @@ void CSizeWeightManager::addSizeWeight(CSizeWeight *SizeWeight)
 // CSizeWeight* CSizeWeightManager::getSizeWeight(string label)
 // Get our Ageing Error
 //**********************************************************************
-CSizeWeight *CSizeWeightManager::getSizeWeight(string label)
-{
-  try
-  {
-    foreach (CSizeWeight *SizeWeight, vSizeWeights)
-    {
+CSizeWeight* CSizeWeightManager::getSizeWeight(string label) {
+  try {
+    foreach (CSizeWeight* SizeWeight, vSizeWeights) {
       if (SizeWeight->getLabel() == label)
         return SizeWeight;
     }
 
     CError::errorUnknown(PARAM_SIZE_WEIGHT, label);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSizeWeightManager.getSizeWeight(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -105,18 +89,12 @@ CSizeWeight *CSizeWeightManager::getSizeWeight(string label)
 // void CSizeWeightManager::validate()
 // Validate our Ageing Errors
 //**********************************************************************
-void CSizeWeightManager::validate()
-{
-  try
-  {
-    foreach (CSizeWeight *SizeWeight, vSizeWeights)
-    {
-      SizeWeight->validate();
-    }
+void CSizeWeightManager::validate() {
+  try {
+    foreach (CSizeWeight* SizeWeight, vSizeWeights) { SizeWeight->validate(); }
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CSizeWeight *SizeWeight, vSizeWeights)
-    {
+    foreach (CSizeWeight* SizeWeight, vSizeWeights) {
       // Increase Count for this label
       mLabelList[SizeWeight->getLabel()] += 1;
 
@@ -124,9 +102,7 @@ void CSizeWeightManager::validate()
       if (mLabelList[SizeWeight->getLabel()] > 1)
         CError::errorDuplicate(PARAM_SIZE_WEIGHT, SizeWeight->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSizeWeightManager.validate()->" + Ex;
     throw Ex;
   }
@@ -136,17 +112,10 @@ void CSizeWeightManager::validate()
 // void CSizeWeightManager::build()
 // Build our SizeWeights
 //**********************************************************************
-void CSizeWeightManager::build()
-{
-  try
-  {
-    foreach (CSizeWeight *SizeWeight, vSizeWeights)
-    {
-      SizeWeight->build();
-    }
-  }
-  catch (string &Ex)
-  {
+void CSizeWeightManager::build() {
+  try {
+    foreach (CSizeWeight* SizeWeight, vSizeWeights) { SizeWeight->build(); }
+  } catch (string& Ex) {
     Ex = "CSizeWeightManager.build()->" + Ex;
     throw Ex;
   }
@@ -156,17 +125,10 @@ void CSizeWeightManager::build()
 // void CSizeWeightManager::rebuild()
 // Rebuild our ageing errors
 //**********************************************************************
-void CSizeWeightManager::rebuild()
-{
-  try
-  {
-    foreach (CSizeWeight *SizeWeight, vSizeWeights)
-    {
-      SizeWeight->rebuild();
-    }
-  }
-  catch (string &Ex)
-  {
+void CSizeWeightManager::rebuild() {
+  try {
+    foreach (CSizeWeight* SizeWeight, vSizeWeights) { SizeWeight->rebuild(); }
+  } catch (string& Ex) {
     Ex = "CSizeWeightManager.rebuild()->" + Ex;
     throw Ex;
   }
@@ -176,10 +138,6 @@ void CSizeWeightManager::rebuild()
 // CSizeWeightManager::~CSizeWeightManager()
 // Destructor
 //**********************************************************************
-CSizeWeightManager::~CSizeWeightManager()
-{
-  foreach (CSizeWeight *SizeWeight, vSizeWeights)
-  {
-    delete SizeWeight;
-  }
+CSizeWeightManager::~CSizeWeightManager() {
+  foreach (CSizeWeight* SizeWeight, vSizeWeights) { delete SizeWeight; }
 }

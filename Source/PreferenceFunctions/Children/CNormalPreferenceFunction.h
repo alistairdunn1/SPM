@@ -16,18 +16,17 @@
 //
 //
 //**********************************************************************
-class CNormalPreferenceFunction : public CPreferenceFunction
-{
+class CNormalPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CNormalPreferenceFunction();
   virtual ~CNormalPreferenceFunction();
-  CPreferenceFunction *clone() { return new CNormalPreferenceFunction(*this); }
-  double getMu() { return dMu; }
-  double getSigma() { return dSigma; }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build();
+  CPreferenceFunction* clone() { return new CNormalPreferenceFunction(*this); }
+  double               getMu() { return dMu; }
+  double               getSigma() { return dSigma; }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build();
 
 protected:
   // Variables

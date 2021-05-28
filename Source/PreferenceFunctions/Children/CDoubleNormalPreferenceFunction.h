@@ -16,19 +16,18 @@
 //
 //
 //**********************************************************************
-class CDoubleNormalPreferenceFunction : public CPreferenceFunction
-{
+class CDoubleNormalPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CDoubleNormalPreferenceFunction();
   virtual ~CDoubleNormalPreferenceFunction();
-  CPreferenceFunction *clone() { return new CDoubleNormalPreferenceFunction(*this); }
-  double getSigmaL() { return dSigmaL; }
-  double getSigmaR() { return dSigmaR; }
-  double getMu() { return dMu; }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build();
+  CPreferenceFunction* clone() { return new CDoubleNormalPreferenceFunction(*this); }
+  double               getSigmaL() { return dSigmaL; }
+  double               getSigmaR() { return dSigmaR; }
+  double               getMu() { return dMu; }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build();
 
 protected:
   // Variables

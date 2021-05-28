@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CSelectivityFactory
-{
+class CSelectivityFactory {
 public:
   // Functions
-  static CSelectivity *buildSelectivity(string type, bool registerWithManager = true);
+  static CSelectivity* buildSelectivity(string type, bool registerWithManager = true);
 
 private:
   // Functions

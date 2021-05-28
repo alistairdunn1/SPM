@@ -9,14 +9,14 @@
 
 // Local Headers
 #include "CLogisticSelectivity.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CLogisticSelectivity::CLogisticSelectivity()
 // Default constructor
 //**********************************************************************
-CLogisticSelectivity::CLogisticSelectivity()
-{
+CLogisticSelectivity::CLogisticSelectivity() {
   // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
@@ -32,13 +32,10 @@ CLogisticSelectivity::CLogisticSelectivity()
 // void CLogisticSelectivity::validate()
 // validate
 //**********************************************************************
-void CLogisticSelectivity::validate()
-{
-  try
-  {
-
+void CLogisticSelectivity::validate() {
+  try {
     // Populate our variables
-    dA50 = pParameterList->getDouble(PARAM_A50);
+    dA50   = pParameterList->getDouble(PARAM_A50);
     dAto95 = pParameterList->getDouble(PARAM_ATO95);
     dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
@@ -50,9 +47,7 @@ void CLogisticSelectivity::validate()
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (dAto95 <= 0)
       CError::errorLessThanEqualTo(PARAM_ATO95, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,14 +57,12 @@ void CLogisticSelectivity::validate()
 // double CLogisticSelectivity::calculateResult(int Age)
 // Calculate a result for our Vector
 //**********************************************************************
-double CLogisticSelectivity::calculateResult(int Age)
-{
+double CLogisticSelectivity::calculateResult(int Age) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
-    double dRet = 0.0;
+    double dRet  = 0.0;
     double dTemp = (dA50 - Age) / dAto95;
 
     if (dTemp > 5.0)
@@ -82,9 +75,7 @@ double CLogisticSelectivity::calculateResult(int Age)
     return dRet;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLogisticSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -96,6 +87,4 @@ double CLogisticSelectivity::calculateResult(int Age)
 // CLogisticSelectivity::~CLogisticSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CLogisticSelectivity::~CLogisticSelectivity()
-{
-}
+CLogisticSelectivity::~CLogisticSelectivity() {}

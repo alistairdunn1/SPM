@@ -12,7 +12,6 @@
 #include <limits>
 
 // Local headers
-#include "CLocalBHRecruitmentProcess.h"
 #include "../../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
@@ -22,6 +21,7 @@
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../TimeSteps/CTimeStepManager.h"
+#include "CLocalBHRecruitmentProcess.h"
 
 // Using
 using std::cout;
@@ -32,19 +32,18 @@ using std::numeric_limits;
 // CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess()
 // Default constructor
 //**********************************************************************
-CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess()
-{
+CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess() {
   pTimeStepManager = CTimeStepManager::Instance();
   // Default Vars
-  pR0Layer = 0;
-  sType = PARAM_LOCAL_BH_RECRUITMENT;
+  pR0Layer       = 0;
+  sType          = PARAM_LOCAL_BH_RECRUITMENT;
   bRequiresMerge = false;
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
   registerEstimable(PARAM_STEEPNESS, &dSteepness);
-  //registerEstimable(PARAM_SIGMA_R, &dSigmaR);
-  //registerEstimable(PARAM_RHO, &dRho);
+  // registerEstimable(PARAM_SIGMA_R, &dSigmaR);
+  // registerEstimable(PARAM_RHO, &dRho);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_R0);
@@ -64,21 +63,18 @@ CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess()
 // void CLocalBHRecruitmentProcess::validate()
 // Validate the process
 //**********************************************************************
-void CLocalBHRecruitmentProcess::validate()
-{
-  try
-  {
-
+void CLocalBHRecruitmentProcess::validate() {
+  try {
     // Assign our variables
-    dR0 = pParameterList->getDouble(PARAM_R0);
-    iAge = pParameterList->getInt(PARAM_AGE, true, pWorld->getMinAge());
+    dR0        = pParameterList->getDouble(PARAM_R0);
+    iAge       = pParameterList->getInt(PARAM_AGE, true, pWorld->getMinAge());
     dSteepness = pParameterList->getDouble(PARAM_STEEPNESS, true, 1.0);
-    sSSB = pParameterList->getString(PARAM_SSB);
-    sB0 = pParameterList->getString(PARAM_B0, true, "");
+    sSSB       = pParameterList->getString(PARAM_SSB);
+    sB0        = pParameterList->getString(PARAM_B0, true, "");
     iSSBOffset = pParameterList->getInt(PARAM_SSB_OFFSET);
-    sR0Layer = pParameterList->getString(PARAM_LAYER, true, "");
-    //dSigmaR     = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
-    //dRho        = pParameterList->getDouble(PARAM_RHO,true,0.0);
+    sR0Layer   = pParameterList->getString(PARAM_LAYER, true, "");
+    // dSigmaR     = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
+    // dRho        = pParameterList->getDouble(PARAM_RHO,true,0.0);
 
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
@@ -100,41 +96,33 @@ void CLocalBHRecruitmentProcess::validate()
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // Register our Proportions as Estimable
-    for (int i = 0; i < (int)vProportions.size(); ++i)
-      registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
+    for (int i = 0; i < (int)vProportions.size(); ++i) registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
-    foreach (double Prop, vProportions)
-    {
-      dRunningTotal += Prop;
-    }
+    foreach (double Prop, vProportions) { dRunningTotal += Prop; }
     // See If It is close enough to 1.0
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
-    //Check iSSBOffset is a non-negative int
+    // Check iSSBOffset is a non-negative int
     if (iSSBOffset < 0)
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
 
     //***************************************************
-    //Check that a value of YCSValues supplied for each YCSYear
+    // Check that a value of YCSValues supplied for each YCSYear
     if ((int)vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
       CError::errorListSameSize(PARAM_YCS_VALUES, string("model years"));
 
     // Register our YCS as Estimable
-    for (int i = 0; i < (int)vYCSValues.size(); ++i)
-      registerEstimable(PARAM_YCS_VALUES, i, &vYCSValues[i]);
+    for (int i = 0; i < (int)vYCSValues.size(); ++i) registerEstimable(PARAM_YCS_VALUES, i, &vYCSValues[i]);
 
     // Loop Through YCS. Make Sure They Are >= 0.0
-    foreach (double dValue, vYCSValues)
-    {
+    foreach (double dValue, vYCSValues) {
       if (!CComparer::isNonNegative(dValue))
         CError::errorLessThan(PARAM_YCS_VALUES, PARAM_ZERO);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLocalBHRecruitment.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -144,10 +132,8 @@ void CLocalBHRecruitmentProcess::validate()
 // void CLocalBHRecruitmentProcess::build()
 // Build the process
 //**********************************************************************
-void CLocalBHRecruitmentProcess::build()
-{
-  try
-  {
+void CLocalBHRecruitmentProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
@@ -162,12 +148,9 @@ void CLocalBHRecruitmentProcess::build()
     pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
     // Get B0 phase
-    if (sB0 == "")
-    {
+    if (sB0 == "") {
       iPhaseB0 = pInitializationPhaseManager->getNumberInitializationPhases() - 1;
-    }
-    else
-    {
+    } else {
       iPhaseB0 = pInitializationPhaseManager->getInitializationPhaseOrderIndex(sB0);
     }
 
@@ -178,11 +161,10 @@ void CLocalBHRecruitmentProcess::build()
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
-    //Build dAmountPer and dTrueYCS variables
+    // Build dAmountPer and dTrueYCS variables
     dAmountPer.resize(pWorld->getHeight());
     dTrueYCS.resize(pWorld->getHeight());
-    for (int i = 0; i < (int)dAmountPer.size(); ++i)
-    {
+    for (int i = 0; i < (int)dAmountPer.size(); ++i) {
       dAmountPer[i].resize(pWorld->getWidth());
       dTrueYCS[i].resize(pWorld->getWidth());
     }
@@ -190,31 +172,22 @@ void CLocalBHRecruitmentProcess::build()
     // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantityByCell->getTimeStep())
-    {
+    if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantityByCell->getTimeStep()) {
       iActualOffset = iSSBOffset - 1;
-      if (iActualOffset < 0)
-      {
+      if (iActualOffset < 0) {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
       }
-    }
-    else
-    {
+    } else {
       iActualOffset = iSSBOffset;
     }
 
     // Build the Standardise YCS Year Range
-    if (vStandardiseYCSYears.size() == 0)
-    {
-      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i)
-      {
+    if (vStandardiseYCSYears.size() == 0) {
+      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i) {
         vStandardiseYCSYears.push_back(i - iSSBOffset);
       }
-    }
-    else if (vStandardiseYCSYears.size() > 1)
-    {
-      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i)
-      {
+    } else if (vStandardiseYCSYears.size() > 1) {
+      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i) {
         if (vStandardiseYCSYears[i - 1] >= vStandardiseYCSYears[i])
           CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
       }
@@ -225,11 +198,9 @@ void CLocalBHRecruitmentProcess::build()
     if (vStandardiseYCSYears[vStandardiseYCSYears.size() - 1] > (pWorld->getCurrentYear() - iSSBOffset))
       CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
-    //rebuild
+    // rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLocalBHRecruitment.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -239,11 +210,9 @@ void CLocalBHRecruitmentProcess::build()
 // void CLocalBHRecruitmentProcess::rebuild()
 // Build the process
 //**********************************************************************
-void CLocalBHRecruitmentProcess::rebuild()
-{
+void CLocalBHRecruitmentProcess::rebuild() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     // Base rebuild
@@ -255,30 +224,24 @@ void CLocalBHRecruitmentProcess::rebuild()
     vTrueYCSValues.resize(0);
     vRecruitmentValues.resize(0);
 
-    //Reset dAmountPer
-    for (int i = 0; i < (int)dAmountPer.size(); ++i)
-    {
-      for (int j = 0; j < (int)dAmountPer[i].size(); ++j)
-      {
+    // Reset dAmountPer
+    for (int i = 0; i < (int)dAmountPer.size(); ++i) {
+      for (int j = 0; j < (int)dAmountPer[i].size(); ++j) {
         dAmountPer[i][j] = 0.0;
-        dTrueYCS[i][j] = 0.0;
+        dTrueYCS[i][j]   = 0.0;
       }
     }
 
     // Create vector of YCS years
-    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
-    {
+    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
       vYCSYears.push_back(i - iSSBOffset);
     }
 
     // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
     double dMeanYCS = 0;
-    for (int i = 0; i < (int)vYCSYears.size(); ++i)
-    {
-      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j)
-      {
-        if (vYCSYears[i] == vStandardiseYCSYears[j])
-        {
+    for (int i = 0; i < (int)vYCSYears.size(); ++i) {
+      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j) {
+        if (vYCSYears[i] == vStandardiseYCSYears[j]) {
           dMeanYCS += vYCSValues[i];
           break;
         }
@@ -286,12 +249,9 @@ void CLocalBHRecruitmentProcess::rebuild()
     }
     dMeanYCS /= vStandardiseYCSYears.size();
 
-    for (int i = 0; i < (int)vYCSYears.size(); ++i)
-    {
-      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j)
-      {
-        if (vYCSYears[i] == vStandardiseYCSYears[j])
-        {
+    for (int i = 0; i < (int)vYCSYears.size(); ++i) {
+      for (int j = 0; j < (int)vStandardiseYCSYears.size(); ++j) {
+        if (vYCSYears[i] == vStandardiseYCSYears[j]) {
           // rescale
           vYCSValues[i] = vYCSValues[i] / dMeanYCS;
           break;
@@ -300,9 +260,7 @@ void CLocalBHRecruitmentProcess::rebuild()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBHRecruitmentProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -313,100 +271,73 @@ void CLocalBHRecruitmentProcess::rebuild()
 // void CLocalBHRecruitmentProcess::execute()
 // Execute this process
 //**********************************************************************
-void CLocalBHRecruitmentProcess::execute()
-{
+void CLocalBHRecruitmentProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base Execute
     CProcess::execute();
 
-    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION)
-    {
+    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION) {
       // We are in an initialisation phase
-      if (pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0)
-      {
+      if (pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0) {
         // If in a phase before we have defined B0, then just assume a constant recruitment of dR0
-        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i)
-        {
-          for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j)
-          {
+        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+          for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
             // Check if this square is enabled or not.
-            if (!pWorld->getBaseSquare(i, j)->getEnabled())
-            {
+            if (!pWorld->getBaseSquare(i, j)->getEnabled()) {
               continue;
-            }
-            else
-            {
+            } else {
               dAmountPer[i][j] = dR0;
-              if (pR0Layer != 0)
-              {
+              if (pR0Layer != 0) {
                 dAmountPer[i][j] *= pR0Layer->getValue(i, j);
               }
             }
           }
         }
-      }
-      else
-      {
+      } else {
         // Get our B0 (assumed to be the LAST value in the defined initialisation)
-        dB0 = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0, (pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
+        dB0            = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0, (pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
         Data dSSBvalue = pDerivedQuantityByCell->getValue(iActualOffset);
-        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i)
-        {
-          for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j)
-          {
+        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+          for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
             // Calculate the Stock-recruit relationship
             // And apply to calculate this events recruitment
             // Check if this square is enabled or not.
-            if (!pWorld->getBaseSquare(i, j)->getEnabled())
-            {
+            if (!pWorld->getBaseSquare(i, j)->getEnabled()) {
               continue;
-            }
-            else
-            {
-              double dSSBRatio = dSSBvalue[i][j] / CMath::zeroFun(dB0[i][j], ZERO);
+            } else {
+              double dSSBRatio    = dSSBvalue[i][j] / CMath::zeroFun(dB0[i][j], ZERO);
               double dTempTrueYCS = 1.0 * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness)) * (1 - dSSBRatio));
-              dAmountPer[i][j] = dR0 * dTempTrueYCS;
-              if (pR0Layer != 0)
-              {
+              dAmountPer[i][j]    = dR0 * dTempTrueYCS;
+              if (pR0Layer != 0) {
                 dAmountPer[i][j] *= pR0Layer->getValue(i, j);
               }
             }
           }
         }
       }
-    }
-    else
-    {
+    } else {
       // We are not in an initialisation phase
       // Setup Our Variables
       double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
 
       // Get SSB (and SSB:B0 ratio)
-      dB0 = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0, (pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
+      dB0            = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0, (pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
       Data dSSBvalue = pDerivedQuantityByCell->getValue(iActualOffset);
-      for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i)
-      {
-        for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j)
-        {
+      for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+        for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
           // Calculate the Stock-recruit relationship
           // And apply to calculate this events recruitment
           // Check if this square is enabled or not.
-          if (!pWorld->getBaseSquare(i, j)->getEnabled())
-          {
+          if (!pWorld->getBaseSquare(i, j)->getEnabled()) {
             continue;
-          }
-          else
-          {
-            if (dB0[i][j] > 0.0)
-            {
+          } else {
+            if (dB0[i][j] > 0.0) {
               double dSSBRatio = dSSBvalue[i][j] / CMath::zeroFun(dB0[i][j], ZERO);
-              dTrueYCS[i][j] = dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness)) * (1 - dSSBRatio));
+              dTrueYCS[i][j]   = dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness)) * (1 - dSSBRatio));
               dAmountPer[i][j] = dR0 * dTrueYCS[i][j];
-              if (pR0Layer != 0)
-              {
+              if (pR0Layer != 0) {
                 dAmountPer[i][j] *= pR0Layer->getValue(i, j);
               }
             }
@@ -420,13 +351,10 @@ void CLocalBHRecruitmentProcess::execute()
     }
 
     // Iterate over the world and apply
-    for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i)
-    {
-      for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j)
-      {
+    for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+      for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
         // Check for non-negative values
-        if (!CComparer::isNonNegative(dAmountPer[i][j]))
-        {
+        if (!CComparer::isNonNegative(dAmountPer[i][j])) {
           CError::errorLessThan(PARAM_R0, PARAM_ZERO);
         }
         pBaseSquare = pWorld->getBaseSquare(i, j);
@@ -434,17 +362,14 @@ void CLocalBHRecruitmentProcess::execute()
         if (!pBaseSquare->getEnabled())
           continue;
         // Loop Through the Categories and Ages we have and Recruit
-        for (int k = 0; k < getCategoryCount(); ++k)
-        {
+        for (int k = 0; k < getCategoryCount(); ++k) {
           pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (dAmountPer[i][j] * vProportions[k]));
         }
       }
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLocalBHRecruitment.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -455,7 +380,6 @@ void CLocalBHRecruitmentProcess::execute()
 // CLocalBHRecruitmentProcess::~CLocalBHRecruitmentProcess()
 // Destructor
 //**********************************************************************
-CLocalBHRecruitmentProcess::~CLocalBHRecruitmentProcess()
-{
+CLocalBHRecruitmentProcess::~CLocalBHRecruitmentProcess() {
   vProportions.clear();
 }

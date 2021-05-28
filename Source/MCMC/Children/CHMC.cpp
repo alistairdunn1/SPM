@@ -9,15 +9,14 @@
 // Headers
 #include "CHMC.h"
 
-#include <limits>
-#include <numeric>
-#include <iostream>
-#include <boost/random.hpp>
-#include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/lu.hpp>
+#include <boost/numeric/ublas/triangular.hpp>
+#include <boost/random.hpp>
+#include <iostream>
+#include <limits>
+#include <numeric>
 
-#include "../CMCMC.h"
 #include "../../Estimates/CEstimate.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Helpers/CComparer.h"
@@ -30,6 +29,7 @@
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 #include "../../Reports/CReportManager.h"
 #include "../../RuntimeThread/CRuntimeThread.h"
+#include "../CMCMC.h"
 
 // Namespaces
 using namespace boost::numeric;
@@ -40,23 +40,16 @@ using std::endl;
 // CHMC::CHMC()
 // Default Constructor
 //**********************************************************************
-CHMC::CHMC()
-{
-}
+CHMC::CHMC() {}
 
 //**********************************************************************
 // void CHMC::validate()
 // Validate our MCMC
 //**********************************************************************
-void CHMC::validate()
-{
-  try
-  {
-
+void CHMC::validate() {
+  try {
     CMCMC::validate();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHMC.validate()->" + Ex;
     throw Ex;
   }
@@ -66,15 +59,10 @@ void CHMC::validate()
 // void CHMC::build()
 // Build our MCMC
 //**********************************************************************
-void CHMC::build()
-{
-  try
-  {
-
+void CHMC::build() {
+  try {
     CMCMC::build();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHMC.build()->" + Ex;
     throw Ex;
   }
@@ -84,13 +72,9 @@ void CHMC::build()
 // void CHMC::leapfrog()
 // Calculate the leap
 //**********************************************************************
-void CHMC::leapfrog()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CHMC::leapfrog() {
+  try {
+  } catch (string& Ex) {
     Ex = "CHMC.leapfrog()->" + Ex;
     throw Ex;
   }
@@ -100,39 +84,36 @@ void CHMC::leapfrog()
 // void CHMC::execute()
 // Execute our MCMC
 //**********************************************************************
-void CHMC::execute()
-{
-  try
-  {
-
+void CHMC::execute() {
+  try {
     CMCMC::execute();
 
     // Get the initial objective function value
-    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+    CRuntimeThread* pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
     pThread->startModel();
 
     // Workout our objective function value
-    CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
+    CObjectiveFunction* pObjectiveFunction = CObjectiveFunction::Instance();
     pObjectiveFunction->execute();
 
     // record it as the old one as well
-    CObjectiveFunction *pOldObjectiveFunction = CObjectiveFunction::Instance();
+    CObjectiveFunction* pOldObjectiveFunction = CObjectiveFunction::Instance();
 
     double dScore = pObjectiveFunction->getScore();
     // Keep the location as the first point in our chain
     {
       SChainItem newItem;
-      newItem.iIteration = 0;
-      newItem.dPenalty = pObjectiveFunction->getPenalties();
-      newItem.dScore = pObjectiveFunction->getScore();
-      newItem.dPrior = pObjectiveFunction->getPriors();
+      newItem.iIteration  = 0;
+      newItem.dPenalty    = pObjectiveFunction->getPenalties();
+      newItem.dScore      = pObjectiveFunction->getScore();
+      newItem.dPrior      = pObjectiveFunction->getPriors();
       newItem.dLikelihood = pObjectiveFunction->getLikelihoods();
       ;
-      newItem.dAcceptanceRate = 0;
+      newItem.dAcceptanceRate           = 0;
       newItem.dAcceptanceRateSinceAdapt = 0;
-      newItem.dStepSize = dStepSize;
-      newItem.vValues = vCandidates;
+      newItem.dStepSize                 = dStepSize;
+      newItem.vValues                   = vCandidates;
       vChain.push_back(newItem);
     }
 
@@ -141,13 +122,9 @@ void CHMC::execute()
     //===============================================================
     // Iterate over length of MCMC
 
-    do
-    {
-
-      if (!(pConfig->getQuietMode()))
-      {
-        if (((iJumps) % iKeep) == 0)
-        {
+    do {
+      if (!(pConfig->getQuietMode())) {
+        if (((iJumps) % iKeep) == 0) {
           std::cerr << ".";
         }
       }
@@ -156,13 +133,12 @@ void CHMC::execute()
       vector<double> vOldCandidates = vCandidates;
       updateStepSize(iJumps);
       this->generateNewCandidate();
-      for (int j = 0; j < iEstimateCount; ++j)
-      {
+      for (int j = 0; j < iEstimateCount; ++j) {
         CEstimateManager::Instance()->getEnabledEstimate(j)->setValue(vCandidates[j]);
       }
 
       // Run model with these parameters to get objective function score
-      CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+      CRuntimeThread* pThread = pRuntimeController->getCurrentThread();
       pThread->rebuild();
       pThread->startModel();
       // Workout our Objective Score
@@ -171,62 +147,54 @@ void CHMC::execute()
 
       // Preserve our score for later
       double dOldScore = dScore;
-      dScore = pObjectiveFunction->getScore();
-      double dRatio = 1.0;
+      dScore           = pObjectiveFunction->getScore();
+      double dRatio    = 1.0;
 
       // Evaluate if the old value was better, and decide whether to jump
-      if (dScore > dOldScore)
-      {
+      if (dScore > dOldScore) {
         dRatio = exp(-dScore + dOldScore);
       }
-      //Update number of jumps and jumps since last adapt
+      // Update number of jumps and jumps since last adapt
       iJumps++;
       iJumpsSinceAdapt++;
-      if (dRatio == 1.0 || CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio)
-      {
+      if (dRatio == 1.0 || CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the proposed candidate point
         iSuccessfulJumps++;
         iSuccessfulJumpsSinceAdapt++;
         // keep the score, and its component parts
-        if (((iJumps) % iKeep) == 0)
-        {
-          newItem.iIteration = iJumps;
-          newItem.dPenalty = pObjectiveFunction->getPenalties();
-          newItem.dScore = pObjectiveFunction->getScore();
-          newItem.dPrior = pObjectiveFunction->getPriors();
-          newItem.dLikelihood = pObjectiveFunction->getLikelihoods();
+        if (((iJumps) % iKeep) == 0) {
+          newItem.iIteration                = iJumps;
+          newItem.dPenalty                  = pObjectiveFunction->getPenalties();
+          newItem.dScore                    = pObjectiveFunction->getScore();
+          newItem.dPrior                    = pObjectiveFunction->getPriors();
+          newItem.dLikelihood               = pObjectiveFunction->getLikelihoods();
           newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
-          newItem.dAcceptanceRate = (double)iSuccessfulJumps / (double)(iJumps);
-          newItem.dStepSize = dStepSize;
-          newItem.vValues = vCandidates;
+          newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
+          newItem.dStepSize                 = dStepSize;
+          newItem.vValues                   = vCandidates;
           vChain.push_back(newItem);
-          if (iSuccessfulJumps >= iLength)
-          {
+          if (iSuccessfulJumps >= iLength) {
             bLastItem = true;
           }
           CReportManager::Instance()->execute(STATE_ITERATION_COMPLETE);
         }
-      }
-      else
-      {
+      } else {
         // reject the new proposed candidate point and use the point from the previous iteration
-        dScore = dOldScore;
-        vCandidates = vOldCandidates;
+        dScore             = dOldScore;
+        vCandidates        = vOldCandidates;
         pObjectiveFunction = pOldObjectiveFunction;
-        if (((iJumps) % iKeep) == 0)
-        {
-          newItem.iIteration = iJumps;
-          newItem.dPenalty = pOldObjectiveFunction->getPenalties();
-          newItem.dScore = dScore;
-          newItem.dPrior = pOldObjectiveFunction->getPriors();
-          newItem.dLikelihood = pOldObjectiveFunction->getLikelihoods();
+        if (((iJumps) % iKeep) == 0) {
+          newItem.iIteration                = iJumps;
+          newItem.dPenalty                  = pOldObjectiveFunction->getPenalties();
+          newItem.dScore                    = dScore;
+          newItem.dPrior                    = pOldObjectiveFunction->getPriors();
+          newItem.dLikelihood               = pOldObjectiveFunction->getLikelihoods();
           newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
-          newItem.dAcceptanceRate = (double)iSuccessfulJumps / (double)(iJumps);
-          newItem.dStepSize = dStepSize;
-          newItem.vValues = vCandidates;
+          newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
+          newItem.dStepSize                 = dStepSize;
+          newItem.vValues                   = vCandidates;
           vChain.push_back(newItem);
-          if (iSuccessfulJumps >= iLength)
-          {
+          if (iSuccessfulJumps >= iLength) {
             bLastItem = true;
           }
           CReportManager::Instance()->execute(STATE_ITERATION_COMPLETE);
@@ -235,13 +203,10 @@ void CHMC::execute()
 
     } while (iJumps < iLength);
 
-    if (!(pConfig->getQuietMode()))
-    {
+    if (!(pConfig->getQuietMode())) {
       std::cerr << "\n";
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMHMCMC.execute()->" + Ex;
     throw Ex;
   }
@@ -251,19 +216,14 @@ void CHMC::execute()
 // void CHMC::generateNewCandidate()
 // Generate our new candidate estimates
 //**********************************************************************
-void CHMC::generateNewCandidate()
-{
-
-  try
-  {
-
+void CHMC::generateNewCandidate() {
+  try {
     vector<double> vOldCandidates = vCandidates;
 
-    int iAttempts = 0;
+    int  iAttempts = 0;
     bool bCandidatesOk;
 
-    do
-    {
+    do {
       bCandidatesOk = true;
 
       iAttempts++;
@@ -276,22 +236,18 @@ void CHMC::generateNewCandidate()
         fillMultivariatet(dStepSize);
 
       // Check bounds and regenerate candidates if they are not within the bounds.
-      for (int i = 0; i < iEstimateCount; ++i)
-      {
-        CEstimate *pEstimate = CEstimateManager::Instance()->getEnabledEstimate(i);
-        if (pEstimate->getLowerBound() > vCandidates[i] || pEstimate->getUpperBound() < vCandidates[i])
-        {
+      for (int i = 0; i < iEstimateCount; ++i) {
+        CEstimate* pEstimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+        if (pEstimate->getLowerBound() > vCandidates[i] || pEstimate->getUpperBound() < vCandidates[i]) {
           // reset candidates and try again
           bCandidatesOk = false;
-          vCandidates = vOldCandidates;
+          vCandidates   = vOldCandidates;
           break;
         }
       }
 
     } while (!bCandidatesOk);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHMC.generateNewCandidate()->" + Ex;
     throw Ex;
   }
@@ -301,6 +257,4 @@ void CHMC::generateNewCandidate()
 // CHMC::~CHMC()
 // Default De-Constructor
 //**********************************************************************
-CHMC::~CHMC()
-{
-}
+CHMC::~CHMC() {}

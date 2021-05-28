@@ -16,14 +16,13 @@
 //
 //
 //**********************************************************************
-class CCovarianceReport : public CFileReport
-{
+class CCovarianceReport : public CFileReport {
 public:
   // Functions
   CCovarianceReport();
   virtual ~CCovarianceReport();
-  CReport *clone() { return new CCovarianceReport(*this); }
-  void execute();
+  CReport* clone() { return new CCovarianceReport(*this); }
+  void     execute();
 };
 
 #endif /* CCOVARIANCEREPORT_H_ */

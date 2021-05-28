@@ -16,18 +16,21 @@
 //
 //
 //**********************************************************************
-class CLikelihood : public CBaseObject
-{
+class CLikelihood : public CBaseObject {
 public:
   CLikelihood();
   virtual ~CLikelihood();
   virtual double adjustErrorValue(const double processError, const double errorValue) = 0;
-  virtual void getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
-                         const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
-  virtual void simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
-                                const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
-  virtual double getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
-                                 const vector<double> &processError, const vector<double> &errorValue, const double delta) { return 0; }
+  virtual void   getResult(vector<double>& scores, const vector<double>& expected, const vector<double>& observed, const vector<double>& errorValue,
+                           const vector<double>& processError, const double delta)
+      = 0;
+  virtual void simulateObserved(const vector<string>& keys, vector<double>& observed, const vector<double>& expected, const vector<double>& errorValue,
+                                const vector<double>& processError, const double delta)
+      = 0;
+  virtual double getInitialScore(const vector<string>& keys, const vector<double>& expected, const vector<double>& observed, const vector<double>& processError,
+                                 const vector<double>& errorValue, const double delta) {
+    return 0;
+  }
 
   double adjustLikelihoodValue(const double LikelihoodMultiplier, const double Likelihood);
 };

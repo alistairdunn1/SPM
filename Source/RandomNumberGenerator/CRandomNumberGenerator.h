@@ -19,22 +19,21 @@
 //
 //
 //**********************************************************************
-class CRandomNumberGenerator : public CBaseManager
-{
+class CRandomNumberGenerator : public CBaseManager {
 public:
-  static CRandomNumberGenerator *Instance();
-  void Reset(unsigned new_seed = 12345u);
-  static void Destroy();
-  void validate();
-  void build();
-  double getRandomUniform(double min, double max);
-  double getRandomUniform_01();
-  double getRandomNormal(double mean, double sigma);
-  double getRandomStandardNormal();
-  double getRandomLogNormal(double mean, double cv);
-  double getRandomBinomial(double p, double N);
-  double getRandomChiSquare(int df);
-  double getRandomGamma(double shape);
+  static CRandomNumberGenerator* Instance();
+  void                           Reset(unsigned new_seed = 12345u);
+  static void                    Destroy();
+  void                           validate();
+  void                           build();
+  double                         getRandomUniform(double min, double max);
+  double                         getRandomUniform_01();
+  double                         getRandomNormal(double mean, double sigma);
+  double                         getRandomStandardNormal();
+  double                         getRandomLogNormal(double mean, double cv);
+  double                         getRandomBinomial(double p, double N);
+  double                         getRandomChiSquare(int df);
+  double                         getRandomGamma(double shape);
 
 protected:
   // Functions
@@ -44,7 +43,7 @@ protected:
   boost::mt19937 clGenerator;
 
 private:
-  static CRandomNumberGenerator *clInstance;
+  static CRandomNumberGenerator* clInstance;
 };
 
 #endif /* CRANDOMNUMBERGENERATOR_H_ */

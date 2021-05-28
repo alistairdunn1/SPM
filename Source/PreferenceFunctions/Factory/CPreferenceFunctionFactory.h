@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionFactory
-{
+class CPreferenceFunctionFactory {
 public:
   // Functions
-  static CPreferenceFunction *buildPreferenceFunction(string type, bool registerWithManager = true);
+  static CPreferenceFunction* buildPreferenceFunction(string type, bool registerWithManager = true);
 
 private:
   // Functions

@@ -24,15 +24,14 @@ using std::string;
 //
 //
 //**********************************************************************
-class CMCMCFactory
-{
+class CMCMCFactory {
 public:
   // Functions
-  static CMCMC *buildMCMC(const string &type, bool registerWithManager = true);
+  static CMCMC* buildMCMC(const string& type, bool registerWithManager = true);
 
 private:
   // Functions
-  CMCMCFactory() = delete;
+  CMCMCFactory()          = delete;
   virtual ~CMCMCFactory() = delete;
 };
 

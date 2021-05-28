@@ -9,37 +9,33 @@
 
 // Local Headers
 #include "CLayer.h"
+
 #include "../World/CWorld.h"
 
 //**********************************************************************
 // CLayer::CLayer()
 // Default Constructor
 //**********************************************************************
-CLayer::CLayer()
-{
-  sType = "";
+CLayer::CLayer() {
+  sType     = "";
   bIsStatic = true;
-  bIsZero = false;
+  bIsZero   = false;
 }
 
 //**********************************************************************
 // void CLayer::validate()
 // Validate
 //**********************************************************************
-void CLayer::validate()
-{
-  try
-  {
+void CLayer::validate() {
+  try {
     // Base
     CBaseBuild::validate();
 
     // Get Variables from World
-    CWorld *pWorld = CWorld::Instance();
-    iWidth = pWorld->getWidth();
-    iHeight = pWorld->getHeight();
-  }
-  catch (string &Ex)
-  {
+    CWorld* pWorld = CWorld::Instance();
+    iWidth         = pWorld->getWidth();
+    iHeight        = pWorld->getHeight();
+  } catch (string& Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,6 +45,4 @@ void CLayer::validate()
 // CLayer::~CLayer()
 // Default De-Constructor
 //**********************************************************************
-CLayer::~CLayer()
-{
-}
+CLayer::~CLayer() {}

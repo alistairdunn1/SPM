@@ -9,8 +9,9 @@
 
 // Local headers
 #include "CEstimateFactory.h"
-#include "../CEstimateManager.h"
+
 #include "../../Helpers/CError.h"
+#include "../CEstimateManager.h"
 #include "../Children/CBetaEstimate.h"
 #include "../Children/CLogNormalEstimate.h"
 #include "../Children/CNormalByStdevEstimate.h"
@@ -23,10 +24,8 @@
 // CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager)
 // Build our estimates
 //**********************************************************************
-CEstimateInfo *CEstimateFactory::buildEstimateInfo(bool registerWithManager)
-{
-
-  CEstimateInfo *pInfo = new CEstimateInfo();
+CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager) {
+  CEstimateInfo* pInfo = new CEstimateInfo();
 
   if (registerWithManager)
     CEstimateManager::Instance()->addEstimateInfo(pInfo);
@@ -37,9 +36,8 @@ CEstimateInfo *CEstimateFactory::buildEstimateInfo(bool registerWithManager)
 /**
  *
  */
-CEstimate *CEstimateFactory::buildEstimate(const string &type, bool registerWithManager)
-{
-  CEstimate *estimate = 0;
+CEstimate* CEstimateFactory::buildEstimate(const string& type, bool registerWithManager) {
+  CEstimate* estimate = 0;
 
   if (type == PARAM_BETA)
     estimate = new CBetaEstimate();

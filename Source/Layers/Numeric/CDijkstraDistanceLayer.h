@@ -14,32 +14,31 @@
 //
 //
 //**********************************************************************
-class CDijkstraDistanceLayer : public CNumericLayer
-{
+class CDijkstraDistanceLayer : public CNumericLayer {
 public:
   // Functions
   CDijkstraDistanceLayer();
   virtual ~CDijkstraDistanceLayer();
-  CLayer *clone() { return (new CDijkstraDistanceLayer(*this)); }
-  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  double getCellLength() { return dCellLength; }
-  void validate();
-  void build();
-  void rebuild();
+  CLayer* clone() { return (new CDijkstraDistanceLayer(*this)); }
+  double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  double  getCellLength() { return dCellLength; }
+  void    validate();
+  void    build();
+  void    rebuild();
 
 protected:
-  void makeGraph();
-  int minDistance(vector<double> vDist, vector<bool> vSptSet);
+  void           makeGraph();
+  int            minDistance(vector<double> vDist, vector<bool> vSptSet);
   vector<double> calculate(int iSource);
 
   map<unsigned, map<unsigned, map<unsigned, map<unsigned, double>>>> mGrid;
 
   vector<vector<double>> vvGraph;
-  double dCellLength;
-  CNumericLayer *pLayer;
-  string sLayer;
-  CWorldSquare *pSink;
-  CWorldSquare *pSource;
+  double                 dCellLength;
+  CNumericLayer*         pLayer;
+  string                 sLayer;
+  CWorldSquare*          pSink;
+  CWorldSquare*          pSource;
 
   double dInfiniteDistance;
   double dDistanceToSelf;

@@ -16,27 +16,26 @@
 //
 //
 //**********************************************************************
-class CSizeWeight : public CBaseBuild
-{
+class CSizeWeight : public CBaseBuild {
 public:
   // Functions
   CSizeWeight();
   virtual ~CSizeWeight();
-  virtual CSizeWeight *clone() = 0;
-  void validate();
-  void build();
-  virtual void rebuild();
-  string getType() { return sType; };
-  virtual double getMeanWeight(double &size, string &distribution, double &cv) = 0;
-  int getMinAge() { return iMinAge; }
-  int getMaxAge() { return iMaxAge; }
-  bool getAgePlusGroup() { return bAgePlusGroup; }
+  virtual CSizeWeight* clone() = 0;
+  void                 validate();
+  void                 build();
+  virtual void         rebuild();
+  string               getType() { return sType; };
+  virtual double       getMeanWeight(double& size, string& distribution, double& cv) = 0;
+  int                  getMinAge() { return iMinAge; }
+  int                  getMaxAge() { return iMaxAge; }
+  bool                 getAgePlusGroup() { return bAgePlusGroup; }
 
 protected:
-  int iMaxAge;
-  int iMinAge;
-  bool bAgePlusGroup;
-  int iNAges;
+  int    iMaxAge;
+  int    iMinAge;
+  bool   bAgePlusGroup;
+  int    iNAges;
   string sType;
 };
 

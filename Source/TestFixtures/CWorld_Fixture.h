@@ -14,8 +14,7 @@
 //
 //
 //**********************************************************************
-class CWorld_Fixture
-{
+class CWorld_Fixture {
 public:
   CWorld_Fixture();
   virtual ~CWorld_Fixture();

@@ -13,18 +13,16 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CSelectivityFactory.h"
 #include "../../TestFixtures/CWorld_Fixture.h"
+#include "../Factory/CSelectivityFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
 // this test case will use struct F as fixture
-BOOST_FIXTURE_TEST_CASE(LogisticSelectivity, CWorld_Fixture)
-{
-
-  CSelectivity *pSelectivity = 0;
+BOOST_FIXTURE_TEST_CASE(LogisticSelectivity, CWorld_Fixture) {
+  CSelectivity* pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_LOGISTIC, false));
 
   pSelectivity->addParameter(PARAM_LABEL, "selectivity");

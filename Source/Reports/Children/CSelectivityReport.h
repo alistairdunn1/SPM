@@ -19,19 +19,18 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CSelectivityReport : public CFileReport
-{
+class CSelectivityReport : public CFileReport {
 public:
   CSelectivityReport();
   virtual ~CSelectivityReport();
-  CReport *clone() { return new CSelectivityReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CSelectivityReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sSelectivity;
-  CSelectivity *pSelectivity;
+  string        sSelectivity;
+  CSelectivity* pSelectivity;
 };
 
 #endif /* CSELECTIVITYREPORT_H_ */

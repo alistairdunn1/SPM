@@ -7,30 +7,28 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-//Headers
+// Headers
 #include <boost/lexical_cast.hpp>
 
 // Local headers
-#include "CLayerDerivedWorldViewReport.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../Layers/String/Base/CCategoricalLayer.h"
-#include "../../World/WorldView/CLayerDerivedWorldView.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/String/Base/CCategoricalLayer.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../World/WorldView/CLayerDerivedWorldView.h"
+#include "CLayerDerivedWorldViewReport.h"
 
 //**********************************************************************
 // CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport()
 // Constructor
 //**********************************************************************
-CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport()
-{
-
+CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport() {
   // Variables
-  eExecutionState = STATE_MODELLING;
+  eExecutionState  = STATE_MODELLING;
   pTimeStepManager = CTimeStepManager::Instance();
-  pLayerManager = CLayerManager::Instance();
-  pWorldView = 0;
+  pLayerManager    = CLayerManager::Instance();
+  pWorldView       = 0;
 
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_LAYER);
@@ -42,11 +40,8 @@ CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport()
 //
 //
 //**********************************************************************
-void CLayerDerivedWorldViewReport::validate()
-{
-  try
-  {
-
+void CLayerDerivedWorldViewReport::validate() {
+  try {
     // Assign Variables
     if (pParameterList->hasParameter(PARAM_YEARS))
       pParameterList->fillVector(vYear, PARAM_YEARS);
@@ -54,23 +49,20 @@ void CLayerDerivedWorldViewReport::validate()
       vYear.push_back(pWorld->getInitialYear());
 
     sTimeStep = pParameterList->getString(PARAM_TIME_STEP, true, "");
-    sLayer = pParameterList->getString(PARAM_LAYER);
+    sLayer    = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CFileReport::validate();
 
     // Local validation
     // Validate Year Range
-    for (int i = 0; i < (int)vYear.size(); ++i)
-    {
+    for (int i = 0; i < (int)vYear.size(); ++i) {
       if (vYear[i] < pWorld->getInitialYear())
         CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
       else if (vYear[i] > pWorld->getCurrentYear())
         CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLayerDerivedWorldViewReport.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -80,18 +72,15 @@ void CLayerDerivedWorldViewReport::validate()
 // void CLayerDerivedWorldViewReport::build()
 // Build our Report
 //**********************************************************************
-void CLayerDerivedWorldViewReport::build()
-{
-  try
-  {
+void CLayerDerivedWorldViewReport::build() {
+  try {
     // Base
     CFileReport::build();
 
     // Populate TimeStepIndex
     if (sTimeStep != "")
       iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
-    else
-    {
+    else {
       iTimeStep = 0;
       sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
     }
@@ -108,11 +97,8 @@ void CLayerDerivedWorldViewReport::build()
     mAreas.clear();
 
     for (int i = 0; i < pLayer->getHeight(); ++i)
-      for (int j = 0; j < pLayer->getWidth(); ++j)
-        mAreas[pLayer->getValue(i, j)]++;
-  }
-  catch (string &Ex)
-  {
+      for (int j = 0; j < pLayer->getWidth(); ++j) mAreas[pLayer->getValue(i, j)]++;
+  } catch (string& Ex) {
     Ex = "CLayerDerivedWorldViewReport.build(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -122,10 +108,8 @@ void CLayerDerivedWorldViewReport::build()
 // void CLayerDerivedWorldViewReport::execute()
 // Execute our Layer Derived World View
 //**********************************************************************
-void CLayerDerivedWorldViewReport::execute()
-{
-  try
-  {
+void CLayerDerivedWorldViewReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -134,13 +118,9 @@ void CLayerDerivedWorldViewReport::execute()
     // Start IO
     this->start();
 
-    for (int i = 0; i < (int)vYear.size(); ++i)
-    {
-      if (vYear[i] == pTimeStepManager->getCurrentYear())
-      {
-        if (iTimeStep == pTimeStepManager->getCurrentTimeStep())
-        {
-
+    for (int i = 0; i < (int)vYear.size(); ++i) {
+      if (vYear[i] == pTimeStepManager->getCurrentYear()) {
+        if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
           pWorldView->execute();
 
           // Start Output
@@ -151,27 +131,23 @@ void CLayerDerivedWorldViewReport::execute()
 
           cout << PARAM_AREA << CONFIG_SPACE_SEPARATOR;
           cout << PARAM_CATEGORY;
-          for (int i = pWorld->getMinAge(); i < pWorld->getMaxAge() + 1; i++)
-          {
+          for (int i = pWorld->getMinAge(); i < pWorld->getMaxAge() + 1; i++) {
             cout << CONFIG_SPACE_SEPARATOR << PARAM_AGE;
             cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
           }
           cout << "\n";
 
           map<string, int>::iterator mPtr = mAreas.begin();
-          while (mPtr != mAreas.end())
-          {
+          while (mPtr != mAreas.end()) {
             pBaseSquare = pWorldView->getSquare((*mPtr).first);
 
             int iSquareHeight = pBaseSquare->getHeight();
-            int iSquareWidth = pBaseSquare->getWidth();
+            int iSquareWidth  = pBaseSquare->getWidth();
 
             // Loop Through
-            for (int i = 0; i < iSquareHeight; ++i)
-            {
+            for (int i = 0; i < iSquareHeight; ++i) {
               cout << (*mPtr).first << CONFIG_SPACE_SEPARATOR << pWorld->getCategoryNameForIndex(i);
-              for (int j = 0; j < iSquareWidth; ++j)
-              {
+              for (int j = 0; j < iSquareWidth; ++j) {
                 cout << CONFIG_SPACE_SEPARATOR << pBaseSquare->getValue(i, j);
               }
               cout << "\n";
@@ -179,16 +155,13 @@ void CLayerDerivedWorldViewReport::execute()
 
             mPtr++;
           }
-          cout << CONFIG_END_REPORT << "\n"
-               << endl;
+          cout << CONFIG_END_REPORT << "\n" << endl;
         }
       }
     }
     // End IO
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLayerDerivedViewReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -198,8 +171,7 @@ void CLayerDerivedWorldViewReport::execute()
 // CLayerDerivedWorldViewReport::~CLayerDerivedWorldViewReport()
 // Destructor
 //**********************************************************************
-CLayerDerivedWorldViewReport::~CLayerDerivedWorldViewReport()
-{
+CLayerDerivedWorldViewReport::~CLayerDerivedWorldViewReport() {
   // Clean Memory
   //  if (pWorldView != 0)
   //    delete pWorldView;

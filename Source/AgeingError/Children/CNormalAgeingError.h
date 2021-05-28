@@ -16,21 +16,20 @@
 //
 //
 //**********************************************************************
-class CNormalAgeingError : public CAgeingError
-{
+class CNormalAgeingError : public CAgeingError {
 public:
   // Functions
   CNormalAgeingError();
   virtual ~CNormalAgeingError();
-  CAgeingError *clone() { return new CNormalAgeingError(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  void getExpected(vector<double> &expected);
+  CAgeingError* clone() { return new CNormalAgeingError(*this); }
+  void          validate();
+  void          build();
+  void          rebuild();
+  void          getExpected(vector<double>& expected);
 
 protected:
   double dCV;
-  int iK;
+  int    iK;
 };
 
 #endif /* CNORMALAGEINGERROR_H_ */

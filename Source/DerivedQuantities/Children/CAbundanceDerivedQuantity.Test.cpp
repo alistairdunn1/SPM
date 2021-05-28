@@ -13,26 +13,24 @@
 #include <string>
 
 // Local Includes
-#include "CAbundanceDerivedQuantity.h"
-#include "../CDerivedQuantityManager.h"
-#include "../CDerivedQuantity.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../CDerivedQuantity.h"
+#include "../CDerivedQuantityManager.h"
+#include "CAbundanceDerivedQuantity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(Abundance_Derived_Quantity, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(Abundance_Derived_Quantity, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -46,9 +44,9 @@ BOOST_FIXTURE_TEST_CASE(Abundance_Derived_Quantity, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedQuantityManager *pManager = CDerivedQuantityManager::Instance();
-  CDerivedQuantity *pQuantity = pManager->getDerivedQuantity("derived_quantity");
-  CWorldSquare *pSquare = getSquare();
+  CDerivedQuantityManager* pManager  = CDerivedQuantityManager::Instance();
+  CDerivedQuantity*        pQuantity = pManager->getDerivedQuantity("derived_quantity");
+  CWorldSquare*            pSquare   = getSquare();
 
   // Check Results
   BOOST_CHECK_EQUAL(15, pQuantity->getValuesSize());
@@ -68,8 +66,8 @@ BOOST_FIXTURE_TEST_CASE(Abundance_Derived_Quantity, C1x1_Fixture)
   BOOST_CHECK_EQUAL(pQuantity->getValue(13), 400.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(14), 200.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(15), 0.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(16), 0.0); // Too Large, should return 0.0
-  BOOST_CHECK_EQUAL(pQuantity->getValue(17), 0.0); // ""
+  BOOST_CHECK_EQUAL(pQuantity->getValue(16), 0.0);  // Too Large, should return 0.0
+  BOOST_CHECK_EQUAL(pQuantity->getValue(17), 0.0);  // ""
 }
 
 #endif

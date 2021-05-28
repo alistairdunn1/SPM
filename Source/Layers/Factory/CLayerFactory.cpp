@@ -9,22 +9,23 @@
 
 // Local headers
 #include "CLayerFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../CLayerManager.h"
+#include "../Integer/CNotNegIntegerLayer.h"
 #include "../Numeric/CAbundanceDensityLayer.h"
 #include "../Numeric/CAbundanceLayer.h"
 #include "../Numeric/CBiomassDensityLayer.h"
 #include "../Numeric/CBiomassLayer.h"
 #include "../Numeric/CDerivedQuantityByCellLayer.h"
 #include "../Numeric/CDerivedQuantityLayer.h"
-#include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDijkstraDistanceLayer.h"
-#include "../Numeric/CLatLongDijkstraDistanceLayer.h"
+#include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDoubleLayer.h"
+#include "../Numeric/CLatLongDijkstraDistanceLayer.h"
 #include "../Numeric/CLatLongDistanceLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
-#include "../Integer/CNotNegIntegerLayer.h"
 #include "../String/CStringLayer.h"
 #include "../String/CStringMetaLayer.h"
 
@@ -32,10 +33,8 @@
 // CLayer* CLayerFactory::buildLayer(string type)
 // Build us a layer based on type
 //**********************************************************************
-CLayer *CLayerFactory::buildLayer(string type, bool registerWithManager)
-{
-
-  CLayer *pLayer = 0;
+CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
+  CLayer* pLayer = 0;
 
   if (type == PARAM_ABUNDANCE)
     pLayer = new CAbundanceLayer();

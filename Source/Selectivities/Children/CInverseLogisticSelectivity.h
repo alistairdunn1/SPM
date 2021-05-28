@@ -15,14 +15,13 @@
 //
 //
 //**********************************************************************
-class CInverseLogisticSelectivity : public CCachedSelectivity
-{
+class CInverseLogisticSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CInverseLogisticSelectivity();
   virtual ~CInverseLogisticSelectivity();
-  CSelectivity *clone() { return new CInverseLogisticSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CInverseLogisticSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions

@@ -9,25 +9,24 @@
 
 // Local headers
 #include "CObservationFactory.h"
-#include "../CObservationManager.h"
+
+#include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
+#include "../CObservationManager.h"
 #include "../Children/CAbundanceObservation.h"
 #include "../Children/CBiomassObservation.h"
-#include "../Children/CProportionsAtAgeObservation.h"
-#include "../Children/CProportionsAtLengthObservation.h"
 #include "../Children/CPresenceObservation.h"
-#include "../Children/CProportionsByCategoryObservation.h"
+#include "../Children/CProportionsAtAgeObservation.h"
 #include "../Children/CProportionsAtLengthByCategoryObservation.h"
-#include "../../Helpers/CError.h"
+#include "../Children/CProportionsAtLengthObservation.h"
+#include "../Children/CProportionsByCategoryObservation.h"
 
 //**********************************************************************
 // CObservation* CObservationFactory::buildObservation(string type, bool registerWithManager)
 // Build our Observation of type
 //**********************************************************************
-CObservation *CObservationFactory::buildObservation(string type, bool registerWithManager)
-{
-
-  CObservation *pObservation = 0;
+CObservation* CObservationFactory::buildObservation(string type, bool registerWithManager) {
+  CObservation* pObservation = 0;
 
   if (type == PARAM_ABUNDANCE)
     pObservation = new CAbundanceObservation();

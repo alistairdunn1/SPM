@@ -29,15 +29,14 @@ using std::numeric_limits;
 // CProportionalRecruitmentProcess::CProportionalRecruitmentProcess(CProportionalRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
-CProportionalRecruitmentProcess::CProportionalRecruitmentProcess()
-{
+CProportionalRecruitmentProcess::CProportionalRecruitmentProcess() {
   // Default Vars
 
   pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
   // Default Vars
-  pLayer = 0;
-  sType = PARAM_PROPORTIONAL_RECRUITMENT;
+  pLayer         = 0;
+  sType          = PARAM_PROPORTIONAL_RECRUITMENT;
   bRequiresMerge = false;
 
   // Register allowed estimables
@@ -60,18 +59,15 @@ CProportionalRecruitmentProcess::CProportionalRecruitmentProcess()
 // void CProportionalRecruitmentProcess::validate()
 // Validate Our Parameters
 //**********************************************************************
-void CProportionalRecruitmentProcess::validate()
-{
-  try
-  {
-
+void CProportionalRecruitmentProcess::validate() {
+  try {
     // Populate our Variables
-    dLambda = pParameterList->getDouble(PARAM_LAMBDA);
-    iAge = pParameterList->getInt(PARAM_AGE, pWorld->getMinAge());
-    sLayer = pParameterList->getString(PARAM_LAYER, true, "");
-    sSSB = pParameterList->getString(PARAM_SSB);
-    dR0 = pParameterList->getDouble(PARAM_R0);
-    sB0 = pParameterList->getString(PARAM_B0, true, "");
+    dLambda    = pParameterList->getDouble(PARAM_LAMBDA);
+    iAge       = pParameterList->getInt(PARAM_AGE, pWorld->getMinAge());
+    sLayer     = pParameterList->getString(PARAM_LAYER, true, "");
+    sSSB       = pParameterList->getString(PARAM_SSB);
+    dR0        = pParameterList->getDouble(PARAM_R0);
+    sB0        = pParameterList->getString(PARAM_B0, true, "");
     iSSBOffset = pParameterList->getInt(PARAM_SSB_OFFSET);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
@@ -91,25 +87,19 @@ void CProportionalRecruitmentProcess::validate()
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // Register our Proportions as Estimable
-    for (int i = 0; i < (int)vProportions.size(); ++i)
-      registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
+    for (int i = 0; i < (int)vProportions.size(); ++i) registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
-    foreach (double Prop, vProportions)
-    {
-      dRunningTotal += Prop;
-    }
+    foreach (double Prop, vProportions) { dRunningTotal += Prop; }
     // See If It is close enough to 1.0
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
-    //Check SSBOffset is a non-negative int
+    // Check SSBOffset is a non-negative int
     if (iSSBOffset < 0)
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -119,10 +109,8 @@ void CProportionalRecruitmentProcess::validate()
 // void CProportionalRecruitmentProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CProportionalRecruitmentProcess::build()
-{
-  try
-  {
+void CProportionalRecruitmentProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
@@ -134,12 +122,9 @@ void CProportionalRecruitmentProcess::build()
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
 
     // Get B0 phase
-    if (sB0 == "")
-    {
+    if (sB0 == "") {
       iPhaseB0 = pInitializationPhaseManager->getNumberInitializationPhases() - 1;
-    }
-    else
-    {
+    } else {
       iPhaseB0 = pInitializationPhaseManager->getInitializationPhaseOrderIndex(sB0);
     }
 
@@ -151,9 +136,7 @@ void CProportionalRecruitmentProcess::build()
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -163,11 +146,9 @@ void CProportionalRecruitmentProcess::build()
 // void CProportionalRecruitmentProcess::rebuild()
 // Build the process
 //**********************************************************************
-void CProportionalRecruitmentProcess::rebuild()
-{
+void CProportionalRecruitmentProcess::rebuild() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     // Base rebuild
@@ -178,9 +159,7 @@ void CProportionalRecruitmentProcess::rebuild()
     vRecruitmentValues.resize(0);
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProportionalRecruitmentProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -191,74 +170,56 @@ void CProportionalRecruitmentProcess::rebuild()
 // void CProportionalRecruitmentProcess::execute()
 // Execute
 //**********************************************************************
-void CProportionalRecruitmentProcess::execute()
-{
+void CProportionalRecruitmentProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base Execute
     CProcess::execute();
 
-    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION)
-    {
+    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION) {
       // We are in an initialisation phase
-      if (pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0)
-      {
+      if (pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0) {
         // If in a phase before we have defined B0, then just assume a constant recruitment of dR0
         dAmountPer = dR0;
-      }
-      else
-      {
+      } else {
         // Get our B0 (assumed to be the LAST value in the defined initialisation)
-        dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0, (pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
+        dB0        = pDerivedQuantity->getInitialisationValue(iPhaseB0, (pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
         dAmountPer = dLambda * pDerivedQuantity->getValue(iSSBOffset);
       }
-    }
-    else
-    {
+    } else {
       // We are not in an initialisation phase
       // Get SSB
-      dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0, (pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
+      dB0        = pDerivedQuantity->getInitialisationValue(iPhaseB0, (pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
       dAmountPer = dLambda * pDerivedQuantity->getValue(iSSBOffset);
       vRecruitmentValues.push_back(dAmountPer);
       vSSBValues.push_back(pDerivedQuantity->getValue(iSSBOffset));
     }
 
-    //Allocate our recruitment across the cells
-    if (pLayer != 0)
-    {
+    // Allocate our recruitment across the cells
+    if (pLayer != 0) {
       double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i)
-      {
-        for (int j = 0; j < iWorldWidth; ++j)
-        {
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
           pBaseSquare = pWorld->getBaseSquare(i, j);
-          if (pBaseSquare->getEnabled())
-          {
+          if (pBaseSquare->getEnabled()) {
             dTotal += pLayer->getValue(i, j);
           }
         }
       }
 
-      if (CComparer::isPositive(dTotal))
-      {
+      if (CComparer::isPositive(dTotal)) {
         dAmountPer /= dTotal;
-      }
-      else
-      {
+      } else {
         CError::errorLessThanEqualTo(PARAM_LAYER, PARAM_ZERO);
       }
-    }
-    else
+    } else
       dAmountPer /= pWorld->getEnabledSquareCount();
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
         pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check if this square is enabled or not.
@@ -270,15 +231,12 @@ void CProportionalRecruitmentProcess::execute()
           value *= pLayer->getValue(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
-        for (int k = 0; k < getCategoryCount(); ++k)
-          pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
+        for (int k = 0; k < getCategoryCount(); ++k) pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
       }
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -289,7 +247,6 @@ void CProportionalRecruitmentProcess::execute()
 // CProportionalRecruitmentProcess::~CProportionalRecruitmentProcess()
 // Default De-Constructor
 //**********************************************************************
-CProportionalRecruitmentProcess::~CProportionalRecruitmentProcess()
-{
+CProportionalRecruitmentProcess::~CProportionalRecruitmentProcess() {
   vProportions.clear();
 }

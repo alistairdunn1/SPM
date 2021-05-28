@@ -10,10 +10,10 @@
 #ifndef AGEING_H_
 #define AGEING_H_
 
-const string ageing =
-    "@process ageing\n"
-    "type ageing\n"
-    "categories immature mature spawning\n";
+const string ageing
+    = "@process ageing\n"
+      "type ageing\n"
+      "categories immature mature spawning\n";
 
 #endif /* AGEINGPS_H_ */
 #endif /* TEST */

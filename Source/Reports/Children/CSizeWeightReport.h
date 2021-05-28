@@ -19,22 +19,21 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CSizeWeightReport : public CFileReport
-{
+class CSizeWeightReport : public CFileReport {
 public:
   CSizeWeightReport();
   virtual ~CSizeWeightReport();
-  CReport *clone() { return new CSizeWeightReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CSizeWeightReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sAgeSize;
-  CAgeSize *pAgeSize;
+  string         sAgeSize;
+  CAgeSize*      pAgeSize;
   vector<double> vSizeList;
-  bool bByLength;
-  double dCV;
+  bool           bByLength;
+  double         dCV;
 };
 
 #endif /* CSIZEWEIGHTREPORT_H_ */

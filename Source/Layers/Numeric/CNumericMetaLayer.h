@@ -13,8 +13,8 @@
 #include <vector>
 
 // Local headers
-#include "Base/CNumericLayer.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "Base/CNumericLayer.h"
 
 // Classes
 class CTimeStepManager;
@@ -26,31 +26,30 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CNumericMetaLayer : public CNumericLayer
-{
+class CNumericMetaLayer : public CNumericLayer {
 public:
   // Functions
   CNumericMetaLayer();
   virtual ~CNumericMetaLayer();
-  CLayer *clone() { return new CNumericMetaLayer(*this); }
-  void validate();
-  void build();
-  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  CLayer* clone() { return new CNumericMetaLayer(*this); }
+  void    validate();
+  void    build();
+  double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
 
 protected:
   // Variables
-  string sDefaultLayer;
-  vector<int> vYears;
-  vector<string> vLayerNames;
-  vector<string> vInitialisationPhases;
-  vector<string> vInitialisationLayers;
-  vector<CNumericLayer *> vPhaseLayers;
-  vector<int> vYearsIndex;
-  vector<CNumericLayer *> vYearsLayers;
-  bool bHasYears;
-  bool bHasInitialisation;
-  CInitializationPhaseManager *pInitializationPhaseManager;
-  CTimeStepManager *pTimeStepManager;
+  string                       sDefaultLayer;
+  vector<int>                  vYears;
+  vector<string>               vLayerNames;
+  vector<string>               vInitialisationPhases;
+  vector<string>               vInitialisationLayers;
+  vector<CNumericLayer*>       vPhaseLayers;
+  vector<int>                  vYearsIndex;
+  vector<CNumericLayer*>       vYearsLayers;
+  bool                         bHasYears;
+  bool                         bHasInitialisation;
+  CInitializationPhaseManager* pInitializationPhaseManager;
+  CTimeStepManager*            pTimeStepManager;
 };
 
 #endif /* CMETALAYER_H_ */

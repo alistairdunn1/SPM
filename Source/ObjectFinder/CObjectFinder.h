@@ -15,12 +15,11 @@
 /**
  * Class Definition: CObjectFinder
  */
-class CObjectFinder
-{
+class CObjectFinder {
 public:
-  static void splitParameter(const string parameter, string &objectType, string &objectLabel, string &objectParameter, int &objectIndex);
-  static CBaseObject *getObject(string objectAbsoluteName);
-  static double *getObjectEstimable(string estimableAbsoluteName);
+  static void         splitParameter(const string parameter, string& objectType, string& objectLabel, string& objectParameter, int& objectIndex);
+  static CBaseObject* getObject(string objectAbsoluteName);
+  static double*      getObjectEstimable(string estimableAbsoluteName);
 
 private:
   // Methods

@@ -16,24 +16,22 @@
 //
 //
 //**********************************************************************
-class CDerivedQuantity : public CBaseBuild
-{
+class CDerivedQuantity : public CBaseBuild {
 public:
   // Functions
   CDerivedQuantity();
   virtual ~CDerivedQuantity();
-  double getValue(int offset);
-  int getTimeStep() { return iTimeStep; };
-  double getValueFromIndex(int index) { return vValues[index]; };
-  void incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
-  int getValuesSize() { return vValues.size(); }
-  virtual void calculate() = 0;
+  double       getValue(int offset);
+  int          getTimeStep() { return iTimeStep; };
+  double       getValueFromIndex(int index) { return vValues[index]; };
+  void         incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
+  int          getValuesSize() { return vValues.size(); }
+  virtual void calculate()                        = 0;
   virtual void calculate(int initialisationPhase) = 0;
-  int getInitialisationSize() { return vvInitialisationValues.size(); }
-  int getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
-  double getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
-  void rebuild()
-  {
+  int          getInitialisationSize() { return vvInitialisationValues.size(); }
+  int          getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
+  double       getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
+  void         rebuild() {
     iCurrentInitialisationPhase = 0;
     vvInitialisationValues.clear();
     vValues.clear();
@@ -41,12 +39,12 @@ public:
 
 protected:
   // Members
-  int iHeight;
-  int iWidth;
-  int iCurrentInitialisationPhase;
+  int                    iHeight;
+  int                    iWidth;
+  int                    iCurrentInitialisationPhase;
   vector<vector<double>> vvInitialisationValues;
-  vector<double> vValues;
-  int iTimeStep;
+  vector<double>         vValues;
+  int                    iTimeStep;
 };
 
 #endif /* CDERIVEDQUANTITY_H_ */

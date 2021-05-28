@@ -14,14 +14,10 @@
 // CBaseManager::CBaseManager()
 // Default Constructor
 //**********************************************************************
-CBaseManager::CBaseManager()
-{
-}
+CBaseManager::CBaseManager() {}
 
 //**********************************************************************
 // CBaseManager::~CBaseManager()
 // Destructor
 //**********************************************************************
-CBaseManager::~CBaseManager()
-{
-}
+CBaseManager::~CBaseManager() {}

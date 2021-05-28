@@ -22,10 +22,9 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_InitializationPhase)
-{
+BOOST_AUTO_TEST_CASE(Build_InitializationPhase) {
   // See if we got a Valid Estimate
-  CInitializationPhase *pBasic = 0;
+  CInitializationPhase* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CInitializationPhaseFactory::buildInitializationPhase("", false));
   delete pBasic;
 }
@@ -34,8 +33,7 @@ BOOST_AUTO_TEST_CASE(Build_InitializationPhase)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_InitializationPhase_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_InitializationPhase_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CInitializationPhaseFactory::buildInitializationPhase(PARAM_ZERO, false), string);
 }

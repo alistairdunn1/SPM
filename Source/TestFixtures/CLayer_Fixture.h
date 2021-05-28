@@ -17,8 +17,7 @@
 //
 //
 //**********************************************************************
-class CLayer_Fixture : public CWorld_Fixture
-{
+class CLayer_Fixture : public CWorld_Fixture {
 public:
   CLayer_Fixture();
   virtual ~CLayer_Fixture();

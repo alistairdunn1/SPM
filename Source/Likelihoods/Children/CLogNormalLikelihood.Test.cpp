@@ -13,24 +13,23 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CLikelihoodFactory.h"
-#include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
-#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../../TestFixtures/C1x1_Fixture.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../Factory/CLikelihoodFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(LogNormalLikelihood)
-{
+BOOST_AUTO_TEST_CASE(LogNormalLikelihood) {
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
+  CLikelihood* pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
 
   // Generate data
   vector<string> keys;
@@ -39,18 +38,16 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood)
   vector<double> expected;
   vector<double> errorValue;
   vector<double> processError;
-  double delta = 1e-05;
+  double         delta = 1e-05;
 
-  for (int i = 0; i < 4; ++i)
-  {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("A");
     observed.push_back(0.25);
     expected.push_back(0.25);
     errorValue.push_back(0.0001);
     processError.push_back(0);
   }
-  for (int i = 0; i < 4; ++i)
-  {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("B");
     observed.push_back(0.25);
     expected.push_back(0.25);
@@ -91,9 +88,7 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(LogNormalLikelihood_1x1, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(LogNormalLikelihood_1x1, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -107,7 +102,7 @@ BOOST_FIXTURE_TEST_CASE(LogNormalLikelihood_1x1, C1x1_Fixture)
   // Check our Results
 
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
+  CLikelihood* pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
 
   // Check results
   //  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99845193414953692);
@@ -120,19 +115,17 @@ BOOST_FIXTURE_TEST_CASE(LogNormalLikelihood_1x1, C1x1_Fixture)
   delete pLikelihood;
 
   // Check Population
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_EQUAL(pSquare->getAbundance(), 1500.0);
 
   // Immature only should've aged
-  for (int i = 0; i < 9; ++i)
-    BOOST_CHECK_EQUAL(pSquare->getValue(0, i), 100.0);
+  for (int i = 0; i < 9; ++i) BOOST_CHECK_EQUAL(pSquare->getValue(0, i), 100.0);
   BOOST_CHECK_EQUAL(pSquare->getValue(0, 9), 600.0);
 
   // No population should've been recruited here
   for (int i = 1; i < 3; ++i)
-    for (int j = 0; j < 10; ++j)
-      BOOST_CHECK_EQUAL(pSquare->getValue(i, j), 0.0);
+    for (int j = 0; j < 10; ++j) BOOST_CHECK_EQUAL(pSquare->getValue(i, j), 0.0);
 }
 
 #endif /* TEST */

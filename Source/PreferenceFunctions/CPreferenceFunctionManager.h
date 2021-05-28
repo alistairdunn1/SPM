@@ -19,20 +19,19 @@ class CPreferenceFunction;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionManager : public CBaseManager
-{
+class CPreferenceFunctionManager : public CBaseManager {
 public:
-  static CPreferenceFunctionManager *Instance();
-  static void Destroy();
+  static CPreferenceFunctionManager* Instance();
+  static void                        Destroy();
 
   // Functions
-  void addPreferenceFunction(CPreferenceFunction *Function);
-  int getPreferenceFunctionCount() { return (int)vPreferenceFunctions.size(); }
-  CPreferenceFunction *getPreferenceFunction(int index);
-  CPreferenceFunction *getPreferenceFunction(string Label);
-  void clone(CPreferenceFunctionManager *Manager);
-  void validate();
-  void build();
+  void                 addPreferenceFunction(CPreferenceFunction* Function);
+  int                  getPreferenceFunctionCount() { return (int)vPreferenceFunctions.size(); }
+  CPreferenceFunction* getPreferenceFunction(int index);
+  CPreferenceFunction* getPreferenceFunction(string Label);
+  void                 clone(CPreferenceFunctionManager* Manager);
+  void                 validate();
+  void                 build();
   virtual ~CPreferenceFunctionManager();
 
 protected:
@@ -40,7 +39,7 @@ protected:
   CPreferenceFunctionManager();
 
   // Variables
-  vector<CPreferenceFunction *> vPreferenceFunctions;
+  vector<CPreferenceFunction*> vPreferenceFunctions;
 
 private:
   static boost::thread_specific_ptr<CPreferenceFunctionManager> clInstance;

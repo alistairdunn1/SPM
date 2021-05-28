@@ -16,43 +16,42 @@
 //
 //
 //**********************************************************************
-class CEstimate : public CBaseBuild
-{
+class CEstimate : public CBaseBuild {
 public:
   CEstimate();
   virtual ~CEstimate();
-  void fillSameVector(vector<string> &sames);
-  string getParameter() { return sParameter; }
-  double getLowerBound() { return dLowerBound; }
-  double getUpperBound() { return dUpperBound; }
-  bool getMCMCFixed() { return bMCMCFixed; }
-  int getEstimationPhase() { return iEstimationPhase; }
-  void setValue(double value);
-  double getValue();
-  void setEnabled(bool value) { bEnabled = value; }
-  bool getEnabled() { return bEnabled; }
-  void addValue(double value);
-  int getValueCount() { return (int)vValueList.size(); }
-  void loadValue(int index);
-  void setTarget(double *newTarget) { pTarget = newTarget; }
-  virtual void validate();
-  void build();
+  void           fillSameVector(vector<string>& sames);
+  string         getParameter() { return sParameter; }
+  double         getLowerBound() { return dLowerBound; }
+  double         getUpperBound() { return dUpperBound; }
+  bool           getMCMCFixed() { return bMCMCFixed; }
+  int            getEstimationPhase() { return iEstimationPhase; }
+  void           setValue(double value);
+  double         getValue();
+  void           setEnabled(bool value) { bEnabled = value; }
+  bool           getEnabled() { return bEnabled; }
+  void           addValue(double value);
+  int            getValueCount() { return (int)vValueList.size(); }
+  void           loadValue(int index);
+  void           setTarget(double* newTarget) { pTarget = newTarget; }
+  virtual void   validate();
+  void           build();
   virtual double getScore() = 0;
-  string getType() { return sType; }
+  string         getType() { return sType; }
 
 protected:
   // Variables
-  string sType;
-  string sParameter;
-  double dLowerBound;
-  double dUpperBound;
-  bool bMCMCFixed;
-  double *pTarget;
-  bool bEnabled;
-  int iEstimationPhase;
-  vector<string> vSameList;
-  vector<double *> vSameIndex;
-  vector<double> vValueList;
+  string          sType;
+  string          sParameter;
+  double          dLowerBound;
+  double          dUpperBound;
+  bool            bMCMCFixed;
+  double*         pTarget;
+  bool            bEnabled;
+  int             iEstimationPhase;
+  vector<string>  vSameList;
+  vector<double*> vSameIndex;
+  vector<double>  vValueList;
 };
 
 #endif /*CESTIMATE_H_*/

@@ -8,22 +8,22 @@
 //============================================================================
 
 // headers
+#include "CProcess.h"
+
 #include <omp.h>
 
-#include "CProcess.h"
-#include "../Penalties/CPenaltyManager.h"
-#include "../Selectivities/CSelectivityManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../Penalties/CPenaltyManager.h"
+#include "../Selectivities/CSelectivityManager.h"
 
 //**********************************************************************
 // CProcess::CProcess()
 // Default Constructor
 //**********************************************************************
-CProcess::CProcess()
-{
-  sType = "";
-  bRequiresMerge = true;
+CProcess::CProcess() {
+  sType              = "";
+  bRequiresMerge     = true;
   iNumberOfProcesses = omp_get_num_procs();
 }
 
@@ -31,8 +31,7 @@ CProcess::CProcess()
 // string CProcess::getCategory(int index)
 // Get category from vector at index
 //**********************************************************************
-string CProcess::getCategory(int index)
-{
+string CProcess::getCategory(int index) {
   return vCategoryList[index];
 }
 
@@ -40,8 +39,7 @@ string CProcess::getCategory(int index)
 // string CProcess::getSelectivity(int index)
 // Get Selectivity from vector at index
 //**********************************************************************
-string CProcess::getSelectivity(int index)
-{
+string CProcess::getSelectivity(int index) {
   return vSelectivityList[index];
 }
 
@@ -49,7 +47,7 @@ string CProcess::getSelectivity(int index)
 // string CProcess::getLayerCategory(int index)
 // Get layer category from vector at index
 //**********************************************************************
-//string CProcess::getLayerCategory(int index) {
+// string CProcess::getLayerCategory(int index) {
 //  return vLayerCategoryList[index];
 //}
 
@@ -57,19 +55,15 @@ string CProcess::getSelectivity(int index)
 // void CProcess::validate()
 // Validate our Base Parameters
 //**********************************************************************
-void CProcess::validate()
-{
-  try
-  {
+void CProcess::validate() {
+  try {
     // Base Validation
     CBaseExecute::validate();
 
     // Check For Duplicate Categories.
     map<string, int> mList;
-    if (vCategoryList.size() > 0)
-    {
-      foreach (string Category, vCategoryList)
-      {
+    if (vCategoryList.size() > 0) {
+      foreach (string Category, vCategoryList) {
         mList[Category] += 1;
 
         if (mList[Category] > 1)
@@ -77,9 +71,7 @@ void CProcess::validate()
       }
       mList.clear();
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -88,26 +80,16 @@ void CProcess::validate()
 // void CProcess::build()
 // Build our Base Objects
 //**********************************************************************
-void CProcess::build()
-{
-  try
-  {
-    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-    foreach (string Name, vSelectivityList)
-    {
-      vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-    }
+void CProcess::build() {
+  try {
+    CSelectivityManager* pSelectivityManager = CSelectivityManager::Instance();
+    foreach (string Name, vSelectivityList) { vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name)); }
 
-    foreach (string Name, vCategoryList)
-    {
-      vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-    }
+    foreach (string Name, vCategoryList) { vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name)); }
 
     // Setup Vars
     iBaseColCount = pWorld->getBaseSquare(0, 0)->getWidth();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -117,8 +99,7 @@ void CProcess::build()
 // void CProcess::execute()
 // Base execution
 //**********************************************************************
-void CProcess::execute()
-{
+void CProcess::execute() {
   // Default Variables
   dCurrent = 0.0;
 
@@ -134,7 +115,7 @@ void CProcess::execute()
 // bool CProcess::checkUsableSquare(CWorldSquare *Square, int iX, int iY)
 // Check If Square Is Usable
 //**********************************************************************
-//bool CProcess::checkUsableSquare(CWorldSquare *Square, int iX, int iY) {
+// bool CProcess::checkUsableSquare(CWorldSquare *Square, int iX, int iY) {
 //#ifndef OPTIMIZE
 //  try {
 //#endif
@@ -154,7 +135,7 @@ void CProcess::execute()
 // bool CProcess::checkUsableBaseSquare(int RowIndex, int ColIndex)
 // Check If base Square Is Usable
 //**********************************************************************
-//bool CProcess::checkUsableBaseSquare(int RowIndex, int ColIndex) {
+// bool CProcess::checkUsableBaseSquare(int RowIndex, int ColIndex) {
 //#ifndef OPTIMIZE
 //  try {
 //#endif
@@ -182,6 +163,4 @@ void CProcess::execute()
 // CProcess::~CProcess()
 // Default De-Constructor
 //**********************************************************************
-CProcess::~CProcess()
-{
-}
+CProcess::~CProcess() {}

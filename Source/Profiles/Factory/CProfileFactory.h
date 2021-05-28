@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CProfileFactory
-{
+class CProfileFactory {
 public:
   // Functions
-  static CProfile *buildProfile(string type, bool registerWithManager = true);
+  static CProfile* buildProfile(string type, bool registerWithManager = true);
 
 private:
   // Functions

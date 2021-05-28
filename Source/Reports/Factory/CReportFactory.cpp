@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CReportFactory.h"
+
 #include "../CReportManager.h"
 #include "../Children/CAgeSizeReport.h"
 #include "../Children/CAgeWeightReport.h"
@@ -22,8 +23,8 @@
 #include "../Children/CInitializationReport.h"
 #include "../Children/CLayerDerivedWorldViewReport.h"
 #include "../Children/CLayerReport.h"
-#include "../Children/CMCMCReport.h"
 #include "../Children/CMCMCObjectivesReport.h"
+#include "../Children/CMCMCReport.h"
 #include "../Children/CMCMCSamplesReport.h"
 #include "../Children/CObjectiveFunctionReport.h"
 #include "../Children/CObservationReport.h"
@@ -40,10 +41,8 @@
 //
 //
 //**********************************************************************
-CReport *CReportFactory::buildReport(string type, bool registerWithManager)
-{
-
-  CReport *pReporter = 0;
+CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
+  CReport* pReporter = 0;
 
   if (type == PARAM_PARTITION)
     pReporter = new CPartitionReport();

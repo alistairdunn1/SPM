@@ -15,16 +15,15 @@
 //
 //
 //**********************************************************************
-class CNoneProcess : public CProcess
-{
+class CNoneProcess : public CProcess {
 public:
-	// Functions
-	CNoneProcess();
-	virtual ~CNoneProcess();
-	CProcess *clone() { return new CNoneProcess(*this); }
-	void validate();
-	void build();
-	void execute();
+  // Functions
+  CNoneProcess();
+  virtual ~CNoneProcess();
+  CProcess* clone() { return new CNoneProcess(*this); }
+  void      validate();
+  void      build();
+  void      execute();
 };
 
 #endif /*CNONEPROCESS_H_*/

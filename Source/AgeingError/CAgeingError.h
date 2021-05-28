@@ -16,27 +16,26 @@
 //
 //
 //**********************************************************************
-class CAgeingError : public CBaseBuild
-{
+class CAgeingError : public CBaseBuild {
 public:
   // Functions
   CAgeingError();
   virtual ~CAgeingError();
-  virtual CAgeingError *clone() { return new CAgeingError(*this); }
-  void validate();
-  void build();
-  virtual void rebuild();
-  virtual void getExpected(vector<double> &expected) {}
-  int getMinAge() { return iMinAge; }
-  int getMaxAge() { return iMaxAge; }
-  bool getAgePlusGroup() { return bAgePlusGroup; }
+  virtual CAgeingError*  clone() { return new CAgeingError(*this); }
+  void                   validate();
+  void                   build();
+  virtual void           rebuild();
+  virtual void           getExpected(vector<double>& expected) {}
+  int                    getMinAge() { return iMinAge; }
+  int                    getMaxAge() { return iMaxAge; }
+  bool                   getAgePlusGroup() { return bAgePlusGroup; }
   vector<vector<double>> getMisMatrix() { return mMisMatrix; }
 
 protected:
-  int iMaxAge;
-  int iMinAge;
-  bool bAgePlusGroup;
-  int iNAges;
+  int                    iMaxAge;
+  int                    iMinAge;
+  bool                   bAgePlusGroup;
+  int                    iNAges;
   vector<vector<double>> mMisMatrix;
 };
 

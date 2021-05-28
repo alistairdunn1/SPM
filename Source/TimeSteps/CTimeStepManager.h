@@ -31,27 +31,26 @@ class CDerivedQuantityByCellManager;
 //
 //
 //**********************************************************************
-class CTimeStepManager : public CBaseManager
-{
+class CTimeStepManager : public CBaseManager {
 public:
-  static CTimeStepManager *Instance();
-  static void Destroy();
+  static CTimeStepManager* Instance();
+  static void              Destroy();
 
   // Functions
-  void addTimeStep(CTimeStep *value);
-  void fillVector(vector<string> &labels, vector<CTimeStep *> &result);
-  void setTimeStepOrder(vector<string> &order);
-  int getTimeStepOrderIndex(string label);
-  string getFirstTimeStepLabel();
-  int getCurrentYear() { return iCurrentYear; }
-  int getCurrentTimeStep() { return iCurrentTimeStep; }
-  CTimeStep *getTimeStep(int i) { return vTimeSteps[i]; }
-  int getTimeStepIndexForProcess(string &label);
-  void clone(CTimeStepManager *Manager);
-  void validate();
-  void build();
-  void executeInitialisation();
-  void execute();
+  void       addTimeStep(CTimeStep* value);
+  void       fillVector(vector<string>& labels, vector<CTimeStep*>& result);
+  void       setTimeStepOrder(vector<string>& order);
+  int        getTimeStepOrderIndex(string label);
+  string     getFirstTimeStepLabel();
+  int        getCurrentYear() { return iCurrentYear; }
+  int        getCurrentTimeStep() { return iCurrentTimeStep; }
+  CTimeStep* getTimeStep(int i) { return vTimeSteps[i]; }
+  int        getTimeStepIndexForProcess(string& label);
+  void       clone(CTimeStepManager* Manager);
+  void       validate();
+  void       build();
+  void       executeInitialisation();
+  void       execute();
   virtual ~CTimeStepManager();
 
 protected:
@@ -59,16 +58,16 @@ protected:
   CTimeStepManager();
 
   // Variables
-  int iFirstHumanYear;
-  int iNumberOfYears;
-  int iCurrentYear;
-  int iCurrentTimeStep;
-  CObservationManager *pObservationManager;
-  CReportManager *pReporterManager;
-  vector<CTimeStep *> vMasterTimeStepList;
-  vector<CTimeStep *> vTimeSteps;
-  CDerivedQuantityManager *pDerivedQuantityManager;
-  CDerivedQuantityByCellManager *pDerivedQuantityByCellManager;
+  int                            iFirstHumanYear;
+  int                            iNumberOfYears;
+  int                            iCurrentYear;
+  int                            iCurrentTimeStep;
+  CObservationManager*           pObservationManager;
+  CReportManager*                pReporterManager;
+  vector<CTimeStep*>             vMasterTimeStepList;
+  vector<CTimeStep*>             vTimeSteps;
+  CDerivedQuantityManager*       pDerivedQuantityManager;
+  CDerivedQuantityByCellManager* pDerivedQuantityByCellManager;
 
 private:
   static boost::thread_specific_ptr<CTimeStepManager> clInstance;

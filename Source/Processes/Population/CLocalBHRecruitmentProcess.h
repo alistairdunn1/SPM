@@ -10,10 +10,10 @@
 #define CLOCALBHRECRUITMENTPROCESS_H_
 
 // Local Headers
-#include "../CProcess.h"
 #include "../../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
 #include "../../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../CProcess.h"
 
 // Classes
 class CTimeStepManager;
@@ -25,49 +25,48 @@ typedef vector<vector<double>> Data;
 //
 //
 //**********************************************************************
-class CLocalBHRecruitmentProcess : public CProcess
-{
+class CLocalBHRecruitmentProcess : public CProcess {
 public:
   CLocalBHRecruitmentProcess();
   virtual ~CLocalBHRecruitmentProcess();
-  CProcess *clone() { return new CLocalBHRecruitmentProcess(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
+  CProcess*    clone() { return new CLocalBHRecruitmentProcess(*this); }
+  void         validate();
+  void         build();
+  void         rebuild();
+  void         execute();
   vector<Data> getTrueYCSValues() { return vTrueYCSValues; }
   vector<Data> getRecruitmentValues() { return vRecruitmentValues; }
-  vector<int> getYCSYears() { return vYCSYears; }
+  vector<int>  getYCSYears() { return vYCSYears; }
   vector<Data> getSSBValues() { return vSSBValues; }
-  Data getB0Value() { return dB0; }
+  Data         getB0Value() { return dB0; }
 
 protected:
   // Variables
-  double dR0;
-  int iPhaseB0;
-  Data dB0;
+  double         dR0;
+  int            iPhaseB0;
+  Data           dB0;
   vector<double> vProportions;
-  int iAge;
-  int iAgeIndex;
-  double dSteepness;
-  //double                    dSigmaR;
-  //double                    dRho;
-  string sSSB;
-  string sB0;
-  vector<double> vYCSValues;
-  vector<int> vYCSYears;
-  vector<int> vStandardiseYCSYears;
-  vector<Data> vTrueYCSValues;
-  vector<Data> vRecruitmentValues;
-  vector<Data> vSSBValues;
-  int iSSBOffset;
-  int iActualOffset;
-  string sR0Layer;
-  CNumericLayer *pR0Layer;
-  vector<vector<double>> *pSSB;
-  CTimeStepManager *pTimeStepManager;
-  CDerivedQuantityByCell *pDerivedQuantityByCell;
-  CInitializationPhaseManager *pInitializationPhaseManager;
+  int            iAge;
+  int            iAgeIndex;
+  double         dSteepness;
+  // double                    dSigmaR;
+  // double                    dRho;
+  string                       sSSB;
+  string                       sB0;
+  vector<double>               vYCSValues;
+  vector<int>                  vYCSYears;
+  vector<int>                  vStandardiseYCSYears;
+  vector<Data>                 vTrueYCSValues;
+  vector<Data>                 vRecruitmentValues;
+  vector<Data>                 vSSBValues;
+  int                          iSSBOffset;
+  int                          iActualOffset;
+  string                       sR0Layer;
+  CNumericLayer*               pR0Layer;
+  vector<vector<double>>*      pSSB;
+  CTimeStepManager*            pTimeStepManager;
+  CDerivedQuantityByCell*      pDerivedQuantityByCell;
+  CInitializationPhaseManager* pInitializationPhaseManager;
 
 private:
   Data dAmountPer;

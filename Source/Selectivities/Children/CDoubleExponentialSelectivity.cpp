@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CDoubleExponentialSelectivity.h"
+
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 
@@ -16,8 +17,7 @@
 // CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
 // Default constructor
 //**********************************************************************
-CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
-{
+CDoubleExponentialSelectivity::CDoubleExponentialSelectivity() {
   // Register estimables
   registerEstimable(PARAM_X0, &dX0);
   registerEstimable(PARAM_Y0, &dY0);
@@ -39,18 +39,15 @@ CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
 // void CDoubleExponentialSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CDoubleExponentialSelectivity::validate()
-{
-  try
-  {
-
+void CDoubleExponentialSelectivity::validate() {
+  try {
     // Populate our parameters
-    dX0 = pParameterList->getDouble(PARAM_X0);
-    dX1 = pParameterList->getDouble(PARAM_X1);
-    dX2 = pParameterList->getDouble(PARAM_X2);
-    dY0 = pParameterList->getDouble(PARAM_Y0);
-    dY1 = pParameterList->getDouble(PARAM_Y1);
-    dY2 = pParameterList->getDouble(PARAM_Y2);
+    dX0    = pParameterList->getDouble(PARAM_X0);
+    dX1    = pParameterList->getDouble(PARAM_X1);
+    dX2    = pParameterList->getDouble(PARAM_X2);
+    dY0    = pParameterList->getDouble(PARAM_Y0);
+    dY1    = pParameterList->getDouble(PARAM_Y1);
+    dY2    = pParameterList->getDouble(PARAM_Y2);
     dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
     // Validate parent
@@ -67,9 +64,7 @@ void CDoubleExponentialSelectivity::validate()
       CError::errorLessThan(PARAM_Y1, PARAM_ZERO);
     if (dY2 < 0)
       CError::errorLessThan(PARAM_Y2, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDoubleExponentialSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -79,11 +74,9 @@ void CDoubleExponentialSelectivity::validate()
 // double CDoubleExponentialSelectivity::getResult(int Index)
 // Get the result from our selectivity
 //**********************************************************************
-double CDoubleExponentialSelectivity::calculateResult(int Age)
-{
+double CDoubleExponentialSelectivity::calculateResult(int Age) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     double dRet = 0.0;
@@ -96,9 +89,7 @@ double CDoubleExponentialSelectivity::calculateResult(int Age)
     return dRet;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDoubleExponentialSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -110,6 +101,4 @@ double CDoubleExponentialSelectivity::calculateResult(int Age)
 // CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity()
 // Destructor
 //**********************************************************************
-CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity()
-{
-}
+CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity() {}

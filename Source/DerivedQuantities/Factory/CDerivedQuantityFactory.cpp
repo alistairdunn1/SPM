@@ -9,8 +9,9 @@
 
 // Local includes
 #include "CDerivedQuantityFactory.h"
-#include "../CDerivedQuantityManager.h"
+
 #include "../../Helpers/CError.h"
+#include "../CDerivedQuantityManager.h"
 #include "../Children/CAbundanceDerivedQuantity.h"
 #include "../Children/CBiomassDerivedQuantity.h"
 
@@ -18,10 +19,8 @@
 // CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, bool registerWithManager)
 // Build a Derived Quantity
 //**********************************************************************
-CDerivedQuantity *CDerivedQuantityFactory::buildDerivedQuantity(string type, bool registerWithManager)
-{
-
-  CDerivedQuantity *pQuantity = 0;
+CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, bool registerWithManager) {
+  CDerivedQuantity* pQuantity = 0;
 
   if (type == PARAM_ABUNDANCE)
     pQuantity = new CAbundanceDerivedQuantity();

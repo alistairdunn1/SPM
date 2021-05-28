@@ -19,19 +19,18 @@ class CAgeingError;
 //
 //
 //**********************************************************************
-class CAgeingErrorReport : public CFileReport
-{
+class CAgeingErrorReport : public CFileReport {
 public:
   CAgeingErrorReport();
   virtual ~CAgeingErrorReport();
-  CReport *clone() { return new CAgeingErrorReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CAgeingErrorReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sAgeingError;
-  CAgeingError *pAgeingError;
+  string        sAgeingError;
+  CAgeingError* pAgeingError;
 };
 
 #endif /* CAGEINGERRORREPORT_H_ */

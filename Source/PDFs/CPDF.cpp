@@ -6,15 +6,14 @@
 
 // Local headers
 #include "CPDF.h"
+
 #include "../Helpers/CError.h"
 
 //**********************************************************************
 // CPDF::CPDF()
 // Default Constructor
 //**********************************************************************
-CPDF::CPDF()
-{
-
+CPDF::CPDF() {
   sType = "";
   // Register our Estimables
 
@@ -25,17 +24,13 @@ CPDF::CPDF()
 // void CPDF::validate()
 // Validate
 //**********************************************************************
-void CPDF::validate()
-{
-  try
-  {
+void CPDF::validate() {
+  try {
     // Base Validation
     CBaseBuild::validate();
 
     // Populate our Parameters.
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -45,13 +40,9 @@ void CPDF::validate()
 // void CPDF::build()
 // Build our Object
 //**********************************************************************
-void CPDF::build()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CPDF::build() {
+  try {
+  } catch (string& Ex) {
     Ex = "CPDF.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -61,6 +52,4 @@ void CPDF::build()
 // CPDF::~CPDF()
 // Destructor
 //**********************************************************************
-CPDF::~CPDF()
-{
-}
+CPDF::~CPDF() {}

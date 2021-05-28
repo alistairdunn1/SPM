@@ -8,10 +8,10 @@
 #define CERROR_H_
 
 // Global Headers
-#include <string>
-#include <sstream>
-#include <iostream>
 #include <exception>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 // Using
 using std::cout;
@@ -22,34 +22,30 @@ using std::string;
 using std::stringstream;
 
 // Macro
-#define THROW_EXCEPTION(X)                   \
-  {                                          \
-    ostringstream o;                         \
-    o << __FILE__ << ":" << __LINE__ << endl \
-      << "## " << X << endl;                 \
-    throw string(o.str());                   \
+#define THROW_EXCEPTION(X)                                          \
+  {                                                                 \
+    ostringstream o;                                                \
+    o << __FILE__ << ":" << __LINE__ << endl << "## " << X << endl; \
+    throw string(o.str());                                          \
   }
-#define RETHROW_EXCEPTION(X)                 \
-  {                                          \
-    ostringstream o;                         \
-    o << __FILE__ << ":" << __LINE__ << endl \
-      << X;                                  \
-    throw string(o.str());                   \
+#define RETHROW_EXCEPTION(X)                       \
+  {                                                \
+    ostringstream o;                               \
+    o << __FILE__ << ":" << __LINE__ << endl << X; \
+    throw string(o.str());                         \
   }
-#define RETHROW_LABELLED_EXCEPTION(X)                                                                             \
-  {                                                                                                               \
-    ostringstream o;                                                                                              \
-    o << __FILE__ << ":" << __LINE__ << " (" << pParameterList->getString(PARAM_LABEL, "Unknown") << ") " << endl \
-      << X;                                                                                                       \
-    throw string(o.str());                                                                                        \
+#define RETHROW_LABELLED_EXCEPTION(X)                                                                                   \
+  {                                                                                                                     \
+    ostringstream o;                                                                                                    \
+    o << __FILE__ << ":" << __LINE__ << " (" << pParameterList->getString(PARAM_LABEL, "Unknown") << ") " << endl << X; \
+    throw string(o.str());                                                                                              \
   }
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CError
-{
+class CError {
 public:
   // Functions
   static void error(string value);

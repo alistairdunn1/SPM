@@ -13,9 +13,9 @@
 #include <string>
 
 // Local Headers
-#include "CMinimizerFactory.h"
 #include "../DESolver/CDESolver.h"
 #include "../GammaDiff/CGammaDiff.h"
+#include "CMinimizerFactory.h"
 
 // Namespaces
 using namespace std;
@@ -24,16 +24,14 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DESolver)
-{
-
-  CMinimizer *pMinimizer = 0;
+BOOST_AUTO_TEST_CASE(Build_DESolver) {
+  CMinimizer* pMinimizer = 0;
   BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_DE_SOLVER, false));
 
-  CDESolver *pPtr = dynamic_cast<CDESolver *>(pMinimizer);
+  CDESolver* pPtr = dynamic_cast<CDESolver*>(pMinimizer);
   BOOST_ASSERT(pPtr != 0);
 
-  CGammaDiff *pPtr2 = dynamic_cast<CGammaDiff *>(pMinimizer);
+  CGammaDiff* pPtr2 = dynamic_cast<CGammaDiff*>(pMinimizer);
   BOOST_ASSERT(pPtr2 == 0);
 
   delete pMinimizer;
@@ -43,16 +41,14 @@ BOOST_AUTO_TEST_CASE(Build_DESolver)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_GammaDiff)
-{
-
-  CMinimizer *pMinimizer = 0;
+BOOST_AUTO_TEST_CASE(Build_GammaDiff) {
+  CMinimizer* pMinimizer = 0;
   BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_GAMMADIFF, false));
 
-  CGammaDiff *pPtr = dynamic_cast<CGammaDiff *>(pMinimizer);
+  CGammaDiff* pPtr = dynamic_cast<CGammaDiff*>(pMinimizer);
   BOOST_ASSERT(pPtr != 0);
 
-  CDESolver *pPtr2 = dynamic_cast<CDESolver *>(pMinimizer);
+  CDESolver* pPtr2 = dynamic_cast<CDESolver*>(pMinimizer);
   BOOST_ASSERT(pPtr2 == 0);
 
   delete pMinimizer;

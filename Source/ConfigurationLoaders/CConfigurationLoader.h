@@ -24,25 +24,24 @@ class CBaseObject;
 //
 //
 //**********************************************************************
-class CConfigurationLoader
-{
+class CConfigurationLoader {
 public:
   CConfigurationLoader();
   virtual ~CConfigurationLoader();
   void loadConfigFile(bool skipLoadingFile = false);
   void loadEstimateValuesFile(bool skipLoadingFile = false);
-  void loadIntoCache(vector<string> &lines);
+  void loadIntoCache(vector<string>& lines);
 
 protected:
   // Functions
-  void processSection();
-  void loadConfigIntoCache(string FileName);
-  void assignParameters(CBaseObject *Object);
+  void   processSection();
+  void   loadConfigIntoCache(string FileName);
+  void   assignParameters(CBaseObject* Object);
   string getTypeFromCurrentSection();
-  void splitLineIntoVector(string line, vector<string> &parameters);
-  bool bModelHasBeenDefined = 0;
-  bool bEstimationHasBeenDefined = 0;
-  bool bMCMCHasBeenDefined = 0;
+  void   splitLineIntoVector(string line, vector<string>& parameters);
+  bool   bModelHasBeenDefined      = 0;
+  bool   bEstimationHasBeenDefined = 0;
+  bool   bMCMCHasBeenDefined       = 0;
 
   // Variables
   vector<string> vLines;

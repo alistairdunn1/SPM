@@ -10,13 +10,13 @@
 #ifndef CONSTANTRECRUITMENT_H_
 #define CONSTANTRECRUITMENT_H_
 
-const string constant_recruitment =
-    "@process constant_recruitment\n"
-    "type constant_recruitment\n"
-    "categories immature\n"
-    "proportions 1.0\n"
-    "r0 100\n"
-    "age 1\n";
+const string constant_recruitment
+    = "@process constant_recruitment\n"
+      "type constant_recruitment\n"
+      "categories immature\n"
+      "proportions 1.0\n"
+      "r0 100\n"
+      "age 1\n";
 
 #endif /* CONSTANTRECRUITMENT_H_ */
 #endif /* TEST */

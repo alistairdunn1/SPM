@@ -8,16 +8,17 @@
 //============================================================================
 
 // Global Headers
-#include <iostream>
-#include <vector>
-#include <iomanip>
-#include <sstream>
-#include <string>
 #include <math.h>
 
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
 // Local Headers
-#include "CStandardHeaderReport.h"
 #include "../../Version.h"
+#include "CStandardHeaderReport.h"
 
 // Namespaces
 using std::cerr;
@@ -29,9 +30,7 @@ using std::ostringstream;
 // CStandardHeaderReport::CStandardHeaderReport()
 // Default Constructor
 //**********************************************************************
-CStandardHeaderReport::CStandardHeaderReport()
-{
-
+CStandardHeaderReport::CStandardHeaderReport() {
   // Variables
   tmeStart = time(NULL);
 
@@ -42,7 +41,7 @@ CStandardHeaderReport::CStandardHeaderReport()
 
   // Start building our Header
   sVersion = "";
-  sHeader = "SPM (Spatial Population Model)";
+  sHeader  = "SPM (Spatial Population Model)";
 #ifndef OPTIMIZE
   sHeader += " (UNOPTIMISED)\n";
 #else
@@ -54,13 +53,10 @@ CStandardHeaderReport::CStandardHeaderReport()
 // void CStandardHeaderReport::start()
 // Start the printing of this header
 //**********************************************************************
-void CStandardHeaderReport::start()
-{
-
+void CStandardHeaderReport::start() {
   // Build Command Line
   sHeader += "Call: ";
-  for (int i = 0; i < pConfig->getCommandLineParameterCount(); ++i)
-    sHeader += pConfig->getCommandLineParameter(i) + string(" ");
+  for (int i = 0; i < pConfig->getCommandLineParameterCount(); ++i) sHeader += pConfig->getCommandLineParameter(i) + string(" ");
 
   // Build Date
   sHeader += "\nDate: " + string(ctime(&tmeStart));
@@ -81,11 +77,10 @@ void CStandardHeaderReport::start()
   PID << _getpid();
   sHeader += "PID=" + PID.str() + ")\n";
 #else
-  char *cUsername = getenv("LOGNAME");
+  char* cUsername = getenv("LOGNAME");
   if (cUsername != NULL)
     sHeader += "User name: " + string(cUsername) + "\n";
-  else
-  {
+  else {
     sHeader += "User name: -----\n";
   }
   sHeader += "\nMachine name: ";
@@ -111,33 +106,28 @@ void CStandardHeaderReport::execute() {}
 // void CStandardHeaderReport::end()
 // End our Printing of this Header
 //**********************************************************************
-void CStandardHeaderReport::end()
-{
+void CStandardHeaderReport::end() {
 #ifndef __MINGW32__
   times(&cpu_stop);
-  double cpu_time = (static_cast<double>(cpu_stop.tms_utime) + static_cast<double>(cpu_stop.tms_stime)) - (static_cast<double>(cpu_start.tms_utime) + static_cast<double>(cpu_start.tms_stime));
+  double cpu_time
+      = (static_cast<double>(cpu_stop.tms_utime) + static_cast<double>(cpu_stop.tms_stime)) - (static_cast<double>(cpu_start.tms_utime) + static_cast<double>(cpu_start.tms_stime));
   // Turn into seconds
   cpu_time /= static_cast<double>(sysconf(_SC_CLK_TCK));
   // Turn into hours
   cpu_time = cpu_time / 3600.0;
-  int P = (int)floor(log10(cpu_time)) + 4;
+  int P    = (int)floor(log10(cpu_time)) + 4;
   cerr << "Total CPU time: " << std::setprecision(P) << cpu_time << (cpu_time == 1 ? " hour" : " hours") << ".\n";
 #endif
 
   double elapsed_time = static_cast<double>(time(NULL) - tmeStart);
-  if (elapsed_time < 60)
-  {
+  if (elapsed_time < 60) {
     int P = (int)floor(log10(elapsed_time)) + 4;
     cerr << "Total elapsed time: " << std::setprecision(P) << fmax(1, elapsed_time) << (elapsed_time <= 1 ? " second" : " seconds") << endl;
-  }
-  else if ((elapsed_time / 60.0) < 60)
-  {
+  } else if ((elapsed_time / 60.0) < 60) {
     elapsed_time /= 60.0;
     int P = (int)floor(log10(elapsed_time)) + 4;
     cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time == 1 ? " minute" : " minutes") << endl;
-  }
-  else
-  {
+  } else {
     elapsed_time /= 3600.0;
     int P = (int)floor(log10(elapsed_time)) + 4;
     cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time == 1 ? " hour" : " hours") << endl;
@@ -149,6 +139,4 @@ void CStandardHeaderReport::end()
 // CStandardHeaderReport::~CStandardHeaderReport()
 // Destructor
 //**********************************************************************
-CStandardHeaderReport::~CStandardHeaderReport()
-{
-}
+CStandardHeaderReport::~CStandardHeaderReport() {}

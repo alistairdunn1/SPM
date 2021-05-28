@@ -9,19 +9,18 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CLikelihoodFactory.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../Factory/CLikelihoodFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(MultinomialLikelihood)
-{
+BOOST_AUTO_TEST_CASE(MultinomialLikelihood) {
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_MULTINOMIAL);
+  CLikelihood* pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_MULTINOMIAL);
 
   vector<string> keys;
   vector<double> scores;
@@ -29,7 +28,7 @@ BOOST_AUTO_TEST_CASE(MultinomialLikelihood)
   vector<double> observed;
   vector<double> errorValue;
   vector<double> processError;
-  double delta = 1e-05;
+  double         delta = 1e-05;
 
   // Test case 1
   keys.push_back("A");

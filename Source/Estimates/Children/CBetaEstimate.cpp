@@ -20,8 +20,7 @@ using std::endl;
 /**
  * Default constructor
  */
-CBetaEstimate::CBetaEstimate()
-{
+CBetaEstimate::CBetaEstimate() {
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);
@@ -36,17 +35,15 @@ CBetaEstimate::CBetaEstimate()
 /**
  * Validate our Beta prior/estimate
  */
-void CBetaEstimate::validate()
-{
+void CBetaEstimate::validate() {
   CEstimate::validate();
 
-  try
-  {
+  try {
     // Assign our parameters
-    dMu = pParameterList->getDouble(PARAM_MU);
+    dMu    = pParameterList->getDouble(PARAM_MU);
     dSigma = pParameterList->getDouble(PARAM_SIGMA);
-    dA = pParameterList->getDouble(PARAM_A);
-    dB = pParameterList->getDouble(PARAM_B);
+    dA     = pParameterList->getDouble(PARAM_A);
+    dB     = pParameterList->getDouble(PARAM_B);
 
     // Local validation
     if (dSigma <= 0.0)
@@ -55,9 +52,7 @@ void CBetaEstimate::validate()
       CError::errorGreaterThanEqualTo(PARAM_A, PARAM_B);
     if (((((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1) <= 0)
       CError::error(PARAM_SIGMA + string(" is too large"));
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBetaEstimate.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,14 +61,13 @@ void CBetaEstimate::validate()
 /**
  *
  */
-double CBetaEstimate::getScore()
-{
+double CBetaEstimate::getScore() {
   double dRet = 0.0;
 
-  dV = (dMu - dA) / (dB - dA);
-  dT = (((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1.0;
-  dM = dT * dV;
-  dN = dT * (1.0 - dV);
+  dV   = (dMu - dA) / (dB - dA);
+  dT   = (((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1.0;
+  dM   = dT * dV;
+  dN   = dT * (1.0 - dV);
   dRet = ((1.0 - dM) * log(getValue() - dA)) + ((1.0 - dN) * log(dB - getValue()));
 
   return dRet;

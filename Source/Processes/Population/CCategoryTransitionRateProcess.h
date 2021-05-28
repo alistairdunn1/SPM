@@ -19,25 +19,24 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CCategoryTransitionRateProcess : public CProcess
-{
+class CCategoryTransitionRateProcess : public CProcess {
 public:
   CCategoryTransitionRateProcess();
   virtual ~CCategoryTransitionRateProcess();
-  CProcess *clone() { return new CCategoryTransitionRateProcess(*this); }
-  void validate();
-  void build();
-  void execute();
+  CProcess* clone() { return new CCategoryTransitionRateProcess(*this); }
+  void      validate();
+  void      build();
+  void      execute();
 
 protected:
   // Variables
   vector<double> vProportions;
   vector<string> vFromList;
-  vector<int> vFromIndex;
+  vector<int>    vFromIndex;
   vector<string> vToList;
-  vector<int> vToIndex;
-  string sLayer;
-  CNumericLayer *pLayer;
+  vector<int>    vToIndex;
+  string         sLayer;
+  CNumericLayer* pLayer;
 };
 
 #endif /* CCATEGORYTRANSITIONRATEPROCESS_H_ */

@@ -8,6 +8,8 @@
 //============================================================================
 
 // Local Headers
+#include "CProcessFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../CProcessManager.h"
@@ -15,8 +17,8 @@
 #include "../Movement/CMigrationMovementProcess.h"
 #include "../Movement/COpenMPPreferenceMovementProcess.h"
 #include "../Movement/CPreferenceMovementProcess.h"
-#include "../Population/CAgeingProcess.h"
 #include "../Population/CAgeMortalityRateProcess.h"
+#include "../Population/CAgeingProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
 #include "../Population/CBHRecruitmentProcess2.h"
@@ -25,27 +27,24 @@
 #include "../Population/CCategoryTransitionByAgeProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
-#include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantExploitationRateProcess.h"
+#include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
-#include "../Population/CLayerVaryingExploitationRateProcess.h"
 #include "../Population/CLayerVaryingExploitationRateByeventProcess.h"
+#include "../Population/CLayerVaryingExploitationRateProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
 #include "../Population/CNoneProcess.h"
 #include "../Population/CPreySuitabilityPredationProcess.h"
 #include "../Population/CProportionalRecruitmentProcess.h"
-#include "CProcessFactory.h"
 
 //**********************************************************************
 // CProcessFactory::CProcessFactory()
 // Default Constructor
 //**********************************************************************
-CProcess *CProcessFactory::buildProcess(string type, bool registerWithManager)
-{
-
-  CProcess *pProcess = 0;
+CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
+  CProcess* pProcess = 0;
 
   if (type == PARAM_CONSTANT_RECRUITMENT)
     pProcess = new CConstantRecruitmentProcess();

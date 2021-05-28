@@ -16,13 +16,12 @@
 //
 //
 //**********************************************************************
-class CObjectiveFunctionReport : public CFileReport
-{
+class CObjectiveFunctionReport : public CFileReport {
 public:
   CObjectiveFunctionReport();
   virtual ~CObjectiveFunctionReport();
-  CReport *clone() { return new CObjectiveFunctionReport(*this); }
-  void execute();
+  CReport* clone() { return new CObjectiveFunctionReport(*this); }
+  void     execute();
 };
 
 #endif /* COBJECTIVEFUNCTIONREPORT_H_ */

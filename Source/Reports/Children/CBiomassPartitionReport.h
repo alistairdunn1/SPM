@@ -19,23 +19,22 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CBiomassPartitionReport : public CFileReport
-{
+class CBiomassPartitionReport : public CFileReport {
 public:
   // Functions
   CBiomassPartitionReport();
   virtual ~CBiomassPartitionReport();
-  CReport *clone() { return new CBiomassPartitionReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CBiomassPartitionReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  vector<int> vYear;
-  int iTimeStep;
-  string sTimeStep;
-  CTimeStepManager *pTimeStepManager;
+  vector<int>       vYear;
+  int               iTimeStep;
+  string            sTimeStep;
+  CTimeStepManager* pTimeStepManager;
 };
 
 #endif /* CBIOMASSPARTITIONREPORT_H_ */

@@ -8,16 +8,16 @@
 //============================================================================
 
 // Global Headers
-#include <iostream>
 #include <boost/lexical_cast.hpp>
+#include <iostream>
 
 // Local Includes
-#include "CNotNegIntegerLayer.h"
-#include "../../World/CWorld.h"
-#include "../../World/CWorldSquare.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
+#include "../../World/CWorld.h"
+#include "../../World/CWorldSquare.h"
+#include "CNotNegIntegerLayer.h"
 
 // Namespace
 using std::cout;
@@ -27,9 +27,7 @@ using std::endl;
 // CNotNegIntegerLayer::CNotNegIntegerLayer()
 // Default Constructor
 //**********************************************************************
-CNotNegIntegerLayer::CNotNegIntegerLayer()
-{
-
+CNotNegIntegerLayer::CNotNegIntegerLayer() {
   sType = PARAM_NOT_NEG_INT;
 
   // Register Allowed Parameters
@@ -40,11 +38,9 @@ CNotNegIntegerLayer::CNotNegIntegerLayer()
 // int CNotNegIntegerLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)
 // Get Value From Our Layer
 //**********************************************************************
-int CNotNegIntegerLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
-{
+int CNotNegIntegerLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
     // Check
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
@@ -54,9 +50,7 @@ int CNotNegIntegerLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0,
       CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
     if (ColIndex < 0)
       CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -69,11 +63,9 @@ int CNotNegIntegerLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0,
 // void CNotNegIntegerLayer::addValue(int RowIndex, int ColIndex, int Value)
 // Add Value to our Grid
 //**********************************************************************
-void CNotNegIntegerLayer::setValue(int RowIndex, int ColIndex, int Value)
-{
+void CNotNegIntegerLayer::setValue(int RowIndex, int ColIndex, int Value) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW, PARAM_LAYER_HEIGHT);
     if (ColIndex >= iWidth)
@@ -82,9 +74,7 @@ void CNotNegIntegerLayer::setValue(int RowIndex, int ColIndex, int Value)
       CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
     if (ColIndex < 0)
       CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.addValue()->" + Ex;
     throw Ex;
   }
@@ -97,10 +87,8 @@ void CNotNegIntegerLayer::setValue(int RowIndex, int ColIndex, int Value)
 // void CNotNegIntegerLayer::validate()
 // Validate Our Layer
 //**********************************************************************
-void CNotNegIntegerLayer::validate()
-{
-  try
-  {
+void CNotNegIntegerLayer::validate() {
+  try {
     // Base Validate
     CIntLayer::validate();
 
@@ -111,14 +99,12 @@ void CNotNegIntegerLayer::validate()
     int iRow = 0;
     int iCol = 0;
 
-    for (int i = 0; i < (int)vData.size(); ++i)
-    {
+    for (int i = 0; i < (int)vData.size(); ++i) {
       if (vData[i] == PARAM_DATA)
         continue;
 
       // Read data and if enough on theis row, then start filling out the next row
-      if (iCol >= iWidth)
-      {
+      if (iCol >= iWidth) {
         iCol = 0;
         iRow++;
       }
@@ -127,15 +113,12 @@ void CNotNegIntegerLayer::validate()
       if (iRow >= iHeight)
         CError::errorTooMuch(PARAM_DATA);
 
-      try
-      {
+      try {
         // Set grid data
         pGrid[iRow][iCol] = boost::lexical_cast<int>(vData[i]);
         // register as estimable - don't do for integer values for now
         // registerEstimable(PARAM_DATA, i, &pGrid[iRow][iCol]);
-      }
-      catch (boost::bad_lexical_cast &)
-      {
+      } catch (boost::bad_lexical_cast&) {
         string Ex = string("Non-integer value in layer ") + getLabel();
         throw Ex;
       }
@@ -144,9 +127,7 @@ void CNotNegIntegerLayer::validate()
 
     if (((iRow + 1) != iHeight) || (iCol != iWidth))
       CError::errorNotEnough(PARAM_DATA);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -156,17 +137,12 @@ void CNotNegIntegerLayer::validate()
 // int getLayerMin();
 // Get layer value min
 //**********************************************************************
-int CNotNegIntegerLayer::getLayerMin()
-{
-  try
-  {
-
+int CNotNegIntegerLayer::getLayerMin() {
+  try {
     int dMin = pGrid[0][0];
 
-    for (int i = 0; i < iHeight; ++i)
-    {
-      for (int j = 0; j < iWidth; ++j)
-      {
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
         dMin = std::min(dMin, pGrid[i][j]);
       }
     }
@@ -175,9 +151,7 @@ int CNotNegIntegerLayer::getLayerMin()
       CError::errorLessThanEqualTo(PARAM_VALUE, PARAM_ZERO);
 
     return (dMin);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.getLayerMin(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -187,25 +161,18 @@ int CNotNegIntegerLayer::getLayerMin()
 // int getLayerMax();
 // Get layer value max
 //**********************************************************************
-int CNotNegIntegerLayer::getLayerMax()
-{
-  try
-  {
-
+int CNotNegIntegerLayer::getLayerMax() {
+  try {
     int dMax = pGrid[0][0];
 
-    for (int i = 0; i < iHeight; ++i)
-    {
-      for (int j = 0; j < iWidth; ++j)
-      {
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
         dMax = std::max(dMax, pGrid[i][j]);
       }
     }
 
     return (dMax);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.getLayerMax(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -215,20 +182,14 @@ int CNotNegIntegerLayer::getLayerMax()
 // void CNotNegIntegerLayer::build()
 // Build our layer
 //**********************************************************************
-void CNotNegIntegerLayer::build()
-{
-  try
-  {
-    for (int i = 0; i < iHeight; ++i)
-    {
-      for (int j = 0; j < iWidth; ++j)
-      {
+void CNotNegIntegerLayer::build() {
+  try {
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
         pGrid[i][j] = pGrid[i][j];
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNotNegIntegerLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -238,6 +199,4 @@ void CNotNegIntegerLayer::build()
 // CNotNegIntegerLayer::~CNotNegIntegerLayer()
 // Default De-Constructor
 //**********************************************************************
-CNotNegIntegerLayer::~CNotNegIntegerLayer()
-{
-}
+CNotNegIntegerLayer::~CNotNegIntegerLayer() {}

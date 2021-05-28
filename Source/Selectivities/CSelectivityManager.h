@@ -23,20 +23,19 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CSelectivityManager : public CBaseManager
-{
+class CSelectivityManager : public CBaseManager {
 public:
-  static CSelectivityManager *Instance();
-  static void Destroy();
+  static CSelectivityManager* Instance();
+  static void                 Destroy();
 
   // Functions
-  void fillVector(vector<CSelectivity *> &list, vector<string> &names);
-  void addSelectivity(CSelectivity *Selectivity);
-  CSelectivity *getSelectivity(string Label);
-  void clone(CSelectivityManager *Manager);
-  void validate();
-  void build();
-  void rebuild();
+  void          fillVector(vector<CSelectivity*>& list, vector<string>& names);
+  void          addSelectivity(CSelectivity* Selectivity);
+  CSelectivity* getSelectivity(string Label);
+  void          clone(CSelectivityManager* Manager);
+  void          validate();
+  void          build();
+  void          rebuild();
   virtual ~CSelectivityManager();
 
 protected:
@@ -45,7 +44,7 @@ protected:
   int getSelectivityIndex(string Label);
 
   // Variables
-  vector<CSelectivity *> vSelectivities;
+  vector<CSelectivity*> vSelectivities;
 
 private:
   static boost::thread_specific_ptr<CSelectivityManager> clInstance;

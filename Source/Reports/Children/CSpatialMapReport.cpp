@@ -14,8 +14,7 @@
 // CSpatialMapReport::CSpatialMapReport()
 // Default constructor
 //**********************************************************************
-CSpatialMapReport::CSpatialMapReport()
-{
+CSpatialMapReport::CSpatialMapReport() {
   // Variables
   eExecutionState = STATE_FINALIZATION;
 }
@@ -24,11 +23,8 @@ CSpatialMapReport::CSpatialMapReport()
 // void CSpatialMapReport::execute()
 // Execute
 //**********************************************************************
-void CSpatialMapReport::execute()
-{
-  try
-  {
-
+void CSpatialMapReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       return;
@@ -39,21 +35,16 @@ void CSpatialMapReport::execute()
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << pParameterList->getString(PARAM_TYPE) << "\n";
 
-    for (int i = 0; i < pWorld->getHeight(); ++i)
-    {
-      for (int j = 0; j < pWorld->getWidth(); ++j)
-      {
+    for (int i = 0; i < pWorld->getHeight(); ++i) {
+      for (int j = 0; j < pWorld->getWidth(); ++j) {
         cout << "r" << (i + 1) << "-c" << (j + 1) << CONFIG_SPACE_SEPARATOR;
       }
       cout << "\n";
     }
 
-    cout << CONFIG_END_REPORT << "\n"
-         << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSpatialMapReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -63,6 +54,4 @@ void CSpatialMapReport::execute()
 // CSpatialMapReport::~CSpatialMapReport()
 // Destructor
 //**********************************************************************
-CSpatialMapReport::~CSpatialMapReport()
-{
-}
+CSpatialMapReport::~CSpatialMapReport() {}

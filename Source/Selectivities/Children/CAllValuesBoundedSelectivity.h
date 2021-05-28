@@ -16,24 +16,23 @@
 //
 //
 //**********************************************************************
-class CAllValuesBoundedSelectivity : public CCachedSelectivity
-{
+class CAllValuesBoundedSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CAllValuesBoundedSelectivity();
   virtual ~CAllValuesBoundedSelectivity();
-  CSelectivity *clone() { return new CAllValuesBoundedSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CAllValuesBoundedSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions
   double calculateResult(int Age);
 
   // Variables
-  int iL;
-  int iH;
+  int            iL;
+  int            iH;
   vector<double> vVs;
-  int iMinAge;
+  int            iMinAge;
 };
 
 #endif /* CALLVALUESBOUNDEDSELECTIVITY_H_ */

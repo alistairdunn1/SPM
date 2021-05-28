@@ -20,24 +20,23 @@ class CLayerManager;
 //
 //
 //**********************************************************************
-class CAgeMortalityRateProcess : public CProcess
-{
+class CAgeMortalityRateProcess : public CProcess {
 public:
   // Functions
   CAgeMortalityRateProcess();
   virtual ~CAgeMortalityRateProcess();
-  CProcess *clone() { return new CAgeMortalityRateProcess(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
+  CProcess* clone() { return new CAgeMortalityRateProcess(*this); }
+  void      validate();
+  void      build();
+  void      rebuild();
+  void      execute();
 
 protected:
   // Variables
   vector<double> vMortalityRates;
-  CWorldSquare **pGrid;
-  CNumericLayer *pLayer;
-  string sLayer;
+  CWorldSquare** pGrid;
+  CNumericLayer* pLayer;
+  string         sLayer;
 };
 
 #endif /* CAGEMORTALITYRATEPROCESS_H_ */

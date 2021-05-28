@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CObservation.h"
+
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../Layers/CLayerManager.h"
@@ -20,14 +21,13 @@
 // CObservation::CObservation()
 // Default Constructor
 //**********************************************************************
-CObservation::CObservation()
-{
+CObservation::CObservation() {
   // Variables
-  pStartWorldView = 0;
-  pWorldView = 0;
-  pLikelihood = 0;
-  dScore = 0;
-  dMultiplier = 1.0;
+  pStartWorldView    = 0;
+  pWorldView         = 0;
+  pLikelihood        = 0;
+  dScore             = 0;
+  dMultiplier        = 1.0;
   bSimulationRunMode = false;
 
   // Register estimables
@@ -50,8 +50,7 @@ CObservation::CObservation()
 // string CObservation::getCategory(int index)
 // Get Category
 //**********************************************************************
-string CObservation::getCategory(int index)
-{
+string CObservation::getCategory(int index) {
   return vCategoryNames[index];
 }
 
@@ -59,60 +58,57 @@ string CObservation::getCategory(int index)
 // string CObservation::getSelectivity(int index)
 // Get The selectivity for index
 //**********************************************************************
-string CObservation::getSelectivity(int index)
-{
+string CObservation::getSelectivity(int index) {
   return vSelectivityNames[index];
 }
 
 //**********************************************************************
-// void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
-// Save comparison into our Vector
+// void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double
+// multiplier, double score) Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
-{
-
+void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double multiplier,
+                                  double score) {
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
       if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
         return;
 
-  SComparison *pComparison = new SComparison();
-  pComparison->sKey = key;
-  pComparison->iBin = age;
-  pComparison->sGroup = group;
+  SComparison* pComparison    = new SComparison();
+  pComparison->sKey           = key;
+  pComparison->iBin           = age;
+  pComparison->sGroup         = group;
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
-  pComparison->dErrorValue = errorValue;
-  pComparison->dProcessError = processError;
-  pComparison->dTotalError = totalError;
-  pComparison->dMultiplier = multiplier;
-  pComparison->dScore = score;
+  pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
+  pComparison->dMultiplier    = multiplier;
+  pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
 
 //**********************************************************************
-// void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
-// Save comparison into our Vector
+// void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double
+// score) Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
-{
-
+void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double multiplier,
+                                  double score) {
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
       if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
         return;
 
-  SComparison *pComparison = new SComparison();
-  pComparison->sKey = key;
-  pComparison->iBin = age;
-  pComparison->sGroup = "";
+  SComparison* pComparison    = new SComparison();
+  pComparison->sKey           = key;
+  pComparison->iBin           = age;
+  pComparison->sGroup         = "";
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
-  pComparison->dErrorValue = errorValue;
-  pComparison->dProcessError = processError;
-  pComparison->dTotalError = totalError;
-  pComparison->dMultiplier = multiplier;
-  pComparison->dScore = score;
+  pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
+  pComparison->dMultiplier    = multiplier;
+  pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
 
@@ -120,25 +116,23 @@ void CObservation::saveComparison(string key, int age, double expected, double o
 // void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
 // Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score)
-{
-
+void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score) {
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
       if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
         return;
 
-  SComparison *pComparison = new SComparison();
-  pComparison->sKey = key;
-  pComparison->iBin = -1;
-  pComparison->sGroup = "";
+  SComparison* pComparison    = new SComparison();
+  pComparison->sKey           = key;
+  pComparison->iBin           = -1;
+  pComparison->sGroup         = "";
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
-  pComparison->dErrorValue = errorValue;
-  pComparison->dProcessError = processError;
-  pComparison->dTotalError = totalError;
-  pComparison->dMultiplier = multiplier;
-  pComparison->dScore = score;
+  pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
+  pComparison->dMultiplier    = multiplier;
+  pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
 
@@ -146,45 +140,35 @@ void CObservation::saveComparison(string key, double expected, double observed, 
 // void CObservation::fillComparisons(vector<SComparison*> &comparisons)
 // Fill Vector with Comparisons for Print Out
 //**********************************************************************
-void CObservation::fillComparisons(vector<SComparison *> &comparisons)
-{
+void CObservation::fillComparisons(vector<SComparison*>& comparisons) {
   comparisons.clear();
 
-  foreach (SComparison *Comparison, vComparisons)
-  {
-    comparisons.push_back(Comparison);
-  }
+  foreach (SComparison* Comparison, vComparisons) { comparisons.push_back(Comparison); }
 }
 
 //**********************************************************************
 // void CObservation::validate()
 // Validate the Observation
 //**********************************************************************
-void CObservation::validate()
-{
-  try
-  {
+void CObservation::validate() {
+  try {
     // Base
     CBaseExecute::validate();
 
     // Assign our Variables
-    iYear = pParameterList->getInt(PARAM_YEAR);
-    sTimeStep = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer = pParameterList->getString(PARAM_LAYER);
-    sLikelihood = pParameterList->getString(PARAM_LIKELIHOOD);
+    iYear               = pParameterList->getInt(PARAM_YEAR);
+    sTimeStep           = pParameterList->getString(PARAM_TIME_STEP);
+    sLayer              = pParameterList->getString(PARAM_LAYER);
+    sLikelihood         = pParameterList->getString(PARAM_LIKELIHOOD);
     dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP, true, 1.0);
-    sProportionMethod = pParameterList->getString(PARAM_PROPORTION_METHOD, true, PARAM_MEAN);
-    dMultiplier = pParameterList->getDouble(PARAM_LIKELIHOOD_MULTIPLIER, true, 1.0);
+    sProportionMethod   = pParameterList->getString(PARAM_PROPORTION_METHOD, true, PARAM_MEAN);
+    dMultiplier         = pParameterList->getDouble(PARAM_LIKELIHOOD_MULTIPLIER, true, 1.0);
 
-    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION)
-    {
-      if (sLikelihood == PARAM_PSEUDO)
-      {
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+      if (sLikelihood == PARAM_PSEUDO) {
         sSimulationLikelihood = pParameterList->getString(PARAM_SIMULATION_LIKELIHOOD);
-        sLikelihood = sSimulationLikelihood;
-      }
-      else
-      {
+        sLikelihood           = sSimulationLikelihood;
+      } else {
         sSimulationLikelihood = sLikelihood;
       }
     }
@@ -197,16 +181,13 @@ void CObservation::validate()
     if (dProportionTimeStep > 1)
       CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
 
-    if (!(sProportionMethod == PARAM_MEAN || sProportionMethod == PARAM_DIFFERENCE))
-    {
+    if (!(sProportionMethod == PARAM_MEAN || sProportionMethod == PARAM_DIFFERENCE)) {
       CError::errorNotEqual(PARAM_PROPORTION_METHOD, PARAM_MEAN + string(" or ") + PARAM_DIFFERENCE);
     }
 
     if (dMultiplier < 0)
       CError::errorLessThan(PARAM_LIKELIHOOD_MULTIPLIER, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -216,21 +197,19 @@ void CObservation::validate()
 // void CObservation::build()
 // build
 //**********************************************************************
-void CObservation::build()
-{
-  try
-  {
+void CObservation::build() {
+  try {
     // Get our Layer Pointer
-    CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getCategoricalLayer(sLayer);
+    CLayerManager* pLayerManager = CLayerManager::Instance();
+    pLayer                       = pLayerManager->getCategoricalLayer(sLayer);
 
     // Get Selectivities
-    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    CSelectivityManager* pSelectivityManager = CSelectivityManager::Instance();
     pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
 
     // Get the Index for our TimeStep in the Order Vector
-    CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
-    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    CTimeStepManager* pTimeStepManager = CTimeStepManager::Instance();
+    iTimeStep                          = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
     // Build our start world view. This represents the world before the timestep
     pStartWorldView = new CLayerDerivedWorldView(pLayer);
@@ -250,9 +229,7 @@ void CObservation::build()
       bSimulationRunMode = true;
     else
       bSimulationRunMode = false;
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -262,8 +239,7 @@ void CObservation::build()
 // void CObservation::prepare()
 // This method is called before the timestep to load any pre-timestep info
 //**********************************************************************
-void CObservation::prepare()
-{
+void CObservation::prepare() {
   /**
    * Execute our start world view. This means when we actually call
    * execute we'll have a view of the world from before the timestep
@@ -276,13 +252,9 @@ void CObservation::prepare()
 // void CObservation::execute()
 // Execute Observation
 //**********************************************************************
-void CObservation::execute()
-{
+void CObservation::execute() {
   // Clear Comparisons List
-  foreach (SComparison *Comparison, vComparisons)
-  {
-    delete Comparison;
-  }
+  foreach (SComparison* Comparison, vComparisons) { delete Comparison; }
   vComparisons.clear();
 }
 
@@ -290,15 +262,11 @@ void CObservation::execute()
 // CObservation::~CObservation()
 // Default De-Constructor
 //**********************************************************************
-CObservation::~CObservation()
-{
+CObservation::~CObservation() {
   if (pWorldView != 0)
     delete pWorldView;
 
-  foreach (SComparison *Comparison, vComparisons)
-  {
-    delete Comparison;
-  }
+  foreach (SComparison* Comparison, vComparisons) { delete Comparison; }
   vComparisons.clear();
 
   if (pLikelihood != 0)

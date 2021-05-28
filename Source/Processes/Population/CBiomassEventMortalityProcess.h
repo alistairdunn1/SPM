@@ -21,37 +21,36 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CBiomassEventMortalityProcess : public CProcess
-{
+class CBiomassEventMortalityProcess : public CProcess {
 public:
   // Functions
   CBiomassEventMortalityProcess();
   virtual ~CBiomassEventMortalityProcess();
-  CProcess *clone() { return new CBiomassEventMortalityProcess(*this); }
-  double getUMax() { return dUMax; }
-  int getYearsCount() { return vYearsList.size(); }
-  int getYears(int index);
-  int getLayersCount() { return vLayersList.size(); }
-  string getLayers(int index);
-  void validate();
-  void build();
-  void execute();
+  CProcess* clone() { return new CBiomassEventMortalityProcess(*this); }
+  double    getUMax() { return dUMax; }
+  int       getYearsCount() { return vYearsList.size(); }
+  int       getYears(int index);
+  int       getLayersCount() { return vLayersList.size(); }
+  string    getLayers(int index);
+  void      validate();
+  void      build();
+  void      execute();
 
 protected:
   // Variables
-  double dUMax;
-  double dCatch;
-  double dVulnerable;
-  double dExploitation;
-  vector<int> vYearsList;
-  vector<string> vLayersList;
-  vector<CNumericLayer *> vLayersIndex;
-  CNumericLayer *pLayer;
-  int iCurrentYear;
-  bool bYearMatch;
-  CTimeStepManager *pTimeStepManager;
-  string sPenalty;
-  CPenalty *pPenalty;
+  double                 dUMax;
+  double                 dCatch;
+  double                 dVulnerable;
+  double                 dExploitation;
+  vector<int>            vYearsList;
+  vector<string>         vLayersList;
+  vector<CNumericLayer*> vLayersIndex;
+  CNumericLayer*         pLayer;
+  int                    iCurrentYear;
+  bool                   bYearMatch;
+  CTimeStepManager*      pTimeStepManager;
+  string                 sPenalty;
+  CPenalty*              pPenalty;
 };
 
 #endif /*CBIOMASSEVENTMORTALITYPROCESS_H_*/

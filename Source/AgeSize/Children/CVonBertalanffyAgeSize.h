@@ -9,8 +9,8 @@
 #ifndef CVONBERTALANFFYAGESIZE_H_
 #define CVONBERTALANFFYAGESIZE_H_
 
-#include "../CAgeSize.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../CAgeSize.h"
 
 // Classes
 class CTimeStepManager;
@@ -21,38 +21,37 @@ class CInitializationPhase;
 //
 //
 //**********************************************************************
-class CVonBertalanffyAgeSize : public CAgeSize
-{
+class CVonBertalanffyAgeSize : public CAgeSize {
 public:
   // Functions
   CVonBertalanffyAgeSize();
   virtual ~CVonBertalanffyAgeSize();
-  CAgeSize *clone() { return new CVonBertalanffyAgeSize(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  double getMeanSize(double &age);
-  double getMeanWeight(double &age);
-  double getCV(double &age);
-  double getCVFromSize(double &size);
-  double getProportionInLengthBin(double &age, double &LowerBin, double &UpperBin);
-  bool getByLength() { return bByLength; };
+  CAgeSize* clone() { return new CVonBertalanffyAgeSize(*this); }
+  void      validate();
+  void      build();
+  void      rebuild();
+  double    getMeanSize(double& age);
+  double    getMeanWeight(double& age);
+  double    getCV(double& age);
+  double    getCVFromSize(double& size);
+  double    getProportionInLengthBin(double& age, double& LowerBin, double& UpperBin);
+  bool      getByLength() { return bByLength; };
 
 protected:
-  double dLinf;
-  double dK;
-  double dT0;
-  double dCV;
-  double getGrowthProportion();
-  std::string sDistribution;
-  bool bByLength;
-  string sSizeWeight;
-  CSizeWeight *pSizeWeight;
-  double getMeanWeightFromSize(double &size, double &cv);
-  double getSd(double &age);
-  CTimeStepManager *pTimeStepManager;
-  CInitializationPhaseManager *pInitializationPhaseManager;
-  CInitializationPhase *pInitializationPhase;
+  double                       dLinf;
+  double                       dK;
+  double                       dT0;
+  double                       dCV;
+  double                       getGrowthProportion();
+  std::string                  sDistribution;
+  bool                         bByLength;
+  string                       sSizeWeight;
+  CSizeWeight*                 pSizeWeight;
+  double                       getMeanWeightFromSize(double& size, double& cv);
+  double                       getSd(double& age);
+  CTimeStepManager*            pTimeStepManager;
+  CInitializationPhaseManager* pInitializationPhaseManager;
+  CInitializationPhase*        pInitializationPhase;
 };
 
 #endif /* CVONBERTALANFFYAGESIZE_H_ */

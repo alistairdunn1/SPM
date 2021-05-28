@@ -16,24 +16,23 @@
 //
 //
 //**********************************************************************
-class CIncreasingSelectivity : public CCachedSelectivity
-{
+class CIncreasingSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CIncreasingSelectivity();
   virtual ~CIncreasingSelectivity();
-  CSelectivity *clone() { return new CIncreasingSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CIncreasingSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions
   double calculateResult(int Age);
 
   // Variables
-  int iL;
-  int iH;
+  int            iL;
+  int            iH;
   vector<double> vVs;
-  double dAlpha;
+  double         dAlpha;
 };
 
 #endif /* CINCREASINGSELECTIVITY_H_ */

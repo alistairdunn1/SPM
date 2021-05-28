@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CTimeStepFactory
-{
+class CTimeStepFactory {
 public:
   // Functions
-  static CTimeStep *buildTimeStep(string type, bool registerWithManager = true);
+  static CTimeStep* buildTimeStep(string type, bool registerWithManager = true);
 
 private:
   // Functions

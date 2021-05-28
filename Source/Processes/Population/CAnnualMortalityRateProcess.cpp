@@ -11,25 +11,24 @@
 #include <boost/lexical_cast.hpp>
 
 // Local headers
-#include "CAnnualMortalityRateProcess.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../TimeSteps/CTimeStepManager.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/ForEach.h"
-#include "../../Helpers/CComparer.h"
+#include "CAnnualMortalityRateProcess.h"
 
 //**********************************************************************
 // CAnnualMortalityRateProcess::CAnnualMortalityRateProcess()
 // Default constructor
 //**********************************************************************
-CAnnualMortalityRateProcess::CAnnualMortalityRateProcess()
-{
+CAnnualMortalityRateProcess::CAnnualMortalityRateProcess() {
   // Variables
-  pLayer = 0;
-  sType = PARAM_ANNUAL_MORTALITY_RATE;
+  pLayer         = 0;
+  sType          = PARAM_ANNUAL_MORTALITY_RATE;
   bRequiresMerge = false;
 
   // Register user allowed variables
@@ -44,11 +43,8 @@ CAnnualMortalityRateProcess::CAnnualMortalityRateProcess()
 // void CAnnualMortalityRateProcess::validate()
 // Validate the process
 //**********************************************************************
-void CAnnualMortalityRateProcess::validate()
-{
-  try
-  {
-
+void CAnnualMortalityRateProcess::validate() {
+  try {
     // Get our variables
     sLayer = pParameterList->getString(PARAM_LAYER, true, "");
     pParameterList->fillVector(vYears, PARAM_YEARS);
@@ -61,14 +57,12 @@ void CAnnualMortalityRateProcess::validate()
 
     // local validation
     // M must be non-negative
-    for (int i = 0; i < (int)vMortalityRates.size(); ++i)
-    {
+    for (int i = 0; i < (int)vMortalityRates.size(); ++i) {
       if (vMortalityRates[i] < 0.0)
         CError::errorLessThan(PARAM_AGE, PARAM_ZERO);
     }
 
-    for (int i = 0; i < (int)vMortalityRates.size(); ++i)
-    {
+    for (int i = 0; i < (int)vMortalityRates.size(); ++i) {
       registerEstimable(PARAM_M, i, &vMortalityRates[i]);
     }
 
@@ -80,15 +74,12 @@ void CAnnualMortalityRateProcess::validate()
 
     // Check unique years
     map<int, int> mYears;
-    foreach (int Year, vYears)
-    {
+    foreach (int Year, vYears) {
       mYears[Year]++;
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEARS, boost::lexical_cast<string>(Year));
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAnnualMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,10 +89,8 @@ void CAnnualMortalityRateProcess::validate()
 // void CAnnualMortalityRateProcess::build()
 // Build this process
 //**********************************************************************
-void CAnnualMortalityRateProcess::build()
-{
-  try
-  {
+void CAnnualMortalityRateProcess::build() {
+  try {
     // Base
     CProcess::build();
 
@@ -115,9 +104,7 @@ void CAnnualMortalityRateProcess::build()
 
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAnnualMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -127,34 +114,28 @@ void CAnnualMortalityRateProcess::build()
 // void CAnnualMortalityRateProcess::execute()
 // Execute this process
 //**********************************************************************
-void CAnnualMortalityRateProcess::execute()
-{
+void CAnnualMortalityRateProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base Execute
     CProcess::execute();
 
     // Check if we run this year
     double dM = 0.0;
-    for (int i = 0; i < (int)vYears.size(); ++i)
-    {
-      if (pTimeStepManager->getCurrentYear() == vYears[i])
-      {
+    for (int i = 0; i < (int)vYears.size(); ++i) {
+      if (pTimeStepManager->getCurrentYear() == vYears[i]) {
         dM = vMortalityRates[i];
         break;
       }
     }
 
     if (CComparer::isEqual(dM, 0.0))
-      return; // Don't run this year
+      return;  // Don't run this year
 
     // Loop through World Grid (i, j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
           continue;
@@ -163,23 +144,19 @@ void CAnnualMortalityRateProcess::execute()
         if (pLayer != 0)
           dLayerValue = pLayer->getValue(i, j);
 
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int m = 0; m < iBaseColCount; ++m)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int m = 0; m < iBaseColCount; ++m) {
             double dCurrent = pBaseSquare->getValue(vCategoryIndex[k], m);
             dCurrent *= (1.0 - exp(-dM * dLayerValue)) * vSelectivityIndex[k]->getResult(m);
 
             pBaseSquare->subValue(vCategoryIndex[k], m, dCurrent);
-          } // for m
-        }   // for k
-      }     // for j
-    }       // for i
+          }  // for m
+        }    // for k
+      }      // for j
+    }        // for i
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAnnualMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -190,6 +167,4 @@ void CAnnualMortalityRateProcess::execute()
 // CAnnualMortalityRateProcess::~CAnnualMortalityRateProcess()
 // Destructor
 //**********************************************************************
-CAnnualMortalityRateProcess::~CAnnualMortalityRateProcess()
-{
-}
+CAnnualMortalityRateProcess::~CAnnualMortalityRateProcess() {}

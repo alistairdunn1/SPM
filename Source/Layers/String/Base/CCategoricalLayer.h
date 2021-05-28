@@ -16,21 +16,20 @@
 //
 //
 //**********************************************************************
-class CCategoricalLayer : public CLayer
-{
+class CCategoricalLayer : public CLayer {
 public:
   // Functions
   CCategoricalLayer();
   virtual ~CCategoricalLayer();
-  int countValidSpaces();
-  virtual void setValue(int RowIndex, int ColIndex, string Value);
+  int            countValidSpaces();
+  virtual void   setValue(int RowIndex, int ColIndex, string Value);
   virtual string getValue(int RowIndex, int ColIndex) = 0;
-  virtual void validate();
-  virtual void build() = 0;
+  virtual void   validate();
+  virtual void   build() = 0;
 
 protected:
   // Variables
-  double **pGrid;
+  double** pGrid;
 };
 
 #endif /*CCATEGORICALLAYER_H_*/

@@ -10,9 +10,9 @@
 #define CFILEREPORT_H_
 
 // Global Headers
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <string>
 
 // Local headers
 #include "../../CReport.h"
@@ -28,26 +28,25 @@ using std::streambuf;
 //
 //
 //**********************************************************************
-class CFileReport : public CReport
-{
+class CFileReport : public CReport {
 public:
   // Functions
   CFileReport();
   virtual ~CFileReport();
   virtual void validate();
   virtual void build() { CReport::build(); };
-  void start();
-  void end();
+  void         start();
+  void         end();
 
 protected:
   // Variable
-  string sFileName;
-  string sFullFileName;
-  string sLastSuffix;
-  bool bOverwrite;
-  streambuf *sCoutBackup;
-  ofstream *fFile;
-  bool bStartedWrite;
+  string     sFileName;
+  string     sFullFileName;
+  string     sLastSuffix;
+  bool       bOverwrite;
+  streambuf* sCoutBackup;
+  ofstream*  fFile;
+  bool       bStartedWrite;
 };
 
 #endif /* CFILEREPORT_H_ */

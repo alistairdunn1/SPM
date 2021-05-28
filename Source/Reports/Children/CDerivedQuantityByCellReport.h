@@ -19,20 +19,19 @@ class CDerivedQuantityByCell;
 //
 //
 //**********************************************************************
-class CDerivedQuantityByCellReport : public CFileReport
-{
+class CDerivedQuantityByCellReport : public CFileReport {
 public:
   CDerivedQuantityByCellReport();
   virtual ~CDerivedQuantityByCellReport();
-  CReport *clone() { return new CDerivedQuantityByCellReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CDerivedQuantityByCellReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sDerivedQuantityByCell;
-  CDerivedQuantityByCell *pDerivedQuantityByCell;
-  bool bPrintInitialisation;
+  string                  sDerivedQuantityByCell;
+  CDerivedQuantityByCell* pDerivedQuantityByCell;
+  bool                    bPrintInitialisation;
 };
 
 #endif /* CDERIVEDQUANTITYBYCELLREPORT_H_ */

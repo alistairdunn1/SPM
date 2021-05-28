@@ -9,18 +9,17 @@
 
 // Local Headers
 #include "CGammaDiffCallback.h"
+
+#include "../../Estimates/CEstimate.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "../../ObjectiveFunction/CObjectiveFunction.h"
 #include "../../RuntimeThread/CRuntimeThread.h"
-#include "../../Estimates/CEstimateManager.h"
-#include "../../Estimates/CEstimate.h"
 
 //**********************************************************************
 // CGammaDiffCallback::CGammaDiffCallback()
 // Default Constructor
 //**********************************************************************
-CGammaDiffCallback::CGammaDiffCallback()
-{
-
+CGammaDiffCallback::CGammaDiffCallback() {
   // Vars
   pEstimateManager = CEstimateManager::Instance();
 }
@@ -29,24 +28,20 @@ CGammaDiffCallback::CGammaDiffCallback()
 // double CGammaDiffCallback::operator()(const vector<double>& Parameters)
 // Operatior() for Minimiser CallBack
 //**********************************************************************
-double CGammaDiffCallback::operator()(const vector<double> &Parameters)
-{
-
+double CGammaDiffCallback::operator()(const vector<double>& Parameters) {
   // Update our Components with the New Parameters
   int iCount = pEstimateManager->getEnabledEstimateCount();
-  for (int i = 0; i < iCount; ++i)
-  {
+  for (int i = 0; i < iCount; ++i) {
     pEstimateManager->getEnabledEstimate(i)->setValue(Parameters[i]);
   }
 
-  CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
+  CObjectiveFunction* pObjectiveFunction = CObjectiveFunction::Instance();
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Re-Run
-    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+    CRuntimeThread* pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
     pThread->startModel();
 
@@ -54,9 +49,7 @@ double CGammaDiffCallback::operator()(const vector<double> &Parameters)
     pObjectiveFunction->execute();
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBetaDiffCallback.operator()->" + Ex;
     throw Ex;
   }
@@ -70,6 +63,4 @@ double CGammaDiffCallback::operator()(const vector<double> &Parameters)
 // CGammaDiffCallback::~CGammaDiffCallback()
 // Default Destructor
 //**********************************************************************
-CGammaDiffCallback::~CGammaDiffCallback()
-{
-}
+CGammaDiffCallback::~CGammaDiffCallback() {}

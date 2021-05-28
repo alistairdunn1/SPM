@@ -9,19 +9,19 @@
 
 // Local headers
 #include "CSizeWeightReport.h"
-#include "../../AgeSize/CAgeSizeManager.h"
+
 #include "../../AgeSize/CAgeSize.h"
+#include "../../AgeSize/CAgeSizeManager.h"
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CSizeWeightReport::CSizeWeightReport()
 // Constructor
 //**********************************************************************
-CSizeWeightReport::CSizeWeightReport()
-{
+CSizeWeightReport::CSizeWeightReport() {
   // Variables
   eExecutionState = STATE_FINALIZATION;
-  pAgeSize = 0;
+  pAgeSize        = 0;
 
   // Register allowed
   pParameterList->registerAllowed(PARAM_AGE_SIZE);
@@ -32,11 +32,8 @@ CSizeWeightReport::CSizeWeightReport()
 // void CSizeWeightReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CSizeWeightReport::validate()
-{
-  try
-  {
-
+void CSizeWeightReport::validate() {
+  try {
     sAgeSize = pParameterList->getString(PARAM_AGE_SIZE);
     // Get our list of sizes to evaluate
     pParameterList->fillVector(vSizeList, PARAM_SIZES);
@@ -45,14 +42,11 @@ void CSizeWeightReport::validate()
     CFileReport::validate();
 
     // Local validation
-    for (int i = 0; i < (int)vSizeList.size(); ++i)
-    {
+    for (int i = 0; i < (int)vSizeList.size(); ++i) {
       if (vSizeList[i] < 0)
         CError::errorLessThan(PARAM_SIZES, PARAM_ZERO);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSizeWeightReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,25 +56,20 @@ void CSizeWeightReport::validate()
 // void CSizeWeightReport::build()
 // Build our Report
 //**********************************************************************
-void CSizeWeightReport::build()
-{
-  try
-  {
+void CSizeWeightReport::build() {
+  try {
     // Parent
     CFileReport::build();
 
     // Get our relationship
-    CAgeSizeManager *pManager = CAgeSizeManager::Instance();
-    pAgeSize = pManager->getAgeSize(sAgeSize);
+    CAgeSizeManager* pManager = CAgeSizeManager::Instance();
+    pAgeSize                  = pManager->getAgeSize(sAgeSize);
 
     bByLength = pAgeSize->getByLength();
-    if (!bByLength)
-    {
+    if (!bByLength) {
       CError::error((string)PARAM_AGE_SIZE + "." + (string)PARAM_BY_LENGTH + (string) " = false is not supported for " + (string)PARAM_SIZE_WEIGHT + (string) " reports.");
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSizeWeightReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -90,11 +79,8 @@ void CSizeWeightReport::build()
 // void CSizeWeightReport::execute()
 // Execute
 //**********************************************************************
-void CSizeWeightReport::execute()
-{
-  try
-  {
-
+void CSizeWeightReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       return;
@@ -107,27 +93,22 @@ void CSizeWeightReport::execute()
     cout << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << sAgeSize << "\n";
 
     cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
-    for (int i = 0; i < ((int)vSizeList.size() - 1); ++i)
-    {
+    for (int i = 0; i < ((int)vSizeList.size() - 1); ++i) {
       cout << vSizeList[i] << CONFIG_SPACE_SEPARATOR;
     }
     cout << vSizeList[vSizeList.size() - 1] << "\n";
 
     cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
-    for (int i = 0; i < ((int)vSizeList.size() - 1); ++i)
-    {
+    for (int i = 0; i < ((int)vSizeList.size() - 1); ++i) {
       dCV = pAgeSize->getCVFromSize(vSizeList[i]);
       cout << pAgeSize->getMeanWeightFromSize(vSizeList[i], dCV) << CONFIG_SPACE_SEPARATOR;
     }
     dCV = pAgeSize->getCVFromSize(vSizeList[vSizeList.size() - 1]);
     cout << pAgeSize->getMeanWeightFromSize(vSizeList[vSizeList.size() - 1], dCV) << "\n";
-    cout << CONFIG_END_REPORT << "\n"
-         << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSizeWeightReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -137,6 +118,4 @@ void CSizeWeightReport::execute()
 // CSizeWeightReport::~CSizeWeightReport()
 // Destuctor
 //**********************************************************************
-CSizeWeightReport::~CSizeWeightReport()
-{
-}
+CSizeWeightReport::~CSizeWeightReport() {}

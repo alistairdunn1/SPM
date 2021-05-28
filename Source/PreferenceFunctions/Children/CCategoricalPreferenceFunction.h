@@ -19,28 +19,27 @@ class CCategoricalLayer;
 //
 //
 //**********************************************************************
-class CCategoricalPreferenceFunction : public CPreferenceFunction
-{
+class CCategoricalPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CCategoricalPreferenceFunction();
   virtual ~CCategoricalPreferenceFunction();
-  CPreferenceFunction *clone() { return new CCategoricalPreferenceFunction(*this); }
-  vector<double> getValues() { return vValues; }
-  vector<string> getLabels() { return vLabels; }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build() override;
-  bool getIsStatic();
+  CPreferenceFunction* clone() { return new CCategoricalPreferenceFunction(*this); }
+  vector<double>       getValues() { return vValues; }
+  vector<string>       getLabels() { return vLabels; }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build() override;
+  bool                 getIsStatic();
 
 protected:
   // Variables
-  vector<double> vValues;
-  vector<string> vLabels;
-  vector<string> vCategories;
-  vector<string> vSelectivities;
-  string sLayerValue;
-  CCategoricalLayer *pLayer;
+  vector<double>     vValues;
+  vector<string>     vLabels;
+  vector<string>     vCategories;
+  vector<string>     vSelectivities;
+  string             sLayerValue;
+  CCategoricalLayer* pLayer;
 };
 
 #endif /*CCATEGORICALPREFERENCEFUNCTION_H_*/

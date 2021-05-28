@@ -15,16 +15,14 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(PseudoLikelihood)
-{
-
+BOOST_AUTO_TEST_CASE(PseudoLikelihood) {
   // Generate data
   vector<double> scores;
   vector<double> expected;
   vector<double> observed;
   vector<double> errorValue;
   vector<double> processError;
-  double delta = 1e-05;
+  double         delta = 1e-05;
 
   // Test case 1
   expected.push_back(0.1);
@@ -63,7 +61,7 @@ BOOST_AUTO_TEST_CASE(PseudoLikelihood)
   processError.push_back(15);
 
   // Run the likelihood
-  CLikelihood *pLikelihood_PAA = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_PSEUDO);
+  CLikelihood* pLikelihood_PAA = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_PSEUDO);
   pLikelihood_PAA->getResult(scores, expected, observed, errorValue, processError, delta);
   delete pLikelihood_PAA;
 
@@ -77,7 +75,7 @@ BOOST_AUTO_TEST_CASE(PseudoLikelihood)
   BOOST_CHECK_EQUAL(0.0, scores[6]);
 
   // Run the likelihood
-  CLikelihood *pLikelihood_AB = CLikelihoodFactory::buildLikelihood(PARAM_ABUNDANCE, PARAM_PSEUDO);
+  CLikelihood* pLikelihood_AB = CLikelihoodFactory::buildLikelihood(PARAM_ABUNDANCE, PARAM_PSEUDO);
   pLikelihood_AB->getResult(scores, expected, observed, errorValue, processError, delta);
   delete pLikelihood_AB;
 
@@ -91,7 +89,7 @@ BOOST_AUTO_TEST_CASE(PseudoLikelihood)
   BOOST_CHECK_EQUAL(0.0, scores[6]);
 
   // Run the likelihood
-  CLikelihood *pLikelihood_BIO = CLikelihoodFactory::buildLikelihood(PARAM_BIOMASS, PARAM_PSEUDO);
+  CLikelihood* pLikelihood_BIO = CLikelihoodFactory::buildLikelihood(PARAM_BIOMASS, PARAM_PSEUDO);
   pLikelihood_BIO->getResult(scores, expected, observed, errorValue, processError, delta);
   delete pLikelihood_BIO;
 
@@ -105,7 +103,7 @@ BOOST_AUTO_TEST_CASE(PseudoLikelihood)
   BOOST_CHECK_EQUAL(0.0, scores[6]);
 
   // Run the likelihood
-  CLikelihood *pLikelihood_PBC = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_PSEUDO);
+  CLikelihood* pLikelihood_PBC = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_PSEUDO);
   pLikelihood_PBC->getResult(scores, expected, observed, errorValue, processError, delta);
   delete pLikelihood_PBC;
 

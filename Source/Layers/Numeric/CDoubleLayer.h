@@ -16,19 +16,18 @@
 //
 //
 //**********************************************************************
-class CDoubleLayer : public CNumericLayer
-{
+class CDoubleLayer : public CNumericLayer {
 public:
   // Functions
   CDoubleLayer();
   virtual ~CDoubleLayer();
-  CLayer *clone() { return (new CDoubleLayer(*this)); }
-  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  void setValue(int RowIndex, int ColIndex, double Value);
-  double getLayerMin();
-  double getLayerMax();
-  void validate();
-  void build();
+  CLayer* clone() { return (new CDoubleLayer(*this)); }
+  double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  void    setValue(int RowIndex, int ColIndex, double Value);
+  double  getLayerMin();
+  double  getLayerMax();
+  void    validate();
+  void    build();
 
 protected:
   // Variables

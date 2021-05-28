@@ -21,24 +21,23 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CAnnualMortalityRateProcess : public CProcess
-{
+class CAnnualMortalityRateProcess : public CProcess {
 public:
   // Functions
   CAnnualMortalityRateProcess();
   virtual ~CAnnualMortalityRateProcess();
-  CProcess *clone() { return new CAnnualMortalityRateProcess(*this); }
-  void validate();
-  void build();
-  void execute();
+  CProcess* clone() { return new CAnnualMortalityRateProcess(*this); }
+  void      validate();
+  void      build();
+  void      execute();
 
 protected:
   // Variables
-  vector<int> vYears;
-  vector<double> vMortalityRates;
-  string sLayer;
-  CNumericLayer *pLayer;
-  CTimeStepManager *pTimeStepManager;
+  vector<int>       vYears;
+  vector<double>    vMortalityRates;
+  string            sLayer;
+  CNumericLayer*    pLayer;
+  CTimeStepManager* pTimeStepManager;
 };
 
 #endif /* CANNUALMORTALITYRATEPROCESS_H_ */

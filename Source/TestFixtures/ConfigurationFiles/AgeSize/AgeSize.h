@@ -10,13 +10,13 @@
 #ifndef AGESIZE_H_
 #define AGESIZE_H_
 
-const string age_size_vonB =
-    "@age_size vonB\n"
-    "type von_bertalanffy\n"
-    "linf 100\n"
-    "k 0.2\n"
-    "t0 0.0\n"
-    "size_weight none\n";
+const string age_size_vonB
+    = "@age_size vonB\n"
+      "type von_bertalanffy\n"
+      "linf 100\n"
+      "k 0.2\n"
+      "t0 0.0\n"
+      "size_weight none\n";
 
 #endif /* AGESIZE_H_ */
 #endif /* TEST */

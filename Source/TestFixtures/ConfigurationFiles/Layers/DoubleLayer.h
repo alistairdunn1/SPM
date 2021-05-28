@@ -10,15 +10,15 @@
 #ifndef DOUBLELAYER_H_
 #define DOUBLELAYER_H_
 
-const string numeric =
-    "@layer double\n"
-    "type numeric\n"
-    "data 2\n";
+const string numeric
+    = "@layer double\n"
+      "type numeric\n"
+      "data 2\n";
 
-const string numeric_one =
-    "@layer double_one\n"
-    "type numeric\n"
-    "data 1\n";
+const string numeric_one
+    = "@layer double_one\n"
+      "type numeric\n"
+      "data 1\n";
 
 #endif /* DOUBLELAYER_H_ */
 #endif /* TEST */

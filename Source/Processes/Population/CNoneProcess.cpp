@@ -8,18 +8,17 @@
 
 // Local Headers
 #include "CNoneProcess.h"
-#include "../../Helpers/CError.h"
+
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CNoneProcess::CNoneProcess()
 // Default Constructor
 //**********************************************************************
-CNoneProcess::CNoneProcess()
-{
-
+CNoneProcess::CNoneProcess() {
   // Variables
-  sType = PARAM_NONE;
+  sType          = PARAM_NONE;
   bRequiresMerge = false;
 }
 
@@ -27,25 +26,19 @@ CNoneProcess::CNoneProcess()
 // void CNoneProcess:validate()
 // Validate This
 //**********************************************************************
-void CNoneProcess::validate()
-{
-}
+void CNoneProcess::validate() {}
 
 //**********************************************************************
 // void CNoneProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CNoneProcess::build()
-{
-}
+void CNoneProcess::build() {}
 
 //**********************************************************************
 // void CNoneProcess::execute()
 // execute this Process
 //**********************************************************************
-void CNoneProcess::execute()
-{
-
+void CNoneProcess::execute() {
   CProcess::execute();
 }
 
@@ -53,6 +46,4 @@ void CNoneProcess::execute()
 // CNoneProcess::~CNoneProcess()
 // Default De-Constructor
 //**********************************************************************
-CNoneProcess::~CNoneProcess()
-{
-}
+CNoneProcess::~CNoneProcess() {}

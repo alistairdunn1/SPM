@@ -9,29 +9,26 @@
 #ifdef TEST
 
 // Global Includes
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <string>
-#include <boost/lexical_cast.hpp>
 
 // Local Includes
-#include "../Factory/CSelectivityFactory.h"
-#include "../../TestFixtures/CWorld_Fixture.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../TestFixtures/CWorld_Fixture.h"
+#include "../Factory/CSelectivityFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(AllValuesSelectivity, CWorld_Fixture)
-{
-
-  CSelectivity *pSelectivity = 0;
+BOOST_FIXTURE_TEST_CASE(AllValuesSelectivity, CWorld_Fixture) {
+  CSelectivity* pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_ALL_VALUES, false));
 
   pSelectivity->addParameter(PARAM_LABEL, "selectivity");
 
-  for (int i = 0; i < 20; ++i)
-    pSelectivity->addParameter(PARAM_V, boost::lexical_cast<string>(i * 2));
+  for (int i = 0; i < 20; ++i) pSelectivity->addParameter(PARAM_V, boost::lexical_cast<string>(i * 2));
 
   pSelectivity->validate();
   BOOST_REQUIRE_NO_THROW(pSelectivity->validate());

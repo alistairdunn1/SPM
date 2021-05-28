@@ -17,36 +17,26 @@
 // CDerivedQuantity::CDerivedQuantity()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantity::CDerivedQuantity() : iCurrentInitialisationPhase(0)
-{
-}
+CDerivedQuantity::CDerivedQuantity() : iCurrentInitialisationPhase(0) {}
 
 //**********************************************************************
 // CDerivedQuantity::~CDerivedQuantity()
 // Destructor
 //**********************************************************************
-CDerivedQuantity::~CDerivedQuantity()
-{
-}
+CDerivedQuantity::~CDerivedQuantity() {}
 
 //**********************************************************************
 // double CDerivedQuantity::getValue(int offset)
 // Get Value From our Derived Quantity
 //**********************************************************************
-double CDerivedQuantity::getValue(int offset)
-{
-
+double CDerivedQuantity::getValue(int offset) {
   int phasesCrossed = 0;
 
-  if (vValues.size() > 0)
-  {
-    if (offset >= (int)vValues.size())
-    {
+  if (vValues.size() > 0) {
+    if (offset >= (int)vValues.size()) {
       offset -= vValues.size();
       phasesCrossed = 1;
-    }
-    else
-    {
+    } else {
       return vValues[vValues.size() - (offset + 1)];
     }
   }
@@ -63,27 +53,19 @@ double CDerivedQuantity::getValue(int offset)
    * backwards through the initialisation values
    */
   vector<vector<double>>::reverse_iterator vvIter;
-  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter)
-  {
-
-    if (offset >= (int)vvIter->size())
-    {
+  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter) {
+    if (offset >= (int)vvIter->size()) {
       /**
        * If we have already crossed a phase then we want to return the first element
        * of the new phase, we cannot ever cross more than 1 phase
        */
-      if (phasesCrossed == 1)
-      {
+      if (phasesCrossed == 1) {
         return (*vvIter->begin());
-      }
-      else
-      {
+      } else {
         offset -= vvIter->size();
         phasesCrossed = 1;
       }
-    }
-    else
-    {
+    } else {
       return vvIter->at(vvIter->size() - (offset + 1));
     }
   }

@@ -16,13 +16,12 @@
 //
 //
 //**********************************************************************
-class CSpatialMapReport : public CFileReport
-{
+class CSpatialMapReport : public CFileReport {
 public:
   CSpatialMapReport();
   virtual ~CSpatialMapReport();
-  CReport *clone() { return new CSpatialMapReport(*this); }
-  void execute();
+  CReport* clone() { return new CSpatialMapReport(*this); }
+  void     execute();
 };
 
 #endif /* CSPATIALMAPREPORT_H_ */

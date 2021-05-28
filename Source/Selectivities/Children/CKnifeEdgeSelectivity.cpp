@@ -9,14 +9,14 @@
 
 // Local Headers
 #include "CKnifeEdgeSelectivity.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CKnifeEdgeSelectivity::CKnifeEdgeSelectivity()
 // Default Constructor
 //**********************************************************************
-CKnifeEdgeSelectivity::CKnifeEdgeSelectivity()
-{
+CKnifeEdgeSelectivity::CKnifeEdgeSelectivity() {
   // Register estimable
   registerEstimable(PARAM_E, &dE);
   registerEstimable(PARAM_ALPHA, &dAlpha);
@@ -30,13 +30,10 @@ CKnifeEdgeSelectivity::CKnifeEdgeSelectivity()
 // void CKnifeEdgeSelectivity::validate()
 // validate
 //**********************************************************************
-void CKnifeEdgeSelectivity::validate()
-{
-  try
-  {
-
+void CKnifeEdgeSelectivity::validate() {
+  try {
     // Populate our variable
-    dE = pParameterList->getDouble(PARAM_E);
+    dE     = pParameterList->getDouble(PARAM_E);
     dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
     // Validate parent
@@ -45,9 +42,7 @@ void CKnifeEdgeSelectivity::validate()
     // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CKnifeedgeSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -57,11 +52,9 @@ void CKnifeEdgeSelectivity::validate()
 // double CKnifeEdgeSelectivity::getResult(int Param)
 // get Result
 //**********************************************************************
-double CKnifeEdgeSelectivity::getResult(int Param)
-{
+double CKnifeEdgeSelectivity::getResult(int Param) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
     if ((Param + pWorld->getMinAge()) > pWorld->getMaxAge())
       CError::errorTooHigh(PARAM_PARAMETER);
 #endif
@@ -73,9 +66,7 @@ double CKnifeEdgeSelectivity::getResult(int Param)
       return (dAlpha);
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CKnifeedgeSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,6 +78,4 @@ double CKnifeEdgeSelectivity::getResult(int Param)
 // CKnifeEdgeSelectivity::~CKnifeEdgeSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CKnifeEdgeSelectivity::~CKnifeEdgeSelectivity()
-{
-}
+CKnifeEdgeSelectivity::~CKnifeEdgeSelectivity() {}

@@ -9,21 +9,22 @@
 #ifdef TEST
 
 // Headers
-#include <boost/test/unit_test.hpp>
-#include <string>
-#include <iostream>
-
 #include "CEstimateInfo.h"
+
+#include <boost/test/unit_test.hpp>
+#include <iostream>
+#include <string>
+
+#include "../TestFixtures/C1x1_Fixture.h"
+#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../TestFixtures/ConfigurationFiles/Estimation/EstimateInfo.h"
+#include "../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
+#include "../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
+#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "CEstimate.h"
 #include "CEstimateManager.h"
-#include "../TestFixtures/C1x1_Fixture.h"
-#include "../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
-#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
-#include "../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
-#include "../TestFixtures/ConfigurationFiles/Estimation/EstimateInfo.h"
 
 // Namespaces
 using namespace std;
@@ -32,9 +33,7 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(CEstimateInfo_1_Estimate, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_1_Estimate, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -48,11 +47,11 @@ BOOST_FIXTURE_TEST_CASE(CEstimateInfo_1_Estimate, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1500.0, 1e-9);
 
-  CEstimateManager *pManager = CEstimateManager::Instance();
+  CEstimateManager* pManager = CEstimateManager::Instance();
 
   BOOST_REQUIRE_EQUAL(pManager->getEnabledEstimateCount(), 1);
 }
@@ -61,9 +60,7 @@ BOOST_FIXTURE_TEST_CASE(CEstimateInfo_1_Estimate, C1x1_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(CEstimateInfo_2_Estimates, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_2_Estimates, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -77,11 +74,11 @@ BOOST_FIXTURE_TEST_CASE(CEstimateInfo_2_Estimates, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1500.0, 1e-9);
 
-  CEstimateManager *pManager = CEstimateManager::Instance();
+  CEstimateManager* pManager = CEstimateManager::Instance();
 
   BOOST_REQUIRE_EQUAL(pManager->getEnabledEstimateCount(), 2);
 }
@@ -90,9 +87,7 @@ BOOST_FIXTURE_TEST_CASE(CEstimateInfo_2_Estimates, C1x1_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(CEstimateInfo_Vector, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(CEstimateInfo_Vector, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -106,11 +101,11 @@ BOOST_FIXTURE_TEST_CASE(CEstimateInfo_Vector, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1500.0, 1e-9);
 
-  CEstimateManager *pManager = CEstimateManager::Instance();
+  CEstimateManager* pManager = CEstimateManager::Instance();
 
   BOOST_REQUIRE_EQUAL(pManager->getEnabledEstimateCount(), 2);
 }

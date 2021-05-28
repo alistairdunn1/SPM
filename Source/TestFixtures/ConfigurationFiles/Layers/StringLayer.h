@@ -10,12 +10,12 @@
 #ifndef STRINGLAYER_H_
 #define STRINGLAYER_H_
 
-const string string_layer =
-    "@layer string_layer\n"
-    "type categorical\n"
-    "data AreaA AreaA AreaA\n"
-    "data AreaB AreaB AreaC\n"
-    "data AreaD AreaE AreaF\n";
+const string string_layer
+    = "@layer string_layer\n"
+      "type categorical\n"
+      "data AreaA AreaA AreaA\n"
+      "data AreaB AreaB AreaC\n"
+      "data AreaD AreaE AreaF\n";
 
 #endif /* STRINGLAYER_H_ */
 #endif /* TEST */

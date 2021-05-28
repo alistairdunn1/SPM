@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CDerivedQuantityLayer.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -20,12 +21,10 @@
 // CDerivedQuantityLayer::CDerivedQuantityLayer()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantityLayer::CDerivedQuantityLayer()
-{
-
+CDerivedQuantityLayer::CDerivedQuantityLayer() {
   // Variables
-  sType = PARAM_DERIVED_QUANTITY;
-  pWorld = CWorld::Instance();
+  sType     = PARAM_DERIVED_QUANTITY;
+  pWorld    = CWorld::Instance();
   bIsStatic = false;
 
   // Register User allowed parameters
@@ -37,23 +36,19 @@ CDerivedQuantityLayer::CDerivedQuantityLayer()
 // void CDerivedQuantityLayer::validate()
 // Validate
 //**********************************************************************
-void CDerivedQuantityLayer::validate()
-{
-  try
-  {
+void CDerivedQuantityLayer::validate() {
+  try {
     // Base Validate
     CNumericLayer::validate();
 
     // Populate our Parameters
     sDerivedQuantity = pParameterList->getString(PARAM_DERIVED_QUANTITY);
-    iOffset = pParameterList->getInt(PARAM_YEAR_OFFSET);
+    iOffset          = pParameterList->getInt(PARAM_YEAR_OFFSET);
 
-    //Check iOffset is a non-negative int
+    // Check iOffset is a non-negative int
     if (iOffset < 0)
       CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -63,32 +58,23 @@ void CDerivedQuantityLayer::validate()
 // void CDerivedQuantityLayer::build()
 // Build
 //**********************************************************************
-void CDerivedQuantityLayer::build()
-{
-  try
-  {
-
+void CDerivedQuantityLayer::build() {
+  try {
     // Get our derived layer (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sDerivedQuantity);
 
     // Figure out the order of timesteps
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep())
-    {
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
       iActualOffset = iOffset - 1;
-      if (iActualOffset < 0)
-      {
+      if (iActualOffset < 0) {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
       }
-    }
-    else
-    {
+    } else {
       iActualOffset = iOffset;
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,11 +84,9 @@ void CDerivedQuantityLayer::build()
 // double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
 // get Value
 //**********************************************************************
-double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
-{
+double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     double dResult = pDerivedQuantity->getValue(iActualOffset);
@@ -110,9 +94,7 @@ double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow
     return dResult;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -125,6 +107,4 @@ double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow
 // CDerivedQuantityLayer::~CDerivedQuantityLayer()
 // Default De-Constructor
 //**********************************************************************
-CDerivedQuantityLayer::~CDerivedQuantityLayer()
-{
-}
+CDerivedQuantityLayer::~CDerivedQuantityLayer() {}

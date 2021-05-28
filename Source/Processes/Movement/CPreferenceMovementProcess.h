@@ -20,8 +20,7 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPreferenceMovementProcess : public CMovementProcess
-{
+class CPreferenceMovementProcess : public CMovementProcess {
 public:
   // Typedefs
   typedef vector<vector<vector<vector<double>>>> Vector4D;
@@ -29,21 +28,21 @@ public:
   // Functions
   CPreferenceMovementProcess();
   virtual ~CPreferenceMovementProcess();
-  CProcess *clone() { return (new CPreferenceMovementProcess(*this)); }
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
+  CProcess* clone() { return (new CPreferenceMovementProcess(*this)); }
+  void      validate();
+  void      build();
+  void      rebuild();
+  void      execute();
 
 protected:
   // Variables
-  vector<string> vDirectedProcessList;
-  vector<CPreferenceFunction *> vDirectedProcessIndex;
-  double dRunningTotal;
-  CNumericLayer *pLayer;
-  Vector4D vPreferenceCache;
-  vector<vector<double>> vRunningTotalCache;
-  bool bIsStatic;
+  vector<string>               vDirectedProcessList;
+  vector<CPreferenceFunction*> vDirectedProcessIndex;
+  double                       dRunningTotal;
+  CNumericLayer*               pLayer;
+  Vector4D                     vPreferenceCache;
+  vector<vector<double>>       vRunningTotalCache;
+  bool                         bIsStatic;
 };
 
 #endif /* CPREFERENCEMOVEMENTPROCESS_H_ */

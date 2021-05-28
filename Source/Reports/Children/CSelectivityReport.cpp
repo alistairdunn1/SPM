@@ -9,18 +9,18 @@
 
 // Local headers
 #include "CSelectivityReport.h"
-#include "../../Selectivities/CSelectivityManager.h"
+
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
 
 //**********************************************************************
 // CSelectivityReport::CSelectivityReport()
 // Constructor
 //**********************************************************************
-CSelectivityReport::CSelectivityReport()
-{
+CSelectivityReport::CSelectivityReport() {
   // Variables
   eExecutionState = STATE_FINALIZATION;
-  pSelectivity = 0;
+  pSelectivity    = 0;
 
   // Register allowed
   pParameterList->registerAllowed(PARAM_SELECTIVITY);
@@ -30,20 +30,15 @@ CSelectivityReport::CSelectivityReport()
 // void CSelectivityReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CSelectivityReport::validate()
-{
-  try
-  {
-
+void CSelectivityReport::validate() {
+  try {
     sSelectivity = pParameterList->getString(PARAM_SELECTIVITY);
 
     // Validate parent
     CFileReport::validate();
 
     // Local validation
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSelectivityReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -53,19 +48,15 @@ void CSelectivityReport::validate()
 // void CSelectivityReport::build()
 // Build our Report
 //**********************************************************************
-void CSelectivityReport::build()
-{
-  try
-  {
+void CSelectivityReport::build() {
+  try {
     // Parent
     CFileReport::build();
 
     // Get our selectivity
-    CSelectivityManager *pManager = CSelectivityManager::Instance();
-    pSelectivity = pManager->getSelectivity(sSelectivity);
-  }
-  catch (string &Ex)
-  {
+    CSelectivityManager* pManager = CSelectivityManager::Instance();
+    pSelectivity                  = pManager->getSelectivity(sSelectivity);
+  } catch (string& Ex) {
     Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -75,11 +66,8 @@ void CSelectivityReport::build()
 // void CSelectivityReport::execute()
 // Execute
 //**********************************************************************
-void CSelectivityReport::execute()
-{
-
-  try
-  {
+void CSelectivityReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -97,22 +85,17 @@ void CSelectivityReport::execute()
     cout << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sSelectivity << "\n";
 
     cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
-    for (int i = 1; i < iSpread; ++i)
-      cout << CONFIG_SPACE_SEPARATOR << (i + iMinAge);
+    for (int i = 1; i < iSpread; ++i) cout << CONFIG_SPACE_SEPARATOR << (i + iMinAge);
     cout << "\n";
 
     cout << PARAM_VALUES << CONFIG_RATIO_SEPARATOR << " ";
     cout << pSelectivity->getResult(0);
-    for (int i = 1; i < iSpread; ++i)
-      cout << CONFIG_SPACE_SEPARATOR << pSelectivity->getResult(i);
+    for (int i = 1; i < iSpread; ++i) cout << CONFIG_SPACE_SEPARATOR << pSelectivity->getResult(i);
     cout << "\n";
-    cout << CONFIG_END_REPORT << "\n"
-         << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -122,6 +105,4 @@ void CSelectivityReport::execute()
 // CSelectivityReport::~CSelectivityReport()
 // Destuctor
 //**********************************************************************
-CSelectivityReport::~CSelectivityReport()
-{
-}
+CSelectivityReport::~CSelectivityReport() {}

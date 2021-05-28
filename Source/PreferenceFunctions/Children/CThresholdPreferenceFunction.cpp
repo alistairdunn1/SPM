@@ -9,18 +9,17 @@
 
 // Local Headers
 #include "CThresholdPreferenceFunction.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Helpers/CMath.h"
+
 #include "../../Helpers/CError.h"
+#include "../../Helpers/CMath.h"
 #include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CThresholdPreferenceFunction::CThresholdPreferenceFunction()
-{
-
+CThresholdPreferenceFunction::CThresholdPreferenceFunction() {
   sType = PARAM_THRESHOLD;
 
   // Register estimables
@@ -39,25 +38,20 @@ CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // void CThresholdPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CThresholdPreferenceFunction::validate()
-{
-  try
-  {
-
+void CThresholdPreferenceFunction::validate() {
+  try {
     // Assign local variables
-    dN = pParameterList->getDouble(PARAM_N);
-    dLambda = pParameterList->getDouble(PARAM_LAMBDA);
+    dN         = pParameterList->getDouble(PARAM_N);
+    dLambda    = pParameterList->getDouble(PARAM_LAMBDA);
     sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
 
-    //Local validation
+    // Local validation
     if (dLambda <= 0.0)
       CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -67,20 +61,15 @@ void CThresholdPreferenceFunction::validate()
 // void CThresholdPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CThresholdPreferenceFunction::build()
-{
-  try
-  {
-
+void CThresholdPreferenceFunction::build() {
+  try {
     // Build parent
     CPreferenceFunction::build();
 
     // Get our Layer
-    CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getNumericLayer(sLayerName);
-  }
-  catch (string &Ex)
-  {
+    CLayerManager* pLayerManager = CLayerManager::Instance();
+    pLayer                       = pLayerManager->getNumericLayer(sLayerName);
+  } catch (string& Ex) {
     Ex = "CThreshholdPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -90,14 +79,11 @@ void CThresholdPreferenceFunction::build()
 // double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // Get Result
 //**********************************************************************
-double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
-{
-
+double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     dLayerValue = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
@@ -107,9 +93,7 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
       dRet = 1.0;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CThresholdPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -121,6 +105,4 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
 // CThresholdPreferenceFunction::~CThresholdPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CThresholdPreferenceFunction::~CThresholdPreferenceFunction()
-{
-}
+CThresholdPreferenceFunction::~CThresholdPreferenceFunction() {}

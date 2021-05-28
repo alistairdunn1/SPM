@@ -1,0 +1,92 @@
+# The reports/outputs
+
+@report random_seed
+type random_number_seed
+
+@report spatial-map
+type spatial_map
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report state-0
+type partition
+time_step zero
+years 1986-2015
+
+@report state-1
+type partition
+time_step one
+years 1986-2015
+
+@report state-2
+type partition
+time_step two
+years 1986-2015
+
+@report state-0-biomass
+type partition_biomass
+time_step zero
+years 1986-2015
+
+@report state-1-biomass
+type partition_biomass
+time_step one
+years 1986-2015
+
+{
+@report state-1b-biomass
+type partition_biomass
+time_step oneb
+years 1995-2013
+}
+{
+@report state-2-biomass
+type partition_biomass
+time_step two
+years 1995-2013
+}
+@report SSB
+type derived_quantity
+derived_quantity SSB
+
+@report SSB_layer
+type layer
+layer SSB_layer
+years 1995-2013
+time_step two
+
+@report estimate-summary
+type estimate_summary
+
+@report objective
+type objective_function
+
+{
+@report Maturation
+type selectivity
+selectivity Maturation
+}
+
+@report covariance
+type covariance
+
+@report estimate-mpd
+type estimate_value
+
+@report estimate
+type estimate_value
+file_name MPD.dat
+
+@report Recruitment
+type process
+process Recruitment
+
+@report ageweight
+type age_weight
+age_size VB
+
+@report MCMC
+type MCMC
+file_name MCMC.log

@@ -19,27 +19,26 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CAbundanceObservation : public CObservation
-{
+class CAbundanceObservation : public CObservation {
 public:
   // Functions
   CAbundanceObservation();
   virtual ~CAbundanceObservation();
-  CObservation *clone() { return new CAbundanceObservation(*this); }
-  void validate();
-  void build();
-  void execute();
-  string getType() { return (PARAM_ABUNDANCE); }
-  double getCatchability();
+  CObservation* clone() { return new CAbundanceObservation(*this); }
+  void          validate();
+  void          build();
+  void          execute();
+  string        getType() { return (PARAM_ABUNDANCE); }
+  double        getCatchability();
 
 protected:
   // Variables
   map<string, double> mProportionMatrix;
   map<string, double> mErrorValue;
-  string sCatchability;
-  CCatchability *pCatchability;
-  double dDelta;
-  double dProcessError;
+  string              sCatchability;
+  CCatchability*      pCatchability;
+  double              dDelta;
+  double              dProcessError;
 };
 
 #endif /*CABUNDANCEOBSERVATION_H_*/

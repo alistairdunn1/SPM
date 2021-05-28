@@ -22,13 +22,12 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CCachedSelectivity : public CSelectivity
-{
+class CCachedSelectivity : public CSelectivity {
 public:
   CCachedSelectivity();
   virtual ~CCachedSelectivity();
-  virtual void build();
-  virtual void rebuild();
+  virtual void   build();
+  virtual void   rebuild();
   virtual double getResult(int index);
 
 protected:

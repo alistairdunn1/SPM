@@ -10,26 +10,25 @@
 #define CMULTINOMIALLIKELIHOOD_H_
 
 // Local headers
-#include "../CLikelihood.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../CLikelihood.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CMultinomialLikelihood : public CLikelihood
-{
+class CMultinomialLikelihood : public CLikelihood {
 public:
   // Functions
   CMultinomialLikelihood();
   virtual ~CMultinomialLikelihood();
   double adjustErrorValue(const double processError, const double errorValue);
-  void getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
-                 const vector<double> &errorValue, const vector<double> &processError, const double delta);
-  void simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
-                        const vector<double> &errorValue, const vector<double> &processError, const double delta);
-  double getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
-                         const vector<double> &processError, const vector<double> &errorValue, const double delta);
+  void   getResult(vector<double>& scores, const vector<double>& expected, const vector<double>& observed, const vector<double>& errorValue, const vector<double>& processError,
+                   const double delta);
+  void simulateObserved(const vector<string>& keys, vector<double>& observed, const vector<double>& expected, const vector<double>& errorValue, const vector<double>& processError,
+                        const double delta);
+  double getInitialScore(const vector<string>& keys, const vector<double>& expected, const vector<double>& observed, const vector<double>& processError,
+                         const vector<double>& errorValue, const double delta);
 };
 
 #endif /* CMULTINOMIALLIKELIHOOD_H_ */

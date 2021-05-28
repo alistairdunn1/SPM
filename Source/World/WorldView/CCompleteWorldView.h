@@ -19,19 +19,18 @@ class CWorldSquare;
 //
 //
 //**********************************************************************
-class CCompleteWorldView : public CBaseExecute
-{
+class CCompleteWorldView : public CBaseExecute {
 public:
   CCompleteWorldView();
   virtual ~CCompleteWorldView();
-  CWorldSquare *getSquare() { return pWorldSquare; }
-  void build();
-  void execute();
+  CWorldSquare* getSquare() { return pWorldSquare; }
+  void          build();
+  void          execute();
 
 protected:
   // Variables
-  CWorldSquare *pWorldSquare;
-  vector<CWorldSquare *> vWorldSquares;
+  CWorldSquare*         pWorldSquare;
+  vector<CWorldSquare*> vWorldSquares;
 };
 
 #endif /* CCOMPLETEWORLDVIEW_H_ */

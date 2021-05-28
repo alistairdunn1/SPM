@@ -14,16 +14,15 @@
 //
 //**********************************************************************
 
-class CKrugerSplineSelectivity : public CCachedSelectivity
-{
+class CKrugerSplineSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CKrugerSplineSelectivity();
   virtual ~CKrugerSplineSelectivity();
-  CSelectivity *clone() { return new CKrugerSplineSelectivity(*this); }
-  void validate();
-  void rebuild();
-  void build();
+  CSelectivity* clone() { return new CKrugerSplineSelectivity(*this); }
+  void          validate();
+  void          rebuild();
+  void          build();
 
 protected:
   // Functions
@@ -31,7 +30,7 @@ protected:
   // Variables
   vector<double> vKnots;
   vector<double> vValues;
-  int iN;
+  int            iN;
 };
 
 #endif /*CKRUGERSPLINESELECTIVITY_H_*/

@@ -9,18 +9,17 @@
 
 // Local Headers
 #include "CNormalPreferenceFunction.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 
 //**********************************************************************
 // CNormalPreferenceFunction::CNormalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CNormalPreferenceFunction::CNormalPreferenceFunction()
-{
-
+CNormalPreferenceFunction::CNormalPreferenceFunction() {
   sType = PARAM_NORMAL;
 
   // Register Estimables
@@ -37,25 +36,20 @@ CNormalPreferenceFunction::CNormalPreferenceFunction()
 // void CNormalPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CNormalPreferenceFunction::validate()
-{
-  try
-  {
-
+void CNormalPreferenceFunction::validate() {
+  try {
     // Assign our variables
-    dMu = pParameterList->getDouble(PARAM_MU);
-    dSigma = pParameterList->getDouble(PARAM_SIGMA);
+    dMu        = pParameterList->getDouble(PARAM_MU);
+    dSigma     = pParameterList->getDouble(PARAM_SIGMA);
     sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
 
-    //Local validation
+    // Local validation
     if (dSigma <= 0.0)
       CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,20 +59,15 @@ void CNormalPreferenceFunction::validate()
 // void CNormalPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CNormalPreferenceFunction::build()
-{
-  try
-  {
-
+void CNormalPreferenceFunction::build() {
+  try {
     // Build parent
     CPreferenceFunction::build();
 
     // Get our Layer
-    CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getNumericLayer(sLayerName);
-  }
-  catch (string &Ex)
-  {
+    CLayerManager* pLayerManager = CLayerManager::Instance();
+    pLayer                       = pLayerManager->getNumericLayer(sLayerName);
+  } catch (string& Ex) {
     Ex = "CNormalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -88,23 +77,18 @@ void CNormalPreferenceFunction::build()
 // double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // get Result
 //**********************************************************************
-double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
-{
-
+double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     dLayerValue = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
-    dRet = pow(2.0, -((dLayerValue - dMu) / dSigma * (dLayerValue - dMu) / dSigma));
+    dRet        = pow(2.0, -((dLayerValue - dMu) / dSigma * (dLayerValue - dMu) / dSigma));
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -116,6 +100,4 @@ double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
 // CNormalPreferenceFunction::~CNormalPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CNormalPreferenceFunction::~CNormalPreferenceFunction()
-{
-}
+CNormalPreferenceFunction::~CNormalPreferenceFunction() {}

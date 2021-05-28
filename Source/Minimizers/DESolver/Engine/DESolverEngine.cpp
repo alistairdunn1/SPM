@@ -6,14 +6,15 @@
 //============================================================================
 
 // Global Headers
-#include <memory.h>
-#include <iostream>
 #include <math.h>
+#include <memory.h>
+
+#include <iostream>
 
 // Local Headers
-#include "DESolverEngine.h"
 #include "../../../CConfiguration.h"
 #include "../../../Helpers/CComparer.h"
+#include "DESolverEngine.h"
 // Local headers
 #include "../../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
@@ -23,12 +24,10 @@ using std::endl;
 
 // Macro
 #ifdef WIN32
-inline double fmax(double a, double b)
-{
+inline double fmax(double a, double b) {
   return (a > b) ? a : b;
 }
-inline double fmin(double a, double b)
-{
+inline double fmin(double a, double b) {
   return (a < b) ? a : b;
 }
 #endif
@@ -37,18 +36,16 @@ inline double fmin(double a, double b)
 // DESolverEngine::DESolverEngine(int dim,int popSize)
 // Constructor
 //**********************************************************************
-DESolverEngine::DESolverEngine(int vectorSize, int populationSize, double tolerance)
-{
-
+DESolverEngine::DESolverEngine(int vectorSize, int populationSize, double tolerance) {
   // Variables
-  iVectorSize = vectorSize;
+  iVectorSize     = vectorSize;
   iPopulationSize = populationSize;
-  iGenerations = 0;
-  dScale = 0.7;
-  dProbability = 0.5;
-  dBestEnergy = 1.0E20;
-  dStepSize = 1e-6;
-  dTolerance = tolerance;
+  iGenerations    = 0;
+  dScale          = 0.7;
+  dProbability    = 0.5;
+  dBestEnergy     = 1.0E20;
+  dStepSize       = 1e-6;
+  dTolerance      = tolerance;
 
   // Build our Vectors so they are correct size
   vCurrentValues.resize(iVectorSize);
@@ -59,91 +56,82 @@ DESolverEngine::DESolverEngine(int vectorSize, int populationSize, double tolera
   vGradientValues.resize(iVectorSize);
   vPopulationEnergy.resize(iPopulationSize);
 
-  for (int i = 0; i < iVectorSize; ++i)
-    vBestSolution[i] = 0.0;
+  for (int i = 0; i < iVectorSize; ++i) vBestSolution[i] = 0.0;
 
-  for (int i = 0; i < iPopulationSize; ++i)
-    mvPopulation[i].resize(iVectorSize);
+  for (int i = 0; i < iPopulationSize; ++i) mvPopulation[i].resize(iVectorSize);
 }
 
 //**********************************************************************
 // DESolverEngine::~DESolverEngine()
 // Default De-Constructor
 //**********************************************************************
-DESolverEngine::~DESolverEngine()
-{
-}
+DESolverEngine::~DESolverEngine() {}
 
 //**********************************************************************
 // void DESolverEngine::Setup(double *min,double *max,
 //                            int deStrategy,double diffScale,double crossoverProb)
 // Setup
 //**********************************************************************
-void DESolverEngine::Setup(vector<double> startValues, vector<double> lowerBounds, vector<double> upperBounds,
-                           int deStrategy, double diffScale, double crossoverProb)
-{
-  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+void DESolverEngine::Setup(vector<double> startValues, vector<double> lowerBounds, vector<double> upperBounds, int deStrategy, double diffScale, double crossoverProb) {
+  CRandomNumberGenerator* pRandom = CRandomNumberGenerator::Instance();
 
-  switch (deStrategy)
-  {
-  case stBest1Exp:
-    calcTrialSolution = &DESolverEngine::Best1Exp;
-    iNumberOfParents = 2;
-    break;
+  switch (deStrategy) {
+    case stBest1Exp:
+      calcTrialSolution = &DESolverEngine::Best1Exp;
+      iNumberOfParents  = 2;
+      break;
 
-  case stRand1Exp:
-    calcTrialSolution = &DESolverEngine::Rand1Exp;
-    iNumberOfParents = 3;
-    break;
+    case stRand1Exp:
+      calcTrialSolution = &DESolverEngine::Rand1Exp;
+      iNumberOfParents  = 3;
+      break;
 
-  case stRandToBest1Exp:
-    calcTrialSolution = &DESolverEngine::RandToBest1Exp;
-    iNumberOfParents = 2;
-    break;
+    case stRandToBest1Exp:
+      calcTrialSolution = &DESolverEngine::RandToBest1Exp;
+      iNumberOfParents  = 2;
+      break;
 
-  case stBest2Exp:
-    calcTrialSolution = &DESolverEngine::Best2Exp;
-    iNumberOfParents = 4;
-    break;
+    case stBest2Exp:
+      calcTrialSolution = &DESolverEngine::Best2Exp;
+      iNumberOfParents  = 4;
+      break;
 
-  case stRand2Exp:
-    calcTrialSolution = &DESolverEngine::Rand2Exp;
-    iNumberOfParents = 5;
-    break;
+    case stRand2Exp:
+      calcTrialSolution = &DESolverEngine::Rand2Exp;
+      iNumberOfParents  = 5;
+      break;
 
-  case stBest1Bin:
-    calcTrialSolution = &DESolverEngine::Best1Bin;
-    iNumberOfParents = 2;
-    break;
+    case stBest1Bin:
+      calcTrialSolution = &DESolverEngine::Best1Bin;
+      iNumberOfParents  = 2;
+      break;
 
-  case stRand1Bin:
-    calcTrialSolution = &DESolverEngine::Rand1Bin;
-    iNumberOfParents = 3;
-    break;
+    case stRand1Bin:
+      calcTrialSolution = &DESolverEngine::Rand1Bin;
+      iNumberOfParents  = 3;
+      break;
 
-  case stRandToBest1Bin:
-    calcTrialSolution = &DESolverEngine::RandToBest1Bin;
-    iNumberOfParents = 2;
-    break;
+    case stRandToBest1Bin:
+      calcTrialSolution = &DESolverEngine::RandToBest1Bin;
+      iNumberOfParents  = 2;
+      break;
 
-  case stBest2Bin:
-    calcTrialSolution = &DESolverEngine::Best2Bin;
-    iNumberOfParents = 4;
-    break;
+    case stBest2Bin:
+      calcTrialSolution = &DESolverEngine::Best2Bin;
+      iNumberOfParents  = 4;
+      break;
 
-  case stRand2Bin:
-    calcTrialSolution = &DESolverEngine::Rand2Bin;
-    iNumberOfParents = 5;
-    break;
+    case stRand2Bin:
+      calcTrialSolution = &DESolverEngine::Rand2Bin;
+      iNumberOfParents  = 5;
+      break;
   }
 
-  dScale = diffScale;
+  dScale       = diffScale;
   dProbability = crossoverProb;
 
-  for (int i = 0; i < iPopulationSize; ++i)
-  {
-    for (int j = 0; j < iVectorSize; ++j)
-      mvPopulation[i][j] = pRandom->getRandomUniform(lowerBounds[j], upperBounds[j]);
+  for (int i = 0; i < iPopulationSize; ++i) {
+    for (int j = 0; j < iVectorSize; ++j) mvPopulation[i][j] = pRandom->getRandomUniform(lowerBounds[j], upperBounds[j]);
 
     vPopulationEnergy[i] = 1.0E20;
   }
@@ -158,38 +146,31 @@ void DESolverEngine::Setup(vector<double> startValues, vector<double> lowerBound
 // bool DESolverEngine::Solve(int maxGenerations)
 //
 //**********************************************************************
-bool DESolverEngine::Solve(int maxGenerations)
-{
-
+bool DESolverEngine::Solve(int maxGenerations) {
   // Variables
-  bool bNewBestEnergy = false;
-  CConfiguration *pConfig = CConfiguration::Instance();
+  bool            bNewBestEnergy = false;
+  CConfiguration* pConfig        = CConfiguration::Instance();
 
   // Execute it.
   dTrialEnergy = EnergyFunction(vCurrentValues);
 
-  if (dTrialEnergy < dBestEnergy)
-  {
+  if (dTrialEnergy < dBestEnergy) {
     bNewBestEnergy = true;
     // Copy the solution to our best.
     dBestEnergy = dTrialEnergy;
     vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
-    if (!(pConfig->getQuietMode()))
-    {
+    if (!(pConfig->getQuietMode())) {
       cerr << "Current estimates: ";
-      for (int k = 0; k < (int)vBestSolution.size(); ++k)
-        cerr << vBestSolution[k] << " ";
+      for (int k = 0; k < (int)vBestSolution.size(); ++k) cerr << vBestSolution[k] << " ";
       cerr << "\n";
       cerr << "Objective function value: " << dTrialEnergy << "\n\n";
     }
   }
 
-  for (int i = 0; i < maxGenerations; ++i)
-  {
+  for (int i = 0; i < maxGenerations; ++i) {
     if (!(pConfig->getQuietMode()))
       cerr << DESOLVER_CURRENT_GENERATION << (i + 1) << "\n";
-    for (int j = 0; j < iPopulationSize; ++j)
-    {
+    for (int j = 0; j < iPopulationSize; ++j) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
 
@@ -197,39 +178,33 @@ bool DESolverEngine::Solve(int maxGenerations)
       dTrialEnergy = EnergyFunction(vCurrentValues);
 
       // Check if this is a new low for this population
-      if (dTrialEnergy < vPopulationEnergy[j])
-      {
-
+      if (dTrialEnergy < vPopulationEnergy[j]) {
         // Copy solution to our Population
         vPopulationEnergy[j] = dTrialEnergy;
         mvPopulation[j].assign(vCurrentValues.begin(), vCurrentValues.end());
 
         // Is this a new all-time low for our search?
-        if (dTrialEnergy < dBestEnergy)
-        {
+        if (dTrialEnergy < dBestEnergy) {
           bNewBestEnergy = true;
           // Copy the solution to our best.
           dBestEnergy = dTrialEnergy;
           vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
 
-          if (!(pConfig->getQuietMode()))
-          {
+          if (!(pConfig->getQuietMode())) {
             cerr << "Current estimates: ";
-            for (int k = 0; k < (int)vBestSolution.size(); ++k)
-              cerr << vBestSolution[k] << " ";
+            for (int k = 0; k < (int)vBestSolution.size(); ++k) cerr << vBestSolution[k] << " ";
             cerr << endl;
             cerr << "Objective function value: " << dTrialEnergy << "\n";
           }
         }
       }
-    } // end for()
+    }  // end for()
 
     // If we have a new Best, lets generate a gradient.
     if (bNewBestEnergy)
-      if (generateGradient())
-      {
+      if (generateGradient()) {
         iGenerations = i;
-        return true; // Convergence!
+        return true;  // Convergence!
       }
 
     // Reset value
@@ -243,20 +218,16 @@ bool DESolverEngine::Solve(int maxGenerations)
 // bool DESolverEngine::generateGradient()
 // Generate our Gradient
 //**********************************************************************
-bool DESolverEngine::generateGradient()
-{
-
-  CConfiguration *pConfig = CConfiguration::Instance();
+bool DESolverEngine::generateGradient() {
+  CConfiguration* pConfig = CConfiguration::Instance();
 
   double dConvergenceCheck = 0;
-  for (int i = 0; i < iVectorSize; ++i)
-  {
+  for (int i = 0; i < iVectorSize; ++i) {
     // Create Vars
     double dMin = 1.0E20;
     double dMax = -1.0E20;
 
-    for (int j = 0; j < iPopulationSize; ++j)
-    {
+    for (int j = 0; j < iPopulationSize; ++j) {
       double scaled = scaleValue(mvPopulation[j][i], vLowerBounds[i], vUpperBounds[i]);
 
       if (scaled < dMin)
@@ -267,32 +238,24 @@ bool DESolverEngine::generateGradient()
 
     dConvergenceCheck = dMax - dMin;
 
-    if (dConvergenceCheck > dTolerance)
-    {
-      if (!(pConfig->getQuietMode()))
-      {
+    if (dConvergenceCheck > dTolerance) {
+      if (!(pConfig->getQuietMode())) {
         cerr << DESOLVER_CONVERGENCE_CHECK << dConvergenceCheck << "\n";
-        cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n"
-             << endl;
+        cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
       }
-      return false; // No Convergence
+      return false;  // No Convergence
     }
   }
-  if (!(pConfig->getQuietMode()))
-  {
+  if (!(pConfig->getQuietMode())) {
     cerr << DESOLVER_CONVERGENCE_CHECK << dConvergenceCheck << "\n";
-    cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n"
-         << endl;
+    cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
   }
-  return true; // Convergence
+  return true;  // Convergence
 }
 
-void DESolverEngine::scaleValues()
-{
-
+void DESolverEngine::scaleValues() {
   // Build some Scaled Values
-  for (int i = 0; i < iVectorSize; ++i)
-  {
+  for (int i = 0; i < iVectorSize; ++i) {
     // Boundary-Pinning
     if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vScaledValues[i] = 0.0;
@@ -301,10 +264,8 @@ void DESolverEngine::scaleValues()
   }
 }
 
-void DESolverEngine::unScaleValues()
-{
-  for (int i = 0; i < iVectorSize; ++i)
-  {
+void DESolverEngine::unScaleValues() {
+  for (int i = 0; i < iVectorSize; ++i) {
     if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vCurrentValues[i] = vLowerBounds[i];
     else
@@ -316,8 +277,7 @@ void DESolverEngine::unScaleValues()
 // double DESolverEngine::scaleValue(double value, double min, double max)
 // Scale our Value from -1.0 to 1.0
 //**********************************************************************
-double DESolverEngine::scaleValue(double value, double min, double max)
-{
+double DESolverEngine::scaleValue(double value, double min, double max) {
   if (CComparer::isEqual(value, min))
     return -1;
   else if (CComparer::isEqual(value, max))
@@ -330,8 +290,7 @@ double DESolverEngine::scaleValue(double value, double min, double max)
 // double DESolverEngine::unScaleValue(const double& value, double min, double max)
 // Un-Scale our value back to Original Value
 //**********************************************************************
-double DESolverEngine::unScaleValue(const double &value, double min, double max)
-{
+double DESolverEngine::unScaleValue(const double& value, double min, double max) {
   // courtesy of AUTODIF - modified to correct error -
   // penalty on values outside [-1,1] multiplied by 100 as of 14/1/02.
   double t = 0.0;
@@ -354,8 +313,7 @@ double DESolverEngine::unScaleValue(const double &value, double min, double max)
 // void DESolverEngine::condAssign(double &res, const double &cond, const double &arg1, const double &arg2)
 // Conditional Assignment
 //**********************************************************************
-void DESolverEngine::condAssign(double &res, const double &cond, const double &arg1, const double &arg2)
-{
+void DESolverEngine::condAssign(double& res, const double& cond, const double& arg1, const double& arg2) {
   res = (cond) > 0 ? arg1 : arg2;
 }
 
@@ -363,8 +321,7 @@ void DESolverEngine::condAssign(double &res, const double &cond, const double &a
 // void DESolverEngine::condAssign(double &res, const double &cond, const double &arg)
 // Conditional Assignment
 //**********************************************************************
-void DESolverEngine::condAssign(double &res, const double &cond, const double &arg)
-{
+void DESolverEngine::condAssign(double& res, const double& cond, const double& arg) {
   res = (cond) > 0 ? arg : res;
 }
 
@@ -372,9 +329,8 @@ void DESolverEngine::condAssign(double &res, const double &cond, const double &a
 // void DESolverEngine::Best1Exp(int candidate)
 // Generate A Solution from our Best Score
 //**********************************************************************
-void DESolverEngine::Best1Exp(int candidate)
-{
-  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+void DESolverEngine::Best1Exp(int candidate) {
+  CRandomNumberGenerator* pRandom = CRandomNumberGenerator::Instance();
 
   // Select our Previous Generations to Sample From
   SelectSamples(candidate);
@@ -384,10 +340,8 @@ void DESolverEngine::Best1Exp(int candidate)
 
   // Generate new values for our Current by using probability and scale and then
   // making a slight adjustment to the vBestSolution.
-  for (int i = 0; i < iVectorSize; ++i)
-  {
-    if (pRandom->getRandomUniform_01() < dProbability)
-    {
+  for (int i = 0; i < iVectorSize; ++i) {
+    if (pRandom->getRandomUniform_01() < dProbability) {
       vCurrentValues[i] = vBestSolution[i] + (dScale * (mvPopulation[iR1][i] - mvPopulation[iR2][i]));
 
       if (vCurrentValues[i] < vLowerBounds[i])
@@ -402,8 +356,7 @@ void DESolverEngine::Best1Exp(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Rand1Exp(int candidate)
-{
+void DESolverEngine::Rand1Exp(int candidate) {
   /*int r1, r2, r3;
   int n;
 
@@ -423,8 +376,7 @@ void DESolverEngine::Rand1Exp(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::RandToBest1Exp(int candidate)
-{
+void DESolverEngine::RandToBest1Exp(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -444,8 +396,7 @@ void DESolverEngine::RandToBest1Exp(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Best2Exp(int candidate)
-{
+void DESolverEngine::Best2Exp(int candidate) {
   /*int r1, r2, r3, r4;
   int n;
 
@@ -465,8 +416,7 @@ void DESolverEngine::Best2Exp(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Rand2Exp(int candidate)
-{
+void DESolverEngine::Rand2Exp(int candidate) {
   /*int r1, r2, r3, r4, r5;
   int n;
 
@@ -486,8 +436,7 @@ void DESolverEngine::Rand2Exp(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Best1Bin(int candidate)
-{
+void DESolverEngine::Best1Bin(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -508,8 +457,7 @@ void DESolverEngine::Best1Bin(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Rand1Bin(int candidate)
-{
+void DESolverEngine::Rand1Bin(int candidate) {
   /*int r1, r2, r3;
   int n;
 
@@ -530,8 +478,7 @@ void DESolverEngine::Rand1Bin(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::RandToBest1Bin(int candidate)
-{
+void DESolverEngine::RandToBest1Bin(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -552,8 +499,7 @@ void DESolverEngine::RandToBest1Bin(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Best2Bin(int candidate)
-{
+void DESolverEngine::Best2Bin(int candidate) {
   /*int r1, r2, r3, r4;
   int n;
 
@@ -574,8 +520,7 @@ void DESolverEngine::Best2Bin(int candidate)
 //
 //
 //**********************************************************************
-void DESolverEngine::Rand2Bin(int candidate)
-{
+void DESolverEngine::Rand2Bin(int candidate) {
   /*int r1, r2, r3, r4, r5;
   int n;
 
@@ -596,58 +541,43 @@ void DESolverEngine::Rand2Bin(int candidate)
 // void DESolverEngine::SelectSamples(int candidate)
 // Build us some sample values
 //**********************************************************************
-void DESolverEngine::SelectSamples(int candidate)
-{
-
-  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+void DESolverEngine::SelectSamples(int candidate) {
+  CRandomNumberGenerator* pRandom = CRandomNumberGenerator::Instance();
 
   // Build first Sample
-  if (iNumberOfParents >= 1)
-  {
-    do
-    {
+  if (iNumberOfParents >= 1) {
+    do {
       iR1 = (int)pRandom->getRandomUniform(0.0, (double)iPopulationSize);
     } while (iR1 == candidate);
-  }
-  else
+  } else
     return;
 
   // Build Second Sample
-  if (iNumberOfParents >= 2)
-  {
-    do
-    {
+  if (iNumberOfParents >= 2) {
+    do {
       iR2 = (int)pRandom->getRandomUniform(0.0, (double)iPopulationSize);
     } while ((iR2 == candidate) || (iR2 == iR1));
-  }
-  else
+  } else
     return;
 
   // Build third sample
-  if (iNumberOfParents >= 3)
-  {
-    do
-    {
+  if (iNumberOfParents >= 3) {
+    do {
       iR3 = (int)pRandom->getRandomUniform(0.0, (double)iPopulationSize);
     } while ((iR3 == candidate) || (iR3 == iR2) || (iR3 == iR1));
-  }
-  else
+  } else
     return;
 
   // etc
-  if (iNumberOfParents >= 4)
-  {
-    do
-    {
+  if (iNumberOfParents >= 4) {
+    do {
       iR4 = (int)pRandom->getRandomUniform(0.0, (double)iPopulationSize);
     } while ((iR4 == candidate) || (iR4 == iR3) || (iR4 == iR2) || (iR4 == iR1));
   }
 
   // etc
-  if (iNumberOfParents >= 5)
-  {
-    do
-    {
+  if (iNumberOfParents >= 5) {
+    do {
       iR5 = (int)pRandom->getRandomUniform(0.0, (double)iPopulationSize);
     } while ((iR5 == candidate) || (iR5 == iR4) || (iR5 == iR3) || (iR5 == iR2) || (iR5 == iR1));
   }

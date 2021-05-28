@@ -22,10 +22,9 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_TimeStep)
-{
+BOOST_AUTO_TEST_CASE(Build_TimeStep) {
   // See if we got a Valid Estimate
-  CTimeStep *pBasic = 0;
+  CTimeStep* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CTimeStepFactory::buildTimeStep("", false));
   delete pBasic;
 }
@@ -34,8 +33,7 @@ BOOST_AUTO_TEST_CASE(Build_TimeStep)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_TimeStep_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_TimeStep_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CTimeStepFactory::buildTimeStep(PARAM_ZERO, false), string);
 }

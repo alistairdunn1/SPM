@@ -11,10 +11,10 @@
 #include <iostream>
 
 // Local headers
-#include "CAgeSizeManager.h"
-#include "CAgeSize.h"
-#include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "CAgeSize.h"
+#include "CAgeSizeManager.h"
 
 // Using
 using std::cout;
@@ -27,16 +27,13 @@ boost::thread_specific_ptr<CAgeSizeManager> CAgeSizeManager::clInstance;
 // CAgeSizeManager::CAgeSizeManager()
 // Default Constructor
 //**********************************************************************
-CAgeSizeManager::CAgeSizeManager()
-{
-}
+CAgeSizeManager::CAgeSizeManager() {}
 
 //**********************************************************************
 // CAgeSizeManager* CAgeSizeManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CAgeSizeManager *CAgeSizeManager::Instance()
-{
+CAgeSizeManager* CAgeSizeManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CAgeSizeManager());
   return clInstance.get();
@@ -46,10 +43,8 @@ CAgeSizeManager *CAgeSizeManager::Instance()
 // void CAgeSizeManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CAgeSizeManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CAgeSizeManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -58,21 +53,15 @@ void CAgeSizeManager::Destroy()
 // void CAgeSizeManager::clone(CAgeSizeManager *Manager)
 // Clone our Ageing Errors
 //**********************************************************************
-void CAgeSizeManager::clone(CAgeSizeManager *Manager)
-{
-
-  foreach (CAgeSize *ageSize, Manager->vAgeSizes)
-  {
-    vAgeSizes.push_back(ageSize->clone());
-  }
+void CAgeSizeManager::clone(CAgeSizeManager* Manager) {
+  foreach (CAgeSize* ageSize, Manager->vAgeSizes) { vAgeSizes.push_back(ageSize->clone()); }
 }
 
 //**********************************************************************
 // void CAgeSizeManager::addAgeSize(CAgeSize *AgeSize)
 // Add Ageing Error to the List
 //**********************************************************************
-void CAgeSizeManager::addAgeSize(CAgeSize *AgeSize)
-{
+void CAgeSizeManager::addAgeSize(CAgeSize* AgeSize) {
   vAgeSizes.push_back(AgeSize);
 }
 
@@ -80,20 +69,15 @@ void CAgeSizeManager::addAgeSize(CAgeSize *AgeSize)
 // CAgeSize* CAgeSizeManager::getAgeSize(string label)
 // Get our Ageing Error
 //**********************************************************************
-CAgeSize *CAgeSizeManager::getAgeSize(string label)
-{
-  try
-  {
-    foreach (CAgeSize *AgeSize, vAgeSizes)
-    {
+CAgeSize* CAgeSizeManager::getAgeSize(string label) {
+  try {
+    foreach (CAgeSize* AgeSize, vAgeSizes) {
       if (AgeSize->getLabel() == label)
         return AgeSize;
     }
 
     CError::errorUnknown(PARAM_AGE_SIZE, label);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAgeSizeManager.getAgeSize(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -105,19 +89,13 @@ CAgeSize *CAgeSizeManager::getAgeSize(string label)
 // void CAgeSizeManager::validate()
 // Validate our Ageing Errors
 //**********************************************************************
-void CAgeSizeManager::validate()
-{
-  try
-  {
-    foreach (CAgeSize *AgeSize, vAgeSizes)
-    {
-      AgeSize->validate();
-    }
+void CAgeSizeManager::validate() {
+  try {
+    foreach (CAgeSize* AgeSize, vAgeSizes) { AgeSize->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CAgeSize *AgeSize, vAgeSizes)
-    {
+    foreach (CAgeSize* AgeSize, vAgeSizes) {
       // Increase Count for this label
       mLabelList[AgeSize->getLabel()] += 1;
 
@@ -125,9 +103,7 @@ void CAgeSizeManager::validate()
       if (mLabelList[AgeSize->getLabel()] > 1)
         CError::errorDuplicate(PARAM_AGE_SIZE, AgeSize->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAgeSizeManager.validate()->" + Ex;
     throw Ex;
   }
@@ -137,17 +113,10 @@ void CAgeSizeManager::validate()
 // void CAgeSizeManager::build()
 // Build our AgeSizes
 //**********************************************************************
-void CAgeSizeManager::build()
-{
-  try
-  {
-    foreach (CAgeSize *AgeSize, vAgeSizes)
-    {
-      AgeSize->build();
-    }
-  }
-  catch (string &Ex)
-  {
+void CAgeSizeManager::build() {
+  try {
+    foreach (CAgeSize* AgeSize, vAgeSizes) { AgeSize->build(); }
+  } catch (string& Ex) {
     Ex = "CAgeSizeManager.build()->" + Ex;
     throw Ex;
   }
@@ -157,17 +126,10 @@ void CAgeSizeManager::build()
 // void CAgeSizeManager::rebuild()
 // Rebuild our ageing errors
 //**********************************************************************
-void CAgeSizeManager::rebuild()
-{
-  try
-  {
-    foreach (CAgeSize *AgeSize, vAgeSizes)
-    {
-      AgeSize->rebuild();
-    }
-  }
-  catch (string &Ex)
-  {
+void CAgeSizeManager::rebuild() {
+  try {
+    foreach (CAgeSize* AgeSize, vAgeSizes) { AgeSize->rebuild(); }
+  } catch (string& Ex) {
     Ex = "CAgeSizeManager.rebuild()->" + Ex;
     throw Ex;
   }
@@ -177,10 +139,6 @@ void CAgeSizeManager::rebuild()
 // CAgeSizeManager::~CAgeSizeManager()
 // Destructor
 //**********************************************************************
-CAgeSizeManager::~CAgeSizeManager()
-{
-  foreach (CAgeSize *AgeSize, vAgeSizes)
-  {
-    delete AgeSize;
-  }
+CAgeSizeManager::~CAgeSizeManager() {
+  foreach (CAgeSize* AgeSize, vAgeSizes) { delete AgeSize; }
 }

@@ -9,22 +9,22 @@
 
 // Local Headers
 #include "CConstantMortalityRateProcess.h"
+
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CConstantMortalityRateProcess::CConstantMortalityRateProcess()
 // Default Constructor
 //**********************************************************************
-CConstantMortalityRateProcess::CConstantMortalityRateProcess()
-{
+CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
   // Variables
-  pGrid = 0;
-  pLayer = 0;
-  sType = PARAM_CONSTANT_MORTALITY_RATE;
+  pGrid          = 0;
+  pLayer         = 0;
+  sType          = PARAM_CONSTANT_MORTALITY_RATE;
   bRequiresMerge = false;
 
   // Register user allowed parameters
@@ -38,11 +38,8 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess()
 // void CConstantMortalityRateProcess::validate()
 // Validate our process
 //**********************************************************************
-void CConstantMortalityRateProcess::validate()
-{
-  try
-  {
-
+void CConstantMortalityRateProcess::validate() {
+  try {
     // Get our parameters
     sLayer = pParameterList->getString(PARAM_LAYER, true, "");
 
@@ -54,17 +51,14 @@ void CConstantMortalityRateProcess::validate()
     CProcess::validate();
 
     // Register Estimables
-    for (int i = 0; i < (int)vMortalityRates.size(); ++i)
-      registerEstimable(PARAM_M, i, &vMortalityRates[i]);
+    for (int i = 0; i < (int)vMortalityRates.size(); ++i) registerEstimable(PARAM_M, i, &vMortalityRates[i]);
 
     // Local Validation
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
     if (getCategoryCount() != (int)vMortalityRates.size())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_M);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CConstantMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -74,27 +68,22 @@ void CConstantMortalityRateProcess::validate()
 // void CConstantMortalityRateProcess::build()
 // Build our process
 //**********************************************************************
-void CConstantMortalityRateProcess::build()
-{
-  try
-  {
+void CConstantMortalityRateProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
     // Allocate our Grid
-    if (pGrid == 0)
-    {
+    if (pGrid == 0) {
       // Allocate Space for our X (Height) Y (Width) Grid
-      pGrid = new CWorldSquare *[iWorldHeight];
-      for (int i = 0; i < iWorldHeight; ++i)
-      {
+      pGrid = new CWorldSquare*[iWorldHeight];
+      for (int i = 0; i < iWorldHeight; ++i) {
         pGrid[i] = new CWorldSquare[iWorldWidth];
       }
 
       // Build our Grid
       for (int i = 0; i < iWorldHeight; ++i)
-        for (int j = 0; j < iWorldWidth; ++j)
-          pGrid[i][j].build();
+        for (int j = 0; j < iWorldWidth; ++j) pGrid[i][j].build();
     }
 
     if (sLayer != "")
@@ -102,9 +91,7 @@ void CConstantMortalityRateProcess::build()
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CConstantMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -114,21 +101,15 @@ void CConstantMortalityRateProcess::build()
 // void CConstantMortalityProcess::rebuild()
 // Rebuild
 //**********************************************************************
-void CConstantMortalityRateProcess::rebuild()
-{
+void CConstantMortalityRateProcess::rebuild() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Populate Grid With Values
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // Get Our Selectivity Result
             dSelectivityResult = vSelectivityIndex[k]->getResult(l);
             // Calculate Our Value
@@ -149,9 +130,7 @@ void CConstantMortalityRateProcess::rebuild()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CConstantMortalityRateProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -162,29 +141,23 @@ void CConstantMortalityRateProcess::rebuild()
 // void CConstantMortalityRateProcess::execute()
 // Execute our process
 //**********************************************************************
-void CConstantMortalityRateProcess::execute()
-{
+void CConstantMortalityRateProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base execute
     CProcess::execute();
 
     // If a meta-layer, then we need to rebuild the Process to take account of changes in layer values by year
-    if (pLayer != 0)
-    {
-      if (pLayer->getLayerType() == PARAM_META_NUMERIC)
-      {
+    if (pLayer != 0) {
+      if (pLayer->getLayerType() == PARAM_META_NUMERIC) {
         rebuild();
       }
     }
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
         pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check Square Ok
@@ -192,10 +165,8 @@ void CConstantMortalityRateProcess::execute()
           continue;
 
         // Loop Through Categories and Ages
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // Get Current Value
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l);
 
@@ -217,9 +188,7 @@ void CConstantMortalityRateProcess::execute()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CConstantMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -230,14 +199,10 @@ void CConstantMortalityRateProcess::execute()
 // CConstantMortalityRateProcess::~CConstantMortalityRateProcess()
 // Destructor
 //**********************************************************************
-CConstantMortalityRateProcess::~CConstantMortalityRateProcess()
-{
-
+CConstantMortalityRateProcess::~CConstantMortalityRateProcess() {
   // Clean Our Grid
-  if (pGrid != 0)
-  {
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
+  if (pGrid != 0) {
+    for (int i = 0; i < iWorldHeight; ++i) {
       delete[] pGrid[i];
       pGrid[i] = 0;
     }

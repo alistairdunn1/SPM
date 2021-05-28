@@ -13,17 +13,16 @@
 //
 //
 //**********************************************************************
-class CExponentialPDF : public CPDF
-{
+class CExponentialPDF : public CPDF {
 public:
   // Functions
   CExponentialPDF();
   virtual ~CExponentialPDF();
-  CPDF *clone() { return new CExponentialPDF(*this); }
+  CPDF*  clone() { return new CExponentialPDF(*this); }
   double getLambda() { return dLambda; }
   double getPDFResult(double value);
   double getCDFResult(double value);
-  void validate();
+  void   validate();
 
 protected:
   // Variables

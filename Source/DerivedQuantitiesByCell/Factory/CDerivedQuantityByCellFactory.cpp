@@ -7,19 +7,18 @@
 
 // Local includes
 #include "CDerivedQuantityByCellFactory.h"
+
+#include "../../Helpers/CError.h"
 #include "../CDerivedQuantityByCellManager.h"
 #include "../Children/CAbundanceDerivedQuantityByCell.h"
 #include "../Children/CBiomassDerivedQuantityByCell.h"
-#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CDerivedQuantityByCell* CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(string type, bool registerWithManager)
 // Build a Derived Layer
 //**********************************************************************
-CDerivedQuantityByCell *CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(string type, bool registerWithManager)
-{
-
-  CDerivedQuantityByCell *pLayer = 0;
+CDerivedQuantityByCell* CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(string type, bool registerWithManager) {
+  CDerivedQuantityByCell* pLayer = 0;
 
   if (type == PARAM_ABUNDANCE)
     pLayer = new CAbundanceDerivedQuantityByCell();

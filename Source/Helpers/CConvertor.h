@@ -19,12 +19,11 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CConvertor
-{
+class CConvertor {
 public:
   // Functions
-  static bool stringToBool(string value);
-  static void stringToVectorByNewline(string value, vector<string> &lines);
+  static bool   stringToBool(string value);
+  static void   stringToVectorByNewline(string value, vector<string>& lines);
   static string stringToLowercase(string value);
 
 private:

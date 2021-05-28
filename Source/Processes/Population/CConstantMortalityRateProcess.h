@@ -20,24 +20,23 @@ class CLayerManager;
 //
 //
 //**********************************************************************
-class CConstantMortalityRateProcess : public CProcess
-{
+class CConstantMortalityRateProcess : public CProcess {
 public:
   // Functions
   CConstantMortalityRateProcess();
   virtual ~CConstantMortalityRateProcess();
-  CProcess *clone() { return new CConstantMortalityRateProcess(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
+  CProcess* clone() { return new CConstantMortalityRateProcess(*this); }
+  void      validate();
+  void      build();
+  void      rebuild();
+  void      execute();
 
 protected:
   // Variables
   vector<double> vMortalityRates;
-  CWorldSquare **pGrid;
-  CNumericLayer *pLayer;
-  string sLayer;
+  CWorldSquare** pGrid;
+  CNumericLayer* pLayer;
+  string         sLayer;
 };
 
 #endif /* CCONSTANTMORTALITYRATEPROCESS_H_ */

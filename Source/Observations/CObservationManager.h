@@ -31,19 +31,18 @@ class CObservation;
 //
 //
 //**********************************************************************
-class CObservationManager : public CBaseManager
-{
+class CObservationManager : public CBaseManager {
 public:
-  static CObservationManager *Instance();
-  static void Destroy();
-  void clone(CObservationManager *Manager);
-  void addObservation(CObservation *pObservation);
-  void fillVector(vector<CObservation *> &list);
-  CObservation *getObservation(string label);
-  void validate();
-  void build();
-  void prepare(int year, int step);
-  void execute(int year, int step);
+  static CObservationManager* Instance();
+  static void                 Destroy();
+  void                        clone(CObservationManager* Manager);
+  void                        addObservation(CObservation* pObservation);
+  void                        fillVector(vector<CObservation*>& list);
+  CObservation*               getObservation(string label);
+  void                        validate();
+  void                        build();
+  void                        prepare(int year, int step);
+  void                        execute(int year, int step);
   virtual ~CObservationManager();
 
 protected:
@@ -51,7 +50,7 @@ protected:
   CObservationManager();
 
   // Variables
-  vector<CObservation *> vObservationList;
+  vector<CObservation*> vObservationList;
 
 private:
   static boost::thread_specific_ptr<CObservationManager> clInstance;

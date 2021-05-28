@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CCategoricalMonotonicPreferenceFunction.h"
+
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
@@ -19,9 +20,7 @@
 // CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction()
-{
-
+CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction() {
   sType = PARAM_CATEGORICAL_MONOTONIC;
 
   // Register user allowed parameters
@@ -34,11 +33,8 @@ CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction
 // void CCategoricalMonotonicPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CCategoricalMonotonicPreferenceFunction::validate()
-{
-  try
-  {
-
+void CCategoricalMonotonicPreferenceFunction::validate() {
+  try {
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
@@ -47,10 +43,8 @@ void CCategoricalMonotonicPreferenceFunction::validate()
     // Base Validation
     CPreferenceFunction::validate();
 
-    for (int i = 1; i < (int)vValues.size(); i++)
-    {
-      if (vValues[i] < 0)
-      {
+    for (int i = 1; i < (int)vValues.size(); i++) {
+      if (vValues[i] < 0) {
         // TODO: Not a helpful error message: Should report that these values are not monotonically increasing.
         CError::errorLessThan(PARAM_CATEGORY_VALUES, PARAM_ZERO);
       }
@@ -62,11 +56,8 @@ void CCategoricalMonotonicPreferenceFunction::validate()
       CError::errorDuplicate(PARAM_CATEGORY_LABELS, getLabel());
 
     // Register estimables
-    for (int i = 0; i < (int)vValues.size(); ++i)
-      registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
-  }
-  catch (string &Ex)
-  {
+    for (int i = 0; i < (int)vValues.size(); ++i) registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
+  } catch (string& Ex) {
     Ex = "CCategoricalMonotonicPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -76,21 +67,16 @@ void CCategoricalMonotonicPreferenceFunction::validate()
 // void CCategoricalMonotonicPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CCategoricalMonotonicPreferenceFunction::build()
-{
-  try
-  {
-
+void CCategoricalMonotonicPreferenceFunction::build() {
+  try {
     // Get our Layer Pointer
-    CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getCategoricalLayer(sLayerName);
+    CLayerManager* pLayerManager = CLayerManager::Instance();
+    pLayer                       = pLayerManager->getCategoricalLayer(sLayerName);
 
     // Get list of layer values
     std::vector<std::string> vLayerLabels;
-    for (int i = 0; i < pLayer->getHeight(); ++i)
-    {
-      for (int j = 0; j < pLayer->getWidth(); ++j)
-      {
+    for (int i = 0; i < pLayer->getHeight(); ++i) {
+      for (int j = 0; j < pLayer->getWidth(); ++j) {
         vLayerLabels.push_back(pLayer->getValue(i, j));
       }
     }
@@ -103,17 +89,13 @@ void CCategoricalMonotonicPreferenceFunction::build()
     if (vLayerLabels.size() < vLabels.size())
       CError::errorTooMuch(PARAM_CATEGORY_VALUES);
 
-    for (int i = 0; i < (int)vLabels.size(); i++)
-    {
-      if (vLabels[i] == sLayerValue)
-      {
+    for (int i = 0; i < (int)vLabels.size(); i++) {
+      if (vLabels[i] == sLayerValue) {
         dRet = vValues[i];
         break;
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CCategoricalMonotonicPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -123,8 +105,7 @@ void CCategoricalMonotonicPreferenceFunction::build()
 // CCategoricalMonotonicPreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CCategoricalMonotonicPreferenceFunction::getIsStatic()
-{
+bool CCategoricalMonotonicPreferenceFunction::getIsStatic() {
   return true;
 }
 
@@ -132,25 +113,19 @@ bool CCategoricalMonotonicPreferenceFunction::getIsStatic()
 // double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // Get Result
 //**********************************************************************
-double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
-{
-
+double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
-    //TODO: Scott to check code for efficiency
-    //Function should identify the label, and then return the corresponding (cumulative) value
+    // TODO: Scott to check code for efficiency
+    // Function should identify the label, and then return the corresponding (cumulative) value
     sLayerValue = pLayer->getValue(TRIndex, TCIndex);
 
-    for (int i = 0; i < (int)vLabels.size(); i++)
-    {
-      if (vLabels[i] == sLayerValue)
-      {
-        for (int j = 0; j < (i + 1); j++)
-        {
+    for (int i = 0; i < (int)vLabels.size(); i++) {
+      if (vLabels[i] == sLayerValue) {
+        for (int j = 0; j < (i + 1); j++) {
           dRet += vValues[j];
         }
         break;
@@ -158,9 +133,7 @@ double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CCategoricalMonotonicPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -172,6 +145,4 @@ double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex
 // CCategoricalMonotonicPreferenceFunction::~CCategoricalMonotonicPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CCategoricalMonotonicPreferenceFunction::~CCategoricalMonotonicPreferenceFunction()
-{
-}
+CCategoricalMonotonicPreferenceFunction::~CCategoricalMonotonicPreferenceFunction() {}

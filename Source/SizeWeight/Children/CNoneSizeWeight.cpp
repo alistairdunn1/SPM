@@ -9,15 +9,14 @@
 
 // Local headers
 #include "CNoneSizeWeight.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CNoneSizeWeight::CNoneSizeWeight()
 // Default Constructor
 //**********************************************************************
-CNoneSizeWeight::CNoneSizeWeight()
-{
-
+CNoneSizeWeight::CNoneSizeWeight() {
   sType = PARAM_NONE;
 
   // Register user allowed parameters
@@ -27,18 +26,13 @@ CNoneSizeWeight::CNoneSizeWeight()
 // voidCNoneSizeWeight::validate()
 // Validate the size-weight relationship
 //**********************************************************************
-void CNoneSizeWeight::validate()
-{
-  try
-  {
-
+void CNoneSizeWeight::validate() {
+  try {
     // Base
     CSizeWeight::validate();
 
     // Local validations
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNoneSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -48,18 +42,14 @@ void CNoneSizeWeight::validate()
 // voidCNoneSizeWeight::build()
 // Validate the size-weight relationship
 //**********************************************************************
-void CNoneSizeWeight::build()
-{
-  try
-  {
+void CNoneSizeWeight::build() {
+  try {
     // Base
     CSizeWeight::build();
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNoneSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -69,15 +59,11 @@ void CNoneSizeWeight::build()
 // voidCNoneSizeWeight::rebuild()
 // Validate the size-weight relationship
 //**********************************************************************
-void CNoneSizeWeight::rebuild()
-{
-  try
-  {
+void CNoneSizeWeight::rebuild() {
+  try {
     // Base
     CSizeWeight::rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNoneSizeWeight.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,6 +73,4 @@ void CNoneSizeWeight::rebuild()
 // CNoneSizeWeight::~CNoneSizeWeight()
 // Destructor
 //**********************************************************************
-CNoneSizeWeight::~CNoneSizeWeight()
-{
-}
+CNoneSizeWeight::~CNoneSizeWeight() {}

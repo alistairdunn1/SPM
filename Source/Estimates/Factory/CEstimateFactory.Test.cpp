@@ -16,20 +16,20 @@
 //#include "CEstimateFactory.h"
 //
 //// Namespaces
-//using namespace std;
+// using namespace std;
 //
 ////**********************************************************************
 ////
 ////
 ////**********************************************************************
-//BOOST_AUTO_TEST_CASE( Build_Estimate ) {
+// BOOST_AUTO_TEST_CASE( Build_Estimate ) {
 //  // See if we got a Valid Estimate
 //  CEstimate *pBasic = 0;
 //  BOOST_REQUIRE_NO_THROW(pBasic = CEstimateFactory::buildEstimate(false));
 //  delete pBasic;
 //}
 //
-//BOOST_AUTO_TEST_CASE(CEstimateFactory_buildEstimateInfo) {
+// BOOST_AUTO_TEST_CASE(CEstimateFactory_buildEstimateInfo) {
 //  CEstimateInfo *info = 0;
 //  BOOST_REQUIRE_NO_THROW(info = CEstimateFactory::buildEstimateInfo(false));
 //  delete info;

@@ -8,21 +8,21 @@
 //============================================================================
 
 // Headers
+#include "CPartitionReport.h"
+
 #include <boost/lexical_cast.hpp>
 
-#include "CPartitionReport.h"
-#include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CPartitionReport::CPartitionReport()
 // Default Constructor
 //**********************************************************************
-CPartitionReport::CPartitionReport()
-{
+CPartitionReport::CPartitionReport() {
   // Variables
-  eExecutionState = STATE_MODELLING;
+  eExecutionState  = STATE_MODELLING;
   pTimeStepManager = CTimeStepManager::Instance();
 
   // Register user allowed parameters
@@ -34,20 +34,13 @@ CPartitionReport::CPartitionReport()
 // void CPartitionReport::validate()
 // Validate this reporter
 //**********************************************************************
-void CPartitionReport::validate()
-{
-  try
-  {
-
+void CPartitionReport::validate() {
+  try {
     // Assign Variables
-    if (pParameterList->hasParameter(PARAM_YEARS))
-    {
+    if (pParameterList->hasParameter(PARAM_YEARS)) {
       pParameterList->fillVector(vYear, PARAM_YEARS);
-    }
-    else
-    {
-      for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
-        vYear.push_back(i);
+    } else {
+      for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) vYear.push_back(i);
     }
 
     sTimeStep = pParameterList->getString(PARAM_TIME_STEP, true, "");
@@ -57,16 +50,13 @@ void CPartitionReport::validate()
 
     // Local validation
     // Validate Year Range
-    for (int i = 0; i < (int)vYear.size(); ++i)
-    {
+    for (int i = 0; i < (int)vYear.size(); ++i) {
       if (vYear[i] < pWorld->getInitialYear())
         CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
       else if (vYear[i] > pWorld->getCurrentYear())
         CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPartitionReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -76,24 +66,19 @@ void CPartitionReport::validate()
 // void CPartitionReport::build()
 // Build this reporter
 //**********************************************************************
-void CPartitionReport::build()
-{
-  try
-  {
+void CPartitionReport::build() {
+  try {
     // Base
     CFileReport::build();
 
     // Populate TimeStepIndex
     if (sTimeStep != "")
       iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
-    else
-    {
+    else {
       iTimeStep = 0;
       sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPartitionReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -103,26 +88,20 @@ void CPartitionReport::build()
 // void CPartitionReport::execute()
 // Execute reporter
 //**********************************************************************
-void CPartitionReport::execute()
-{
-  try
-  {
+void CPartitionReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
         return;
 
     this->start();
-    for (int i = 0; i < (int)vYear.size(); ++i)
-    {
-      if (vYear[i] == pTimeStepManager->getCurrentYear())
-      {
-        if (iTimeStep == pTimeStepManager->getCurrentTimeStep())
-        {
-
+    for (int i = 0; i < (int)vYear.size(); ++i) {
+      if (vYear[i] == pTimeStepManager->getCurrentYear()) {
+        if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
           // Variables
           int iSquareHeight = -1;
-          int iSquareWidth = -1;
+          int iSquareWidth  = -1;
 
           // Print Out
           cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
@@ -131,53 +110,43 @@ void CPartitionReport::execute()
           cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
           cout << PARAM_ROW << CONFIG_SPACE_SEPARATOR;
-          cout << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR,
-              cout << PARAM_CATEGORY;
-          for (int i = pWorld->getMinAge(); i < pWorld->getMaxAge() + 1; i++)
-          {
+          cout << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR, cout << PARAM_CATEGORY;
+          for (int i = pWorld->getMinAge(); i < pWorld->getMaxAge() + 1; i++) {
             cout << CONFIG_SPACE_SEPARATOR << PARAM_AGE;
             cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
           }
           cout << "\n";
 
-          for (int i = 0; i < iWorldHeight; ++i)
-          {
-            for (int j = 0; j < iWorldWidth; ++j)
-            {
+          for (int i = 0; i < iWorldHeight; ++i) {
+            for (int j = 0; j < iWorldWidth; ++j) {
               // Get Current Square
               pBaseSquare = pWorld->getBaseSquare(i, j);
 
               // If not set, Set our SquareHeight/Width
-              if (iSquareHeight == -1)
-              {
+              if (iSquareHeight == -1) {
                 iSquareHeight = pBaseSquare->getHeight();
-                iSquareWidth = pBaseSquare->getWidth();
+                iSquareWidth  = pBaseSquare->getWidth();
               }
 
               if (!pBaseSquare->getEnabled())
                 continue;
 
               // Loop Through
-              for (int k = 0; k < iSquareHeight; ++k)
-              {
+              for (int k = 0; k < iSquareHeight; ++k) {
                 cout << i + 1 << CONFIG_SPACE_SEPARATOR << j + 1 << CONFIG_SPACE_SEPARATOR << pWorld->getCategoryNameForIndex(k);
-                for (int l = 0; l < iSquareWidth; ++l)
-                {
+                for (int l = 0; l < iSquareWidth; ++l) {
                   cout << CONFIG_SPACE_SEPARATOR << pBaseSquare->getValue(k, l);
                 }
                 cout << "\n";
               }
             }
           }
-          cout << CONFIG_END_REPORT << "\n"
-               << endl;
+          cout << CONFIG_END_REPORT << "\n" << endl;
         }
       }
     }
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPartitionReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -187,6 +156,4 @@ void CPartitionReport::execute()
 // CPartitionReport::~CPartitionReport()
 // Destructor
 //**********************************************************************
-CPartitionReport::~CPartitionReport()
-{
-}
+CPartitionReport::~CPartitionReport() {}

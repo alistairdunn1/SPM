@@ -19,21 +19,20 @@ class CDerivedQuantity;
 //
 //
 //**********************************************************************
-class CDerivedQuantityManager : public CBaseManager
-{
+class CDerivedQuantityManager : public CBaseManager {
 public:
-  static CDerivedQuantityManager *Instance();
-  static void Destroy();
+  static CDerivedQuantityManager* Instance();
+  static void                     Destroy();
 
   // Functions
-  void addDerivedQuantity(CDerivedQuantity *DerivedQuantity);
-  CDerivedQuantity *getDerivedQuantity(string label);
-  void setInitialisationPhase(int newValue) { iInitialisationPhase = newValue; }
-  void validate();
-  void build();
-  void rebuild();
-  void calculate();
-  void calculate(int initialisationPhase);
+  void              addDerivedQuantity(CDerivedQuantity* DerivedQuantity);
+  CDerivedQuantity* getDerivedQuantity(string label);
+  void              setInitialisationPhase(int newValue) { iInitialisationPhase = newValue; }
+  void              validate();
+  void              build();
+  void              rebuild();
+  void              calculate();
+  void              calculate(int initialisationPhase);
   virtual ~CDerivedQuantityManager();
 
 protected:
@@ -41,8 +40,8 @@ protected:
   CDerivedQuantityManager();
 
   // Variables
-  vector<CDerivedQuantity *> vDerivedQuantities;
-  int iInitialisationPhase;
+  vector<CDerivedQuantity*> vDerivedQuantities;
+  int                       iInitialisationPhase;
 
 private:
   static boost::thread_specific_ptr<CDerivedQuantityManager> clInstance;

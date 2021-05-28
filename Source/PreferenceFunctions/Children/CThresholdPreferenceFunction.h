@@ -16,23 +16,22 @@
 //
 //
 //**********************************************************************
-class CThresholdPreferenceFunction : public CPreferenceFunction
-{
+class CThresholdPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CThresholdPreferenceFunction();
   virtual ~CThresholdPreferenceFunction();
-  CPreferenceFunction *clone() { return new CThresholdPreferenceFunction(*this); }
-  double getN() { return dN; }
-  double getLambda() { return dLambda; }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build();
+  CPreferenceFunction* clone() { return new CThresholdPreferenceFunction(*this); }
+  double               getN() { return dN; }
+  double               getLambda() { return dLambda; }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build();
 
 protected:
   // Variables
-  double dN;
-  double dLambda;
+  double         dN;
+  double         dLambda;
   vector<string> vCategories;
   vector<string> vSelectivities;
 };

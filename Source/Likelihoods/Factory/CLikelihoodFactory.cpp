@@ -9,15 +9,16 @@
 
 // Local headers
 #include "CLikelihoodFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../Children/CBinomialApproxLikelihood.h"
 #include "../Children/CBinomialLikelihood.h"
 #include "../Children/CBinomialwithQLikelihood.h"
+#include "../Children/CDirichletLikelihood.h"
 #include "../Children/CLogNormalLikelihood.h"
 #include "../Children/CLogNormalWithQLikelihood.h"
 #include "../Children/CMultinomialLikelihood.h"
-#include "../Children/CDirichletLikelihood.h"
 #include "../Children/CNormalLikelihood.h"
 #include "../Children/CPseudoLikelihood.h"
 
@@ -25,13 +26,10 @@
 // CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string type)
 // Build likelihood based on type
 //**********************************************************************
-CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string type)
-{
+CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string type) {
+  CLikelihood* pLikelihood = 0;
 
-  CLikelihood *pLikelihood = 0;
-
-  if (observationType == PARAM_ABUNDANCE)
-  {
+  if (observationType == PARAM_ABUNDANCE) {
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
     else if (type == PARAM_LOGNORMAL)
@@ -40,9 +38,7 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_BIOMASS)
-  {
+  } else if (observationType == PARAM_BIOMASS) {
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
     else if (type == PARAM_LOGNORMAL)
@@ -51,18 +47,14 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_PRESENCE)
-  {
+  } else if (observationType == PARAM_PRESENCE) {
     if (type == PARAM_BINOMIAL)
       pLikelihood = new CBinomialwithQLikelihood();
     else if (type == PARAM_PSEUDO)
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_PROPORTIONS_AT_AGE)
-  {
+  } else if (observationType == PARAM_PROPORTIONS_AT_AGE) {
     if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
@@ -73,9 +65,7 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_PROPORTIONS_BY_CATEGORY)
-  {
+  } else if (observationType == PARAM_PROPORTIONS_BY_CATEGORY) {
     if (type == PARAM_BINOMIAL_APPROX)
       pLikelihood = new CBinomialApproxLikelihood();
     else if (type == PARAM_BINOMIAL)
@@ -84,9 +74,7 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_PROPORTIONS_AT_LENGTH)
-  {
+  } else if (observationType == PARAM_PROPORTIONS_AT_LENGTH) {
     if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
@@ -97,9 +85,7 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else if (observationType == PARAM_PROPORTIONS_AT_LENGTH_BY_CATEGORY)
-  {
+  } else if (observationType == PARAM_PROPORTIONS_AT_LENGTH_BY_CATEGORY) {
     if (type == PARAM_BINOMIAL_APPROX)
       pLikelihood = new CBinomialApproxLikelihood();
     else if (type == PARAM_BINOMIAL)
@@ -108,8 +94,7 @@ CLikelihood *CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CPseudoLikelihood();
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
-  }
-  else
+  } else
     CError::errorUnknown(PARAM_OBSERVATION, observationType);
 
   return pLikelihood;

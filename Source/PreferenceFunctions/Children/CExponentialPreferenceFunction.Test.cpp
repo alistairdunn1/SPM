@@ -13,17 +13,15 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CPreferenceFunctionFactory.h"
 #include "../../TestFixtures/CLayer_Fixture.h"
+#include "../Factory/CPreferenceFunctionFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ExponentialPreferenceFunction_DoubleLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(ExponentialPreferenceFunction_DoubleLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_EXPONENTIAL, false));
 
   pPreference->addParameter(PARAM_LABEL, "exponential");
@@ -65,10 +63,8 @@ BOOST_FIXTURE_TEST_CASE(ExponentialPreferenceFunction_DoubleLayer, CLayer_Fixtur
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ExponentialPreferenceFunction_DistanceLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(ExponentialPreferenceFunction_DistanceLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_EXPONENTIAL, false));
 
   pPreference->addParameter(PARAM_LABEL, "exponential");

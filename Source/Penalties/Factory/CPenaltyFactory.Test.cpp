@@ -22,10 +22,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Penalty)
-{
-
-  CPenalty *pPenalty = 0;
+BOOST_AUTO_TEST_CASE(Build_Penalty) {
+  CPenalty* pPenalty = 0;
   BOOST_REQUIRE_NO_THROW(pPenalty = CPenaltyFactory::buildPenalty("", false));
   delete pPenalty;
 }
@@ -34,9 +32,7 @@ BOOST_AUTO_TEST_CASE(Build_Penalty)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_InvalidPenalty)
-{
-
+BOOST_AUTO_TEST_CASE(Build_InvalidPenalty) {
   BOOST_REQUIRE_THROW(CPenaltyFactory::buildPenalty(PARAM_ZERO, false), string);
 }
 

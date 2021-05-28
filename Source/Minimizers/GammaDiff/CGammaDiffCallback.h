@@ -20,16 +20,15 @@ class CEstimateManager;
 //
 //
 //**********************************************************************
-class CGammaDiffCallback : public CBaseObject
-{
+class CGammaDiffCallback : public CBaseObject {
 public:
   CGammaDiffCallback();
   virtual ~CGammaDiffCallback();
-  double operator()(const vector<double> &Parameters);
+  double operator()(const vector<double>& Parameters);
 
 protected:
   // Variables
-  CEstimateManager *pEstimateManager;
+  CEstimateManager* pEstimateManager;
 };
 
 #endif /* CGAMMADIFFCALLBACK_H_ */

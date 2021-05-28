@@ -13,8 +13,7 @@
 #include "../BaseClasses/CBaseExecute.h"
 
 // Structs
-struct SScore
-{
+struct SScore {
   string Label;
   double Score;
 };
@@ -23,11 +22,10 @@ struct SScore
 //
 //
 //**********************************************************************
-class CObjectiveFunction : public CBaseExecute
-{
+class CObjectiveFunction : public CBaseExecute {
 public:
-  static CObjectiveFunction *Instance();
-  static void Destroy();
+  static CObjectiveFunction* Instance();
+  static void                Destroy();
 
   // Functions
   double getScore() { return dScore; }
@@ -35,10 +33,10 @@ public:
   double getPriors() { return dPriors; }
   double getPenalties() { return dPenalties; }
 
-  int getScoreListCount() { return (int)vScoreList.size(); }
-  SScore *getScore(int Index);
-  void build(){};
-  void execute();
+  int     getScoreListCount() { return (int)vScoreList.size(); }
+  SScore* getScore(int Index);
+  void    build(){};
+  void    execute();
   virtual ~CObjectiveFunction();
 
 protected:

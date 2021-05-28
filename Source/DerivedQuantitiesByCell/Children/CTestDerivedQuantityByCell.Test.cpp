@@ -11,26 +11,24 @@
 #include <string>
 
 // Local Includes
-#include "CTestDerivedQuantityByCell.h"
-#include "../CDerivedQuantityByCellManager.h"
-#include "../CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../CDerivedQuantityByCell.h"
+#include "../CDerivedQuantityByCellManager.h"
+#include "CTestDerivedQuantityByCell.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(Test_Derived_QuantityByCell, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(Test_Derived_QuantityByCell, C1x1_Fixture) {
   CTestDerivedQuantityByCell tdq;
 
   /**

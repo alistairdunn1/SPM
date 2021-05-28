@@ -20,11 +20,8 @@ using boost::math::normal;
 // double CNormalDistribution::getCDF(double x, double mu, double sigma)
 // Get a a value from the normal CDF
 //**********************************************************************
-double CNormalDistribution::getCDF(double x, double mu, double sigma)
-{
-
-  if (sigma <= 0)
-  {
+double CNormalDistribution::getCDF(double x, double mu, double sigma) {
+  if (sigma <= 0) {
     if (x < mu)
       return 0;
     else if (x >= mu)
@@ -39,11 +36,8 @@ double CNormalDistribution::getCDF(double x, double mu, double sigma)
 // double CNormalDistribution::getQuantile(double x, double mu, double sigma)
 // Get a a value from the normal as quantiles
 //**********************************************************************
-double CNormalDistribution::getQuantile(double x, double mu, double sigma)
-{
-
-  if (sigma <= 0)
-  {
+double CNormalDistribution::getQuantile(double x, double mu, double sigma) {
+  if (sigma <= 0) {
     if (x < mu)
       return 0;
     else if (x >= mu)

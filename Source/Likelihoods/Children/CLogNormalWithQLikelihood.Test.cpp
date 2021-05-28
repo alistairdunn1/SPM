@@ -13,24 +13,23 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CLikelihoodFactory.h"
-#include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
-#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../../TestFixtures/C1x1_Fixture.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../Factory/CLikelihoodFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(LogNormalWithQLikelihood)
-{
+BOOST_AUTO_TEST_CASE(LogNormalWithQLikelihood) {
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_BIOMASS, PARAM_LOGNORMAL);
+  CLikelihood* pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_BIOMASS, PARAM_LOGNORMAL);
 
   // Generate data
   vector<string> keys;
@@ -39,18 +38,16 @@ BOOST_AUTO_TEST_CASE(LogNormalWithQLikelihood)
   vector<double> expected;
   vector<double> errorValue;
   vector<double> processError;
-  double delta = 1e-05;
+  double         delta = 1e-05;
 
-  for (int i = 0; i < 4; ++i)
-  {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("A");
     observed.push_back(0.25);
     expected.push_back(0.25);
     errorValue.push_back(0.0001);
     processError.push_back(0);
   }
-  for (int i = 0; i < 4; ++i)
-  {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("B");
     observed.push_back(0.25);
     expected.push_back(0.25);

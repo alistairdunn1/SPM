@@ -11,8 +11,8 @@
 #include <iostream>
 
 // Local headers
-#include "CAllValuesBoundedSelectivity.h"
 #include "../../Helpers/CError.h"
+#include "CAllValuesBoundedSelectivity.h"
 
 // Using
 using std::cout;
@@ -22,8 +22,7 @@ using std::endl;
 // CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
 // Default Constructor
 //**********************************************************************
-CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
-{
+CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
@@ -34,11 +33,8 @@ CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
 // void CAllValuesBoundedSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CAllValuesBoundedSelectivity::validate()
-{
-  try
-  {
-
+void CAllValuesBoundedSelectivity::validate() {
+  try {
     // Get our variables
     iL = pParameterList->getInt(PARAM_L);
     iH = pParameterList->getInt(PARAM_H);
@@ -59,13 +55,10 @@ void CAllValuesBoundedSelectivity::validate()
       CError::errorListNotSize(PARAM_V, (iH - iL));
 
     // Register our vector as estimable
-    for (int i = 0; i < (int)vVs.size(); ++i)
-      registerEstimable(PARAM_V, i, &vVs[i]);
+    for (int i = 0; i < (int)vVs.size(); ++i) registerEstimable(PARAM_V, i, &vVs[i]);
 
     iMinAge = pWorld->getMinAge();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -75,9 +68,7 @@ void CAllValuesBoundedSelectivity::validate()
 // double CAllValuesBoundedSelectivity::calculateResult(int Age)
 // Calculate a cached result for this selectivity
 //**********************************************************************
-double CAllValuesBoundedSelectivity::calculateResult(int Age)
-{
-
+double CAllValuesBoundedSelectivity::calculateResult(int Age) {
   double dRet = 0.0;
 
   if (Age < iL)
@@ -94,6 +85,4 @@ double CAllValuesBoundedSelectivity::calculateResult(int Age)
 // CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity()
 // Destructor
 //**********************************************************************
-CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity()
-{
-}
+CAllValuesBoundedSelectivity::~CAllValuesBoundedSelectivity() {}

@@ -16,13 +16,12 @@
 //
 //
 //**********************************************************************
-class CRandomNumberSeedReport : public CFileReport
-{
+class CRandomNumberSeedReport : public CFileReport {
 public:
   CRandomNumberSeedReport();
   virtual ~CRandomNumberSeedReport();
-  CReport *clone() { return new CRandomNumberSeedReport(*this); }
-  void execute();
+  CReport* clone() { return new CRandomNumberSeedReport(*this); }
+  void     execute();
 };
 
 #endif /* CRANDOMNUMBERSEEDREPORT_H_ */

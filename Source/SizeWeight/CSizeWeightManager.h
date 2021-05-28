@@ -19,19 +19,18 @@ class CSizeWeight;
 //
 //
 //**********************************************************************
-class CSizeWeightManager : public CBaseManager
-{
+class CSizeWeightManager : public CBaseManager {
 public:
-  static CSizeWeightManager *Instance();
-  static void Destroy();
+  static CSizeWeightManager* Instance();
+  static void                Destroy();
 
   // Functions
-  void clone(CSizeWeightManager *Manager);
-  void addSizeWeight(CSizeWeight *SizeWeight);
-  CSizeWeight *getSizeWeight(string label);
-  void validate();
-  void build();
-  void rebuild();
+  void         clone(CSizeWeightManager* Manager);
+  void         addSizeWeight(CSizeWeight* SizeWeight);
+  CSizeWeight* getSizeWeight(string label);
+  void         validate();
+  void         build();
+  void         rebuild();
   virtual ~CSizeWeightManager();
 
 protected:
@@ -39,7 +38,7 @@ protected:
   CSizeWeightManager();
 
   // Variables
-  vector<CSizeWeight *> vSizeWeights;
+  vector<CSizeWeight*> vSizeWeights;
 
 private:
   // Variables

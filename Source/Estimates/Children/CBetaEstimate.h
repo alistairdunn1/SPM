@@ -14,12 +14,11 @@
 /**
  * class definition
  */
-class CBetaEstimate : public CEstimate
-{
+class CBetaEstimate : public CEstimate {
 public:
   CBetaEstimate();
   virtual ~CBetaEstimate() = default;
-  void validate();
+  void   validate();
   double getScore();
 
 protected:

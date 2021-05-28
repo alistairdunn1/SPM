@@ -10,8 +10,8 @@
 #define CMCMCOBJECTIVESREPORT_H_
 
 // Local headers
-#include "Base/CFileReport.h"
 #include "../../MCMC/CMCMC.h"
+#include "Base/CFileReport.h"
 
 // Forward-Declaration
 class CMCMC;
@@ -20,21 +20,20 @@ class CMCMC;
 //
 //
 //**********************************************************************
-class CMCMCObjectivesReport : public CFileReport
-{
+class CMCMCObjectivesReport : public CFileReport {
 public:
   CMCMCObjectivesReport();
   virtual ~CMCMCObjectivesReport();
-  CReport *clone() { return new CMCMCObjectivesReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CMCMCObjectivesReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sMCMC;
-  CMCMC *pMCMC;
+  string     sMCMC;
+  CMCMC*     pMCMC;
   SChainItem vChain;
-  bool bWrittenHeader;
+  bool       bWrittenHeader;
 };
 
 #endif /* CMCMCOBJECTIVESREPORT_H_ */

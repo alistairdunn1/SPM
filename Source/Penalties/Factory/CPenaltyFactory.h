@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CPenaltyFactory
-{
+class CPenaltyFactory {
 public:
   // Functions
-  static CPenalty *buildPenalty(string type, bool registerWithManager = true);
+  static CPenalty* buildPenalty(string type, bool registerWithManager = true);
 
 private:
   // Functions

@@ -10,21 +10,21 @@
 #ifndef DERIVEDQUANTITY_H_
 #define DERIVEDQUANTITY_H_
 
-const string derived_quantity =
-    "@derived_quantity derived_quantity\n"
-    "type abundance\n"
-    "time_step step_one\n"
-    "categories immature mature spawning\n"
-    "layer double\n"
-    "selectivities constant constant constant\n";
+const string derived_quantity
+    = "@derived_quantity derived_quantity\n"
+      "type abundance\n"
+      "time_step step_one\n"
+      "categories immature mature spawning\n"
+      "layer double\n"
+      "selectivities constant constant constant\n";
 
-const string derived_quantity_ssb =
-    "@derived_quantity ssb\n"
-    "type abundance\n"
-    "time_step step_one\n"
-    "categories mature\n"
-    "layer double_one\n"
-    "selectivities constant\n";
+const string derived_quantity_ssb
+    = "@derived_quantity ssb\n"
+      "type abundance\n"
+      "time_step step_one\n"
+      "categories mature\n"
+      "layer double_one\n"
+      "selectivities constant\n";
 
 #endif /* DERIVEDQUANTITY_H_ */
 #endif /* TEST */

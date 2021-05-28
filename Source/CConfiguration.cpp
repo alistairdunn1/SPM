@@ -9,38 +9,37 @@
 
 // Local Headers
 #include "CConfiguration.h"
+
 #include "Translations/Translations.h"
 
 // Singleton Variable
-CConfiguration *CConfiguration::clInstance = 0;
+CConfiguration* CConfiguration::clInstance = 0;
 
 //**********************************************************************
 // CConfiguration::CConfiguration()
 // Default Constructor
 //**********************************************************************
-CConfiguration::CConfiguration()
-{
+CConfiguration::CConfiguration() {
   // Variables
-  bQuietMode = false;
-  bPopulateWithDummyData = false;
-  sConfigFile = "config.spm";
-  sEstimateValuesFile = "";
-  iNumberOfThreads = 0;
-  bUseEstimateValues = false;
-  iSimulationCandidates = 0;
-  bSuffixFileOutput = false;
-  bDisableReports = false;
-  iRandomSeed = 123;
+  bQuietMode                    = false;
+  bPopulateWithDummyData        = false;
+  sConfigFile                   = "config.spm";
+  sEstimateValuesFile           = "";
+  iNumberOfThreads              = 0;
+  bUseEstimateValues            = false;
+  iSimulationCandidates         = 0;
+  bSuffixFileOutput             = false;
+  bDisableReports               = false;
+  iRandomSeed                   = 123;
   iNumberSuppliedEstimateValues = 0;
-  bWasInputFileSupplied = false;
+  bWasInputFileSupplied         = false;
 }
 
 //**********************************************************************
 // CConfiguration* CConfiguration::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CConfiguration *CConfiguration::Instance()
-{
+CConfiguration* CConfiguration::Instance() {
   if (clInstance == 0)
     clInstance = new CConfiguration();
 
@@ -51,10 +50,8 @@ CConfiguration *CConfiguration::Instance()
 // void CConfiguration::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CConfiguration::Destroy()
-{
-  if (clInstance != 0)
-  {
+void CConfiguration::Destroy() {
+  if (clInstance != 0) {
     delete clInstance;
     clInstance = 0;
   }
@@ -64,8 +61,7 @@ void CConfiguration::Destroy()
 //
 //
 //**********************************************************************
-void CConfiguration::addCommandLineParameter(string value)
-{
+void CConfiguration::addCommandLineParameter(string value) {
   vCommandLineParameters.push_back(value);
 }
 
@@ -73,8 +69,7 @@ void CConfiguration::addCommandLineParameter(string value)
 //
 //
 //**********************************************************************
-string CConfiguration::getCommandLineParameter(int index)
-{
+string CConfiguration::getCommandLineParameter(int index) {
   return vCommandLineParameters[index];
 }
 
@@ -82,8 +77,7 @@ string CConfiguration::getCommandLineParameter(int index)
 //
 //
 //**********************************************************************
-void CConfiguration::setNumberOfThreads(int value)
-{
+void CConfiguration::setNumberOfThreads(int value) {
   if (value < 1)
     iNumberOfThreads = 1;
   else
@@ -94,6 +88,4 @@ void CConfiguration::setNumberOfThreads(int value)
 // CConfiguration::~CConfiguration()
 // Default De-Constructor
 //**********************************************************************
-CConfiguration::~CConfiguration()
-{
-}
+CConfiguration::~CConfiguration() {}

@@ -25,22 +25,21 @@ class CWorldSquare;
 //
 //
 //**********************************************************************
-class CLayerDerivedWorldView : public CBaseExecute
-{
+class CLayerDerivedWorldView : public CBaseExecute {
 public:
-  CLayerDerivedWorldView(CCategoricalLayer *sourceLayer);
+  CLayerDerivedWorldView(CCategoricalLayer* sourceLayer);
   virtual ~CLayerDerivedWorldView();
-  CWorldSquare *getSquare(string area);
-  vector<CWorldSquare *> getWorldSquares(string area);
-  void cleanUp();
-  void build();
-  void execute();
+  CWorldSquare*         getSquare(string area);
+  vector<CWorldSquare*> getWorldSquares(string area);
+  void                  cleanUp();
+  void                  build();
+  void                  execute();
 
 protected:
   // Variables
-  CCategoricalLayer *pSourceLayer;
-  map<string, vector<CWorldSquare *>> mvAreas;
-  map<string, CWorldSquare *> mView;
+  CCategoricalLayer*                 pSourceLayer;
+  map<string, vector<CWorldSquare*>> mvAreas;
+  map<string, CWorldSquare*>         mView;
 };
 
 #endif /* CLAYERDERIVEDWORLDVIEW_H_ */

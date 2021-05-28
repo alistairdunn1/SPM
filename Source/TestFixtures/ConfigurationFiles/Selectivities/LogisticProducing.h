@@ -10,13 +10,13 @@
 #ifndef LOGISTICPRODUCING_H_
 #define LOGISTICPRODUCING_H_
 
-const string logistic_producing =
-    "@selectivity logistic_producing\n"
-    "type logistic_producing\n"
-    "l 5\n"
-    "h 30\n"
-    "a50 8\n"
-    "ato95 3\n";
+const string logistic_producing
+    = "@selectivity logistic_producing\n"
+      "type logistic_producing\n"
+      "l 5\n"
+      "h 30\n"
+      "a50 8\n"
+      "ato95 3\n";
 
 #endif /* LOGISTICPRODUCING_H_ */
 #endif /* TEST */

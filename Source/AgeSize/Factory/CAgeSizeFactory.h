@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CAgeSizeFactory
-{
+class CAgeSizeFactory {
 public:
   // Functions
-  static CAgeSize *buildAgeSize(string type, bool registerWithManager = true);
+  static CAgeSize* buildAgeSize(string type, bool registerWithManager = true);
 
 private:
   // Functions

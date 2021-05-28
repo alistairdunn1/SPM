@@ -11,10 +11,10 @@
 #include <iostream>
 
 // Local headers
-#include "CAgeingErrorManager.h"
-#include "CAgeingError.h"
-#include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "CAgeingError.h"
+#include "CAgeingErrorManager.h"
 
 // Using
 using std::cout;
@@ -27,16 +27,13 @@ boost::thread_specific_ptr<CAgeingErrorManager> CAgeingErrorManager::clInstance;
 // CAgeingErrorManager::CAgeingErrorManager()
 // Default Constructor
 //**********************************************************************
-CAgeingErrorManager::CAgeingErrorManager()
-{
-}
+CAgeingErrorManager::CAgeingErrorManager() {}
 
 //**********************************************************************
 // CAgeingErrorManager* CAgeingErrorManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CAgeingErrorManager *CAgeingErrorManager::Instance()
-{
+CAgeingErrorManager* CAgeingErrorManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CAgeingErrorManager());
   return clInstance.get();
@@ -46,10 +43,8 @@ CAgeingErrorManager *CAgeingErrorManager::Instance()
 // void CAgeingErrorManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CAgeingErrorManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CAgeingErrorManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -58,21 +53,15 @@ void CAgeingErrorManager::Destroy()
 // void CAgeingErrorManager::clone(CAgeingErrorManager *Manager)
 // Clone our Ageing Errors for multi-threaded use
 //**********************************************************************
-void CAgeingErrorManager::clone(CAgeingErrorManager *Manager)
-{
-
-  foreach (CAgeingError *ageingError, Manager->vAgeingErrors)
-  {
-    vAgeingErrors.push_back(ageingError->clone());
-  }
+void CAgeingErrorManager::clone(CAgeingErrorManager* Manager) {
+  foreach (CAgeingError* ageingError, Manager->vAgeingErrors) { vAgeingErrors.push_back(ageingError->clone()); }
 }
 
 //**********************************************************************
 // void CAgeingErrorManager::addAgeingError(CAgeingError *ageingError)
 // Add Ageing Error to the List
 //**********************************************************************
-void CAgeingErrorManager::addAgeingError(CAgeingError *ageingError)
-{
+void CAgeingErrorManager::addAgeingError(CAgeingError* ageingError) {
   vAgeingErrors.push_back(ageingError);
 }
 
@@ -80,20 +69,15 @@ void CAgeingErrorManager::addAgeingError(CAgeingError *ageingError)
 // CAgeingError* CAgeingErrorManager::getAgeingError(string label)
 // Get our Ageing Error
 //**********************************************************************
-CAgeingError *CAgeingErrorManager::getAgeingError(string label)
-{
-  try
-  {
-    foreach (CAgeingError *ageingError, vAgeingErrors)
-    {
+CAgeingError* CAgeingErrorManager::getAgeingError(string label) {
+  try {
+    foreach (CAgeingError* ageingError, vAgeingErrors) {
       if (ageingError->getLabel() == label)
         return ageingError;
     }
 
     CError::errorUnknown(PARAM_AGEING_ERROR, label);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAgeingErrorManager.getAgeingError(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -105,19 +89,13 @@ CAgeingError *CAgeingErrorManager::getAgeingError(string label)
 // void CAgeingErrorManager::validate()
 // Validate our Ageing Errors
 //**********************************************************************
-void CAgeingErrorManager::validate()
-{
-  try
-  {
-    foreach (CAgeingError *ageingError, vAgeingErrors)
-    {
-      ageingError->validate();
-    }
+void CAgeingErrorManager::validate() {
+  try {
+    foreach (CAgeingError* ageingError, vAgeingErrors) { ageingError->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CAgeingError *ageingError, vAgeingErrors)
-    {
+    foreach (CAgeingError* ageingError, vAgeingErrors) {
       // Increase Count for this label
       mLabelList[ageingError->getLabel()] += 1;
 
@@ -125,9 +103,7 @@ void CAgeingErrorManager::validate()
       if (mLabelList[ageingError->getLabel()] > 1)
         CError::errorDuplicate(PARAM_AGEING_ERROR, ageingError->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAgeingErrorManager.validate()->" + Ex;
     throw Ex;
   }
@@ -137,17 +113,10 @@ void CAgeingErrorManager::validate()
 // void CAgeingErrorManager::build()
 // Build our AgeingErrors
 //**********************************************************************
-void CAgeingErrorManager::build()
-{
-  try
-  {
-    foreach (CAgeingError *ageingError, vAgeingErrors)
-    {
-      ageingError->build();
-    }
-  }
-  catch (string &Ex)
-  {
+void CAgeingErrorManager::build() {
+  try {
+    foreach (CAgeingError* ageingError, vAgeingErrors) { ageingError->build(); }
+  } catch (string& Ex) {
     Ex = "CAgeingErrorManager.build()->" + Ex;
     throw Ex;
   }
@@ -157,17 +126,10 @@ void CAgeingErrorManager::build()
 // void CAgeingErrorManager::rebuild()
 // Rebuild our ageing errors
 //**********************************************************************
-void CAgeingErrorManager::rebuild()
-{
-  try
-  {
-    foreach (CAgeingError *ageingError, vAgeingErrors)
-    {
-      ageingError->rebuild();
-    }
-  }
-  catch (string &Ex)
-  {
+void CAgeingErrorManager::rebuild() {
+  try {
+    foreach (CAgeingError* ageingError, vAgeingErrors) { ageingError->rebuild(); }
+  } catch (string& Ex) {
     Ex = "CAgeingErrorManager.rebuild()->" + Ex;
     throw Ex;
   }
@@ -177,10 +139,6 @@ void CAgeingErrorManager::rebuild()
 // CAgeingErrorManager::~CAgeingErrorManager()
 // Destructor
 //**********************************************************************
-CAgeingErrorManager::~CAgeingErrorManager()
-{
-  foreach (CAgeingError *ageingError, vAgeingErrors)
-  {
-    delete ageingError;
-  }
+CAgeingErrorManager::~CAgeingErrorManager() {
+  foreach (CAgeingError* ageingError, vAgeingErrors) { delete ageingError; }
 }

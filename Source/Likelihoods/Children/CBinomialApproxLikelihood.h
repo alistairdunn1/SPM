@@ -10,24 +10,23 @@
 #define CBINOMIALAPPROXLIKELIHOOD_H_
 
 // Local headers
-#include "../CLikelihood.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../CLikelihood.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CBinomialApproxLikelihood : public CLikelihood
-{
+class CBinomialApproxLikelihood : public CLikelihood {
 public:
   // Functions
   CBinomialApproxLikelihood();
   virtual ~CBinomialApproxLikelihood();
   double adjustErrorValue(const double processError, const double errorValue);
-  void getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
-                 const vector<double> &errorValue, const vector<double> &processError, const double delta);
-  void simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
-                        const vector<double> &errorValue, const vector<double> &processError, const double delta);
+  void   getResult(vector<double>& scores, const vector<double>& expected, const vector<double>& observed, const vector<double>& errorValue, const vector<double>& processError,
+                   const double delta);
+  void simulateObserved(const vector<string>& keys, vector<double>& observed, const vector<double>& expected, const vector<double>& errorValue, const vector<double>& processError,
+                        const double delta);
 };
 
 #endif /* CBINOMIALAPPROXLIKELIHOOD_H_ */

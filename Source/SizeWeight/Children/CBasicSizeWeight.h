@@ -15,17 +15,16 @@
 //
 //
 //**********************************************************************
-class CBasicSizeWeight : public CSizeWeight
-{
+class CBasicSizeWeight : public CSizeWeight {
 public:
   // Functions
   CBasicSizeWeight();
   virtual ~CBasicSizeWeight();
-  CSizeWeight *clone() { return new CBasicSizeWeight(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  double getMeanWeight(double &size, string &distribution, double &cv);
+  CSizeWeight* clone() { return new CBasicSizeWeight(*this); }
+  void         validate();
+  void         build();
+  void         rebuild();
+  double       getMeanWeight(double& size, string& distribution, double& cv);
 
 protected:
   double dA;

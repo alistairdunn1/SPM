@@ -1,0 +1,188 @@
+# Model Structure
+@model
+nrows 14
+ncols 49
+layer Base
+categories  mature
+min_age 1
+max_age 15
+age_plus_group True
+initialisation_phases Phase1  
+initial_year 1986
+current_year 2016
+cell_length 5
+time_steps zero one two three
+age_size VB  
+
+@age_size VB # based on Judy's spreadsheet
+type von_bertalanffy
+size_weight basic
+k      0.3
+t0     0.0
+linf    10 #cm
+
+@size_weight basic # tube
+type basic
+a 1e-008
+b 3
+
+# Initialisation
+@initialisation_phase Phase1
+years 100
+time_steps phase1 phase3
+lambda 1e-7
+lambda_years 80 100
+
+@time_step phase1
+processes Recruitment  halfM halfM
+
+@time_step phase3
+processes Ageing
+
+# Annual Cycle
+@time_step zero # Summer
+processes Recruitment  halfM
+
+@time_step one # End summer and fishing
+processes Fishing
+
+@time_step two # Winter
+processes halfM   
+
+@time_step three # End winter and Ageing
+processes Ageing
+
+# Derived layers
+@layer SSB_layer
+type biomass
+categories mature
+selectivities One
+
+# Derived quantities
+@derived_quantity SSB
+type biomass
+time_step two
+categories mature
+selectivities One
+layer Base
+initialisation_time_steps phase1 
+
+# Population processes
+@process Ageing
+type ageing
+categories  mature
+
+@process Recruitment
+type bh_recruitment
+categories mature
+proportions 1.0
+r0  25000
+age 1
+ssb SSB
+b0 Phase1 #Phase3
+ssb_offset 2
+standardise_YCS_years 1986-2006
+#ycs_years 1986-2014
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+layer Recruitment
+
+@process halfM # M = 0.1 from Williams 2009
+type constant_mortality_rate
+categories  mature
+M 0.15 
+selectivities One 
+
+{
+# this is using the rate by event that's not working yet - can't have two layers in the same module
+@process Fishing
+type layer_varying_exploitation_rate_by_event
+categories mature
+U 0.1
+U_max 0.999
+selectivities One
+years 1990 2001
+layers FootprintFish1990 FootprintFish1990
+event_layers TrawlsFish1990 TrawlsFish1990
+}
+
+# this is using the meta-layers, but the results are wrong
+@process Fishing
+type constant_exploitation_rate
+U 0.1
+U_max 0.999
+categories mature
+selectivities One
+layer AnnualFootprint 
+
+@layer AnnualFootprint
+type numeric_meta
+default_layer Zero
+years 1990 2001
+layers FootprintFish1990 FootprintFish1990
+
+{
+# this is the one similar to the meta-layers 
+@process Fishing
+type layer_varying_exploitation_rate_by_event
+categories mature
+U 0.1
+U_max 0.999
+selectivities One
+years 1990 2001
+layers FootprintFish1990 FootprintFish1990
+event_layers TrawlsFish1990 TrawlsFish1990
+}
+
+
+# Definition of layers
+@include "../layers/Base.spm"
+@include "../layers/Cell.spm"
+@include "../layers/Constant.spm"
+@include "../SpatialDeltaGLMM_R3c/Recruitment.spm"
+
+@include "../layers/FootprintFish1990.spm"
+@include "../layers/Zero.spm"
+#@include "../layers/TrawlsFish1990.spm"
+
+# Definition of selectivities
+@selectivity One
+type constant
+c 1
+
+@selectivity surveySel
+type constant
+c 1
+
+{
+@selectivity Maturation # based on Hau's thesis - median of males and femailes
+type logistic_producing
+L 1
+H 15
+a50 2
+ato95 2
+}
+{
+type logistic
+a50 11
+ato95 14
+
+@selectivity FishingSel
+type logistic
+a50    5 #6.91642
+ato95  2 #2.70004
+
+}
+# CATCHABILITY
+@catchability TANq
+q 0.2
+
+
+# Estimation Section
+@include "estimation.spm"
+
+# Observation Section
+@include "observations.spm"
+
+# Report Section
+@include "report.spm"

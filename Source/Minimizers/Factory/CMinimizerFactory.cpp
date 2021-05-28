@@ -9,20 +9,19 @@
 
 // Local headers
 #include "CMinimizerFactory.h"
-#include "../CMinimizerManager.h"
+
+#include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
+#include "../CMinimizerManager.h"
 #include "../DESolver/CDESolver.h"
 #include "../GammaDiff/CGammaDiff.h"
-#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CMinimizer* CMinimizerFactory::buildMinimizer(string type)
 // Build our Minimizer based on type
 //**********************************************************************
-CMinimizer *CMinimizerFactory::buildMinimizer(string type, bool registerWithManager)
-{
-
-  CMinimizer *pMinimizer = 0;
+CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithManager) {
+  CMinimizer* pMinimizer = 0;
 
   if (type == PARAM_GAMMADIFF)
     pMinimizer = new CGammaDiff();

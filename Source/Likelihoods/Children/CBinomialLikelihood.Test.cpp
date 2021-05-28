@@ -13,19 +13,18 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CLikelihoodFactory.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../Factory/CLikelihoodFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(BinomialLikelihood)
-{
+BOOST_AUTO_TEST_CASE(BinomialLikelihood) {
   CRandomNumberGenerator::Instance()->Reset(31373u);
 
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_BINOMIAL);
+  CLikelihood* pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_BINOMIAL);
 
   vector<string> keys;
   vector<double> scores;
@@ -33,7 +32,7 @@ BOOST_AUTO_TEST_CASE(BinomialLikelihood)
   vector<double> observed;
   vector<double> errorValue;
   vector<double> processError;
-  double delta = 1e-05;
+  double         delta = 1e-05;
 
   // Test case 1
   keys.push_back("A");

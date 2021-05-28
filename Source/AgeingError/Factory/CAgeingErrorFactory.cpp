@@ -9,20 +9,19 @@
 
 // Local headers
 #include "CAgeingErrorFactory.h"
+
+#include "../../Helpers/CError.h"
 #include "../CAgeingError.h"
 #include "../CAgeingErrorManager.h"
-#include "../Children/COffByOneAgeingError.h"
 #include "../Children/CNormalAgeingError.h"
-#include "../../Helpers/CError.h"
+#include "../Children/COffByOneAgeingError.h"
 
 //**********************************************************************
 // CAgeingError* CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager)
 //
 //**********************************************************************
-CAgeingError *CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager)
-{
-
-  CAgeingError *pError = 0;
+CAgeingError* CAgeingErrorFactory::buildAgeingError(string type, bool registerWithManager) {
+  CAgeingError* pError = 0;
 
   if (type == PARAM_NONE)
     pError = new CAgeingError();

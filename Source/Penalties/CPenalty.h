@@ -16,8 +16,7 @@
 //
 //
 //**********************************************************************
-class CPenalty : public CBaseValidate
-{
+class CPenalty : public CBaseValidate {
 public:
   // Functions
   CPenalty();
@@ -27,7 +26,7 @@ public:
 
 protected:
   // Variables
-  bool bLogScale;
+  bool   bLogScale;
   double dMultiplier;
 };
 

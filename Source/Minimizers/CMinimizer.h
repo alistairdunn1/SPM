@@ -22,32 +22,31 @@ using namespace boost::numeric;
 // class CMinimzer
 //
 //**********************************************************************
-class CMinimizer : public CBaseBuild
-{
+class CMinimizer : public CBaseBuild {
 public:
   // Functions
   CMinimizer();
   virtual ~CMinimizer();
-  bool getBuildCovariance() { return bCovariance; }
-  double getHessianValue(int row, int col) { return pHessian[row][col]; }
-  double getCovarianceValue(int row, int col);
-  double getCorrelationValue(int row, int col);
-  ublas::matrix<double> &getCovarianceMatrix() { return mxCovariance; }
-  int getEstimateCount() { return iEstimateCount; }
-  bool getCovarianceError() { return bCovarianceError; }
-  void buildCovarianceMatrix();
-  virtual void runEstimation() = 0;
-  virtual void validate();
-  virtual void build();
+  bool                   getBuildCovariance() { return bCovariance; }
+  double                 getHessianValue(int row, int col) { return pHessian[row][col]; }
+  double                 getCovarianceValue(int row, int col);
+  double                 getCorrelationValue(int row, int col);
+  ublas::matrix<double>& getCovarianceMatrix() { return mxCovariance; }
+  int                    getEstimateCount() { return iEstimateCount; }
+  bool                   getCovarianceError() { return bCovarianceError; }
+  void                   buildCovarianceMatrix();
+  virtual void           runEstimation() = 0;
+  virtual void           validate();
+  virtual void           build();
 
 protected:
   // Variables
-  double **pHessian;
+  double**              pHessian;
   ublas::matrix<double> mxCovariance;
   ublas::matrix<double> mxCorrelation;
-  int iEstimateCount;
-  bool bCovariance;
-  bool bCovarianceError;
+  int                   iEstimateCount;
+  bool                  bCovariance;
+  bool                  bCovarianceError;
 };
 
 #endif /*CMINIMIZER_H_*/

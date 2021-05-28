@@ -8,22 +8,22 @@
 //============================================================================
 
 // Global Headers
-#include <iostream>
 #include <boost/lexical_cast.hpp>
+#include <iostream>
 
 // Local headers
-#include "CEventMortalityProcess.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../Penalties/CPenaltyManager.h"
-#include "../../Penalties/CPenalty.h"
-#include "../../Selectivities/CSelectivity.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
-#include "../../Helpers/CComparer.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Penalties/CPenalty.h"
+#include "../../Penalties/CPenaltyManager.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "CEventMortalityProcess.h"
 
 // Using
 using std::cout;
@@ -33,13 +33,12 @@ using std::endl;
 // CEventMortalityProcess::CEventMortalityProcess()
 // Default Constructor
 //**********************************************************************
-CEventMortalityProcess::CEventMortalityProcess()
-{
+CEventMortalityProcess::CEventMortalityProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
-  sType = PARAM_EVENT_MORTALITY;
-  bRequiresMerge = false;
-  pPenalty = 0;
+  sType            = PARAM_EVENT_MORTALITY;
+  bRequiresMerge   = false;
+  pPenalty         = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -54,8 +53,7 @@ CEventMortalityProcess::CEventMortalityProcess()
 // int CEventMortalityProcess::getYears(int index)
 // Return the years entry from vector @ index
 //**********************************************************************
-int CEventMortalityProcess::getYears(int index)
-{
+int CEventMortalityProcess::getYears(int index) {
   return vYearsList[index];
 }
 
@@ -63,8 +61,7 @@ int CEventMortalityProcess::getYears(int index)
 // string CEventMortalityProcess::getLayers(int index)
 // Return the layers entry in vector at index
 //**********************************************************************
-string CEventMortalityProcess::getLayers(int index)
-{
+string CEventMortalityProcess::getLayers(int index) {
   return vLayersList[index];
 }
 
@@ -72,13 +69,10 @@ string CEventMortalityProcess::getLayers(int index)
 // void CEventMortalityProcess:validate()
 // Validate This
 //**********************************************************************
-void CEventMortalityProcess::validate()
-{
-  try
-  {
-
+void CEventMortalityProcess::validate() {
+  try {
     // Get our Parameters
-    dUMax = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    dUMax    = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
     sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
@@ -101,15 +95,12 @@ void CEventMortalityProcess::validate()
 
     // Duplicate Year check
     map<int, int> mYears;
-    foreach (int Year, vYearsList)
-    {
+    foreach (int Year, vYearsList) {
       mYears[Year]++;
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -119,23 +110,19 @@ void CEventMortalityProcess::validate()
 // void CEventMortalityProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CEventMortalityProcess::build()
-{
-  try
-  {
+void CEventMortalityProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
     // Build our Layer Index
-    CLayerManager *pLayerManager = CLayerManager::Instance();
+    CLayerManager* pLayerManager = CLayerManager::Instance();
     pLayerManager->fillVector(vLayersIndex, vLayersList);
 
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -145,21 +132,17 @@ void CEventMortalityProcess::build()
 // void CEventMortalityProcess::execute()
 // execute this Process
 //**********************************************************************
-void CEventMortalityProcess::execute()
-{
+void CEventMortalityProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // See if we are suppose to be executing first
-    bYearMatch = false;
+    bYearMatch   = false;
     iCurrentYear = pTimeStepManager->getCurrentYear();
-    for (int i = 0; i < (int)vYearsList.size(); ++i)
-    {
-      if (vYearsList[i] == iCurrentYear)
-      {
+    for (int i = 0; i < (int)vYearsList.size(); ++i) {
+      if (vYearsList[i] == iCurrentYear) {
         bYearMatch = true;
-        pLayer = vLayersIndex[i];
+        pLayer     = vLayersIndex[i];
         break;
       }
     }
@@ -176,10 +159,8 @@ void CEventMortalityProcess::execute()
     CProcess::execute();
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -191,10 +172,8 @@ void CEventMortalityProcess::execute()
         dVulnerable = 0.0;
 
         // Loop Through Categories & Work out Vulnerable Stock
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             if (dCurrent < 0.0)
               dCurrent = 0.0;
@@ -205,25 +184,19 @@ void CEventMortalityProcess::execute()
 
         // Work out exploitation rate to remove (catch/vulnerableNumber)
         dExploitation = dCatch / CMath::zeroFun(dVulnerable, ZERO);
-        if (dExploitation > dUMax)
-        {
+        if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0)
-          { // Throw Penalty
+          if (pPenalty != 0) {  // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
-        }
-        else if (dExploitation < ZERO)
-        {
+        } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
           continue;
         }
 
         // Loop Through Categories & remove number based on calculated exploitation rate
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
             // If is Zero, Cont
@@ -237,9 +210,7 @@ void CEventMortalityProcess::execute()
       }
     }
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -250,6 +221,4 @@ void CEventMortalityProcess::execute()
 // CEventMortalityProcess::~CEventMortalityProcess()
 // Default De-Constructor
 //**********************************************************************
-CEventMortalityProcess::~CEventMortalityProcess()
-{
-}
+CEventMortalityProcess::~CEventMortalityProcess() {}

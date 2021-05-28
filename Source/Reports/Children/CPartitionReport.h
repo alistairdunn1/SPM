@@ -19,23 +19,22 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CPartitionReport : public CFileReport
-{
+class CPartitionReport : public CFileReport {
 public:
   // Functions
   CPartitionReport();
   virtual ~CPartitionReport();
-  CReport *clone() { return new CPartitionReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CPartitionReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  vector<int> vYear;
-  int iTimeStep;
-  string sTimeStep;
-  CTimeStepManager *pTimeStepManager;
+  vector<int>       vYear;
+  int               iTimeStep;
+  string            sTimeStep;
+  CTimeStepManager* pTimeStepManager;
 };
 
 #endif /* CPARTITIONREPORT_H_ */

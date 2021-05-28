@@ -13,8 +13,7 @@
 //
 //
 //**********************************************************************
-class CTestDerivedQuantityByCell : public CDerivedQuantityByCell
-{
+class CTestDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
   CTestDerivedQuantityByCell();
   virtual ~CTestDerivedQuantityByCell();

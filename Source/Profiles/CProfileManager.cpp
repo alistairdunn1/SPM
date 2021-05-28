@@ -9,14 +9,15 @@
 
 // Local Headers
 #include "CProfileManager.h"
-#include "CProfile.h"
-#include "../Minimizers/CMinimizerManager.h"
-#include "../Estimates/CEstimateManager.h"
+
+#include "../CRuntimeController.h"
 #include "../Estimates/CEstimate.h"
-#include "../Reports/CReportManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
-#include "../CRuntimeController.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../Reports/CReportManager.h"
+#include "CProfile.h"
 
 // Singleton Var
 boost::thread_specific_ptr<CProfileManager> CProfileManager::clInstance;
@@ -25,16 +26,13 @@ boost::thread_specific_ptr<CProfileManager> CProfileManager::clInstance;
 // CProfileManager::CProfileManager()
 // Default Constructor
 //**********************************************************************
-CProfileManager::CProfileManager()
-{
-}
+CProfileManager::CProfileManager() {}
 
 //**********************************************************************
 // CProfileManager* CProfileManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CProfileManager *CProfileManager::Instance()
-{
+CProfileManager* CProfileManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CProfileManager());
   return clInstance.get();
@@ -44,10 +42,8 @@ CProfileManager *CProfileManager::Instance()
 // void CProfileManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CProfileManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CProfileManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -56,8 +52,7 @@ void CProfileManager::Destroy()
 // void CProfileManager::addProfile(CProfile *Profile)
 // add Profile to our List
 //**********************************************************************
-void CProfileManager::addProfile(CProfile *Profile)
-{
+void CProfileManager::addProfile(CProfile* Profile) {
   vProfileList.push_back(Profile);
 }
 
@@ -65,17 +60,13 @@ void CProfileManager::addProfile(CProfile *Profile)
 // CProfile* CProfileManager::getProfile(int index)
 // Get profile from our vector @ index
 //**********************************************************************
-CProfile *CProfileManager::getProfile(int index)
-{
-  try
-  {
+CProfile* CProfileManager::getProfile(int index) {
+  try {
     if (index >= (int)vProfileList.size())
       CError::errorGreaterThan(PARAM_INDEX, PARAM_PROFILES);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfileManager.getProfile()->" + Ex;
     throw Ex;
   }
@@ -87,19 +78,13 @@ CProfile *CProfileManager::getProfile(int index)
 // void CProfileManager::clone(CProfileManager *Manager)
 // Clone the CProfileManager with param
 //**********************************************************************
-void CProfileManager::clone(CProfileManager *Manager)
-{
-  try
-  {
-
-    for (int i = 0; i < Manager->getProfileCount(); ++i)
-    {
-      CProfile *pProfile = Manager->getProfile(i);
+void CProfileManager::clone(CProfileManager* Manager) {
+  try {
+    for (int i = 0; i < Manager->getProfileCount(); ++i) {
+      CProfile* pProfile = Manager->getProfile(i);
       vProfileList.push_back(pProfile->clone());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfileManager.clone()->" + Ex;
     throw Ex;
   }
@@ -109,13 +94,11 @@ void CProfileManager::clone(CProfileManager *Manager)
 // void CProfileManager::validate()
 // Validate our Profiles
 //**********************************************************************
-void CProfileManager::validate()
-{
-  try
-  {
+void CProfileManager::validate() {
+  try {
     // Variables
     map<string, int> mParameterList;
-    ERunMode eRunMode = CRuntimeController::Instance()->getRunMode();
+    ERunMode         eRunMode = CRuntimeController::Instance()->getRunMode();
 
     // Check Run Mode
     if (eRunMode == RUN_MODE_PROFILE)
@@ -123,8 +106,7 @@ void CProfileManager::validate()
         CError::errorMissing(PARAM_PROFILES);
 
     // Check For Duplicates
-    foreach (CProfile *Profile, vProfileList)
-    {
+    foreach (CProfile* Profile, vProfileList) {
       mParameterList[Profile->getParameter()] += 1;
 
       if (mParameterList[Profile->getParameter()] > 1)
@@ -132,13 +114,8 @@ void CProfileManager::validate()
     }
 
     // Validate The Parameters
-    foreach (CProfile *Profile, vProfileList)
-    {
-      Profile->validate();
-    }
-  }
-  catch (string &Ex)
-  {
+    foreach (CProfile* Profile, vProfileList) { Profile->validate(); }
+  } catch (string& Ex) {
     Ex = "CProfileManager.validate()->" + Ex;
     throw Ex;
   }
@@ -148,23 +125,16 @@ void CProfileManager::validate()
 // void CProfileManager::build()
 // build
 //**********************************************************************
-void CProfileManager::build()
-{
+void CProfileManager::build() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     // Build profiles
-    foreach (CProfile *Profile, vProfileList)
-    {
-      Profile->build();
-    }
+    foreach (CProfile* Profile, vProfileList) { Profile->build(); }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfileManager.build()->" + Ex;
     throw Ex;
   }
@@ -175,26 +145,22 @@ void CProfileManager::build()
 // void CProfileManager::execute()
 // execute
 //**********************************************************************
-void CProfileManager::execute()
-{
-  try
-  {
+void CProfileManager::execute() {
+  try {
     // Variables
-    CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-    CReportManager *pReporter = CReportManager::Instance();
+    CMinimizerManager* pMinimizer = CMinimizerManager::Instance();
+    CReportManager*    pReporter  = CReportManager::Instance();
 
     // Save our Current State
     saveState();
     resetState();
 
     // Loop Through Profiles
-    foreach (CProfile *Profile, vProfileList)
-    {
+    foreach (CProfile* Profile, vProfileList) {
       Profile->setEnabled(true);
 
       // Loop through the number of steps
-      while (Profile->doStep())
-      {
+      while (Profile->doStep()) {
         // minimize
         pMinimizer->execute();
 
@@ -207,9 +173,7 @@ void CProfileManager::execute()
       Profile->setEnabled(false);
       resetState();
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfileManager.execute()->" + Ex;
     throw Ex;
   }
@@ -219,18 +183,13 @@ void CProfileManager::execute()
 // void CProfileManager::saveState()
 // Save Current State of the World
 //**********************************************************************
-void CProfileManager::saveState()
-{
-  try
-  {
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    int iCount = pEstimateManager->getEstimateCount();
+void CProfileManager::saveState() {
+  try {
+    CEstimateManager* pEstimateManager = CEstimateManager::Instance();
+    int               iCount           = pEstimateManager->getEstimateCount();
 
-    for (int i = 0; i < iCount; ++i)
-      vCurrentState.push_back(pEstimateManager->getEstimate(i)->getValue());
-  }
-  catch (string &Ex)
-  {
+    for (int i = 0; i < iCount; ++i) vCurrentState.push_back(pEstimateManager->getEstimate(i)->getValue());
+  } catch (string& Ex) {
     Ex = "CProfileManager.saveState()->" + Ex;
     throw Ex;
   }
@@ -240,26 +199,21 @@ void CProfileManager::saveState()
 // void CProfileManager::resetState()
 // Reset Current State();
 //**********************************************************************
-void CProfileManager::resetState()
-{
-  try
-  {
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    CWorld *pWorld = CWorld::Instance();
+void CProfileManager::resetState() {
+  try {
+    CEstimateManager* pEstimateManager = CEstimateManager::Instance();
+    CWorld*           pWorld           = CWorld::Instance();
 
     // Clear our World
     pWorld->zeroGrid();
 
     int iCount = (int)vCurrentState.size();
     // Reset our Variables back from the Saved State
-    for (int i = 0; i < iCount; ++i)
-    {
+    for (int i = 0; i < iCount; ++i) {
       if (pEstimateManager->getEstimate(i)->getEnabled())
         pEstimateManager->getEstimate(i)->setValue(vCurrentState[i]);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfileManager.resetState()->" + Ex;
     throw Ex;
   }
@@ -269,12 +223,8 @@ void CProfileManager::resetState()
 // CProfileManager::~CProfileManager()
 // Default De-Constructor
 //**********************************************************************
-CProfileManager::~CProfileManager()
-{
+CProfileManager::~CProfileManager() {
   // De-Allocate our Memory
-  foreach (CProfile *Profile, vProfileList)
-  {
-    delete Profile;
-  }
+  foreach (CProfile* Profile, vProfileList) { delete Profile; }
   vProfileList.clear();
 }

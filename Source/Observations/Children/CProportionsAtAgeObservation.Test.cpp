@@ -13,30 +13,28 @@
 #include <string>
 
 // Local Includes
+#include "../../Helpers/CComparer.h"
 #include "../../Observations/CObservation.h"
 #include "../../Observations/CObservationManager.h"
-#include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C3x3_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeingError/AgeingError.h"
 #include "../../TestFixtures/ConfigurationFiles/Catchabilities/Catchability.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/StringLayer.h"
 #include "../../TestFixtures/ConfigurationFiles/Observations/ProportionsAtAge.h"
-#include "../../TestFixtures/ConfigurationFiles/AgeingError/AgeingError.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservation, C3x3_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservation, C3x3_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -54,15 +52,15 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservation, C3x3_Fixture)
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager = CObservationManager::Instance();
-  CObservation *pObservation = pManager->getObservation("proportions_at_age_observation");
+  CObservationManager* pManager     = CObservationManager::Instance();
+  CObservation*        pObservation = pManager->getObservation("proportions_at_age_observation");
 
-  vector<SComparison *> vComparisons;
+  vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 18.0);
 
-  SComparison *pComparison = vComparisons[0];
+  SComparison* pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 1000, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 0.1, 1e-9);
@@ -125,17 +123,26 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservation, C3x3_Fixture)
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.78983491904005387, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 2032.7126680893093, 1e-9);
 
-  for (int i = 0; i < 3; ++i)
-  {
-    for (int j = 0; j < 3; ++j)
-    {
-      CWorldSquare *pSquare = getSquare(i, j);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      CWorldSquare* pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
-      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332,
+                           10.416266318250708, 9.5285900493878319, 8.039167031304288,  6.2110466653061902, 14.041008649763675};
+      double mature[]   = {
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531,
+          0.68514671490004475,
+          1.5301395904028099,
+          2.8847802067147867,
+          4.4252416779189687,
+          36.808881270055224};
       double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model
@@ -179,9 +186,7 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservation, C3x3_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithCompoundCategories, C3x3_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithCompoundCategories, C3x3_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -200,15 +205,15 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithCompoundCategories, C3x3_
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager = CObservationManager::Instance();
-  CObservation *pObservation = pManager->getObservation("proportions_at_age_observation_with_compound_categories");
+  CObservationManager* pManager     = CObservationManager::Instance();
+  CObservation*        pObservation = pManager->getObservation("proportions_at_age_observation_with_compound_categories");
 
-  vector<SComparison *> vComparisons;
+  vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 36.0);
 
-  SComparison *pComparison = vComparisons[0];
+  SComparison* pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 1000, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 0.05, 1e-9);
@@ -271,17 +276,26 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithCompoundCategories, C3x3_
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.35625852383574208, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 1724.5354362839362, 1e-9);
 
-  for (int i = 0; i < 3; ++i)
-  {
-    for (int j = 0; j < 3; ++j)
-    {
-      CWorldSquare *pSquare = getSquare(i, j);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      CWorldSquare* pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
-      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332,
+                           10.416266318250708, 9.5285900493878319, 8.039167031304288,  6.2110466653061902, 14.041008649763675};
+      double mature[]   = {
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531,
+          0.68514671490004475,
+          1.5301395904028099,
+          2.8847802067147867,
+          4.4252416779189687,
+          36.808881270055224};
       double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model
@@ -325,9 +339,7 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithCompoundCategories, C3x3_
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithNormalAgeingError, C3x3_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithNormalAgeingError, C3x3_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -346,15 +358,15 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithNormalAgeingError, C3x3_F
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager = CObservationManager::Instance();
-  CObservation *pObservation = pManager->getObservation("proportions_at_age_observation_with_normal");
+  CObservationManager* pManager     = CObservationManager::Instance();
+  CObservation*        pObservation = pManager->getObservation("proportions_at_age_observation_with_normal");
 
-  vector<SComparison *> vComparisons;
+  vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 18.0);
 
-  SComparison *pComparison = vComparisons[0];
+  SComparison* pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 1000, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 0.1, 1e-9);
@@ -417,17 +429,26 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithNormalAgeingError, C3x3_F
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.78776219007441806, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 2033.7374731641448, 1e-9);
 
-  for (int i = 0; i < 3; ++i)
-  {
-    for (int j = 0; j < 3; ++j)
-    {
-      CWorldSquare *pSquare = getSquare(i, j);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      CWorldSquare* pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
-      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332,
+                           10.416266318250708, 9.5285900493878319, 8.039167031304288,  6.2110466653061902, 14.041008649763675};
+      double mature[]   = {
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531,
+          0.68514671490004475,
+          1.5301395904028099,
+          2.8847802067147867,
+          4.4252416779189687,
+          36.808881270055224};
       double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model
@@ -471,9 +492,7 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithNormalAgeingError, C3x3_F
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithOffByOneAgeingError, C3x3_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithOffByOneAgeingError, C3x3_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -492,15 +511,15 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithOffByOneAgeingError, C3x3
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
-  CObservationManager *pManager = CObservationManager::Instance();
-  CObservation *pObservation = pManager->getObservation("proportions_at_age_observation_with_off_by_one");
+  CObservationManager* pManager     = CObservationManager::Instance();
+  CObservation*        pObservation = pManager->getObservation("proportions_at_age_observation_with_off_by_one");
 
-  vector<SComparison *> vComparisons;
+  vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 18.0);
 
-  SComparison *pComparison = vComparisons[0];
+  SComparison* pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 1000, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 0.1, 1e-9);
@@ -563,17 +582,26 @@ BOOST_FIXTURE_TEST_CASE(ProportionsAtAgeObservationWithOffByOneAgeingError, C3x3
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.79094857016607623, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 2032.1631633481888, 1e-9);
 
-  for (int i = 0; i < 3; ++i)
-  {
-    for (int j = 0; j < 3; ++j)
-    {
-      CWorldSquare *pSquare = getSquare(i, j);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      CWorldSquare* pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
-      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332,
+                           10.416266318250708, 9.5285900493878319, 8.039167031304288,  6.2110466653061902, 14.041008649763675};
+      double mature[]   = {
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531,
+          0.68514671490004475,
+          1.5301395904028099,
+          2.8847802067147867,
+          4.4252416779189687,
+          36.808881270055224};
       double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model

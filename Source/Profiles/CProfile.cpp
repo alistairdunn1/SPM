@@ -9,27 +9,26 @@
 
 // Local Headers
 #include "CProfile.h"
-#include "../World/CWorld.h"
-#include "../Estimates/CEstimateManager.h"
+
 #include "../Estimates/CEstimate.h"
-#include "../Helpers/CError.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Helpers/CComparer.h"
+#include "../Helpers/CError.h"
+#include "../World/CWorld.h"
 
 //**********************************************************************
 // CProfile::CProfile()
 // Default Constructor
 //**********************************************************************
-CProfile::CProfile()
-{
-
+CProfile::CProfile() {
   // Vars
-  iSteps = 0;
-  dStepSize = 0.0;
+  iSteps      = 0;
+  dStepSize   = 0.0;
   dLowerBound = 0.0;
   dUpperBound = 0.0;
-  dCurrent = 0.0;
-  sParameter = "";
-  pTarget = 0;
+  dCurrent    = 0.0;
+  sParameter  = "";
+  pTarget     = 0;
 
   // Register Params
   pParameterList->registerAllowed(PARAM_LOWER_BOUND);
@@ -42,10 +41,8 @@ CProfile::CProfile()
 // bool CProfile::doStep()
 // Do A Step
 //**********************************************************************
-bool CProfile::doStep()
-{
-  try
-  {
+bool CProfile::doStep() {
+  try {
     // Increase Current Value
     if (CComparer::isZero(dCurrent) && (!CComparer::isZero(dLowerBound)))
       dCurrent = dLowerBound;
@@ -54,13 +51,11 @@ bool CProfile::doStep()
 
     // Check
     if (dCurrent > dUpperBound)
-      return false; // Finished
+      return false;  // Finished
 
     // Set Value
     pTarget->setValue(dCurrent);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfile.doStep(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -72,16 +67,12 @@ bool CProfile::doStep()
 // void CProfile::setEnabled(bool value)
 // set Enabled
 //**********************************************************************
-void CProfile::setEnabled(bool value)
-{
-  try
-  {
+void CProfile::setEnabled(bool value) {
+  try {
     // If this is enabled, we want to disable the estimation
     // of our target
     pTarget->setEnabled(!value);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfile.setEnabled(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -91,28 +82,24 @@ void CProfile::setEnabled(bool value)
 // void CProfile::validate()
 // validate
 //**********************************************************************
-void CProfile::validate()
-{
-  try
-  {
+void CProfile::validate() {
+  try {
     // Base
     CBaseBuild::validate();
 
     // Get our Parameters
     dLowerBound = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dUpperBound = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    iSteps = pParameterList->getInt(PARAM_STEPS, true, 10);
-    sParameter = pParameterList->getString(PARAM_PARAMETER);
+    iSteps      = pParameterList->getInt(PARAM_STEPS, true, 10);
+    sParameter  = pParameterList->getString(PARAM_PARAMETER);
 
-    if ((dLowerBound - dUpperBound) > ZERO) // Lower Bound Must be < Upper Bound
+    if ((dLowerBound - dUpperBound) > ZERO)  // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
     if (iSteps <= 1)
       CError::errorLessThanEqualTo(PARAM_STEPS, PARAM_ONE);
 
     dStepSize = (dUpperBound - dLowerBound) / ((double)(iSteps - 1));
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -122,19 +109,14 @@ void CProfile::validate()
 // void CProfile::build()
 // Build
 //**********************************************************************
-void CProfile::build()
-{
-  try
-  {
+void CProfile::build() {
+  try {
     // Get our Target
-    if (pTarget == 0)
-    {
-      CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-      pTarget = pEstimateManager->getEstimate(sParameter);
+    if (pTarget == 0) {
+      CEstimateManager* pEstimateManager = CEstimateManager::Instance();
+      pTarget                            = pEstimateManager->getEstimate(sParameter);
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CProfile.build(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -144,6 +126,4 @@ void CProfile::build()
 // CProfile::~CProfile()
 // Default De-Constructor
 //**********************************************************************
-CProfile::~CProfile()
-{
-}
+CProfile::~CProfile() {}

@@ -14,13 +14,12 @@
 /**
  *
  */
-class CLogNormalEstimate : public CEstimate
-{
+class CLogNormalEstimate : public CEstimate {
 public:
   // methods
   CLogNormalEstimate();
   virtual ~CLogNormalEstimate() = default;
-  void validate();
+  void   validate();
   double getScore();
 
 protected:

@@ -13,17 +13,15 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CSelectivityFactory.h"
 #include "../../TestFixtures/CWorld_Fixture.h"
+#include "../Factory/CSelectivityFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ConstantSelectivity, CWorld_Fixture)
-{
-
-  CSelectivity *pSelectivity = 0;
+BOOST_FIXTURE_TEST_CASE(ConstantSelectivity, CWorld_Fixture) {
+  CSelectivity* pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_CONSTANT, false));
 
   pSelectivity->addParameter(PARAM_LABEL, "selectivity");

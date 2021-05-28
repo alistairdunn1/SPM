@@ -9,14 +9,14 @@
 
 // Local Headers
 #include "CInverseLogisticSelectivity.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CInverseLogisticSelectivity::CInverseLogisticSelectivity()
 // Default constructor
 //**********************************************************************
-CInverseLogisticSelectivity::CInverseLogisticSelectivity()
-{
+CInverseLogisticSelectivity::CInverseLogisticSelectivity() {
   // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
@@ -32,13 +32,10 @@ CInverseLogisticSelectivity::CInverseLogisticSelectivity()
 // void CInverseLogisticSelectivity::validate()
 // validate
 //**********************************************************************
-void CInverseLogisticSelectivity::validate()
-{
-  try
-  {
-
+void CInverseLogisticSelectivity::validate() {
+  try {
     // Populate our variables
-    dA50 = pParameterList->getDouble(PARAM_A50);
+    dA50   = pParameterList->getDouble(PARAM_A50);
     dAto95 = pParameterList->getDouble(PARAM_ATO95);
     dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
@@ -50,9 +47,7 @@ void CInverseLogisticSelectivity::validate()
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (dAto95 <= 0)
       CError::errorLessThanEqualTo(PARAM_ATO95, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CInverseLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,14 +57,12 @@ void CInverseLogisticSelectivity::validate()
 // double CInverseLogisticSelectivity::calculateResult(int Age)
 // Calculate a result for our Vector
 //**********************************************************************
-double CInverseLogisticSelectivity::calculateResult(int Age)
-{
+double CInverseLogisticSelectivity::calculateResult(int Age) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
-    double dRet = 0.0;
+    double dRet  = 0.0;
     double dTemp = (dA50 - Age) / dAto95;
 
     if (dTemp > 5.0)
@@ -82,9 +75,7 @@ double CInverseLogisticSelectivity::calculateResult(int Age)
     return dRet;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CInverseLogisticSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -96,6 +87,4 @@ double CInverseLogisticSelectivity::calculateResult(int Age)
 // CInverseLogisticSelectivity::~CInverseLogisticSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CInverseLogisticSelectivity::~CInverseLogisticSelectivity()
-{
-}
+CInverseLogisticSelectivity::~CInverseLogisticSelectivity() {}

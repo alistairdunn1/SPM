@@ -16,8 +16,7 @@
 //
 //
 //**********************************************************************
-class CBaseExecute : public CBaseBuild
-{
+class CBaseExecute : public CBaseBuild {
 public:
   CBaseExecute();
   virtual ~CBaseExecute();

@@ -8,10 +8,10 @@
 #define CCOMPARER_H_
 
 // Global Headers
+#include <algorithm>
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <algorithm>
 
 // Local Headers
 #include "DefinedValues.h"
@@ -24,12 +24,11 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CComparer
-{
+class CComparer {
 public:
   // Functions
   static bool isSame(string one, string two, bool useWildCards = true);
-  static bool hasDuplicates(const vector<std::string> &vLabels);
+  static bool hasDuplicates(const vector<std::string>& vLabels);
 
   // Inline Functions
   static bool isZero(double A) { return ((A < ZERO) && (A > -ZERO)); }
@@ -38,10 +37,7 @@ public:
   static bool isPositive(double A) { return (0.0 < A); }
   static bool isEqual(double A, double B) { return (((A - B) < ZERO) && ((A - B) > -ZERO)); }
   static bool isClose(double A, double B) { return (((A - B) < 1e-12) && ((A - B) > -1e-12)); }
-  static bool isBetween(double A, double B, double C)
-  {
-    return (((A - B) > -ZERO) && ((A - C) < ZERO));
-  }
+  static bool isBetween(double A, double B, double C) { return (((A - B) > -ZERO) && ((A - C) < ZERO)); }
 
 private:
   // Functions

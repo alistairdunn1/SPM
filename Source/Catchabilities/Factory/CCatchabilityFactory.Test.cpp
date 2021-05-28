@@ -22,10 +22,9 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Catchability)
-{
+BOOST_AUTO_TEST_CASE(Build_Catchability) {
   // See if we got a Valid Estimate
-  CCatchability *pBasic = 0;
+  CCatchability* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CCatchabilityFactory::buildCatchability("", false));
   delete pBasic;
 }
@@ -34,8 +33,7 @@ BOOST_AUTO_TEST_CASE(Build_Catchability)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Catchability_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_Catchability_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CCatchabilityFactory::buildCatchability(PARAM_ZERO, false), string);
 }

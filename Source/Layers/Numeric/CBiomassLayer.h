@@ -20,28 +20,27 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CBiomassLayer : public CNumericLayer
-{
+class CBiomassLayer : public CNumericLayer {
 public:
   // Functions
   CBiomassLayer();
   virtual ~CBiomassLayer();
-  CLayer *clone() { return (new CBiomassLayer(*this)); }
-  void addCategory(string value);
-  int getCategoryCount() { return (int)vCategoryNames.size(); }
-  void addSelectivity(string value);
-  int getSelectivityCount() { return (int)vSelectivityNames.size(); }
-  double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  void validate();
-  void build();
+  CLayer* clone() { return (new CBiomassLayer(*this)); }
+  void    addCategory(string value);
+  int     getCategoryCount() { return (int)vCategoryNames.size(); }
+  void    addSelectivity(string value);
+  int     getSelectivityCount() { return (int)vSelectivityNames.size(); }
+  double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  void    validate();
+  void    build();
 
 protected:
   // Variables
-  CWorld *pWorld;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CWorld*               pWorld;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /*CBIOMASSLAYER_H_*/

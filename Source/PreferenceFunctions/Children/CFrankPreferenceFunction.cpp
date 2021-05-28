@@ -6,6 +6,7 @@
 
 // Local Headers
 #include "CFrankPreferenceFunction.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/DefinedValues.h"
@@ -18,9 +19,7 @@
 // CFrankPreferenceFunction::CFrankPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CFrankPreferenceFunction::CFrankPreferenceFunction()
-{
-
+CFrankPreferenceFunction::CFrankPreferenceFunction() {
   sType = PARAM_FRANK_COPULA;
 
   // Register Estimables
@@ -36,11 +35,8 @@ CFrankPreferenceFunction::CFrankPreferenceFunction()
 // void CFrankPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CFrankPreferenceFunction::validate()
-{
-  try
-  {
-
+void CFrankPreferenceFunction::validate() {
+  try {
     // Assign our variables
     dRho = pParameterList->getDouble(PARAM_RHO);
     pParameterList->fillVector(vPDFNames, PARAM_PDFS);
@@ -58,16 +54,14 @@ void CFrankPreferenceFunction::validate()
     //********************************************
     //  We allow only two PDF's
     //*********************************************
-    //Ensure exactly 2 PDFs
+    // Ensure exactly 2 PDFs
     if (vPDFNames.size() != 2)
       CError::errorNotEqual(PARAM_PDFS, "two");
 
-    //Ensure exactly 2 layers
+    // Ensure exactly 2 layers
     if (vLayerNames.size() != 2)
       CError::errorNotEqual(PARAM_LAYERS, "two");
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CFrankPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -77,26 +71,22 @@ void CFrankPreferenceFunction::validate()
 // void CFrankPreferenceFunction::build()
 // Build
 //**********************************************************************
-void CFrankPreferenceFunction::build()
-{
-
+void CFrankPreferenceFunction::build() {
   // Build parent
   CPreferenceFunction::build();
 
   // Get PDFs
-  CPDFManager *pPDFManager = CPDFManager::Instance();
+  CPDFManager* pPDFManager = CPDFManager::Instance();
 
-  for (int i = 0; i < (int)vPDFNames.size(); ++i)
-  {
+  for (int i = 0; i < (int)vPDFNames.size(); ++i) {
     vPDFs.push_back(pPDFManager->getPDF(vPDFNames[i]));
     vPDFTypes.push_back(vPDFs[i]->getPDFType());
   }
 
   // Get Layers
-  CLayerManager *pLayerManager = CLayerManager::Instance();
+  CLayerManager* pLayerManager = CLayerManager::Instance();
 
-  for (int i = 0; i < (int)vLayerNames.size(); ++i)
-  {
+  for (int i = 0; i < (int)vLayerNames.size(); ++i) {
     vLayers.push_back(pLayerManager->getNumericLayer(vLayerNames[i]));
   }
 }
@@ -105,11 +95,8 @@ void CFrankPreferenceFunction::build()
 // CFrankPreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CFrankPreferenceFunction::getIsStatic()
-{
-
-  for (int i = 0; i < (int)vLayers.size(); ++i)
-  {
+bool CFrankPreferenceFunction::getIsStatic() {
+  for (int i = 0; i < (int)vLayers.size(); ++i) {
     if (!(vLayers[i]->getIsStatic()))
       return false;
   }
@@ -120,14 +107,11 @@ bool CFrankPreferenceFunction::getIsStatic()
 // double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // get Result
 //**********************************************************************
-double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
-{
-
+double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     vector<double> dValue;
@@ -143,15 +127,12 @@ double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, 
     double dCDF1 = vPDFs[0]->getCDFResult(x1);
     double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-    dRet = (dRho * exp(-dRho * dCDF1) * exp(-dRho * dCDF2)) / (exp(-dRho) - 1) *
-           (1 / (1 + ((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1) / (exp(-dRho) - 1)))) *
-           (((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1)) / (exp(-dRho) - 1) * (1 / (1 + ((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1) / (exp(-dRho) - 1)))) - 1) *
-           dPDF1 * dPDF2;
+    dRet = (dRho * exp(-dRho * dCDF1) * exp(-dRho * dCDF2)) / (exp(-dRho) - 1) * (1 / (1 + ((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1) / (exp(-dRho) - 1))))
+           * (((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1)) / (exp(-dRho) - 1) * (1 / (1 + ((exp(-dRho * dCDF1) - 1) * (exp(-dRho * dCDF2) - 1) / (exp(-dRho) - 1)))) - 1)
+           * dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CFrankPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -163,6 +144,4 @@ double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, 
 // CFrankPreferenceFunction::~CFrankPreferenceFunction()
 // Default De-Constructor
 //**********************************************************************
-CFrankPreferenceFunction::~CFrankPreferenceFunction()
-{
-}
+CFrankPreferenceFunction::~CFrankPreferenceFunction() {}

@@ -17,13 +17,12 @@
 //
 //
 //**********************************************************************
-class CBaseValidate : public CBaseObject
-{
+class CBaseValidate : public CBaseObject {
 public:
   CBaseValidate();
   virtual ~CBaseValidate();
   virtual void validate() = 0;
-  string getLabel() { return sLabel; }
+  string       getLabel() { return sLabel; }
 
 protected:
   string sLabel;

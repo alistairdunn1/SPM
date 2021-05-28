@@ -16,16 +16,15 @@
 //
 //
 //**********************************************************************
-class CConstantPreferenceFunction : public CPreferenceFunction
-{
+class CConstantPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CConstantPreferenceFunction();
   virtual ~CConstantPreferenceFunction();
-  CPreferenceFunction *clone() { return new CConstantPreferenceFunction(*this); }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build();
+  CPreferenceFunction* clone() { return new CConstantPreferenceFunction(*this); }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build();
 
 protected:
   // Variables

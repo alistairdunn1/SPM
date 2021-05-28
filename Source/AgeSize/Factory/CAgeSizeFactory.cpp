@@ -9,23 +9,22 @@
 
 // Local headers
 #include "CAgeSizeFactory.h"
+
+#include "../../Helpers/CError.h"
 #include "../CAgeSize.h"
 #include "../CAgeSizeManager.h"
+#include "../Children/CMeanAgeSize.h"
 #include "../Children/CNoneAgeSize.h"
 #include "../Children/CSchnuteAgeSize.h"
 #include "../Children/CVonBertalanffyAgeSize.h"
 #include "../Children/CVonBertalanffyKAtAgeAgeSize.h"
-#include "../Children/CMeanAgeSize.h"
-#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CAgeSize* CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager)
 //
 //**********************************************************************
-CAgeSize *CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager)
-{
-
-  CAgeSize *pAgeSize = 0;
+CAgeSize* CAgeSizeFactory::buildAgeSize(string type, bool registerWithManager) {
+  CAgeSize* pAgeSize = 0;
 
   if (type == PARAM_NONE)
     pAgeSize = new CNoneAgeSize();

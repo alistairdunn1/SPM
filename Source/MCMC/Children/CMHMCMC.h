@@ -12,9 +12,9 @@
 #include <boost/numeric/ublas/matrix.hpp>
 
 // Local Headers
-#include "../CMCMC.h"
-#include "../../Minimizers/CMinimizerManager.h"
 #include "../../Minimizers/CMinimizer.h"
+#include "../../Minimizers/CMinimizerManager.h"
+#include "../CMCMC.h"
 
 // Classes
 class CRuntimeThread;
@@ -25,8 +25,7 @@ using namespace boost::numeric;
 //
 //
 //**********************************************************************
-class CMHMCMC : public CMCMC
-{
+class CMHMCMC : public CMCMC {
 public:
   // Methods
   CMHMCMC();

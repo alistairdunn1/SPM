@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CCatchabilityFactory
-{
+class CCatchabilityFactory {
 public:
   // Functions
-  static CCatchability *buildCatchability(string type, bool registerWithManager = true);
+  static CCatchability* buildCatchability(string type, bool registerWithManager = true);
 
 private:
   // Functions

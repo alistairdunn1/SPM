@@ -19,18 +19,17 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CCatchabilityManager : public CBaseManager
-{
+class CCatchabilityManager : public CBaseManager {
 public:
-  static CCatchabilityManager *Instance();
-  static void Destroy();
+  static CCatchabilityManager* Instance();
+  static void                  Destroy();
 
   // Functions
-  void clone(CCatchabilityManager *Manager);
-  void addCatchability(CCatchability *Q);
-  CCatchability *getCatchability(string label);
-  void validate();
-  void build() {}
+  void           clone(CCatchabilityManager* Manager);
+  void           addCatchability(CCatchability* Q);
+  CCatchability* getCatchability(string label);
+  void           validate();
+  void           build() {}
   virtual ~CCatchabilityManager();
 
 protected:
@@ -38,7 +37,7 @@ protected:
   CCatchabilityManager();
 
   // Variables
-  vector<CCatchability *> vCatchabilities;
+  vector<CCatchability*> vCatchabilities;
 
 private:
   // Variables

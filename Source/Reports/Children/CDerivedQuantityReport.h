@@ -19,19 +19,18 @@ class CDerivedQuantity;
 //
 //
 //**********************************************************************
-class CDerivedQuantityReport : public CFileReport
-{
+class CDerivedQuantityReport : public CFileReport {
 public:
   CDerivedQuantityReport();
   virtual ~CDerivedQuantityReport();
-  CReport *clone() { return new CDerivedQuantityReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CDerivedQuantityReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sDerivedQuantity;
-  CDerivedQuantity *pDerivedQuantity;
+  string            sDerivedQuantity;
+  CDerivedQuantity* pDerivedQuantity;
 };
 
 #endif /* CDERIVEDQUANTITYREPORT_H_ */

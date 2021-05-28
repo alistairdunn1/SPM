@@ -15,22 +15,21 @@
 //
 //
 //**********************************************************************
-class COffByOneAgeingError : public CAgeingError
-{
+class COffByOneAgeingError : public CAgeingError {
 public:
   // Functions
   COffByOneAgeingError();
   virtual ~COffByOneAgeingError();
-  CAgeingError *clone() { return new COffByOneAgeingError(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  void getExpected(vector<double> &expected);
+  CAgeingError* clone() { return new COffByOneAgeingError(*this); }
+  void          validate();
+  void          build();
+  void          rebuild();
+  void          getExpected(vector<double>& expected);
 
 protected:
   double dP1;
   double dP2;
-  int iK;
+  int    iK;
 };
 
 #endif /* COFFBYONEAGEINGERROR_H_ */

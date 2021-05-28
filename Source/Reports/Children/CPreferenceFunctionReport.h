@@ -20,21 +20,20 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionReport : public CFileReport
-{
+class CPreferenceFunctionReport : public CFileReport {
 public:
   CPreferenceFunctionReport();
   virtual ~CPreferenceFunctionReport();
-  CReport *clone() { return new CPreferenceFunctionReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CPreferenceFunctionReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sPreferenceFunction;
-  CPreferenceFunction *pPreferenceFunction;
-  CNumericLayer *pLayer;
-  std::string sLayerType;
+  string               sPreferenceFunction;
+  CPreferenceFunction* pPreferenceFunction;
+  CNumericLayer*       pLayer;
+  std::string          sLayerType;
 };
 
 #endif /* CPREFERENCEFUNCTIONREPORT_H_ */

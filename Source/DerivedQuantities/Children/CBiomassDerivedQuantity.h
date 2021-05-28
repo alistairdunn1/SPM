@@ -20,8 +20,7 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CBiomassDerivedQuantity : public CDerivedQuantity
-{
+class CBiomassDerivedQuantity : public CDerivedQuantity {
 public:
   // Methods
   CBiomassDerivedQuantity();
@@ -33,16 +32,16 @@ public:
 
 protected:
   // Members
-  CTimeStepManager *pTimeStepManager;
-  string sTimeStep;
-  vector<string> vInitializationTimeStepNames;
-  vector<int> vInitializationTimeStepIndex;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  string sLayer;
-  CNumericLayer *pLayer;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CTimeStepManager*     pTimeStepManager;
+  string                sTimeStep;
+  vector<string>        vInitializationTimeStepNames;
+  vector<int>           vInitializationTimeStepIndex;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  string                sLayer;
+  CNumericLayer*        pLayer;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /* CBIOMASSDERIVEDQUANTITY_H_ */

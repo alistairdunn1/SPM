@@ -13,17 +13,15 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CPreferenceFunctionFactory.h"
 #include "../../TestFixtures/CLayer_Fixture.h"
+#include "../Factory/CPreferenceFunctionFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ConstantPreferenceFunction_DoubleLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(ConstantPreferenceFunction_DoubleLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_CONSTANT, false));
 
   pPreference->addParameter(PARAM_LABEL, "constant");
@@ -64,10 +62,8 @@ BOOST_FIXTURE_TEST_CASE(ConstantPreferenceFunction_DoubleLayer, CLayer_Fixture)
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(ConstantPreferenceFunction_DistanceLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(ConstantPreferenceFunction_DistanceLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_CONSTANT, false));
 
   pPreference->addParameter(PARAM_LABEL, "constant");

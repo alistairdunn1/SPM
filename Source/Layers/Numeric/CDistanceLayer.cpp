@@ -9,15 +9,15 @@
 
 // Local Headers
 #include "CDistanceLayer.h"
-#include "../../World/CWorld.h"
+
 #include "../../Helpers/CError.h"
+#include "../../World/CWorld.h"
 
 //**********************************************************************
 // CDistanceLayer::CDistanceLayer()
 // Default Constructor
 //**********************************************************************
-CDistanceLayer::CDistanceLayer()
-{
+CDistanceLayer::CDistanceLayer() {
   sType = PARAM_DISTANCE;
 }
 
@@ -25,19 +25,15 @@ CDistanceLayer::CDistanceLayer()
 // double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)
 // Get The Value Fromo ur Distance Layer
 //**********************************************************************
-double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
-{
+double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
     // Check
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDistanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -55,18 +51,14 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, i
 // void CDistanceLayer::validate()
 // Validate our Distance Lyer
 //**********************************************************************
-void CDistanceLayer::validate()
-{
-  try
-  {
+void CDistanceLayer::validate() {
+  try {
     // Base
     CNumericLayer::validate();
 
     // Assign parameters
     dCellLength = pWorld->getCellLength();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDistanceLayer.validate()->" + Ex;
     throw Ex;
   }
@@ -76,22 +68,15 @@ void CDistanceLayer::validate()
 // void CDistanceLayer::build()
 // build
 //**********************************************************************
-void CDistanceLayer::build()
-{
-  try
-  {
-
+void CDistanceLayer::build() {
+  try {
     // Fill The Grid With The Distances
-    for (int i = 0; i < iHeight; ++i)
-    {
-      for (int j = 0; j < iWidth; ++j)
-      {
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
         pGrid[i][j] = dCellLength * sqrt((double)((i * i) + (j * j)));
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDistanceLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -101,6 +86,4 @@ void CDistanceLayer::build()
 // CDistanceLayer::~CDistanceLayer()
 // Default De-Constructor
 //**********************************************************************
-CDistanceLayer::~CDistanceLayer()
-{
-}
+CDistanceLayer::~CDistanceLayer() {}

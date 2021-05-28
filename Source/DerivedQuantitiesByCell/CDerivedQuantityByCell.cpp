@@ -15,36 +15,26 @@
 // CDerivedQuantityByCell::CDerivedQuantityByCell()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantityByCell::CDerivedQuantityByCell() : iCurrentInitialisationPhase(0)
-{
-}
+CDerivedQuantityByCell::CDerivedQuantityByCell() : iCurrentInitialisationPhase(0) {}
 
 //**********************************************************************
 // CDerivedQuantityByCell::~CDerivedQuantityByCell()
 // Destructor
 //**********************************************************************
-CDerivedQuantityByCell::~CDerivedQuantityByCell()
-{
-}
+CDerivedQuantityByCell::~CDerivedQuantityByCell() {}
 
 //**********************************************************************
 // vector<vector<double> > CDerivedQuantityByCell::getValue(int offset)
 // Get Value From our Derived Layer
 //**********************************************************************
-vector<vector<double>> CDerivedQuantityByCell::getValue(int offset)
-{
-
+vector<vector<double>> CDerivedQuantityByCell::getValue(int offset) {
   int phasesCrossed = 0;
 
-  if (vValues.size() > 0)
-  {
-    if (offset >= (int)vValues.size())
-    {
+  if (vValues.size() > 0) {
+    if (offset >= (int)vValues.size()) {
       offset -= vValues.size();
       phasesCrossed = 1;
-    }
-    else
-    {
+    } else {
       return vValues[vValues.size() - (offset + 1)];
     }
   }
@@ -61,27 +51,19 @@ vector<vector<double>> CDerivedQuantityByCell::getValue(int offset)
    * backwards through the initialisation values
    */
   vector<vector<Data>>::reverse_iterator vvIter;
-  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter)
-  {
-
-    if (offset >= (int)vvIter->size())
-    {
+  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter) {
+    if (offset >= (int)vvIter->size()) {
       /**
        * If we have already crossed a phase then we want to return the first element
        * of the new phase, we cannot ever cross more than 1 phase
        */
-      if (phasesCrossed == 1)
-      {
+      if (phasesCrossed == 1) {
         return (*vvIter->begin());
-      }
-      else
-      {
+      } else {
         offset -= vvIter->size();
         phasesCrossed = 1;
       }
-    }
-    else
-    {
+    } else {
       return vvIter->at(vvIter->size() - (offset + 1));
     }
   }
@@ -97,20 +79,14 @@ vector<vector<double>> CDerivedQuantityByCell::getValue(int offset)
 // double CDerivedQuantityByCell::getValue(int offset, int RowIndex, int ColIndex)
 // Get Value From our Derived Layer
 //**********************************************************************
-double CDerivedQuantityByCell::getValue(int offset, int RowIndex, int ColIndex)
-{
-
+double CDerivedQuantityByCell::getValue(int offset, int RowIndex, int ColIndex) {
   int phasesCrossed = 0;
 
-  if (vValues.size() > 0)
-  {
-    if (offset >= (int)vValues.size())
-    {
+  if (vValues.size() > 0) {
+    if (offset >= (int)vValues.size()) {
       offset -= vValues.size();
       phasesCrossed = 1;
-    }
-    else
-    {
+    } else {
       return vValues[vValues.size() - (offset + 1)][RowIndex][ColIndex];
     }
   }
@@ -127,27 +103,19 @@ double CDerivedQuantityByCell::getValue(int offset, int RowIndex, int ColIndex)
    * backwards through the initialisation values
    */
   vector<vector<Data>>::reverse_iterator vvIter;
-  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter)
-  {
-
-    if (offset >= (int)vvIter->size())
-    {
+  for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter) {
+    if (offset >= (int)vvIter->size()) {
       /**
        * If we have already crossed a phase then we want to return the first element
        * of the new phase, we cannot ever cross more than 1 phase
        */
-      if (phasesCrossed == 1)
-      {
+      if (phasesCrossed == 1) {
         return ((*vvIter->begin())[RowIndex][ColIndex]);
-      }
-      else
-      {
+      } else {
         offset -= vvIter->size();
         phasesCrossed = 1;
       }
-    }
-    else
-    {
+    } else {
       return (vvIter->at(vvIter->size() - (offset + 1)))[RowIndex][ColIndex];
     }
   }
@@ -163,25 +131,21 @@ double CDerivedQuantityByCell::getValue(int offset, int RowIndex, int ColIndex)
 // void CDerivedQuantityByCell::rebuild()
 // Rebuild our derived layer
 //**********************************************************************
-void CDerivedQuantityByCell::build()
-{
-
+void CDerivedQuantityByCell::build() {
   // We have to build the blank data object to return when we haven't yet
   // built some data during the initialisation phases
   iHeight = pWorld->getHeight();
-  iWidth = pWorld->getWidth();
+  iWidth  = pWorld->getWidth();
 
   vBlankData.resize(iHeight);
-  for (int i = 0; i < iHeight; ++i)
-    vBlankData[i].assign(iWidth, 0.0);
+  for (int i = 0; i < iHeight; ++i) vBlankData[i].assign(iWidth, 0.0);
 }
 
 //**********************************************************************
 // void CDerivedQuantityByCell::rebuild()
 // Rebuild our derived layer
 //**********************************************************************
-void CDerivedQuantityByCell::rebuild()
-{
+void CDerivedQuantityByCell::rebuild() {
   iCurrentInitialisationPhase = 0;
   vvInitialisationValues.clear();
   vValues.clear();

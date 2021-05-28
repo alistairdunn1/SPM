@@ -20,10 +20,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell)
-{
-
-  CDerivedQuantityByCell *pBasic = 0;
+BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell) {
+  CDerivedQuantityByCell* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ABUNDANCE, false));
   delete pBasic;
 }
@@ -32,10 +30,8 @@ BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell)
-{
-
-  CDerivedQuantityByCell *pBasic = 0;
+BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell) {
+  CDerivedQuantityByCell* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_BIOMASS, false));
   delete pBasic;
 }
@@ -44,8 +40,7 @@ BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedQuantityByCell_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_DerivedQuantityByCell_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ZERO, false), string);
 }

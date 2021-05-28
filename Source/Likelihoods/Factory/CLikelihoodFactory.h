@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CLikelihoodFactory
-{
+class CLikelihoodFactory {
 public:
   // Functions
-  static CLikelihood *buildLikelihood(string observationType, string type);
+  static CLikelihood* buildLikelihood(string observationType, string type);
 
 private:
   // Functions

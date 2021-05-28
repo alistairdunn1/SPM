@@ -19,21 +19,20 @@ class CObservation;
 //
 //
 //**********************************************************************
-class CObservationReport : public CFileReport
-{
+class CObservationReport : public CFileReport {
 public:
   // Functions
   CObservationReport();
   virtual ~CObservationReport();
-  CReport *clone() { return new CObservationReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CObservationReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  string sObservation;
-  CObservation *pObservation;
+  string        sObservation;
+  CObservation* pObservation;
 };
 
 #endif /* COBSERVATIONREPORT_H_ */

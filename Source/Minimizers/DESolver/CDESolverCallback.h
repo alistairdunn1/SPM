@@ -10,8 +10,8 @@
 #define CDESOLVERCALLBACK_H_
 
 // Local Headers
-#include "Engine/DESolverEngine.h"
 #include "../../BaseClasses/CBaseObject.h"
+#include "Engine/DESolverEngine.h"
 
 // Classes
 class CEstimateManager;
@@ -20,8 +20,7 @@ class CEstimateManager;
 //
 //
 //**********************************************************************
-class CDESolverCallback : public CBaseObject, public DESolverEngine
-{
+class CDESolverCallback : public CBaseObject, public DESolverEngine {
 public:
   // Functions
   CDESolverCallback(int vectorsize, int populationsize, double tolerance);
@@ -30,7 +29,7 @@ public:
 
 protected:
   // Variables
-  CEstimateManager *pEstimateManager;
+  CEstimateManager* pEstimateManager;
 };
 
 #endif /*CDESOLVERCALLBACK_H_*/

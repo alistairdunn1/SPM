@@ -13,18 +13,17 @@
 //
 //
 //**********************************************************************
-class CLogNormalPDF : public CPDF
-{
+class CLogNormalPDF : public CPDF {
 public:
   // Functions
   CLogNormalPDF();
   virtual ~CLogNormalPDF();
-  CPDF *clone() { return new CLogNormalPDF(*this); }
+  CPDF*  clone() { return new CLogNormalPDF(*this); }
   double getMu() { return dMu; }
   double getSigma() { return dSigma; }
   double getPDFResult(double value);
   double getCDFResult(double value);
-  void validate();
+  void   validate();
 
 protected:
   // Variables

@@ -9,9 +9,10 @@
 
 // Local Headers
 #include "CCatchabilityManager.h"
-#include "CCatchability.h"
+
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "CCatchability.h"
 
 // Singleton Variable
 boost::thread_specific_ptr<CCatchabilityManager> CCatchabilityManager::clInstance;
@@ -20,16 +21,13 @@ boost::thread_specific_ptr<CCatchabilityManager> CCatchabilityManager::clInstanc
 // CCatchabilityManager::CCatchabilityManager()
 // Default Constructor
 //**********************************************************************
-CCatchabilityManager::CCatchabilityManager()
-{
-}
+CCatchabilityManager::CCatchabilityManager() {}
 
 //**********************************************************************
 // CCatchabilityManager* CCatchabilityManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CCatchabilityManager *CCatchabilityManager::Instance()
-{
+CCatchabilityManager* CCatchabilityManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CCatchabilityManager());
   return clInstance.get();
@@ -39,10 +37,8 @@ CCatchabilityManager *CCatchabilityManager::Instance()
 // void CCatchabilityManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CCatchabilityManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CCatchabilityManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -51,8 +47,7 @@ void CCatchabilityManager::Destroy()
 // void CCatchabilityManager::addQ(CCatchability *Q)
 // Add a Q (I hate this short name) to our List
 //**********************************************************************
-void CCatchabilityManager::addCatchability(CCatchability *Q)
-{
+void CCatchabilityManager::addCatchability(CCatchability* Q) {
   vCatchabilities.push_back(Q);
 }
 
@@ -60,15 +55,12 @@ void CCatchabilityManager::addCatchability(CCatchability *Q)
 // CCatchability* CCatchabilityManager::getQ(string label)
 // Get a pointer to our Q from the vector
 //**********************************************************************
-CCatchability *CCatchabilityManager::getCatchability(string label)
-{
+CCatchability* CCatchabilityManager::getCatchability(string label) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Loop through and find our Q
-    foreach (CCatchability *Q, vCatchabilities)
-    {
+    foreach (CCatchability* Q, vCatchabilities) {
       if (Q->getLabel() == label)
         return Q;
     }
@@ -77,9 +69,7 @@ CCatchability *CCatchabilityManager::getCatchability(string label)
     CError::errorUnknown(PARAM_CATCHABILITY, label);
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CCatchabilityManager.getQ()->" + Ex;
     throw Ex;
   }
@@ -92,17 +82,10 @@ CCatchability *CCatchabilityManager::getCatchability(string label)
 // void CCatchabilityManager::clone(CCatchabilityManager *Manager)
 // Clone the manager with param
 //**********************************************************************
-void CCatchabilityManager::clone(CCatchabilityManager *Manager)
-{
-  try
-  {
-    foreach (CCatchability *Catchability, Manager->vCatchabilities)
-    {
-      vCatchabilities.push_back(Catchability->clone());
-    }
-  }
-  catch (string &Ex)
-  {
+void CCatchabilityManager::clone(CCatchabilityManager* Manager) {
+  try {
+    foreach (CCatchability* Catchability, Manager->vCatchabilities) { vCatchabilities.push_back(Catchability->clone()); }
+  } catch (string& Ex) {
     Ex = "CCatchabilityManager.clone()->" + Ex;
     throw Ex;
   }
@@ -112,19 +95,13 @@ void CCatchabilityManager::clone(CCatchabilityManager *Manager)
 // void CCatchabilityManager::validate()
 // Validate our catchabilities
 //**********************************************************************
-void CCatchabilityManager::validate()
-{
-  try
-  {
-    foreach (CCatchability *Catchability, vCatchabilities)
-    {
-      Catchability->validate();
-    }
+void CCatchabilityManager::validate() {
+  try {
+    foreach (CCatchability* Catchability, vCatchabilities) { Catchability->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CCatchability *Catchability, vCatchabilities)
-    {
+    foreach (CCatchability* Catchability, vCatchabilities) {
       // Increase Count for this label
       mLabelList[Catchability->getLabel()] += 1;
 
@@ -132,9 +109,7 @@ void CCatchabilityManager::validate()
       if (mLabelList[Catchability->getLabel()] > 1)
         CError::errorDuplicate(PARAM_CATCHABILITY, Catchability->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CCatchabilityManager.validate()->" + Ex;
     throw Ex;
   }
@@ -144,6 +119,4 @@ void CCatchabilityManager::validate()
 // CCatchabilityManager::~CCatchabilityManager()
 // Default De-Constructor
 //**********************************************************************
-CCatchabilityManager::~CCatchabilityManager()
-{
-}
+CCatchabilityManager::~CCatchabilityManager() {}

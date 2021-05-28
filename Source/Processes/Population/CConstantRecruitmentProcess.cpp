@@ -12,12 +12,12 @@
 #include <limits>
 
 // Local Headers
-#include "CConstantRecruitmentProcess.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
-#include "../../Helpers/CComparer.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "CConstantRecruitmentProcess.h"
 
 // Using
 using std::cout;
@@ -28,11 +28,10 @@ using std::numeric_limits;
 // CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
-CConstantRecruitmentProcess::CConstantRecruitmentProcess()
-{
+CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   // Default Vars
-  pLayer = 0;
-  sType = PARAM_CONSTANT_RECRUITMENT;
+  pLayer         = 0;
+  sType          = PARAM_CONSTANT_RECRUITMENT;
   bRequiresMerge = false;
 
   // Register allowed estimables
@@ -50,14 +49,11 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess()
 // void CConstantRecruitmentProcess::validate()
 // Validate Our Parameters
 //**********************************************************************
-void CConstantRecruitmentProcess::validate()
-{
-  try
-  {
-
+void CConstantRecruitmentProcess::validate() {
+  try {
     // Populate our Variables
-    dR0 = pParameterList->getDouble(PARAM_R0);
-    iAge = pParameterList->getInt(PARAM_AGE, pWorld->getMinAge());
+    dR0    = pParameterList->getDouble(PARAM_R0);
+    iAge   = pParameterList->getInt(PARAM_AGE, pWorld->getMinAge());
     sLayer = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
@@ -78,21 +74,15 @@ void CConstantRecruitmentProcess::validate()
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // Register our Proportions as Estimable
-    for (int i = 0; i < (int)vProportions.size(); ++i)
-      registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
+    for (int i = 0; i < (int)vProportions.size(); ++i) registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
-    foreach (double Prop, vProportions)
-    {
-      dRunningTotal += Prop;
-    }
+    foreach (double Prop, vProportions) { dRunningTotal += Prop; }
     // See If It is close enough to 1.0
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -102,10 +92,8 @@ void CConstantRecruitmentProcess::validate()
 // void CConstantRecruitmentProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CConstantRecruitmentProcess::build()
-{
-  try
-  {
+void CConstantRecruitmentProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
@@ -119,9 +107,7 @@ void CConstantRecruitmentProcess::build()
     // Validate our Vectors are all same size
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -131,11 +117,9 @@ void CConstantRecruitmentProcess::build()
 // void CConstantRecruitmentProcess::execute()
 // Execute
 //**********************************************************************
-void CConstantRecruitmentProcess::execute()
-{
+void CConstantRecruitmentProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base Execute
     CProcess::execute();
@@ -143,17 +127,13 @@ void CConstantRecruitmentProcess::execute()
     // Setup Our Variables
     double dAmountPer = dR0;
 
-    if (pLayer != 0)
-    {
+    if (pLayer != 0) {
       double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i)
-      {
-        for (int j = 0; j < iWorldWidth; ++j)
-        {
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
           pBaseSquare = pWorld->getBaseSquare(i, j);
-          if (pBaseSquare->getEnabled())
-          {
+          if (pBaseSquare->getEnabled()) {
             dTotal += pLayer->getValue(i, j);
           }
         }
@@ -161,15 +141,12 @@ void CConstantRecruitmentProcess::execute()
 
       if (!CComparer::isZero(dTotal))
         dAmountPer /= dTotal;
-    }
-    else
+    } else
       dAmountPer /= pWorld->getEnabledSquareCount();
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
         pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check if this square is enabled or not.
@@ -181,14 +158,11 @@ void CConstantRecruitmentProcess::execute()
           value *= pLayer->getValue(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
-        for (int k = 0; k < getCategoryCount(); ++k)
-          pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
+        for (int k = 0; k < getCategoryCount(); ++k) pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
       }
     }
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CRecruitmentProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -199,7 +173,6 @@ void CConstantRecruitmentProcess::execute()
 // CConstantRecruitmentProcess::~CConstantRecruitmentProcess()
 // Default De-Constructor
 //**********************************************************************
-CConstantRecruitmentProcess::~CConstantRecruitmentProcess()
-{
+CConstantRecruitmentProcess::~CConstantRecruitmentProcess() {
   vProportions.clear();
 }

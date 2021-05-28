@@ -13,17 +13,15 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CSelectivityFactory.h"
 #include "../../TestFixtures/CWorld_Fixture.h"
+#include "../Factory/CSelectivityFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(KnifeEdgeSelectivity, CWorld_Fixture)
-{
-
-  CSelectivity *pSelectivity = 0;
+BOOST_FIXTURE_TEST_CASE(KnifeEdgeSelectivity, CWorld_Fixture) {
+  CSelectivity* pSelectivity = 0;
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_KNIFE_EDGE, false));
 
   pSelectivity->addParameter(PARAM_LABEL, "selectivity");

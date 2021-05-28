@@ -14,8 +14,7 @@
 // CReport::CReport()
 // Default Constructor
 //**********************************************************************
-CReport::CReport()
-{
+CReport::CReport() {
   // Default
   eExecutionState = STATE_INVALID;
 }
@@ -24,6 +23,4 @@ CReport::CReport()
 // CReport::~CReport()
 // Destructor
 //**********************************************************************
-CReport::~CReport()
-{
-}
+CReport::~CReport() {}

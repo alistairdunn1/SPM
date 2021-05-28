@@ -16,20 +16,19 @@
 //
 //
 //**********************************************************************
-class CStringLayer : public CCategoricalLayer
-{
+class CStringLayer : public CCategoricalLayer {
 public:
   // Functions
   CStringLayer();
   virtual ~CStringLayer();
-  CLayer *clone() { return new CStringLayer(*this); }
-  string getValue(int RowIndex, int ColIndex);
-  void validate();
-  void build(){};
+  CLayer* clone() { return new CStringLayer(*this); }
+  string  getValue(int RowIndex, int ColIndex);
+  void    validate();
+  void    build(){};
 
 protected:
   // Variables
-  string **pGrid;
+  string** pGrid;
 };
 
 #endif /*CSTRINGLAYER_H_*/

@@ -9,8 +9,8 @@
 #ifndef CSCHNUTEAGESIZE_H_
 #define CSCHNUTEAGESIZE_H_
 
-#include "../CAgeSize.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../CAgeSize.h"
 
 // Classes
 class CTimeStepManager;
@@ -21,41 +21,40 @@ class CInitializationPhase;
 //
 //
 //**********************************************************************
-class CSchnuteAgeSize : public CAgeSize
-{
+class CSchnuteAgeSize : public CAgeSize {
 public:
   // Functions
   CSchnuteAgeSize();
   virtual ~CSchnuteAgeSize();
-  CAgeSize *clone() { return new CSchnuteAgeSize(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  double getMeanSize(double &age);
-  double getMeanWeight(double &age);
-  double getCV(double &age);
-  double getCVFromSize(double &size);
-  double getProportionInLengthBin(double &age, double &LowerBin, double &UpperBin);
-  bool getByLength() { return bByLength; };
+  CAgeSize* clone() { return new CSchnuteAgeSize(*this); }
+  void      validate();
+  void      build();
+  void      rebuild();
+  double    getMeanSize(double& age);
+  double    getMeanWeight(double& age);
+  double    getCV(double& age);
+  double    getCVFromSize(double& size);
+  double    getProportionInLengthBin(double& age, double& LowerBin, double& UpperBin);
+  bool      getByLength() { return bByLength; };
 
 protected:
-  double dY1;
-  double dY2;
-  double dTau1;
-  double dTau2;
-  double dA;
-  double dB;
-  double dCV;
-  double getGrowthProportion();
-  std::string sDistribution;
-  bool bByLength;
-  string sSizeWeight;
-  CSizeWeight *pSizeWeight;
-  double getMeanWeightFromSize(double &size, double &cv);
-  double getSd(double &age);
-  CTimeStepManager *pTimeStepManager;
-  CInitializationPhaseManager *pInitializationPhaseManager;
-  CInitializationPhase *pInitializationPhase;
+  double                       dY1;
+  double                       dY2;
+  double                       dTau1;
+  double                       dTau2;
+  double                       dA;
+  double                       dB;
+  double                       dCV;
+  double                       getGrowthProportion();
+  std::string                  sDistribution;
+  bool                         bByLength;
+  string                       sSizeWeight;
+  CSizeWeight*                 pSizeWeight;
+  double                       getMeanWeightFromSize(double& size, double& cv);
+  double                       getSd(double& age);
+  CTimeStepManager*            pTimeStepManager;
+  CInitializationPhaseManager* pInitializationPhaseManager;
+  CInitializationPhase*        pInitializationPhase;
 };
 
 #endif /* CSCHNUTEAGESIZE_H_ */

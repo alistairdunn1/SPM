@@ -8,13 +8,13 @@
 
 // headers
 #include "CLogNormalEstimate.h"
+
 #include "../../Helpers/CError.h"
 
 /**
  * Default constructor
  */
-CLogNormalEstimate::CLogNormalEstimate()
-{
+CLogNormalEstimate::CLogNormalEstimate() {
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_CV, &dCv);
@@ -27,13 +27,10 @@ CLogNormalEstimate::CLogNormalEstimate()
 /**
  * Validate our Prior/Estimate
  */
-void CLogNormalEstimate::validate()
-{
+void CLogNormalEstimate::validate() {
   CEstimate::validate();
 
-  try
-  {
-
+  try {
     // Populate our variables
     dMu = pParameterList->getDouble(PARAM_MU);
     dCv = pParameterList->getDouble(PARAM_CV);
@@ -43,9 +40,7 @@ void CLogNormalEstimate::validate()
       CError::errorLessThanEqualTo(PARAM_MU, PARAM_ZERO);
     if (dCv <= 0.0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CLogNormalPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -54,10 +49,9 @@ void CLogNormalEstimate::validate()
 /**
  *
  */
-double CLogNormalEstimate::getScore()
-{
+double CLogNormalEstimate::getScore() {
   double dRet = 0.0;
-  dSigma = sqrt(log(1 + dCv * dCv));
-  dRet = log(getValue()) + 0.5 * pow(log(getValue() / dMu) / dSigma + dSigma * 0.5, 2);
+  dSigma      = sqrt(log(1 + dCv * dCv));
+  dRet        = log(getValue()) + 0.5 * pow(log(getValue() / dMu) / dSigma + dSigma * 0.5, 2);
   return dRet;
 }

@@ -12,8 +12,7 @@
 //
 //
 //**********************************************************************
-class CLogNormalDistribution
-{
+class CLogNormalDistribution {
 public:
   static double getCDF(double x, double mu, double sigma);
   static double getQuantile(double x, double mu, double sigma);

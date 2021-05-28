@@ -16,14 +16,13 @@
 //
 //
 //**********************************************************************
-class CDoubleExponentialSelectivity : public CCachedSelectivity
-{
+class CDoubleExponentialSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CDoubleExponentialSelectivity();
   virtual ~CDoubleExponentialSelectivity();
-  CSelectivity *clone() { return new CDoubleExponentialSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CDoubleExponentialSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions

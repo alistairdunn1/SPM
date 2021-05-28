@@ -16,16 +16,15 @@
 //
 //
 //**********************************************************************
-class CAgeingProcess : public CProcess
-{
+class CAgeingProcess : public CProcess {
 public:
-	// Functions
-	CAgeingProcess();
-	virtual ~CAgeingProcess();
-	CProcess *clone() { return new CAgeingProcess(*this); }
-	void validate();
-	void build();
-	void execute();
+  // Functions
+  CAgeingProcess();
+  virtual ~CAgeingProcess();
+  CProcess* clone() { return new CAgeingProcess(*this); }
+  void      validate();
+  void      build();
+  void      execute();
 };
 
 #endif /*CAGEINGPROCESS_H_*/

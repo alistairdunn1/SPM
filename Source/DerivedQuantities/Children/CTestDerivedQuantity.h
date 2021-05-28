@@ -14,8 +14,7 @@
 //
 //
 //**********************************************************************
-class CTestDerivedQuantity : public CDerivedQuantity
-{
+class CTestDerivedQuantity : public CDerivedQuantity {
 public:
   CTestDerivedQuantity();
   virtual ~CTestDerivedQuantity();

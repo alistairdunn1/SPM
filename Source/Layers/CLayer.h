@@ -16,25 +16,24 @@
 //
 //
 //**********************************************************************
-class CLayer : public CBaseBuild
-{
+class CLayer : public CBaseBuild {
 public:
   CLayer();
   virtual ~CLayer();
-  virtual CLayer *clone() = 0;
-  int getWidth() { return iWidth; }
-  int getHeight() { return iHeight; }
-  virtual void validate();
-  string getLayerType() { return sType; };
-  bool getIsStatic() { return bIsStatic; }
-  bool getIsZero() { return bIsZero; }
+  virtual CLayer* clone() = 0;
+  int             getWidth() { return iWidth; }
+  int             getHeight() { return iHeight; }
+  virtual void    validate();
+  string          getLayerType() { return sType; };
+  bool            getIsStatic() { return bIsStatic; }
+  bool            getIsZero() { return bIsZero; }
 
 protected:
-  int iWidth;
-  int iHeight;
+  int    iWidth;
+  int    iHeight;
   string sType;
-  bool bIsStatic;
-  bool bIsZero;
+  bool   bIsStatic;
+  bool   bIsZero;
 };
 
 #endif /*CLAYER_H_*/

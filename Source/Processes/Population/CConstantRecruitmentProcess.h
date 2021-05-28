@@ -19,25 +19,24 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CConstantRecruitmentProcess : public CProcess
-{
+class CConstantRecruitmentProcess : public CProcess {
 public:
   // Functions
   CConstantRecruitmentProcess();
   virtual ~CConstantRecruitmentProcess();
-  CProcess *clone() { return new CConstantRecruitmentProcess(*this); }
-  void validate();
-  void build();
-  void execute();
+  CProcess* clone() { return new CConstantRecruitmentProcess(*this); }
+  void      validate();
+  void      build();
+  void      execute();
 
 protected:
   // Variables
-  double dR0;
+  double         dR0;
   vector<double> vProportions;
-  int iAge;
-  int iAgeIndex;
-  string sLayer;
-  CNumericLayer *pLayer;
+  int            iAge;
+  int            iAgeIndex;
+  string         sLayer;
+  CNumericLayer* pLayer;
 };
 
 #endif /*CCONSTANTRECRUITMENTPROCESS_H_*/

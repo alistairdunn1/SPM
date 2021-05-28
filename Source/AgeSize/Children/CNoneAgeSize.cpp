@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CNoneAgeSize.h"
+
 #include "../../Helpers/CError.h"
 #include "../../SizeWeight/CSizeWeight.h"
 
@@ -16,9 +17,7 @@
 // CNoneAgeSize::CNoneAgeSize()
 // Default Constructor
 //**********************************************************************
-CNoneAgeSize::CNoneAgeSize()
-{
-
+CNoneAgeSize::CNoneAgeSize() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 }
@@ -27,16 +26,12 @@ CNoneAgeSize::CNoneAgeSize()
 // void CNoneAgeSize::validate()
 // Validate the age-size relationship
 //**********************************************************************
-void CNoneAgeSize::validate()
-{
-
-  try
-  {
-
+void CNoneAgeSize::validate() {
+  try {
     // Get our variables
-    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
-    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
-    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
+    sSizeWeight                            = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager* pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight                            = pSizeWeightManager->getSizeWeight(sSizeWeight);
 
     // Validate parent
     CAgeSize::validate();
@@ -44,9 +39,7 @@ void CNoneAgeSize::validate()
     // Local validation
     if (pSizeWeight->getType() != PARAM_NONE)
       CError::errorTypeNotSupported(PARAM_SIZE_WEIGHT, string(PARAM_AGE_SIZE + string(" type=") + PARAM_NONE));
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNoneAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -56,23 +49,18 @@ void CNoneAgeSize::validate()
 // void CNoneAgeSize::build()
 // Validate the age-size relationship
 //**********************************************************************
-void CNoneAgeSize::build()
-{
-  try
-  {
-
+void CNoneAgeSize::build() {
+  try {
     // Base
     CAgeSize::build();
 
-    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
-    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
-    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
+    sSizeWeight                            = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager* pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight                            = pSizeWeightManager->getSizeWeight(sSizeWeight);
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -82,13 +70,9 @@ void CNoneAgeSize::build()
 // void CNoneAgeSize::rebuild()
 // Validate the age-size relationship
 //**********************************************************************
-void CNoneAgeSize::rebuild()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CNoneAgeSize::rebuild() {
+  try {
+  } catch (string& Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,15 +82,10 @@ void CNoneAgeSize::rebuild()
 // double getProportionInLengthBin(double &age, double &LowerBin, double&UpperBin);
 // Get the proportion within the length bin
 //**********************************************************************
-double CNoneAgeSize::getProportionInLengthBin(double &age, double &LowerBin, double &UpperBin)
-{
-
-  if ((LowerBin < 1.0) && (1.0 <= UpperBin))
-  {
+double CNoneAgeSize::getProportionInLengthBin(double& age, double& LowerBin, double& UpperBin) {
+  if ((LowerBin < 1.0) && (1.0 <= UpperBin)) {
     return (1.0);
-  }
-  else
-  {
+  } else {
     return (0.0);
   }
 }
@@ -115,6 +94,4 @@ double CNoneAgeSize::getProportionInLengthBin(double &age, double &LowerBin, dou
 // CNoneAgeSize::~CNoneAgeSize()
 // Destructor
 //**********************************************************************
-CNoneAgeSize::~CNoneAgeSize()
-{
-}
+CNoneAgeSize::~CNoneAgeSize() {}

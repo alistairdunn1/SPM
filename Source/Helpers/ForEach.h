@@ -11,6 +11,6 @@
 #include <boost/foreach.hpp>
 
 // Defines
-#define foreach BOOST_FOREACH // Make the boost foreach a bit nicer.
+#define foreach BOOST_FOREACH  // Make the boost foreach a bit nicer.
 
 #endif /* FOREACH_H_ */

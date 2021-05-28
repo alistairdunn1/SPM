@@ -20,31 +20,30 @@ class CReport;
 //
 //
 //**********************************************************************
-class CReportManager : public CBaseManager
-{
+class CReportManager : public CBaseManager {
 public:
   // Function
-  static CReportManager *Instance();
-  static void Destroy();
+  static CReportManager* Instance();
+  static void            Destroy();
   virtual ~CReportManager();
-  void addReporter(CReport *value);
-  void setReportSuffix(string newSuffix) { sReportSuffix = newSuffix; }
+  void   addReporter(CReport* value);
+  void   setReportSuffix(string newSuffix) { sReportSuffix = newSuffix; }
   string getReportSuffix() { return sReportSuffix; }
-  void clone(CReportManager *Manager);
-  void validate();
-  void build();
-  void execute();
-  void execute(EState state);
+  void   clone(CReportManager* Manager);
+  void   validate();
+  void   build();
+  void   execute();
+  void   execute(EState state);
 
 protected:
   // Functions
   CReportManager();
 
   // Variables
-  vector<CReport *> vReporters;
-  vector<CReport *> vModellingReporters;
-  bool bDisableReports;
-  string sReportSuffix;
+  vector<CReport*> vReporters;
+  vector<CReport*> vModellingReporters;
+  bool             bDisableReports;
+  string           sReportSuffix;
 
 private:
   static boost::thread_specific_ptr<CReportManager> clInstance;

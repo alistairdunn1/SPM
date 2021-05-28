@@ -23,29 +23,28 @@ class CProcess;
 //
 //
 //**********************************************************************
-class CTimeStep : public CBaseExecute
-{
+class CTimeStep : public CBaseExecute {
 public:
   CTimeStep();
   virtual ~CTimeStep();
-  CTimeStep *clone() { return new CTimeStep(*this); }
-  void validate();
-  void build();
-  void execute();
+  CTimeStep*     clone() { return new CTimeStep(*this); }
+  void           validate();
+  void           build();
+  void           execute();
   vector<string> getProcessNames() { return vProcessNames; }
-  double getGrowthProportion() { return dGrowthProportion; }
-  void addInitialisationDerivedQuantity(CDerivedQuantity *dq) { vInitialisationDerivedQuantities.push_back(dq); }
-  void addDerivedQuantity(CDerivedQuantity *dq);
+  double         getGrowthProportion() { return dGrowthProportion; }
+  void           addInitialisationDerivedQuantity(CDerivedQuantity* dq) { vInitialisationDerivedQuantities.push_back(dq); }
+  void           addDerivedQuantity(CDerivedQuantity* dq);
 
 protected:
   // Variables
-  vector<string> vProcessNames;
-  vector<CProcess *> vProcesses;
-  double dGrowthProportion;
-  vector<CDerivedQuantity *> vInitialisationDerivedQuantities;
-  map<unsigned, vector<CDerivedQuantity *>> mvDerivedQuantities;
-  vector<CDerivedQuantityByCell *> vInitialisationDerivedQuantitiesByCell;
-  map<unsigned, vector<CDerivedQuantityByCell *>> mvDerivedQuantitiesByCell;
+  vector<string>                                 vProcessNames;
+  vector<CProcess*>                              vProcesses;
+  double                                         dGrowthProportion;
+  vector<CDerivedQuantity*>                      vInitialisationDerivedQuantities;
+  map<unsigned, vector<CDerivedQuantity*>>       mvDerivedQuantities;
+  vector<CDerivedQuantityByCell*>                vInitialisationDerivedQuantitiesByCell;
+  map<unsigned, vector<CDerivedQuantityByCell*>> mvDerivedQuantitiesByCell;
 };
 
 #endif /*CTIMESTEP_H_*/

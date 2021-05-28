@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CProcessFactory
-{
+class CProcessFactory {
 public:
   // Functions
-  static CProcess *buildProcess(string type, bool registerWithManager = true);
+  static CProcess* buildProcess(string type, bool registerWithManager = true);
 
 private:
   // Functions

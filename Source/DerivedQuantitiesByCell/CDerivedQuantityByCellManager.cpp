@@ -6,12 +6,13 @@
 //============================================================================
 
 // Headers
+#include "CDerivedQuantityByCellManager.h"
+
 #include <iostream>
 
-#include "CDerivedQuantityByCellManager.h"
-#include "CDerivedQuantityByCell.h"
-#include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "CDerivedQuantityByCell.h"
 
 // Using
 using std::cout;
@@ -24,16 +25,13 @@ boost::thread_specific_ptr<CDerivedQuantityByCellManager> CDerivedQuantityByCell
 // CDerivedQuantityByCellManager::CDerivedQuantityByCellManager()
 // Default Constructor
 //**********************************************************************
-CDerivedQuantityByCellManager::CDerivedQuantityByCellManager()
-{
-}
+CDerivedQuantityByCellManager::CDerivedQuantityByCellManager() {}
 
 //**********************************************************************
 // CDerivedQuantityByCellManager* CDerivedQuantityByCellManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CDerivedQuantityByCellManager *CDerivedQuantityByCellManager::Instance()
-{
+CDerivedQuantityByCellManager* CDerivedQuantityByCellManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CDerivedQuantityByCellManager());
   return clInstance.get();
@@ -43,10 +41,8 @@ CDerivedQuantityByCellManager *CDerivedQuantityByCellManager::Instance()
 // void CDerivedQuantityByCellManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CDerivedQuantityByCellManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CDerivedQuantityByCellManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -55,8 +51,7 @@ void CDerivedQuantityByCellManager::Destroy()
 // void CDerivedQuantityByCellManager::addDerivedQuantityByCell(CDerivedQuantityByCell *DerivedQuantityByCell)
 // Add Derived Layer to our list
 //**********************************************************************
-void CDerivedQuantityByCellManager::addDerivedQuantityByCell(CDerivedQuantityByCell *DerivedQuantityByCell)
-{
+void CDerivedQuantityByCellManager::addDerivedQuantityByCell(CDerivedQuantityByCell* DerivedQuantityByCell) {
   vDerivedQuantityByCells.push_back(DerivedQuantityByCell);
 }
 
@@ -64,20 +59,15 @@ void CDerivedQuantityByCellManager::addDerivedQuantityByCell(CDerivedQuantityByC
 // CDerivedQuantityByCell* CDerivedQuantityByCellManager::getDerivedQuantityByCell(string label)
 // Get our Derived Layer
 //**********************************************************************
-CDerivedQuantityByCell *CDerivedQuantityByCellManager::getDerivedQuantityByCell(string label)
-{
-  try
-  {
-    foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-    {
+CDerivedQuantityByCell* CDerivedQuantityByCellManager::getDerivedQuantityByCell(string label) {
+  try {
+    foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) {
       if (DerivedQuantityByCell->getLabel() == label)
         return DerivedQuantityByCell;
     }
 
     CError::errorUnknown(PARAM_DERIVED_QUANTITY_BY_CELL, label);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityByCellManager.validate()->" + Ex;
     throw Ex;
   }
@@ -89,20 +79,13 @@ CDerivedQuantityByCell *CDerivedQuantityByCellManager::getDerivedQuantityByCell(
 // void CDerivedQuantityByCellManager::validate()
 // Validate our Derived Layers
 //**********************************************************************
-void CDerivedQuantityByCellManager::validate()
-{
-  try
-  {
-
-    foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-    {
-      DerivedQuantityByCell->validate();
-    }
+void CDerivedQuantityByCellManager::validate() {
+  try {
+    foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { DerivedQuantityByCell->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-    {
+    foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) {
       // Increase Count for this label
       mLabelList[DerivedQuantityByCell->getLabel()] += 1;
 
@@ -110,9 +93,7 @@ void CDerivedQuantityByCellManager::validate()
       if (mLabelList[DerivedQuantityByCell->getLabel()] > 1)
         CError::errorDuplicate(PARAM_DERIVED_QUANTITY_BY_CELL, DerivedQuantityByCell->getLabel());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityByCellManager.validate()->" + Ex;
     throw Ex;
   }
@@ -122,18 +103,10 @@ void CDerivedQuantityByCellManager::validate()
 // void CDerivedQuantityByCellManager::build()
 // Build our Derived Layers
 //**********************************************************************
-void CDerivedQuantityByCellManager::build()
-{
-  try
-  {
-
-    foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-    {
-      DerivedQuantityByCell->build();
-    }
-  }
-  catch (string &Ex)
-  {
+void CDerivedQuantityByCellManager::build() {
+  try {
+    foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { DerivedQuantityByCell->build(); }
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityByCellManager.build()->" + Ex;
     throw Ex;
   }
@@ -143,18 +116,10 @@ void CDerivedQuantityByCellManager::build()
 // void CDerivedQuantityByCellManager::rebuild()
 // ReBuild our Derived Layers
 //**********************************************************************
-void CDerivedQuantityByCellManager::rebuild()
-{
-  try
-  {
-
-    foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-    {
-      DerivedQuantityByCell->rebuild();
-    }
-  }
-  catch (string &Ex)
-  {
+void CDerivedQuantityByCellManager::rebuild() {
+  try {
+    foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { DerivedQuantityByCell->rebuild(); }
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityByCellManager.rebuild()->" + Ex;
     throw Ex;
   }
@@ -164,36 +129,23 @@ void CDerivedQuantityByCellManager::rebuild()
 // void CDerivedQuantityByCellManager::calculate()
 // Calculate Derived Layers
 //**********************************************************************
-void CDerivedQuantityByCellManager::calculate()
-{
-  foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-  {
-    DerivedQuantityByCell->calculate();
-  }
+void CDerivedQuantityByCellManager::calculate() {
+  foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { DerivedQuantityByCell->calculate(); }
 }
 
 //**********************************************************************
 // void CDerivedQuantityByCellManager::calculate(bool initialisationPhase)
 // Calculate Derived Layers
 //**********************************************************************
-void CDerivedQuantityByCellManager::calculate(int initialisationPhase)
-{
-
-  foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-  {
-    DerivedQuantityByCell->calculate(initialisationPhase);
-  }
+void CDerivedQuantityByCellManager::calculate(int initialisationPhase) {
+  foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { DerivedQuantityByCell->calculate(initialisationPhase); }
 }
 
 //**********************************************************************
 // CDerivedQuantityByCellManager::~CDerivedQuantityByCellManager()
 // Destructor
 //**********************************************************************
-CDerivedQuantityByCellManager::~CDerivedQuantityByCellManager()
-{
-  foreach (CDerivedQuantityByCell *DerivedQuantityByCell, vDerivedQuantityByCells)
-  {
-    delete DerivedQuantityByCell;
-  }
+CDerivedQuantityByCellManager::~CDerivedQuantityByCellManager() {
+  foreach (CDerivedQuantityByCell* DerivedQuantityByCell, vDerivedQuantityByCells) { delete DerivedQuantityByCell; }
   vDerivedQuantityByCells.clear();
 }

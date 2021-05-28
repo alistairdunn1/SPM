@@ -16,13 +16,12 @@
 //
 //
 //**********************************************************************
-class CAllValuesSelectivity : public CCachedSelectivity
-{
+class CAllValuesSelectivity : public CCachedSelectivity {
 public:
   CAllValuesSelectivity();
   virtual ~CAllValuesSelectivity();
-  CSelectivity *clone() { return new CAllValuesSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CAllValuesSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions
@@ -30,7 +29,7 @@ protected:
 
   // Variables
   vector<double> vVs;
-  double dAlpha;
+  double         dAlpha;
 };
 
 #endif /* CALLVALUESSELECTIVITY_H_ */

@@ -9,24 +9,23 @@
 
 // Local Headers
 #include "CMigrationMovementProcess.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 #include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CMigrationMovementProcess::CMigrationMovementProcess()
 // Default Constructor
 //**********************************************************************
-CMigrationMovementProcess::CMigrationMovementProcess()
-{
-
-  //Default values
+CMigrationMovementProcess::CMigrationMovementProcess() {
+  // Default values
   pSourceLayer = 0;
-  pSinkLayer = 0;
-  sType = PARAM_MIGRATION_MOVEMENT;
+  pSinkLayer   = 0;
+  sType        = PARAM_MIGRATION_MOVEMENT;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -40,13 +39,10 @@ CMigrationMovementProcess::CMigrationMovementProcess()
 // void CMigrationMovementProcess::validate()
 // validate
 //**********************************************************************
-void CMigrationMovementProcess::validate()
-{
-  try
-  {
-
+void CMigrationMovementProcess::validate() {
+  try {
     // Get our Variables
-    sSinkLayer = pParameterList->getString(PARAM_SINK_LAYER);
+    sSinkLayer   = pParameterList->getString(PARAM_SINK_LAYER);
     sSourceLayer = pParameterList->getString(PARAM_SOURCE_LAYER);
 
     dProportion = pParameterList->getDouble(PARAM_PROPORTION, true, 1.0);
@@ -54,7 +50,7 @@ void CMigrationMovementProcess::validate()
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
-    //register estimables
+    // register estimables
     registerEstimable(PARAM_PROPORTION, &dProportion);
 
     // Base Validation
@@ -72,9 +68,7 @@ void CMigrationMovementProcess::validate()
       CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
     if (getProportion() > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMigrationMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -84,10 +78,8 @@ void CMigrationMovementProcess::validate()
 // void CMigrationMovementProcess::build()
 // build
 //**********************************************************************
-void CMigrationMovementProcess::build()
-{
-  try
-  {
+void CMigrationMovementProcess::build() {
+  try {
     // Base Building
     CMovementProcess::build();
 
@@ -100,9 +92,7 @@ void CMigrationMovementProcess::build()
       pSinkLayer = CLayerManager::Instance()->getNumericLayer(sSinkLayer);
     if (sSourceLayer != "")
       pSourceLayer = CLayerManager::Instance()->getNumericLayer(sSourceLayer);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMigrationMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -112,14 +102,12 @@ void CMigrationMovementProcess::build()
 // void CMigrationMovementProcess::execute()
 // execute
 //**********************************************************************
-void CMigrationMovementProcess::execute()
-{
+void CMigrationMovementProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
-    //TODO: Scott.. this function works correctly, but does need
+    // TODO: Scott.. this function works correctly, but does need
     // optimisation. Its multiple loops would proably result in this
     // being relatively slow. Can we improve it?
 
@@ -130,10 +118,8 @@ void CMigrationMovementProcess::execute()
 
     // iterate over source layer and calc. max_layer_source_value
     // iterate over sink layer and calc. total_layer_sink_value
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Squares
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -148,35 +134,27 @@ void CMigrationMovementProcess::execute()
     //    multiply by source layer/max_layer_value
     //    multiply by selectivity
     //  and sum the result for age and category (call total)
-    for (int k = 0; k < getCategoryCount(); ++k)
-    {
-      for (int l = 0; l < iBaseColCount; ++l)
-      {
-
+    for (int k = 0; k < getCategoryCount(); ++k) {
+      for (int l = 0; l < iBaseColCount; ++l) {
         dTotal = 0.0;
 
         // iterate over the world and sum the source
-        for (int i = 0; i < iWorldHeight; ++i)
-        {
-          for (int j = 0; j < iWorldWidth; ++j)
-          {
-
+        for (int i = 0; i < iWorldHeight; ++i) {
+          for (int j = 0; j < iWorldWidth; ++j) {
             // Get Current Squares
             pBaseSquare = pWorld->getBaseSquare(i, j);
             if (!pBaseSquare->getEnabled())
               continue;
 
-            pDiff = pWorld->getDifferenceSquare(i, j);
+            pDiff   = pWorld->getDifferenceSquare(i, j);
             dSquare = pBaseSquare->getValue(vCategoryIndex[k], l) * dProportion * vSelectivityIndex[k]->getResult(l);
             dTotal += dSquare;
-            pDiff->subValue(k, l, dSquare); // remove from world
+            pDiff->subValue(k, l, dSquare);  // remove from world
           }
         }
         // iterate over the world and allocate dTotal to sink, proportionally
-        for (int i = 0; i < iWorldHeight; ++i)
-        {
-          for (int j = 0; j < iWorldWidth; ++j)
-          {
+        for (int i = 0; i < iWorldHeight; ++i) {
+          for (int j = 0; j < iWorldWidth; ++j) {
             pBaseSquare = pWorld->getBaseSquare(i, j);
             if (!pBaseSquare->getEnabled())
               continue;
@@ -189,9 +167,7 @@ void CMigrationMovementProcess::execute()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMigrationMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -202,6 +178,4 @@ void CMigrationMovementProcess::execute()
 // CMigrationMovementProcess::~CMigrationMovementProcess()
 // Default De-Constructor
 //**********************************************************************
-CMigrationMovementProcess::~CMigrationMovementProcess()
-{
-}
+CMigrationMovementProcess::~CMigrationMovementProcess() {}

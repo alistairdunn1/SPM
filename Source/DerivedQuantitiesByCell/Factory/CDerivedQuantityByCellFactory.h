@@ -20,10 +20,9 @@ using std::string;
 //
 //
 //**********************************************************************
-class CDerivedQuantityByCellFactory
-{
+class CDerivedQuantityByCellFactory {
 public:
-  static CDerivedQuantityByCell *buildDerivedQuantityByCell(string type, bool registerWithManager = true);
+  static CDerivedQuantityByCell* buildDerivedQuantityByCell(string type, bool registerWithManager = true);
 
 private:
   // Functions

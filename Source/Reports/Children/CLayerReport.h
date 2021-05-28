@@ -22,28 +22,27 @@ class CLayerManager;
 //
 //
 //**********************************************************************
-class CLayerReport : public CFileReport
-{
+class CLayerReport : public CFileReport {
 public:
   CLayerReport();
   virtual ~CLayerReport();
-  CReport *clone() { return new CLayerReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CLayerReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  vector<int> vYears;
-  int iTimeStep;
-  string sTimeStep;
-  CTimeStepManager *pTimeStepManager;
-  string sLayer;
-  string sLayerType;
-  string sType;
-  CNumericLayer *pNumericLayer;
-  CCategoricalLayer *pCategoricalLayer;
-  CLayerManager *pLayerManager;
+  vector<int>        vYears;
+  int                iTimeStep;
+  string             sTimeStep;
+  CTimeStepManager*  pTimeStepManager;
+  string             sLayer;
+  string             sLayerType;
+  string             sType;
+  CNumericLayer*     pNumericLayer;
+  CCategoricalLayer* pCategoricalLayer;
+  CLayerManager*     pLayerManager;
 };
 
 #endif /* CLAYERREPORT_H_ */

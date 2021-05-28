@@ -39,43 +39,42 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CWorld : public CBaseManager
-{
+class CWorld : public CBaseManager {
 public:
-  static CWorld *Instance();
-  static void Destroy();
+  static CWorld* Instance();
+  static void    Destroy();
 
   // Functions
-  void clone(CWorld *World);
-  void validate();
-  void build();
-  void rebuild();
-  void fillCategoryVector(vector<int> &list, vector<string> &names);
-  int getWidth() { return iWidth; }
-  int getHeight() { return iHeight; }
-  double getCellLength() { return dCellLength; }
-  string getBaseLayer() { return sBaseLayer; }
-  int getMinAge() { return iMinAge; }
-  int getMaxAge() { return iMaxAge; }
-  int getAgeSpread() { return ((iMaxAge + 1) - iMinAge); }
-  bool getAgePlusGroup() { return bAgePlusGroup; }
-  int getInitialYear() { return iInitialYear; }
-  int getCurrentYear() { return iCurrentYear; }
-  int getTimeStepCount() { return (int)vTimeSteps.size(); }
-  int getInitializationPhaseCount() { return (int)vInitializationPhases.size(); }
-  int getCategoryCount() { return (int)vCategories.size(); }
-  string getInitializationPhase(int index);
-  CWorldSquare *getBaseSquare(int RowIndex, int ColIndex);
-  CWorldSquare *getDifferenceSquare(int RowIndex, int ColIndex);
-  int getEnabledSquareCount() { return iEnabledSquareCount; };
-  int getCategoryIndexForName(string Name);
-  string getCategoryNameForIndex(int Index);
-  int getColIndexForAge(int Age);
-  double getMeanWeight(int AgeIndex, int iCategoryIndex);
-  vector<double> getLengthFrequency(int AgeIndex, int CategoryIndex, vector<double> &LengthBins);
-  void mergeDifferenceGrid();
-  void zeroGrid();
-  void debugToScreen();
+  void           clone(CWorld* World);
+  void           validate();
+  void           build();
+  void           rebuild();
+  void           fillCategoryVector(vector<int>& list, vector<string>& names);
+  int            getWidth() { return iWidth; }
+  int            getHeight() { return iHeight; }
+  double         getCellLength() { return dCellLength; }
+  string         getBaseLayer() { return sBaseLayer; }
+  int            getMinAge() { return iMinAge; }
+  int            getMaxAge() { return iMaxAge; }
+  int            getAgeSpread() { return ((iMaxAge + 1) - iMinAge); }
+  bool           getAgePlusGroup() { return bAgePlusGroup; }
+  int            getInitialYear() { return iInitialYear; }
+  int            getCurrentYear() { return iCurrentYear; }
+  int            getTimeStepCount() { return (int)vTimeSteps.size(); }
+  int            getInitializationPhaseCount() { return (int)vInitializationPhases.size(); }
+  int            getCategoryCount() { return (int)vCategories.size(); }
+  string         getInitializationPhase(int index);
+  CWorldSquare*  getBaseSquare(int RowIndex, int ColIndex);
+  CWorldSquare*  getDifferenceSquare(int RowIndex, int ColIndex);
+  int            getEnabledSquareCount() { return iEnabledSquareCount; };
+  int            getCategoryIndexForName(string Name);
+  string         getCategoryNameForIndex(int Index);
+  int            getColIndexForAge(int Age);
+  double         getMeanWeight(int AgeIndex, int iCategoryIndex);
+  vector<double> getLengthFrequency(int AgeIndex, int CategoryIndex, vector<double>& LengthBins);
+  void           mergeDifferenceGrid();
+  void           zeroGrid();
+  void           debugToScreen();
   virtual ~CWorld();
 
 protected:
@@ -83,25 +82,25 @@ protected:
   CWorld();
 
   // Variables
-  double dCellLength;
-  int iWidth;
-  int iHeight;
-  string sBaseLayer;
-  CNumericLayer *pBaseLayer;
-  vector<string> vCategories;
-  int iMinAge;
-  int iMaxAge;
-  bool bAgePlusGroup;
-  vector<string> vInitializationPhases;
-  int iInitialYear;
-  int iCurrentYear;
-  int iFinalYear;
-  vector<string> vTimeSteps;
-  CWorldSquare **pGrid;
-  CWorldSquare **pDifferenceGrid;
-  int iEnabledSquareCount;
-  vector<string> vAgeSizeList;
-  vector<CAgeSize *> vAgeSizeIndex;
+  double            dCellLength;
+  int               iWidth;
+  int               iHeight;
+  string            sBaseLayer;
+  CNumericLayer*    pBaseLayer;
+  vector<string>    vCategories;
+  int               iMinAge;
+  int               iMaxAge;
+  bool              bAgePlusGroup;
+  vector<string>    vInitializationPhases;
+  int               iInitialYear;
+  int               iCurrentYear;
+  int               iFinalYear;
+  vector<string>    vTimeSteps;
+  CWorldSquare**    pGrid;
+  CWorldSquare**    pDifferenceGrid;
+  int               iEnabledSquareCount;
+  vector<string>    vAgeSizeList;
+  vector<CAgeSize*> vAgeSizeIndex;
 
 private:
   static boost::thread_specific_ptr<CWorld> clInstance;

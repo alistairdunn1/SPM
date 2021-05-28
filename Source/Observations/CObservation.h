@@ -11,14 +11,13 @@
 
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
-#include "../World/WorldView/CLayerDerivedWorldView.h"
 #include "../Likelihoods/CLikelihood.h"
+#include "../World/WorldView/CLayerDerivedWorldView.h"
 
 // structures
-struct SComparison
-{
+struct SComparison {
   string sKey;
-  int iBin;
+  int    iBin;
   string sGroup;
   double dExpectedValue;
   double dObservedValue;
@@ -37,54 +36,54 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CObservation : public CBaseExecute
-{
+class CObservation : public CBaseExecute {
 public:
   // Functions
   CObservation();
   virtual ~CObservation();
-  virtual CObservation *clone() = 0;
-  int getYear() { return iYear; }
-  int getTimeStep() { return iTimeStep; }
-  string getTimeStepString() { return sTimeStep; }
-  string getLayer() { return sLayer; }
-  string getCategory(int index);
-  string getSelectivity(int index);
-  double getScore() { return dScore; }
-  void fillComparisons(vector<SComparison *> &comparisons);
-  virtual void validate();
-  virtual void build();
-  void prepare();
-  virtual void execute();
-  string getType();
+  virtual CObservation* clone() = 0;
+  int                   getYear() { return iYear; }
+  int                   getTimeStep() { return iTimeStep; }
+  string                getTimeStepString() { return sTimeStep; }
+  string                getLayer() { return sLayer; }
+  string                getCategory(int index);
+  string                getSelectivity(int index);
+  double                getScore() { return dScore; }
+  void                  fillComparisons(vector<SComparison*>& comparisons);
+  virtual void          validate();
+  virtual void          build();
+  void                  prepare();
+  virtual void          execute();
+  string                getType();
 
 protected:
   // Functions
-  void saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score);
+  void saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double multiplier,
+                      double score);
   void saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score);
   void saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double multiplier, double score);
 
   // Variables
-  double dScore;
-  double dMultiplier;
-  int iYear;
-  string sTimeStep;
-  int iTimeStep;
-  double dProportionTimeStep;
-  string sProportionMethod;
-  string sLayer;
-  CCategoricalLayer *pLayer;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
-  vector<SComparison *> vComparisons;
-  CLayerDerivedWorldView *pStartWorldView;
-  CLayerDerivedWorldView *pWorldView;
-  string sLikelihood;
-  string sSimulationLikelihood;
-  CLikelihood *pLikelihood;
-  bool bSimulationRunMode;
+  double                  dScore;
+  double                  dMultiplier;
+  int                     iYear;
+  string                  sTimeStep;
+  int                     iTimeStep;
+  double                  dProportionTimeStep;
+  string                  sProportionMethod;
+  string                  sLayer;
+  CCategoricalLayer*      pLayer;
+  vector<string>          vCategoryNames;
+  vector<int>             vCategories;
+  vector<string>          vSelectivityNames;
+  vector<CSelectivity*>   vSelectivities;
+  vector<SComparison*>    vComparisons;
+  CLayerDerivedWorldView* pStartWorldView;
+  CLayerDerivedWorldView* pWorldView;
+  string                  sLikelihood;
+  string                  sSimulationLikelihood;
+  CLikelihood*            pLikelihood;
+  bool                    bSimulationRunMode;
 };
 
 #endif /*COBSERVATION_H_*/

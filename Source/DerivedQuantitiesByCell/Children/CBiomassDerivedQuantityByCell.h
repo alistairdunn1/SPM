@@ -19,8 +19,7 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CBiomassDerivedQuantityByCell : public CDerivedQuantityByCell
-{
+class CBiomassDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
   // Methods
   CBiomassDerivedQuantityByCell();
@@ -32,14 +31,14 @@ public:
 
 protected:
   // Members
-  CTimeStepManager *pTimeStepManager;
-  string sTimeStep;
-  vector<string> vInitializationTimeStepNames;
-  vector<int> vInitializationTimeStepIndex;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CTimeStepManager*     pTimeStepManager;
+  string                sTimeStep;
+  vector<string>        vInitializationTimeStepNames;
+  vector<int>           vInitializationTimeStepIndex;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /* CBIOMASSDERIVEDQUANTITYBYCELL_H_ */

@@ -12,17 +12,15 @@
 #include <boost/test/unit_test.hpp>
 
 // Local Headers
-#include "CWorld_Fixture.h"
 #include "../World/CWorld.h"
+#include "CWorld_Fixture.h"
 
 //**********************************************************************
 // CWorld_Fixture::CWorld_Fixture()
 // Default Constructor
 //**********************************************************************
-CWorld_Fixture::CWorld_Fixture()
-{
-
-  CWorld *pWorld = CWorld::Instance();
+CWorld_Fixture::CWorld_Fixture() {
+  CWorld* pWorld = CWorld::Instance();
 
   pWorld->addParameter(PARAM_CELL_LENGTH, "1");
   pWorld->addParameter(PARAM_NROWS, "5");
@@ -33,7 +31,7 @@ CWorld_Fixture::CWorld_Fixture()
   pWorld->addParameter(PARAM_AGE_PLUS_GROUP, "true");
   pWorld->addParameter(PARAM_INITIAL_YEAR, "1990");
   pWorld->addParameter(PARAM_CURRENT_YEAR, "2000");
-  //pWorld->addParameter(PARAM_FINAL_YEAR, "2010");
+  // pWorld->addParameter(PARAM_FINAL_YEAR, "2010");
 
   pWorld->addParameter(PARAM_CATEGORIES, "immature");
   pWorld->addParameter(PARAM_CATEGORIES, "mature");
@@ -56,8 +54,7 @@ CWorld_Fixture::CWorld_Fixture()
 // CWorld_Fixture::~CWorld_Fixture()
 // Destructor
 //**********************************************************************
-CWorld_Fixture::~CWorld_Fixture()
-{
+CWorld_Fixture::~CWorld_Fixture() {
   CWorld::Destroy();
 }
 

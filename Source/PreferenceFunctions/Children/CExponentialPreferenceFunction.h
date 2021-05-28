@@ -16,17 +16,16 @@
 //
 //
 //**********************************************************************
-class CExponentialPreferenceFunction : public CPreferenceFunction
-{
+class CExponentialPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CExponentialPreferenceFunction();
   virtual ~CExponentialPreferenceFunction();
-  CPreferenceFunction *clone() { return new CExponentialPreferenceFunction(*this); }
-  double getLambda() { return dLambda; }
-  double getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void validate();
-  void build();
+  CPreferenceFunction* clone() { return new CExponentialPreferenceFunction(*this); }
+  double               getLambda() { return dLambda; }
+  double               getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                 validate();
+  void                 build();
 
 protected:
   double dLambda;

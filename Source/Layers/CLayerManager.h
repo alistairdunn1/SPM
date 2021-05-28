@@ -41,31 +41,30 @@ class CCategoricalLayer;
 //
 //
 //**********************************************************************
-class CLayerManager : public CBaseManager
-{
+class CLayerManager : public CBaseManager {
 public:
-  static CLayerManager *Instance();
-  static void Destroy();
+  static CLayerManager* Instance();
+  static void           Destroy();
   virtual ~CLayerManager();
-  void clone(CLayerManager *Manager);
-  void addLayer(CLayer *Layer);
-  CLayer *getLayer(int index);
-  std::string getLayerType(string Label);
-  CNumericLayer *getNumericLayer(string Label);
-  CIntLayer *getIntLayer(string Label);
-  CCategoricalLayer *getCategoricalLayer(string Label);
-  int getLayerCount() { return (int)vLayerList.size(); }
-  void fillVector(vector<CNumericLayer *> &list, vector<string> &names);
-  void fillVector(vector<CIntLayer *> &list, vector<string> &names);
-  void validate();
-  void build();
+  void               clone(CLayerManager* Manager);
+  void               addLayer(CLayer* Layer);
+  CLayer*            getLayer(int index);
+  std::string        getLayerType(string Label);
+  CNumericLayer*     getNumericLayer(string Label);
+  CIntLayer*         getIntLayer(string Label);
+  CCategoricalLayer* getCategoricalLayer(string Label);
+  int                getLayerCount() { return (int)vLayerList.size(); }
+  void               fillVector(vector<CNumericLayer*>& list, vector<string>& names);
+  void               fillVector(vector<CIntLayer*>& list, vector<string>& names);
+  void               validate();
+  void               build();
 
 protected:
   // Functions
   CLayerManager();
 
   // Variables
-  vector<CLayer *> vLayerList;
+  vector<CLayer*> vLayerList;
 
 private:
   static boost::thread_specific_ptr<CLayerManager> clInstance;

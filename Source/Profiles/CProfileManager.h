@@ -31,20 +31,19 @@ class CProfile;
 //
 //
 //**********************************************************************
-class CProfileManager : public CBaseManager
-{
+class CProfileManager : public CBaseManager {
 public:
-  static CProfileManager *Instance();
-  static void Destroy();
+  static CProfileManager* Instance();
+  static void             Destroy();
 
   // Functions
-  void addProfile(CProfile *Profile);
-  int getProfileCount() { return vProfileList.size(); }
-  CProfile *getProfile(int index);
-  void clone(CProfileManager *Manager);
-  void validate();
-  void build();
-  void execute();
+  void      addProfile(CProfile* Profile);
+  int       getProfileCount() { return vProfileList.size(); }
+  CProfile* getProfile(int index);
+  void      clone(CProfileManager* Manager);
+  void      validate();
+  void      build();
+  void      execute();
   virtual ~CProfileManager();
 
 protected:
@@ -54,8 +53,8 @@ protected:
   void resetState();
 
   // Variables
-  vector<CProfile *> vProfileList;
-  vector<double> vCurrentState;
+  vector<CProfile*> vProfileList;
+  vector<double>    vCurrentState;
 
 private:
   static boost::thread_specific_ptr<CProfileManager> clInstance;

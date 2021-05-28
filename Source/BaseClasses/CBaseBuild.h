@@ -10,16 +10,15 @@
 #define CBASEBUILD_H_
 
 // Local headers
-#include "CBaseValidate.h"
 #include "../World/CWorld.h"
 #include "../World/CWorldSquare.h"
+#include "CBaseValidate.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CBaseBuild : public CBaseValidate
-{
+class CBaseBuild : public CBaseValidate {
 public:
   CBaseBuild();
   virtual ~CBaseBuild();
@@ -29,10 +28,10 @@ public:
 
 protected:
   // Variables
-  CWorld *pWorld;
-  CWorldSquare *pBaseSquare;
-  int iWorldWidth;
-  int iWorldHeight;
+  CWorld*       pWorld;
+  CWorldSquare* pBaseSquare;
+  int           iWorldWidth;
+  int           iWorldHeight;
 };
 
 #endif /* CBASEBUILD_H_ */

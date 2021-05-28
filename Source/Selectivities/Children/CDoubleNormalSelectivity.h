@@ -15,14 +15,13 @@
 //
 //
 //**********************************************************************
-class CDoubleNormalSelectivity : public CCachedSelectivity
-{
+class CDoubleNormalSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CDoubleNormalSelectivity();
   virtual ~CDoubleNormalSelectivity();
-  CSelectivity *clone() { return new CDoubleNormalSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CDoubleNormalSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions

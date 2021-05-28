@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CInitializationPhaseFactory
-{
+class CInitializationPhaseFactory {
 public:
   // Functions
-  static CInitializationPhase *buildInitializationPhase(string type, bool registerWithManager = true);
+  static CInitializationPhase* buildInitializationPhase(string type, bool registerWithManager = true);
 
 private:
   // Functions

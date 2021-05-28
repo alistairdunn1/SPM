@@ -15,8 +15,8 @@
 #ifdef __MINGW32__
 #include <process.h>
 #else
-#include <sys/utsname.h>
 #include <sys/times.h>
+#include <sys/utsname.h>
 #include <unistd.h>
 #endif
 
@@ -30,16 +30,15 @@ using std::string;
 //
 //
 //**********************************************************************
-class CStandardHeaderReport : public CReport
-{
+class CStandardHeaderReport : public CReport {
 public:
   // Functions
   CStandardHeaderReport();
   virtual ~CStandardHeaderReport();
-  CReport *clone() { return new CStandardHeaderReport(*this); }
-  void start();
-  void execute();
-  void end();
+  CReport* clone() { return new CStandardHeaderReport(*this); }
+  void     start();
+  void     execute();
+  void     end();
 
 protected:
   // Variables

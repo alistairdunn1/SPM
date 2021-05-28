@@ -9,14 +9,14 @@
 
 // Local headers
 #include "CAllValuesSelectivity.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CAllValuesSelectivity::CAllValuesSelectivity()
 // Default constructor
 //**********************************************************************
-CAllValuesSelectivity::CAllValuesSelectivity()
-{
+CAllValuesSelectivity::CAllValuesSelectivity() {
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_V);
 }
@@ -25,11 +25,8 @@ CAllValuesSelectivity::CAllValuesSelectivity()
 // void CAllValuesSelectivity::validate()
 // Validate the selectivity
 //**********************************************************************
-void CAllValuesSelectivity::validate()
-{
-  try
-  {
-
+void CAllValuesSelectivity::validate() {
+  try {
     // Fill our vector
     pParameterList->fillVector(vVs, PARAM_V);
 
@@ -42,11 +39,8 @@ void CAllValuesSelectivity::validate()
       CError::errorListSameSize(PARAM_V, PARAM_AGES);
 
     // Register the Vs as estimable
-    for (int i = 0; i < (int)vVs.size(); ++i)
-      registerEstimable(PARAM_V, i, &vVs[i]);
-  }
-  catch (string &Ex)
-  {
+    for (int i = 0; i < (int)vVs.size(); ++i) registerEstimable(PARAM_V, i, &vVs[i]);
+  } catch (string& Ex) {
     Ex = "CAllValuesSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -56,10 +50,9 @@ void CAllValuesSelectivity::validate()
 // double CAllValuesSelectivity::getResult(int Age)
 // Get the result from our selectivity
 //**********************************************************************
-double CAllValuesSelectivity::calculateResult(int Age)
-{
+double CAllValuesSelectivity::calculateResult(int Age) {
   double dRet = 0.0;
-  dRet = vVs[Age - pWorld->getMinAge()];
+  dRet        = vVs[Age - pWorld->getMinAge()];
   return dRet;
 }
 
@@ -67,6 +60,4 @@ double CAllValuesSelectivity::calculateResult(int Age)
 // CAllValuesSelectivity::~CAllValuesSelectivity()
 // Destructor
 //**********************************************************************
-CAllValuesSelectivity::~CAllValuesSelectivity()
-{
-}
+CAllValuesSelectivity::~CAllValuesSelectivity() {}

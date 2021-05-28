@@ -13,8 +13,8 @@
 #define _DESOLVERENGINE_H
 
 // Global Headers
-#include <vector>
 #include <map>
+#include <vector>
 
 using std::map;
 using std::vector;
@@ -38,55 +38,53 @@ typedef void (DESolverEngine::*StrategyFunction)(int);
 //
 //
 //**********************************************************************
-class DESolverEngine
-{
+class DESolverEngine {
 public:
   DESolverEngine(int vectorSize, int populationsize, double tolerance);
   virtual ~DESolverEngine(void);
-  void Setup(vector<double> startValues, vector<double> lowerBounds,
-             vector<double> upperBounds, int deStrategy, double diffScale, double crossoverProb);
-  virtual bool Solve(int maxGenerations);
+  void           Setup(vector<double> startValues, vector<double> lowerBounds, vector<double> upperBounds, int deStrategy, double diffScale, double crossoverProb);
+  virtual bool   Solve(int maxGenerations);
   virtual double EnergyFunction(vector<double> testSolution) = 0;
-  double getEnergy() { return dBestEnergy; }
-  int getGenerations() { return iGenerations; }
+  double         getEnergy() { return dBestEnergy; }
+  int            getGenerations() { return iGenerations; }
 
 protected:
   // Functions
-  void SelectSamples(int candidate);
-  bool generateGradient();
-  void scaleValues();
-  void unScaleValues();
+  void   SelectSamples(int candidate);
+  bool   generateGradient();
+  void   scaleValues();
+  void   unScaleValues();
   double scaleValue(double value, double min, double max);
-  double unScaleValue(const double &value, double min, double max);
-  void condAssign(double &res, const double &cond, const double &arg1, const double &arg2);
-  void condAssign(double &res, const double &cond, const double &arg);
+  double unScaleValue(const double& value, double min, double max);
+  void   condAssign(double& res, const double& cond, const double& arg1, const double& arg2);
+  void   condAssign(double& res, const double& cond, const double& arg);
 
   // Variables
-  int iVectorSize;
-  vector<double> vCurrentValues;
-  vector<double> vScaledValues;
-  vector<double> vLowerBounds;
-  vector<double> vUpperBounds;
+  int                      iVectorSize;
+  vector<double>           vCurrentValues;
+  vector<double>           vScaledValues;
+  vector<double>           vLowerBounds;
+  vector<double>           vUpperBounds;
   map<int, vector<double>> mvPopulation;
-  vector<double> vPopulationEnergy;
-  vector<double> vBestSolution;
-  vector<double> vGradientValues;
-  int iPopulationSize;
-  int iNumberOfParents;
-  int iGenerations;
-  double dScale;
-  double dProbability;
-  double dBestEnergy;
-  double dTrialEnergy;
-  StrategyFunction calcTrialSolution;
-  int iR1;
-  int iR2;
-  int iR3;
-  int iR4;
-  int iR5;
-  double dStepSize;
-  double dPenalty;
-  double dTolerance;
+  vector<double>           vPopulationEnergy;
+  vector<double>           vBestSolution;
+  vector<double>           vGradientValues;
+  int                      iPopulationSize;
+  int                      iNumberOfParents;
+  int                      iGenerations;
+  double                   dScale;
+  double                   dProbability;
+  double                   dBestEnergy;
+  double                   dTrialEnergy;
+  StrategyFunction         calcTrialSolution;
+  int                      iR1;
+  int                      iR2;
+  int                      iR3;
+  int                      iR4;
+  int                      iR5;
+  double                   dStepSize;
+  double                   dPenalty;
+  double                   dTolerance;
 
 private:
   // Functions
@@ -102,4 +100,4 @@ private:
   void Rand2Bin(int candidate);
 };
 
-#endif // _DESOLVERENGINE_H
+#endif  // _DESOLVERENGINE_H

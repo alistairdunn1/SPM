@@ -17,21 +17,20 @@ class CDerivedQuantityByCell;
 //
 //
 //**********************************************************************
-class CDerivedQuantityByCellManager : public CBaseManager
-{
+class CDerivedQuantityByCellManager : public CBaseManager {
 public:
-  static CDerivedQuantityByCellManager *Instance();
-  static void Destroy();
+  static CDerivedQuantityByCellManager* Instance();
+  static void                           Destroy();
 
   // Functions
-  void addDerivedQuantityByCell(CDerivedQuantityByCell *DerivedQuantityByCell);
-  CDerivedQuantityByCell *getDerivedQuantityByCell(string label);
-  void setInitialisationPhase(int newValue) { iInitialisationPhase = newValue; }
-  void validate();
-  void build();
-  void rebuild();
-  void calculate();
-  void calculate(int initialisationPhase);
+  void                    addDerivedQuantityByCell(CDerivedQuantityByCell* DerivedQuantityByCell);
+  CDerivedQuantityByCell* getDerivedQuantityByCell(string label);
+  void                    setInitialisationPhase(int newValue) { iInitialisationPhase = newValue; }
+  void                    validate();
+  void                    build();
+  void                    rebuild();
+  void                    calculate();
+  void                    calculate(int initialisationPhase);
   virtual ~CDerivedQuantityByCellManager();
 
 protected:
@@ -39,8 +38,8 @@ protected:
   CDerivedQuantityByCellManager();
 
   // Variables
-  vector<CDerivedQuantityByCell *> vDerivedQuantityByCells;
-  int iInitialisationPhase;
+  vector<CDerivedQuantityByCell*> vDerivedQuantityByCells;
+  int                             iInitialisationPhase;
 
 private:
   static boost::thread_specific_ptr<CDerivedQuantityByCellManager> clInstance;

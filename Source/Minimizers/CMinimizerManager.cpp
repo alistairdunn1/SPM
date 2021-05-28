@@ -8,28 +8,27 @@
 //============================================================================
 
 // Headers
+#include "CMinimizerManager.h"
+
 #include <boost/lexical_cast.hpp>
 
-#include "CMinimizerManager.h"
-#include "CMinimizer.h"
-#include "../RuntimeThread/CRuntimeThread.h"
-#include "../Estimates/CEstimateManager.h"
-#include "../Estimates/CEstimate.h"
-#include "../Reports/CReportManager.h"
 #include "../CRuntimeController.h"
+#include "../Estimates/CEstimate.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../Reports/CReportManager.h"
+#include "../RuntimeThread/CRuntimeThread.h"
+#include "CMinimizer.h"
 
 // Singleton Variable
-CMinimizerManager *CMinimizerManager::clInstance = 0;
+CMinimizerManager* CMinimizerManager::clInstance = 0;
 
 //**********************************************************************
 // CMinimizerManager::CMinimizerManager()
 // Default Constructor
 //**********************************************************************
-CMinimizerManager::CMinimizerManager()
-{
-
+CMinimizerManager::CMinimizerManager() {
   // Set Vars
   pMinimizer = 0;
   sMinimizer = "";
@@ -43,8 +42,7 @@ CMinimizerManager::CMinimizerManager()
 // CMinimizerManager* CMinimizerManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CMinimizerManager *CMinimizerManager::Instance()
-{
+CMinimizerManager* CMinimizerManager::Instance() {
   if (clInstance == 0)
     clInstance = new CMinimizerManager();
   return clInstance;
@@ -54,10 +52,8 @@ CMinimizerManager *CMinimizerManager::Instance()
 // void CMinimizerManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CMinimizerManager::Destroy()
-{
-  if (clInstance != 0)
-  {
+void CMinimizerManager::Destroy() {
+  if (clInstance != 0) {
     delete clInstance;
     clInstance = 0;
   }
@@ -67,8 +63,7 @@ void CMinimizerManager::Destroy()
 // void CMinimizerManager::addMinimizer(CMinimizer *value)
 // Add A Minimizer to our List
 //**********************************************************************
-void CMinimizerManager::addMinimizer(CMinimizer *value)
-{
+void CMinimizerManager::addMinimizer(CMinimizer* value) {
   vMinimizerList.push_back(value);
 }
 
@@ -76,8 +71,7 @@ void CMinimizerManager::addMinimizer(CMinimizer *value)
 // void CMinimizerManager::addThread(CRuntimeThread *Thread)
 // Add Thread to our Pool
 //**********************************************************************
-void CMinimizerManager::addThread(CRuntimeThread *Thread)
-{
+void CMinimizerManager::addThread(CRuntimeThread* Thread) {
   lock lk(mutThread);
   vThreadList.push_back(Thread);
 }
@@ -86,28 +80,22 @@ void CMinimizerManager::addThread(CRuntimeThread *Thread)
 // void CMinimizer::validate()
 // Validate our MinizerManager
 //**********************************************************************
-void CMinimizerManager::validate()
-{
-  try
-  {
+void CMinimizerManager::validate() {
+  try {
     if ((CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC) || (CRuntimeController::Instance()->getRunMode() == RUN_MODE_SIMULATION))
       return;
 
     pParameterList->checkInvalidParameters();
 
     sMinimizer = pParameterList->getString(PARAM_MINIMIZER);
-    sMCMC = pParameterList->getString(PARAM_MCMC, true, "");
+    sMCMC      = pParameterList->getString(PARAM_MCMC, true, "");
 
     // Validate our Minimizers
-    foreach (CMinimizer *Minimizer, vMinimizerList)
-    {
-      Minimizer->validate();
-    }
+    foreach (CMinimizer* Minimizer, vMinimizerList) { Minimizer->validate(); }
 
     // Look for Duplicate Labels
     map<string, int> mLabelList;
-    foreach (CMinimizer *Minimizer, vMinimizerList)
-    {
+    foreach (CMinimizer* Minimizer, vMinimizerList) {
       // Increase Count for this label
       mLabelList[Minimizer->getLabel()] += 1;
 
@@ -120,8 +108,7 @@ void CMinimizerManager::validate()
     pMinimizer = 0;
 
     // Find and Assign
-    foreach (CMinimizer *Minimizer, vMinimizerList)
-    {
+    foreach (CMinimizer* Minimizer, vMinimizerList) {
       if (Minimizer->getLabel() == sMinimizer)
         pMinimizer = Minimizer;
     }
@@ -129,9 +116,7 @@ void CMinimizerManager::validate()
     // See if we have a valid minimizer defined
     if (pMinimizer == 0)
       CError::errorUnknown(PARAM_MINIMIZER, sMinimizer);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMinimizerManager.validate()->" + Ex;
     throw Ex;
   }
@@ -141,17 +126,13 @@ void CMinimizerManager::validate()
 // void CMinimizerManager::build()
 // Build our Minimizer
 //**********************************************************************
-void CMinimizerManager::build()
-{
-  try
-  {
+void CMinimizerManager::build() {
+  try {
     if ((CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC) || (CRuntimeController::Instance()->getRunMode() == RUN_MODE_SIMULATION))
       return;
 
     pMinimizer->build();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMinimizerManager.build()->" + Ex;
     throw Ex;
   }
@@ -161,14 +142,12 @@ void CMinimizerManager::build()
 // void CMinimizer::initialise()
 // Initialise Our Minimisation
 //**********************************************************************
-void CMinimizerManager::initialise()
-{
-  try
-  {
+void CMinimizerManager::initialise() {
+  try {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+    CEstimateManager* pEstimateManager = CEstimateManager::Instance();
 
     /* We need to go through each of the estimates now and check out what phases
      * that have been given. This will allow us to determine how many minimisation
@@ -179,20 +158,16 @@ void CMinimizerManager::initialise()
     vEstimationPhases.resize(0);
     vEstimationPhases.push_back(1);
 
-    if (runMode == RUN_MODE_ESTIMATION)
-    {
+    if (runMode == RUN_MODE_ESTIMATION) {
       int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
-      for (int i = 0; i < enabledEstimates; ++i)
-      {
+      for (int i = 0; i < enabledEstimates; ++i) {
         int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
         vEstimationPhases.push_back(estimationPhase);
       }
       sort(vEstimationPhases.begin(), vEstimationPhases.end());
       vEstimationPhases.erase(unique(vEstimationPhases.begin(), vEstimationPhases.end()), vEstimationPhases.end());
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMinimizerManager.initialise()->" + Ex;
     throw Ex;
   }
@@ -202,16 +177,13 @@ void CMinimizerManager::initialise()
 // void CMinimizer::execute(int estimationPhase)
 // Execute Our Minimisation
 //**********************************************************************
-void CMinimizerManager::execute(int estimationPhase)
-{
-  try
-  {
-
+void CMinimizerManager::execute(int estimationPhase) {
+  try {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    ERunMode runMode = CRuntimeController::Instance()->getRunMode();
+    CEstimateManager* pEstimateManager = CEstimateManager::Instance();
+    ERunMode          runMode          = CRuntimeController::Instance()->getRunMode();
 
     if (runMode == RUN_MODE_ESTIMATION)
       pEstimateManager->setCurrentPhase(estimationPhase);
@@ -219,9 +191,7 @@ void CMinimizerManager::execute(int estimationPhase)
     pMinimizer->runEstimation();
     if (pMinimizer->getBuildCovariance())
       pMinimizer->buildCovarianceMatrix();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMinimizerManager.execute(int)->" + Ex;
     throw Ex;
   }
@@ -231,19 +201,15 @@ void CMinimizerManager::execute(int estimationPhase)
 // void CMinimizer::execute()
 // Execute Our Minimisation
 //**********************************************************************
-void CMinimizerManager::execute()
-{
-  try
-  {
+void CMinimizerManager::execute() {
+  try {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
     pMinimizer->runEstimation();
     if (pMinimizer->getBuildCovariance())
       pMinimizer->buildCovarianceMatrix();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CMinimizerManager.execute()->" + Ex;
     throw Ex;
   }
@@ -253,6 +219,4 @@ void CMinimizerManager::execute()
 // CMinimizerManager::~CMinimizerManager()
 // Default De-Constructor
 //**********************************************************************
-CMinimizerManager::~CMinimizerManager()
-{
-}
+CMinimizerManager::~CMinimizerManager() {}

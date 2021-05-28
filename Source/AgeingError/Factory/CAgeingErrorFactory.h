@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CAgeingErrorFactory
-{
+class CAgeingErrorFactory {
 public:
   // Functions
-  static CAgeingError *buildAgeingError(string type, bool registerWithManager = true);
+  static CAgeingError* buildAgeingError(string type, bool registerWithManager = true);
 
 private:
   // Functions

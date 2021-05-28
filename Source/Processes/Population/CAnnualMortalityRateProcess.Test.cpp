@@ -15,20 +15,19 @@
 // Local Includes
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
-
+BOOST_FIXTURE_TEST_CASE(AnnualMortalityRateProcess, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -42,14 +41,14 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1351.1097549101755, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311 };
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707 };
-  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  double immature[] = {100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311};
+  double mature[]   = {0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707};
+  double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // Check Expected against model
   BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);

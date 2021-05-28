@@ -15,10 +15,10 @@
 #include <vector>
 
 // Local Headers
-#include "ParameterList/CParameterList.h"
 #include "../CConfiguration.h"
 #include "../CRuntimeController.h"
 #include "../Translations/Translations.h"
+#include "ParameterList/CParameterList.h"
 
 // Namespaces
 using std::map;
@@ -28,27 +28,26 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CBaseObject
-{
+class CBaseObject {
 public:
   CBaseObject();
   virtual ~CBaseObject();
-  double *getEstimableVariable(string name, string longName);
-  bool isEstimableAVector(string name);
-  int getEstimableVectorSize(string name);
-  void addParameter(string name, string value);
-  CParameterList *getParameterList() { return pParameterList; }
+  double*         getEstimableVariable(string name, string longName);
+  bool            isEstimableAVector(string name);
+  int             getEstimableVectorSize(string name);
+  void            addParameter(string name, string value);
+  CParameterList* getParameterList() { return pParameterList; }
 
 protected:
   // Functions
-  void registerEstimable(string name, double *variable);
-  void registerEstimable(string name, int index, double *variable);
+  void registerEstimable(string name, double* variable);
+  void registerEstimable(string name, int index, double* variable);
 
   // Variables
-  CConfiguration *pConfig;
-  CRuntimeController *pRuntimeController;
-  CParameterList *pParameterList;
-  map<string, double *> mEstimables;
+  CConfiguration*      pConfig;
+  CRuntimeController*  pRuntimeController;
+  CParameterList*      pParameterList;
+  map<string, double*> mEstimables;
 };
 
 #endif /*CBASEOBJECT_H_*/

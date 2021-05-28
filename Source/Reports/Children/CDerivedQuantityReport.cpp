@@ -11,18 +11,17 @@
 #include <boost/lexical_cast.hpp>
 
 // Local headers
-#include "CDerivedQuantityReport.h"
-#include "../../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../../DerivedQuantities/CDerivedQuantity.h"
+#include "../../DerivedQuantities/CDerivedQuantityManager.h"
+#include "CDerivedQuantityReport.h"
 
 //**********************************************************************
 // CDerivedQuantityReport::CDerivedQuantityReport()
 // Constructor
 //**********************************************************************
-CDerivedQuantityReport::CDerivedQuantityReport()
-{
+CDerivedQuantityReport::CDerivedQuantityReport() {
   // Variables
-  eExecutionState = STATE_FINALIZATION;
+  eExecutionState  = STATE_FINALIZATION;
   pDerivedQuantity = 0;
 
   // Register allowed
@@ -33,20 +32,15 @@ CDerivedQuantityReport::CDerivedQuantityReport()
 // void CDerivedQuantityReport::validate()
 // Validate our report
 //**********************************************************************
-void CDerivedQuantityReport::validate()
-{
-  try
-  {
-
+void CDerivedQuantityReport::validate() {
+  try {
     sDerivedQuantity = pParameterList->getString(PARAM_DERIVED_QUANTITY);
 
     // Validate parent
     CFileReport::validate();
 
     // Local validation
-  }
-  catch (string &ex)
-  {
+  } catch (string& ex) {
     ex = "CDerivedQuantityReport.validate(" + getLabel() + ")->" + ex;
     throw ex;
   }
@@ -56,17 +50,12 @@ void CDerivedQuantityReport::validate()
 // void CDerivedQuantityReport::build()
 // Build our Report
 //**********************************************************************
-void CDerivedQuantityReport::build()
-{
-  try
-  {
-
+void CDerivedQuantityReport::build() {
+  try {
     // Get our derived quantity
-    CDerivedQuantityManager *pManager = CDerivedQuantityManager::Instance();
-    pDerivedQuantity = pManager->getDerivedQuantity(sDerivedQuantity);
-  }
-  catch (string &Ex)
-  {
+    CDerivedQuantityManager* pManager = CDerivedQuantityManager::Instance();
+    pDerivedQuantity                  = pManager->getDerivedQuantity(sDerivedQuantity);
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -76,11 +65,8 @@ void CDerivedQuantityReport::build()
 // void CDerivedQuantityReport::execute()
 // Execute
 //**********************************************************************
-void CDerivedQuantityReport::execute()
-{
-
-  try
-  {
+void CDerivedQuantityReport::execute() {
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -94,11 +80,9 @@ void CDerivedQuantityReport::execute()
     cout << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sDerivedQuantity << "\n";
 
     // Output initialisation values
-    for (int i = 0; i < pDerivedQuantity->getInitialisationSize(); ++i)
-    {
+    for (int i = 0; i < pDerivedQuantity->getInitialisationSize(); ++i) {
       cout << PARAM_INITIALIZATION_PHASE << CONFIG_ARRAY_START << boost::lexical_cast<string>(i + 1) << CONFIG_ARRAY_END << CONFIG_RATIO_SEPARATOR << " ";
-      for (int j = 0; j < pDerivedQuantity->getInitialisationValuesSize(i); ++j)
-      {
+      for (int j = 0; j < pDerivedQuantity->getInitialisationValuesSize(i); ++j) {
         cout << pDerivedQuantity->getInitialisationValue(i, j) << (j == (pDerivedQuantity->getInitialisationValuesSize(i) - 1) ? "" : CONFIG_SPACE_SEPARATOR);
       }
       cout << "\n";
@@ -106,25 +90,19 @@ void CDerivedQuantityReport::execute()
 
     // Output values for each year
     cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " ";
-    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
-    {
+    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
       cout << boost::lexical_cast<string>(i) << (i == (pWorld->getCurrentYear()) ? "" : CONFIG_SPACE_SEPARATOR);
     }
-    cout << "\n"
-         << PARAM_VALUES << CONFIG_RATIO_SEPARATOR << " ";
-    for (int i = 0; i < pDerivedQuantity->getValuesSize(); ++i)
-    {
+    cout << "\n" << PARAM_VALUES << CONFIG_RATIO_SEPARATOR << " ";
+    for (int i = 0; i < pDerivedQuantity->getValuesSize(); ++i) {
       cout << pDerivedQuantity->getValueFromIndex(i) << (i == (pDerivedQuantity->getValuesSize() - 1) ? "" : CONFIG_SPACE_SEPARATOR);
     }
 
     cout << "\n";
-    cout << CONFIG_END_REPORT << "\n"
-         << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDerivedQuantityReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -134,6 +112,4 @@ void CDerivedQuantityReport::execute()
 // CDerivedQuantityReport::~CDerivedQuantityReport()
 // Destructor
 //**********************************************************************
-CDerivedQuantityReport::~CDerivedQuantityReport()
-{
-}
+CDerivedQuantityReport::~CDerivedQuantityReport() {}

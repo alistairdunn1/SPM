@@ -9,18 +9,17 @@
 
 // Local headers
 #include "CCatchabilityFactory.h"
-#include "../CCatchabilityManager.h"
-#include "../CCatchability.h"
+
 #include "../../Helpers/CError.h"
+#include "../CCatchability.h"
+#include "../CCatchabilityManager.h"
 
 //**********************************************************************
 // CCatchability* CCatchabilityFactory::buildCatchability(string type, bool registerWithManager)
 // Build a catchability of type
 //**********************************************************************
-CCatchability *CCatchabilityFactory::buildCatchability(string type, bool registerWithManager)
-{
-
-  CCatchability *pCatchability = 0;
+CCatchability* CCatchabilityFactory::buildCatchability(string type, bool registerWithManager) {
+  CCatchability* pCatchability = 0;
 
   if (type == "")
     pCatchability = new CCatchability();

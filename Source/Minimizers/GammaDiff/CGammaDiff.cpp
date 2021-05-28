@@ -9,18 +9,17 @@
 
 // Local Headers
 #include "CGammaDiff.h"
+
+#include "../../Estimates/CEstimate.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "CGammaDiffCallback.h"
 #include "Engine/GammaDiffEngine.h"
-#include "../../Estimates/CEstimateManager.h"
-#include "../../Estimates/CEstimate.h"
 
 //**********************************************************************
 // CGammaDiff::CGammaDiff()
 // Default Constructor
 //**********************************************************************
-CGammaDiff::CGammaDiff()
-{
-
+CGammaDiff::CGammaDiff() {
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_MAX_ITERATIONS);
   pParameterList->registerAllowed(PARAM_MAX_EVALUATIONS);
@@ -32,22 +31,18 @@ CGammaDiff::CGammaDiff()
 // void CGammaDiff::validate()
 // Validate our Minimizer
 //**********************************************************************
-void CGammaDiff::validate()
-{
-  try
-  {
+void CGammaDiff::validate() {
+  try {
     CMinimizer::validate();
 
     // Get Variables
-    iMaxIterations = pParameterList->getInt(PARAM_MAX_ITERATIONS, true, 1000);
-    iMaxEvaluations = pParameterList->getInt(PARAM_MAX_EVALUATIONS, true, 4000);
+    iMaxIterations     = pParameterList->getInt(PARAM_MAX_ITERATIONS, true, 1000);
+    iMaxEvaluations    = pParameterList->getInt(PARAM_MAX_EVALUATIONS, true, 4000);
     dGradientTolerance = pParameterList->getDouble(PARAM_TOLERANCE, true, 0.002);
-    dStepSize = pParameterList->getDouble(PARAM_STEPSIZE, true, 1e-6);
+    dStepSize          = pParameterList->getDouble(PARAM_STEPSIZE, true, 1e-6);
     // dStepSize default is 1e-7 = pow(10.0,-14/2.0)
     // using modified version of Dennis & Schnabel's FDGRAD here with digits=14
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CGammaDiff.validate()->" + Ex;
     throw Ex;
   }
@@ -57,24 +52,21 @@ void CGammaDiff::validate()
 // void CGammaDiff::runEstimation()void CGammaDiff::runEstimation()
 // Run the Estimation through our Minimizer
 //**********************************************************************
-void CGammaDiff::runEstimation()
-{
-  try
-  {
+void CGammaDiff::runEstimation() {
+  try {
     // Variables
     CGammaDiffCallback clGammaDiffCallback;
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    vector<double> vStartValues;
-    vector<double> vLowerBounds;
-    vector<double> vUpperBounds;
+    CEstimateManager*  pEstimateManager = CEstimateManager::Instance();
+    vector<double>     vStartValues;
+    vector<double>     vLowerBounds;
+    vector<double>     vUpperBounds;
 
     // Get our Variables, Upper and Lower Bounds From
     // The EstimateManager
     int iCount = pEstimateManager->getEnabledEstimateCount();
 
-    for (int i = 0; i < iCount; ++i)
-    {
-      CEstimate *pEstimate = pEstimateManager->getEnabledEstimate(i);
+    for (int i = 0; i < iCount; ++i) {
+      CEstimate* pEstimate = pEstimateManager->getEnabledEstimate(i);
 
       vStartValues.push_back(pEstimate->getValue());
       vLowerBounds.push_back(pEstimate->getLowerBound());
@@ -88,13 +80,9 @@ void CGammaDiff::runEstimation()
     int iMaxEvals = iMaxEvaluations;
 
     GammaDiffEngine clGammaDiff;
-    clGammaDiff.optimise_finite_differences(clGammaDiffCallback,
-                                            vStartValues, vLowerBounds, vUpperBounds,
-                                            status, iMaxIters, iMaxEvals, dGradientTolerance,
-                                            pHessian, 1, dStepSize);
-  }
-  catch (string &Ex)
-  {
+    clGammaDiff.optimise_finite_differences(clGammaDiffCallback, vStartValues, vLowerBounds, vUpperBounds, status, iMaxIters, iMaxEvals, dGradientTolerance, pHessian, 1,
+                                            dStepSize);
+  } catch (string& Ex) {
     Ex = "CGammaDiff.runEstimation()->" + Ex;
     throw Ex;
   }
@@ -104,6 +92,4 @@ void CGammaDiff::runEstimation()
 // CGammaDiff::~CGammaDiff()
 // Default Destructor
 //**********************************************************************
-CGammaDiff::~CGammaDiff()
-{
-}
+CGammaDiff::~CGammaDiff() {}

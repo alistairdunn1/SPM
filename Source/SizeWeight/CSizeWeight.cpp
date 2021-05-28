@@ -14,28 +14,22 @@
 // CSizeWeight::CSizeWeight()
 // Default Constructor
 //**********************************************************************
-CSizeWeight::CSizeWeight()
-{
-}
+CSizeWeight::CSizeWeight() {}
 
 //**********************************************************************
 // void CLayer::validate()
 // Validate
 //**********************************************************************
-void CSizeWeight::validate()
-{
-  try
-  {
+void CSizeWeight::validate() {
+  try {
     CBaseBuild::validate();
 
     // Get Variables from World
-    iMinAge = pWorld->getMinAge();
-    iMaxAge = pWorld->getMaxAge();
+    iMinAge       = pWorld->getMinAge();
+    iMaxAge       = pWorld->getMaxAge();
     bAgePlusGroup = pWorld->getAgePlusGroup();
-    iNAges = pWorld->getAgeSpread();
-  }
-  catch (string &Ex)
-  {
+    iNAges        = pWorld->getAgeSpread();
+  } catch (string& Ex) {
     Ex = "CSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -45,13 +39,9 @@ void CSizeWeight::validate()
 // void CSizeWeight::build()
 // Build our size-weight relationship
 //**********************************************************************
-void CSizeWeight::build()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CSizeWeight::build() {
+  try {
+  } catch (string& Ex) {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -61,13 +51,9 @@ void CSizeWeight::build()
 // void CSizeWeight::rebuild()
 // Rebuild our size-weight relationship
 //**********************************************************************
-void CSizeWeight::rebuild()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CSizeWeight::rebuild() {
+  try {
+  } catch (string& Ex) {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -77,6 +63,4 @@ void CSizeWeight::rebuild()
 // CSizeWeight::~CSizeWeight()
 // Destructor
 //**********************************************************************
-CSizeWeight::~CSizeWeight()
-{
-}
+CSizeWeight::~CSizeWeight() {}

@@ -23,8 +23,7 @@ using namespace std;
 /**
  * Class definition
  */
-class C1x1_Empty_Fixture
-{
+class C1x1_Empty_Fixture {
 public:
   C1x1_Empty_Fixture();
   virtual ~C1x1_Empty_Fixture();
@@ -32,8 +31,8 @@ public:
   void loadAndRunEnvironment();
 
 protected:
-  vector<string> vConfiguration;
-  CConfigurationLoader *pConfigLoader;
+  vector<string>        vConfiguration;
+  CConfigurationLoader* pConfigLoader;
 };
 
 #endif /* C1X1EMPTYFIXTURE_H_ */

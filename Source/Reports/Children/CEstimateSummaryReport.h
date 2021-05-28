@@ -16,13 +16,12 @@
 //
 //
 //**********************************************************************
-class CEstimateSummaryReport : public CFileReport
-{
+class CEstimateSummaryReport : public CFileReport {
 public:
   CEstimateSummaryReport();
   virtual ~CEstimateSummaryReport();
-  CReport *clone() { return new CEstimateSummaryReport(*this); }
-  void execute();
+  CReport* clone() { return new CEstimateSummaryReport(*this); }
+  void     execute();
 };
 
 #endif /* CESTIMATESUMMARYREPORT_H_ */

@@ -13,18 +13,17 @@
 //
 //
 //**********************************************************************
-class CUniformPDF : public CPDF
-{
+class CUniformPDF : public CPDF {
 public:
   // Functions
   CUniformPDF();
   virtual ~CUniformPDF();
-  CPDF *clone() { return new CUniformPDF(*this); }
+  CPDF*  clone() { return new CUniformPDF(*this); }
   double getA() { return dA; }
   double getB() { return dB; }
   double getPDFResult(double value);
   double getCDFResult(double value);
-  void validate();
+  void   validate();
 
 protected:
   // Variables

@@ -19,19 +19,18 @@ class CAgeingError;
 //
 //
 //**********************************************************************
-class CAgeingErrorManager : public CBaseManager
-{
+class CAgeingErrorManager : public CBaseManager {
 public:
-  static CAgeingErrorManager *Instance();
-  static void Destroy();
+  static CAgeingErrorManager* Instance();
+  static void                 Destroy();
 
   // Functions
-  void clone(CAgeingErrorManager *Manager);
-  void addAgeingError(CAgeingError *ageingError);
-  CAgeingError *getAgeingError(string label);
-  void validate();
-  void build();
-  void rebuild();
+  void          clone(CAgeingErrorManager* Manager);
+  void          addAgeingError(CAgeingError* ageingError);
+  CAgeingError* getAgeingError(string label);
+  void          validate();
+  void          build();
+  void          rebuild();
   virtual ~CAgeingErrorManager();
 
 protected:
@@ -39,7 +38,7 @@ protected:
   CAgeingErrorManager();
 
   // Variables
-  vector<CAgeingError *> vAgeingErrors;
+  vector<CAgeingError*> vAgeingErrors;
 
 private:
   // Variables

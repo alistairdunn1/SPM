@@ -30,20 +30,19 @@ class CProcess;
 //
 //
 //**********************************************************************
-class CProcessManager : public CBaseManager
-{
+class CProcessManager : public CBaseManager {
 public:
-  static CProcessManager *Instance();
-  static void Destroy();
+  static CProcessManager* Instance();
+  static void             Destroy();
 
   // Functions
-  void addProcess(CProcess *value);
-  void fillVector(vector<CProcess *> &list, vector<string> &labels);
-  CProcess *getProcess(string Label);
-  void clone(CProcessManager *Manager);
-  void validate();
-  void build();
-  void rebuild();
+  void      addProcess(CProcess* value);
+  void      fillVector(vector<CProcess*>& list, vector<string>& labels);
+  CProcess* getProcess(string Label);
+  void      clone(CProcessManager* Manager);
+  void      validate();
+  void      build();
+  void      rebuild();
   virtual ~CProcessManager();
 
 protected:
@@ -51,7 +50,7 @@ protected:
   CProcessManager();
 
   // Variables
-  vector<CProcess *> vProcessList;
+  vector<CProcess*> vProcessList;
 
 private:
   static boost::thread_specific_ptr<CProcessManager> clInstance;

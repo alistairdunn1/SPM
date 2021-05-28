@@ -16,15 +16,14 @@
 //
 //
 //**********************************************************************
-class CConstantSelectivity : public CSelectivity
-{
+class CConstantSelectivity : public CSelectivity {
 public:
   // Functions
   CConstantSelectivity();
   virtual ~CConstantSelectivity();
-  CSelectivity *clone() { return new CConstantSelectivity(*this); }
-  void validate();
-  double getResult(int Index);
+  CSelectivity* clone() { return new CConstantSelectivity(*this); }
+  void          validate();
+  double        getResult(int Index);
 
 protected:
   // Variables

@@ -12,6 +12,4 @@
 /**
  * Default constructor
  */
-CUniformEstimate::CUniformEstimate()
-{
-}
+CUniformEstimate::CUniformEstimate() {}

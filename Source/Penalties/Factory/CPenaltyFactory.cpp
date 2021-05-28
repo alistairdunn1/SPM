@@ -9,19 +9,18 @@
 
 // Local headers
 #include "CPenaltyFactory.h"
-#include "../CPenaltyManager.h"
+
+#include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../CPenalty.h"
-#include "../../Helpers/CError.h"
+#include "../CPenaltyManager.h"
 
 //**********************************************************************
 // CPenalty* CPenaltyFactory::buildPenalty(string type, bool registerWithManager = true)
 // Build our penalty based on type
 //**********************************************************************
-CPenalty *CPenaltyFactory::buildPenalty(string type, bool registerWithManager)
-{
-
-  CPenalty *pPenalty = 0;
+CPenalty* CPenaltyFactory::buildPenalty(string type, bool registerWithManager) {
+  CPenalty* pPenalty = 0;
 
   if (type == "")
     pPenalty = new CPenalty();

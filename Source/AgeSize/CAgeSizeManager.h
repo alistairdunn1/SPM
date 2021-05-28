@@ -19,19 +19,18 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CAgeSizeManager : public CBaseManager
-{
+class CAgeSizeManager : public CBaseManager {
 public:
-  static CAgeSizeManager *Instance();
-  static void Destroy();
+  static CAgeSizeManager* Instance();
+  static void             Destroy();
 
   // Functions
-  void clone(CAgeSizeManager *Manager);
-  void addAgeSize(CAgeSize *AgeSize);
-  CAgeSize *getAgeSize(string label);
-  void validate();
-  void build();
-  void rebuild();
+  void      clone(CAgeSizeManager* Manager);
+  void      addAgeSize(CAgeSize* AgeSize);
+  CAgeSize* getAgeSize(string label);
+  void      validate();
+  void      build();
+  void      rebuild();
   virtual ~CAgeSizeManager();
 
 protected:
@@ -39,7 +38,7 @@ protected:
   CAgeSizeManager();
 
   // Variables
-  vector<CAgeSize *> vAgeSizes;
+  vector<CAgeSize*> vAgeSizes;
 
 private:
   // Variables

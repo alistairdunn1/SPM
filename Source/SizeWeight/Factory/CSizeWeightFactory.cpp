@@ -9,20 +9,19 @@
 
 // Local headers
 #include "CSizeWeightFactory.h"
+
+#include "../../Helpers/CError.h"
 #include "../CSizeWeight.h"
 #include "../CSizeWeightManager.h"
-#include "../Children/CNoneSizeWeight.h"
 #include "../Children/CBasicSizeWeight.h"
-#include "../../Helpers/CError.h"
+#include "../Children/CNoneSizeWeight.h"
 
 //**********************************************************************
 // CSizeWeight* CSizeWeightFactory::buildSizeWeight(string type, bool registerWithManager)
 //
 //**********************************************************************
-CSizeWeight *CSizeWeightFactory::buildSizeWeight(string type, bool registerWithManager)
-{
-
-  CSizeWeight *pSizeWeight = 0;
+CSizeWeight* CSizeWeightFactory::buildSizeWeight(string type, bool registerWithManager) {
+  CSizeWeight* pSizeWeight = 0;
 
   if (type == PARAM_NONE)
     pSizeWeight = new CNoneSizeWeight();

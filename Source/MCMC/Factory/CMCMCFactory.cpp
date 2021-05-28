@@ -9,18 +9,18 @@
 
 // Local headers
 #include "CMCMCFactory.h"
-#include "../CMCMCManager.h"
+
 #include "../../Helpers/CError.h"
-#include "../Children/CMHMCMC.h"
+#include "../CMCMCManager.h"
 #include "../Children/CHMC.h"
+#include "../Children/CMHMCMC.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-CMCMC *CMCMCFactory::buildMCMC(const string &type, bool registerWithManager)
-{
-  CMCMC *mcmc = 0;
+CMCMC* CMCMCFactory::buildMCMC(const string& type, bool registerWithManager) {
+  CMCMC* mcmc = 0;
 
   if (type == "" || type == PARAM_METROPOLIS_HASTINGS)
     mcmc = new CMHMCMC();

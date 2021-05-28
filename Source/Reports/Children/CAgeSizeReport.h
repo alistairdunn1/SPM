@@ -19,19 +19,18 @@ class CAgeSize;
 //
 //
 //**********************************************************************
-class CAgeSizeReport : public CFileReport
-{
+class CAgeSizeReport : public CFileReport {
 public:
   CAgeSizeReport();
   virtual ~CAgeSizeReport();
-  CReport *clone() { return new CAgeSizeReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CAgeSizeReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
-  string sAgeSize;
-  CAgeSize *pAgeSize;
+  string         sAgeSize;
+  CAgeSize*      pAgeSize;
   vector<double> vAgeList;
 };
 

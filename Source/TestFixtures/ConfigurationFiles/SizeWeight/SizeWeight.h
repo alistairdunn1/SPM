@@ -10,9 +10,9 @@
 #ifndef SIZEWEIGHT_H_
 #define SIZEWEIGHT_H_
 
-const string size_weight_none =
-    "@size_weight none\n"
-    "type none\n";
+const string size_weight_none
+    = "@size_weight none\n"
+      "type none\n";
 
 #endif /* SIZEWEIGHT_H_ */
 #endif /* TEST */

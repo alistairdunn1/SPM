@@ -13,19 +13,17 @@
 // Local Includes
 #include "../../TestFixtures/C1x1_Initialisation_Fixture.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
-#include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
+#include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/BHRecruitment2.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(BHRecruitment2Process, C1x1_Initialisation_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(BHRecruitment2Process, C1x1_Initialisation_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(bh_recruitment2);
@@ -38,7 +36,7 @@ BOOST_FIXTURE_TEST_CASE(BHRecruitment2Process, C1x1_Initialisation_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_CLOSE(pSquare->getAbundance(), 648.05610368680971, 1e-4);
 

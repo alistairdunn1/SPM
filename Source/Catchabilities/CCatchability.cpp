@@ -14,8 +14,7 @@
 // CCatchability::CCatchability()
 // Default Constructor
 //**********************************************************************
-CCatchability::CCatchability()
-{
+CCatchability::CCatchability() {
   // Register estimables
   registerEstimable(PARAM_Q, &dQ);
 
@@ -27,18 +26,14 @@ CCatchability::CCatchability()
 // void CCatchability::validate()
 // Validate the Catchability
 //**********************************************************************
-void CCatchability::validate()
-{
-  try
-  {
+void CCatchability::validate() {
+  try {
     // Base
     CBaseValidate::validate();
 
     // Populate Vars
     dQ = pParameterList->getDouble(PARAM_Q);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CCatchability.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -48,6 +43,4 @@ void CCatchability::validate()
 // CCatchability::~CCatchability()
 // Default De-Constructor
 //**********************************************************************
-CCatchability::~CCatchability()
-{
-}
+CCatchability::~CCatchability() {}

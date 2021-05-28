@@ -6,6 +6,7 @@
 
 // Local Headers
 #include "CNormalPDF.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/DefinedValues.h"
@@ -14,9 +15,7 @@
 // CNormalPDF::CNormalPDF()
 // Default Constructor
 //**********************************************************************
-CNormalPDF::CNormalPDF()
-{
-
+CNormalPDF::CNormalPDF() {
   sType = PARAM_NORMAL;
 
   // Register Estimables
@@ -32,24 +31,19 @@ CNormalPDF::CNormalPDF()
 // void CNormalPDF::validate()
 // Validate
 //**********************************************************************
-void CNormalPDF::validate()
-{
-  try
-  {
-
+void CNormalPDF::validate() {
+  try {
     // Assign our variables
-    dMu = pParameterList->getDouble(PARAM_MU);
+    dMu    = pParameterList->getDouble(PARAM_MU);
     dSigma = pParameterList->getDouble(PARAM_SIGMA);
 
     // Validate parent
     CPDF::validate();
 
-    //Local validation
+    // Local validation
     if (dSigma <= 0.0)
       CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -59,23 +53,19 @@ void CNormalPDF::validate()
 // double CNormalPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getPDFResult(double value)
-{
+double CNormalPDF::getPDFResult(double value) {
   // not required ?
 
   dRet = 0.0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     dRet = exp((-(value - dMu) * (value - dMu)) / (2.0 * dSigma * dSigma)) / (dSigma * sqrt(TWO_PI));
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalPDF.getPDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -88,14 +78,12 @@ double CNormalPDF::getPDFResult(double value)
 // double CNormalPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getCDFResult(double value)
-{
+double CNormalPDF::getCDFResult(double value) {
   // not required ?
   dRet = 0;
 
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     double x = (value - dMu) / dSigma;
@@ -105,24 +93,21 @@ double CNormalPDF::getCDFResult(double value)
     double a3 = 1.421413741;
     double a4 = -1.453152027;
     double a5 = 1.061405429;
-    double p = 0.3275911;
+    double p  = 0.3275911;
 
     double sign = 1.0;
-    if (x < 0)
-    {
+    if (x < 0) {
       sign = -1.0;
     }
 
-    x = fabs(x) / sqrt(2.0);
+    x        = fabs(x) / sqrt(2.0);
     double t = 1.0 / (1.0 + p * x);
     double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * exp(-x * x);
 
     dRet = (0.5 * (1.0 + sign * y));
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalCDF.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -134,6 +119,4 @@ double CNormalPDF::getCDFResult(double value)
 // CNormalPDF::~CNormalPDF()
 // Default De-Constructor
 //**********************************************************************
-CNormalPDF::~CNormalPDF()
-{
-}
+CNormalPDF::~CNormalPDF() {}

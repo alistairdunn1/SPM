@@ -20,22 +20,21 @@ class CInitializationPhase;
 //
 //
 //**********************************************************************
-class CInitializationReport : public CFileReport
-{
+class CInitializationReport : public CFileReport {
 public:
   CInitializationReport();
   virtual ~CInitializationReport();
-  CReport *clone() { return new CInitializationReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CInitializationReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  CInitializationPhaseManager *pInitializationPhaseManager;
-  string sInitializationPhase;
-  int iInitializationPhaseIndex;
-  CInitializationPhase *pInitializationPhase;
+  CInitializationPhaseManager* pInitializationPhaseManager;
+  string                       sInitializationPhase;
+  int                          iInitializationPhaseIndex;
+  CInitializationPhase*        pInitializationPhase;
 };
 
 #endif /* CINITIALIZATIONREPORT_H_ */

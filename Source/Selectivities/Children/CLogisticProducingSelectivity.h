@@ -16,22 +16,21 @@
 //
 //
 //**********************************************************************
-class CLogisticProducingSelectivity : public CCachedSelectivity
-{
+class CLogisticProducingSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CLogisticProducingSelectivity();
   virtual ~CLogisticProducingSelectivity();
-  CSelectivity *clone() { return new CLogisticProducingSelectivity(*this); }
-  void validate();
+  CSelectivity* clone() { return new CLogisticProducingSelectivity(*this); }
+  void          validate();
 
 protected:
   // Functions
   double calculateResult(int Age);
 
   // Variables
-  int iL;
-  int iH;
+  int    iL;
+  int    iH;
   double dA50;
   double dAto95;
   double dAlpha;

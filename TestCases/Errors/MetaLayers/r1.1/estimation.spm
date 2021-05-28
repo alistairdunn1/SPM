@@ -1,0 +1,77 @@
+# Estimation.spm
+
+@estimation
+minimiser     GammaDiff
+
+@minimiser GammaDiff
+type numerical_differences
+tolerance 0.001 #The default is 0.002
+covariance True
+stepsize 1e-3
+
+@minimiser DE
+type DE_Solver
+covariance False
+tolerance 0.02 #The default is 0.002
+population_size 250
+
+# MCMC
+@mcmc MH
+minimiser GammaDiff
+type metropolis_hastings
+length 200000 # 1500000
+keep 100 # 1000
+start 1
+#adaptive_stepsize True
+adapt_stepsize_at 10000 20000 40000 #100000 200000 400000
+burn_in 50
+proposal_t True
+df 4
+#stepsize 0.01
+
+# ESTIMATION PROFILING
+{
+@profile proportion-spawning
+parameter Process[MatureToPreSpawn].proportions(1)
+steps  10
+lower_bound  0.01
+upper_bound  1.00
+}
+
+# ESTIMATION
+
+@estimate
+parameter  process[Recruitment].r0
+lower_bound 10000
+upper_bound 100000000
+type uniform
+
+@estimate
+parameter process[Fishing].U
+lower_bound 0.01
+upper_bound 0.99
+type uniform
+
+{
+@estimate
+parameter  catchability[CPUEq].q
+lower_bound 1e-7
+upper_bound 1e-1
+type uniform
+}
+
+{
+# nothing to estimate maturation
+@estimate
+parameter selectivity[Maturation].a50
+lower_bound 5
+upper_bound 25
+type uniform
+
+@estimate
+parameter selectivity[Maturation].ato95
+lower_bound 0.01
+upper_bound 15
+type uniform
+}
+

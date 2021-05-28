@@ -8,12 +8,13 @@
 //============================================================================
 
 // Headers
-#include <iostream>
-#include <iomanip>
-#include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "CObjectFinder.h"
+
+#include <boost/lexical_cast.hpp>
+#include <boost/tokenizer.hpp>
+#include <iomanip>
+#include <iostream>
+
 #include "../AgeSize/CAgeSizeManager.h"
 #include "../AgeingError/CAgeingErrorManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
@@ -36,21 +37,18 @@
  * @param objectParameter the actual parameter in the object we want (return variable)
  * @param objectIndex The index of this object into a vector (return variable, default -1)
  */
-void CObjectFinder::splitParameter(const string parameter, string &objectType, string &objectLabel, string &objectParameter, int &objectIndex)
-{
-
+void CObjectFinder::splitParameter(const string parameter, string& objectType, string& objectLabel, string& objectParameter, int& objectIndex) {
   /**
-    * This snippet of code will split the parameter from
-    * objectType[ObjectName].ObjectParam(Index)
-    */
+   * This snippet of code will split the parameter from
+   * objectType[ObjectName].ObjectParam(Index)
+   */
   vector<string> tokenList;
 
   typedef boost::tokenizer<boost::char_separator<char>> tokenizer;
-  boost::char_separator<char> seperator(".[]()");
-  tokenizer tokens(parameter, seperator);
+  boost::char_separator<char>                           seperator(".[]()");
+  tokenizer                                             tokens(parameter, seperator);
 
-  for (tokenizer::iterator tok_iter = tokens.begin(); tok_iter != tokens.end(); ++tok_iter)
-    tokenList.push_back(*tok_iter);
+  for (tokenizer::iterator tok_iter = tokens.begin(); tok_iter != tokens.end(); ++tok_iter) tokenList.push_back(*tok_iter);
 
   /**
    * Now, we've populated vector<string> called tokenList with
@@ -60,68 +58,45 @@ void CObjectFinder::splitParameter(const string parameter, string &objectType, s
   if (tokenList.size() != 3 && tokenList.size() != 4)
     THROW_EXCEPTION("Failed to split the parameter properly: " + parameter);
 
-  objectType = CConvertor::stringToLowercase(tokenList[0]);
-  objectLabel = tokenList[1];
+  objectType      = CConvertor::stringToLowercase(tokenList[0]);
+  objectLabel     = tokenList[1];
   objectParameter = CConvertor::stringToLowercase(tokenList[2]);
-  objectIndex = tokenList.size() == 4 ? boost::lexical_cast<int>(tokenList[3]) : -1;
+  objectIndex     = tokenList.size() == 4 ? boost::lexical_cast<int>(tokenList[3]) : -1;
 }
 
 /**
  * This method will find a specific object in our system.
  */
-CBaseObject *CObjectFinder::getObject(string objectAbsoluteName)
-{
-
-  string sObjectType = "";
+CBaseObject* CObjectFinder::getObject(string objectAbsoluteName) {
+  string sObjectType  = "";
   string sObjectLabel = "";
-  string sTemp = "";
-  int iTemp = -1;
+  string sTemp        = "";
+  int    iTemp        = -1;
 
   CObjectFinder::splitParameter(objectAbsoluteName, sObjectType, sObjectLabel, sTemp, iTemp);
 
-  CBaseObject *target = 0;
-  if (sObjectType == PARAM_PROCESS)
-  {
-    target = (CBaseObject *)CProcessManager::Instance()->getProcess(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_PREFERENCE_FUNCTION)
-  {
-    target = (CBaseObject *)CPreferenceFunctionManager::Instance()->getPreferenceFunction(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_SELECTIVITY)
-  {
-    target = (CBaseObject *)CSelectivityManager::Instance()->getSelectivity(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_CATCHABILITY)
-  {
-    target = (CBaseObject *)CCatchabilityManager::Instance()->getCatchability(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_LAYER)
-  {
-    target = (CBaseObject *)CLayerManager::Instance()->getNumericLayer(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_AGE_SIZE)
-  {
-    target = (CBaseObject *)CAgeSizeManager::Instance()->getAgeSize(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_AGEING_ERROR)
-  {
-    target = (CBaseObject *)CAgeingErrorManager::Instance()->getAgeingError(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_SIZE_WEIGHT)
-  {
-    target = (CBaseObject *)CSizeWeightManager::Instance()->getSizeWeight(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_OBSERVATION)
-  {
-    target = (CBaseObject *)CObservationManager::Instance()->getObservation(sObjectLabel);
-  }
-  else if (sObjectType == PARAM_PDF)
-  {
-    target = (CBaseObject *)CPDFManager::Instance()->getPDF(sObjectLabel);
-  }
-  else
-  {
+  CBaseObject* target = 0;
+  if (sObjectType == PARAM_PROCESS) {
+    target = (CBaseObject*)CProcessManager::Instance()->getProcess(sObjectLabel);
+  } else if (sObjectType == PARAM_PREFERENCE_FUNCTION) {
+    target = (CBaseObject*)CPreferenceFunctionManager::Instance()->getPreferenceFunction(sObjectLabel);
+  } else if (sObjectType == PARAM_SELECTIVITY) {
+    target = (CBaseObject*)CSelectivityManager::Instance()->getSelectivity(sObjectLabel);
+  } else if (sObjectType == PARAM_CATCHABILITY) {
+    target = (CBaseObject*)CCatchabilityManager::Instance()->getCatchability(sObjectLabel);
+  } else if (sObjectType == PARAM_LAYER) {
+    target = (CBaseObject*)CLayerManager::Instance()->getNumericLayer(sObjectLabel);
+  } else if (sObjectType == PARAM_AGE_SIZE) {
+    target = (CBaseObject*)CAgeSizeManager::Instance()->getAgeSize(sObjectLabel);
+  } else if (sObjectType == PARAM_AGEING_ERROR) {
+    target = (CBaseObject*)CAgeingErrorManager::Instance()->getAgeingError(sObjectLabel);
+  } else if (sObjectType == PARAM_SIZE_WEIGHT) {
+    target = (CBaseObject*)CSizeWeightManager::Instance()->getSizeWeight(sObjectLabel);
+  } else if (sObjectType == PARAM_OBSERVATION) {
+    target = (CBaseObject*)CObservationManager::Instance()->getObservation(sObjectLabel);
+  } else if (sObjectType == PARAM_PDF) {
+    target = (CBaseObject*)CPDFManager::Instance()->getPDF(sObjectLabel);
+  } else {
     THROW_EXCEPTION("Failed to find object for: " + objectAbsoluteName);
   }
 
@@ -131,17 +106,15 @@ CBaseObject *CObjectFinder::getObject(string objectAbsoluteName)
 /**
  * Find a specific estimable in the system
  */
-double *CObjectFinder::getObjectEstimable(string estimableAbsoluteName)
-{
-
-  string sObjectType = "";
-  string sObjectLabel = "";
+double* CObjectFinder::getObjectEstimable(string estimableAbsoluteName) {
+  string sObjectType      = "";
+  string sObjectLabel     = "";
   string sObjectParameter = "";
-  int iIndex = -1;
+  int    iIndex           = -1;
 
   CObjectFinder::splitParameter(estimableAbsoluteName, sObjectType, sObjectLabel, sObjectParameter, iIndex);
 
-  CBaseObject *target = CObjectFinder::getObject(estimableAbsoluteName);
+  CBaseObject* target = CObjectFinder::getObject(estimableAbsoluteName);
 
   if (iIndex != -1)
     sObjectParameter += "(" + boost::lexical_cast<string>(iIndex) + ")";

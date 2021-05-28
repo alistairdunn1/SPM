@@ -12,15 +12,12 @@
 /**
  * Constructor
  */
-CUniformLogEstimate::CUniformLogEstimate()
-{
-}
+CUniformLogEstimate::CUniformLogEstimate() {}
 
 /**
  * Get our score
  */
-double CUniformLogEstimate::getScore()
-{
+double CUniformLogEstimate::getScore() {
   double dRet = log(getValue());
   return dRet;
 }

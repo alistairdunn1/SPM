@@ -28,29 +28,28 @@ class CEstimateInfo;
 //
 //
 //**********************************************************************
-class CEstimateManager : public CBaseManager
-{
+class CEstimateManager : public CBaseManager {
 public:
-  static CEstimateManager *Instance();
-  static void Destroy();
+  static CEstimateManager* Instance();
+  static void              Destroy();
 
   // Functions
-  void addEstimateInfo(CEstimateInfo *info);
-  void addEstimate(CEstimate *Estimate);
-  void fillVector(vector<CEstimate *> &list);
-  int getEstimateCount() { return vEstimateList.size(); }
-  int getEnabledEstimateCount();
-  CEstimate *getEnabledEstimate(int Index);
-  CEstimate *getEstimate(int Index);
-  bool hasEstimate(string Parameter);
-  CEstimate *getEstimate(string Parameter);
-  void addEstimateValue(string estimate, double value);
-  int getEstimateValueCount();
-  int getEstimateValueNumber() { return iEstimateNumber; }
-  void loadEstimateValues(int index);
-  void setCurrentPhase(int phase);
-  void validate();
-  void build();
+  void       addEstimateInfo(CEstimateInfo* info);
+  void       addEstimate(CEstimate* Estimate);
+  void       fillVector(vector<CEstimate*>& list);
+  int        getEstimateCount() { return vEstimateList.size(); }
+  int        getEnabledEstimateCount();
+  CEstimate* getEnabledEstimate(int Index);
+  CEstimate* getEstimate(int Index);
+  bool       hasEstimate(string Parameter);
+  CEstimate* getEstimate(string Parameter);
+  void       addEstimateValue(string estimate, double value);
+  int        getEstimateValueCount();
+  int        getEstimateValueNumber() { return iEstimateNumber; }
+  void       loadEstimateValues(int index);
+  void       setCurrentPhase(int phase);
+  void       validate();
+  void       build();
   virtual ~CEstimateManager();
 
 protected:
@@ -58,10 +57,10 @@ protected:
   CEstimateManager();
 
   // Variables
-  vector<CEstimateInfo *> vEstimateInfoList;
-  vector<CEstimate *> vEstimateList;
+  vector<CEstimateInfo*>      vEstimateInfoList;
+  vector<CEstimate*>          vEstimateList;
   map<string, vector<double>> mvEstimateValues;
-  int iEstimateNumber;
+  int                         iEstimateNumber;
 
 private:
   static boost::thread_specific_ptr<CEstimateManager> clInstance;

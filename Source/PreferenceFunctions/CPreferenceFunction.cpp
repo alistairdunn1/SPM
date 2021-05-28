@@ -9,19 +9,18 @@
 
 // Local headers
 #include "CPreferenceFunction.h"
+
+#include "../Helpers/CError.h"
 #include "../Layers/CLayerManager.h"
 #include "../Layers/Numeric/Base/CNumericLayer.h"
-#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CPreferenceFunction::CPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CPreferenceFunction::CPreferenceFunction()
-{
-
+CPreferenceFunction::CPreferenceFunction() {
   // Initialise
-  sType = "";
+  sType  = "";
   pLayer = 0;
 
   // Register our Estimables
@@ -35,18 +34,14 @@ CPreferenceFunction::CPreferenceFunction()
 // void CPreferenceFunction::validate()
 // Validate
 //**********************************************************************
-void CPreferenceFunction::validate()
-{
-  try
-  {
+void CPreferenceFunction::validate() {
+  try {
     // Base Validation
     CBaseBuild::validate();
 
     // Populate our Parameters.
     dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -56,13 +51,9 @@ void CPreferenceFunction::validate()
 // void CPreferenceFunction::build()
 // Build our Object
 //**********************************************************************
-void CPreferenceFunction::build()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CPreferenceFunction::build() {
+  try {
+  } catch (string& Ex) {
     Ex = "CPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -72,9 +63,7 @@ void CPreferenceFunction::build()
 // CPreferenceFunction::getIsStatic()
 // getIsStatic
 //**********************************************************************
-bool CPreferenceFunction::getIsStatic()
-{
-
+bool CPreferenceFunction::getIsStatic() {
   if (pLayer == 0)
     return false;
 
@@ -85,6 +74,4 @@ bool CPreferenceFunction::getIsStatic()
 // CPreferenceFunction::~CPreferenceFunction()
 // Destructor
 //**********************************************************************
-CPreferenceFunction::~CPreferenceFunction()
-{
-}
+CPreferenceFunction::~CPreferenceFunction() {}

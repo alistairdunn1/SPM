@@ -11,26 +11,24 @@
 #include <string>
 
 // Local Includes
-#include "CAbundanceDerivedQuantityByCell.h"
-#include "../CDerivedQuantityByCellManager.h"
-#include "../CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../CDerivedQuantityByCell.h"
+#include "../CDerivedQuantityByCellManager.h"
+#include "CAbundanceDerivedQuantityByCell.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(Abundance_Derived_QuantityByCell, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(Abundance_Derived_QuantityByCell, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -44,8 +42,8 @@ BOOST_FIXTURE_TEST_CASE(Abundance_Derived_QuantityByCell, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedQuantityByCellManager *pManager = CDerivedQuantityByCellManager::Instance();
-  CDerivedQuantityByCell *pLayer = pManager->getDerivedQuantityByCell("derived_quantity_by_cell_abundance");
+  CDerivedQuantityByCellManager* pManager = CDerivedQuantityByCellManager::Instance();
+  CDerivedQuantityByCell*        pLayer   = pManager->getDerivedQuantityByCell("derived_quantity_by_cell_abundance");
   //  CWorldSquare         *pSquare   = getSquare();
 
   // Check Results

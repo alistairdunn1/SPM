@@ -22,9 +22,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Profile)
-{
-  CProfile *pProfile = 0;
+BOOST_AUTO_TEST_CASE(Build_Profile) {
+  CProfile* pProfile = 0;
 
   BOOST_REQUIRE_NO_THROW(pProfile = CProfileFactory::buildProfile("", false));
   delete pProfile;
@@ -34,8 +33,7 @@ BOOST_AUTO_TEST_CASE(Build_Profile)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Profile_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_Profile_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CProfileFactory::buildProfile(PARAM_ZERO, false), string);
 }

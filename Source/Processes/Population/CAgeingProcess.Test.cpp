@@ -15,17 +15,15 @@
 // Local Includes
 #include "../../TestFixtures/C1x1_Fixture.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(AgeingProcess, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(AgeingProcess, C1x1_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -36,19 +34,17 @@ BOOST_FIXTURE_TEST_CASE(AgeingProcess, C1x1_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CWorldSquare *pSquare = getSquare();
+  CWorldSquare* pSquare = getSquare();
 
   BOOST_CHECK_EQUAL(pSquare->getAbundance(), 1500.0);
 
   // Immature only should've aged
-  for (int i = 0; i < 9; ++i)
-    BOOST_CHECK_EQUAL(pSquare->getValue(0, i), 100.0);
+  for (int i = 0; i < 9; ++i) BOOST_CHECK_EQUAL(pSquare->getValue(0, i), 100.0);
   BOOST_CHECK_EQUAL(pSquare->getValue(0, 9), 600.0);
 
   // No population should've been recruited here
   for (int i = 1; i < 3; ++i)
-    for (int j = 0; j < 10; ++j)
-      BOOST_CHECK_EQUAL(pSquare->getValue(i, j), 0.0);
+    for (int j = 0; j < 10; ++j) BOOST_CHECK_EQUAL(pSquare->getValue(i, j), 0.0);
 }
 
 #endif /* TEST */

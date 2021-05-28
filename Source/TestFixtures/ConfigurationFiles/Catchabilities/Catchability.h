@@ -10,9 +10,9 @@
 #ifndef CATCHABILITY_H_
 #define CATCHABILITY_H_
 
-const string catchability_basic =
-    "@catchability catchability_basic\n"
-    "q 0.001\n";
+const string catchability_basic
+    = "@catchability catchability_basic\n"
+      "q 0.001\n";
 
 #endif /* CATCHABILITY_H_ */
 #endif /* TEST */

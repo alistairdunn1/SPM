@@ -8,9 +8,10 @@
 //============================================================================
 
 // Headers
+#include "CAbundanceObservation.h"
+
 #include <boost/lexical_cast.hpp>
 
-#include "CAbundanceObservation.h"
 #include "../../Catchabilities/CCatchability.h"
 #include "../../Catchabilities/CCatchabilityManager.h"
 #include "../../Helpers/CConvertor.h"
@@ -22,9 +23,7 @@
 // CAbundanceObservation::CAbundanceObservation()
 // Default Constructor
 //**********************************************************************
-CAbundanceObservation::CAbundanceObservation()
-{
-
+CAbundanceObservation::CAbundanceObservation() {
   // Variables
   sCatchability = "";
   pCatchability = 0;
@@ -44,15 +43,13 @@ CAbundanceObservation::CAbundanceObservation()
 // void CAbundanceObservation::validate()
 // validate
 //**********************************************************************
-void CAbundanceObservation::validate()
-{
-  try
-  {
+void CAbundanceObservation::validate() {
+  try {
     // Base Validate
     CObservation::validate();
 
-    //Check length of categories and selectivites are equal
-    unsigned iCategoryNamesSize = vCategoryNames.size();
+    // Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize    = vCategoryNames.size();
     unsigned iSelectivityNamesSize = vSelectivityNames.size();
 
     if (iCategoryNamesSize != iSelectivityNamesSize)
@@ -60,7 +57,7 @@ void CAbundanceObservation::validate()
 
     // Get our Parameters
     sCatchability = pParameterList->getString(PARAM_CATCHABILITY);
-    dDelta = pParameterList->getDouble(PARAM_DELTA, true, DELTA);
+    dDelta        = pParameterList->getDouble(PARAM_DELTA, true, DELTA);
     dProcessError = pParameterList->getDouble(PARAM_PROCESS_ERROR, true, 0);
 
     if (dDelta < 0)
@@ -73,27 +70,20 @@ void CAbundanceObservation::validate()
     if ((vOBS.size() % 2) != 0)
       CError::errorPairs(PARAM_OBS);
 
-    for (int i = 0; i < (int)vOBS.size(); i += 2)
-    {
-      try
-      {
+    for (int i = 0; i < (int)vOBS.size(); i += 2) {
+      try {
         mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i + 1]);
-      }
-      catch (boost::bad_lexical_cast &)
-      {
+      } catch (boost::bad_lexical_cast&) {
         string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
         throw Ex;
       }
 
       // Check for non-positive values in our observation values (for all likelihoods except normal)
       //       or negative values in the normal likelihood
-      if (sLikelihood == PARAM_NORMAL)
-      {
+      if (sLikelihood == PARAM_NORMAL) {
         if (mProportionMatrix[vOBS[i]] < 0.0)
           CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
-      }
-      else
-      {
+      } else {
         if (mProportionMatrix[vOBS[i]] <= 0.0)
           CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
       }
@@ -109,14 +99,10 @@ void CAbundanceObservation::validate()
     if ((vErrorValues.size() % 2) != 0)
       CError::errorPairs(PARAM_ERROR_VALUE);
 
-    for (int i = 0; i < (int)vErrorValues.size(); i += 2)
-    {
-      try
-      {
+    for (int i = 0; i < (int)vErrorValues.size(); i += 2) {
+      try {
         mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i + 1]);
-      }
-      catch (boost::bad_lexical_cast &)
-      {
+      } catch (boost::bad_lexical_cast&) {
         string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
         throw Ex;
       }
@@ -128,20 +114,17 @@ void CAbundanceObservation::validate()
 
     // Validate our vErrorValues's to make sure we have the right amount for our
     // Observations
-    bool bMatch = false;
+    bool                          bMatch         = false;
     map<string, double>::iterator mErrorValuePtr = mErrorValue.begin();
-    map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
+    map<string, double>::iterator mPropPtr       = mProportionMatrix.begin();
 
-    while (mErrorValuePtr != mErrorValue.end())
-    {
+    while (mErrorValuePtr != mErrorValue.end()) {
       // Reset Vars
-      bMatch = false;
+      bMatch   = false;
       mPropPtr = mProportionMatrix.begin();
 
-      while (mPropPtr != mProportionMatrix.end())
-      {
-        if ((*mPropPtr).first == (*mErrorValuePtr).first)
-        {
+      while (mPropPtr != mProportionMatrix.end()) {
+        if ((*mPropPtr).first == (*mErrorValuePtr).first) {
           bMatch = true;
           break;
         }
@@ -153,9 +136,7 @@ void CAbundanceObservation::validate()
 
       mErrorValuePtr++;
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAbundanceObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -165,10 +146,8 @@ void CAbundanceObservation::validate()
 // void CAbundanceObservation::build()
 // build
 //**********************************************************************
-void CAbundanceObservation::build()
-{
-  try
-  {
+void CAbundanceObservation::build() {
+  try {
     // Base build
     CObservation::build();
 
@@ -176,11 +155,9 @@ void CAbundanceObservation::build()
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
     // Build relationships
-    CCatchabilityManager *pCatchabilityManager = CCatchabilityManager::Instance();
-    pCatchability = pCatchabilityManager->getCatchability(sCatchability);
-  }
-  catch (string &Ex)
-  {
+    CCatchabilityManager* pCatchabilityManager = CCatchabilityManager::Instance();
+    pCatchability                              = pCatchabilityManager->getCatchability(sCatchability);
+  } catch (string& Ex) {
     Ex = "CAbundanceObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -190,15 +167,13 @@ void CAbundanceObservation::build()
 // void CAbundanceObservation::execute()
 // Execute
 //**********************************************************************
-void CAbundanceObservation::execute()
-{
+void CAbundanceObservation::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Variables
-    dScore = 0.0;
-    double dExpectedTotal = 0.0;
+    dScore                        = 0.0;
+    double         dExpectedTotal = 0.0;
     vector<string> vKeys;
     vector<double> vExpected;
     vector<double> vObserved;
@@ -213,29 +188,23 @@ void CAbundanceObservation::execute()
 
     // Loop Through Obs
     map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
-    while (mPropPtr != mProportionMatrix.end())
-    {
+    while (mPropPtr != mProportionMatrix.end()) {
       // Reset Vars
       dExpectedTotal = 0.0;
 
-      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mPropPtr).first);
-      CWorldSquare *pSquare = pWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare* pStartSquare = pStartWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare* pSquare      = pWorldView->getSquare((*mPropPtr).first);
 
-      for (int i = 0; i < (int)vCategories.size(); ++i)
-      {
-        for (int j = 0; j < pSquare->getWidth(); ++j)
-        {
+      for (int i = 0; i < (int)vCategories.size(); ++i) {
+        for (int j = 0; j < pSquare->getWidth(); ++j) {
           double dSelectResult = vSelectivities[i]->getResult(j);
 
           double dStartValue = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
-          double dEndValue = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
+          double dEndValue   = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dFinalValue = 0.0;
-          if (sProportionMethod == PARAM_MEAN)
-          {
+          if (sProportionMethod == PARAM_MEAN) {
             dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
-          }
-          else
-          {
+          } else {
             dFinalValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
           }
           dExpectedTotal += dSelectResult * dFinalValue;
@@ -259,30 +228,25 @@ void CAbundanceObservation::execute()
     }
 
     // Simulate or Generate Result?
-    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION)
-    {
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
       // Simulate our values, then save them
       pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vObserved.size(); ++i)
         saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 1.0, 0.0);
-    }
-    else
-    { // Generate Score
+    } else {  // Generate Score
       dScore = 0.0;
 
       // Generate Results and save them
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
-      for (int i = 0; i < (int)vScores.size(); ++i)
-      {
+      for (int i = 0; i < (int)vScores.size(); ++i) {
         dScore += (vScores[i] * dMultiplier);
-        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), dMultiplier, vScores[i]);
+        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), dMultiplier,
+                       vScores[i]);
       }
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAbundanceObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -293,8 +257,7 @@ void CAbundanceObservation::execute()
 // CAbundanceObservation::getCatchability()
 // Get catchabilty
 //**********************************************************************
-double CAbundanceObservation::getCatchability()
-{
+double CAbundanceObservation::getCatchability() {
   double Q = pCatchability->getQ();
   return (Q);
 }
@@ -303,6 +266,4 @@ double CAbundanceObservation::getCatchability()
 // CAbundanceObservation::~CAbundanceObservation()
 // Default De-Constructor
 //**********************************************************************
-CAbundanceObservation::~CAbundanceObservation()
-{
-}
+CAbundanceObservation::~CAbundanceObservation() {}

@@ -14,23 +14,16 @@
 // CAgeSize::CAgeSize()
 // Default Constructor
 //**********************************************************************
-CAgeSize::CAgeSize()
-{
-}
+CAgeSize::CAgeSize() {}
 
 //**********************************************************************
 // void CLayer::validate()
 // Validate
 //**********************************************************************
-void CAgeSize::validate()
-{
-  try
-  {
-
+void CAgeSize::validate() {
+  try {
     CBaseBuild::validate();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -40,13 +33,9 @@ void CAgeSize::validate()
 // void CAgeSize::build()
 // Build our age-size relationship
 //**********************************************************************
-void CAgeSize::build()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CAgeSize::build() {
+  try {
+  } catch (string& Ex) {
     Ex = "CAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -56,13 +45,9 @@ void CAgeSize::build()
 // void CAgeSize::rebuild()
 // Rebuild our age-size relationship
 //**********************************************************************
-void CAgeSize::rebuild()
-{
-  try
-  {
-  }
-  catch (string &Ex)
-  {
+void CAgeSize::rebuild() {
+  try {
+  } catch (string& Ex) {
     Ex = "CAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -72,6 +57,4 @@ void CAgeSize::rebuild()
 // CAgeSize::~CAgeSize()
 // Destructor
 //**********************************************************************
-CAgeSize::~CAgeSize()
-{
-}
+CAgeSize::~CAgeSize() {}

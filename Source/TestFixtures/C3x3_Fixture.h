@@ -26,21 +26,20 @@ using namespace std;
 //
 //
 //**********************************************************************
-class C3x3_Fixture
-{
+class C3x3_Fixture {
 public:
   C3x3_Fixture();
   virtual ~C3x3_Fixture();
-  void addToConfiguration(string value);
-  void addToTimeStep(string process);
-  void loadEnvironment(string runMode = "-r");
-  void loadAndRunEnvironment(string runMode = "-r");
-  CWorldSquare *getSquare(int row, int col);
+  void          addToConfiguration(string value);
+  void          addToTimeStep(string process);
+  void          loadEnvironment(string runMode = "-r");
+  void          loadAndRunEnvironment(string runMode = "-r");
+  CWorldSquare* getSquare(int row, int col);
 
 protected:
-  vector<string> vConfiguration;
-  CConfigurationLoader *pConfigLoader;
-  string sTimeStep;
+  vector<string>        vConfiguration;
+  CConfigurationLoader* pConfigLoader;
+  string                sTimeStep;
 };
 
 #endif /* C3X3_FIXTURE_H_ */

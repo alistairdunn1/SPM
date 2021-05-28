@@ -16,14 +16,13 @@
 //
 //
 //**********************************************************************
-class CEstimateValueReport : public CFileReport
-{
+class CEstimateValueReport : public CFileReport {
 public:
   CEstimateValueReport();
   virtual ~CEstimateValueReport();
-  CReport *clone() { return new CEstimateValueReport(*this); }
-  void validate();
-  void execute();
+  CReport* clone() { return new CEstimateValueReport(*this); }
+  void     validate();
+  void     execute();
 
 protected:
   bool bWrittenHeader;

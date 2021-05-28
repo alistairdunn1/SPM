@@ -1,0 +1,14 @@
+# The ../observations
+
+
+# biomass
+@include "../SpatialDeltaGLMM_R3c/Biomass-2007.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2008.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2009.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2010.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2011.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2012.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2013.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2014.spm"
+@include "../SpatialDeltaGLMM_R3c/Biomass-2016.spm"
+

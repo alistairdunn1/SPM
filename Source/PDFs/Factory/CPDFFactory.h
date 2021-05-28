@@ -19,11 +19,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CPDFFactory
-{
+class CPDFFactory {
 public:
   // Functions
-  static CPDF *buildPDF(string type, bool registerWithManager = true);
+  static CPDF* buildPDF(string type, bool registerWithManager = true);
 
 private:
   // Functions

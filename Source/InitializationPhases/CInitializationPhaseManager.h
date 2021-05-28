@@ -22,22 +22,21 @@ class CDerivedQuantityByCellManager;
 //
 //
 //**********************************************************************
-class CInitializationPhaseManager : public CBaseManager
-{
+class CInitializationPhaseManager : public CBaseManager {
 public:
   // Functions
-  static CInitializationPhaseManager *Instance();
-  static void Destroy();
-  void addInitializationPhase(CInitializationPhase *value);
-  void loadInitializationPhaseOrder(vector<string> &order);
-  int getInitializationPhaseOrderIndex(string label);
-  int getLastExecutedInitializationPhase() { return lastExecutedInitializationPhase; }
-  int getNumberInitializationPhases() { return vInitializationPhases.size(); }
-  CInitializationPhase *getInitializationPhase(int index) { return vInitializationPhaseOrder[index]; };
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
+  static CInitializationPhaseManager* Instance();
+  static void                         Destroy();
+  void                                addInitializationPhase(CInitializationPhase* value);
+  void                                loadInitializationPhaseOrder(vector<string>& order);
+  int                                 getInitializationPhaseOrderIndex(string label);
+  int                                 getLastExecutedInitializationPhase() { return lastExecutedInitializationPhase; }
+  int                                 getNumberInitializationPhases() { return vInitializationPhases.size(); }
+  CInitializationPhase*               getInitializationPhase(int index) { return vInitializationPhaseOrder[index]; };
+  void                                validate();
+  void                                build();
+  void                                rebuild();
+  void                                execute();
   virtual ~CInitializationPhaseManager();
 
 protected:
@@ -45,12 +44,12 @@ protected:
   CInitializationPhaseManager();
 
   // Variables
-  vector<CInitializationPhase *> vInitializationPhases;
-  vector<CInitializationPhase *> vInitializationPhaseOrder;
-  int lastExecutedInitializationPhase;
-  CReportManager *pReportManager;
-  CDerivedQuantityByCellManager *pDerivedQuantityByCellManager;
-  CDerivedQuantityManager *pDerivedQuantityManager;
+  vector<CInitializationPhase*>  vInitializationPhases;
+  vector<CInitializationPhase*>  vInitializationPhaseOrder;
+  int                            lastExecutedInitializationPhase;
+  CReportManager*                pReportManager;
+  CDerivedQuantityByCellManager* pDerivedQuantityByCellManager;
+  CDerivedQuantityManager*       pDerivedQuantityManager;
 
 private:
   // Variables

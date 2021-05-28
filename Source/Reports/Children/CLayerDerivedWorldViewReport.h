@@ -22,28 +22,27 @@ class CLayerDerivedWorldView;
 //
 //
 //**********************************************************************
-class CLayerDerivedWorldViewReport : public CFileReport
-{
+class CLayerDerivedWorldViewReport : public CFileReport {
 public:
   // Functions
   CLayerDerivedWorldViewReport();
   virtual ~CLayerDerivedWorldViewReport();
-  CReport *clone() { return new CLayerDerivedWorldViewReport(*this); }
-  void validate();
-  void build();
-  void execute();
+  CReport* clone() { return new CLayerDerivedWorldViewReport(*this); }
+  void     validate();
+  void     build();
+  void     execute();
 
 protected:
   // Variables
-  vector<int> vYear;
-  int iTimeStep;
-  string sTimeStep;
-  CTimeStepManager *pTimeStepManager;
-  string sLayer;
-  CCategoricalLayer *pLayer;
-  CLayerManager *pLayerManager;
-  CLayerDerivedWorldView *pWorldView;
-  map<string, int> mAreas;
+  vector<int>             vYear;
+  int                     iTimeStep;
+  string                  sTimeStep;
+  CTimeStepManager*       pTimeStepManager;
+  string                  sLayer;
+  CCategoricalLayer*      pLayer;
+  CLayerManager*          pLayerManager;
+  CLayerDerivedWorldView* pWorldView;
+  map<string, int>        mAreas;
 };
 
 #endif /* CLAYERDERIVEDWORLDVIEWREPORT_H_ */

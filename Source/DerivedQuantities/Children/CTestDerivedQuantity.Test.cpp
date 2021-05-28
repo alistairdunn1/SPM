@@ -12,27 +12,25 @@
 #include <string>
 
 // Local Includes
-#include "CTestDerivedQuantity.h"
-#include "../CDerivedQuantityManager.h"
-#include "../CDerivedQuantity.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../CDerivedQuantity.h"
+#include "../CDerivedQuantityManager.h"
+#include "CTestDerivedQuantity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture) {
   CTestDerivedQuantity tdq;
 
   /**
@@ -46,8 +44,7 @@ BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
    * Generate 5 Items
    * 100 200 300 400 500
    */
-  for (unsigned i = 0; i < 5; ++i)
-    tdq.calculate(0);
+  for (unsigned i = 0; i < 5; ++i) tdq.calculate(0);
   BOOST_CHECK_EQUAL(tdq.getValue(0), 500);
   BOOST_CHECK_EQUAL(tdq.getValue(1), 400);
   BOOST_CHECK_EQUAL(tdq.getValue(2), 300);
@@ -59,8 +56,7 @@ BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
    * Generate a 2nd initialisation phase of 5 values
    * 200 400 600 800 1000
    */
-  for (unsigned i = 0; i < 5; ++i)
-    tdq.calculate(1);
+  for (unsigned i = 0; i < 5; ++i) tdq.calculate(1);
   BOOST_CHECK_EQUAL(tdq.getValue(0), 1000);
   BOOST_CHECK_EQUAL(tdq.getValue(1), 800);
   BOOST_CHECK_EQUAL(tdq.getValue(2), 600);
@@ -80,8 +76,7 @@ BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
    * Generate a 3rd initialisation phase of 5 values
    * 400 800 1200 1600 2000
    */
-  for (unsigned i = 0; i < 5; ++i)
-    tdq.calculate(2);
+  for (unsigned i = 0; i < 5; ++i) tdq.calculate(2);
   BOOST_CHECK_EQUAL(tdq.getValue(0), 1500);
   BOOST_CHECK_EQUAL(tdq.getValue(1), 1200);
   BOOST_CHECK_EQUAL(tdq.getValue(2), 900);
@@ -102,8 +97,7 @@ BOOST_FIXTURE_TEST_CASE(Test_Derived_Quantity, C1x1_Fixture)
    * Calculate 5 model values
    * 0 1 2 3 4 5
    */
-  for (unsigned i = 0; i < 5; ++i)
-    tdq.calculate();
+  for (unsigned i = 0; i < 5; ++i) tdq.calculate();
   BOOST_CHECK_EQUAL(tdq.getValue(0), 4);
   BOOST_CHECK_EQUAL(tdq.getValue(1), 3);
   BOOST_CHECK_EQUAL(tdq.getValue(2), 2);

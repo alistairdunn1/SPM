@@ -16,27 +16,26 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CPresenceObservation : public CObservation
-{
+class CPresenceObservation : public CObservation {
 public:
   // Functions
   CPresenceObservation();
   virtual ~CPresenceObservation();
-  CObservation *clone() { return new CPresenceObservation(*this); }
-  void validate();
-  void build();
-  void execute();
-  string getType() { return (PARAM_PRESENCE); }
-  double getCatchability();
+  CObservation* clone() { return new CPresenceObservation(*this); }
+  void          validate();
+  void          build();
+  void          execute();
+  string        getType() { return (PARAM_PRESENCE); }
+  double        getCatchability();
 
 protected:
   // Variables
   map<string, double> mProportionMatrix;
   map<string, double> mErrorValue;
-  string sCatchability;
-  CCatchability *pCatchability;
-  double dDelta;
-  double dProcessError;
+  string              sCatchability;
+  CCatchability*      pCatchability;
+  double              dDelta;
+  double              dProcessError;
 };
 
 #endif /*CPRESENCEOBSERVATION_H_*/

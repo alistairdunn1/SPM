@@ -13,8 +13,8 @@
 #include <vector>
 
 // Local headers
-#include "Base/CCategoricalLayer.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "Base/CCategoricalLayer.h"
 
 // Classes
 class CTimeStepManager;
@@ -26,31 +26,30 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CStringMetaLayer : public CCategoricalLayer
-{
+class CStringMetaLayer : public CCategoricalLayer {
 public:
   // Functions
   CStringMetaLayer();
   virtual ~CStringMetaLayer();
-  CLayer *clone() { return new CStringMetaLayer(*this); }
-  void validate();
-  void build();
-  string getValue(int RowIndex, int ColIndex);
+  CLayer* clone() { return new CStringMetaLayer(*this); }
+  void    validate();
+  void    build();
+  string  getValue(int RowIndex, int ColIndex);
 
 protected:
   // Variables
-  string sDefaultLayer;
-  vector<int> vYears;
-  vector<string> vLayerNames;
-  vector<string> vInitialisationPhases;
-  vector<string> vInitialisationLayers;
-  vector<CCategoricalLayer *> vPhaseLayers;
-  vector<int> vYearsIndex;
-  vector<CCategoricalLayer *> vYearsLayers;
-  bool bHasYears;
-  bool bHasInitialisation;
-  CInitializationPhaseManager *pInitializationPhaseManager;
-  CTimeStepManager *pTimeStepManager;
+  string                       sDefaultLayer;
+  vector<int>                  vYears;
+  vector<string>               vLayerNames;
+  vector<string>               vInitialisationPhases;
+  vector<string>               vInitialisationLayers;
+  vector<CCategoricalLayer*>   vPhaseLayers;
+  vector<int>                  vYearsIndex;
+  vector<CCategoricalLayer*>   vYearsLayers;
+  bool                         bHasYears;
+  bool                         bHasInitialisation;
+  CInitializationPhaseManager* pInitializationPhaseManager;
+  CTimeStepManager*            pTimeStepManager;
 };
 
 #endif /* CSTRINGMETALAYER_H_ */

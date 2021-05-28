@@ -21,8 +21,7 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CAbundanceDerivedQuantity : public CDerivedQuantity
-{
+class CAbundanceDerivedQuantity : public CDerivedQuantity {
 public:
   // Methods
   CAbundanceDerivedQuantity();
@@ -34,16 +33,16 @@ public:
 
 protected:
   // Members
-  CTimeStepManager *pTimeStepManager;
-  string sTimeStep;
-  vector<string> vInitializationTimeStepNames;
-  vector<int> vInitializationTimeStepIndex;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  string sLayer;
-  CNumericLayer *pLayer;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CTimeStepManager*     pTimeStepManager;
+  string                sTimeStep;
+  vector<string>        vInitializationTimeStepNames;
+  vector<int>           vInitializationTimeStepIndex;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  string                sLayer;
+  CNumericLayer*        pLayer;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /* CABUNDANCEDERIVEDQUANTITY_H_ */

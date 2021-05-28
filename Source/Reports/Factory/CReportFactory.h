@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CReportFactory
-{
+class CReportFactory {
 public:
   // Functions
-  static CReport *buildReport(string type, bool registerWithManager = true);
+  static CReport* buildReport(string type, bool registerWithManager = true);
 
 private:
   // Functions

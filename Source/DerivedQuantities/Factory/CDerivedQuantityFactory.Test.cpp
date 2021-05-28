@@ -22,10 +22,8 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedQuantity)
-{
-
-  CDerivedQuantity *pBasic = 0;
+BOOST_AUTO_TEST_CASE(Build_DerivedQuantity) {
+  CDerivedQuantity* pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityFactory::buildDerivedQuantity(PARAM_ABUNDANCE, false));
   delete pBasic;
 }
@@ -34,8 +32,7 @@ BOOST_AUTO_TEST_CASE(Build_DerivedQuantity)
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedQuantity_PARAM_INVALID)
-{
+BOOST_AUTO_TEST_CASE(Build_DerivedQuantity_PARAM_INVALID) {
   // Try to Build Invalid Estimate
   BOOST_REQUIRE_THROW(CDerivedQuantityFactory::buildDerivedQuantity(PARAM_ZERO, false), string);
 }

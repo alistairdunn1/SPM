@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CStringMetaLayer.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../InitializationPhases/CInitializationPhase.h"
@@ -21,10 +22,8 @@
 // CStringMetaLayer::CStringMetaLayer()
 // Default constructor
 //**********************************************************************
-CStringMetaLayer::CStringMetaLayer()
-{
-
-  pTimeStepManager = CTimeStepManager::Instance();
+CStringMetaLayer::CStringMetaLayer() {
+  pTimeStepManager            = CTimeStepManager::Instance();
   pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
   sType = PARAM_META_STRING;
@@ -36,19 +35,17 @@ CStringMetaLayer::CStringMetaLayer()
   pParameterList->registerAllowed(PARAM_INITIALIZATION_PHASES);
   pParameterList->registerAllowed(PARAM_INITIALIZATION_LAYERS);
 
-  bHasYears = true;
+  bHasYears          = true;
   bHasInitialisation = true;
-  bIsStatic = false;
+  bIsStatic          = false;
 }
 
 //**********************************************************************
 // void CStringMetaLayer::validate()
 // Validate the layer
 //**********************************************************************
-void CStringMetaLayer::validate()
-{
-  try
-  {
+void CStringMetaLayer::validate() {
+  try {
     // Base
     CLayer::validate();
 
@@ -56,24 +53,16 @@ void CStringMetaLayer::validate()
     sDefaultLayer = pParameterList->getString(PARAM_DEFAULT_LAYER);
 
     // determine if years defined, and check
-    if (pParameterList->hasParameter(PARAM_YEARS))
-    {
-      if (pParameterList->hasParameter(PARAM_LAYERS))
-      {
+    if (pParameterList->hasParameter(PARAM_YEARS)) {
+      if (pParameterList->hasParameter(PARAM_LAYERS)) {
         pParameterList->fillVector(vYears, PARAM_YEARS);
         pParameterList->fillVector(vLayerNames, PARAM_LAYERS);
-      }
-      else
-      {
+      } else {
         CError::errorMissing(PARAM_LAYERS);
       }
-    }
-    else if (pParameterList->hasParameter(PARAM_LAYERS))
-    {
+    } else if (pParameterList->hasParameter(PARAM_LAYERS)) {
       CError::errorMissing(PARAM_YEARS);
-    }
-    else
-    {
+    } else {
       bHasYears = false;
     }
     // Validate lengths
@@ -81,32 +70,22 @@ void CStringMetaLayer::validate()
       CError::errorListSameSize(PARAM_YEARS, PARAM_LAYERS);
 
     // determine if initalisation defined, and check
-    if (pParameterList->hasParameter(PARAM_INITIALIZATION_PHASES))
-    {
-      if (pParameterList->hasParameter(PARAM_LAYERS))
-      {
+    if (pParameterList->hasParameter(PARAM_INITIALIZATION_PHASES)) {
+      if (pParameterList->hasParameter(PARAM_LAYERS)) {
         pParameterList->fillVector(vInitialisationPhases, PARAM_INITIALIZATION_PHASES);
         pParameterList->fillVector(vInitialisationLayers, PARAM_INITIALIZATION_LAYERS);
-      }
-      else
-      {
+      } else {
         CError::errorMissing(PARAM_LAYERS);
       }
-    }
-    else if (pParameterList->hasParameter(PARAM_INITIALIZATION_LAYERS))
-    {
+    } else if (pParameterList->hasParameter(PARAM_INITIALIZATION_LAYERS)) {
       CError::errorMissing(PARAM_YEARS);
-    }
-    else
-    {
+    } else {
       bHasInitialisation = false;
     }
     // Validate lengths
     if (vInitialisationPhases.size() != vInitialisationLayers.size())
       CError::errorListSameSize(PARAM_INITIALIZATION_PHASES, PARAM_INITIALIZATION_LAYERS);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CStringMetaLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -116,53 +95,40 @@ void CStringMetaLayer::validate()
 // void CStringMetaLayer::build()
 // Build the layer
 //**********************************************************************
-void CStringMetaLayer::build()
-{
-  try
-  {
-
-    CLayerManager *pLayerManager = CLayerManager::Instance();
+void CStringMetaLayer::build() {
+  try {
+    CLayerManager* pLayerManager = CLayerManager::Instance();
 
     // Sort out the vector of layers to use in the initialisation
-    pInitializationPhaseManager = CInitializationPhaseManager::Instance();
+    pInitializationPhaseManager   = CInitializationPhaseManager::Instance();
     int iInitialisationPhaseCount = pInitializationPhaseManager->getNumberInitializationPhases();
     // Fill in as default, then override with the specifics
-    for (int i = 0; i < iInitialisationPhaseCount; ++i)
-    {
+    for (int i = 0; i < iInitialisationPhaseCount; ++i) {
       vPhaseLayers.push_back(pLayerManager->getCategoricalLayer(sDefaultLayer));
     }
-    if (bHasInitialisation)
-    {
-      for (int i = 0; i < (int)vInitialisationPhases.size(); ++i)
-      {
-        int iPhase = pInitializationPhaseManager->getInitializationPhaseOrderIndex(vInitialisationPhases[i]);
+    if (bHasInitialisation) {
+      for (int i = 0; i < (int)vInitialisationPhases.size(); ++i) {
+        int iPhase           = pInitializationPhaseManager->getInitializationPhaseOrderIndex(vInitialisationPhases[i]);
         vPhaseLayers[iPhase] = pLayerManager->getCategoricalLayer(vInitialisationLayers[i]);
       }
     }
 
     // Sort out the vector of layers to use for the run years
     // Fill in as default, then override with the specifics
-    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
-    {
+    for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
       vYearsIndex.push_back(i);
       vYearsLayers.push_back(pLayerManager->getCategoricalLayer(sDefaultLayer));
     }
-    if (bHasYears)
-    {
-      for (int i = 0; i < (int)vYearsIndex.size(); ++i)
-      {
-        for (int j = 0; j < (int)vYears.size(); ++j)
-        {
-          if (vYearsIndex[i] == vYears[j])
-          {
+    if (bHasYears) {
+      for (int i = 0; i < (int)vYearsIndex.size(); ++i) {
+        for (int j = 0; j < (int)vYears.size(); ++j) {
+          if (vYearsIndex[i] == vYears[j]) {
             vYearsLayers[i] = pLayerManager->getCategoricalLayer(vLayerNames[j]);
           }
         }
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CStringMetaLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -172,35 +138,25 @@ void CStringMetaLayer::build()
 // string getValue(int RowIndex, int ColIndex)
 // get value
 //**********************************************************************
-string CStringMetaLayer::getValue(int RowIndex, int ColIndex)
-{
-  try
-  {
-
+string CStringMetaLayer::getValue(int RowIndex, int ColIndex) {
+  try {
     string sValue = "";
-    //If initialisation phase, return appropriate layer
-    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION)
-    {
+    // If initialisation phase, return appropriate layer
+    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION) {
       int iThisPhase = pInitializationPhaseManager->getLastExecutedInitializationPhase();
-      sValue = vPhaseLayers[iThisPhase]->getValue(RowIndex, ColIndex);
-    }
-    else
-    {
+      sValue         = vPhaseLayers[iThisPhase]->getValue(RowIndex, ColIndex);
+    } else {
       int iThisYear = pTimeStepManager->getCurrentYear();
-      int iIndex = 0;
-      for (int i = 0; i < (int)vYearsIndex.size(); ++i)
-      {
-        if (vYearsIndex[i] == iThisYear)
-        {
+      int iIndex    = 0;
+      for (int i = 0; i < (int)vYearsIndex.size(); ++i) {
+        if (vYearsIndex[i] == iThisYear) {
           iIndex = i;
         }
       }
       sValue = vYearsLayers[iIndex]->getValue(RowIndex, ColIndex);
     }
     return (sValue);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CStringMetaLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -210,6 +166,4 @@ string CStringMetaLayer::getValue(int RowIndex, int ColIndex)
 // CStringMetaLayer::~CStringMetaLayer()
 // Destructor
 //**********************************************************************
-CStringMetaLayer::~CStringMetaLayer()
-{
-}
+CStringMetaLayer::~CStringMetaLayer() {}

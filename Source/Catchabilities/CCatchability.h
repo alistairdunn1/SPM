@@ -16,19 +16,18 @@
 //
 //
 //**********************************************************************
-class CCatchability : public CBaseValidate
-{
+class CCatchability : public CBaseValidate {
 public:
-	// Functions
-	CCatchability();
-	virtual ~CCatchability();
-	CCatchability *clone() { return new CCatchability(*this); }
-	double getQ() { return dQ; }
-	void validate();
+  // Functions
+  CCatchability();
+  virtual ~CCatchability();
+  CCatchability* clone() { return new CCatchability(*this); }
+  double         getQ() { return dQ; }
+  void           validate();
 
 protected:
-	// Variables
-	double dQ;
+  // Variables
+  double dQ;
 };
 
 #endif /*CCATCHABILITY_H_*/

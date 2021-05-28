@@ -14,8 +14,7 @@
 //
 //
 //**********************************************************************
-class CMath
-{
+class CMath {
 public:
   // Functions
   static double lnGamma(double t);

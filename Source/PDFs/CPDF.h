@@ -16,17 +16,16 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPDF : public CBaseBuild
-{
+class CPDF : public CBaseBuild {
 public:
   CPDF();
   virtual ~CPDF();
-  virtual CPDF *clone() = 0;
+  virtual CPDF*  clone()                    = 0;
   virtual double getPDFResult(double Value) = 0;
   virtual double getCDFResult(double Value) = 0;
-  string getPDFType() { return sType; };
-  virtual void validate();
-  void build();
+  string         getPDFType() { return sType; };
+  virtual void   validate();
+  void           build();
 
 protected:
   // Variables

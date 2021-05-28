@@ -9,23 +9,22 @@
 
 // Local Headers
 #include "CAdjacentCellMovementProcess.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 #include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
 // Default Constructor
 //**********************************************************************
-CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
-{
-
+CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
   // Default Values
   pLayer = 0;
-  sType = PARAM_ADJACENT_CELL_MOVEMENT;
+  sType  = PARAM_ADJACENT_CELL_MOVEMENT;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -38,13 +37,10 @@ CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
 // void CAdjacentCellMovementProcess::validate()
 // validate
 //**********************************************************************
-void CAdjacentCellMovementProcess::validate()
-{
-  try
-  {
-
+void CAdjacentCellMovementProcess::validate() {
+  try {
     // Get our Variables
-    sLayer = pParameterList->getString(PARAM_LAYER, true, "");
+    sLayer      = pParameterList->getString(PARAM_LAYER, true, "");
     dProportion = pParameterList->getDouble(PARAM_PROPORTION, true, 1.0);
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
@@ -67,9 +63,7 @@ void CAdjacentCellMovementProcess::validate()
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
     registerEstimable(PARAM_PROPORTION, &dProportion);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAdjacentCellMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -79,10 +73,8 @@ void CAdjacentCellMovementProcess::validate()
 // void CAdjacentCellMovementProcess::build()
 // build
 //**********************************************************************
-void CAdjacentCellMovementProcess::build()
-{
-  try
-  {
+void CAdjacentCellMovementProcess::build() {
+  try {
     // Base Building
     CMovementProcess::build();
 
@@ -93,9 +85,7 @@ void CAdjacentCellMovementProcess::build()
     // Get our Layer
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAdjacentCellMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -105,40 +95,33 @@ void CAdjacentCellMovementProcess::build()
 // void CAdjacentCellMovementProcess::execute()
 // execute
 //**********************************************************************
-void CAdjacentCellMovementProcess::execute()
-{
+void CAdjacentCellMovementProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     // Base Execution
     CMovementProcess::execute();
 
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Squares
         pBaseSquare = pWorld->getBaseSquare(i, j);
-        pDiff = pWorld->getDifferenceSquare(i, j);
+        pDiff       = pWorld->getDifferenceSquare(i, j);
 
         if (!pBaseSquare->getEnabled())
           continue;
 
         // Loop Through Categories and Ages
-        for (int k = 0; k < getCategoryCount(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < getCategoryCount(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l);
 
             if (CComparer::isZero(dCurrent))
               continue;
             // get up/down/left/right layer values and convert to proportions
 
-            if (sLayer != "")
-            {
+            if (sLayer != "") {
               if ((i + 1) < pWorld->getHeight())
                 dLayerValueDown = pLayer->getValue(i + 1, j);
               else
@@ -158,29 +141,24 @@ void CAdjacentCellMovementProcess::execute()
 
               dLayerTotal = dLayerValueUp + dLayerValueDown + dLayerValueLeft + dLayerValueRight;
 
-              if (dLayerTotal > 0.0)
-              {
-                dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueUp = dValue * dLayerValueUp / dLayerTotal;
-                dLayerValueDown = dValue * dLayerValueDown / dLayerTotal;
-                dLayerValueLeft = dValue * dLayerValueLeft / dLayerTotal;
+              if (dLayerTotal > 0.0) {
+                dValue           = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
+                dLayerValueUp    = dValue * dLayerValueUp / dLayerTotal;
+                dLayerValueDown  = dValue * dLayerValueDown / dLayerTotal;
+                dLayerValueLeft  = dValue * dLayerValueLeft / dLayerTotal;
                 dLayerValueRight = dValue * dLayerValueRight / dLayerTotal;
-              }
-              else
-              {
-                dLayerValueUp = 0.0;
-                dLayerValueDown = 0.0;
-                dLayerValueLeft = 0.0;
+              } else {
+                dLayerValueUp    = 0.0;
+                dLayerValueDown  = 0.0;
+                dLayerValueLeft  = 0.0;
                 dLayerValueRight = 0.0;
               }
               // or if no layer defined, then just move 1/4 each way
-            }
-            else
-            {
-              dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
-              dLayerValueUp = 0.25 * dValue;
-              dLayerValueDown = 0.25 * dValue;
-              dLayerValueLeft = 0.25 * dValue;
+            } else {
+              dValue           = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
+              dLayerValueUp    = 0.25 * dValue;
+              dLayerValueDown  = 0.25 * dValue;
+              dLayerValueLeft  = 0.25 * dValue;
               dLayerValueRight = 0.25 * dValue;
             }
             // Move
@@ -194,9 +172,7 @@ void CAdjacentCellMovementProcess::execute()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CAdjacentCellMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -207,6 +183,4 @@ void CAdjacentCellMovementProcess::execute()
 // CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess()
 // Default De-Constructor
 //**********************************************************************
-CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess()
-{
-}
+CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess() {}

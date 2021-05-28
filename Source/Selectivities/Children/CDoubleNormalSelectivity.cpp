@@ -9,14 +9,14 @@
 
 // Local Headers
 #include "CDoubleNormalSelectivity.h"
+
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CDoubleNormalSelectivity::CDoubleNormalSelectivity()
 // Default constructor
 //**********************************************************************
-CDoubleNormalSelectivity::CDoubleNormalSelectivity()
-{
+CDoubleNormalSelectivity::CDoubleNormalSelectivity() {
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA_L, &dSigmaL);
@@ -34,16 +34,13 @@ CDoubleNormalSelectivity::CDoubleNormalSelectivity()
 // void CDoubleNormalSelectivity::validate()
 // validate
 //**********************************************************************
-void CDoubleNormalSelectivity::validate()
-{
-  try
-  {
-
+void CDoubleNormalSelectivity::validate() {
+  try {
     // Populate our variables
-    dMu = pParameterList->getDouble(PARAM_MU);
+    dMu     = pParameterList->getDouble(PARAM_MU);
     dSigmaL = pParameterList->getDouble(PARAM_SIGMA_L);
     dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R);
-    dAlpha = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
+    dAlpha  = pParameterList->getDouble(PARAM_ALPHA, true, 1.0);
 
     // Validate parent
     CSelectivity::validate();
@@ -55,9 +52,7 @@ void CDoubleNormalSelectivity::validate()
       CError::errorLessThanEqualTo(PARAM_SIGMA_L, PARAM_ZERO);
     if (dSigmaR <= 0)
       CError::errorLessThanEqualTo(PARAM_SIGMA_R, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDoublenormalSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -67,11 +62,9 @@ void CDoubleNormalSelectivity::validate()
 // double CDoubleNormalSelectivity::calculateResult(int Age)
 // calculate the results for our Vector
 //**********************************************************************
-double CDoubleNormalSelectivity::calculateResult(int Age)
-{
+double CDoubleNormalSelectivity::calculateResult(int Age) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     double dRet = 0.0;
@@ -84,9 +77,7 @@ double CDoubleNormalSelectivity::calculateResult(int Age)
     return dRet;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDoubleNormalSelectivity.calculateResult()->" + Ex;
     throw Ex;
   }
@@ -98,6 +89,4 @@ double CDoubleNormalSelectivity::calculateResult(int Age)
 // CDoubleNormalSelectivity::~CDoubleNormalSelectivity()
 // Default De-Constructor
 //**********************************************************************
-CDoubleNormalSelectivity::~CDoubleNormalSelectivity()
-{
-}
+CDoubleNormalSelectivity::~CDoubleNormalSelectivity() {}

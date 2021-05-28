@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CSizeWeightFactory
-{
+class CSizeWeightFactory {
 public:
   // Functions
-  static CSizeWeight *buildSizeWeight(string type, bool registerWithManager = true);
+  static CSizeWeight* buildSizeWeight(string type, bool registerWithManager = true);
 
 private:
   // Functions

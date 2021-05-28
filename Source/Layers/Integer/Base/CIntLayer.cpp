@@ -11,9 +11,9 @@
 #include <iostream>
 
 // Local Headers
-#include "CIntLayer.h"
 #include "../../../Helpers/CComparer.h"
 #include "../../../Helpers/CError.h"
+#include "CIntLayer.h"
 
 // Using
 using std::cout;
@@ -23,9 +23,7 @@ using std::endl;
 // CIntLayer::CIntLayer();
 // Default Constructor
 //**********************************************************************
-CIntLayer::CIntLayer()
-{
-
+CIntLayer::CIntLayer() {
   // Default Variables
   sType = "";
   pGrid = 0;
@@ -35,14 +33,10 @@ CIntLayer::CIntLayer()
 // void CIntLayer::setValue(int X, int Y, int Value)
 // Default Set Value
 //**********************************************************************
-void CIntLayer::setValue(int X, int Y, int Value)
-{
-  try
-  {
+void CIntLayer::setValue(int X, int Y, int Value) {
+  try {
     CError::errorSupported(PARAM_FUNCTION);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CIntLayer.setValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -52,16 +46,12 @@ void CIntLayer::setValue(int X, int Y, int Value)
 // int CIntLayer::countValidSpaces()
 // count Valid Spaces
 //**********************************************************************
-int CIntLayer::countValidSpaces()
-{
-
+int CIntLayer::countValidSpaces() {
   int iValidSquares = 0;
 
   // Loop Through World
-  for (int i = 0; i < iHeight; ++i)
-  {
-    for (int j = 0; j < iWidth; ++j)
-    {
+  for (int i = 0; i < iHeight; ++i) {
+    for (int j = 0; j < iWidth; ++j) {
       // Check if Space is disabled on World first
       if (!pWorld->getBaseSquare(i, j)->getEnabled())
         continue;
@@ -77,20 +67,15 @@ int CIntLayer::countValidSpaces()
 // void CIntLayer::validate()
 // validate
 //**********************************************************************
-void CIntLayer::validate()
-{
-  try
-  {
+void CIntLayer::validate() {
+  try {
     // Base Validate
     CLayer::validate();
 
     // Allocate Space for our X (Width)
-    pGrid = new int *[iHeight];
-    for (int i = 0; i < iHeight; ++i)
-      pGrid[i] = new int[iWidth];
-  }
-  catch (string &Ex)
-  {
+    pGrid = new int*[iHeight];
+    for (int i = 0; i < iHeight; ++i) pGrid[i] = new int[iWidth];
+  } catch (string& Ex) {
     Ex = "CIntLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -100,13 +85,10 @@ void CIntLayer::validate()
 // CIntLayer::~CIntLayer()
 // Default De-Constructor
 //**********************************************************************
-CIntLayer::~CIntLayer()
-{
+CIntLayer::~CIntLayer() {
   // Clean Our Grid
-  if (pGrid != 0)
-  {
-    for (int i = 0; i < iHeight; ++i)
-    {
+  if (pGrid != 0) {
+    for (int i = 0; i < iHeight; ++i) {
       delete[] pGrid[i];
       pGrid[i] = 0;
     }

@@ -18,14 +18,12 @@
 //
 //
 //**********************************************************************
-class GammaDiffEngine : public CBaseObject
-{
+class GammaDiffEngine : public CBaseObject {
 public:
   GammaDiffEngine();
   virtual ~GammaDiffEngine();
-  double optimise_finite_differences(CGammaDiffCallback &objective, vector<double> &StartValues, vector<double> &LowerBounds,
-                                     vector<double> &UpperBounds, int &convergence, int &iMaxIter, int &iMaxFunc, double dGradTol,
-                                     double **pOptimiseHessian, int untransformedHessians, double dStepSize);
+  double optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds, vector<double>& UpperBounds, int& convergence,
+                                     int& iMaxIter, int& iMaxFunc, double dGradTol, double** pOptimiseHessian, int untransformedHessians, double dStepSize);
 
 private:
   // Variables
@@ -35,15 +33,15 @@ private:
   vector<double> vScaledValues;
   vector<double> vCurrentValues;
   vector<double> vGradientValues;
-  double dPenalty;
+  double         dPenalty;
 
   // Functions
-  void buildScaledValues();
-  void buildCurrentValues();
+  void   buildScaledValues();
+  void   buildCurrentValues();
   double scaleValue(double value, double min, double max);
-  double unScaleValue(const double &value, double min, double max);
-  void condAssign(double &res, const double &cond, const double &arg1, const double &arg2);
-  void condAssign(double &res, const double &cond, const double &arg);
+  double unScaleValue(const double& value, double min, double max);
+  void   condAssign(double& res, const double& cond, const double& arg1, const double& arg2);
+  void   condAssign(double& res, const double& cond, const double& arg);
 };
 
 #endif /* GAMMADIFFENGINE_H_ */

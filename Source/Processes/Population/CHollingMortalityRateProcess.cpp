@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CHollingMortalityRateProcess.h"
+
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
@@ -23,10 +24,9 @@
 // CHollingMortalityRateProcess::CHollingMortalityRateProcess()
 // Default Constructor
 //**********************************************************************
-CHollingMortalityRateProcess::CHollingMortalityRateProcess()
-{
+CHollingMortalityRateProcess::CHollingMortalityRateProcess() {
   // Variables
-  sType = PARAM_HOLLING_MORTALITY_RATE;
+  sType    = PARAM_HOLLING_MORTALITY_RATE;
   pPenalty = 0;
 
   // Register user allowed parameters
@@ -46,21 +46,18 @@ CHollingMortalityRateProcess::CHollingMortalityRateProcess()
 // void CHollingMortalityRateProcess::validate()
 // Validate our process
 //**********************************************************************
-void CHollingMortalityRateProcess::validate()
-{
-  try
-  {
-
+void CHollingMortalityRateProcess::validate() {
+  try {
     // Get our parameters
     bIsAbundance = pParameterList->getBool(PARAM_IS_ABUNDANCE);
-    dA = pParameterList->getDouble(PARAM_A);
-    dB = pParameterList->getDouble(PARAM_B);
-    dX = pParameterList->getDouble(PARAM_X, true, 2.0);
+    dA           = pParameterList->getDouble(PARAM_A);
+    dB           = pParameterList->getDouble(PARAM_B);
+    dX           = pParameterList->getDouble(PARAM_X, true, 2.0);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vPredatorCategoryList, PARAM_PREDATOR_CATEGORIES);
     pParameterList->fillVector(vPredatorSelectivityList, PARAM_PREDATOR_SELECTIVITIES);
-    dUMax = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
+    dUMax    = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
     sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
 
     // Base Validation
@@ -91,9 +88,7 @@ void CHollingMortalityRateProcess::validate()
 
     if (dX < ONE)
       CError::errorLessThanEqualTo(PARAM_X, PARAM_ONE);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -103,23 +98,15 @@ void CHollingMortalityRateProcess::validate()
 // void CHollingMortalityRateProcess::build()
 // Build our process
 //**********************************************************************
-void CHollingMortalityRateProcess::build()
-{
-  try
-  {
+void CHollingMortalityRateProcess::build() {
+  try {
     // Base Build
     CProcess::build();
 
-    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-    foreach (string Name, vPredatorSelectivityList)
-    {
-      vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-    }
+    CSelectivityManager* pSelectivityManager = CSelectivityManager::Instance();
+    foreach (string Name, vPredatorSelectivityList) { vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name)); }
 
-    foreach (string Name, vPredatorCategoryList)
-    {
-      vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-    }
+    foreach (string Name, vPredatorCategoryList) { vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name)); }
 
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
@@ -130,9 +117,7 @@ void CHollingMortalityRateProcess::build()
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -142,11 +127,9 @@ void CHollingMortalityRateProcess::build()
 // void CHollingMortalityProcess::rebuild()
 // Rebuild
 //**********************************************************************
-void CHollingMortalityRateProcess::rebuild()
-{
+void CHollingMortalityRateProcess::rebuild() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     vMortalityRate.resize(0);
@@ -156,9 +139,7 @@ void CHollingMortalityRateProcess::rebuild()
     vPredatorBiomass.resize(0);
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -169,25 +150,20 @@ void CHollingMortalityRateProcess::rebuild()
 // void CHollingMortalityRateProcess::execute()
 // Execute our process
 //**********************************************************************
-void CHollingMortalityRateProcess::execute()
-{
+void CHollingMortalityRateProcess::execute() {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
     // Base execute
     CProcess::execute();
 
-    double dSumMortality = 0;
-    double dSumAbundance = 0;
+    double dSumMortality        = 0;
+    double dSumAbundance        = 0;
     double dSumMortalityBiomass = 0;
 
     // Loop Through The World Grid (i,j)
-    for (int i = 0; i < iWorldHeight; ++i)
-    {
-      for (int j = 0; j < iWorldWidth; ++j)
-      {
-
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())
@@ -196,46 +172,36 @@ void CHollingMortalityRateProcess::execute()
         pDiff = pWorld->getDifferenceSquare(i, j);
 
         // Clear our Vulnerable Amount
-        dVulnerable = 0.0;
+        dVulnerable         = 0.0;
         dPredatorVulnerable = 0.0;
 
         // Loop Through Categories & Work out Vulnerable Stock in abundance or biomass
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // get current prey abundance in age/category
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             if (dCurrent < 0.0)
               dCurrent = 0.0;
             // Increase Vulnerable biomass
-            if (bIsAbundance)
-            {
+            if (bIsAbundance) {
               dVulnerable += dCurrent;
-            }
-            else
-            {
+            } else {
               dVulnerable += dCurrent * pWorld->getMeanWeight(l, vCategoryIndex[k]);
             }
           }
         }
 
         // Loop Through Categories & Work out Predator Stock in abundance or biomass
-        for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // get current prey abundance in age/category
             dPredatorCurrent = pBaseSquare->getValue(vPredatorCategoryIndex[k], l) * vPredatorSelectivityIndex[k]->getResult(l);
             if (dPredatorCurrent < 0.0)
               dPredatorCurrent = 0.0;
             // Increase Predator biomass
-            if (bIsAbundance)
-            {
+            if (bIsAbundance) {
               dPredatorVulnerable += dPredatorCurrent;
-            }
-            else
-            {
+            } else {
               dPredatorVulnerable += dPredatorCurrent * pWorld->getMeanWeight(l, vPredatorCategoryIndex[k]);
             }
           }
@@ -246,25 +212,19 @@ void CHollingMortalityRateProcess::execute()
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         dExploitation = dMortality / CMath::zeroFun(dVulnerable, ZERO);
-        if (dExploitation > dUMax)
-        {
+        if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0)
-          { // Throw Penalty
+          if (pPenalty != 0) {  // Throw Penalty
             pPenalty->trigger(sLabel, dMortality, (dVulnerable * dUMax));
           }
-        }
-        else if (dExploitation < ZERO)
-        {
+        } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
           continue;
         }
 
         // Loop Through Categories & remove number based on calcuated exploitation rate
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-        {
-          for (int l = 0; l < iBaseColCount; ++l)
-          {
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
@@ -282,8 +242,7 @@ void CHollingMortalityRateProcess::execute()
         }
       }
     }
-    if (pRuntimeController->getCurrentState() != STATE_INITIALIZATION)
-    {
+    if (pRuntimeController->getCurrentState() != STATE_INITIALIZATION) {
       vMortalityYears.push_back(pTimeStepManager->getCurrentYear());
       vMortalityRate.push_back(dSumMortality / dSumAbundance);
       vMortalityN.push_back(dSumMortality);
@@ -293,9 +252,7 @@ void CHollingMortalityRateProcess::execute()
     }
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -306,6 +263,4 @@ void CHollingMortalityRateProcess::execute()
 // CHollingMortalityRateProcess::~CHollingMortalityRateProcess()
 // Destructor
 //**********************************************************************
-CHollingMortalityRateProcess::~CHollingMortalityRateProcess()
-{
-}
+CHollingMortalityRateProcess::~CHollingMortalityRateProcess() {}

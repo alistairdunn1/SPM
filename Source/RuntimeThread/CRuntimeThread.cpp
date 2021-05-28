@@ -8,11 +8,10 @@
 //============================================================================
 
 // Global Headers
-#include <iostream>
 #include <boost/lexical_cast.hpp>
+#include <iostream>
 
 // Local Headers
-#include "CRuntimeThread.h"
 #include "../AgeSize/CAgeSizeManager.h"
 #include "../AgeingError/CAgeingErrorManager.h"
 #include "../BaseClasses/CBaseManager.h"
@@ -37,6 +36,7 @@
 #include "../Selectivities/CSelectivityManager.h"
 #include "../SizeWeight/CSizeWeightManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
+#include "CRuntimeThread.h"
 
 //#include "../TimeSteps/CTimeStep.h"
 //#include "../InitializationPhases/CInitializationPhase.h"
@@ -50,9 +50,7 @@ using std::endl;
 // CRuntimeThread::CRuntimeThread()
 // Default Constructor
 //**********************************************************************
-CRuntimeThread::CRuntimeThread()
-{
-
+CRuntimeThread::CRuntimeThread() {
   // Add our managers to the Vector
   vManagers.push_back(CWorld::Instance());
   vManagers.push_back(CLayerManager::Instance());
@@ -87,8 +85,8 @@ CRuntimeThread::CRuntimeThread()
   vManagers.push_back(CEstimateManager::Instance());
 
   // Variables
-  bWaiting = false;
-  pEstimateManager = CEstimateManager::Instance(); // Use for MCMC
+  bWaiting           = false;
+  pEstimateManager   = CEstimateManager::Instance();  // Use for MCMC
   pObjectiveFunction = CObjectiveFunction::Instance();
 }
 
@@ -96,8 +94,7 @@ CRuntimeThread::CRuntimeThread()
 // void CRuntimeThread::setWaiting(bool value)
 // Set our Waiting Variable
 //**********************************************************************
-void CRuntimeThread::setWaiting(bool value)
-{
+void CRuntimeThread::setWaiting(bool value) {
   lock lk(mutWaiting);
   bWaiting = value;
 }
@@ -106,8 +103,7 @@ void CRuntimeThread::setWaiting(bool value)
 // bool CRuntimeThread::getWaiting()
 // Return our Waiting Variable.
 //**********************************************************************
-bool CRuntimeThread::getWaiting()
-{
+bool CRuntimeThread::getWaiting() {
   lock lk(mutWaiting);
   return bWaiting;
 }
@@ -116,8 +112,7 @@ bool CRuntimeThread::getWaiting()
 // void CRuntimeThread::setTerminate(bool value)
 // Set our Terminate Value
 //**********************************************************************
-void CRuntimeThread::setTerminate(bool value)
-{
+void CRuntimeThread::setTerminate(bool value) {
   lock lk(mutTerminate);
   bTerminate = value;
 }
@@ -126,8 +121,7 @@ void CRuntimeThread::setTerminate(bool value)
 // bool CRuntimeThread::getTerminate()
 // Return out Terminate Variable
 //**********************************************************************
-bool CRuntimeThread::getTerminate()
-{
+bool CRuntimeThread::getTerminate() {
   lock lk(mutTerminate);
   return bTerminate;
 }
@@ -136,30 +130,22 @@ bool CRuntimeThread::getTerminate()
 // void CRuntimeThread::validate()
 // Validate This Thread
 //**********************************************************************
-void CRuntimeThread::validate()
-{
+void CRuntimeThread::validate() {
   eCurrentState = STATE_VALIDATION;
 
   // Validate our Managers
-  foreach (CBaseManager *Manager, vManagers)
-  {
-    Manager->validate();
-  }
+  foreach (CBaseManager* Manager, vManagers) { Manager->validate(); }
 }
 
 //**********************************************************************
 // void CRuntimeThread::build()
 // Build the thread's relationships
 //**********************************************************************
-void CRuntimeThread::build()
-{
+void CRuntimeThread::build() {
   eCurrentState = STATE_CONSTRUCTION;
 
   // Validate our Managers
-  foreach (CBaseManager *Manager, vManagers)
-  {
-    Manager->build();
-  }
+  foreach (CBaseManager* Manager, vManagers) { Manager->build(); }
 
   // Build our Own Locals
   iNumberOfYears = pWorld->getCurrentYear() - pWorld->getInitialYear();
@@ -169,21 +155,16 @@ void CRuntimeThread::build()
 // void CRuntimeThread::rebuild()
 // Re-Build the components with caches.
 //**********************************************************************
-void CRuntimeThread::rebuild()
-{
+void CRuntimeThread::rebuild() {
   // Validate our Managers
-  foreach (CBaseManager *Manager, vManagers)
-  {
-    Manager->rebuild();
-  }
+  foreach (CBaseManager* Manager, vManagers) { Manager->rebuild(); }
 }
 
 //**********************************************************************
 // void CRuntimeThread::executeBasicRun()
 // Start our Basic Run
 //**********************************************************************
-void CRuntimeThread::executeBasicRun()
-{
+void CRuntimeThread::executeBasicRun() {
   // Validate, Build, Start
   startModel();
 
@@ -195,17 +176,15 @@ void CRuntimeThread::executeBasicRun()
   eCurrentState = STATE_FINALIZATION;
 
   if (pConfig->getSuffixFileOutput() && CConfiguration::Instance()->getWasInputFileSupplied()) {
-    int iEstimateValueCount = pEstimateManager->getEstimateValueCount();
-    int iEstimateValueNumber = pEstimateManager->getEstimateValueNumber();
-    string reportSuffix = CReportManager::Instance()->getReportSuffix();
-    int iSuffixIterationWidth = (int)floor(log10((double)iEstimateValueCount + 1)) + 1;
-    string sReportSuffix = ".";
-    int iThisIterationWidth = (int)floor(log10(iEstimateValueNumber + 1)) + 1;
-    int iCount = iSuffixIterationWidth - iThisIterationWidth;
-    if (iCount > 0)
-    {
-      for (int j = 0; j < iCount; ++j)
-      {
+    int    iEstimateValueCount   = pEstimateManager->getEstimateValueCount();
+    int    iEstimateValueNumber  = pEstimateManager->getEstimateValueNumber();
+    string reportSuffix          = CReportManager::Instance()->getReportSuffix();
+    int    iSuffixIterationWidth = (int)floor(log10((double)iEstimateValueCount + 1)) + 1;
+    string sReportSuffix         = ".";
+    int    iThisIterationWidth   = (int)floor(log10(iEstimateValueNumber + 1)) + 1;
+    int    iCount                = iSuffixIterationWidth - iThisIterationWidth;
+    if (iCount > 0) {
+      for (int j = 0; j < iCount; ++j) {
         sReportSuffix += "0";
       }
     }
@@ -220,15 +199,12 @@ void CRuntimeThread::executeBasicRun()
 // void CRuntimeThread::executeEstimationRun()
 // Execute Estimations
 //**********************************************************************
-void CRuntimeThread::executeEstimationRun()
-{
-
-  CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
+void CRuntimeThread::executeEstimationRun() {
+  CMinimizerManager* pMinimizerManager = CMinimizerManager::Instance();
   pMinimizerManager->initialise();
   vector<int> vEstimationPhases = pMinimizerManager->getEstimationPhases();
 
-  for (int i = 0; i < (int)vEstimationPhases.size(); ++i)
-  {
+  for (int i = 0; i < (int)vEstimationPhases.size(); ++i) {
     pMinimizerManager->execute(vEstimationPhases[i]);
 
     string reportSuffix = "";
@@ -248,9 +224,8 @@ void CRuntimeThread::executeEstimationRun()
 // void CRuntimeThread:executeProfileRun()
 // Execute a Profile Run
 //**********************************************************************
-void CRuntimeThread::executeProfileRun()
-{
-  CProfileManager *pProfileManager = CProfileManager::Instance();
+void CRuntimeThread::executeProfileRun() {
+  CProfileManager* pProfileManager = CProfileManager::Instance();
   pProfileManager->execute();
 }
 
@@ -258,10 +233,9 @@ void CRuntimeThread::executeProfileRun()
 // void CRuntimeThread::executeMCMC()
 // Do a point estimate, then start our MCMC
 //**********************************************************************
-void CRuntimeThread::executeMCMC()
-{
+void CRuntimeThread::executeMCMC() {
   // Find a pointer estimate to start our chain from
-  CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
+  CMinimizerManager* pMinimizerManager = CMinimizerManager::Instance();
   pMinimizerManager->execute();
 
   // Rebuild our managers to ensure everything is back to default state
@@ -279,20 +253,15 @@ void CRuntimeThread::executeMCMC()
 // void CRuntimeThread::executeSimulationRun()
 // Execute a Simulation Run
 //**********************************************************************
-void CRuntimeThread::executeSimulationRun()
-{
-
+void CRuntimeThread::executeSimulationRun() {
   int iSuffixIterationWidth = (int)floor(log10((double)CConfiguration::Instance()->getSimulationCandidates() + 1)) + 1;
 
-  for (int i = 0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i)
-  {
-    string sReportSuffix = ".";
-    int iThisIterationWidth = (int)floor(log10(i + 1)) + 1;
-    int iCount = iSuffixIterationWidth - iThisIterationWidth;
-    if (iCount > 0)
-    {
-      for (int j = 0; j < iCount; ++j)
-      {
+  for (int i = 0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i) {
+    string sReportSuffix       = ".";
+    int    iThisIterationWidth = (int)floor(log10(i + 1)) + 1;
+    int    iCount              = iSuffixIterationWidth - iThisIterationWidth;
+    if (iCount > 0) {
+      for (int j = 0; j < iCount; ++j) {
         sReportSuffix += "0";
       }
     }
@@ -313,9 +282,7 @@ void CRuntimeThread::executeSimulationRun()
 // void CRuntimeThread::startModel()
 // Start The Model
 //**********************************************************************
-void CRuntimeThread::startModel()
-{
-
+void CRuntimeThread::startModel() {
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;
   CInitializationPhaseManager::Instance()->execute();
@@ -332,9 +299,7 @@ void CRuntimeThread::startModel()
 // CRuntimeThread::~CRuntimeThread()
 // Destructor
 //**********************************************************************
-CRuntimeThread::~CRuntimeThread()
-{
-
+CRuntimeThread::~CRuntimeThread() {
   // Destroy Singleton Classes in reverse Order
   CTimeStepManager::Destroy();
   CSelectivityManager::Destroy();

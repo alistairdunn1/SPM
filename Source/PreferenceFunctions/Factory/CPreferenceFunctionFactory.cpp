@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CPreferenceFunctionFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../CPreferenceFunctionManager.h"
@@ -32,10 +33,8 @@
 // CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
 // Build our buildPreferenceFunction
 //**********************************************************************
-CPreferenceFunction *CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
-{
-
-  CPreferenceFunction *pFunction = 0;
+CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager) {
+  CPreferenceFunction* pFunction = 0;
 
   if (type == PARAM_CONSTANT)
     pFunction = new CConstantPreferenceFunction();

@@ -9,17 +9,16 @@
 
 // Local headers
 #include "CProfileFactory.h"
-#include "../CProfileManager.h"
+
 #include "../CProfile.h"
+#include "../CProfileManager.h"
 
 //**********************************************************************
 // CProfile* CProfileFactory::buildProfile(string type)
 // Build a profile based on type
 //**********************************************************************
-CProfile *CProfileFactory::buildProfile(string type, bool registerWithManager)
-{
-
-  CProfile *pProfile = 0;
+CProfile* CProfileFactory::buildProfile(string type, bool registerWithManager) {
+  CProfile* pProfile = 0;
 
   if (type == "")
     pProfile = new CProfile();

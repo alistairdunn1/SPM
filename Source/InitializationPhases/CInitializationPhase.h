@@ -19,42 +19,41 @@ class CTimeStep;
 //
 //
 //**********************************************************************
-class CInitializationPhase : public CBaseExecute
-{
+class CInitializationPhase : public CBaseExecute {
 public:
   CInitializationPhase();
   virtual ~CInitializationPhase();
-  void validate();
-  void build();
-  void rebuild();
-  void execute();
-  int getCurrentTimeStep() { return iCurrentTimeStep; }
-  CTimeStep *getTimeStep(int i) { return vTimeSteps[i]; }
+  void           validate();
+  void           build();
+  void           rebuild();
+  void           execute();
+  int            getCurrentTimeStep() { return iCurrentTimeStep; }
+  CTimeStep*     getTimeStep(int i) { return vTimeSteps[i]; }
   vector<string> getTimeStepNames() { return vTimeStepNames; }
-  void setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
-  int getNYears() { return iYears; }
-  int getActualYears() { return iActualYears; }
-  double getLambda() { return dLambda; }
-  bool getConvergenceCheck() { return bConvergenceCheck; }
-  vector<int> getLambdaHatYears() { return vLambdaHatYears; }
+  void           setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
+  int            getNYears() { return iYears; }
+  int            getActualYears() { return iActualYears; }
+  double         getLambda() { return dLambda; }
+  bool           getConvergenceCheck() { return bConvergenceCheck; }
+  vector<int>    getLambdaHatYears() { return vLambdaHatYears; }
   vector<double> getLambdaHat() { return vLambdaHat; }
 
 protected:
-  int iYears;
-  int iActualYears;
-  int iCurrentTimeStep;
-  int iExecutionOrderIndex;
-  vector<string> vTimeStepNames;
-  vector<CTimeStep *> vTimeSteps;
-  bool bConvergenceCheck;
-  double dLambda;
-  double dDiffLambda;
-  double dTotalLambda;
-  vector<int> vLambdaYears;
+  int                                    iYears;
+  int                                    iActualYears;
+  int                                    iCurrentTimeStep;
+  int                                    iExecutionOrderIndex;
+  vector<string>                         vTimeStepNames;
+  vector<CTimeStep*>                     vTimeSteps;
+  bool                                   bConvergenceCheck;
+  double                                 dLambda;
+  double                                 dDiffLambda;
+  double                                 dTotalLambda;
+  vector<int>                            vLambdaYears;
   vector<vector<vector<vector<double>>>> vvWorldCopy;
-  CWorldSquare *pPreviousSquare;
-  vector<double> vLambdaHat;
-  vector<int> vLambdaHatYears;
+  CWorldSquare*                          pPreviousSquare;
+  vector<double>                         vLambdaHat;
+  vector<int>                            vLambdaHatYears;
 };
 
 #endif /* CINITIALIZATIONPHASE_H_ */

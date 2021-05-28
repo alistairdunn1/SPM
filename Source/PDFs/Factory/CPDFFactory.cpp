@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CPDFFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../CPDFManager.h"
@@ -21,10 +22,8 @@
 // CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager)
 // Build our buildPDF
 //**********************************************************************
-CPDF *CPDFFactory::buildPDF(string type, bool registerWithManager)
-{
-
-  CPDF *pFunction = 0;
+CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager) {
+  CPDF* pFunction = 0;
 
   if (type == PARAM_NORMAL)
     pFunction = new CNormalPDF();

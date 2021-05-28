@@ -22,11 +22,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CMinimizerFactory
-{
+class CMinimizerFactory {
 public:
   // Functions
-  static CMinimizer *buildMinimizer(string type, bool registerWithManager = true);
+  static CMinimizer* buildMinimizer(string type, bool registerWithManager = true);
 
 private:
   // Functions

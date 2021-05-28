@@ -9,17 +9,16 @@
 
 // Local headers
 #include "CTimeStepFactory.h"
-#include "../CTimeStepManager.h"
+
 #include "../../Helpers/CError.h"
+#include "../CTimeStepManager.h"
 
 //**********************************************************************
 // CTimeStep* CTimeStepFactory::buildTimeStep(string type, bool registerWithManager = true)
 // Build our TimeStep based on type
 //**********************************************************************
-CTimeStep *CTimeStepFactory::buildTimeStep(string type, bool registerWithManager)
-{
-
-  CTimeStep *pTimeStep = 0;
+CTimeStep* CTimeStepFactory::buildTimeStep(string type, bool registerWithManager) {
+  CTimeStep* pTimeStep = 0;
 
   if (type == "")
     pTimeStep = new CTimeStep();

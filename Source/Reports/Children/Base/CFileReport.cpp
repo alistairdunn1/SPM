@@ -9,20 +9,20 @@
 
 // Local Headers
 #include "CFileReport.h"
+
 #include "../../CReportManager.h"
 
 //**********************************************************************
 // CFileReport::CFileReport()
 // Default constructor
 //**********************************************************************
-CFileReport::CFileReport()
-{
+CFileReport::CFileReport() {
   // Default Values
-  sFileName = "";
+  sFileName     = "";
   sFullFileName = "";
-  bOverwrite = true;
+  bOverwrite    = true;
   bStartedWrite = false;
-  fFile = 0;
+  fFile         = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FILE_NAME);
@@ -33,21 +33,17 @@ CFileReport::CFileReport()
 // void CFileReport::validate()
 // Validate file reporter
 //**********************************************************************
-void CFileReport::validate()
-{
-  try
-  {
+void CFileReport::validate() {
+  try {
     // Base
     CReport::validate();
 
     // Assign variables
-    sFileName = pParameterList->getString(PARAM_FILE_NAME, true, "");
+    sFileName  = pParameterList->getString(PARAM_FILE_NAME, true, "");
     bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
 
     fFile = new ofstream();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CFileReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -57,18 +53,15 @@ void CFileReport::validate()
 // void CFileReport::start()
 // Start the Reporting
 //**********************************************************************
-void CFileReport::start()
-{
-  if (sFileName != "")
-  {
+void CFileReport::start() {
+  if (sFileName != "") {
     /**
      * Check if our suffix has changed. If it has we need to reset
      * our overwrite variable otherwise all reports after the
      * first one will append.
      */
     string sSuffix = CReportManager::Instance()->getReportSuffix();
-    if (sSuffix != sLastSuffix)
-    {
+    if (sSuffix != sLastSuffix) {
       bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
     }
     sLastSuffix = sSuffix;
@@ -102,13 +95,10 @@ void CFileReport::start()
 // void CFileReport::end()
 // End the Reporting
 //**********************************************************************
-void CFileReport::end()
-{
-
+void CFileReport::end() {
   cout.flush();
 
-  if (sFileName != "")
-  {
+  if (sFileName != "") {
     fFile->close();
     cout.rdbuf(sCoutBackup);
   }
@@ -118,8 +108,7 @@ void CFileReport::end()
 // CFileReport::~CFileReport()
 // Destructor
 //**********************************************************************
-CFileReport::~CFileReport()
-{
+CFileReport::~CFileReport() {
   if (fFile != 0)
     delete fFile;
 }

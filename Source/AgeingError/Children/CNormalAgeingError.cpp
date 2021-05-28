@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CNormalAgeingError.h"
+
 #include "../../Distributions/CNormalDistribution.h"
 #include "../../Helpers/CError.h"
 
@@ -16,9 +17,7 @@
 // CNormalAgeingError::CNormalAgeingError()
 // Default Constructor
 //**********************************************************************
-CNormalAgeingError::CNormalAgeingError()
-{
-
+CNormalAgeingError::CNormalAgeingError() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_K);
@@ -31,14 +30,11 @@ CNormalAgeingError::CNormalAgeingError()
 // voidCNormalError::validate()
 // Validate the ageing error
 //**********************************************************************
-void CNormalAgeingError::validate()
-{
-  try
-  {
-
+void CNormalAgeingError::validate() {
+  try {
     // Get our variables
     dCV = pParameterList->getDouble(PARAM_CV);
-    iK = pParameterList->getInt(PARAM_K, true, 0);
+    iK  = pParameterList->getInt(PARAM_K, true, 0);
 
     // Parent validation
     CAgeingError::validate();
@@ -48,9 +44,7 @@ void CNormalAgeingError::validate()
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
     if (iK > iMaxAge)
       CError::errorGreaterThan(PARAM_K, PARAM_MAX_AGE);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalError.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -60,18 +54,14 @@ void CNormalAgeingError::validate()
 // voidCNormalAgeingError::build()
 // Validate the ageing error
 //**********************************************************************
-void CNormalAgeingError::build()
-{
-  try
-  {
+void CNormalAgeingError::build() {
+  try {
     // Base
     CAgeingError::build();
 
     // Rebuild
     rebuild();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -81,18 +71,14 @@ void CNormalAgeingError::build()
 // void CNormalAgeingError::rebuild()
 // Rebuild Normal Ageing Error
 //**********************************************************************
-void CNormalAgeingError::rebuild()
-{
-  try
-  {
+void CNormalAgeingError::rebuild() {
+  try {
     // Base
     CAgeingError::rebuild();
 
-    for (int i = 0; i < iNAges; i++)
-    {
+    for (int i = 0; i < iNAges; i++) {
       double dAge = iMinAge + i;
-      for (int j = 0; j < iNAges; ++j)
-      {
+      for (int j = 0; j < iNAges; ++j) {
         double dMinAgeClass = (iMinAge + j) - 0.5;
         if (j == 0)
           mMisMatrix[i][j] = CNormalDistribution::getCDF(dMinAgeClass + 1, dAge, dAge * dCV);
@@ -102,20 +88,15 @@ void CNormalAgeingError::rebuild()
           mMisMatrix[i][j] = CNormalDistribution::getCDF(dMinAgeClass + 1, dAge, dAge * dCV) - CNormalDistribution::getCDF(dMinAgeClass, dAge, dAge * dCV);
       }
     }
-    if (iK > iMinAge)
-    {
-      for (int i = 0; i < (iK - iMinAge); ++i)
-      {
-        for (int j = 0; j < (iK - iMinAge); ++j)
-        {
+    if (iK > iMinAge) {
+      for (int i = 0; i < (iK - iMinAge); ++i) {
+        for (int j = 0; j < (iK - iMinAge); ++j) {
           mMisMatrix[i][j] = 0;
         }
         mMisMatrix[i][i] = 1;
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CNormalAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -125,25 +106,18 @@ void CNormalAgeingError::rebuild()
 // void CNormalAgeingError::getExpected(vector<double> &expected)
 // Apply ageing error
 //**********************************************************************
-void CNormalAgeingError::getExpected(vector<double> &expected)
-{
-  try
-  {
+void CNormalAgeingError::getExpected(vector<double>& expected) {
+  try {
     vector<double> vResult(expected.size(), 0);
 
-    for (int i = 0; i < (int)mMisMatrix.size(); ++i)
-    {
-      for (int j = 0; j < (int)mMisMatrix[i].size(); ++j)
-      {
+    for (int i = 0; i < (int)mMisMatrix.size(); ++i) {
+      for (int j = 0; j < (int)mMisMatrix[i].size(); ++j) {
         vResult[j] += expected[i] * mMisMatrix[i][j];
       }
     }
 
-    for (int i = 0; i < (int)expected.size(); ++i)
-      expected[i] = vResult[i];
-  }
-  catch (string &Ex)
-  {
+    for (int i = 0; i < (int)expected.size(); ++i) expected[i] = vResult[i];
+  } catch (string& Ex) {
     Ex = "CNormalAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -153,9 +127,7 @@ void CNormalAgeingError::getExpected(vector<double> &expected)
 // CNormalAgeingError::~CNormalAgeingError()
 // Destructor
 //**********************************************************************
-CNormalAgeingError::~CNormalAgeingError()
-{
-}
+CNormalAgeingError::~CNormalAgeingError() {}
 
 /*
  # Normal ageing error

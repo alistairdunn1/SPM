@@ -8,17 +8,17 @@
 //============================================================================
 
 // Global Header
+#include <boost/lexical_cast.hpp>
 #include <fstream>
 #include <iostream>
-#include <boost/lexical_cast.hpp>
 
 // Local Headers
-#include "CEstimateManager.h"
+#include "../Helpers/CConvertor.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
 #include "CEstimate.h"
 #include "CEstimateInfo.h"
-#include "../Helpers/CError.h"
-#include "../Helpers/CConvertor.h"
-#include "../Helpers/ForEach.h"
+#include "CEstimateManager.h"
 
 // Using
 using std::cout;
@@ -32,8 +32,7 @@ boost::thread_specific_ptr<CEstimateManager> CEstimateManager::clInstance;
 // CEstimateManager::CEstimateManager()
 // Default Constructor
 //**********************************************************************
-CEstimateManager::CEstimateManager()
-{
+CEstimateManager::CEstimateManager() {
   iEstimateNumber = 0;
 }
 
@@ -41,8 +40,7 @@ CEstimateManager::CEstimateManager()
 // CEstimateManager* CEstimateManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CEstimateManager *CEstimateManager::Instance()
-{
+CEstimateManager* CEstimateManager::Instance() {
   if (clInstance.get() == 0)
     clInstance.reset(new CEstimateManager());
   return clInstance.get();
@@ -52,10 +50,8 @@ CEstimateManager *CEstimateManager::Instance()
 // void CEstimateManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CEstimateManager::Destroy()
-{
-  if (clInstance.get() != 0)
-  {
+void CEstimateManager::Destroy() {
+  if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
@@ -64,8 +60,7 @@ void CEstimateManager::Destroy()
 // void CEstimateManager::addEstimate(CEstimate *Estimate)
 // Add Estimate to our List
 //**********************************************************************
-void CEstimateManager::addEstimateInfo(CEstimateInfo *info)
-{
+void CEstimateManager::addEstimateInfo(CEstimateInfo* info) {
   vEstimateInfoList.push_back(info);
 }
 
@@ -73,8 +68,7 @@ void CEstimateManager::addEstimateInfo(CEstimateInfo *info)
 // void CEstimateManager::addEstimate(CEstimate *Estimate)
 // Add Estimate to our List
 //**********************************************************************
-void CEstimateManager::addEstimate(CEstimate *Estimate)
-{
+void CEstimateManager::addEstimate(CEstimate* Estimate) {
   vEstimateList.push_back(Estimate);
 }
 
@@ -82,40 +76,31 @@ void CEstimateManager::addEstimate(CEstimate *Estimate)
 // void CEstimateManager::fillVector(vector<CEstimate*> &list)
 // Fill list with our Estimate pointers
 //**********************************************************************
-void CEstimateManager::fillVector(vector<CEstimate *> &list)
-{
+void CEstimateManager::fillVector(vector<CEstimate*>& list) {
   list.clear();
 
-  foreach (CEstimate *Estimate, vEstimateList)
-  {
-    list.push_back(Estimate);
-  }
+  foreach (CEstimate* Estimate, vEstimateList) { list.push_back(Estimate); }
 }
 
 //**********************************************************************
 // int CEstimateManager::getEnabledEstimateCount()
 // Get the count for enabled Estimates
 //**********************************************************************
-int CEstimateManager::getEnabledEstimateCount()
-{
-  try
-  {
+int CEstimateManager::getEnabledEstimateCount() {
+  try {
     // vars
-    int iEnabled = 0;
-    vector<CEstimate *>::iterator vPtr = vEstimateList.begin();
+    int                          iEnabled = 0;
+    vector<CEstimate*>::iterator vPtr     = vEstimateList.begin();
 
     // Loop
-    while (vPtr != vEstimateList.end())
-    {
+    while (vPtr != vEstimateList.end()) {
       if ((*vPtr)->getEnabled())
         iEnabled++;
       vPtr++;
     }
 
     return iEnabled;
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.getEnabledEstimateCount()->" + Ex;
     throw Ex;
   }
@@ -127,10 +112,8 @@ int CEstimateManager::getEnabledEstimateCount()
 // CEstimate* CEstimateManager::getEnabledEstimate(int Index)
 // Get Estimate
 //**********************************************************************
-CEstimate *CEstimateManager::getEnabledEstimate(int Index)
-{
-  try
-  {
+CEstimate* CEstimateManager::getEnabledEstimate(int Index) {
+  try {
     if ((Index + 1) > (int)vEstimateList.size())
       CError::errorGreaterThan(PARAM_INDEX, PARAM_ESTIMATES);
     if (Index < 0)
@@ -141,8 +124,7 @@ CEstimate *CEstimateManager::getEnabledEstimate(int Index)
     int iCurrentIndex = -1;
 
     // Loop through incrementing our index based on the enabled ones
-    for (int i = 0; i < (int)vEstimateList.size(); ++i)
-    {
+    for (int i = 0; i < (int)vEstimateList.size(); ++i) {
       if (vEstimateList[i]->getEnabled())
         iCurrentIndex++;
 
@@ -151,9 +133,7 @@ CEstimate *CEstimateManager::getEnabledEstimate(int Index)
     }
 
     throw string(ERROR_INVALID_IDX + boost::lexical_cast<string>(Index));
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
     throw Ex;
   }
@@ -165,17 +145,13 @@ CEstimate *CEstimateManager::getEnabledEstimate(int Index)
 // CEstimate* CEstimateManager::getEstimate(int Index)
 // Get Estimate Index
 //**********************************************************************
-CEstimate *CEstimateManager::getEstimate(int Index)
-{
-  try
-  {
+CEstimate* CEstimateManager::getEstimate(int Index) {
+  try {
     if ((Index + 1) > (int)vEstimateList.size())
       CError::errorGreaterThan(PARAM_INDEX, PARAM_ESTIMATES);
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
     throw Ex;
   }
@@ -187,16 +163,14 @@ CEstimate *CEstimateManager::getEstimate(int Index)
 // bool CEstimateManager::hasEstimate(string Parameter)
 // Check if estimate exists
 //**********************************************************************
-bool CEstimateManager::hasEstimate(string Parameter)
-{
+bool CEstimateManager::hasEstimate(string Parameter) {
   // Variables
-  vector<CEstimate *>::iterator vPtr = vEstimateList.begin();
-  string sParam = Parameter;
-  string sParam2 = "";
+  vector<CEstimate*>::iterator vPtr    = vEstimateList.begin();
+  string                       sParam  = Parameter;
+  string                       sParam2 = "";
 
   // Loop Through
-  while (vPtr != vEstimateList.end())
-  {
+  while (vPtr != vEstimateList.end()) {
     // Make sure both commands are relative
     sParam2 = (*vPtr)->getParameter();
 
@@ -214,18 +188,15 @@ bool CEstimateManager::hasEstimate(string Parameter)
 // CEstimate* CEstimateManager::getEstimate(string Parameter)
 // Get Estimate
 //**********************************************************************
-CEstimate *CEstimateManager::getEstimate(string Parameter)
-{
-  try
-  {
+CEstimate* CEstimateManager::getEstimate(string Parameter) {
+  try {
     // Variables
-    vector<CEstimate *>::iterator vPtr = vEstimateList.begin();
-    string sParam = Parameter;
-    string sParam2 = "";
+    vector<CEstimate*>::iterator vPtr    = vEstimateList.begin();
+    string                       sParam  = Parameter;
+    string                       sParam2 = "";
 
     // Loop Through
-    while (vPtr != vEstimateList.end())
-    {
+    while (vPtr != vEstimateList.end()) {
       // Make sure both commands are relative
       sParam2 = (*vPtr)->getParameter();
 
@@ -237,9 +208,7 @@ CEstimate *CEstimateManager::getEstimate(string Parameter)
     }
 
     CError::errorUnknown(PARAM_ESTIMATE, Parameter);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.getEstimate()->" + Ex;
     throw Ex;
   }
@@ -251,8 +220,7 @@ CEstimate *CEstimateManager::getEstimate(string Parameter)
 // void CEstimateManager::addEstimateValue(string estimate, double value)
 // Add An Estimate Value to Be Used
 //**********************************************************************
-void CEstimateManager::addEstimateValue(string estimate, double value)
-{
+void CEstimateManager::addEstimateValue(string estimate, double value) {
   mvEstimateValues[estimate].push_back(value);
 }
 
@@ -260,15 +228,11 @@ void CEstimateManager::addEstimateValue(string estimate, double value)
 // int CEstimateManager::getEstimateValueCount()
 // Get The Number of Estimates Loaded
 //**********************************************************************
-int CEstimateManager::getEstimateValueCount()
-{
-  try
-  {
+int CEstimateManager::getEstimateValueCount() {
+  try {
     if (vEstimateList.size() == 0)
       CError::errorMissing(PARAM_ESTIMATES);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.getEstimateValueCount()->" + Ex;
     throw Ex;
   }
@@ -280,18 +244,11 @@ int CEstimateManager::getEstimateValueCount()
 // void CEstimateManager::loadEstimateValues(int index)
 // Load The Estimate Values
 //**********************************************************************
-void CEstimateManager::loadEstimateValues(int index)
-{
-  try
-  {
-    foreach (CEstimate *Estimate, vEstimateList)
-    {
-      Estimate->loadValue(index);
-    }
+void CEstimateManager::loadEstimateValues(int index) {
+  try {
+    foreach (CEstimate* Estimate, vEstimateList) { Estimate->loadValue(index); }
     iEstimateNumber = index;
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.loadEstimateValues()->" + Ex;
     throw Ex;
   }
@@ -301,10 +258,8 @@ void CEstimateManager::loadEstimateValues(int index)
 // void CEstimateManager::setCurrentPhase(int phase)
 // This method will enable all estimates that have estimate_phase <= phase
 //**********************************************************************
-void CEstimateManager::setCurrentPhase(int phase)
-{
-  foreach (CEstimate *estimate, vEstimateList)
-  {
+void CEstimateManager::setCurrentPhase(int phase) {
+  foreach (CEstimate* estimate, vEstimateList) {
     if (estimate->getEstimationPhase() <= phase)
       estimate->setEnabled(true);
     else
@@ -316,19 +271,13 @@ void CEstimateManager::setCurrentPhase(int phase)
 // void CEstimateManager::validate()
 // Validate
 //**********************************************************************
-void CEstimateManager::validate()
-{
-  try
-  {
+void CEstimateManager::validate() {
+  try {
     /**
      * Remove any existing Estimates
      */
-    if (vEstimateInfoList.size() > 0)
-    {
-      foreach (CEstimate *estimate, vEstimateList)
-      {
-        delete estimate;
-      }
+    if (vEstimateInfoList.size() > 0) {
+      foreach (CEstimate* estimate, vEstimateList) { delete estimate; }
 
       vEstimateList.clear();
     }
@@ -336,27 +285,20 @@ void CEstimateManager::validate()
     /**
      * Convert from EstimateInfo objects into Estimate objects
      */
-    foreach (CEstimateInfo *info, vEstimateInfoList)
-    {
-      info->generateEstimates();
-    }
+    foreach (CEstimateInfo* info, vEstimateInfoList) { info->generateEstimates(); }
     vEstimateInfoList.clear();
 
     /**
      * Now, start the real validation of the CEstimateObjects
      */
     // Validate Each Estimate
-    foreach (CEstimate *Estimate, vEstimateList)
-    {
-      Estimate->validate();
-    }
+    foreach (CEstimate* Estimate, vEstimateList) { Estimate->validate(); }
 
     // Variables
     map<string, int> mParameters;
 
     // Check for Duplicate Estimates
-    foreach (CEstimate *Estimate, vEstimateList)
-    {
+    foreach (CEstimate* Estimate, vEstimateList) {
       string sParameter = Estimate->getParameter();
       mParameters[sParameter]++;
 
@@ -366,23 +308,19 @@ void CEstimateManager::validate()
 
     // Check For Duplicate Sames Across Estimates
     map<string, int> mSames;
-    vector<string> vSames;
+    vector<string>   vSames;
 
     // Get Sames and Check Against Map
-    foreach (CEstimate *Estimate, vEstimateList)
-    {
+    foreach (CEstimate* Estimate, vEstimateList) {
       Estimate->fillSameVector(vSames);
 
-      foreach (string Same, vSames)
-      {
+      foreach (string Same, vSames) {
         mSames[Same]++;
         if (mSames[Same] > 1)
           CError::errorDuplicate(PARAM_SAME, Same);
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;
     throw Ex;
   }
@@ -392,31 +330,24 @@ void CEstimateManager::validate()
 // void CEstimateManager::build()
 // Build
 //**********************************************************************
-void CEstimateManager::build()
-{
-  try
-  {
+void CEstimateManager::build() {
+  try {
     // Build Estimates
-    vector<CEstimate *>::iterator vPtr = vEstimateList.begin();
-    while (vPtr != vEstimateList.end())
-    {
+    vector<CEstimate*>::iterator vPtr = vEstimateList.begin();
+    while (vPtr != vEstimateList.end()) {
       (*vPtr)->build();
       vPtr++;
     }
 
     // Now set the estimate values on Them
-    foreach (CEstimate *estimate, vEstimateList)
-    {
+    foreach (CEstimate* estimate, vEstimateList) {
       string parameter = estimate->getParameter();
 
-      for (unsigned i = 0; i < mvEstimateValues[parameter].size(); ++i)
-      {
+      for (unsigned i = 0; i < mvEstimateValues[parameter].size(); ++i) {
         estimate->addValue(mvEstimateValues[parameter][i]);
       }
     }
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CEstimateManager.build()->" + Ex;
     throw Ex;
   }
@@ -426,15 +357,8 @@ void CEstimateManager::build()
 // CEstimateManager::~CEstimateManager()
 // Default De-Constructor
 //**********************************************************************
-CEstimateManager::~CEstimateManager()
-{
-  foreach (CEstimate *Estimate, vEstimateList)
-  {
-    delete Estimate;
-  }
+CEstimateManager::~CEstimateManager() {
+  foreach (CEstimate* Estimate, vEstimateList) { delete Estimate; }
 
-  foreach (CEstimateInfo *info, vEstimateInfoList)
-  {
-    delete info;
-  }
+  foreach (CEstimateInfo* info, vEstimateInfoList) { delete info; }
 }

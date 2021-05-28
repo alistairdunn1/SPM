@@ -22,10 +22,9 @@ using std::string;
 //
 //
 //**********************************************************************
-class CDerivedQuantityFactory
-{
+class CDerivedQuantityFactory {
 public:
-  static CDerivedQuantity *buildDerivedQuantity(string type, bool registerWithManager = true);
+  static CDerivedQuantity* buildDerivedQuantity(string type, bool registerWithManager = true);
 
 private:
   // Functions

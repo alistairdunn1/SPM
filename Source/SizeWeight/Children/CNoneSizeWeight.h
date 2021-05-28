@@ -15,17 +15,16 @@
 //
 //
 //**********************************************************************
-class CNoneSizeWeight : public CSizeWeight
-{
+class CNoneSizeWeight : public CSizeWeight {
 public:
   // Functions
   CNoneSizeWeight();
   virtual ~CNoneSizeWeight();
-  CSizeWeight *clone() { return new CNoneSizeWeight(*this); }
-  void validate();
-  void build();
-  void rebuild();
-  double getMeanWeight(double &size, string &distribution, double &cv) { return 1; }
+  CSizeWeight* clone() { return new CNoneSizeWeight(*this); }
+  void         validate();
+  void         build();
+  void         rebuild();
+  double       getMeanWeight(double& size, string& distribution, double& cv) { return 1; }
 };
 
 #endif /* CNONESIZEWEIGHT_H_ */

@@ -19,10 +19,9 @@
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Catchability)
-{
+BOOST_AUTO_TEST_CASE(Catchability) {
   // Get prior
-  CCatchability *pCatchability = CCatchabilityFactory::buildCatchability("", false);
+  CCatchability* pCatchability = CCatchabilityFactory::buildCatchability("", false);
 
   // Add parameters
   pCatchability->addParameter(PARAM_LABEL, "catchability");

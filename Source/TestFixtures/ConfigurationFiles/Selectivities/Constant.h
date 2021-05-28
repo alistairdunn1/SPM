@@ -10,10 +10,10 @@
 #ifndef CONSTANTSELECTIVITY_H_
 #define CONSTANTSELECTIVITY_H_
 
-const string constant =
-    "@selectivity constant\n"
-    "type constant\n"
-    "c 1\n";
+const string constant
+    = "@selectivity constant\n"
+      "type constant\n"
+      "c 1\n";
 
 #endif /* CONSTANTSELECTIVITY_H_ */
 #endif /* TEST */

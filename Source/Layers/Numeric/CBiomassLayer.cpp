@@ -9,21 +9,21 @@
 
 // Local Headers
 #include "CBiomassLayer.h"
-#include "../../Selectivities/CSelectivityManager.h"
-#include "../../World/CWorld.h"
-#include "../../Selectivities/CSelectivity.h"
+
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../World/CWorld.h"
 
 //**********************************************************************
 // CBiomassLayer::CBiomassLayer()
 // Default Constructor
 //**********************************************************************
-CBiomassLayer::CBiomassLayer()
-{
+CBiomassLayer::CBiomassLayer() {
   // Variables
-  sType = PARAM_BIOMASS;
-  pWorld = CWorld::Instance();
+  sType     = PARAM_BIOMASS;
+  pWorld    = CWorld::Instance();
   bIsStatic = false;
 
   // Register User allowed parameters
@@ -35,8 +35,7 @@ CBiomassLayer::CBiomassLayer()
 // void CBiomassLayer::addCategory(string value)
 // Add A Category to our Biomass Layer
 //**********************************************************************
-void CBiomassLayer::addCategory(string value)
-{
+void CBiomassLayer::addCategory(string value) {
   vCategoryNames.push_back(value);
 }
 
@@ -44,8 +43,7 @@ void CBiomassLayer::addCategory(string value)
 // void CBiomassLayer::addSelectivity(string value)
 // Add a selectivity to our list.
 //**********************************************************************
-void CBiomassLayer::addSelectivity(string value)
-{
+void CBiomassLayer::addSelectivity(string value) {
   vSelectivityNames.push_back(value);
 }
 
@@ -53,10 +51,8 @@ void CBiomassLayer::addSelectivity(string value)
 // void CBiomassLayer::validate()
 // Validate
 //**********************************************************************
-void CBiomassLayer::validate()
-{
-  try
-  {
+void CBiomassLayer::validate() {
+  try {
     // Base Validate
     CNumericLayer::validate();
 
@@ -66,8 +62,7 @@ void CBiomassLayer::validate()
 
     // Check For Duplicate Categories.
     map<string, int> mList;
-    foreach (string Category, vCategoryNames)
-    {
+    foreach (string Category, vCategoryNames) {
       mList[Category] += 1;
       if (mList[Category] > 1)
         CError::errorDuplicate(PARAM_CATEGORY, Category);
@@ -75,9 +70,7 @@ void CBiomassLayer::validate()
 
     if (vCategoryNames.size() != vSelectivityNames.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,19 +80,15 @@ void CBiomassLayer::validate()
 // void CBiomassLayer::build()
 // Build
 //**********************************************************************
-void CBiomassLayer::build()
-{
-  try
-  {
+void CBiomassLayer::build() {
+  try {
     // Build Selectivities
-    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    CSelectivityManager* pSelectivityManager = CSelectivityManager::Instance();
     pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
 
     // Build Categories
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBiomassLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -109,19 +98,15 @@ void CBiomassLayer::build()
 // double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
 // get Value
 //**********************************************************************
-double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0)
-{
+double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int TargetCol = 0) {
 #ifndef OPTIMIZE
-  try
-  {
+  try {
 #endif
 
     double dResult = 0;
 
-    for (int i = 0; i < pWorld->getAgeSpread(); ++i)
-    {
-      for (int j = 0; j < (int)vCategories.size(); ++j)
-      {
+    for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
+      for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dAbundance = vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
         dResult += dAbundance * pWorld->getMeanWeight(i, vCategories[j]);
       }
@@ -130,9 +115,7 @@ double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, in
     return dResult;
 
 #ifndef OPTIMIZE
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CBiomassLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -145,6 +128,4 @@ double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, in
 // CBiomassLayer::~CBiomassLayer()
 // Default De-Constructor
 //**********************************************************************
-CBiomassLayer::~CBiomassLayer()
-{
-}
+CBiomassLayer::~CBiomassLayer() {}

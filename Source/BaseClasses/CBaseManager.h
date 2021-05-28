@@ -10,10 +10,10 @@
 #define CBASEMANAGER_H_
 
 // Global Headers
-#include <vector>
-#include <string>
-#include <boost/thread/tss.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/tss.hpp>
+#include <string>
+#include <vector>
 
 // Local Headers
 #include "CBaseObject.h"
@@ -26,13 +26,12 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CBaseManager : public CBaseObject
-{
+class CBaseManager : public CBaseObject {
 public:
   CBaseManager();
   virtual ~CBaseManager();
   virtual void validate() = 0;
-  virtual void build() = 0;
+  virtual void build()    = 0;
   virtual void rebuild() {}
 };
 

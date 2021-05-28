@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CSelectivityFactory.h"
+
 #include "../../Helpers/CError.h"
 #include "../CSelectivityManager.h"
 #include "../Children/CAllValuesBoundedSelectivity.h"
@@ -28,10 +29,8 @@
 // CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
 // Build a selectivity based on type
 //**********************************************************************
-CSelectivity *CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
-{
-
-  CSelectivity *pSelectivity = 0;
+CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager) {
+  CSelectivity* pSelectivity = 0;
 
   if (type == PARAM_ALL_VALUES_BOUNDED)
     pSelectivity = new CAllValuesBoundedSelectivity();
@@ -55,7 +54,7 @@ CSelectivity *CSelectivityFactory::buildSelectivity(string type, bool registerWi
     pSelectivity = new CInverseLogisticSelectivity();
   else if (type == PARAM_SPLINE)
     pSelectivity = new CSplineSelectivity();
-  //else if (type == PARAM_KRUGER_SPLINE)
+  // else if (type == PARAM_KRUGER_SPLINE)
   //  pSelectivity = new CKrugerSplineSelectivity();
   else
     CError::errorUnknown(PARAM_TYPE, type);

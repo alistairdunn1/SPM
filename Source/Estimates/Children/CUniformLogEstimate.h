@@ -14,13 +14,12 @@
 /**
  * Class definition
  */
-class CUniformLogEstimate : public CEstimate
-{
+class CUniformLogEstimate : public CEstimate {
 public:
   // methods
   CUniformLogEstimate();
   virtual ~CUniformLogEstimate() = default;
-  void validate() { CEstimate::validate(); }
+  void   validate() { CEstimate::validate(); }
   double getScore();
 };
 

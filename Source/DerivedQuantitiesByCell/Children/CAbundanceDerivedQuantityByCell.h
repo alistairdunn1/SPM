@@ -19,8 +19,7 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CAbundanceDerivedQuantityByCell : public CDerivedQuantityByCell
-{
+class CAbundanceDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
   // Methods
   CAbundanceDerivedQuantityByCell();
@@ -32,14 +31,14 @@ public:
 
 protected:
   // Members
-  CTimeStepManager *pTimeStepManager;
-  string sTimeStep;
-  vector<string> vInitializationTimeStepNames;
-  vector<int> vInitializationTimeStepIndex;
-  vector<string> vCategoryNames;
-  vector<int> vCategories;
-  vector<string> vSelectivityNames;
-  vector<CSelectivity *> vSelectivities;
+  CTimeStepManager*     pTimeStepManager;
+  string                sTimeStep;
+  vector<string>        vInitializationTimeStepNames;
+  vector<int>           vInitializationTimeStepIndex;
+  vector<string>        vCategoryNames;
+  vector<int>           vCategories;
+  vector<string>        vSelectivityNames;
+  vector<CSelectivity*> vSelectivities;
 };
 
 #endif /* CABUNDANCEDERIVEDQUANTITYBYCELL_H_ */

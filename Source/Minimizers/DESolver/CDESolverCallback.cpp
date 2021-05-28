@@ -11,20 +11,17 @@
 #include <iostream>
 
 // Local Headers
-#include "CDESolverCallback.h"
+#include "../../Estimates/CEstimate.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "../../ObjectiveFunction/CObjectiveFunction.h"
 #include "../../RuntimeThread/CRuntimeThread.h"
-#include "../../Estimates/CEstimateManager.h"
-#include "../../Estimates/CEstimate.h"
+#include "CDESolverCallback.h"
 
 //**********************************************************************
 // CDESolverCallback::CDESolverCallback()
 // Default Constructor
 //**********************************************************************
-CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize, double tolerance)
-    : DESolverEngine(vectorsize, populationsize, tolerance)
-{
-
+CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize, double tolerance) : DESolverEngine(vectorsize, populationsize, tolerance) {
   // Vars
   pEstimateManager = CEstimateManager::Instance();
 }
@@ -33,30 +30,24 @@ CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize, double 
 // double CDESolverCallback::EnergyFunction(double trial[],bool &bAtSolution)
 // Our CallBack Function. Returns our Score
 //**********************************************************************
-double CDESolverCallback::EnergyFunction(vector<double> vTrialValues)
-{
-
+double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
   // Update our Components with the New Parameters
   int iCount = pEstimateManager->getEnabledEstimateCount();
-  for (int i = 0; i < iCount; ++i)
-  {
+  for (int i = 0; i < iCount; ++i) {
     pEstimateManager->getEnabledEstimate(i)->setValue(vTrialValues[i]);
   }
 
-  CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
+  CObjectiveFunction* pObjectiveFunction = CObjectiveFunction::Instance();
 
-  try
-  {
+  try {
     // Rebuild and Run
-    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+    CRuntimeThread* pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
     pThread->startModel();
 
     // Workout our Objective Score
     pObjectiveFunction->execute();
-  }
-  catch (string &Ex)
-  {
+  } catch (string& Ex) {
     Ex = "CDESolverCallback.EnergyFunction()->" + Ex;
     throw Ex;
   }
@@ -70,6 +61,4 @@ double CDESolverCallback::EnergyFunction(vector<double> vTrialValues)
 // CDESolverCallback::~CDESolverCallback()
 // Default De-Constructor
 //**********************************************************************
-CDESolverCallback::~CDESolverCallback()
-{
-}
+CDESolverCallback::~CDESolverCallback() {}

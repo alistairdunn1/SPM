@@ -23,11 +23,10 @@ using std::string;
 //
 //
 //**********************************************************************
-class CLayerFactory
-{
+class CLayerFactory {
 public:
   // Functions
-  static CLayer *buildLayer(string type, bool registerWithManager = true);
+  static CLayer* buildLayer(string type, bool registerWithManager = true);
 
 private:
   // Functions

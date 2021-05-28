@@ -14,8 +14,7 @@
 // CBaseExecute::CBaseExecute()
 // Default Constructor
 //**********************************************************************
-CBaseExecute::CBaseExecute()
-{
+CBaseExecute::CBaseExecute() {
   // Get Singletone Instance
   pWorld = CWorld::Instance();
 }
@@ -24,6 +23,4 @@ CBaseExecute::CBaseExecute()
 // CBaseExecute::~CBaseExecute()
 // Destructor
 //**********************************************************************
-CBaseExecute::~CBaseExecute()
-{
-}
+CBaseExecute::~CBaseExecute() {}

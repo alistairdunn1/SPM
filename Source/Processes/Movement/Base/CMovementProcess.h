@@ -16,18 +16,17 @@
 //
 //
 //**********************************************************************
-class CMovementProcess : public CProcess
-{
+class CMovementProcess : public CProcess {
 public:
   // Functions
   CMovementProcess();
   virtual ~CMovementProcess();
-  void setProportion(double value) { dProportion = value; }
-  double getProportion() { return dProportion; }
-  virtual CProcess *clone() = 0;
-  virtual void validate();
-  virtual void build();
-  virtual void execute();
+  void              setProportion(double value) { dProportion = value; }
+  double            getProportion() { return dProportion; }
+  virtual CProcess* clone() = 0;
+  virtual void      validate();
+  virtual void      build();
+  virtual void      execute();
 
 protected:
   // Functions
@@ -38,9 +37,9 @@ protected:
   void moveRight(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
 
   // Variables
-  double dProportion;
-  CWorldSquare *pTargetBase;
-  CWorldSquare *pTargetDiff;
+  double        dProportion;
+  CWorldSquare* pTargetBase;
+  CWorldSquare* pTargetDiff;
 };
 
 #endif /*CMOVEMENTPROCESS_H_*/

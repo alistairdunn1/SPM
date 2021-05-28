@@ -10,21 +10,21 @@
 #ifndef DERIVEDQUANTITYBYCELL_H_
 #define DERIVEDQUANTITYBYCELL_H_
 
-const string derived_quantity_by_cell_abundance =
-    "@derived_quantity_by_cell derived_quantity_by_cell_abundance\n"
-    "type abundance\n"
-    "time_step step_one\n"
-    "categories immature mature spawning\n"
-    "layer double\n"
-    "selectivities constant constant constant\n";
+const string derived_quantity_by_cell_abundance
+    = "@derived_quantity_by_cell derived_quantity_by_cell_abundance\n"
+      "type abundance\n"
+      "time_step step_one\n"
+      "categories immature mature spawning\n"
+      "layer double\n"
+      "selectivities constant constant constant\n";
 
-const string derived_quantity_by_cell_biomass =
-    "@derived_quantity_by_cell derived_quantity_by_cell_biomass\n"
-    "type biomass\n"
-    "time_step step_one\n"
-    "categories immature mature spawning\n"
-    "layer double\n"
-    "selectivities constant constant constant\n";
+const string derived_quantity_by_cell_biomass
+    = "@derived_quantity_by_cell derived_quantity_by_cell_biomass\n"
+      "type biomass\n"
+      "time_step step_one\n"
+      "categories immature mature spawning\n"
+      "layer double\n"
+      "selectivities constant constant constant\n";
 
 #endif /* DERIVEDQUANTITYBYCELL_H_ */
 #endif /* TEST */

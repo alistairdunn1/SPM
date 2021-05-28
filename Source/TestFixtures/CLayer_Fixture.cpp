@@ -9,15 +9,15 @@
 #ifdef TEST
 
 // Global Headers
-#include <iostream>
-#include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/test/unit_test.hpp>
+#include <iostream>
 
 // Local headers
-#include "CLayer_Fixture.h"
+#include "../Helpers/CConvertor.h"
 #include "../Layers/CLayerManager.h"
 #include "../Layers/Factory/CLayerFactory.h"
-#include "../Helpers/CConvertor.h"
+#include "CLayer_Fixture.h"
 
 // Using
 using std::cout;
@@ -27,14 +27,11 @@ using std::endl;
 // CLayer_Fixture::CLayer_Fixture()
 // Constructor
 //**********************************************************************
-CLayer_Fixture::CLayer_Fixture()
-{
-
+CLayer_Fixture::CLayer_Fixture() {
   // Create a Double Layer
-  CLayer *pLayer = CLayerFactory::buildLayer(PARAM_DOUBLE);
+  CLayer* pLayer = CLayerFactory::buildLayer(PARAM_DOUBLE);
   pLayer->addParameter(PARAM_LABEL, "double_layer");
-  for (int i = 0; i < 25; ++i)
-    pLayer->addParameter(PARAM_DATA, boost::lexical_cast<string>(i + 1));
+  for (int i = 0; i < 25; ++i) pLayer->addParameter(PARAM_DATA, boost::lexical_cast<string>(i + 1));
   pLayer->validate();
   pLayer->build();
 
@@ -111,8 +108,7 @@ CLayer_Fixture::CLayer_Fixture()
 // CLayer_Fixture::~CLayer_Fixture()
 // Destructor
 //**********************************************************************
-CLayer_Fixture::~CLayer_Fixture()
-{
+CLayer_Fixture::~CLayer_Fixture() {
   CLayerManager::Destroy();
 }
 

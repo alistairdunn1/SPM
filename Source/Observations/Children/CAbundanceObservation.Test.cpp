@@ -13,29 +13,27 @@
 #include <string>
 
 // Local Includes
+#include "../../Helpers/CComparer.h"
 #include "../../Observations/CObservation.h"
 #include "../../Observations/CObservationManager.h"
-#include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C3x3_Fixture.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
-#include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
-#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/Catchabilities/Catchability.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/StringLayer.h"
 #include "../../TestFixtures/ConfigurationFiles/Observations/Abundance.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(AbundanceObservation, C3x3_Fixture)
-{
-
+BOOST_FIXTURE_TEST_CASE(AbundanceObservation, C3x3_Fixture) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
@@ -53,15 +51,15 @@ BOOST_FIXTURE_TEST_CASE(AbundanceObservation, C3x3_Fixture)
   loadAndRunEnvironment();
 
   // Check our Results
-  CObservationManager *pManager = CObservationManager::Instance();
-  CObservation *pObservation = pManager->getObservation("abundance_observation");
+  CObservationManager* pManager     = CObservationManager::Instance();
+  CObservation*        pObservation = pManager->getObservation("abundance_observation");
 
-  vector<SComparison *> vComparisons;
+  vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
   BOOST_REQUIRE_EQUAL(vComparisons.size(), 6.0);
 
-  SComparison *pComparison = vComparisons[0];
+  SComparison* pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.10, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 60.0, 1e-9);
@@ -103,17 +101,25 @@ BOOST_FIXTURE_TEST_CASE(AbundanceObservation, C3x3_Fixture)
   BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.15012330610113056, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dScore, 473.98919711083579, 1e-9);
 
-  for (int i = 0; i < 3; ++i)
-  {
-    for (int j = 0; j < 3; ++j)
-    {
-      CWorldSquare *pSquare = getSquare(i, j);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      CWorldSquare* pSquare = getSquare(i, j);
 
       BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675};
-      double mature[] = {0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224};
+      double immature[] = {11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332,
+                           10.416266318250708, 9.5285900493878319, 8.039167031304288,  6.2110466653061902, 14.041008649763675};
+      double mature[]   = {0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531,
+                         0.68514671490004475,
+                         1.5301395904028099,
+                         2.8847802067147867,
+                         4.4252416779189687,
+                         36.808881270055224};
       double spawning[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
       // Check Expected against model

@@ -13,17 +13,15 @@
 #include <string>
 
 // Local Includes
-#include "../Factory/CPreferenceFunctionFactory.h"
 #include "../../TestFixtures/CLayer_Fixture.h"
+#include "../Factory/CPreferenceFunctionFactory.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DoubleLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DoubleLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_INVERSE_LOGISTIC, false));
 
   pPreference->addParameter(PARAM_LABEL, "inverse_logistic");
@@ -66,10 +64,8 @@ BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DoubleLayer, CLayer_Fi
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DistanceLayer, CLayer_Fixture)
-{
-
-  CPreferenceFunction *pPreference = 0;
+BOOST_FIXTURE_TEST_CASE(InverseLogisticPreferenceFunction_DistanceLayer, CLayer_Fixture) {
+  CPreferenceFunction* pPreference = 0;
   BOOST_REQUIRE_NO_THROW(pPreference = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_INVERSE_LOGISTIC, false));
 
   pPreference->addParameter(PARAM_LABEL, "inverse_logistic");

@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CInitializationPhaseFactory.h"
+
 #include "../CInitializationPhaseManager.h"
 
 //**********************************************************************
@@ -16,10 +17,8 @@
 //                                        (string type, bool registerWithManager)
 // Build our Initialization Phase based on type
 //**********************************************************************
-CInitializationPhase *CInitializationPhaseFactory::buildInitializationPhase(string type, bool registerWithManager)
-{
-
-  CInitializationPhase *pPhase = 0;
+CInitializationPhase* CInitializationPhaseFactory::buildInitializationPhase(string type, bool registerWithManager) {
+  CInitializationPhase* pPhase = 0;
 
   if (type == "")
     pPhase = new CInitializationPhase();
