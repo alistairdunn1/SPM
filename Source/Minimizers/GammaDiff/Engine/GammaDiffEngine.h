@@ -23,7 +23,7 @@ public:
   GammaDiffEngine();
   virtual ~GammaDiffEngine();
   double optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds, vector<double>& UpperBounds, int& convergence,
-                                     int& iMaxIter, int& iMaxFunc, double dGradTol, double** pOptimiseHessian, int untransformedHessians, double dStepSize);
+                                     int& iMaxIter, int& iMaxFunc, double dGradTol, double** pOptimiseHessian, int untransformedHessians, double dStepSize, string transformMethod);
 
 private:
   // Variables
@@ -34,6 +34,7 @@ private:
   vector<double> vCurrentValues;
   vector<double> vGradientValues;
   double         dPenalty;
+  string         sTransformMethod;
 
   // Functions
   void   buildScaledValues();

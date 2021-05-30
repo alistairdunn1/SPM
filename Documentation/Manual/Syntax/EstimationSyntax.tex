@@ -70,7 +70,12 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}
 \defType{Logical}
 \defDefault{True}
-\defValue{Either true of false}
+\defValue{Either true or false}
+
+\defSub{transform\_method} {Specify the method for transforming parameters to ensure values remain within bounds}
+\defType{string}
+\defDefault{asin}
+\defValue{Either asin for the $\arcsin()$ transformation or tan for the $\tan()$ transformation}
 
 \subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{de\_solver}}
 
@@ -102,7 +107,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}
 \defType{Logical}
 \defDefault{True}
-\defValue{Either true of false}
+\defValue{Either true or false}
 
 \subsection{\I{Markov Chain Monte Carlo (MCMC)}\label{sec:estimation-syntax-MCMC}}
 

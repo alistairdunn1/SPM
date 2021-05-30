@@ -71,8 +71,8 @@
 \contentsline {subsubsection}{\numberline {5.4.2}The differential evolution minimiser}{61}{subsubsection.5.4.2}%
 \contentsline {subsection}{\numberline {5.5}Posterior profiles}{62}{subsection.5.5}%
 \contentsline {subsection}{\numberline {5.6}Bayesian estimation}{62}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Priors}{64}{subsection.5.7}%
-\contentsline {subsection}{\numberline {5.8}Penalties}{65}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.7}Priors}{65}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Penalties}{66}{subsection.5.8}%
 \contentsline {section}{\numberline {6}The observation section}{67}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Observations and likelihoods}{67}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Proportions-at-age observations}{67}{subsection.6.2}%

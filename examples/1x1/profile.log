@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: ..\..\Build\windows\spm -p -q -g 0 -o profile.dat 
-Date: Sat Aug 29 10:43:06 2020
-v2.0.3-2020-08-26 (rev. 2020-08-26 10:11:36 UTC). Copyright (c) 2008-2020, NIWA
+Date: Sun May 30 20:19:01 2021
+v2.0.3-2021-05-28 (rev. 2021-05-28 23:15:03 UTC). Copyright (c) 2008-2021, NIWA
 User name: alist
-Machine name: HP1040 (Windows_NT, PID=21700)
+Machine name: HP1040 (Windows_NT, PID=16576)
 
 [CAA-1998]
 report.type: observation

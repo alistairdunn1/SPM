@@ -58,14 +58,8 @@ FMM::FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol) {
   for (int i = 0; i < iVectorSize; ++i) pHessianConstruct[i] = new long double[iVectorSize];
 
   // Calculate the machine Epsilon
-  dEpsilon = 1.0;
-  do {
-    dEpsilon = dEpsilon / 2;
-  } while ((1 + dEpsilon) != 1);
-
-  // Set more variables
-  dEpsilon = 2 * dEpsilon;
-  dStepTol = pow((double)dEpsilon, 2. / 3.);
+  dEpsilon = std::numeric_limits<double>::epsilon();
+  dStepTol = pow((double)dEpsilon, 2.0 / 3.0);
 }
 
 //**********************************************************************

@@ -1,3 +1,10 @@
+SPM (Spatial Population Model)
+Call: ..\..\..\Build\windows\spm -r -q 
+Date: Mon May 31 10:20:10 2021
+v2.0.3-2021-05-28 (rev. 2021-05-28 23:15:03 UTC). Copyright (c) 2008-2021, NIWA
+User name: alist
+Machine name: HP1040 (Windows_NT, PID=12736)
+
 [initialisation-phase1]
 report.type: initialisation
 initialisation_phase: phase1
@@ -419,7 +426,7 @@ total_score: 1389.87
 
 [random_seed]
 report.type: random_number_seed
-random_number_seed: 42059
+random_number_seed: 13210
 *end
 
 [MaturationMale]
@@ -558,3 +565,4 @@ sizes: 50
 weights: 0.000766692
 *end
 
+Completed

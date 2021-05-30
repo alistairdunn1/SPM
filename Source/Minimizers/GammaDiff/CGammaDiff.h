@@ -35,6 +35,7 @@ protected:
   int    iMaxEvaluations;
   double dGradientTolerance;
   double dStepSize;
+  string sTransformMethod;
 };
 
 #endif /* CGAMMADIFF_H_ */

@@ -61,7 +61,7 @@ Parameters specified using the \subcommand{same} argument cannot be specified in
 
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
-Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser \index{Differential evolution minimiser}. However, the second minimiser does not produce an estimate of the covariance matrix, and hence cannot be used to start an MCMC.
+Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser. \index{Differential evolution minimiser} However, the second minimiser does not produce an estimate of the covariance matrix, and hence cannot be used to start an MCMC.
 
 \subsubsection{\I{The numerical differences minimiser}}
 
@@ -75,7 +75,7 @@ The minimiser has three kinds of (non-error) exit status:
 
 You can choose the maximum number of quasi-Newton iterations\index{Quasi-Newton iterations} and objective function evaluations\index{Objective function evaluations} allotted to the minimiser. If it exceeds either limit, it exits with a convergence failure\index{Convergence failure}. We recommend large numbers of evaluations and iterations (at least the defaults of 300 and 1000) unless you successfully reach convergence with less. You can also specify an alternative starting point of the minimiser using \texttt{spm -i}.
 
-We want to stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence'\index{Successful convergence} message, your solution may be only a local minimum\index{Local minimums}, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or doing profiles of one or more key parameters and seeing if any of the profiled estimates finds a better optimum than than the original point estimate.
+We stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence'\index{Successful convergence} message, your solution may be only a local minimum\index{Local minimums}, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or doing profiles of one or more key parameters and seeing if any of the profiled estimates finds a better optimum than than the original point estimate.
 
 The approximate covariance matrix\index{Covariance matrix} of the estimated parameters can be calculated as the inverse of the minimiser's approximation to the \I{Hessian}, and the corresponding correlation matrix\index{Correlation matrix} is also calculated. Be aware that
 
@@ -85,6 +85,12 @@ The approximate covariance matrix\index{Covariance matrix} of the estimated para
 \end{itemize}
 
 Also note that if an estimated parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
+
+Note that the choice of upper and lower bound can impact the estimation --- the step size for the minimiser is a function of the range between the lower and upper bound, and ideally bounds should be chosen to be as close as possible to the range of plausible estimated values, without being too close as to impact the range of values plausible when estimating uncertainty.
+
+Two methods are available for ensuring that parameters remain within bounds. The first uses the $\arcsin()$ transformation, and applies a penalty on parameters that are ``close'' to a bound (defined as less than or equal to 0.01\% of the range between bounds). However, this transformation may unduly influence estimation of values with absolute values that are very small (i.e., absolute value less than about 1e-4) or parameters where the range between the upper and lower bound is very small (i.e, less than about 1e-4). This transformation is less sensitive than the $\tan()$ transformation to the range of the lower and upper bounds in locating a good minimum.
+
+The second transformation using the $\tan()$ transformation, and is less likely to influence estimation for parameters that ''close'' to bounds and have very small absolute values. However, this transformation requires a choice of bounds that are somewhat symmetric with the ``true'' value of each parameter ideally near the centre of the bounds.
 
 \subsubsection{\I{The differential evolution minimiser}}
 

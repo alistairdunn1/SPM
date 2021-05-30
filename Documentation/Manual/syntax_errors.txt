@@ -7,6 +7,7 @@ In SPM, but not in manual
   ages
   algorithm
   area
+  asin
   b0_value
   binomial
   binomial_approx
@@ -68,6 +69,7 @@ In SPM, but not in manual
   ssb_layer
   ssb_values
   t
+  tan
   threshold_biomass
   total_score
   true_recruitment_values

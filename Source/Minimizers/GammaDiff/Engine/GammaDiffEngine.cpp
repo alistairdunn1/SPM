@@ -12,6 +12,7 @@
 
 #include <boost/lexical_cast.hpp>
 #include <iomanip>
+#include <limits>
 
 // Local Headers
 #include "../../../Helpers/CComparer.h"
@@ -27,7 +28,9 @@ using namespace std;
 // GammaDiffEngine::GammaDiffEngine()
 // Default Constructor
 //**********************************************************************
-GammaDiffEngine::GammaDiffEngine() {}
+GammaDiffEngine::GammaDiffEngine() {
+  sTransformMethod = "";
+}
 
 //**********************************************************************
 // void GammaDiffEngine::condassign( double &res, const double &cond, const double &arg1, const double &arg2 ) {
@@ -52,18 +55,26 @@ void GammaDiffEngine::condAssign(double& res, const double& cond, const double& 
 double GammaDiffEngine::unScaleValue(const double& value, double min, double max) {
   // courtesy of AUTODIF - modified to correct error -
   // penalty on values outside [-1,1] multiplied by 100 as of 14/1/02.
-  double t = 0.0;
-  double y = 0.0;
 
-  t = min + (max - min) * (sin(value * 1.57079633) + 1) / 2;
-  this->condAssign(y, -.9999 - value, (value + .9999) * (value + .9999), 0);
-  dPenalty += y;
-  this->condAssign(y, value - .9999, (value - .9999) * (value - .9999), 0);
-  dPenalty += y;
-  this->condAssign(y, -1 - value, 1e5 * (value + 1) * (value + 1), 0);
-  dPenalty += y;
-  this->condAssign(y, value - 1, 1e5 * (value - 1) * (value - 1), 0);
-  dPenalty += y;
+  double t = 0.0;
+
+  if (sTransformMethod == PARAM_TRANSFORM_ASIN) {
+    double y = 0.0;
+
+    t = min + (max - min) * (sin(value * 1.57079633) + 1) / 2;
+
+    this->condAssign(y, -.9999 - value, (value + .9999) * (value + .9999), 0);
+    dPenalty += y;
+    this->condAssign(y, value - .9999, (value - .9999) * (value - .9999), 0);
+    dPenalty += y;
+    this->condAssign(y, -1 - value, 1e5 * (value + 1) * (value + 1), 0);
+    dPenalty += y;
+    this->condAssign(y, value - 1, 1e5 * (value - 1) * (value - 1), 0);
+    dPenalty += y;
+
+  } else if (sTransformMethod == PARAM_TRANSFORM_TAN) {
+    t = ((atan(value) / 3.14159265359) + 0.5) * (max - min) + min;
+  }
 
   return (t);
 }
@@ -73,12 +84,27 @@ double GammaDiffEngine::unScaleValue(const double& value, double min, double max
 // Boundary Pin
 //**********************************************************************
 double GammaDiffEngine::scaleValue(double value, double min, double max) {
-  if (CComparer::isEqual(value, min))
-    return -1;
-  else if (CComparer::isEqual(value, max))
-    return 1;
+  double dResult = 0.0;
 
-  return asin(2 * (value - min) / (max - min) - 1) / 1.57079633;
+  if (sTransformMethod == PARAM_TRANSFORM_ASIN) {
+    if (CComparer::isEqual(value, min)) {
+      dResult = -1.0;
+    } else if (CComparer::isEqual(value, max)) {
+      dResult = 1.0;
+    } else {
+      dResult = asin(2 * (value - min) / (max - min) - 1) / 1.57079633;
+    }
+  } else if (sTransformMethod == PARAM_TRANSFORM_TAN) {
+    if (CComparer::isEqual(value, min)) {
+      dResult = -numeric_limits<double>::max();
+    } else if (CComparer::isEqual(value, max)) {
+      dResult = numeric_limits<double>::max();
+    } else {
+      dResult = tan(((value - min) / (max - min) - 0.5) * 3.14159265359);
+    }
+  }
+
+  return dResult;
 }
 
 //**********************************************************************
@@ -128,10 +154,16 @@ void GammaDiffEngine::buildCurrentValues() {
 //**********************************************************************
 double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds, vector<double>& UpperBounds,
                                                     int& convergence, int& iMaxIter, int& iMaxFunc, double dGradTol, double** pOptimiseHessian, int untransformedHessians,
-                                                    double dStepSize) {
+                                                    double dStepSize, string transformMethod) {
   // Variables
   int    iVectorSize = (int)StartValues.size();
   double dScore      = 0.0;
+  sTransformMethod   = transformMethod;
+
+  if (!(sTransformMethod == PARAM_TRANSFORM_TAN || sTransformMethod == PARAM_TRANSFORM_ASIN)) {
+    string sError = string("ERROR: GAMMADIFF unknown rescale type: ") + sTransformMethod;
+    throw sError;
+  }
 
   // Assign Our Vectors
   vStartValues.assign(StartValues.begin(), StartValues.end());

@@ -25,6 +25,7 @@ CGammaDiff::CGammaDiff() {
   pParameterList->registerAllowed(PARAM_MAX_EVALUATIONS);
   pParameterList->registerAllowed(PARAM_TOLERANCE);
   pParameterList->registerAllowed(PARAM_STEPSIZE);
+  pParameterList->registerAllowed(PARAM_TRANSFORM_METHOD);
 }
 
 //**********************************************************************
@@ -40,8 +41,10 @@ void CGammaDiff::validate() {
     iMaxEvaluations    = pParameterList->getInt(PARAM_MAX_EVALUATIONS, true, 4000);
     dGradientTolerance = pParameterList->getDouble(PARAM_TOLERANCE, true, 0.002);
     dStepSize          = pParameterList->getDouble(PARAM_STEPSIZE, true, 1e-6);
+    sTransformMethod   = pParameterList->getString(PARAM_TRANSFORM_METHOD, true, PARAM_TRANSFORM_ASIN);
     // dStepSize default is 1e-7 = pow(10.0,-14/2.0)
     // using modified version of Dennis & Schnabel's FDGRAD here with digits=14
+
   } catch (string& Ex) {
     Ex = "CGammaDiff.validate()->" + Ex;
     throw Ex;
@@ -80,8 +83,8 @@ void CGammaDiff::runEstimation() {
     int iMaxEvals = iMaxEvaluations;
 
     GammaDiffEngine clGammaDiff;
-    clGammaDiff.optimise_finite_differences(clGammaDiffCallback, vStartValues, vLowerBounds, vUpperBounds, status, iMaxIters, iMaxEvals, dGradientTolerance, pHessian, 1,
-                                            dStepSize);
+    clGammaDiff.optimise_finite_differences(clGammaDiffCallback, vStartValues, vLowerBounds, vUpperBounds, status, iMaxIters, iMaxEvals, dGradientTolerance, pHessian, 1, dStepSize,
+                                            sTransformMethod);
   } catch (string& Ex) {
     Ex = "CGammaDiff.runEstimation()->" + Ex;
     throw Ex;

@@ -30,12 +30,12 @@ linf 113.4
 
 @size_weight male
 type basic
-a 2.49e-12
+a 2.49e-9
 b 3.234
 
 @size_weight female
 type basic
-a 1.70e-12
+a 1.70e-9
 b 3.328
 
 # Initialisation

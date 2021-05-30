@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.19)  28 MAY 2021 23:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.19)  31 MAY 2021 10:15
 entering extended mode
 **./SPM.tex
 (SPM.tex
@@ -978,8 +978,8 @@ Package rerunfilecheck Info: File `SPM.out' has not changed.
 ### simple group (level 1) entered at line 84 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12378 strings out of 480202
- 193109 string characters out of 2877025
+ 12379 strings out of 480202
+ 193117 string characters out of 2877025
  777500 words of memory out of 3000000
  27239 multiletter control sequences out of 15000+200000
  611947 words of font info for 185 fonts, out of 3000000 for 9000
@@ -1002,9 +1002,9 @@ type1/urw/times/utmb8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/alist/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SPM.pdf (239 pages, 1215504 bytes).
+Output written on SPM.pdf (239 pages, 1217058 bytes).
 PDF statistics:
- 4071 PDF objects out of 4296 (max. 8388607)
- 1178 named destinations out of 1200 (max. 500000)
+ 4073 PDF objects out of 4296 (max. 8388607)
+ 1179 named destinations out of 1200 (max. 500000)
  2359 words of extra memory for PDF output out of 10000 (max. 10000000)
 
