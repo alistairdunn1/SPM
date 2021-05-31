@@ -784,9 +784,13 @@ Note that the exploitation rate with annually varying layers process maintains t
 
 \subsubsection*{Event and biomass-event mortality}
 
-The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
+The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate (that must be less than 1.0).
 
-The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow the defined number of individuals to be removed. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
+The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals in the vulnerable population for the event mortality to be taken (as defined by the maximum exploitation rate). 
+
+In this process, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow the defined number of individuals to be removed if the model is being estimated. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
+
+Note that the process report can (optionally) give a summary of the total annual abundance (or biomass) requested, and the total annual abundance (or biomass) removed as a result of this process. See Section \ref{sec:report-section} for more information.
 
 For example, the event mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
 

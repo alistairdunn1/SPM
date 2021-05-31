@@ -1,0 +1,97 @@
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report state-1
+type partition
+time_step step_one
+years 1994 #-2007
+
+@report state-2
+type partition
+time_step step_two
+years 1994-2007
+
+@report Maturation-selectivity
+type selectivity
+selectivity Maturation
+
+@report FishingSel-selectivity
+type selectivity
+selectivity FishingSel
+
+@report Covariance
+type covariance
+
+@report Objective_Score
+type objective_function
+
+@report Objective_Score2
+type objective_function
+file_name objective_values.dat
+
+@report estimate-summary
+type estimate_summary
+
+@report AgeError
+type ageing_error
+ageing_error normal
+
+@report RNDseed
+type random_number_seed
+
+@report SSRUs
+type layer_derived_view
+layer SSRU
+years 1994-2007
+time_step step_one
+
+@report Fishing_2005
+type layer
+layer Fishing_2005
+
+@report SSB
+type derived_quantity
+derived_quantity SSB
+
+@report Recruitment
+type process
+process BHrecruitment
+
+@report Ageing
+type process
+process Ageing
+
+@report Maturation
+type process
+process Maturation
+
+@report MCMC
+type MCMC
+
+@report MCMC_samples
+type MCMC_samples
+file_name samples.dat
+
+@report MCMC_objectives
+type MCMC_objectives
+file_name objectives.dat
+
+@report agesize
+type age_size
+age_size VB
+
+@report sizeweight
+type size_weight
+age_size VB
+sizes 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170
+
+@report ageweight
+type age_weight
+age_size VB
+
+@report Fishing
+type process
+process Fishing
+removals true

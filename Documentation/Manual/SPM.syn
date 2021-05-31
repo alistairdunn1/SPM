@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 2.0.3-2021-05-28; ===================================================================================
+; TextPad syntax definitions for SPM version 2.0.3-2021-05-31; ===================================================================================
 ;
 ;
 C=1
@@ -170,6 +170,7 @@ proportions
 proposal_distribution
 q
 r0
+removals
 rescale
 rho
 same

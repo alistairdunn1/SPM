@@ -123,8 +123,29 @@ void CEventMortalityProcess::build() {
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
+
+    // rebuild
+    rebuild();
+
   } catch (string& Ex) {
     Ex = "CEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CEventMortalityProcess::rebuild()
+// Build Our Relationships and Indexes
+//**********************************************************************
+void CEventMortalityProcess::rebuild() {
+  try {
+    for (int i = 0; i < (int)vYearsList.size(); ++i) {
+      vRecordedRemovalsIndex.push_back(0.0);
+      vActualRemovalsIndex.push_back(0.0);
+    }
+
+  } catch (string& Ex) {
+    Ex = "CEventMortalityProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -138,12 +159,17 @@ void CEventMortalityProcess::execute() {
   try {
 #endif
     // See if we are suppose to be executing first
-    bYearMatch   = false;
+    int iIndexYear = 0;
+    bYearMatch     = false;
+
     iCurrentYear = pTimeStepManager->getCurrentYear();
     for (int i = 0; i < (int)vYearsList.size(); ++i) {
       if (vYearsList[i] == iCurrentYear) {
-        bYearMatch = true;
-        pLayer     = vLayersIndex[i];
+        bYearMatch                = true;
+        iIndexYear                = i;
+        vRecordedRemovalsIndex[i] = 0.0;
+        vActualRemovalsIndex[i]   = 0.0;
+        pLayer                    = vLayersIndex[i];
         break;
       }
     }
@@ -169,6 +195,10 @@ void CEventMortalityProcess::execute() {
 
         // Get Layer Value
         dCatch = pLayer->getValue(i, j);
+
+        // Record the catch
+        vRecordedRemovalsIndex[iIndexYear] += dCatch;
+
         // Clear our Vulnerable Amount
         dVulnerable = 0.0;
 
@@ -206,6 +236,8 @@ void CEventMortalityProcess::execute() {
 
             // Subtract These
             pBaseSquare->subValue(vCategoryIndex[k], l, dCurrent);
+            // add this to vActualRemovalsIndex
+            vActualRemovalsIndex[iIndexYear] += dCurrent;
           }
         }
       }

@@ -1,0 +1,159 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ball and Constable(2000)]{1136}
+I.~Ball and A~Constable.
+\newblock Fish heaven: A {M}onte {C}arlo, spatially explicit single species
+  fishery model for the testing of parameter estimation methods.
+\newblock Technical Report WG-FSA-00/36, Australian Antarctic Division, October
+  2000.
+
+\bibitem[Ball and Williamson(2003)]{1135}
+I.~Ball and A.T. Williamson.
+\newblock Fish heaven user's manual.
+\newblock Technical report, Australian Antarctic Division, August 2003.
+
+\bibitem[Bentley et~al.(2004{\natexlab{a}})Bentley, Davies, Mc{N}eill, and
+  Davies]{1366}
+N.~Bentley, C.R. Davies, S.E. Mc{N}eill, and N.M. Davies.
+\newblock A framework for evaluating spatial closures as a fisheries management
+  tool.
+\newblock {N}ew {Z}ealand {F}isheries {A}ssessment {R}eport, {M}inistry of
+  {F}isheries, 2004{\natexlab{a}}.
+
+\bibitem[Bentley et~al.(2004{\natexlab{b}})Bentley, Davies, and McNeill]{1367}
+N.~Bentley, N.M. Davies, and S.E. McNeill.
+\newblock A spatially explicit model of the snapper (\emph{Pagrus auratus})
+  fishery in {SNA}1.
+\newblock New {Z}ealand {F}isheries {A}ssessment {R}eport, {M}inistry of
+  {F}isheries, 2004{\natexlab{b}}.
+
+\bibitem[Beverton and Holt(1957)]{1203}
+R.J.H. Beverton and S.J. Holt.
+\newblock \emph{On the dynamics of exploited fish populations}.
+\newblock Fishery investigations. HMSO, London, 1957.
+
+\bibitem[Bull et~al.(2012)Bull, Francis, Dunn, McKenzie, Gilbert, Smith, Bian,
+  and Fu]{1388}
+B.~Bull, R.I.C.C. Francis, A.~Dunn, A.~McKenzie, D.J. Gilbert, M.H. Smith,
+  R.~Bian, and D.~Fu.
+\newblock {CASAL} {C}++ {A}lgorithmic {S}tock {A}ssessment {L}aboratory):
+  {CASAL} user manual v2.30-2012/03/21.
+\newblock Technical Report 135, NIWA, 2012.
+
+\bibitem[Dennis~Jr and Schnabel(1996)]{779}
+J.E. Dennis~Jr and R.B. Schnabel.
+\newblock \emph{Numerical methods for unconstrained optimisation and nonlinear
+  equations}.
+\newblock Classics in Applied Mathematics. Prentice Hall, 1996.
+
+\bibitem[Dijkstra(1959)]{Dijkstra1959}
+E.W. Dijkstra.
+\newblock A note on two problems in connexion with graphs.
+\newblock \emph{Numerische Mathematik}, 1\penalty0 (1):\penalty0 269--271,
+  1959.
+
+\bibitem[Dunn et~al.(2018)Dunn, Rasmussen, and
+  Mormede]{Dunn_Rasmussen_Mormede_2018}
+A.~Dunn, S.~Rasmussen, and S.~Mormede.
+\newblock Spatial population model user manual, spm v1.1-2018-05-31 (rev.
+  1291).
+\newblock Technical Report NIWA Technical Report 138, NIWA, 2018.
+
+\bibitem[Gelman et~al.(1995)Gelman, Carlin, Stern, and Rubin]{823}
+A.B. Gelman, J.S. Carlin, H.S. Stern, and D.B. Rubin.
+\newblock \emph{Bayesian data analysis}.
+\newblock Chapman and Hall, London, 1995.
+
+\bibitem[Gilks et~al.(1994)Gilks, Thomas, and Spiegelhalter]{143}
+W.R. Gilks, A.~Thomas, and D.J. Spiegelhalter.
+\newblock A language and program for complex {B}ayesian modelling.
+\newblock \emph{The Statistician}, 43\penalty0 (1):\penalty0 169--177, 1994.
+
+\bibitem[Holling(1959)]{Holling1959}
+C.S. Holling.
+\newblock The components of predation as revealed by a study of small-mammal
+  predation of the european pine sawfly.
+\newblock \emph{The Canadian Entomologist}, 91:\penalty0 293--320, 1959.
+
+\bibitem[Jurado-Molina et~al.(2005)Jurado-Molina, Livingston, and
+  Ianelli]{JuradoMolina2005}
+J.~Jurado-Molina, P.A. Livingston, and J.N. Ianelli.
+\newblock Incorporating predation interactions in a statistical catch-at-age
+  model for a predator-prey system in the eastern bering sea.
+\newblock \emph{Canadian Journal of Fisheries and Aquatic Sciences},
+  62:\penalty0 1865--1873, 2005.
+
+\bibitem[Marsh(2015)]{Marsh2015}
+C.~Marsh.
+\newblock Modelling spatio-temporal preferences for albacore tuna.
+\newblock Master's thesis, Victoria University of Wellington, New Zealand,
+  2015.
+
+\bibitem[Marsh et~al.(2015)Marsh, Sibanda, Dunn, and
+  Dunn]{Marsh_Sibanda_Dunn_Dunn_2015}
+C.~Marsh, N.~Sibanda, M.~Dunn, and A.~Dunn.
+\newblock A copula-based habitat preference index in fish spatial population
+  modelling.
+\newblock \emph{Procedia Environmental Sciences}, 27:\penalty0 2–5, 2015.
+\newblock ISSN 6444636779.
+\newblock \doi{10.1016/j.proenv.2015.07.107}.
+
+\bibitem[Matsumoto and Nishimura(1998)]{796}
+Makoto Matsumoto and Takuji Nishimura.
+\newblock Mersenne twister: a 623-dimensionally equidistributed uniform
+  pseudo-random number generator.
+\newblock \emph{ACM Transactions on Modeling and Computer Simulation: Special
+  Issue on Uniform Random Number Generation}, 8\penalty0 (1):\penalty0 3--30,
+  January 1998.
+
+\bibitem[Michaelis and Menten(1913)]{MentenMichaelis1913}
+M.I. Michaelis and L.~Menten.
+\newblock Die kinetik der invertinwirkung.
+\newblock \emph{Biochemische Zeitschrift}, 49:\penalty0 333--369, 1913.
+
+\bibitem[Mormede et~al.(2017)Mormede, Dunn, Parker, and
+  Hanchet]{Mormede_Dunn_Parker_Hanchet_2017}
+S.~Mormede, A.~Dunn, S.J. Parker, and S.~Hanchet.
+\newblock Using spatial population models to investigate the potential effects
+  of the ross sea region marine protected area on the antarctic toothfish
+  population.
+\newblock \emph{Fisheries Research}, 190:\penalty0 164–174, 2017.
+\newblock \doi{10.1016/j.fishres.2017.02.015}.
+
+\bibitem[Mormede et~al.(2020)Mormede, Parker, and
+  Pinkerton]{Mormede_Parker_Pinkerton_2020}
+S.~Mormede, S.J. Parker, and M.H. Pinkerton.
+\newblock Comparing spatial distribution modelling of fisheries data with
+  single-area or spatially-explicit integrated population models, a case study
+  of toothfish in the ross sea region.
+\newblock \emph{Fisheries Research}, 221:\penalty0 105381, Jan 2020.
+\newblock ISSN 01657836.
+\newblock \doi{10.1016/j.fishres.2019.105381}.
+
+\bibitem[Punt and Hilborn(2001)]{828}
+A.E. Punt and R.~Hilborn.
+\newblock \emph{BAYES-SA. Bayesian stock assessment methods in fisheries.
+  User's manual. FAO Computerized information series (fisheries) 12}.
+\newblock Food and Agriculture Organisation of the United Nations, Rome
+  (Italy)., 2001.
+
+\bibitem[Schnute(1981)]{836}
+J.~Schnute.
+\newblock A versatile growth model with statistically stable parameters.
+\newblock \emph{Canadian Journal of Fisheries and Aquatic Sciences},
+  38\penalty0 (9):\penalty0 1128--1140, 1981.
+
+\bibitem[Storn and Price(1995)]{1442}
+Rainer Storn and Kenneth Price.
+\newblock Differential evolution - a simple and efficient adaptive scheme for
+  global optimization over continuous spaces.
+\newblock Technical Report TR-95-012, International Computer Science Institute,
+  Berkeley, CA, 1995.
+\newblock URL \url{http://citeseer.ist.psu.edu/182432.html}.
+
+\end{thebibliography}

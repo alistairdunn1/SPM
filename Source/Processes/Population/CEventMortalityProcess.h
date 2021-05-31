@@ -26,15 +26,19 @@ public:
   // Functions
   CEventMortalityProcess();
   virtual ~CEventMortalityProcess();
-  CProcess* clone() { return new CEventMortalityProcess(*this); }
-  double    getUMax() { return dUMax; }
-  int       getYearsCount() { return vYearsList.size(); }
-  int       getYears(int index);
-  int       getLayersCount() { return vLayersList.size(); }
-  string    getLayers(int index);
-  void      validate();
-  void      build();
-  void      execute();
+  CProcess*   clone() { return new CEventMortalityProcess(*this); }
+  double      getUMax() { return dUMax; }
+  int         getYearsCount() { return vYearsList.size(); }
+  int         getYears(int index);
+  vector<int> getYears() { return vYearsList; }
+  int         getLayersCount() { return vLayersList.size(); }
+  string      getLayers(int index);
+  double      getActualRemovals(int index) { return vActualRemovalsIndex[index]; }
+  double      getRecordedRemovals(int index) { return vRecordedRemovalsIndex[index]; }
+  void        validate();
+  void        build();
+  void        rebuild();
+  void        execute();
 
 protected:
   // Variables
@@ -46,11 +50,14 @@ protected:
   vector<string>         vLayersList;
   vector<CNumericLayer*> vLayersIndex;
   CNumericLayer*         pLayer;
+  CNumericLayer*         pActualCatchLayer;
   int                    iCurrentYear;
   bool                   bYearMatch;
   CTimeStepManager*      pTimeStepManager;
   string                 sPenalty;
   CPenalty*              pPenalty;
+  vector<double>         vActualRemovalsIndex;
+  vector<double>         vRecordedRemovalsIndex;
 };
 
 #endif /*CEVENTMORTALITYPROCESS_H_*/

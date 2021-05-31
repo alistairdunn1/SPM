@@ -123,8 +123,29 @@ void CBiomassEventMortalityProcess::build() {
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
+
+    // rebuild
+    rebuild();
+
   } catch (string& Ex) {
     Ex = "CBiomassEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CBiomassEventMortalityProcess::rebuild()
+// Build Our Relationships and Indexes
+//**********************************************************************
+void CBiomassEventMortalityProcess::rebuild() {
+  try {
+    for (int i = 0; i < (int)vYearsList.size(); ++i) {
+      vRecordedRemovalsIndex.push_back(0.0);
+      vActualRemovalsIndex.push_back(0.0);
+    }
+
+  } catch (string& Ex) {
+    Ex = "CBiomassEventMortalityProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -138,11 +159,14 @@ void CBiomassEventMortalityProcess::execute() {
   try {
 #endif
     // See if we are suppose to be executing first
-    bYearMatch   = false;
+    int iIndexYear = 0;
+    bYearMatch     = false;
+
     iCurrentYear = pTimeStepManager->getCurrentYear();
     for (int i = 0; i < (int)vYearsList.size(); ++i) {
       if (vYearsList[i] == iCurrentYear) {
         bYearMatch = true;
+        iIndexYear = i;
         pLayer     = vLayersIndex[i];
         break;
       }
@@ -169,6 +193,10 @@ void CBiomassEventMortalityProcess::execute() {
 
         // Get Layer Value
         dCatch = pLayer->getValue(i, j);
+
+        // Record the catch
+        vRecordedRemovalsIndex[iIndexYear] += dCatch;
+
         // Clear our Vulnerable Amount
         dVulnerable = 0.0;
 
@@ -206,6 +234,8 @@ void CBiomassEventMortalityProcess::execute() {
 
             // Subtract These
             pBaseSquare->subValue(vCategoryIndex[k], l, dCurrent);
+            // add this to vActualRemovalsIndex
+            vActualRemovalsIndex[iIndexYear] += dCurrent;
           }
         }
       }

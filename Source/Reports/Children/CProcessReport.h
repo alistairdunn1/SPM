@@ -4,7 +4,6 @@
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science �2009 - www.niwa.co.nz
 // Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CPROCESSREPORT_H_
 #define CPROCESSREPORT_H_
@@ -14,6 +13,10 @@
 #include "Base/CFileReport.h"
 
 typedef vector<vector<double>> Data;
+
+// Forward Dec
+class CNumericLayer;
+class CLayerManager;
 
 //**********************************************************************
 //
@@ -29,8 +32,14 @@ public:
   void     execute();
 
 protected:
-  string    sParameter;
-  CProcess* pTarget;
+  string         sParameter;
+  CProcess*      pTarget;
+  CNumericLayer* pCatchLayer;
+  CNumericLayer* pRemovalLayer;
+  CLayerManager* pLayerManager;
+
+private:
+  bool bReportRemovals;
 };
 
 #endif /* CPROCESSREPORT_H_ */

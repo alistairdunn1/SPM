@@ -389,6 +389,7 @@
 #define PARAM_RECRUITMENT_VALUES "recruitment_values"
 #define PARAM_RECRUITMENT_YEARS "recruitment_years"
 #define PARAM_RANDOM_NUMBER_SEED "random_number_seed"
+#define PARAM_REMOVALS "removals"
 #define PARAM_REPORT "report"
 #define PARAM_RESCALE "rescale"
 #define PARAM_RHO "rho"

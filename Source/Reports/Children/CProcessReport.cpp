@@ -16,10 +16,14 @@
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Processes/CProcess.h"
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess2.h"
+#include "../../Processes/Population/CBiomassEventMortalityProcess.h"
+#include "../../Processes/Population/CEventMortalityProcess.h"
 #include "../../Processes/Population/CHollingMortalityRateProcess.h"
 #include "../../Processes/Population/CLocalBHRecruitmentProcess.h"
 #include "../../Processes/Population/CPreySuitabilityPredationProcess.h"
@@ -34,9 +38,12 @@
 CProcessReport::CProcessReport() {
   // Variables
   eExecutionState = STATE_FINALIZATION;
+  pLayerManager   = CLayerManager::Instance();
+  bReportRemovals = false;
 
   // Reg
   pParameterList->registerAllowed(PARAM_PROCESS);
+  pParameterList->registerAllowed(PARAM_REMOVALS);
 }
 
 //**********************************************************************
@@ -46,7 +53,8 @@ CProcessReport::CProcessReport() {
 void CProcessReport::validate() {
   try {
     // Get var
-    sParameter = pParameterList->getString(PARAM_PROCESS);
+    sParameter      = pParameterList->getString(PARAM_PROCESS);
+    bReportRemovals = pParameterList->getBool(PARAM_REMOVALS, true, false);
 
     // Validate parent
     CFileReport::validate();
@@ -295,6 +303,38 @@ void CProcessReport::execute() {
       cout << PARAM_RECRUITMENT_VALUES << ": ";
       for (int i = 0; i < (int)vRecruitmentValues.size(); ++i) {
         cout << vRecruitmentValues[i] << (i < ((int)vRecruitmentValues.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+    }
+
+    // EventMortalityProcess
+    CEventMortalityProcess* pEventMortalityProcess = dynamic_cast<CEventMortalityProcess*>(pTarget);
+    if (pEventMortalityProcess != 0 && bReportRemovals) {
+      vector<int> vYears = pEventMortalityProcess->getYears();
+      std::cout << PARAM_VALUES << ": ";
+      for (int i = 0; i < (int)vYears.size(); ++i) {
+        std::cout << pEventMortalityProcess->getRecordedRemovals(i) << (i < ((int)vYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      std::cout << PARAM_REMOVALS << ": ";
+      for (int i = 0; i < (int)vYears.size(); ++i) {
+        std::cout << pEventMortalityProcess->getActualRemovals(i) << (i < ((int)vYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+    }
+
+    // BiomassEventMortalityProcess
+    CBiomassEventMortalityProcess* pBiomassEventMortalityProcess = dynamic_cast<CBiomassEventMortalityProcess*>(pTarget);
+    if (pBiomassEventMortalityProcess != 0 && bReportRemovals) {
+      vector<int> vYears = pBiomassEventMortalityProcess->getYears();
+      std::cout << PARAM_VALUES << ": ";
+      for (int i = 0; i < (int)vYears.size(); ++i) {
+        std::cout << pBiomassEventMortalityProcess->getRecordedRemovals(i) << (i < ((int)vYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
+      }
+      cout << "\n";
+      std::cout << PARAM_REMOVALS << ": ";
+      for (int i = 0; i < (int)vYears.size(); ++i) {
+        std::cout << pBiomassEventMortalityProcess->getActualRemovals(i) << (i < ((int)vYears.size() - 1) ? CONFIG_SPACE_SEPARATOR : "");
       }
       cout << "\n";
     }
