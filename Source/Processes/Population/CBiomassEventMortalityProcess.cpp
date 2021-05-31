@@ -124,6 +124,9 @@ void CBiomassEventMortalityProcess::build() {
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
 
+    vRecordedRemovalsIndex.resize(getYearsCount());
+    vActualRemovalsIndex.resize(getYearsCount());
+
     // rebuild
     rebuild();
 
@@ -139,11 +142,6 @@ void CBiomassEventMortalityProcess::build() {
 //**********************************************************************
 void CBiomassEventMortalityProcess::rebuild() {
   try {
-    for (int i = 0; i < (int)vYearsList.size(); ++i) {
-      vRecordedRemovalsIndex.push_back(0.0);
-      vActualRemovalsIndex.push_back(0.0);
-    }
-
   } catch (string& Ex) {
     Ex = "CBiomassEventMortalityProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -165,9 +163,11 @@ void CBiomassEventMortalityProcess::execute() {
     iCurrentYear = pTimeStepManager->getCurrentYear();
     for (int i = 0; i < (int)vYearsList.size(); ++i) {
       if (vYearsList[i] == iCurrentYear) {
-        bYearMatch = true;
-        iIndexYear = i;
-        pLayer     = vLayersIndex[i];
+        bYearMatch                = true;
+        iIndexYear                = i;
+        pLayer                    = vLayersIndex[i];
+        vRecordedRemovalsIndex[i] = 0.0;
+        vActualRemovalsIndex[i]   = 0.0;
         break;
       }
     }

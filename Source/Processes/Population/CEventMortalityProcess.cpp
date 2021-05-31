@@ -124,6 +124,9 @@ void CEventMortalityProcess::build() {
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
 
+    vRecordedRemovalsIndex.resize(getYearsCount());
+    vActualRemovalsIndex.resize(getYearsCount());
+
     // rebuild
     rebuild();
 
@@ -139,11 +142,6 @@ void CEventMortalityProcess::build() {
 //**********************************************************************
 void CEventMortalityProcess::rebuild() {
   try {
-    for (int i = 0; i < (int)vYearsList.size(); ++i) {
-      vRecordedRemovalsIndex.push_back(0.0);
-      vActualRemovalsIndex.push_back(0.0);
-    }
-
   } catch (string& Ex) {
     Ex = "CEventMortalityProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
