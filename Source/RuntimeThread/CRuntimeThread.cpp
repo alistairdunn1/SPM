@@ -183,6 +183,7 @@ void CRuntimeThread::executeBasicRun() {
     string sReportSuffix         = ".";
     int    iThisIterationWidth   = (int)floor(log10(iEstimateValueNumber + 1)) + 1;
     int    iCount                = iSuffixIterationWidth - iThisIterationWidth;
+
     if (iCount > 0) {
       for (int j = 0; j < iCount; ++j) {
         sReportSuffix += "0";
@@ -266,6 +267,24 @@ void CRuntimeThread::executeSimulationRun() {
       }
     }
     sReportSuffix += boost::lexical_cast<string>(i + 1);
+
+    if (pConfig->getSuffixFileOutput()) {
+      int iEstimateValueCount   = pEstimateManager->getEstimateValueCount();
+      int iEstimateValueNumber  = pEstimateManager->getEstimateValueNumber();
+      int iSuffixIterationWidth = (int)floor(log10((double)iEstimateValueCount + 1)) + 1;
+      int iThisIterationWidth   = (int)floor(log10(iEstimateValueNumber + 1)) + 1;
+      int iCount                = iSuffixIterationWidth - iThisIterationWidth;
+
+      sReportSuffix += ".";
+
+      if (iCount > 0) {
+        for (int j = 0; j < iCount; ++j) {
+          sReportSuffix += "0";
+        }
+      }
+      sReportSuffix += boost::lexical_cast<string>(iEstimateValueNumber + 1);
+    }
+
     CReportManager::Instance()->setReportSuffix(sReportSuffix);
 
     // Validate, Build, Start

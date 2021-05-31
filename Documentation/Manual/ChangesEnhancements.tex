@@ -5,7 +5,7 @@ A summary of changes introduced into \SPM\ are detailed below. These include any
 \textbf{For version \SPM\ \VER}
 \begin{enumerate}
   \item Added an alternative parameterisation for the Beverton-Holt recruitment process (bh\_recruitment2)
-  \item Added an (optional) command line argument to automatically modify output file names using a unique suffix for each run when using (-r -i)
+  \item Added an (optional) command line argument (\texttt{-u}) to automatically modify output file names using a unique suffix for each run when using (\texttt{-r -i}) and for each set of observations when simulating using (\texttt{-s \emph{$n$}\ -i})
 	\item Fixed errors in calculations of \texttt{annual\_mortality\_rate} and \texttt{constant\_exploitation\_rate} processes when used with the \texttt{layers} subcommand
 	\item Applied a consistent standard of formatting for all of the C++ source code files
 	\item Added an option to use the $\tan$ rescaling transformation for bounded parameters in the numerical\_differences minimiser.

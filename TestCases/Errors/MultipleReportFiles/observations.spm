@@ -378,3 +378,10 @@ p2 0.10
 @ageing_error normal
 type normal
 cv 0.1
+
+@report CPUE-2006
+type simulated_observation
+observation CPUE-2006
+file_name SIM-CPUE-2006
+overwrite false
+

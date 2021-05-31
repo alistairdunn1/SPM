@@ -87,6 +87,8 @@ If simulating, then the contribution to the objective function of each observati
 
 Prints out a complete observation definition (i.e., in the form defined by \commandlabsubarg{report}{type}{observation}), but with observed values replaced by randomly generated simulated values. The output is in a form  suitable for use within a \SPM\ \config, reproducing the command and subcommands from the \config.
 
+For each simulated set of observations (i.e., for each line of a \texttt{-i \emph{file\_name}}), \SPM\ will generate a random set of simulated observations. If the simulation report is redirected to a file using \texttt{file\_name}, then each file name will have a suffix \texttt{.$x$}, where $x$ is a unique number corresponding to the simulation iteration. Note that if multiple lines are supplied in the \texttt{-i} file to generate the realisations for the simulations, all of these will be appended into the simulation output files for each simulation $x$ unless the command line option \textt{-u} is used. 
+
 \subsection{\I{Print the ageing error misclassification matrix}}\index{Reports ! Ageing error misclassification matrix}\label{sec:ageingerrorreport}
 
 Prints out the ageing error misclassification matrix.

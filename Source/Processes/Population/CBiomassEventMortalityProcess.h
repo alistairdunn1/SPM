@@ -51,6 +51,7 @@ protected:
   CTimeStepManager*      pTimeStepManager;
   string                 sPenalty;
   CPenalty*              pPenalty;
+  vector<CNumericLayer*> vLayerActualCatches;
 };
 
 #endif /*CBIOMASSEVENTMORTALITYPROCESS_H_*/
