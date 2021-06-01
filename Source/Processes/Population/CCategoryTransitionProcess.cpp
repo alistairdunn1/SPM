@@ -107,6 +107,7 @@ void CCategoryTransitionProcess::validate() {
       CError::errorGreaterThan(PARAM_U_MAX, PARAM_ONE);
     if (dUMax <= TRUE_ZERO)
       CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
+
   } catch (string& Ex) {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -132,6 +133,7 @@ void CCategoryTransitionProcess::build() {
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
+
   } catch (string& Ex) {
     Ex = "CCategoryTransitionProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;

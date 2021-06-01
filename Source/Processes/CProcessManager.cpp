@@ -118,6 +118,7 @@ void CProcessManager::validate() {
       if (mLabelList[Process->getLabel()] > 1)
         CError::errorDuplicate(PARAM_LABEL, Process->getLabel());
     }
+
   } catch (string& Ex) {
     Ex = "CProcessManager.validate()->" + Ex;
     throw Ex;

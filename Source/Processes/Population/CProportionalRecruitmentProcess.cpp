@@ -99,6 +99,7 @@ void CProportionalRecruitmentProcess::validate() {
     // Check SSBOffset is a non-negative int
     if (iSSBOffset < 0)
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
+
   } catch (string& Ex) {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -150,7 +151,6 @@ void CProportionalRecruitmentProcess::rebuild() {
 #ifndef OPTIMIZE
   try {
 #endif
-
     // Base rebuild
     CProcess::rebuild();
 

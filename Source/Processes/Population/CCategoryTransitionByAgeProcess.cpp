@@ -116,6 +116,7 @@ void CCategoryTransitionByAgeProcess::validate() {
         iCounter++;
       }
     }
+
   } catch (string& Ex) {
     Ex = "CCategoryTransitionByAgeProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -146,6 +147,7 @@ void CCategoryTransitionByAgeProcess::build() {
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
+
   } catch (string& Ex) {
     Ex = "CCategoryTransitionByAgeProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;

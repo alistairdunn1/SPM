@@ -161,6 +161,7 @@ void CConstantRecruitmentProcess::execute() {
         for (int k = 0; k < getCategoryCount(); ++k) pBaseSquare->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]));
       }
     }
+
 #ifndef OPTIMIZE
   } catch (string& Ex) {
     Ex = "CRecruitmentProcess.execute(" + getLabel() + ")->" + Ex;

@@ -126,6 +126,7 @@ void CBHRecruitmentProcess2::validate() {
       if (!CComparer::isPositive(dValue))
         CError::errorLessThanEqualTo(PARAM_VALUES, PARAM_ZERO);
     }
+
   } catch (string& Ex) {
     Ex = "CBHRecruitment2.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -202,6 +203,7 @@ void CBHRecruitmentProcess2::build() {
 
     // rebuild
     rebuild();
+
   } catch (string& Ex) {
     Ex = "CBHRecruitment2.build(" + getLabel() + ")->" + Ex;
     throw Ex;

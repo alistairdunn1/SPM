@@ -240,6 +240,7 @@ void CBiomassEventMortalityProcess::execute() {
         }
       }
     }
+
 #ifndef OPTIMIZE
   } catch (string& Ex) {
     Ex = "CBiomassEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;

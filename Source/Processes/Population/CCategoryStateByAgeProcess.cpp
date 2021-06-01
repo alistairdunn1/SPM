@@ -96,6 +96,7 @@ void CCategoryStateByAgeProcess::validate() {
         iCounter++;
       }
     }
+
   } catch (string& Ex) {
     Ex = "CCategoryStateByAgeProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

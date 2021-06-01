@@ -154,9 +154,9 @@ void CAnnualMortalityRateProcess::execute() {
     if (CComparer::isEqual(dM, 0.0))
       return;  // Don't run this year
 
-    // If a meta-layer, then we need to rebuild the Process to take account of changes in layer values by year
+    // If a non-static layer, then we need to rebuild the Process to take account of changes in layer values by year
     if (pLayer != 0) {
-      if (pLayer->getLayerType() == PARAM_META_NUMERIC) {
+      if (!(pLayer->getIsStatic())) {
         rebuild();
       }
     }

@@ -122,6 +122,7 @@ void CLocalBHRecruitmentProcess::validate() {
       if (!CComparer::isNonNegative(dValue))
         CError::errorLessThan(PARAM_YCS_VALUES, PARAM_ZERO);
     }
+
   } catch (string& Ex) {
     Ex = "CLocalBHRecruitment.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -200,6 +201,7 @@ void CLocalBHRecruitmentProcess::build() {
 
     // rebuild
     rebuild();
+
   } catch (string& Ex) {
     Ex = "CLocalBHRecruitment.build(" + getLabel() + ")->" + Ex;
     throw Ex;

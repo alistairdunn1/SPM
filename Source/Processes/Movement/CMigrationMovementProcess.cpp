@@ -68,6 +68,7 @@ void CMigrationMovementProcess::validate() {
       CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
     if (getProportion() > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+
   } catch (string& Ex) {
     Ex = "CMigrationMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -92,6 +93,7 @@ void CMigrationMovementProcess::build() {
       pSinkLayer = CLayerManager::Instance()->getNumericLayer(sSinkLayer);
     if (sSourceLayer != "")
       pSourceLayer = CLayerManager::Instance()->getNumericLayer(sSourceLayer);
+
   } catch (string& Ex) {
     Ex = "CMigrationMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -106,7 +108,6 @@ void CMigrationMovementProcess::execute() {
 #ifndef OPTIMIZE
   try {
 #endif
-
     // TODO: Scott.. this function works correctly, but does need
     // optimisation. Its multiple loops would proably result in this
     // being relatively slow. Can we improve it?

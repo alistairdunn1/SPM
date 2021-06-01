@@ -91,6 +91,7 @@ void CConstantMortalityRateProcess::build() {
 
     // Rebuild
     rebuild();
+
   } catch (string& Ex) {
     Ex = "CConstantMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -148,9 +149,9 @@ void CConstantMortalityRateProcess::execute() {
     // Base execute
     CProcess::execute();
 
-    // If a meta-layer, then we need to rebuild the Process to take account of changes in layer values by year
+    // If a non-static layer, then we need to rebuild the Process to take account of changes in layer values by year
     if (pLayer != 0) {
-      if (pLayer->getLayerType() == PARAM_META_NUMERIC) {
+      if (!(pLayer->getIsStatic())) {
         rebuild();
       }
     }

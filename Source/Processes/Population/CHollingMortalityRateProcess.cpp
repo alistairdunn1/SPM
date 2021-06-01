@@ -119,6 +119,7 @@ void CHollingMortalityRateProcess::build() {
 
     // Rebuild
     rebuild();
+
   } catch (string& Ex) {
     Ex = "CHollingMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;

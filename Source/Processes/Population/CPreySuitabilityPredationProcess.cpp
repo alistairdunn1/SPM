@@ -130,6 +130,7 @@ void CPreySuitabilityPredationProcess::validate() {
     // Check if equal to one
     if (dRunningTotal != 1.0)
       CError::errorNotEqual(PARAM_ELECTIVITIES, PARAM_ONE);
+
   } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -186,6 +187,7 @@ void CPreySuitabilityPredationProcess::build() {
 
     // Rebuild
     rebuild();
+
   } catch (string& Ex) {
     Ex = "CPreySuitabilityPredationProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;

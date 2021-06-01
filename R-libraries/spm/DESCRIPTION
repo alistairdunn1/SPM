@@ -1,7 +1,7 @@
 Package: spm
 Title: SPM extract package
 Version: 2.0.3
-Date: 2021-05-28
+Date: 2021-05-31
 Author: Alistair Dunn
 Description: A set of R functions for extracting from SPM output files.
 Maintainer: Alistair Dunn <Alistair.Dunn@OceanEnvironmental.co.nz>

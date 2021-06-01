@@ -97,6 +97,7 @@ void CCategoryTransitionRateProcess::build() {
 
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
   } catch (string& Ex) {
     Ex = "CCategoryTransitionRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -147,6 +148,7 @@ void CCategoryTransitionRateProcess::execute() {
         }
       }
     }
+
 #ifndef OPTIMIZE
   } catch (string& Ex) {
     Ex = "CCategoryTransitionRateProcess.execute(" + getLabel() + ")->" + Ex;

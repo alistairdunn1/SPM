@@ -63,6 +63,7 @@ void CAdjacentCellMovementProcess::validate() {
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
     registerEstimable(PARAM_PROPORTION, &dProportion);
+
   } catch (string& Ex) {
     Ex = "CAdjacentCellMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -85,6 +86,7 @@ void CAdjacentCellMovementProcess::build() {
     // Get our Layer
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
   } catch (string& Ex) {
     Ex = "CAdjacentCellMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;

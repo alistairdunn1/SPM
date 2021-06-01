@@ -101,6 +101,7 @@ void CEventMortalityProcess::validate() {
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }
+
   } catch (string& Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -240,6 +241,7 @@ void CEventMortalityProcess::execute() {
         }
       }
     }
+
 #ifndef OPTIMIZE
   } catch (string& Ex) {
     Ex = "CEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;

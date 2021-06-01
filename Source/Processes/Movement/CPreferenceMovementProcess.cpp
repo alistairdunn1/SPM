@@ -62,6 +62,7 @@ void CPreferenceMovementProcess::validate() {
 
     // register estimables
     registerEstimable(PARAM_PROPORTION, &dProportion);
+
   } catch (string& Ex) {
     Ex = "CPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -115,6 +116,7 @@ void CPreferenceMovementProcess::build() {
 
       rebuild();
     }
+
   } catch (string& Ex) {
     Ex = "CPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -237,6 +239,7 @@ void CPreferenceMovementProcess::execute() {
         }
       }
     }
+
   } catch (string& Ex) {
     Ex = "CPreferenceMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

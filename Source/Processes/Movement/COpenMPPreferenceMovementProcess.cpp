@@ -65,6 +65,7 @@ void COpenMPPreferenceMovementProcess::validate() {
       CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
     if (getProportion() > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+
   } catch (string& Ex) {
     Ex = "COpenMPPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -128,6 +129,7 @@ void COpenMPPreferenceMovementProcess::build() {
 
       rebuild();
     }
+
   } catch (string& Ex) {
     Ex = "COpenMPPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -262,6 +264,7 @@ void COpenMPPreferenceMovementProcess::execute() {
         }
       }
     }
+
 #ifndef OPTIMIZE
   } catch (string& Ex) {
     cout << "EX: " << Ex << endl;
