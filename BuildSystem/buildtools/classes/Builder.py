@@ -67,6 +67,13 @@ class Release:
       os.chdir(Globals.build_directory_)
       if os.system("make -j " + Globals.threads_) != EX_OK:
         return Globals.PrintError("Failed to build code base. Please see above for build error")
+      else:
+        print('-->strip ' + Globals.build_directory_ + '/spm')
+        os.system('strip ' + Globals.build_directory_ + '/spm')
+        print('-->strip ' + Globals.build_directory_ + '/spm_unittests')
+        os.system('strip ' + Globals.build_directory_ + '/spm_unittests')
+        print('-->strip ' + Globals.build_directory_ + '/spm_unoptimised')
+        os.system('strip ' + Globals.build_directory_ + '/spm_unoptimised')
 
     elapsed = time.time() - start
     print( 'Compile finished in ' + str(round(elapsed, 2)) + ' seconds')
