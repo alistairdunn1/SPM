@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {3.2}The input configuration file}{9}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Redirecting standard output}{10}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Command line arguments}{11}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Constructing an \texttt {SPM}\ input configuration file}{11}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Constructing an \texttt {SPM}\ input configuration file}{12}{subsection.3.5}%
 \contentsline {subsubsection}{\numberline {3.5.1}Commands}{12}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Subcommands}{12}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}The command-block format}{13}{subsubsection.3.5.3}%

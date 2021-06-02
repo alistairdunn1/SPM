@@ -33,7 +33,7 @@ The command and subcommand definitions in the \config\ can be extensive (especia
 
 \subsection{\I{Redirecting standard output}\label{sec:redirecting-stdout}}
 
-\SPM\ uses the standard output stream \texttt{standard output}\index{standard output} to display run-time information. The \I{standard error} stream is used by \SPM\ to output the program exit status and run-time errors. We suggest redirecting both the standard output and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. With the bash shell (on Linux systems), you can do this using the command structure,
+\SPM\ uses the standard output stream \texttt{standard output}\index{standard output} to display run-time information. The \I{standard error} stream is used by \SPM\ to output the program exit status and run-time errors. We suggest redirecting both the standard output and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. \SPM\ allows reports to be directed to a file (using the \texttt{file\_name} argument within the \texttt{@report} command). Otherwise these will be sent to the standard output stream. With the bash shell (on Linux systems), you can direct output to the standard output using the command structure,
 
 \begin{verbatim} (spm [arguments] > out) >& err &\end{verbatim}
 
@@ -90,7 +90,7 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 \item [\texttt{-t \emph{number}}] Maximum number of \emph{threads}\index{Setting the number of threads}\index{Threads!setting} to use when the model includes multi-threaded process.
 
-\item [\texttt{-u}] Modify output file names using a unique suffix for each set of free parameter values when doing either a run (\texttt{-r}) or simulating (\texttt{-s}), and parameter values are supplied supplied using \texttt{-i \emph{file}}.
+\item [\texttt{-u}] Modify output file names using a unique suffix for each set of free parameter values when doing either a run (\texttt{-r}) or simulating (\texttt{-s}), and parameter values are supplied supplied using \texttt{-i \emph{file}}. Note that this will only modify the suffix on reports that specify a \texttt{file\_name} argument (i.e., not output that was directed to the standard output stream).
 
 \item [\texttt{-q}] Run \emph{quietly}, i.e., suppress verbose printing of \SPM.
 
