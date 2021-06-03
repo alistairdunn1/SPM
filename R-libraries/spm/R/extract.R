@@ -7,10 +7,11 @@
 #' 
 #' @export
 #'
-"extract" <- function (file, path = "", ignore.unknown=FALSE) {
+"extract" <- function(file, path = "", ignore.unknown = FALSE) {
   if (missing(path)) path <- ""
   filename <- spm.make.filename(path = path, file = file)
   line <- scan(filename, what = "", sep = "\n")
+  line <- c(line, " ")
   res <- list()
   if (substring(line[1], 1, 3) == "SPM") {
     header <- list()
@@ -20,11 +21,11 @@
     header$user.name <- line[5]
     header$machine.name <- line[6]
     res$header <- header
-    temp<-substr(res$header$version[1],2,17)
+    temp <- substr(res$header$version[1], 2, 17)
     if (temp != spm.binary.version()) {
       cat("Warning: spm and the spm R library versions are different\n")
-      cat("SPM v",temp,"\n",sep="")
-      cat("R   v",spm.binary.version(),"\n",sep="")
+      cat("SPM v", temp, "\n", sep = "")
+      cat("R   v", spm.binary.version(), "\n", sep = "")
     }
   }
   index <- (1:length(line))[substring(line, 1, 1) == "["]
@@ -77,7 +78,6 @@
         res$derived_quantity_by_cell <- list()
       counter$derived_quantity_by_cell <- counter$derived_quantity_by_cell + 1
       temp <- extract.derivedquantitybycell(lines = line[index[i]:(index[i + 1] - 1)])
-      xxx<<-line[index[i]:(index[i + 1] - 1)]
       res$derived_quantity_by_cell[[counter$derived_quantity_by_cell]] <- temp
       names(res$derived_quantity_by_cell)[counter$derived_quantity_by_cell] <- report.label[i]
     } else if (report.type[i] == "estimate_summary") {
@@ -105,7 +105,7 @@
       if (!("layer" %in% names(res)))
         res$layer <- list()
       counter$layer <- counter$layer + 1
-      temp <- extract.layer(lines = line[index[i]:(index[i +  1] - 1)])
+      temp <- extract.layer(lines = line[index[i]:(index[i + 1] - 1)])
       res$layer[[counter$layer]] <- temp
       names(res$layer)[counter$layer] <- report.label[i]
     } else if (report.type[i] == "layer_derived_view") {
@@ -116,12 +116,12 @@
       res$layer_derived_view[[counter$layer_derived_view]] <- temp
       names(res$layer_derived_view)[counter$layer_derived_view] <- report.label[i]
     } else if (report.type[i] == "MCMC") {
-       if (!("MCMC" %in% names(res)))
-         res$MCMC <- list()
-       counter$MCMC <- counter$MCMC + 1
-       temp <- extract.MCMC(lines = line[index[i]:(index[i + 1])]) #don't remove the *end
-       res$MCMC[[counter$MCMC]] <- temp
-       names(res$MCMC)[counter$MCMC] <- report.label[i]
+      if (!("MCMC" %in% names(res)))
+        res$MCMC <- list()
+      counter$MCMC <- counter$MCMC + 1
+      temp <- extract.MCMC(lines = line[index[i]:(index[i + 1])]) #don't remove the *end
+      res$MCMC[[counter$MCMC]] <- temp
+      names(res$MCMC)[counter$MCMC] <- report.label[i]
     } else if (report.type[i] == "objective_function") {
       if (!("objective_function" %in% names(res)))
         res$objective_function <- list()
@@ -130,7 +130,7 @@
       res$objective_function[[counter$objective_function]] <- temp
       names(res$objective_function)[counter$objective_function] <- report.label[i]
     } else if (report.type[i] == "observation") {
-      if (!("observation" %in% names(res))) 
+      if (!("observation" %in% names(res)))
         res$observation <- list()
       counter$observation <- counter$observation + 1
       temp <- extract.observation(lines = line[index[i]:(index[i + 1] - 1)])
@@ -144,14 +144,14 @@
       res$partition[[counter$partition]] <- temp
       names(res$partition)[counter$partition] <- report.label[i]
     } else if (report.type[i] == "partition_biomass") {
-      if (!("partition_biomass" %in% names(res))) 
+      if (!("partition_biomass" %in% names(res)))
         res$partition_biomass <- list()
       counter$partition_biomass <- counter$partition_biomass + 1
       temp <- extract.partitionbiomass(lines = line[index[i]:(index[i + 1] - 1)])
       res$partition_biomass[[counter$partition_biomass]] <- temp
       names(res$partition_biomass)[counter$partition_biomass] <- report.label[i]
     } else if (report.type[i] == "process") {
-      if (!("process" %in% names(res))) 
+      if (!("process" %in% names(res)))
         res$process <- list()
       counter$process <- counter$process + 1
       temp <- extract.process(lines = line[index[i]:(index[i + 1] - 1)])
@@ -192,8 +192,8 @@
       temp <- extract.spatialmap(lines = line[index[i]:(index[i + 1] - 1)])
       res$spatial_map[[counter$spatial_map]] <- temp
       names(res$spatial_map)[counter$spatial_map] <- report.label[i]
-    } else if (ignore.unknown==FALSE) {
-      stop(paste("ERROR: Unknown report type (report.type=",report.type[i],")"))
+    } else if (ignore.unknown == FALSE) {
+      stop(paste("ERROR: Unknown report type (report.type=", report.type[i], ")"))
     }
   }
   return(res)
