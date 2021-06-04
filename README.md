@@ -1,4 +1,4 @@
-SPM v2.0.3-2020-05-31
+SPM v2.0.3-2020-06-03
 =====================
 
 Spatial Population Model (SPM)
