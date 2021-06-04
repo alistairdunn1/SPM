@@ -91,13 +91,13 @@ BOOST_AUTO_TEST_CASE(MultinomialLikelihood) {
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(observed[0], 0.11864406779661017, 1e-9);
-  BOOST_CHECK_CLOSE(observed[1], 0.23728813559322035, 1e-9);
-  BOOST_CHECK_CLOSE(observed[2], 0.22033898305084745, 1e-9);
-  BOOST_CHECK_CLOSE(observed[3], 0.42372881355932202, 1e-9);
-  BOOST_CHECK_CLOSE(observed[4], 0.95999999999999996, 1e-9);
-  BOOST_CHECK_CLOSE(observed[5], 0.040000000000000001, 1e-9);
-  BOOST_CHECK_CLOSE(observed[6], 1.0000000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[0], 0.14, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.16, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.24, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.46, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.58, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.42, 1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 1.00, 1e-9);
 
   // clean up memory
   delete pLikelihood;
