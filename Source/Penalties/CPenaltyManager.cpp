@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 16/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Local Headers
@@ -104,11 +102,21 @@ CPenalty* CPenaltyManager::getPenalty(int index) {
 // Add A Penalty to our list of Executed ones.
 //**********************************************************************
 void CPenaltyManager::flagPenalty(string Label, double Value) {
-  SFlaggedPenalty* stPenalty = new SFlaggedPenalty();
-  stPenalty->Label           = Label;
-  stPenalty->Score           = Value;
-
-  vFlaggedPenaltyList.push_back(stPenalty);
+  // Check if Penalty has alread been flagged, and if so, add to it
+  bool bExists = false;
+  for (int i = 0; i < (int)vFlaggedPenaltyList.size(); ++i) {
+    if (getFlaggedPenalty(i)->Label == Label)
+      getFlaggedPenalty(i)->Score += Value;
+    bExists = true;
+    break;
+  }
+  // Else create new penalty
+  if (!bExists) {
+    SFlaggedPenalty* stPenalty = new SFlaggedPenalty();
+    stPenalty->Label           = Label;
+    stPenalty->Score           = Value;
+    vFlaggedPenaltyList.push_back(stPenalty);
+  }
 }
 
 //**********************************************************************

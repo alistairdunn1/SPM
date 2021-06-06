@@ -8,7 +8,8 @@
 #' @export
 #'
 "extract" <- function(file, path = "", ignore.unknown = FALSE) {
-  if (missing(path)) path <- ""
+  if (missing(path))
+    path <- ""
   filename <- spm.make.filename(path = path, file = file)
   line <- scan(filename, what = "", sep = "\n")
   line <- c(line, " ")

@@ -7,9 +7,9 @@
 #' 
 #' @export
 #'
-"PFconstant" <-
-function(x,alpha,rescale=T) {
-  res<-x^alpha
-  if(rescale) res<-res/max(res)
+"PFconstant" <- function(x, alpha, rescale = T) {
+  res <- x ^ alpha
+  if (rescale)
+    res <- res / max(res)
   return(res)
 }

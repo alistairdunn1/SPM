@@ -2,8 +2,7 @@
 #'
 #' @author Alistair Dunn
 #'
-spm.report.types <- function ()
-{
+spm.report.types <- function() {
   return(c("ageing_error",
            "age_size",
            "age_weight",

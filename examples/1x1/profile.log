@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: ..\..\Build\windows\spm -p -q -g 0 -o profile.dat 
-Date: Sun May 30 20:19:01 2021
-v2.0.3-2021-05-28 (rev. 2021-05-28 23:15:03 UTC). Copyright (c) 2008-2021, NIWA
+Date: Sun Jun 06 11:25:33 2021
+v2.0.3-2021-06-04 (rev. 2021-06-04 10:19:54 UTC). Copyright (c) 2008-2021, NIWA
 User name: alist
-Machine name: HP1040 (Windows_NT, PID=16576)
+Machine name: HP1040 (Windows_NT, PID=16512)
 
 [CAA-1998]
 report.type: observation
@@ -1376,6 +1376,7 @@ obs->CPUE-2004: -1.36001
 obs->CPUE-2005: -0.729978
 obs->CPUE-2006: 0.128542
 obs->CPUE-2007: 2.14316
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -2110,6 +2111,7 @@ obs->CPUE-2004: -1.41236
 obs->CPUE-2005: -0.967134
 obs->CPUE-2006: -0.792307
 obs->CPUE-2007: -0.52248
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -2844,6 +2846,7 @@ obs->CPUE-2004: -1.43133
 obs->CPUE-2005: -1.22477
 obs->CPUE-2006: -1.39579
 obs->CPUE-2007: -1.56172
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -3578,6 +3581,7 @@ obs->CPUE-2004: -1.42979
 obs->CPUE-2005: -1.38334
 obs->CPUE-2006: -1.5918
 obs->CPUE-2007: -1.54105
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -4312,6 +4316,7 @@ obs->CPUE-2004: -1.42241
 obs->CPUE-2005: -1.47194
 obs->CPUE-2006: -1.61771
 obs->CPUE-2007: -1.24698
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -5046,6 +5051,7 @@ obs->CPUE-2004: -1.41393
 obs->CPUE-2005: -1.5235
 obs->CPUE-2006: -1.58577
 obs->CPUE-2007: -0.923775
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -5780,6 +5786,7 @@ obs->CPUE-2004: -1.40594
 obs->CPUE-2005: -1.55505
 obs->CPUE-2006: -1.53625
 obs->CPUE-2007: -0.630368
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -6514,6 +6521,7 @@ obs->CPUE-2004: -1.39882
 obs->CPUE-2005: -1.57523
 obs->CPUE-2006: -1.4837
 obs->CPUE-2007: -0.37638
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -7248,6 +7256,7 @@ obs->CPUE-2004: -1.39247
 obs->CPUE-2005: -1.58866
 obs->CPUE-2006: -1.43328
 obs->CPUE-2007: -0.158624
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -7982,6 +7991,7 @@ obs->CPUE-2004: -1.38689
 obs->CPUE-2005: -1.59781
 obs->CPUE-2006: -1.38681
 obs->CPUE-2007: 0.0281285
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -8716,6 +8726,7 @@ obs->CPUE-2004: -1.38201
 obs->CPUE-2005: -1.60419
 obs->CPUE-2006: -1.34468
 obs->CPUE-2007: 0.189135
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -9450,6 +9461,7 @@ obs->CPUE-2004: -1.37765
 obs->CPUE-2005: -1.6087
 obs->CPUE-2006: -1.30661
 obs->CPUE-2007: 0.329145
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -10184,6 +10196,7 @@ obs->CPUE-2004: -1.37385
 obs->CPUE-2005: -1.61192
 obs->CPUE-2006: -1.27241
 obs->CPUE-2007: 0.451405
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -10918,6 +10931,7 @@ obs->CPUE-2004: -1.37032
 obs->CPUE-2005: -1.61425
 obs->CPUE-2006: -1.2414
 obs->CPUE-2007: 0.559509
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -11652,6 +11666,7 @@ obs->CPUE-2004: -1.36721
 obs->CPUE-2005: -1.61593
 obs->CPUE-2006: -1.21336
 obs->CPUE-2007: 0.655447
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -12386,6 +12401,7 @@ obs->CPUE-2004: -1.36446
 obs->CPUE-2005: -1.61711
 obs->CPUE-2006: -1.18813
 obs->CPUE-2007: 0.740467
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -13120,6 +13136,7 @@ obs->CPUE-2004: -1.36188
 obs->CPUE-2005: -1.61796
 obs->CPUE-2006: -1.16494
 obs->CPUE-2007: 0.817442
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -13854,6 +13871,7 @@ obs->CPUE-2004: -1.35959
 obs->CPUE-2005: -1.61853
 obs->CPUE-2006: -1.14388
 obs->CPUE-2007: 0.886612
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -14588,6 +14606,7 @@ obs->CPUE-2004: -1.35755
 obs->CPUE-2005: -1.61891
 obs->CPUE-2006: -1.12466
 obs->CPUE-2007: 0.949152
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0

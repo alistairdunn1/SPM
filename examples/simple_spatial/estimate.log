@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: ..\..\Build\windows\spm -e -q -g 0 -o MPD.dat 
-Date: Mon May 31 00:39:25 2021
-v2.0.3-2021-05-28 (rev. 2021-05-28 23:15:03 UTC). Copyright (c) 2008-2021, NIWA
+Date: Sun Jun 06 20:33:59 2021
+v2.0.3-2021-06-04 (rev. 2021-06-04 10:19:54 UTC). Copyright (c) 2008-2021, NIWA
 User name: alist
-Machine name: HP1040 (Windows_NT, PID=2768)
+Machine name: HP1040 (Windows_NT, PID=15628)
 
 [initialisation-phase1]
 report.type: initialisation
@@ -8396,6 +8396,7 @@ obs->cpue-2004: 30.2687
 obs->cpue-2005: 18.5791
 obs->cpue-2006: 75.3109
 obs->cpue-2007: 100.976
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->preference_function[ImmatureDistance].lambda: 0
 prior->preference_function[ImmatureDepth].a50: 0

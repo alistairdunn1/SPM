@@ -3,7 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 9/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
 //============================================================================
 #ifndef CBIOMASSEVENTMORTALITYPROCESS_H_
 #define CBIOMASSEVENTMORTALITYPROCESS_H_
@@ -25,19 +24,22 @@ public:
   // Functions
   CBiomassEventMortalityProcess();
   virtual ~CBiomassEventMortalityProcess();
-  CProcess*   clone() { return new CBiomassEventMortalityProcess(*this); }
-  double      getUMax() { return dUMax; }
-  int         getYearsCount() { return vYearsList.size(); }
-  int         getYears(int index);
-  vector<int> getYears() { return vYearsList; }
-  int         getLayersCount() { return vLayersList.size(); }
-  string      getLayers(int index);
-  double      getActualRemovals(int index) { return vActualRemovalsIndex[index]; }
-  double      getRecordedRemovals(int index) { return vRecordedRemovalsIndex[index]; }
-  void        validate();
-  void        build();
-  void        rebuild();
-  void        execute();
+  CProcess*      clone() { return new CBiomassEventMortalityProcess(*this); }
+  double         getUMax() { return dUMax; }
+  int            getYearsCount() { return vYearsList.size(); }
+  int            getYears(int index);
+  vector<int>    getYears() { return vYearsList; }
+  int            getLayersCount() { return vLayersList.size(); }
+  string         getLayers(int index);
+  double         getActualRemovals(int index) { return vActualRemovalsIndex[index]; }
+  double         getRecordedRemovals(int index) { return vRecordedRemovalsIndex[index]; }
+  CNumericLayer* getRemovalsLayer(int index) { return vLayersIndex[index]; }
+  CNumericLayer* getActualRemovalsLayer(int index) { return vActualRemovalsLayersIndex[index]; }
+
+  void validate();
+  void build();
+  void rebuild();
+  void execute();
 
 protected:
   // Variables
@@ -49,7 +51,6 @@ protected:
   vector<string>         vLayersList;
   vector<CNumericLayer*> vLayersIndex;
   CNumericLayer*         pLayer;
-  CNumericLayer*         pActualCatchLayer;
   int                    iCurrentYear;
   bool                   bYearMatch;
   CTimeStepManager*      pTimeStepManager;
@@ -57,6 +58,8 @@ protected:
   CPenalty*              pPenalty;
   vector<double>         vActualRemovalsIndex;
   vector<double>         vRecordedRemovalsIndex;
+  CNumericLayer*         pActualRemovalsLayer;
+  vector<CNumericLayer*> vActualRemovalsLayersIndex;
 };
 
 #endif /*CBIOMASSEVENTMORTALITYPROCESS_H_*/

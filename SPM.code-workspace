@@ -14,6 +14,11 @@
 			"recruitments"
 		],
 		"formatall.search.include": "**/*.{h,hpp,cpp,r,tex}",
-		"formatall.search.exclude": "**/{node_modules,Boost,Build,BuildSystem/buildtools/windows,BuildSystem/buildtools/linux}/**"
+		"formatall.search.exclude": "**/{node_modules,Boost,Build,BuildSystem/buildtools/windows,BuildSystem/buildtools/linux}/**",
+		"files.associations": {
+			"*.rmd": "markdown",
+			"variant": "cpp",
+			"*.ipp": "cpp"
+		}
 	}
 }

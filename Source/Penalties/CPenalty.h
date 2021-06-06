@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 16/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CPENALTY_H_
 #define CPENALTY_H_
@@ -23,6 +21,7 @@ public:
   virtual ~CPenalty();
   void validate();
   void trigger(string Label, double Value1, double Value2);
+  void triggerZero(string Label);
 
 protected:
   // Variables

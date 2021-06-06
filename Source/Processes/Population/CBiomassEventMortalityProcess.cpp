@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 9/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Global Headers
@@ -19,6 +17,7 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Layers/Numeric/CDoubleLayer.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Penalties/CPenaltyManager.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -35,10 +34,12 @@ using std::endl;
 //**********************************************************************
 CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   // Variables
-  pTimeStepManager = CTimeStepManager::Instance();
-  sType            = PARAM_BIOMASS_EVENT_MORTALITY;
-  bRequiresMerge   = false;
-  pPenalty         = 0;
+  pTimeStepManager     = CTimeStepManager::Instance();
+  sType                = PARAM_BIOMASS_EVENT_MORTALITY;
+  bRequiresMerge       = false;
+  pPenalty             = 0;
+  pLayer               = 0;
+  pActualRemovalsLayer = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -73,7 +74,7 @@ void CBiomassEventMortalityProcess::validate() {
   try {
     // Get our Parameters
     dUMax    = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
-    sPenalty = pParameterList->getString(PARAM_PENALTY, true, "");
+    sPenalty = pParameterList->getString(PARAM_PENALTY, false, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
@@ -120,6 +121,20 @@ void CBiomassEventMortalityProcess::build() {
     CLayerManager* pLayerManager = CLayerManager::Instance();
     pLayerManager->fillVector(vLayersIndex, vLayersList);
 
+    // Build storage for pActualRemovalsLayer
+    for (int i = 0; i < (int)vYearsList.size(); ++i) {
+      pActualRemovalsLayer = new CDoubleLayer();
+      for (int k = 0; k < iWorldHeight; ++k) {
+        for (int l = 0; l < iWorldWidth; ++l) {
+          pActualRemovalsLayer->addParameter(PARAM_DATA, "0");
+        }
+      }
+      pActualRemovalsLayer->addParameter(PARAM_LABEL, boost::lexical_cast<string>(vYearsList[i]) + "_" + vLayersList[i] + "_removals");
+      pActualRemovalsLayer->validate();
+      pActualRemovalsLayer->build();
+      vActualRemovalsLayersIndex.push_back(pActualRemovalsLayer);
+    }
+
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
@@ -165,9 +180,10 @@ void CBiomassEventMortalityProcess::execute() {
       if (vYearsList[i] == iCurrentYear) {
         bYearMatch                = true;
         iIndexYear                = i;
-        pLayer                    = vLayersIndex[i];
         vRecordedRemovalsIndex[i] = 0.0;
         vActualRemovalsIndex[i]   = 0.0;
+        pLayer                    = vLayersIndex[i];
+        pActualRemovalsLayer      = vActualRemovalsLayersIndex[i];
         break;
       }
     }
@@ -175,6 +191,13 @@ void CBiomassEventMortalityProcess::execute() {
     // No Match. Don't Execute
     if (!bYearMatch)
       return;
+
+    // set ActualRemovalsLayer as zero
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
+        pActualRemovalsLayer->setValue(i, j, 0.0);
+      }
+    }
 
     // pLayer contains no positive values
     if (pLayer->getIsZero())
@@ -215,12 +238,15 @@ void CBiomassEventMortalityProcess::execute() {
         dExploitation = dCatch / CMath::zeroFun(dVulnerable, ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0) {  // Throw Penalty
+          if (pPenalty != 0)  // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
+        } else {
+          if (pPenalty != 0)  // Throw null Penalty
+            pPenalty->triggerZero(sLabel);
+          if (dExploitation < ZERO) {
+            dExploitation = 0.0;
+            continue;
           }
-        } else if (dExploitation < ZERO) {
-          dExploitation = 0.0;
-          continue;
         }
 
         // Loop Through Categories & remove number based on calculated exploitation rate
@@ -232,10 +258,12 @@ void CBiomassEventMortalityProcess::execute() {
             if (dCurrent <= 0.0)
               continue;
 
-            // Subtract These
+            // Subtract these from the population
             pBaseSquare->subValue(vCategoryIndex[k], l, dCurrent);
-            // add this to vActualRemovalsIndex
+            // Record and add this to vActualRemovalsIndex
             vActualRemovalsIndex[iIndexYear] += dCurrent;
+            // Record and add this to vActualRemovalsLayer
+            pActualRemovalsLayer->addValue(i, j, dCurrent);
           }
         }
       }

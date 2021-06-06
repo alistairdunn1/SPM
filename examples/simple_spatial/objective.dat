@@ -26,6 +26,7 @@ obs->cpue-2004: 30.2687
 obs->cpue-2005: 18.5791
 obs->cpue-2006: 75.3109
 obs->cpue-2007: 100.976
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->preference_function[ImmatureDistance].lambda: 0
 prior->preference_function[ImmatureDepth].a50: 0

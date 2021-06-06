@@ -3,7 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science �2009 - www.niwa.co.nz
-// Description :
 //============================================================================
 #ifndef CPROCESSREPORT_H_
 #define CPROCESSREPORT_H_
@@ -40,6 +39,7 @@ protected:
 
 private:
   bool bReportRemovals;
+  bool bReportRemovalsAsLayer;
 };
 
 #endif /* CPROCESSREPORT_H_ */

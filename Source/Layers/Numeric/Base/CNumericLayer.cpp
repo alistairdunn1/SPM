@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 1/04/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Global Headers
@@ -38,6 +36,32 @@ void CNumericLayer::setValue(int X, int Y, double Value) {
     CError::errorSupported(PARAM_FUNCTION);
   } catch (string& Ex) {
     Ex = "CNumericLayer.setValue(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CNumericLayer::addValue(int X, int Y, double Value)
+// Default add Value
+//**********************************************************************
+void CNumericLayer::addValue(int X, int Y, double Value) {
+  try {
+    CError::errorSupported(PARAM_FUNCTION);
+  } catch (string& Ex) {
+    Ex = "CNumericLayer.addValue(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CNumericLayer::subValue(int X, int Y, double Value)
+// Default subtract Value
+//**********************************************************************
+void CNumericLayer::subValue(int X, int Y, double Value) {
+  try {
+    CError::errorSupported(PARAM_FUNCTION);
+  } catch (string& Ex) {
+    Ex = "CNumericLayer.subValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

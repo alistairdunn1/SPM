@@ -1,5 +1,4 @@
-".First.lib"<-
-function(library, section)
-{
+".First.lib" <-
+function(library, section) {
   spm.version()
 }

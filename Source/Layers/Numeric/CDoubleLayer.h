@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date$
 //============================================================================
 #ifndef CDOUBLELAYER_H_
 #define CDOUBLELAYER_H_
@@ -24,6 +22,8 @@ public:
   CLayer* clone() { return (new CDoubleLayer(*this)); }
   double  getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void    setValue(int RowIndex, int ColIndex, double Value);
+  void    addValue(int RowIndex, int ColIndex, double Value);
+  void    subValue(int RowIndex, int ColIndex, double Value);
   double  getLayerMin();
   double  getLayerMax();
   void    validate();

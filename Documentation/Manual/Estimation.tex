@@ -189,7 +189,7 @@ You have the option to specify that some of the estimated parameters are fixed d
 The posterior sample can also be used for %projections (Section \ref{sec:projections}) or 
 simulations (Section {sec:simulation-observations}) with the values supplied using \texttt{spm -i \emph{file}}.
 
-\subsection{Priors\label{sec:priors}}
+\subsection{\I{Priors}\label{sec:priors}}
 
 In a Bayesian analysis, you need to give a prior for every parameter that is being estimated. There are no default priors.  
 
@@ -241,14 +241,15 @@ where $\nu  = \frac{\mu  - A}{B - A}$, and $\tau = \frac{\left(\mu -A \right)\le
 
 \end{enumerate}
 
-\subsection{Penalties\label{sec:penalties}}
+\subsection{\I{Penalties}\label{sec:penalties}}
 
 Penalties can be used to encourage or discourage parameter values or model outputs that are unlikely to be sensible, by adding a penalty to the objective function. For example, parameter estimates that do not allow a known mortality event to remove enough individuals from the population can be discouraged with an event mortality penalty. \SPM\ requires penalty functions for processes that move or shift a \emph{number} of individuals between categories or from the partition.
 
-For most penalties, you need to specify a multiplier, and the objective function is increased by this multiplier times the penalty value as described below. In some cases you will need to make the multiplier quite large to prohibit some model behaviour. 
+For the penalties, you need to specify a multiplier, and the objective function is increased by this multiplier times the penalty value as described below. In some cases you will need to make the multiplier quite large to prohibit some model behaviour. 
 
-Currently, the penalties for the processes \commandlabsubarg{process}{type}{event\_mortality} and \commandlabsubarg{process}{type}{category\_transition} are the only penalties implemented. 
+Currently, the processes \commandlabsubarg{process}{type}{event\_mortality}, \commandlabsubarg{process}{type}{biomass\_event\_mortality}, \commandlabsubarg{process}{type}{category\_transition}, \commandlabsubarg{process}{type}{category\_transition\_by\_age}, 
+\commandlabsubarg{process}{type}{holling\_mortality\_rate}, and \commandlabsubarg{process}{type}{prey\_suitability\_predation} allow penalties. Penalties for \commandlabsubarg{process}{type}{event\_mortality} and \commandlabsubarg{process}{type}{biomass\_event\_mortality} are compulsory.
 
-For both of these processes, two types of penalty can be defined, natural scale (the default) and log scale. Both of these types add a penalty value of the squared difference between the observed value (i.e., the actual number of individuals to be removed in an event mortality process or the actual number of individuals to shift in a category transition process), and the number that were moved (if less than or equal), times the penalty multiplier.
+For processes that have penalties, two types of penalty can be defined, natural scale (the default) and log scale. Both of these types add a penalty value of the squared difference between the observed value (e.g., the actual number of individuals to be removed in an event mortality process or the actual number of individuals to shift in a category transition process), and the number that were moved (if less than), times the penalty multiplier.
 
-The natural scale penalty just uses at the squared difference on a natural scale, while the log scale penalty uses the squared difference of the logged values. 
+The natural scale penalty uses at the squared difference on a natural scale, while the log scale penalty uses the squared difference of the logged values. 

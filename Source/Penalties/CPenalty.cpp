@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 16/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Local Headers
@@ -45,17 +43,36 @@ void CPenalty::validate() {
 }
 
 //**********************************************************************
-// void CPenalty::trigger(string Label, double Value)
+// void CPenalty::triggerNull(string Label)
+// trigger The penalty with a zero
+//**********************************************************************
+void CPenalty::triggerZero(string Label) {
+#ifndef OPTIMIZE
+  try {
+#endif
+    // Assign Variables
+    string sFullLabel = sLabel + "(" + Label + ")";
+
+    // Flag Penalty Manager
+    CPenaltyManager* pPenaltyManager = CPenaltyManager::Instance();
+    pPenaltyManager->flagPenalty(sFullLabel, 0.0);
+
+#ifndef OPTIMIZE
+  } catch (string& Ex) {
+    Ex = "CPenalty.triggerZero(" + sLabel + ")->" + Ex;
+    throw Ex;
+  }
+#endif
+}
+
+//**********************************************************************
+// void CPenalty::trigger(string Label, double Value1, double Value2)
 // trigger The penalty
 //**********************************************************************
 void CPenalty::trigger(string Label, double Value1, double Value2) {
 #ifndef OPTIMIZE
   try {
 #endif
-    // Value should never be 0
-    // if (CComparer::isZero(Value))
-    //  CError::errorEqualTo(PARAM_PENALTY, PARAM_ZERO);
-
     // Assign Variables
     string sFullLabel = sLabel + "(" + Label + ")";
     double dValue     = 0.0;
@@ -73,7 +90,7 @@ void CPenalty::trigger(string Label, double Value1, double Value2) {
 
 #ifndef OPTIMIZE
   } catch (string& Ex) {
-    Ex = "CPenalty.execute(" + sLabel + ")->" + Ex;
+    Ex = "CPenalty.trigger(" + sLabel + ")->" + Ex;
     throw Ex;
   }
 #endif

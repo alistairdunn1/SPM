@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 9/03/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CEVENTMORTALITYPROCESS_H_
 #define CEVENTMORTALITYPROCESS_H_
@@ -26,19 +24,22 @@ public:
   // Functions
   CEventMortalityProcess();
   virtual ~CEventMortalityProcess();
-  CProcess*   clone() { return new CEventMortalityProcess(*this); }
-  double      getUMax() { return dUMax; }
-  int         getYearsCount() { return vYearsList.size(); }
-  int         getYears(int index);
-  vector<int> getYears() { return vYearsList; }
-  int         getLayersCount() { return vLayersList.size(); }
-  string      getLayers(int index);
-  double      getActualRemovals(int index) { return vActualRemovalsIndex[index]; }
-  double      getRecordedRemovals(int index) { return vRecordedRemovalsIndex[index]; }
-  void        validate();
-  void        build();
-  void        rebuild();
-  void        execute();
+  CProcess*      clone() { return new CEventMortalityProcess(*this); }
+  double         getUMax() { return dUMax; }
+  int            getYearsCount() { return vYearsList.size(); }
+  int            getYears(int index);
+  vector<int>    getYears() { return vYearsList; }
+  int            getLayersCount() { return vLayersList.size(); }
+  string         getLayers(int index);
+  double         getActualRemovals(int index) { return vActualRemovalsIndex[index]; }
+  double         getRecordedRemovals(int index) { return vRecordedRemovalsIndex[index]; }
+  CNumericLayer* getRemovalsLayer(int index) { return vLayersIndex[index]; }
+  CNumericLayer* getActualRemovalsLayer(int index) { return vActualRemovalsLayersIndex[index]; }
+
+  void validate();
+  void build();
+  void rebuild();
+  void execute();
 
 protected:
   // Variables
@@ -50,7 +51,6 @@ protected:
   vector<string>         vLayersList;
   vector<CNumericLayer*> vLayersIndex;
   CNumericLayer*         pLayer;
-  CNumericLayer*         pActualCatchLayer;
   int                    iCurrentYear;
   bool                   bYearMatch;
   CTimeStepManager*      pTimeStepManager;
@@ -58,6 +58,8 @@ protected:
   CPenalty*              pPenalty;
   vector<double>         vActualRemovalsIndex;
   vector<double>         vRecordedRemovalsIndex;
+  CNumericLayer*         pActualRemovalsLayer;
+  vector<CNumericLayer*> vActualRemovalsLayersIndex;
 };
 
 #endif /*CEVENTMORTALITYPROCESS_H_*/

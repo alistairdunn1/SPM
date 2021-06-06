@@ -20,6 +20,7 @@ obs->CPUE-2004: -1.42109
 obs->CPUE-2005: -1.4817
 obs->CPUE-2006: -1.61507
 obs->CPUE-2007: -1.1968
+penalty->event_mortality_penalty(Fishing): 0
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0

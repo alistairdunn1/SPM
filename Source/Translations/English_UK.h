@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 18/07/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 #ifndef ENGLISH_UK_H_
@@ -390,6 +388,7 @@
 #define PARAM_RECRUITMENT_YEARS "recruitment_years"
 #define PARAM_RANDOM_NUMBER_SEED "random_number_seed"
 #define PARAM_REMOVALS "removals"
+#define PARAM_REMOVALS_AS_LAYER "removals_by_cell"
 #define PARAM_REPORT "report"
 #define PARAM_RESCALE "rescale"
 #define PARAM_RHO "rho"

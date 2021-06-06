@@ -9,11 +9,13 @@
 #' 
 #' @export
 #'
-"PFthreshold" <-
-function(x,alpha,N,lambda,rescale=T) {
-  pow<-function(x,y) return(x^y)
-  res<-1.0/(pow(x/N,lambda))
-  res<-ifelse(x > N, res,1)^alpha
-  if(rescale) res<-res/max(res)
+"PFthreshold" <- function(x, alpha, N, lambda, rescale = T) {
+  pow <- function(x, y) {
+    return(x ^ y)
+  }
+  res <- 1.0 / (pow(x / N, lambda))
+  res <- ifelse(x > N, res, 1) ^ alpha
+  if (rescale)
+    res <- res / max(res)
   return(res)
 }

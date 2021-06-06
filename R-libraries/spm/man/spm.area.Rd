@@ -10,5 +10,5 @@ spm.area(corners)
 utility function
 }
 \author{
-Alistair Dunn
+Alistair Dunn (based on code by Ian Doonan)
 }

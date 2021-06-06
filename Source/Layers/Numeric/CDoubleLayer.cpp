@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date$
 //============================================================================
 
 // Global Headers
@@ -61,10 +59,34 @@ double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow = 0, int
 }
 
 //**********************************************************************
-// void CDoubleLayer::addValue(int Row, int Col, double Value)
-// Add Value to our Grid
+// void CDoubleLayer::setValue(int Row, int Col, double Value)
+// Set a vValue in our Grid
 //**********************************************************************
 void CDoubleLayer::setValue(int RowIndex, int ColIndex, double Value) {
+#ifndef OPTIMIZE
+  try {
+    if (RowIndex >= iHeight)
+      CError::errorGreaterThanEqualTo(PARAM_ROW, PARAM_LAYER_HEIGHT);
+    if (ColIndex >= iWidth)
+      CError::errorGreaterThanEqualTo(PARAM_COLUMN, PARAM_LAYER_WIDTH);
+    if (RowIndex < 0)
+      CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
+    if (ColIndex < 0)
+      CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
+  } catch (string& Ex) {
+    Ex = "CDoubleLayer.setValue()->" + Ex;
+    throw Ex;
+  }
+#endif
+
+  pGrid[RowIndex][ColIndex] = Value;
+}
+
+//**********************************************************************
+// void CDoubleLayer::addValue(int Row, int Col, double Value)
+// Add value to our Grid
+//**********************************************************************
+void CDoubleLayer::addValue(int RowIndex, int ColIndex, double Value) {
 #ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
@@ -81,7 +103,30 @@ void CDoubleLayer::setValue(int RowIndex, int ColIndex, double Value) {
   }
 #endif
 
-  pGrid[RowIndex][ColIndex] = Value;
+  pGrid[RowIndex][ColIndex] += Value;
+}
+//**********************************************************************
+// void CDoubleLayer::subValue(int Row, int Col, double Value)
+// Subtract value to our Grid
+//**********************************************************************
+void CDoubleLayer::subValue(int RowIndex, int ColIndex, double Value) {
+#ifndef OPTIMIZE
+  try {
+    if (RowIndex >= iHeight)
+      CError::errorGreaterThanEqualTo(PARAM_ROW, PARAM_LAYER_HEIGHT);
+    if (ColIndex >= iWidth)
+      CError::errorGreaterThanEqualTo(PARAM_COLUMN, PARAM_LAYER_WIDTH);
+    if (RowIndex < 0)
+      CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
+    if (ColIndex < 0)
+      CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
+  } catch (string& Ex) {
+    Ex = "CDoubleLayer.subValue()->" + Ex;
+    throw Ex;
+  }
+#endif
+
+  pGrid[RowIndex][ColIndex] -= Value;
 }
 
 //**********************************************************************

@@ -9,49 +9,43 @@
 #'
 #' @export
 #'
-dirichletLikelihood<-function(observed,expected,errorValue,processError=0,delta=1e-11) {
-  zeroFun<-function(x,delta=1e-11) ifelse(x>=delta,x,delta/(2-(x/delta)))
-  if(processError > 0) N <- errorValue * processError
+dirichletLikelihood <- function(observed, expected, errorValue, processError = 0, delta = 1e-11) {
+  zeroFun <- function(x, delta = 1e-11) ifelse(x >= delta, x, delta / (2 - (x / delta)))
+  if (processError > 0) N <- errorValue * processError
   else N <- errorValue
-  alpha <- zeroFun(expected,delta)*N
+  alpha <- zeroFun(expected, delta) * N
   x <- observed
   a1 <- lgamma(sum(alpha))
   a2 <- sum(lgamma(alpha))
-  a3 <- sum((alpha-1)* log(x))
+  a3 <- sum((alpha - 1) * log(x))
   res <- -a1 + a2 - a3
   return(res)
 }
 
-#dirichletLikelihood(c(0.2,0.1,0.7),c(0.2,0.2,0.6),50,processError=0,delta=1e-11)
-#-2.15327
-
-#dirichletLikelihood(c(0.25,0.25,0.25,0.25),c(0.1,0.2,0.3,0.4),50,processError=1.0,delta=1e-05)
-#-0.2852167
-
-dirichletLikelihood2<-function(observed,expected,errorValue,processError=0,delta=1e-11) {
-  zeroFun<-function(x,delta=1e-11) ifelse(x>=delta,x,delta/(2-(x/delta)))
-  if(processError > 0) N <- errorValue * processError
+dirichletLikelihood2 <- function(observed, expected, errorValue, processError = 0, delta = 1e-11) {
+  zeroFun <- function(x, delta = 1e-11) ifelse(x >= delta, x, delta / (2 - (x / delta)))
+  if (processError > 0) N <- errorValue * processError
   else N <- errorValue
 
   initial <- 0
   for (i in 1:length(expected)) {
-    initial <-  initial + zeroFun(expected[i],delta) * N
+    initial <- initial + zeroFun(expected[i], delta) * N
   }
   print(initial)
 
   initial <- -lgamma(initial)
 
-  score <-c()
+  score <- c()
   for (i in 1:length(expected)) {
-    dAlpha = zeroFun(expected[i],delta) * N
-    dA2andA3 = lgamma(dAlpha) - ((dAlpha - 1.0) * log(zeroFun(observed[i],delta)));
+    dAlpha = zeroFun(expected[i], delta) * N
+    dA2andA3 = lgamma(dAlpha) - ((dAlpha - 1.0) * log(zeroFun(observed[i], delta)));
     score[i] = dA2andA3;
   }
 
   print(initial)
   print(score)
 
-  res<- sum(score) + initial
+  res <- sum(score) + initial
 
   return(res)
 }

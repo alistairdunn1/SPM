@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 14/02/2008
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date$
 //============================================================================
 
 // Headers
@@ -191,15 +189,19 @@ void CCategoryTransitionProcess::execute() {
           }
         }
 
-        // Work out exploitation rate to move
+        // Work out exploitation rate to remove (catch/vulnerableBiomass)
         dExploitation = dN / CMath::zeroFun(dVulnerable, ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0) {  // Throw Penalty
+          if (pPenalty != 0)  // Throw Penalty
             pPenalty->trigger(sLabel, dN, (dVulnerable * dUMax));
+        } else {
+          if (pPenalty != 0)  // Throw null Penalty
+            pPenalty->triggerZero(sLabel);
+          if (dExploitation < ZERO) {
+            dExploitation = 0.0;
+            continue;
           }
-        } else if (dExploitation < 0.0) {
-          dExploitation = 0.0;
         }
 
         // Loop Through Categories & remove individuals

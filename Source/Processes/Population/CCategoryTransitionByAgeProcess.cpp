@@ -194,15 +194,19 @@ void CCategoryTransitionByAgeProcess::execute() {
           dTotal += pLayerDerivedSquare->getValue(vCategoryIndex[i], (iSquareAgeOffset + j));
         }
 
-        // Work out exploitation rate to move
+        // Work out exploitation rate to remove (catch/vulnerableBiomass)
         dExploitation = ((*mvNPtr).second)[j] / CMath::zeroFun(dTotal, ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0) {  // Throw Penalty
+          if (pPenalty != 0)  // Throw Penalty
             pPenalty->trigger(sLabel, dN, (dTotal * dUMax));
+        } else {
+          if (pPenalty != 0)  // Throw null Penalty
+            pPenalty->triggerZero(sLabel);
+          if (dExploitation < ZERO) {
+            dExploitation = 0.0;
+            continue;
           }
-        } else if (dExploitation < 0.0) {
-          dExploitation = 0.0;
         }
 
         // Loop through the WorldSquares

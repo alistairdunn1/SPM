@@ -11,42 +11,42 @@
 #' 
 #' @export
 #'
-"write.spm.config" <- function(object, file, path = "", header="SPM config file", date=FALSE) {
+"write.spm.config" <- function(object, file, path = "", header = "SPM config file", date = FALSE) {
   # create filename and write file
-  if (missing(path)) path <- ""
+  if (missing(path))
+    path <- ""
   filename <- spm.make.filename(path = path, file = file)
-  cat(paste("#",header,"\n"), file=filename, sep="", fill=F, labels=NULL, append=F)
-  if(date) cat(paste("#",date(),"\n\n"), file=filename, sep="", fill=F, labels=NULL, append=T)
-  for(i in 1:length(object)) {
-    index<-regexpr("\\[",names(object)[i])
-    if(index > 0) {
-      command<-paste("@",substring(names(object)[i],1,index-1),sep="")
-      label<-substring(names(object)[i],index+1,nchar(names(object)[i])-1)
+  cat(paste("#", header, "\n"), file = filename, sep = "", fill = F, labels = NULL, append = F)
+  if (date)
+    cat(paste("#", date(), "\n\n"), file = filename, sep = "", fill = F, labels = NULL, append = T)
+  for (i in 1:length(object)) {
+    index <- regexpr("\\[", names(object)[i])
+    if (index > 0) {
+      command <- paste("@", substring(names(object)[i], 1, index - 1), sep = "")
+      label <- substring(names(object)[i], index + 1, nchar(names(object)[i]) - 1)
     } else {
-      command<-paste("@",names(object)[i],sep="")
-      label<-""
+      command <- paste("@", names(object)[i], sep = "")
+      label <- ""
     }
-    cat(paste(command,label,sep=" "), file=filename, sep="", fill=F, labels=NULL, append=T)
-    cat("\n", file=filename, sep="", fill=F, labels=NULL, append=T)
-    subcommands<-object[[i]]
-    if(length(subcommands)>0) {
-      for(j in 1:length(subcommands)) {
-        if(names(subcommands)[j] %in% c("data","obs","error_value")) {
-          for(k in 1:nrow(subcommands[[j]])) {
-            line<-paste(subcommands[[j]][k,],sep="",collapse=" ")
-            line<-paste(names(subcommands)[j]," ",line,"\n",sep="")
-            cat(line, file=filename, sep="", fill=F, labels=NULL, append=T)
+    cat(paste(command, label, sep = " "), file = filename, sep = "", fill = F, labels = NULL, append = T)
+    cat("\n", file = filename, sep = "", fill = F, labels = NULL, append = T)
+    subcommands <- object[[i]]
+    if (length(subcommands) > 0) {
+      for (j in 1:length(subcommands)) {
+        if (names(subcommands)[j] %in% c("data", "obs", "error_value")) {
+          for (k in 1:nrow(subcommands[[j]])) {
+            line <- paste(subcommands[[j]][k,], sep = "", collapse = " ")
+            line <- paste(names(subcommands)[j], " ", line, "\n", sep = "")
+            cat(line, file = filename, sep = "", fill = F, labels = NULL, append = T)
           }
         } else {
-          line<-paste(subcommands[[j]],sep="",collapse=" ")
-          line<-paste(names(subcommands)[j]," ",line,"\n",sep="")
-          cat(line, file=filename, sep="", fill=F, labels=NULL, append=T)
+          line <- paste(subcommands[[j]], sep = "", collapse = " ")
+          line <- paste(names(subcommands)[j], " ", line, "\n", sep = "")
+          cat(line, file = filename, sep = "", fill = F, labels = NULL, append = T)
         }
       }
     }
-  cat("\n", file=filename, sep="", fill=F, labels=NULL, append=T)
+    cat("\n", file = filename, sep = "", fill = F, labels = NULL, append = T)
   }
   invisible()
 }
-#write.spm.config(config,"c:/temp/a.spm")
-

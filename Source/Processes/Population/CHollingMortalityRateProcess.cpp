@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 15/01/2009
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Local Headers
@@ -217,12 +215,15 @@ void CHollingMortalityRateProcess::execute() {
         dExploitation = dMortality / CMath::zeroFun(dVulnerable, ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
-          if (pPenalty != 0) {  // Throw Penalty
+          if (pPenalty != 0)  // Throw Penalty
             pPenalty->trigger(sLabel, dMortality, (dVulnerable * dUMax));
+        } else {
+          if (pPenalty != 0)  // Throw null Penalty
+            pPenalty->triggerZero(sLabel);
+          if (dExploitation < ZERO) {
+            dExploitation = 0.0;
+            continue;
           }
-        } else if (dExploitation < ZERO) {
-          dExploitation = 0.0;
-          continue;
         }
 
         // Loop Through Categories & remove number based on calcuated exploitation rate

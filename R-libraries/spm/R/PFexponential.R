@@ -8,9 +8,9 @@
 #' 
 #' @export
 #'
-"PFexponential" <-
-function(x,alpha,lambda,rescale=T) {
-  res<-exp(-lambda * x)^alpha
-  if(rescale) res<-res/max(res)
+"PFexponential" <- function(x, alpha, lambda, rescale = T) {
+  res <- exp(-lambda * x) ^ alpha
+  if (rescale)
+    res <- res / max(res)
   return(res)
 }

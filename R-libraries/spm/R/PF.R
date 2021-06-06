@@ -9,14 +9,15 @@
 #' 
 #' @export
 #'
-"PF" <-
-function(type="none",x,alpha,...,rescale=T) {
-  valid<-c("constant","normal","double_normal","logistic","inverse_logistic","exponential","threshold")
-  if(length(type)!=1) stop("Only 1 preference function can be specified")
-  type<-valid[pmatch(type,valid)]
-  if(type=="") stop(paste("type must be one of",paste(valid,collapse=", "),sep=" "))
-  type<-type
-  fun<-get(paste("PF",type,sep=""))
-  res<-fun(x=x,alpha=alpha,rescale=rescale,...)
+"PF" <- function(type = "none", x, alpha, ..., rescale = T) {
+  valid <- c("constant", "normal", "double_normal", "logistic", "inverse_logistic", "exponential", "threshold")
+  if (length(type) != 1)
+    stop("Only 1 preference function can be specified")
+  type <- valid[pmatch(type, valid)]
+  if (type == "")
+    stop(paste("type must be one of", paste(valid, collapse = ", "), sep = " "))
+  type <- type
+  fun <- get(paste("PF", type, sep = ""))
+  res <- fun(x = x, alpha = alpha, rescale = rescale, ...)
   return(res)
 }

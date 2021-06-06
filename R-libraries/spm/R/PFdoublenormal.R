@@ -10,12 +10,14 @@
 #' 
 #' @export
 #'
-"PFdouble_normal" <-
-function(x,alpha,mu,sigmaL,sigmaR,rescale=T) {
-  pow<-function(x,y) return(x^y)
-  res1<-pow(2.0,-((x-mu)/sigmaL * (x-mu)/sigmaL))^alpha
-  res2<-pow(2.0,-((x-mu)/sigmaR * (x-mu)/sigmaR))^alpha
-  res<-ifelse(x < mu, res1, res2)
-  if(rescale) res<-res/max(res)
+"PFdouble_normal" <- function(x, alpha, mu, sigmaL, sigmaR, rescale = T) {
+  pow <- function(x, y) {
+    return(x ^ y)
+  }
+  res1 <- pow(2.0, - ((x - mu) / sigmaL * (x - mu) / sigmaL)) ^ alpha
+  res2 <- pow(2.0, - ((x - mu) / sigmaR * (x - mu) / sigmaR)) ^ alpha
+  res <- ifelse(x < mu, res1, res2)
+  if (rescale)
+    res <- res / max(res)
   return(res)
 }

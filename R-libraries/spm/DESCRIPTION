@@ -1,11 +1,11 @@
 Package: spm
 Title: SPM extract package
 Version: 2.0.3
-Date: 2021-06-03
+Date: 2021-06-04
 Author: Alistair Dunn
 Description: A set of R functions for extracting from SPM output files.
 Maintainer: Alistair Dunn <Alistair.Dunn@OceanEnvironmental.co.nz>
 License: CPL v1.0. See the SPM User Manual for license details.
-URL: http://www.niwa.co.nz
+URL: https://github.com/alistairdunn1/SPM
 Copyright: National Institute of Water & Atmospheric Research (NIWA), New Zealand Ministry for Primary Industries.
 RoxygenNote: 7.1.1

@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 15/01/2009
 // Copyright   : Copyright NIWA Science �2008 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Local Headers
@@ -321,16 +319,21 @@ void CPreySuitabilityPredationProcess::execute() {
           if (pCRLayer != 0)
             vMortality[m] *= pCRLayer->getValue(i, j);
           vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m], ZERO);
+
+          // Work out exploitation rate to remove (catch/vulnerableBiomass)
+          vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m], ZERO);
           if (vExploitation[m] > dUMax) {
             vExploitation[m] = dUMax;
-            if (pPenalty != 0) {  // Throw Penalty
+            if (pPenalty != 0)  // Throw Penalty
               pPenalty->trigger(sLabel, vMortality[m], (vVulnerable[m] * dUMax));
+          } else {
+            if (pPenalty != 0)  // Throw null Penalty
+              pPenalty->triggerZero(sLabel);
+            if (vExploitation[m] < ZERO) {
+              vExploitation[m] = 0.0;
             }
-          } else if (vExploitation[m] < ZERO) {
-            vExploitation[m] = 0.0;
           }
         }
-
         // Loop Through Categories & remove number based on calculated exploitation rate
         for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
           for (int k = 0; k < pPreyCategories->getNElements(m); ++k) {

@@ -9,10 +9,12 @@
 #' 
 #' @export
 #'
-"PFnormal" <-
-function(x,alpha,mu,sigma,rescale=T) {
-  pow<-function(x,y) return(x^y)
-  res<-pow(2.0,-((x-mu)/sigma * (x-mu)/sigma))^alpha
-  if(rescale) res<-res/max(res)
+"PFnormal" <- function(x, alpha, mu, sigma, rescale = T) {
+  pow <- function(x, y) {
+    return(x ^ y)
+  }
+  res <- pow(2.0, - ((x - mu) / sigma * (x - mu) / sigma)) ^ alpha
+  if (rescale)
+    res <- res / max(res)
   return(res)
 }
