@@ -10,9 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: doBuild.sh boost
-  displayName: 'Compile the BOOST versions of SPM'
+- script: |
+  cd BuildSystem 
+  ./doBuild.sh boost
+displayName: 'Compile the BOOST versions of SPM'
 
-- script: doBuild.sh release
-  displayName: 'Compile the release versions of SPM'
+- script: |
+  cd BuildSystem 
+  ./doBuild.sh release
+displayName: 'Compile the release versions of SPM'
 
