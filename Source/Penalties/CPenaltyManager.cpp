@@ -102,13 +102,14 @@ CPenalty* CPenaltyManager::getPenalty(int index) {
 // Add A Penalty to our list of Executed ones.
 //**********************************************************************
 void CPenaltyManager::flagPenalty(string Label, double Value) {
-  // Check if Penalty has alread been flagged, and if so, add to it
+  // Check if Penalty has already been flagged, and if so, add to it
   bool bExists = false;
   for (int i = 0; i < (int)vFlaggedPenaltyList.size(); ++i) {
-    if (getFlaggedPenalty(i)->Label == Label)
+    if (getFlaggedPenalty(i)->Label == Label) {
       getFlaggedPenalty(i)->Score += Value;
-    bExists = true;
-    break;
+      bExists = true;
+      break;
+    }
   }
   // Else create new penalty
   if (!bExists) {
@@ -208,6 +209,5 @@ void CPenaltyManager::rebuild() {
 CPenaltyManager::~CPenaltyManager() {
   // De-Allocate our Memory
   foreach (CPenalty* Penalty, vPenaltyList) { delete Penalty; }
-
   foreach (SFlaggedPenalty* Penalty, vFlaggedPenaltyList) { delete Penalty; }
 }

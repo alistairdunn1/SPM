@@ -11,7 +11,8 @@
 			"estimables",
 			"holling",
 			"niwa",
-			"recruitments"
+			"recruitments",
+			"selectivities"
 		],
 		"formatall.search.include": "**/*.{h,hpp,cpp,r,tex}",
 		"formatall.search.exclude": "**/{node_modules,Boost,Build,BuildSystem/buildtools/windows,BuildSystem/buildtools/linux}/**",

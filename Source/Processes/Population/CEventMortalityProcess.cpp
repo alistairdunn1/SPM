@@ -125,6 +125,7 @@ void CEventMortalityProcess::build() {
     // Build storage for pActualRemovalsLayer
     for (int i = 0; i < (int)vYearsList.size(); ++i) {
       pActualRemovalsLayer = new CDoubleLayer();
+      pLayerManager->addLayer(pActualRemovalsLayer);
       for (int k = 0; k < iWorldHeight; ++k) {
         for (int l = 0; l < iWorldWidth; ++l) {
           pActualRemovalsLayer->addParameter(PARAM_DATA, "0");
