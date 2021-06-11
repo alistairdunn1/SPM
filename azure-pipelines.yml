@@ -50,6 +50,10 @@ steps:
   displayName: 'Installing Python3 build environment'
 
 - script: |
+    sudo apt install texlive-latex-extra
+  displayName: 'Installing LaTeX build environment'
+
+- script: |
     cd BuildSystem
     ./doBuild.sh boost
   displayName: 'Compile BOOST for SPM'
