@@ -166,7 +166,7 @@ void CBHRecruitmentProcess::build() {
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
-    // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
+    // Figure out the when SSB is calculated w.r.t. recruitment, and then the default iActualOffset
     pTimeStepManager = CTimeStepManager::Instance();
 
     if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantity->getTimeStep()) {
@@ -323,9 +323,9 @@ void CBHRecruitmentProcess::execute() {
       } else {
         CError::errorLessThanEqualTo(PARAM_LAYER, PARAM_ZERO);
       }
-    } else
+    } else {
       dAmountPer /= pWorld->getEnabledSquareCount();
-
+    }
     // Loop Through The World Grid (i,j)
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
