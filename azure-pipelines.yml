@@ -1,13 +1,33 @@
-# Starter pipeline
+#####################################################################################
+# SPM Ubuntu pipeline
+#####################################################################################
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+
+# USAGE:
+#> doBuild.sh [type]
+# Valid Build Types:
+#   help          - Print this help page
+#   check         - Do a check of the build system
+#   boost         - Build boost libraries (build this before building the release)
+#   release       - Build standalone release executable
+#   examples      - Build the SPM examples
+#   documentation - Build the user manual
+#   rlibrary      - Build the R library
+#   unittests     - Run the unit tests
+#   installer     - Build a MS-Windows installer package
+#   deb           - Build the Linux .deb installer
+#   archive       - Build a zipped archive of the application.
+#   clean         - Remove any previous debug/release build information
 
 trigger:
 - master
 
 pool:
   vmImage: ubuntu-latest
+#pool:
+#  vmImage: 'windows-latest'
 
 steps:
 - script: |
@@ -28,13 +48,18 @@ steps:
     sudo apt -y install python3 python3-pip
     sudo pip3 install pytz
   displayName: 'Installing Python3 build environment'
+
 - script: |
     cd BuildSystem 
     ./doBuild.sh boost
-  displayName: 'Compile the BOOST versions of SPM'
+  displayName: 'Compile BOOST for SPM'
 
 - script: |
     cd BuildSystem 
     ./doBuild.sh release
-  displayName: 'Compile the release versions of SPM'
+  displayName: 'Compile the release version of SPM'
 
+- script: |
+    cd BuildSystem 
+    ./doBuild.sh documentation
+  displayName: 'Compile the Documentation for SPM'

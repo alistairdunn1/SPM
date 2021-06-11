@@ -4,41 +4,39 @@ A summary of changes introduced into \SPM\ are detailed below. These include any
 
 \textbf{For version \SPM\ \VER}
 \begin{enumerate}
-  \item Added an alternative parameterisation for the Beverton-Holt recruitment process (bh\_recruitment2)
-  \item Added an (optional) command line argument (\texttt{-u}) to automatically modify output file names using a unique suffix for each run when using (\texttt{-r -i}) and for each set of observations when simulating using (\texttt{-s \emph{$n$}\ -i})
-	\item Fixed errors in calculations of \texttt{annual\_mortality\_rate} and \texttt{constant\_exploitation\_rate} processes when used with the \texttt{layers} subcommand
-	\item Applied a consistent standard of formatting for all of the C++ source code files
+  \item Added an alternative parameterisation for the Beverton-Holt recruitment process (bh\_recruitment2).
+  \item Added an (optional) command line argument (\texttt{-u}) to automatically modify output file names using a unique suffix for each run when using (\texttt{-r -i}) and for each set of observations when simulating using (\texttt{-s \emph{$n$}\ -i}).
+	\item Fixed errors in calculations of \texttt{annual\_mortality\_rate} and \texttt{constant\_exploitation\_rate} processes when used with the \texttt{layers} subcommand.
+	\item Applied a consistent standard of formatting for all of the C++ source code files.
 	\item Added an option to use the $\tan$ rescaling transformation for bounded parameters in the numerical\_differences minimiser.
-	\item Added an option to print out a summary of the total annual requested and actual removals from an event mortality process or a biomass event mortality process from the process report
-	\item Minor improvements to the user manual
-	\item Each of the penalties for an individual process are now combined into a single penalty value, and penalties with value zero are now reported in the objective function
+	\item Added an option to print out a summary of the total annual requested and actual removals from an event mortality process or a biomass event mortality process from the process report.
+	\item Minor improvements to the user manual, including clarification of the description for the input parameter file.
+	\item Each of the penalties for an individual process are now combined into a single penalty value, and penalties with value zero are now reported in the objective function.
 \end{enumerate}
 
 \textbf{For version \SPM\ 2.03-2020-08-29}
 \begin{enumerate}
-  \item Corrected the multinomial simulation generator for proportions-at-age and -length observations
-	\item Removed the undocumented unit conversion multiplier that was in the size-weight calculations
+  \item Corrected the multinomial simulation generator for proportions-at-age and -length observations.
+	\item Removed the undocumented unit conversion multiplier that was in the size-weight calculations.
 \end{enumerate}
 
 \textbf{For version \SPM\ 2.02}
 
 \begin{enumerate}
   \item Minor corrections to the user manual.
-	\item Added a likelihood multiplier option to observations to modify likelihoods
-	\item Added an option for including detection probabilities for proportions by category and proportions by category at length observations
-	\item Speed optimisation fixes
+	\item Added a likelihood multiplier option to observations to modify likelihoods.
+	\item Added an option for including detection probabilities for proportions by category and proportions by category at length observations.
+	\item Speed optimisation fixes.
 \end{enumerate}
 
 \textbf{For version \SPM\ 2.01}
 
 \begin{enumerate}
-  \item Updated and modified the \SPM\ build system for Git using Python3
-  \item Added R functions for reading and writing SPM configuration files
-	\item Added bug fixes and consistency checking of syntax
-	\item Added knife-edge selectivity function
-  \item Added\ \subcommand{proportions-at-length} observations
-  \item Added\ \subcommand{growth\_proportion} to allow the size of an individual to change over the course of a year
-  \item Updated the reports to be consistent in the output, and also updated the R extract library to account for the changes
+  \item Updated and modified the \SPM\ build system for Git using Python3.
+  \item Added R functions for reading and writing SPM configuration files.
+	\item Added bug fixes and consistency checking of syntax.
+	\item Added knife-edge selectivity function.
+  \item Added\ \subcommand{proportions-at-length} observations.
+  \item Added\ \subcommand{growth\_proportion} to allow the size of an individual to change over the course of a year.
+  \item Updated the reports to be consistent in the output, and also updated the R extract library to account for the changes.
 \end{enumerate}
-
-

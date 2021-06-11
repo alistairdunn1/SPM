@@ -2,55 +2,26 @@
 
 \SPM\ is run from the console window (i.e., the DOS command line) on \I{Microsoft Windows} or from a terminal window on \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
 
-The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ \config. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
-Other input files can, in some circumstances, be supplied to define the starting point for an estimation %, define the parameters for a projection, 
-or as a point estimate from which to simulate observations.
+An input parameter file \index{Input parameter file} can, in some circumstances, be supplied to define the starting point for an estimation %, define the parameters for a projection, 
+or as a point estimate from which to simulate observations (see \ref{sec:input-parameter-file} for information about the input parameter file).
 
 Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc,. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is the \emph{run}, \texttt{-e} is the \emph{estimation}, and \texttt{-m} is the \emph{MCMC} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
 
 \subsection{\I{Using \SPM}}
 
-To use \SPM, open a console (i.e., the command prompt) window (Microsoft Windows) or a terminal window (Linux). Navigate to a directory of your choice, where your \config s are located. Then type \texttt{spm} with any arguments (see Section \ref{sec:command-line-arguments} for the list of possible arguments). SPM will print output to the screen and return you to the command prompt when it completes its task. Note that the \SPM\ executable (binary) must be either in the directory where you run it or somewhere in your \texttt{PATH}. Note that an automated installer is available for \SPM\ on Microsoft Windows. If you use the installer, then it will give you the option of modifying your \texttt{PATH} for you (as well a a number of other options to make using the program a little easier). Otherwise, see your operating system documentation for help on identifying or modifying your \texttt{PATH}.
+To use \SPM
 
-\subsection{The \config\label{sec:config-files}}\index{Input configuration file}
+\begin{itemize}
+	\item open a console (i.e., the command prompt) window (Microsoft Windows) or a terminal window (Linux). 
+	\item Navigate to a directory of your choice, where your \config s are located (see \ref{sec:config-files} for more information about the \config). 
+	\item Then type \texttt{spm} with any command line arguments (see Section \ref{sec:command-line-arguments} for the list of possible arguments).
+  \item SPM will print output to the screen and return you to the command prompt when it completes its task. 
+\end{itemize}
 
-The \config\ is made up of four broad sections; the description of the population structure and parameters (the population section), the estimation methods and variables (the estimation section), the observations and their associated likelihoods (the observation section), and the outputs and reports that \SPM\ will return (the report section). 
-
-The \config\ is a plain text file, and is made up of a number of commands (each with subcommands) which specify various options for each of these components. Some of the commands are compulsory, and others are required to specify certain options.  Commands always begin with an @ character, with some commands also requiring a label. 
-
-Subcommands follow the command, with each subcommand having an argument. Some subcommands have default arguments, but many don't and must be specified. Arguments may be strings, numbers, or vectors of strings or numbers. The type of argument is always specific to the subcommand. The order of subcommands or commands in a file does not matter, except that the subcommands for each command must always follow the associated command and occur before the next command. 
-
-For example, to request a report on the state of the partition, use the \texttt{@report} with an arbitrary label (i.e., myPartitionReport) that will allow you to identify it in the subsequent output file, and with the appropriate subcommands to specify the year and time-step, use the syntax; 
-{\small{\begin{verbatim}
-@report partition
-type myPartitionReport
-time_step step_two
-years 2007
-\end{verbatim}}}
-
-The command and subcommand definitions in the \config\ can be extensive (especially when you have a model with a large spatial structures that has many layers and/or observations), and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{\emph{file}}. The command causes an external file, \argument{\emph{file}}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point\index{Including external files}. The file name must be a complete file name with extension, but can use either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands --- but be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
-
-\subsection{\I{Redirecting standard output}\label{sec:redirecting-stdout}}
-
-\SPM\ uses the standard output stream \texttt{standard output}\index{standard output} to display run-time information. The \I{standard error} stream is used by \SPM\ to output the program exit status and run-time errors. We suggest redirecting both the standard output and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. \SPM\ allows reports to be directed to a file (using the \texttt{file\_name} argument within the \texttt{@report} command). Otherwise these will be sent to the standard output stream. With the bash shell (on Linux systems), you can direct output to the standard output using the command structure,
-
-\begin{verbatim} (spm [arguments] > out) >& err &\end{verbatim}
-
-It may also be useful to redirect the standard input, especially is you're using \SPM\ inside a batch job software, i.e. 
-
-\begin{verbatim} (spm [arguments] > out < /dev/null) >& err &\end{verbatim}
-
-On Microsoft Windows systems, you can redirect to standard output using,
-
-\begin{verbatim} spm [arguments] > out\end{verbatim}
-
-And, on some Microsoft Windows systems (e.g., Windows10), you can redirect to both standard output and standard error, using the syntax, 
-
-\begin{verbatim} spm [arguments] > out 2> err\end{verbatim}
-
-Note that \SPM\ outputs a few lines of header information to the output. The header\index{Output header information} consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
-
+Note that the \SPM\ executable (binary) must be either in the directory where you run it or somewhere in your \texttt{PATH}. Note that an automated installer is available for \SPM\ on Microsoft Windows. If you use the installer, then it will give you the option of modifying your \texttt{PATH} for you (as well a a number of other options to make using the program a little easier). Otherwise, see your operating system documentation for help on identifying or modifying your \texttt{PATH}.
+ 
 \subsection{\I{Command line arguments}\label{sec:command-line-arguments}}
 
 The call to \SPM\ is of the following form.: 
@@ -84,9 +55,9 @@ and where \emph{task} is one of;
 In addition, the following are optional arguments\index{Optional command line arguments} [\emph{options}],
 
 \begin{description}
-\item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of free (estimated) parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
+\item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of free (estimated) parameter values from \texttt{\emph{file}}. See Section \ref{sec:input-parameter-file} for details about the format of \texttt{\emph{file}}.
 
-\item [\texttt{-o \emph{file}}] \emph{Output} a report of the free (estimated) parameter values in a format suitable for \texttt{-i \emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
+\item [\texttt{-o \emph{file}}] \emph{Output} a report of the free (estimated) parameter values in a format suitable for \texttt{-i \emph{file}}. See Section \ref{sec:input-parameter-file} for details about the format of \texttt{\emph{file}}.
 
 \item [\texttt{-t \emph{number}}] Maximum number of \emph{threads}\index{Setting the number of threads}\index{Threads!setting} to use when the model includes multi-threaded process.
 
@@ -97,7 +68,23 @@ In addition, the following are optional arguments\index{Optional command line ar
 \item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ will  generate a random number seed based on the computer clock time.
 \end{description}
 
-\subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
+\subsection{The \config\label{sec:config-files}}\index{Input configuration file}
+
+The \config\ is made up of four broad sections; the description of the population structure and parameters (the population section), the estimation methods and variables (the estimation section), the observations and their associated likelihoods (the observation section), and the outputs and reports that \SPM\ will return (the report section). 
+
+The \config\ is a plain text file, and is made up of a number of commands (each with subcommands) which specify various options for each of these components. Some of the commands are compulsory, and others are required to specify certain options.  Commands always begin with an @ character, with some commands also requiring a label. 
+
+Subcommands follow the command, with each subcommand having an argument. Some subcommands have default arguments, but many don't and must be specified. Arguments may be strings, numbers, or vectors of strings or numbers. The type of argument is always specific to the subcommand. The order of subcommands or commands in a file does not matter, except that the subcommands for each command must always follow the associated command and occur before the next command. 
+
+For example, to request a report on the state of the partition, use the \texttt{@report} with an arbitrary label (i.e., myPartitionReport) that will allow you to identify it in the subsequent output file, and with the appropriate subcommands to specify the year and time-step, use the syntax; 
+{\small{\begin{verbatim}
+@report partition
+type myPartitionReport
+time_step step_two
+years 2007
+\end{verbatim}}}
+
+The command and subcommand definitions in the \config\ can be extensive (especially when you have a model with a large spatial structures that has many layers and/or observations), and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{\emph{file}}. The command causes an external file, \argument{\emph{file}}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point\index{Including external files}. The file name must be a complete file name with extension, but can use either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands --- but be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. 
 
@@ -187,6 +174,50 @@ When SPM processes a \config, it translates each command and each subcommand int
 The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{r0} of the command \command{process} with the label \argument{MyRecruitment} is,
 
 \texttt{process[MyRecruitment].r0}
+
+\subsection{The input parameter file\index{Input parameter file}\label{sec:input-parameter-file}}
+
+The input parameter file is a special file containing values for the estimable model parameters that are specified in an \command{estimate} block in the \config. 
+
+The input parameter file can (optionally) be used as an input to supply \SPM\ with values for these parameters for a \texttt{run} or \texttt{simulation}, or as the starting values for an \texttt{estimation} or \texttt{MCMC}. When used, the values supplied in the input parameter file \emph{overwrite} (i.e., replace) the values that are given in the \config.
+
+The input parameter file can be helpful to, for example, repeat a model run using estimated values from a previous run or as values for parameters when using \SPM\ as a simulator.
+
+The same format is used in all cases. The first line of the file is the header, consisting of the name of each parameter (in \texttt{command[label].subcommand} format), separated by single spaces. Each subsequent line is then a vector of the values for the parameters (one value per parameter), separated by a single space.
+
+A simple example of this is:
+
+\begin{verbatim}
+catchability[CPUEq].q process[BHrecruitment].r0 selectivity[FishingSel].a50
+0.000132488 344098 8.62018
+\end{verbatim}
+
+Note that the header line must be accurate or \SPM\ will reject the file. \SPM\ checks the header to ensure the correct parameters have been provided (i.e., that each parameter specified in an \command{estimate} block in the \config\ is listed in the input parameter file), and each parameter has a supplied value on each subsequent line of the input. Note that the parameters can be supplied in any order as long as the order of the values supplied match those given in the header.
+
+If an input parameter file has multiple lines of values, these are used one-at-a-time when doing a run, simulation, estimation, or MCMC (i.e., multiple runs are carried out, one for each line of values in the input parameter file). Values supplied do not need to between the bounds defined in the \command{estimate} block for that parameter when doing a \texttt{run} or \texttt{simulation}, but do when doing an \texttt{estimate} or \texttt{mcmc}. 
+
+\SPM\ can generate this file as output by using the command line option \texttt{-o}, or from an \command{estimate\_values} report (see Section \ref{sec:InputFileFormat}) in the \config. 
+
+\subsection{\I{Redirecting standard output}\label{sec:redirecting-stdout}}
+
+\SPM\ uses the standard output stream \texttt{standard output}\index{standard output} to display run-time information. The \I{standard error} stream is used by \SPM\ to output the program exit status and run-time errors. We suggest redirecting both the standard output and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. \SPM\ allows reports to be directed to a file (using the \texttt{file\_name} argument within the \texttt{@report} command). Otherwise these will be sent to the standard output stream. With the bash shell (on Linux systems), you can direct output to the standard output using the command structure,
+
+\begin{verbatim} (spm [arguments] > out) >& err &\end{verbatim}
+
+It may also be useful to redirect the standard input, especially is you're using \SPM\ inside a batch job software, i.e. 
+
+\begin{verbatim} (spm [arguments] > out < /dev/null) >& err &\end{verbatim}
+
+On Microsoft Windows systems, you can redirect to standard output using,
+
+\begin{verbatim} spm [arguments] > out\end{verbatim}
+
+And, on some Microsoft Windows systems (e.g., Windows10), you can redirect to both standard output and standard error, using the syntax, 
+
+\begin{verbatim} spm [arguments] > out 2> err\end{verbatim}
+
+Note that \SPM\ outputs a few lines of header information to the output. The header\index{Output header information} consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
+
 
 \subsection{\SPM\ exit status values\index{Exit status value}}
 
