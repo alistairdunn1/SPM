@@ -63,7 +63,7 @@ steps:
     ./doBuild.sh release
   displayName: 'Compile the release version of SPM'
 
-- script: |
-    cd BuildSystem
-    ./doBuild.sh documentation
-  displayName: 'Compile the Documentation for SPM'
+#- script: |
+#    cd BuildSystem
+#    ./doBuild.sh documentation
+#  displayName: 'Compile the Documentation for SPM'
