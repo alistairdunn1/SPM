@@ -127,6 +127,10 @@ void CProportionsAtLengthObservation::validate() {
           if (boost::lexical_cast<double>(vOBS[i + j + 1]) < 0.0) {
             CError::errorLessThan(PARAM_OBS, PARAM_ZERO);
           }
+          // Check for proportions greater than 1 in our observations
+          if (boost::lexical_cast<double>(vOBS[i + j + 1]) > 1.0) {
+            CError::errorGreaterThan(PARAM_OBS, PARAM_ONE);
+          }
         }
       }
     }
@@ -269,7 +273,8 @@ void CProportionsAtLengthObservation::execute() {
   try {
 #endif
     // Variables
-    dScore                       = 0.0;
+    dScore = 0.0;
+
     double         dRunningTotal = 0.0;
     double         dCurrentProp  = 0.0;
     vector<string> vKeys;

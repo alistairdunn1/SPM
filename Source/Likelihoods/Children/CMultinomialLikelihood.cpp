@@ -103,7 +103,6 @@ void CMultinomialLikelihood::simulateObserved(const vector<string>& keys, vector
     for (int j = 0; j < vN[i]; ++j) {
       double temp = pRandom->getRandomUniform_01();
       for (int k = 0; k < (int)vExpected.size(); ++k) {
-        ;
         if (temp <= vExpected[k]) {
           vObserved[k]++;
           break;

@@ -10,7 +10,9 @@
 			"cbhrecruitmentprocess",
 			"estimables",
 			"holling",
+			"multinomial",
 			"niwa",
+			"param",
 			"recruitments",
 			"selectivities"
 		],

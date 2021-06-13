@@ -127,6 +127,10 @@ void CProportionsAtAgeObservation::validate() {
           if (boost::lexical_cast<double>(vOBS[i + j + 1]) < 0.0) {
             CError::errorLessThan(PARAM_OBS, PARAM_ZERO);
           }
+          // Check for proportions greater than 1 in our observations
+          if (boost::lexical_cast<double>(vOBS[i + j + 1]) > 1.0) {
+            CError::errorGreaterThan(PARAM_OBS, PARAM_ONE);
+          }
         }
       }
     }
@@ -271,10 +275,11 @@ void CProportionsAtAgeObservation::execute() {
   try {
 #endif
     // Variables
-    int iSquareAgeOffset         = iMinAge - pWorld->getMinAge();
-    dScore                       = 0.0;
-    double         dRunningTotal = 0.0;
-    double         dCurrentProp  = 0.0;
+    dScore = 0.0;
+
+    int            iSquareAgeOffset = iMinAge - pWorld->getMinAge();
+    double         dRunningTotal    = 0.0;
+    double         dCurrentProp     = 0.0;
     vector<string> vKeys;
     vector<int>    vAges;
     vector<string> vGroup;
