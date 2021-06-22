@@ -1,0 +1,584 @@
+# Model R1.00/model config 
+# Wed May 13 15:15:25 2020 
+
+@model 
+nrows 13
+ncols 17
+layer base
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+min_age 1
+max_age 28
+age_plus_group True
+initialisation_phases phase1 phase2
+initial_year 1
+current_year 256
+cell_length 555.6
+time_steps one two three four
+age_size vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK vonBwithK
+
+@age_size vonBwithK
+type mean_size_at_age
+sizes 30.374 34.811887034447 39.0863666602809 43.2034557005938 47.1689494330755 50.9884297475348 54.6672730030536 58.2106575958322 64.9108180303063 72.6090905490123 81.2701052570415 88.9729860476246 95.8237274993077 101.916598428219 107.335439062943 112.154814718055 116.441041841299 120.253100553207 123.643446236065 126.658731339981 129.340447338403 131.72549566662 133.84669549959 135.733235356316 137.411074744992 138.903301375751 140.23044885636 141.410779242495
+cv 0.1
+size_weight default
+
+@size_weight default
+type basic
+a 2.459e-08
+b 2.9667
+
+@initialisation_phase phase1
+years 60
+time_steps init_population
+lambda 1e-06
+lambda_years 20 30 40 50
+
+@initialisation_phase phase2
+years 60
+time_steps init_one
+lambda 1e-06
+lambda_years 20 30 40 50
+
+@time_step init_population
+growth_proportion 0
+processes BHrecruitment M maturation ageing
+
+@time_step init_one
+growth_proportion 0
+processes BHrecruitment moveImmature moveMature M maturation ageing
+
+@time_step one
+growth_proportion 0
+processes BHrecruitment tag_214 tag_215 tag_216 tag_217 tag_218 tag_219 tag_220 tag_221 tag_222 tag_223 tagloss moveImmature moveMature
+
+@time_step two
+growth_proportion 0
+processes fishing_ps fishing_trol fishing_bb fishing_gill fishing_ll fishing_hand fishing_other
+
+@time_step three
+growth_proportion 0
+processes M maturation
+
+@time_step four
+growth_proportion 0
+processes ageing
+
+@derived_quantity SSB
+type biomass
+time_step one
+initialisation_time_steps init_population init_one
+categories mature
+selectivities one
+
+@derived_quantity_by_cell SSB
+type biomass
+time_step one
+initialisation_time_steps init_population init_one
+categories mature
+selectivities one
+
+@derived_quantity_by_cell mature
+type biomass
+time_step one
+initialisation_time_steps init_population init_one
+categories mature
+selectivities one
+
+@derived_quantity_by_cell immature
+type biomass
+time_step one
+initialisation_time_steps init_population init_one
+categories immature
+selectivities one
+
+@derived_quantity_by_cell total
+type biomass
+time_step one
+initialisation_time_steps init_population init_one
+categories immature mature
+selectivities one one
+
+@derived_quantity_by_cell tagged
+type abundance
+time_step one
+initialisation_time_steps init_population init_one
+categories immature mature
+selectivities one one
+
+@process BHrecruitment
+type bh_recruitment
+categories immature
+proportions 1
+r0 97250600
+age 1
+ssb SSB
+b0 phase2
+ssb_offset 1
+standardise_ycs_years 1-5
+ycs_values 0.999913625211567 0.999884833615422 0.999852957205405 0.999820052524098 0.999785091300208 0.999750130076318 0.99971722539501 0.999685348984993 0.99957532395687 0.999506429780382 0.999470440285201 0.999449874859384 0.999388178581932 0.999306945149953 0.999164015440522 0.999064273125307 0.998977898336874 0.998732141498356 0.998479186760801 0.998421603568513 0.998274560773918 0.997943457418258 0.997714152920393 0.99761543887647 0.997519809646419 0.997387162649896 0.997374823394406 0.997494102864147 0.997555799141599 0.997514668289964 0.997524951002873 0.997680219967794 0.997731633532338 0.99772237909072 0.997689474409412 0.997773792655264 0.99781698004948 0.997735746617501 0.997612354062597 0.997660682813268 0.997598986535816 0.99759178863678 0.997636004302287 0.997640117387451 0.997483820151238 0.99735631451117 0.997313127116954 0.997255543924665 0.997150660252996 0.997176367035268 0.997211328259157 0.997322381558571 0.997333692542771 0.997358371053752 0.997364540681497 0.99736762549537 0.997393332277641 0.997342946984389 0.997354257968588 0.997378936479569 0.997371738580533 0.997202073817539 0.997139349268796 0.997103359773616 0.996965571420639 0.996863772562843 0.996847320222189 0.99693163846804 0.996940892909658 0.996432926891968 0.996086399466944 0.996044240344018 0.996005166034965 0.995851953612625 0.995913649890078 0.995946554571386 0.995879716937479 0.995964035183331 0.996110049706634 0.996160434999887 0.996225216091212 0.996274573113174 0.996296166810282 0.996334212848044 0.265010190168493 0.385585281736051 0.76957468642867 1.02522863612153 0.783764830242693 1.25656808287044 1.52259214853173 0.857635839778881 0.986009340816406 2.25627399728125 1.03202448108289 0.521309894232015 0.513379866036816 0.834862715499956 1.44339469370883 0.638640789876875 0.518277522195236 0.612911385636695 0.596006605614772 0.377442401383642 0.351710940600881 0.465658823698774 0.542382257795839 0.447555079351695 0.517512488354828 1.11238388246448 0.90099804011492 0.744575354805009 0.791077895663369 1.53274118617263 0.954480486495713 0.572738882844939 0.619493350169562 0.918503330570711 0.877141117895416 0.74954601822508 0.904459201279992 1.38791945756633 0.577664302328212 0.539991527044563 0.476092692487244 0.571057659284364 0.84222102485743 1.40361087746502 0.626669655508552 0.714082997945514 1.7139945666145 1.02010990163557 0.574819075666371 0.690693939163357 1.72972711736483 0.904361515507359 0.623909775363854 0.635177572169221 0.786894888052105 0.539391016610694 0.528672316674653 0.520339206133433 1.26295364758675 1.1906558931256 0.674177845689384 0.926688370046046 0.780502125436758 0.787381260372687 0.765583965548799 0.709437268253358 1.18413665314147 0.756901242768682 0.495143474693215 0.575629353443578 0.842638503001524 0.890732807818152 0.959851147447934 0.979865419853451 1.34757009211254 1.00806884481947 0.519675971150821 0.603714527211143 1.31925150076195 0.672528498538826 0.556882939539705 0.639097342330022 1.09357680055444 1.97057910182559 0.604075450434239 0.6725202723685 1.41251570684397 0.980740478721982 0.601281637336942 0.5412151698807 0.802155462279924 0.932832291009001 0.722615593117163 0.826074080776879 0.938512461619774 1.63221615085151 0.947118064053075 0.672845206096415 1.78530518063642 0.991920872467625 0.633081955278425 0.688322745566608 0.714973480883408 1.95500079176889 0.75806730241253 0.651176445183886 2.08115939644588 1.19602346926394 0.583965548798671 0.474793985846874 0.855563873127775 1.01856440988539 0.484264364435798 0.474161599002988 2.23363146345627 1.71951638344648 0.6890445920128 0.548187877504098 1.65535225489611 2.52623634198658 0.533453778177204 0.582398463351383 1.20724190904735 0.996787680487318 0.581034975619688 0.605412203112371 2.08784315983655 0.680613795698947 0.678413295136483 0.53609335058087 0.731766179334626 0.934918653458179 0.32628693293409 0.280236831443713 0.475133315372861 0.604781872811067 0.414117753515145 1.1015561857716 0.546845983469511 0.757062681361349 0.404635035670731 0.963926186573656 0.877995611338131 1.21165319288519 0.487173343917672 0.687940228646404 2.78355094981419 0.718081944995712 0.412554781153021 0.459368888212515 1.00808529716012 1.25084061178029 0.761516124322112 0.538034726778035 0.810274692392643 1.16450695419874 0.415910030375134 0.596559815569261 1.44634583231363 0.951944769492425 0.746846806086543 0.835128009493 2.02581783557119 0.905593384513823 0.632383759071923 0.751914127007957 1.28409490532706 0.698639391427919 0.571249946015757 0.793114901090584 1.07210649600105 0.578210314383664
+steepness 0.8
+layer recruitment
+
+@process M
+type age_mortality_rate
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+m 0.3358 0.2955 0.2552 0.2149 0.1746 0.1343 0.1343 0.1343 0.1343 0.1343 0.141 0.1606 0.178 0.1915 0.1994 0.2009 0.1962 0.1865 0.1743 0.1623 0.1522 0.1449 0.1401 0.1373 0.1357 0.1349 0.1346 0.1344
+
+@process maturation
+type category_transition_rate
+from immature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223
+to mature mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+proportions 1 1 1 1 1 1 1 1 1 1 1
+selectivities maturity maturity maturity maturity maturity maturity maturity maturity maturity maturity maturity
+
+@process ageing
+type ageing
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+
+@process tagloss
+type constant_exploitation_rate
+categories immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+selectivities one one one one one one one one one one one one one one one one one one one one
+u 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091 0.0091
+
+@process fishing_ps
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_ps_1 fishing_ps_2 fishing_ps_3 fishing_ps_4 fishing_ps_5 fishing_ps_6 fishing_ps_7 fishing_ps_8 fishing_ps_9 fishing_ps_10 fishing_ps_11 fishing_ps_12 fishing_ps_13 fishing_ps_14 fishing_ps_15 fishing_ps_16 fishing_ps_17 fishing_ps_18 fishing_ps_19 fishing_ps_20 fishing_ps_21 fishing_ps_22 fishing_ps_23 fishing_ps_24 fishing_ps_25 fishing_ps_26 fishing_ps_27 fishing_ps_28 fishing_ps_29 fishing_ps_30 fishing_ps_31 fishing_ps_32 fishing_ps_33 fishing_ps_34 fishing_ps_35 fishing_ps_36 fishing_ps_37 fishing_ps_38 fishing_ps_39 fishing_ps_40 fishing_ps_41 fishing_ps_42 fishing_ps_43 fishing_ps_44 fishing_ps_45 fishing_ps_46 fishing_ps_47 fishing_ps_48 fishing_ps_49 fishing_ps_50 fishing_ps_51 fishing_ps_52 fishing_ps_53 fishing_ps_54 fishing_ps_55 fishing_ps_56 fishing_ps_57 fishing_ps_58 fishing_ps_59 fishing_ps_60 fishing_ps_61 fishing_ps_62 fishing_ps_63 fishing_ps_64 fishing_ps_65 fishing_ps_66 fishing_ps_67 fishing_ps_68 fishing_ps_69 fishing_ps_70 fishing_ps_71 fishing_ps_72 fishing_ps_73 fishing_ps_74 fishing_ps_75 fishing_ps_76 fishing_ps_77 fishing_ps_78 fishing_ps_79 fishing_ps_80 fishing_ps_81 fishing_ps_82 fishing_ps_83 fishing_ps_84 fishing_ps_85 fishing_ps_86 fishing_ps_87 fishing_ps_88 fishing_ps_89 fishing_ps_90 fishing_ps_91 fishing_ps_92 fishing_ps_93 fishing_ps_94 fishing_ps_95 fishing_ps_96 fishing_ps_97 fishing_ps_98 fishing_ps_99 fishing_ps_100 fishing_ps_101 fishing_ps_102 fishing_ps_103 fishing_ps_104 fishing_ps_105 fishing_ps_106 fishing_ps_107 fishing_ps_108 fishing_ps_109 fishing_ps_110 fishing_ps_111 fishing_ps_112 fishing_ps_113 fishing_ps_114 fishing_ps_115 fishing_ps_116 fishing_ps_117 fishing_ps_118 fishing_ps_119 fishing_ps_120 fishing_ps_121 fishing_ps_122 fishing_ps_123 fishing_ps_124 fishing_ps_125 fishing_ps_126 fishing_ps_127 fishing_ps_128 fishing_ps_129 fishing_ps_130 fishing_ps_131 fishing_ps_132 fishing_ps_133 fishing_ps_134 fishing_ps_135 fishing_ps_136 fishing_ps_137 fishing_ps_138 fishing_ps_139 fishing_ps_140 fishing_ps_141 fishing_ps_142 fishing_ps_143 fishing_ps_144 fishing_ps_145 fishing_ps_146 fishing_ps_147 fishing_ps_148 fishing_ps_149 fishing_ps_150 fishing_ps_151 fishing_ps_152 fishing_ps_153 fishing_ps_154 fishing_ps_155 fishing_ps_156 fishing_ps_157 fishing_ps_158 fishing_ps_159 fishing_ps_160 fishing_ps_161 fishing_ps_162 fishing_ps_163 fishing_ps_164 fishing_ps_165 fishing_ps_166 fishing_ps_167 fishing_ps_168 fishing_ps_169 fishing_ps_170 fishing_ps_171 fishing_ps_172 fishing_ps_173 fishing_ps_174 fishing_ps_175 fishing_ps_176 fishing_ps_177 fishing_ps_178 fishing_ps_179 fishing_ps_180 fishing_ps_181 fishing_ps_182 fishing_ps_183 fishing_ps_184 fishing_ps_185 fishing_ps_186 fishing_ps_187 fishing_ps_188 fishing_ps_189 fishing_ps_190 fishing_ps_191 fishing_ps_192 fishing_ps_193 fishing_ps_194 fishing_ps_195 fishing_ps_196 fishing_ps_197 fishing_ps_198 fishing_ps_199 fishing_ps_200 fishing_ps_201 fishing_ps_202 fishing_ps_203 fishing_ps_204 fishing_ps_205 fishing_ps_206 fishing_ps_207 fishing_ps_208 fishing_ps_209 fishing_ps_210 fishing_ps_211 fishing_ps_212 fishing_ps_213 fishing_ps_214 fishing_ps_215 fishing_ps_216 fishing_ps_217 fishing_ps_218 fishing_ps_219 fishing_ps_220 fishing_ps_221 fishing_ps_222 fishing_ps_223 fishing_ps_224 fishing_ps_225 fishing_ps_226 fishing_ps_227 fishing_ps_228 fishing_ps_229 fishing_ps_230 fishing_ps_231 fishing_ps_232 fishing_ps_233 fishing_ps_234 fishing_ps_235 fishing_ps_236 fishing_ps_237 fishing_ps_238 fishing_ps_239 fishing_ps_240 fishing_ps_241 fishing_ps_242 fishing_ps_243 fishing_ps_244 fishing_ps_245 fishing_ps_246 fishing_ps_247 fishing_ps_248 fishing_ps_249 fishing_ps_250 fishing_ps_251 fishing_ps_252 fishing_ps_253 fishing_ps_254 fishing_ps_255 fishing_ps_256
+selectivities fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel fishing_ps_sel
+u_max 0.95
+penalty fishing_ps_penalty
+
+@process fishing_trol
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_trol_1 fishing_trol_2 fishing_trol_3 fishing_trol_4 fishing_trol_5 fishing_trol_6 fishing_trol_7 fishing_trol_8 fishing_trol_9 fishing_trol_10 fishing_trol_11 fishing_trol_12 fishing_trol_13 fishing_trol_14 fishing_trol_15 fishing_trol_16 fishing_trol_17 fishing_trol_18 fishing_trol_19 fishing_trol_20 fishing_trol_21 fishing_trol_22 fishing_trol_23 fishing_trol_24 fishing_trol_25 fishing_trol_26 fishing_trol_27 fishing_trol_28 fishing_trol_29 fishing_trol_30 fishing_trol_31 fishing_trol_32 fishing_trol_33 fishing_trol_34 fishing_trol_35 fishing_trol_36 fishing_trol_37 fishing_trol_38 fishing_trol_39 fishing_trol_40 fishing_trol_41 fishing_trol_42 fishing_trol_43 fishing_trol_44 fishing_trol_45 fishing_trol_46 fishing_trol_47 fishing_trol_48 fishing_trol_49 fishing_trol_50 fishing_trol_51 fishing_trol_52 fishing_trol_53 fishing_trol_54 fishing_trol_55 fishing_trol_56 fishing_trol_57 fishing_trol_58 fishing_trol_59 fishing_trol_60 fishing_trol_61 fishing_trol_62 fishing_trol_63 fishing_trol_64 fishing_trol_65 fishing_trol_66 fishing_trol_67 fishing_trol_68 fishing_trol_69 fishing_trol_70 fishing_trol_71 fishing_trol_72 fishing_trol_73 fishing_trol_74 fishing_trol_75 fishing_trol_76 fishing_trol_77 fishing_trol_78 fishing_trol_79 fishing_trol_80 fishing_trol_81 fishing_trol_82 fishing_trol_83 fishing_trol_84 fishing_trol_85 fishing_trol_86 fishing_trol_87 fishing_trol_88 fishing_trol_89 fishing_trol_90 fishing_trol_91 fishing_trol_92 fishing_trol_93 fishing_trol_94 fishing_trol_95 fishing_trol_96 fishing_trol_97 fishing_trol_98 fishing_trol_99 fishing_trol_100 fishing_trol_101 fishing_trol_102 fishing_trol_103 fishing_trol_104 fishing_trol_105 fishing_trol_106 fishing_trol_107 fishing_trol_108 fishing_trol_109 fishing_trol_110 fishing_trol_111 fishing_trol_112 fishing_trol_113 fishing_trol_114 fishing_trol_115 fishing_trol_116 fishing_trol_117 fishing_trol_118 fishing_trol_119 fishing_trol_120 fishing_trol_121 fishing_trol_122 fishing_trol_123 fishing_trol_124 fishing_trol_125 fishing_trol_126 fishing_trol_127 fishing_trol_128 fishing_trol_129 fishing_trol_130 fishing_trol_131 fishing_trol_132 fishing_trol_133 fishing_trol_134 fishing_trol_135 fishing_trol_136 fishing_trol_137 fishing_trol_138 fishing_trol_139 fishing_trol_140 fishing_trol_141 fishing_trol_142 fishing_trol_143 fishing_trol_144 fishing_trol_145 fishing_trol_146 fishing_trol_147 fishing_trol_148 fishing_trol_149 fishing_trol_150 fishing_trol_151 fishing_trol_152 fishing_trol_153 fishing_trol_154 fishing_trol_155 fishing_trol_156 fishing_trol_157 fishing_trol_158 fishing_trol_159 fishing_trol_160 fishing_trol_161 fishing_trol_162 fishing_trol_163 fishing_trol_164 fishing_trol_165 fishing_trol_166 fishing_trol_167 fishing_trol_168 fishing_trol_169 fishing_trol_170 fishing_trol_171 fishing_trol_172 fishing_trol_173 fishing_trol_174 fishing_trol_175 fishing_trol_176 fishing_trol_177 fishing_trol_178 fishing_trol_179 fishing_trol_180 fishing_trol_181 fishing_trol_182 fishing_trol_183 fishing_trol_184 fishing_trol_185 fishing_trol_186 fishing_trol_187 fishing_trol_188 fishing_trol_189 fishing_trol_190 fishing_trol_191 fishing_trol_192 fishing_trol_193 fishing_trol_194 fishing_trol_195 fishing_trol_196 fishing_trol_197 fishing_trol_198 fishing_trol_199 fishing_trol_200 fishing_trol_201 fishing_trol_202 fishing_trol_203 fishing_trol_204 fishing_trol_205 fishing_trol_206 fishing_trol_207 fishing_trol_208 fishing_trol_209 fishing_trol_210 fishing_trol_211 fishing_trol_212 fishing_trol_213 fishing_trol_214 fishing_trol_215 fishing_trol_216 fishing_trol_217 fishing_trol_218 fishing_trol_219 fishing_trol_220 fishing_trol_221 fishing_trol_222 fishing_trol_223 fishing_trol_224 fishing_trol_225 fishing_trol_226 fishing_trol_227 fishing_trol_228 fishing_trol_229 fishing_trol_230 fishing_trol_231 fishing_trol_232 fishing_trol_233 fishing_trol_234 fishing_trol_235 fishing_trol_236 fishing_trol_237 fishing_trol_238 fishing_trol_239 fishing_trol_240 fishing_trol_241 fishing_trol_242 fishing_trol_243 fishing_trol_244 fishing_trol_245 fishing_trol_246 fishing_trol_247 fishing_trol_248 fishing_trol_249 fishing_trol_250 fishing_trol_251 fishing_trol_252 fishing_trol_253 fishing_trol_254 fishing_trol_255 fishing_trol_256
+selectivities fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel fishing_trol_sel
+u_max 0.95
+penalty fishing_trol_penalty
+
+@process fishing_bb
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_bb_1 fishing_bb_2 fishing_bb_3 fishing_bb_4 fishing_bb_5 fishing_bb_6 fishing_bb_7 fishing_bb_8 fishing_bb_9 fishing_bb_10 fishing_bb_11 fishing_bb_12 fishing_bb_13 fishing_bb_14 fishing_bb_15 fishing_bb_16 fishing_bb_17 fishing_bb_18 fishing_bb_19 fishing_bb_20 fishing_bb_21 fishing_bb_22 fishing_bb_23 fishing_bb_24 fishing_bb_25 fishing_bb_26 fishing_bb_27 fishing_bb_28 fishing_bb_29 fishing_bb_30 fishing_bb_31 fishing_bb_32 fishing_bb_33 fishing_bb_34 fishing_bb_35 fishing_bb_36 fishing_bb_37 fishing_bb_38 fishing_bb_39 fishing_bb_40 fishing_bb_41 fishing_bb_42 fishing_bb_43 fishing_bb_44 fishing_bb_45 fishing_bb_46 fishing_bb_47 fishing_bb_48 fishing_bb_49 fishing_bb_50 fishing_bb_51 fishing_bb_52 fishing_bb_53 fishing_bb_54 fishing_bb_55 fishing_bb_56 fishing_bb_57 fishing_bb_58 fishing_bb_59 fishing_bb_60 fishing_bb_61 fishing_bb_62 fishing_bb_63 fishing_bb_64 fishing_bb_65 fishing_bb_66 fishing_bb_67 fishing_bb_68 fishing_bb_69 fishing_bb_70 fishing_bb_71 fishing_bb_72 fishing_bb_73 fishing_bb_74 fishing_bb_75 fishing_bb_76 fishing_bb_77 fishing_bb_78 fishing_bb_79 fishing_bb_80 fishing_bb_81 fishing_bb_82 fishing_bb_83 fishing_bb_84 fishing_bb_85 fishing_bb_86 fishing_bb_87 fishing_bb_88 fishing_bb_89 fishing_bb_90 fishing_bb_91 fishing_bb_92 fishing_bb_93 fishing_bb_94 fishing_bb_95 fishing_bb_96 fishing_bb_97 fishing_bb_98 fishing_bb_99 fishing_bb_100 fishing_bb_101 fishing_bb_102 fishing_bb_103 fishing_bb_104 fishing_bb_105 fishing_bb_106 fishing_bb_107 fishing_bb_108 fishing_bb_109 fishing_bb_110 fishing_bb_111 fishing_bb_112 fishing_bb_113 fishing_bb_114 fishing_bb_115 fishing_bb_116 fishing_bb_117 fishing_bb_118 fishing_bb_119 fishing_bb_120 fishing_bb_121 fishing_bb_122 fishing_bb_123 fishing_bb_124 fishing_bb_125 fishing_bb_126 fishing_bb_127 fishing_bb_128 fishing_bb_129 fishing_bb_130 fishing_bb_131 fishing_bb_132 fishing_bb_133 fishing_bb_134 fishing_bb_135 fishing_bb_136 fishing_bb_137 fishing_bb_138 fishing_bb_139 fishing_bb_140 fishing_bb_141 fishing_bb_142 fishing_bb_143 fishing_bb_144 fishing_bb_145 fishing_bb_146 fishing_bb_147 fishing_bb_148 fishing_bb_149 fishing_bb_150 fishing_bb_151 fishing_bb_152 fishing_bb_153 fishing_bb_154 fishing_bb_155 fishing_bb_156 fishing_bb_157 fishing_bb_158 fishing_bb_159 fishing_bb_160 fishing_bb_161 fishing_bb_162 fishing_bb_163 fishing_bb_164 fishing_bb_165 fishing_bb_166 fishing_bb_167 fishing_bb_168 fishing_bb_169 fishing_bb_170 fishing_bb_171 fishing_bb_172 fishing_bb_173 fishing_bb_174 fishing_bb_175 fishing_bb_176 fishing_bb_177 fishing_bb_178 fishing_bb_179 fishing_bb_180 fishing_bb_181 fishing_bb_182 fishing_bb_183 fishing_bb_184 fishing_bb_185 fishing_bb_186 fishing_bb_187 fishing_bb_188 fishing_bb_189 fishing_bb_190 fishing_bb_191 fishing_bb_192 fishing_bb_193 fishing_bb_194 fishing_bb_195 fishing_bb_196 fishing_bb_197 fishing_bb_198 fishing_bb_199 fishing_bb_200 fishing_bb_201 fishing_bb_202 fishing_bb_203 fishing_bb_204 fishing_bb_205 fishing_bb_206 fishing_bb_207 fishing_bb_208 fishing_bb_209 fishing_bb_210 fishing_bb_211 fishing_bb_212 fishing_bb_213 fishing_bb_214 fishing_bb_215 fishing_bb_216 fishing_bb_217 fishing_bb_218 fishing_bb_219 fishing_bb_220 fishing_bb_221 fishing_bb_222 fishing_bb_223 fishing_bb_224 fishing_bb_225 fishing_bb_226 fishing_bb_227 fishing_bb_228 fishing_bb_229 fishing_bb_230 fishing_bb_231 fishing_bb_232 fishing_bb_233 fishing_bb_234 fishing_bb_235 fishing_bb_236 fishing_bb_237 fishing_bb_238 fishing_bb_239 fishing_bb_240 fishing_bb_241 fishing_bb_242 fishing_bb_243 fishing_bb_244 fishing_bb_245 fishing_bb_246 fishing_bb_247 fishing_bb_248 fishing_bb_249 fishing_bb_250 fishing_bb_251 fishing_bb_252 fishing_bb_253 fishing_bb_254 fishing_bb_255 fishing_bb_256
+selectivities fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel fishing_bb_sel
+u_max 0.95
+penalty fishing_bb_penalty
+
+@process fishing_gill
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_gill_1 fishing_gill_2 fishing_gill_3 fishing_gill_4 fishing_gill_5 fishing_gill_6 fishing_gill_7 fishing_gill_8 fishing_gill_9 fishing_gill_10 fishing_gill_11 fishing_gill_12 fishing_gill_13 fishing_gill_14 fishing_gill_15 fishing_gill_16 fishing_gill_17 fishing_gill_18 fishing_gill_19 fishing_gill_20 fishing_gill_21 fishing_gill_22 fishing_gill_23 fishing_gill_24 fishing_gill_25 fishing_gill_26 fishing_gill_27 fishing_gill_28 fishing_gill_29 fishing_gill_30 fishing_gill_31 fishing_gill_32 fishing_gill_33 fishing_gill_34 fishing_gill_35 fishing_gill_36 fishing_gill_37 fishing_gill_38 fishing_gill_39 fishing_gill_40 fishing_gill_41 fishing_gill_42 fishing_gill_43 fishing_gill_44 fishing_gill_45 fishing_gill_46 fishing_gill_47 fishing_gill_48 fishing_gill_49 fishing_gill_50 fishing_gill_51 fishing_gill_52 fishing_gill_53 fishing_gill_54 fishing_gill_55 fishing_gill_56 fishing_gill_57 fishing_gill_58 fishing_gill_59 fishing_gill_60 fishing_gill_61 fishing_gill_62 fishing_gill_63 fishing_gill_64 fishing_gill_65 fishing_gill_66 fishing_gill_67 fishing_gill_68 fishing_gill_69 fishing_gill_70 fishing_gill_71 fishing_gill_72 fishing_gill_73 fishing_gill_74 fishing_gill_75 fishing_gill_76 fishing_gill_77 fishing_gill_78 fishing_gill_79 fishing_gill_80 fishing_gill_81 fishing_gill_82 fishing_gill_83 fishing_gill_84 fishing_gill_85 fishing_gill_86 fishing_gill_87 fishing_gill_88 fishing_gill_89 fishing_gill_90 fishing_gill_91 fishing_gill_92 fishing_gill_93 fishing_gill_94 fishing_gill_95 fishing_gill_96 fishing_gill_97 fishing_gill_98 fishing_gill_99 fishing_gill_100 fishing_gill_101 fishing_gill_102 fishing_gill_103 fishing_gill_104 fishing_gill_105 fishing_gill_106 fishing_gill_107 fishing_gill_108 fishing_gill_109 fishing_gill_110 fishing_gill_111 fishing_gill_112 fishing_gill_113 fishing_gill_114 fishing_gill_115 fishing_gill_116 fishing_gill_117 fishing_gill_118 fishing_gill_119 fishing_gill_120 fishing_gill_121 fishing_gill_122 fishing_gill_123 fishing_gill_124 fishing_gill_125 fishing_gill_126 fishing_gill_127 fishing_gill_128 fishing_gill_129 fishing_gill_130 fishing_gill_131 fishing_gill_132 fishing_gill_133 fishing_gill_134 fishing_gill_135 fishing_gill_136 fishing_gill_137 fishing_gill_138 fishing_gill_139 fishing_gill_140 fishing_gill_141 fishing_gill_142 fishing_gill_143 fishing_gill_144 fishing_gill_145 fishing_gill_146 fishing_gill_147 fishing_gill_148 fishing_gill_149 fishing_gill_150 fishing_gill_151 fishing_gill_152 fishing_gill_153 fishing_gill_154 fishing_gill_155 fishing_gill_156 fishing_gill_157 fishing_gill_158 fishing_gill_159 fishing_gill_160 fishing_gill_161 fishing_gill_162 fishing_gill_163 fishing_gill_164 fishing_gill_165 fishing_gill_166 fishing_gill_167 fishing_gill_168 fishing_gill_169 fishing_gill_170 fishing_gill_171 fishing_gill_172 fishing_gill_173 fishing_gill_174 fishing_gill_175 fishing_gill_176 fishing_gill_177 fishing_gill_178 fishing_gill_179 fishing_gill_180 fishing_gill_181 fishing_gill_182 fishing_gill_183 fishing_gill_184 fishing_gill_185 fishing_gill_186 fishing_gill_187 fishing_gill_188 fishing_gill_189 fishing_gill_190 fishing_gill_191 fishing_gill_192 fishing_gill_193 fishing_gill_194 fishing_gill_195 fishing_gill_196 fishing_gill_197 fishing_gill_198 fishing_gill_199 fishing_gill_200 fishing_gill_201 fishing_gill_202 fishing_gill_203 fishing_gill_204 fishing_gill_205 fishing_gill_206 fishing_gill_207 fishing_gill_208 fishing_gill_209 fishing_gill_210 fishing_gill_211 fishing_gill_212 fishing_gill_213 fishing_gill_214 fishing_gill_215 fishing_gill_216 fishing_gill_217 fishing_gill_218 fishing_gill_219 fishing_gill_220 fishing_gill_221 fishing_gill_222 fishing_gill_223 fishing_gill_224 fishing_gill_225 fishing_gill_226 fishing_gill_227 fishing_gill_228 fishing_gill_229 fishing_gill_230 fishing_gill_231 fishing_gill_232 fishing_gill_233 fishing_gill_234 fishing_gill_235 fishing_gill_236 fishing_gill_237 fishing_gill_238 fishing_gill_239 fishing_gill_240 fishing_gill_241 fishing_gill_242 fishing_gill_243 fishing_gill_244 fishing_gill_245 fishing_gill_246 fishing_gill_247 fishing_gill_248 fishing_gill_249 fishing_gill_250 fishing_gill_251 fishing_gill_252 fishing_gill_253 fishing_gill_254 fishing_gill_255 fishing_gill_256
+selectivities fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel fishing_gill_sel
+u_max 0.95
+penalty fishing_gill_penalty
+
+@process fishing_ll
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_ll_1 fishing_ll_2 fishing_ll_3 fishing_ll_4 fishing_ll_5 fishing_ll_6 fishing_ll_7 fishing_ll_8 fishing_ll_9 fishing_ll_10 fishing_ll_11 fishing_ll_12 fishing_ll_13 fishing_ll_14 fishing_ll_15 fishing_ll_16 fishing_ll_17 fishing_ll_18 fishing_ll_19 fishing_ll_20 fishing_ll_21 fishing_ll_22 fishing_ll_23 fishing_ll_24 fishing_ll_25 fishing_ll_26 fishing_ll_27 fishing_ll_28 fishing_ll_29 fishing_ll_30 fishing_ll_31 fishing_ll_32 fishing_ll_33 fishing_ll_34 fishing_ll_35 fishing_ll_36 fishing_ll_37 fishing_ll_38 fishing_ll_39 fishing_ll_40 fishing_ll_41 fishing_ll_42 fishing_ll_43 fishing_ll_44 fishing_ll_45 fishing_ll_46 fishing_ll_47 fishing_ll_48 fishing_ll_49 fishing_ll_50 fishing_ll_51 fishing_ll_52 fishing_ll_53 fishing_ll_54 fishing_ll_55 fishing_ll_56 fishing_ll_57 fishing_ll_58 fishing_ll_59 fishing_ll_60 fishing_ll_61 fishing_ll_62 fishing_ll_63 fishing_ll_64 fishing_ll_65 fishing_ll_66 fishing_ll_67 fishing_ll_68 fishing_ll_69 fishing_ll_70 fishing_ll_71 fishing_ll_72 fishing_ll_73 fishing_ll_74 fishing_ll_75 fishing_ll_76 fishing_ll_77 fishing_ll_78 fishing_ll_79 fishing_ll_80 fishing_ll_81 fishing_ll_82 fishing_ll_83 fishing_ll_84 fishing_ll_85 fishing_ll_86 fishing_ll_87 fishing_ll_88 fishing_ll_89 fishing_ll_90 fishing_ll_91 fishing_ll_92 fishing_ll_93 fishing_ll_94 fishing_ll_95 fishing_ll_96 fishing_ll_97 fishing_ll_98 fishing_ll_99 fishing_ll_100 fishing_ll_101 fishing_ll_102 fishing_ll_103 fishing_ll_104 fishing_ll_105 fishing_ll_106 fishing_ll_107 fishing_ll_108 fishing_ll_109 fishing_ll_110 fishing_ll_111 fishing_ll_112 fishing_ll_113 fishing_ll_114 fishing_ll_115 fishing_ll_116 fishing_ll_117 fishing_ll_118 fishing_ll_119 fishing_ll_120 fishing_ll_121 fishing_ll_122 fishing_ll_123 fishing_ll_124 fishing_ll_125 fishing_ll_126 fishing_ll_127 fishing_ll_128 fishing_ll_129 fishing_ll_130 fishing_ll_131 fishing_ll_132 fishing_ll_133 fishing_ll_134 fishing_ll_135 fishing_ll_136 fishing_ll_137 fishing_ll_138 fishing_ll_139 fishing_ll_140 fishing_ll_141 fishing_ll_142 fishing_ll_143 fishing_ll_144 fishing_ll_145 fishing_ll_146 fishing_ll_147 fishing_ll_148 fishing_ll_149 fishing_ll_150 fishing_ll_151 fishing_ll_152 fishing_ll_153 fishing_ll_154 fishing_ll_155 fishing_ll_156 fishing_ll_157 fishing_ll_158 fishing_ll_159 fishing_ll_160 fishing_ll_161 fishing_ll_162 fishing_ll_163 fishing_ll_164 fishing_ll_165 fishing_ll_166 fishing_ll_167 fishing_ll_168 fishing_ll_169 fishing_ll_170 fishing_ll_171 fishing_ll_172 fishing_ll_173 fishing_ll_174 fishing_ll_175 fishing_ll_176 fishing_ll_177 fishing_ll_178 fishing_ll_179 fishing_ll_180 fishing_ll_181 fishing_ll_182 fishing_ll_183 fishing_ll_184 fishing_ll_185 fishing_ll_186 fishing_ll_187 fishing_ll_188 fishing_ll_189 fishing_ll_190 fishing_ll_191 fishing_ll_192 fishing_ll_193 fishing_ll_194 fishing_ll_195 fishing_ll_196 fishing_ll_197 fishing_ll_198 fishing_ll_199 fishing_ll_200 fishing_ll_201 fishing_ll_202 fishing_ll_203 fishing_ll_204 fishing_ll_205 fishing_ll_206 fishing_ll_207 fishing_ll_208 fishing_ll_209 fishing_ll_210 fishing_ll_211 fishing_ll_212 fishing_ll_213 fishing_ll_214 fishing_ll_215 fishing_ll_216 fishing_ll_217 fishing_ll_218 fishing_ll_219 fishing_ll_220 fishing_ll_221 fishing_ll_222 fishing_ll_223 fishing_ll_224 fishing_ll_225 fishing_ll_226 fishing_ll_227 fishing_ll_228 fishing_ll_229 fishing_ll_230 fishing_ll_231 fishing_ll_232 fishing_ll_233 fishing_ll_234 fishing_ll_235 fishing_ll_236 fishing_ll_237 fishing_ll_238 fishing_ll_239 fishing_ll_240 fishing_ll_241 fishing_ll_242 fishing_ll_243 fishing_ll_244 fishing_ll_245 fishing_ll_246 fishing_ll_247 fishing_ll_248 fishing_ll_249 fishing_ll_250 fishing_ll_251 fishing_ll_252 fishing_ll_253 fishing_ll_254 fishing_ll_255 fishing_ll_256
+selectivities fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel fishing_ll_sel
+u_max 0.95
+penalty fishing_ll_penalty
+
+@process fishing_hand
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_hand_1 fishing_hand_2 fishing_hand_3 fishing_hand_4 fishing_hand_5 fishing_hand_6 fishing_hand_7 fishing_hand_8 fishing_hand_9 fishing_hand_10 fishing_hand_11 fishing_hand_12 fishing_hand_13 fishing_hand_14 fishing_hand_15 fishing_hand_16 fishing_hand_17 fishing_hand_18 fishing_hand_19 fishing_hand_20 fishing_hand_21 fishing_hand_22 fishing_hand_23 fishing_hand_24 fishing_hand_25 fishing_hand_26 fishing_hand_27 fishing_hand_28 fishing_hand_29 fishing_hand_30 fishing_hand_31 fishing_hand_32 fishing_hand_33 fishing_hand_34 fishing_hand_35 fishing_hand_36 fishing_hand_37 fishing_hand_38 fishing_hand_39 fishing_hand_40 fishing_hand_41 fishing_hand_42 fishing_hand_43 fishing_hand_44 fishing_hand_45 fishing_hand_46 fishing_hand_47 fishing_hand_48 fishing_hand_49 fishing_hand_50 fishing_hand_51 fishing_hand_52 fishing_hand_53 fishing_hand_54 fishing_hand_55 fishing_hand_56 fishing_hand_57 fishing_hand_58 fishing_hand_59 fishing_hand_60 fishing_hand_61 fishing_hand_62 fishing_hand_63 fishing_hand_64 fishing_hand_65 fishing_hand_66 fishing_hand_67 fishing_hand_68 fishing_hand_69 fishing_hand_70 fishing_hand_71 fishing_hand_72 fishing_hand_73 fishing_hand_74 fishing_hand_75 fishing_hand_76 fishing_hand_77 fishing_hand_78 fishing_hand_79 fishing_hand_80 fishing_hand_81 fishing_hand_82 fishing_hand_83 fishing_hand_84 fishing_hand_85 fishing_hand_86 fishing_hand_87 fishing_hand_88 fishing_hand_89 fishing_hand_90 fishing_hand_91 fishing_hand_92 fishing_hand_93 fishing_hand_94 fishing_hand_95 fishing_hand_96 fishing_hand_97 fishing_hand_98 fishing_hand_99 fishing_hand_100 fishing_hand_101 fishing_hand_102 fishing_hand_103 fishing_hand_104 fishing_hand_105 fishing_hand_106 fishing_hand_107 fishing_hand_108 fishing_hand_109 fishing_hand_110 fishing_hand_111 fishing_hand_112 fishing_hand_113 fishing_hand_114 fishing_hand_115 fishing_hand_116 fishing_hand_117 fishing_hand_118 fishing_hand_119 fishing_hand_120 fishing_hand_121 fishing_hand_122 fishing_hand_123 fishing_hand_124 fishing_hand_125 fishing_hand_126 fishing_hand_127 fishing_hand_128 fishing_hand_129 fishing_hand_130 fishing_hand_131 fishing_hand_132 fishing_hand_133 fishing_hand_134 fishing_hand_135 fishing_hand_136 fishing_hand_137 fishing_hand_138 fishing_hand_139 fishing_hand_140 fishing_hand_141 fishing_hand_142 fishing_hand_143 fishing_hand_144 fishing_hand_145 fishing_hand_146 fishing_hand_147 fishing_hand_148 fishing_hand_149 fishing_hand_150 fishing_hand_151 fishing_hand_152 fishing_hand_153 fishing_hand_154 fishing_hand_155 fishing_hand_156 fishing_hand_157 fishing_hand_158 fishing_hand_159 fishing_hand_160 fishing_hand_161 fishing_hand_162 fishing_hand_163 fishing_hand_164 fishing_hand_165 fishing_hand_166 fishing_hand_167 fishing_hand_168 fishing_hand_169 fishing_hand_170 fishing_hand_171 fishing_hand_172 fishing_hand_173 fishing_hand_174 fishing_hand_175 fishing_hand_176 fishing_hand_177 fishing_hand_178 fishing_hand_179 fishing_hand_180 fishing_hand_181 fishing_hand_182 fishing_hand_183 fishing_hand_184 fishing_hand_185 fishing_hand_186 fishing_hand_187 fishing_hand_188 fishing_hand_189 fishing_hand_190 fishing_hand_191 fishing_hand_192 fishing_hand_193 fishing_hand_194 fishing_hand_195 fishing_hand_196 fishing_hand_197 fishing_hand_198 fishing_hand_199 fishing_hand_200 fishing_hand_201 fishing_hand_202 fishing_hand_203 fishing_hand_204 fishing_hand_205 fishing_hand_206 fishing_hand_207 fishing_hand_208 fishing_hand_209 fishing_hand_210 fishing_hand_211 fishing_hand_212 fishing_hand_213 fishing_hand_214 fishing_hand_215 fishing_hand_216 fishing_hand_217 fishing_hand_218 fishing_hand_219 fishing_hand_220 fishing_hand_221 fishing_hand_222 fishing_hand_223 fishing_hand_224 fishing_hand_225 fishing_hand_226 fishing_hand_227 fishing_hand_228 fishing_hand_229 fishing_hand_230 fishing_hand_231 fishing_hand_232 fishing_hand_233 fishing_hand_234 fishing_hand_235 fishing_hand_236 fishing_hand_237 fishing_hand_238 fishing_hand_239 fishing_hand_240 fishing_hand_241 fishing_hand_242 fishing_hand_243 fishing_hand_244 fishing_hand_245 fishing_hand_246 fishing_hand_247 fishing_hand_248 fishing_hand_249 fishing_hand_250 fishing_hand_251 fishing_hand_252 fishing_hand_253 fishing_hand_254 fishing_hand_255 fishing_hand_256
+selectivities fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel fishing_hand_sel
+u_max 0.95
+penalty fishing_hand_penalty
+
+@process fishing_other
+type event_mortality
+categories immature mature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223 mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+years 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256
+layers fishing_other_1 fishing_other_2 fishing_other_3 fishing_other_4 fishing_other_5 fishing_other_6 fishing_other_7 fishing_other_8 fishing_other_9 fishing_other_10 fishing_other_11 fishing_other_12 fishing_other_13 fishing_other_14 fishing_other_15 fishing_other_16 fishing_other_17 fishing_other_18 fishing_other_19 fishing_other_20 fishing_other_21 fishing_other_22 fishing_other_23 fishing_other_24 fishing_other_25 fishing_other_26 fishing_other_27 fishing_other_28 fishing_other_29 fishing_other_30 fishing_other_31 fishing_other_32 fishing_other_33 fishing_other_34 fishing_other_35 fishing_other_36 fishing_other_37 fishing_other_38 fishing_other_39 fishing_other_40 fishing_other_41 fishing_other_42 fishing_other_43 fishing_other_44 fishing_other_45 fishing_other_46 fishing_other_47 fishing_other_48 fishing_other_49 fishing_other_50 fishing_other_51 fishing_other_52 fishing_other_53 fishing_other_54 fishing_other_55 fishing_other_56 fishing_other_57 fishing_other_58 fishing_other_59 fishing_other_60 fishing_other_61 fishing_other_62 fishing_other_63 fishing_other_64 fishing_other_65 fishing_other_66 fishing_other_67 fishing_other_68 fishing_other_69 fishing_other_70 fishing_other_71 fishing_other_72 fishing_other_73 fishing_other_74 fishing_other_75 fishing_other_76 fishing_other_77 fishing_other_78 fishing_other_79 fishing_other_80 fishing_other_81 fishing_other_82 fishing_other_83 fishing_other_84 fishing_other_85 fishing_other_86 fishing_other_87 fishing_other_88 fishing_other_89 fishing_other_90 fishing_other_91 fishing_other_92 fishing_other_93 fishing_other_94 fishing_other_95 fishing_other_96 fishing_other_97 fishing_other_98 fishing_other_99 fishing_other_100 fishing_other_101 fishing_other_102 fishing_other_103 fishing_other_104 fishing_other_105 fishing_other_106 fishing_other_107 fishing_other_108 fishing_other_109 fishing_other_110 fishing_other_111 fishing_other_112 fishing_other_113 fishing_other_114 fishing_other_115 fishing_other_116 fishing_other_117 fishing_other_118 fishing_other_119 fishing_other_120 fishing_other_121 fishing_other_122 fishing_other_123 fishing_other_124 fishing_other_125 fishing_other_126 fishing_other_127 fishing_other_128 fishing_other_129 fishing_other_130 fishing_other_131 fishing_other_132 fishing_other_133 fishing_other_134 fishing_other_135 fishing_other_136 fishing_other_137 fishing_other_138 fishing_other_139 fishing_other_140 fishing_other_141 fishing_other_142 fishing_other_143 fishing_other_144 fishing_other_145 fishing_other_146 fishing_other_147 fishing_other_148 fishing_other_149 fishing_other_150 fishing_other_151 fishing_other_152 fishing_other_153 fishing_other_154 fishing_other_155 fishing_other_156 fishing_other_157 fishing_other_158 fishing_other_159 fishing_other_160 fishing_other_161 fishing_other_162 fishing_other_163 fishing_other_164 fishing_other_165 fishing_other_166 fishing_other_167 fishing_other_168 fishing_other_169 fishing_other_170 fishing_other_171 fishing_other_172 fishing_other_173 fishing_other_174 fishing_other_175 fishing_other_176 fishing_other_177 fishing_other_178 fishing_other_179 fishing_other_180 fishing_other_181 fishing_other_182 fishing_other_183 fishing_other_184 fishing_other_185 fishing_other_186 fishing_other_187 fishing_other_188 fishing_other_189 fishing_other_190 fishing_other_191 fishing_other_192 fishing_other_193 fishing_other_194 fishing_other_195 fishing_other_196 fishing_other_197 fishing_other_198 fishing_other_199 fishing_other_200 fishing_other_201 fishing_other_202 fishing_other_203 fishing_other_204 fishing_other_205 fishing_other_206 fishing_other_207 fishing_other_208 fishing_other_209 fishing_other_210 fishing_other_211 fishing_other_212 fishing_other_213 fishing_other_214 fishing_other_215 fishing_other_216 fishing_other_217 fishing_other_218 fishing_other_219 fishing_other_220 fishing_other_221 fishing_other_222 fishing_other_223 fishing_other_224 fishing_other_225 fishing_other_226 fishing_other_227 fishing_other_228 fishing_other_229 fishing_other_230 fishing_other_231 fishing_other_232 fishing_other_233 fishing_other_234 fishing_other_235 fishing_other_236 fishing_other_237 fishing_other_238 fishing_other_239 fishing_other_240 fishing_other_241 fishing_other_242 fishing_other_243 fishing_other_244 fishing_other_245 fishing_other_246 fishing_other_247 fishing_other_248 fishing_other_249 fishing_other_250 fishing_other_251 fishing_other_252 fishing_other_253 fishing_other_254 fishing_other_255 fishing_other_256
+selectivities fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel fishing_other_sel
+u_max 0.95
+penalty fishing_other_penalty
+
+@process moveMature
+type preference
+categories mature mature_tag_214 mature_tag_215 mature_tag_216 mature_tag_217 mature_tag_218 mature_tag_219 mature_tag_220 mature_tag_221 mature_tag_222 mature_tag_223
+preference_functions distanceMature SSTmature CLOmature
+
+@process moveImmature
+type preference
+categories immature immature_tag_214 immature_tag_215 immature_tag_216 immature_tag_217 immature_tag_218 immature_tag_219 immature_tag_220 immature_tag_221 immature_tag_222 immature_tag_223
+preference_functions distanceImmature SSTimmature CLOimmature
+
+@preference_function distanceMature
+type exponential
+alpha 1
+lambda 0.001
+layer distance
+
+@preference_function SSTmature
+type logistic
+alpha 1
+a50 20
+ato95 5
+layer sst
+
+@preference_function CLOmature
+type logistic
+alpha 1
+a50 -4
+ato95 2
+layer clo
+
+@preference_function distanceImmature
+type exponential
+alpha 1
+lambda 0.001
+layer distance
+
+@preference_function SSTimmature
+type logistic
+alpha 1
+a50 20
+ato95 5
+layer sst
+
+@preference_function CLOimmature
+type logistic
+alpha 1
+a50 -4
+ato95 2
+layer clo
+
+@selectivity one
+type constant
+c 1
+
+@selectivity maturity
+type all_values
+v 0 0 0 0 0.1 0.15 0.2 0.3 0.5 0.7 0.9 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+@selectivity fishing_ps_sel
+type double_normal
+alpha 1
+mu 5
+sigma_l 2
+sigma_r 5
+
+@selectivity fishing_trol_sel
+type double_normal
+alpha 1
+mu 5
+sigma_l 1
+sigma_r 5
+
+@selectivity fishing_bb_sel
+type double_normal
+alpha 1
+mu 4
+sigma_l 1
+sigma_r 5
+
+@selectivity fishing_gill_sel
+type double_normal
+alpha 1
+mu 5
+sigma_l 1
+sigma_r 5
+
+@selectivity fishing_ll_sel
+type logistic
+a50 12
+ato95 3
+
+@selectivity fishing_hand_sel
+type double_normal
+alpha 1
+mu 5
+sigma_l 1
+sigma_r 5
+
+@selectivity fishing_other_sel
+type double_normal
+alpha 1
+mu 5
+sigma_l 5
+sigma_r 5
+
+@include "tag_release.spm"
+
+@include "layers.spm"
+
+@include "layers_environment_SST.spm"
+
+@include "layers_environment_CLO.spm"
+
+@include "recruitment_layers.spm"
+
+@include "observations.nosimulationlabels.spm"
+
+@include "estimation.spm"
+
+@include "reports2.spm"
+
+@report simulated_lf_ps_127
+type simulated_observation
+observation lf_ps_127
+file_name simulations/observations
+overwrite True
+
+@report simulated_af_ps_127
+type simulated_observation
+observation af_ps_127
+file_name simulations/observations
+overwrite false
+
+@report simulated_lf_ps_128
+type simulated_observation
+observation lf_ps_128
+file_name simulations/observations
+overwrite false
+
+@report simulated_lf_ps_129
+type simulated_observation
+observation lf_ps_129
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_130
+type simulated_observation
+observation lf_ps_130
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_131
+type simulated_observation
+observation lf_ps_131
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_132
+type simulated_observation
+observation lf_ps_132
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_133
+type simulated_observation
+observation lf_ps_133
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_134
+type simulated_observation
+observation lf_ps_134
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_135
+type simulated_observation
+observation lf_ps_135
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_136
+type simulated_observation
+observation lf_ps_136
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_137
+type simulated_observation
+observation lf_ps_137
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_138
+type simulated_observation
+observation lf_ps_138
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_139
+type simulated_observation
+observation lf_ps_139
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_140
+type simulated_observation
+observation lf_ps_140
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_141
+type simulated_observation
+observation lf_ps_141
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_142
+type simulated_observation
+observation lf_ps_142
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_143
+type simulated_observation
+observation lf_ps_143
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_144
+type simulated_observation
+observation lf_ps_144
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_145
+type simulated_observation
+observation lf_ps_145
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_146
+type simulated_observation
+observation lf_ps_146
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_147
+type simulated_observation
+observation lf_ps_147
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_148
+type simulated_observation
+observation lf_ps_148
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_149
+type simulated_observation
+observation lf_ps_149
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_150
+type simulated_observation
+observation lf_ps_150
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_151
+type simulated_observation
+observation lf_ps_151
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_152
+type simulated_observation
+observation lf_ps_152
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_153
+type simulated_observation
+observation lf_ps_153
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_154
+type simulated_observation
+observation lf_ps_154
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_155
+type simulated_observation
+observation lf_ps_155
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_156
+type simulated_observation
+observation lf_ps_156
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_157
+type simulated_observation
+observation lf_ps_157
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_158
+type simulated_observation
+observation lf_ps_158
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_159
+type simulated_observation
+observation lf_ps_159
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_160
+type simulated_observation
+observation lf_ps_160
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_161
+type simulated_observation
+observation lf_ps_161
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_162
+type simulated_observation
+observation lf_ps_162
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_163
+type simulated_observation
+observation lf_ps_163
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_164
+type simulated_observation
+observation lf_ps_164
+file_name observations
+overwrite False
+
+@report simulated_lf_ps_165
+type simulated_observation
+observation lf_ps_165
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_166
+type simulated_observation
+observation lf_ps_166
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_167
+type simulated_observation
+observation lf_ps_167
+file_name simulations/observations
+overwrite False
+
+@report simulated_lf_ps_168
+type simulated_observation
+observation lf_ps_168
+file_name simulations/observations
+overwrite False

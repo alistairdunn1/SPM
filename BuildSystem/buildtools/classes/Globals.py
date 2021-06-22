@@ -18,6 +18,7 @@ latex_path_       = ""
 git_path_         = ""
 cmd_path_         = ""
 build_target_     = ""
+install_r_library = "false"
 
 root_directory_          = ""
 buildtools_directory_    = ""
@@ -34,7 +35,7 @@ threads_          = "8"
 boost_version     = 'boost_1_71_0'
 
 allowed_build_targets_ = [ "release", "examples", "documentation", "boost", "archive", "clean", 
-                           "check", "unittests", "installer", "deb", "rlibrary", "version"]
+                           "check", "unittests", "installer", "rlibrary", "rinstall", "version"]
 
 EX_OK = getattr(os, "EX_OK", 0)
 

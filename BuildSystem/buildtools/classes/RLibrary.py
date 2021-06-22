@@ -33,11 +33,10 @@ class RLibrary:
     os.system("R --vanilla < run-roxygen.R")   
     ## build package
     os.system("R CMD build --force spm")
-    os.system("R CMD INSTALL --build spm")
+    if Globals.install_r_library == 'true':
+      os.system("R CMD INSTALL --build spm")
     os.system("R CMD check spm")
-    os.system("del spm.html")
     #os.system("mv -f spm_" + Globals.SPM_version_number + "* " + Globals.root_directory_ + "/Build")
-
     #os.system("R CMD build --force spmTest")
     #os.system("R CMD INSTALL --build spmTest")
     #os.system("R CMD check spmTest")

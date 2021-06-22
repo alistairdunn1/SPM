@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
+# Currently set up for GCC 10.3, using TDM-GCC x64
+
 # to run (Windows, Mingw32-gcc)
 #   cmake -G "MinGW Makefiles"
 #   mingw32-make all
@@ -30,13 +32,13 @@ IF (WIN32)
   SET(MAIN_LIBRARIES    
     gomp
     pthread
-    boost_system-mgw81-mt-s-x64-1_71
-    boost_filesystem-mgw81-mt-s-x64-1_71
-    boost_thread-mgw81-mt-s-x64-1_71
-    boost_program_options-mgw81-mt-s-x64-1_71
-    boost_chrono-mgw81-mt-s-x64-1_71
+    boost_system-mgw103-mt-s-x64-1_71
+    boost_filesystem-mgw103-mt-s-x64-1_71
+    boost_thread-mgw103-mt-s-x64-1_71
+    boost_program_options-mgw103-mt-s-x64-1_71
+    boost_chrono-mgw103-mt-s-x64-1_71
   )
-  SET(TEST_LIBRARIES boost_unit_test_framework-mgw81-mt-s-x64-1_71)
+  SET(TEST_LIBRARIES boost_unit_test_framework-mgw103-mt-s-x64-1_71)
   
 ELSE (WIN32)
   SET(BOOST_LIBS "${CMAKE_BINARY_DIR}/Boost/lib")

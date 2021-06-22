@@ -1,0 +1,4935 @@
+# reports 
+# Tue Apr 21 14:51:54 2020 
+
+@report random_seed
+type random_number_seed
+
+@report spatial-map
+type spatial_map
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase phase1
+
+@report initialisation-phase2
+type initialisation
+initialisation_phase phase2
+
+@report partition-127-1
+type partition
+years 127 130 131
+time_step one
+file_name reports/partition-127-1.dat
+
+@report partition-127-2
+type partition
+years 127 130 131
+time_step two
+file_name reports/partition-127-2.dat
+
+@report partition-127-3
+type partition
+years 127 130 131
+time_step three
+file_name reports/partition-127-3.dat
+
+@report SSB
+file_name reports/SSB_all
+type derived_quantity
+derived_quantity SSB
+
+@report SSB_by_cell
+file_name reports/SSB_by_cell
+type derived_quantity_by_cell
+derived_quantity_by_cell SSB
+
+@report immature
+file_name reports/imm_by_cell
+type derived_quantity_by_cell
+derived_quantity_by_cell immature
+
+@report mature
+file_name reports/mat_by_cell
+type derived_quantity_by_cell
+derived_quantity_by_cell mature
+
+@report total
+file_name reports/total_by_cell
+type derived_quantity_by_cell
+derived_quantity_by_cell total
+
+@report tagged
+file_name reports/tagged_by_cell
+type derived_quantity_by_cell
+derived_quantity_by_cell tagged
+
+@report biomass_by_age
+file_name reports/biomass_by_age_by_cell
+time_step  two
+type partition_biomass
+
+@report fishing_ps
+file_name reports/fishing_ps_removals
+type process
+process fishing_ps
+removals true
+
+@report estimates
+type estimate_summary
+
+@report estimate-value
+type estimate_value
+
+@report Objective_value
+type objective_function
+
+@report Objective_value_file
+type objective_function
+file_name reports/objective.dat
+
+@report fishing_ps_sel
+type selectivity
+selectivity fishing_ps_sel
+
+@report fishing_trol_sel
+type selectivity
+selectivity fishing_trol_sel
+
+@report fishing_bb_sel
+type selectivity
+selectivity fishing_bb_sel
+
+@report fishing_gill_sel
+type selectivity
+selectivity fishing_gill_sel
+
+@report fishing_ll_sel
+type selectivity
+selectivity fishing_ll_sel
+
+@report fishing_hand_sel
+type selectivity
+selectivity fishing_hand_sel
+
+@report fishing_other_sel
+type selectivity
+selectivity fishing_other_sel
+
+@report one
+type selectivity
+selectivity one
+
+@report covariance
+type covariance
+
+@report mpd
+type estimate_value
+
+@report recruitment
+type process
+process BHrecruitment
+
+@report ageing
+type process
+process ageing
+
+@report maturation
+type process
+process maturation
+
+@report M
+type process
+process M
+
+@report MCMC
+type MCMC
+
+@report MCMC_samples
+type MCMC_samples
+file_name reports/samples.dat
+
+@report MCMC_objectives
+type MCMC_objectives
+file_name reports/objectives.dat
+
+@report age_size
+type age_size
+age_size vonBwithK
+
+@report age_weight
+type age_weight
+age_size vonBwithK
+
+@report distanceMature
+type preference_function
+preference_function distanceMature
+
+@report SSTmature
+type preference_function
+preference_function SSTmature
+
+@report CLOmature
+type preference_function
+preference_function CLOmature
+
+@report distanceImmature
+type preference_function
+preference_function distanceImmature
+
+@report SSTimmature
+type preference_function
+preference_function SSTimmature
+
+@report CLOimmature
+type preference_function
+preference_function CLOimmature
+
+@report cpue_ll_jpn_81
+type observation
+observation cpue_ll_jpn_81
+
+@report cpue_ll_jpn_82
+type observation
+observation cpue_ll_jpn_82
+
+@report cpue_ll_jpn_83
+type observation
+observation cpue_ll_jpn_83
+
+@report cpue_ll_jpn_84
+type observation
+observation cpue_ll_jpn_84
+
+@report cpue_ll_jpn_85
+type observation
+observation cpue_ll_jpn_85
+
+@report cpue_ll_jpn_86
+type observation
+observation cpue_ll_jpn_86
+
+@report cpue_ll_jpn_87
+type observation
+observation cpue_ll_jpn_87
+
+@report cpue_ll_jpn_88
+type observation
+observation cpue_ll_jpn_88
+
+@report cpue_ll_jpn_89
+type observation
+observation cpue_ll_jpn_89
+
+@report cpue_ll_jpn_90
+type observation
+observation cpue_ll_jpn_90
+
+@report cpue_ll_jpn_91
+type observation
+observation cpue_ll_jpn_91
+
+@report cpue_ll_jpn_92
+type observation
+observation cpue_ll_jpn_92
+
+@report cpue_ll_jpn_93
+type observation
+observation cpue_ll_jpn_93
+
+@report cpue_ll_jpn_94
+type observation
+observation cpue_ll_jpn_94
+
+@report cpue_ll_jpn_95
+type observation
+observation cpue_ll_jpn_95
+
+@report cpue_ll_jpn_96
+type observation
+observation cpue_ll_jpn_96
+
+@report cpue_ll_jpn_97
+type observation
+observation cpue_ll_jpn_97
+
+@report cpue_ll_jpn_98
+type observation
+observation cpue_ll_jpn_98
+
+@report cpue_ll_jpn_99
+type observation
+observation cpue_ll_jpn_99
+
+@report cpue_ll_jpn_100
+type observation
+observation cpue_ll_jpn_100
+
+@report cpue_ll_jpn_101
+type observation
+observation cpue_ll_jpn_101
+
+@report cpue_ll_jpn_102
+type observation
+observation cpue_ll_jpn_102
+
+@report cpue_ll_jpn_103
+type observation
+observation cpue_ll_jpn_103
+
+@report cpue_ll_jpn_104
+type observation
+observation cpue_ll_jpn_104
+
+@report cpue_ll_jpn_105
+type observation
+observation cpue_ll_jpn_105
+
+@report cpue_ll_jpn_106
+type observation
+observation cpue_ll_jpn_106
+
+@report cpue_ll_jpn_107
+type observation
+observation cpue_ll_jpn_107
+
+@report cpue_ll_jpn_108
+type observation
+observation cpue_ll_jpn_108
+
+@report cpue_ll_jpn_109
+type observation
+observation cpue_ll_jpn_109
+
+@report cpue_ll_jpn_110
+type observation
+observation cpue_ll_jpn_110
+
+@report cpue_ll_jpn_111
+type observation
+observation cpue_ll_jpn_111
+
+@report cpue_ll_jpn_112
+type observation
+observation cpue_ll_jpn_112
+
+@report cpue_ll_jpn_113
+type observation
+observation cpue_ll_jpn_113
+
+@report cpue_ll_jpn_114
+type observation
+observation cpue_ll_jpn_114
+
+@report cpue_ll_jpn_115
+type observation
+observation cpue_ll_jpn_115
+
+@report cpue_ll_jpn_116
+type observation
+observation cpue_ll_jpn_116
+
+@report cpue_ll_jpn_117
+type observation
+observation cpue_ll_jpn_117
+
+@report cpue_ll_jpn_118
+type observation
+observation cpue_ll_jpn_118
+
+@report cpue_ll_jpn_119
+type observation
+observation cpue_ll_jpn_119
+
+@report cpue_ll_jpn_120
+type observation
+observation cpue_ll_jpn_120
+
+@report cpue_ll_jpn_121
+type observation
+observation cpue_ll_jpn_121
+
+@report cpue_ll_jpn_122
+type observation
+observation cpue_ll_jpn_122
+
+@report cpue_ll_jpn_123
+type observation
+observation cpue_ll_jpn_123
+
+@report cpue_ll_jpn_124
+type observation
+observation cpue_ll_jpn_124
+
+@report cpue_ll_jpn_125
+type observation
+observation cpue_ll_jpn_125
+
+@report cpue_ll_jpn_126
+type observation
+observation cpue_ll_jpn_126
+
+@report cpue_ll_jpn_127
+type observation
+observation cpue_ll_jpn_127
+
+@report cpue_ll_jpn_128
+type observation
+observation cpue_ll_jpn_128
+
+@report cpue_ll_jpn_129
+type observation
+observation cpue_ll_jpn_129
+
+@report cpue_ll_jpn_130
+type observation
+observation cpue_ll_jpn_130
+
+@report cpue_ll_jpn_131
+type observation
+observation cpue_ll_jpn_131
+
+@report cpue_ll_jpn_132
+type observation
+observation cpue_ll_jpn_132
+
+@report cpue_ll_jpn_133
+type observation
+observation cpue_ll_jpn_133
+
+@report cpue_ll_jpn_134
+type observation
+observation cpue_ll_jpn_134
+
+@report cpue_ll_jpn_135
+type observation
+observation cpue_ll_jpn_135
+
+@report cpue_ll_jpn_136
+type observation
+observation cpue_ll_jpn_136
+
+@report cpue_ll_jpn_137
+type observation
+observation cpue_ll_jpn_137
+
+@report cpue_ll_jpn_138
+type observation
+observation cpue_ll_jpn_138
+
+@report cpue_ll_jpn_139
+type observation
+observation cpue_ll_jpn_139
+
+@report cpue_ll_jpn_140
+type observation
+observation cpue_ll_jpn_140
+
+@report cpue_ll_jpn_141
+type observation
+observation cpue_ll_jpn_141
+
+@report cpue_ll_jpn_142
+type observation
+observation cpue_ll_jpn_142
+
+@report cpue_ll_jpn_143
+type observation
+observation cpue_ll_jpn_143
+
+@report cpue_ll_jpn_144
+type observation
+observation cpue_ll_jpn_144
+
+@report cpue_ll_jpn_145
+type observation
+observation cpue_ll_jpn_145
+
+@report cpue_ll_jpn_146
+type observation
+observation cpue_ll_jpn_146
+
+@report cpue_ll_jpn_147
+type observation
+observation cpue_ll_jpn_147
+
+@report cpue_ll_jpn_148
+type observation
+observation cpue_ll_jpn_148
+
+@report cpue_ll_jpn_149
+type observation
+observation cpue_ll_jpn_149
+
+@report cpue_ll_jpn_150
+type observation
+observation cpue_ll_jpn_150
+
+@report cpue_ll_jpn_151
+type observation
+observation cpue_ll_jpn_151
+
+@report cpue_ll_jpn_152
+type observation
+observation cpue_ll_jpn_152
+
+@report cpue_ll_jpn_153
+type observation
+observation cpue_ll_jpn_153
+
+@report cpue_ll_jpn_154
+type observation
+observation cpue_ll_jpn_154
+
+@report cpue_ll_jpn_155
+type observation
+observation cpue_ll_jpn_155
+
+@report cpue_ll_jpn_156
+type observation
+observation cpue_ll_jpn_156
+
+@report cpue_ll_jpn_157
+type observation
+observation cpue_ll_jpn_157
+
+@report cpue_ll_jpn_158
+type observation
+observation cpue_ll_jpn_158
+
+@report cpue_ll_jpn_159
+type observation
+observation cpue_ll_jpn_159
+
+@report cpue_ll_jpn_160
+type observation
+observation cpue_ll_jpn_160
+
+@report cpue_ll_jpn_161
+type observation
+observation cpue_ll_jpn_161
+
+@report cpue_ll_jpn_162
+type observation
+observation cpue_ll_jpn_162
+
+@report cpue_ll_jpn_163
+type observation
+observation cpue_ll_jpn_163
+
+@report cpue_ll_jpn_164
+type observation
+observation cpue_ll_jpn_164
+
+@report cpue_ll_jpn_165
+type observation
+observation cpue_ll_jpn_165
+
+@report cpue_ll_jpn_166
+type observation
+observation cpue_ll_jpn_166
+
+@report cpue_ll_jpn_167
+type observation
+observation cpue_ll_jpn_167
+
+@report cpue_ll_jpn_168
+type observation
+observation cpue_ll_jpn_168
+
+@report cpue_ll_jpn_169
+type observation
+observation cpue_ll_jpn_169
+
+@report cpue_ll_jpn_170
+type observation
+observation cpue_ll_jpn_170
+
+@report cpue_ll_jpn_171
+type observation
+observation cpue_ll_jpn_171
+
+@report cpue_ll_jpn_172
+type observation
+observation cpue_ll_jpn_172
+
+@report cpue_ll_jpn_173
+type observation
+observation cpue_ll_jpn_173
+
+@report cpue_ll_jpn_174
+type observation
+observation cpue_ll_jpn_174
+
+@report cpue_ll_jpn_175
+type observation
+observation cpue_ll_jpn_175
+
+@report cpue_ll_jpn_176
+type observation
+observation cpue_ll_jpn_176
+
+@report cpue_ll_jpn_177
+type observation
+observation cpue_ll_jpn_177
+
+@report cpue_ll_jpn_178
+type observation
+observation cpue_ll_jpn_178
+
+@report cpue_ll_jpn_179
+type observation
+observation cpue_ll_jpn_179
+
+@report cpue_ll_jpn_180
+type observation
+observation cpue_ll_jpn_180
+
+@report cpue_ll_jpn_181
+type observation
+observation cpue_ll_jpn_181
+
+@report cpue_ll_jpn_182
+type observation
+observation cpue_ll_jpn_182
+
+@report cpue_ll_jpn_183
+type observation
+observation cpue_ll_jpn_183
+
+@report cpue_ll_jpn_184
+type observation
+observation cpue_ll_jpn_184
+
+@report cpue_ll_jpn_185
+type observation
+observation cpue_ll_jpn_185
+
+@report cpue_ll_jpn_186
+type observation
+observation cpue_ll_jpn_186
+
+@report cpue_ll_jpn_187
+type observation
+observation cpue_ll_jpn_187
+
+@report cpue_ll_jpn_188
+type observation
+observation cpue_ll_jpn_188
+
+@report cpue_ll_jpn_189
+type observation
+observation cpue_ll_jpn_189
+
+@report cpue_ll_jpn_190
+type observation
+observation cpue_ll_jpn_190
+
+@report cpue_ll_jpn_191
+type observation
+observation cpue_ll_jpn_191
+
+@report cpue_ll_jpn_192
+type observation
+observation cpue_ll_jpn_192
+
+@report cpue_ll_jpn_193
+type observation
+observation cpue_ll_jpn_193
+
+@report cpue_ll_jpn_194
+type observation
+observation cpue_ll_jpn_194
+
+@report cpue_ll_jpn_195
+type observation
+observation cpue_ll_jpn_195
+
+@report cpue_ll_jpn_196
+type observation
+observation cpue_ll_jpn_196
+
+@report cpue_ll_jpn_197
+type observation
+observation cpue_ll_jpn_197
+
+@report cpue_ll_jpn_198
+type observation
+observation cpue_ll_jpn_198
+
+@report cpue_ll_jpn_199
+type observation
+observation cpue_ll_jpn_199
+
+@report cpue_ll_jpn_200
+type observation
+observation cpue_ll_jpn_200
+
+@report cpue_ll_jpn_201
+type observation
+observation cpue_ll_jpn_201
+
+@report cpue_ll_jpn_202
+type observation
+observation cpue_ll_jpn_202
+
+@report cpue_ll_jpn_203
+type observation
+observation cpue_ll_jpn_203
+
+@report cpue_ll_jpn_204
+type observation
+observation cpue_ll_jpn_204
+
+@report cpue_ll_jpn_205
+type observation
+observation cpue_ll_jpn_205
+
+@report cpue_ll_jpn_206
+type observation
+observation cpue_ll_jpn_206
+
+@report cpue_ll_jpn_207
+type observation
+observation cpue_ll_jpn_207
+
+@report cpue_ll_jpn_208
+type observation
+observation cpue_ll_jpn_208
+
+@report cpue_ll_jpn_209
+type observation
+observation cpue_ll_jpn_209
+
+@report cpue_ll_jpn_210
+type observation
+observation cpue_ll_jpn_210
+
+@report cpue_ll_jpn_211
+type observation
+observation cpue_ll_jpn_211
+
+@report cpue_ll_jpn_212
+type observation
+observation cpue_ll_jpn_212
+
+@report cpue_ll_jpn_213
+type observation
+observation cpue_ll_jpn_213
+
+@report cpue_ll_jpn_214
+type observation
+observation cpue_ll_jpn_214
+
+@report cpue_ll_jpn_215
+type observation
+observation cpue_ll_jpn_215
+
+@report cpue_ll_jpn_216
+type observation
+observation cpue_ll_jpn_216
+
+@report cpue_ll_jpn_217
+type observation
+observation cpue_ll_jpn_217
+
+@report cpue_ll_jpn_218
+type observation
+observation cpue_ll_jpn_218
+
+@report cpue_ll_jpn_219
+type observation
+observation cpue_ll_jpn_219
+
+@report cpue_ll_jpn_220
+type observation
+observation cpue_ll_jpn_220
+
+@report cpue_ll_jpn_221
+type observation
+observation cpue_ll_jpn_221
+
+@report cpue_ll_jpn_222
+type observation
+observation cpue_ll_jpn_222
+
+@report cpue_ll_jpn_223
+type observation
+observation cpue_ll_jpn_223
+
+@report cpue_ll_jpn_224
+type observation
+observation cpue_ll_jpn_224
+
+@report cpue_ll_jpn_225
+type observation
+observation cpue_ll_jpn_225
+
+@report cpue_ll_jpn_226
+type observation
+observation cpue_ll_jpn_226
+
+@report cpue_ll_jpn_227
+type observation
+observation cpue_ll_jpn_227
+
+@report cpue_ll_jpn_228
+type observation
+observation cpue_ll_jpn_228
+
+@report cpue_ll_jpn_229
+type observation
+observation cpue_ll_jpn_229
+
+@report cpue_ll_jpn_230
+type observation
+observation cpue_ll_jpn_230
+
+@report cpue_ll_jpn_231
+type observation
+observation cpue_ll_jpn_231
+
+@report cpue_ll_jpn_232
+type observation
+observation cpue_ll_jpn_232
+
+@report cpue_ll_jpn_233
+type observation
+observation cpue_ll_jpn_233
+
+@report cpue_ll_jpn_234
+type observation
+observation cpue_ll_jpn_234
+
+@report cpue_ll_jpn_235
+type observation
+observation cpue_ll_jpn_235
+
+@report cpue_ll_jpn_236
+type observation
+observation cpue_ll_jpn_236
+
+@report cpue_ll_jpn_237
+type observation
+observation cpue_ll_jpn_237
+
+@report cpue_ll_jpn_238
+type observation
+observation cpue_ll_jpn_238
+
+@report cpue_ll_jpn_239
+type observation
+observation cpue_ll_jpn_239
+
+@report cpue_ll_jpn_240
+type observation
+observation cpue_ll_jpn_240
+
+@report cpue_ll_jpn_241
+type observation
+observation cpue_ll_jpn_241
+
+@report cpue_ll_jpn_242
+type observation
+observation cpue_ll_jpn_242
+
+@report cpue_ll_jpn_243
+type observation
+observation cpue_ll_jpn_243
+
+@report cpue_ll_jpn_244
+type observation
+observation cpue_ll_jpn_244
+
+@report cpue_ll_jpn_245
+type observation
+observation cpue_ll_jpn_245
+
+@report cpue_ll_jpn_246
+type observation
+observation cpue_ll_jpn_246
+
+@report cpue_ll_jpn_247
+type observation
+observation cpue_ll_jpn_247
+
+@report cpue_ll_jpn_248
+type observation
+observation cpue_ll_jpn_248
+
+@report cpue_ll_jpn_249
+type observation
+observation cpue_ll_jpn_249
+
+@report cpue_ll_jpn_250
+type observation
+observation cpue_ll_jpn_250
+
+@report cpue_ll_jpn_251
+type observation
+observation cpue_ll_jpn_251
+
+@report cpue_ll_jpn_252
+type observation
+observation cpue_ll_jpn_252
+
+@report cpue_ll_jpn_253
+type observation
+observation cpue_ll_jpn_253
+
+@report cpue_ll_jpn_254
+type observation
+observation cpue_ll_jpn_254
+
+@report cpue_ll_jpn_255
+type observation
+observation cpue_ll_jpn_255
+
+@report cpue_ll_jpn_256
+type observation
+observation cpue_ll_jpn_256
+
+@report lf_ps_121
+type observation
+observation lf_ps_121
+
+@report lf_ps_122
+type observation
+observation lf_ps_122
+
+@report lf_ps_124
+type observation
+observation lf_ps_124
+
+@report lf_ps_125
+type observation
+observation lf_ps_125
+
+@report lf_ps_126
+type observation
+observation lf_ps_126
+
+@report lf_ps_127
+type observation
+observation lf_ps_127
+
+@report lf_ps_128
+type observation
+observation lf_ps_128
+
+@report lf_ps_129
+type observation
+observation lf_ps_129
+
+@report lf_ps_130
+type observation
+observation lf_ps_130
+
+@report lf_ps_131
+type observation
+observation lf_ps_131
+
+@report lf_ps_132
+type observation
+observation lf_ps_132
+
+@report lf_ps_133
+type observation
+observation lf_ps_133
+
+@report lf_ps_134
+type observation
+observation lf_ps_134
+
+@report lf_ps_135
+type observation
+observation lf_ps_135
+
+@report lf_ps_136
+type observation
+observation lf_ps_136
+
+@report lf_ps_137
+type observation
+observation lf_ps_137
+
+@report lf_ps_138
+type observation
+observation lf_ps_138
+
+@report lf_ps_139
+type observation
+observation lf_ps_139
+
+@report lf_ps_140
+type observation
+observation lf_ps_140
+
+@report lf_ps_141
+type observation
+observation lf_ps_141
+
+@report lf_ps_142
+type observation
+observation lf_ps_142
+
+@report lf_ps_143
+type observation
+observation lf_ps_143
+
+@report lf_ps_144
+type observation
+observation lf_ps_144
+
+@report lf_ps_145
+type observation
+observation lf_ps_145
+
+@report lf_ps_146
+type observation
+observation lf_ps_146
+
+@report lf_ps_147
+type observation
+observation lf_ps_147
+
+@report lf_ps_148
+type observation
+observation lf_ps_148
+
+@report lf_ps_149
+type observation
+observation lf_ps_149
+
+@report lf_ps_150
+type observation
+observation lf_ps_150
+
+@report lf_ps_151
+type observation
+observation lf_ps_151
+
+@report lf_ps_152
+type observation
+observation lf_ps_152
+
+@report lf_ps_153
+type observation
+observation lf_ps_153
+
+@report lf_ps_154
+type observation
+observation lf_ps_154
+
+@report lf_ps_155
+type observation
+observation lf_ps_155
+
+@report lf_ps_156
+type observation
+observation lf_ps_156
+
+@report lf_ps_157
+type observation
+observation lf_ps_157
+
+@report lf_ps_158
+type observation
+observation lf_ps_158
+
+@report lf_ps_159
+type observation
+observation lf_ps_159
+
+@report lf_ps_160
+type observation
+observation lf_ps_160
+
+@report lf_ps_161
+type observation
+observation lf_ps_161
+
+@report lf_ps_162
+type observation
+observation lf_ps_162
+
+@report lf_ps_163
+type observation
+observation lf_ps_163
+
+@report lf_ps_164
+type observation
+observation lf_ps_164
+
+@report lf_ps_165
+type observation
+observation lf_ps_165
+
+@report lf_ps_166
+type observation
+observation lf_ps_166
+
+@report lf_ps_167
+type observation
+observation lf_ps_167
+
+@report lf_ps_168
+type observation
+observation lf_ps_168
+
+@report lf_ps_169
+type observation
+observation lf_ps_169
+
+@report lf_ps_170
+type observation
+observation lf_ps_170
+
+@report lf_ps_171
+type observation
+observation lf_ps_171
+
+@report lf_ps_172
+type observation
+observation lf_ps_172
+
+@report lf_ps_173
+type observation
+observation lf_ps_173
+
+@report lf_ps_174
+type observation
+observation lf_ps_174
+
+@report lf_ps_175
+type observation
+observation lf_ps_175
+
+@report lf_ps_176
+type observation
+observation lf_ps_176
+
+@report lf_ps_177
+type observation
+observation lf_ps_177
+
+@report lf_ps_178
+type observation
+observation lf_ps_178
+
+@report lf_ps_179
+type observation
+observation lf_ps_179
+
+@report lf_ps_180
+type observation
+observation lf_ps_180
+
+@report lf_ps_181
+type observation
+observation lf_ps_181
+
+@report lf_ps_182
+type observation
+observation lf_ps_182
+
+@report lf_ps_183
+type observation
+observation lf_ps_183
+
+@report lf_ps_184
+type observation
+observation lf_ps_184
+
+@report lf_ps_185
+type observation
+observation lf_ps_185
+
+@report lf_ps_186
+type observation
+observation lf_ps_186
+
+@report lf_ps_187
+type observation
+observation lf_ps_187
+
+@report lf_ps_188
+type observation
+observation lf_ps_188
+
+@report lf_ps_189
+type observation
+observation lf_ps_189
+
+@report lf_ps_190
+type observation
+observation lf_ps_190
+
+@report lf_ps_191
+type observation
+observation lf_ps_191
+
+@report lf_ps_192
+type observation
+observation lf_ps_192
+
+@report lf_ps_193
+type observation
+observation lf_ps_193
+
+@report lf_ps_194
+type observation
+observation lf_ps_194
+
+@report lf_ps_195
+type observation
+observation lf_ps_195
+
+@report lf_ps_196
+type observation
+observation lf_ps_196
+
+@report lf_ps_197
+type observation
+observation lf_ps_197
+
+@report lf_ps_198
+type observation
+observation lf_ps_198
+
+@report lf_ps_199
+type observation
+observation lf_ps_199
+
+@report lf_ps_200
+type observation
+observation lf_ps_200
+
+@report lf_ps_201
+type observation
+observation lf_ps_201
+
+@report lf_ps_202
+type observation
+observation lf_ps_202
+
+@report lf_ps_203
+type observation
+observation lf_ps_203
+
+@report lf_ps_204
+type observation
+observation lf_ps_204
+
+@report lf_ps_205
+type observation
+observation lf_ps_205
+
+@report lf_ps_206
+type observation
+observation lf_ps_206
+
+@report lf_ps_207
+type observation
+observation lf_ps_207
+
+@report lf_ps_208
+type observation
+observation lf_ps_208
+
+@report lf_ps_209
+type observation
+observation lf_ps_209
+
+@report lf_ps_210
+type observation
+observation lf_ps_210
+
+@report lf_ps_211
+type observation
+observation lf_ps_211
+
+@report lf_ps_212
+type observation
+observation lf_ps_212
+
+@report lf_ps_213
+type observation
+observation lf_ps_213
+
+@report lf_ps_214
+type observation
+observation lf_ps_214
+
+@report lf_ps_215
+type observation
+observation lf_ps_215
+
+@report lf_ps_216
+type observation
+observation lf_ps_216
+
+@report lf_ps_217
+type observation
+observation lf_ps_217
+
+@report lf_ps_218
+type observation
+observation lf_ps_218
+
+@report lf_ps_219
+type observation
+observation lf_ps_219
+
+@report lf_ps_220
+type observation
+observation lf_ps_220
+
+@report lf_ps_221
+type observation
+observation lf_ps_221
+
+@report lf_ps_222
+type observation
+observation lf_ps_222
+
+@report lf_ps_223
+type observation
+observation lf_ps_223
+
+@report lf_ps_224
+type observation
+observation lf_ps_224
+
+@report lf_ps_225
+type observation
+observation lf_ps_225
+
+@report lf_ps_226
+type observation
+observation lf_ps_226
+
+@report lf_ps_227
+type observation
+observation lf_ps_227
+
+@report lf_ps_228
+type observation
+observation lf_ps_228
+
+@report lf_ps_229
+type observation
+observation lf_ps_229
+
+@report lf_ps_230
+type observation
+observation lf_ps_230
+
+@report lf_ps_231
+type observation
+observation lf_ps_231
+
+@report lf_ps_232
+type observation
+observation lf_ps_232
+
+@report lf_ps_233
+type observation
+observation lf_ps_233
+
+@report lf_ps_234
+type observation
+observation lf_ps_234
+
+@report lf_ps_235
+type observation
+observation lf_ps_235
+
+@report lf_ps_236
+type observation
+observation lf_ps_236
+
+@report lf_ps_237
+type observation
+observation lf_ps_237
+
+@report lf_ps_238
+type observation
+observation lf_ps_238
+
+@report lf_ps_239
+type observation
+observation lf_ps_239
+
+@report lf_ps_240
+type observation
+observation lf_ps_240
+
+@report lf_ps_241
+type observation
+observation lf_ps_241
+
+@report lf_ps_242
+type observation
+observation lf_ps_242
+
+@report lf_ps_243
+type observation
+observation lf_ps_243
+
+@report lf_ps_244
+type observation
+observation lf_ps_244
+
+@report lf_ps_245
+type observation
+observation lf_ps_245
+
+@report lf_ps_246
+type observation
+observation lf_ps_246
+
+@report lf_ps_247
+type observation
+observation lf_ps_247
+
+@report lf_ps_248
+type observation
+observation lf_ps_248
+
+@report lf_ps_249
+type observation
+observation lf_ps_249
+
+@report lf_ps_250
+type observation
+observation lf_ps_250
+
+@report lf_ps_251
+type observation
+observation lf_ps_251
+
+@report lf_ps_252
+type observation
+observation lf_ps_252
+
+@report lf_ps_253
+type observation
+observation lf_ps_253
+
+@report lf_ps_254
+type observation
+observation lf_ps_254
+
+@report lf_ps_255
+type observation
+observation lf_ps_255
+
+@report lf_ps_256
+type observation
+observation lf_ps_256
+
+@report lf_trol_134
+type observation
+observation lf_trol_134
+
+@report lf_trol_135
+type observation
+observation lf_trol_135
+
+@report lf_trol_136
+type observation
+observation lf_trol_136
+
+@report lf_trol_137
+type observation
+observation lf_trol_137
+
+@report lf_trol_138
+type observation
+observation lf_trol_138
+
+@report lf_trol_142
+type observation
+observation lf_trol_142
+
+@report lf_trol_145
+type observation
+observation lf_trol_145
+
+@report lf_trol_146
+type observation
+observation lf_trol_146
+
+@report lf_trol_147
+type observation
+observation lf_trol_147
+
+@report lf_trol_148
+type observation
+observation lf_trol_148
+
+@report lf_trol_149
+type observation
+observation lf_trol_149
+
+@report lf_trol_151
+type observation
+observation lf_trol_151
+
+@report lf_trol_152
+type observation
+observation lf_trol_152
+
+@report lf_trol_153
+type observation
+observation lf_trol_153
+
+@report lf_trol_154
+type observation
+observation lf_trol_154
+
+@report lf_trol_155
+type observation
+observation lf_trol_155
+
+@report lf_trol_156
+type observation
+observation lf_trol_156
+
+@report lf_trol_255
+type observation
+observation lf_trol_255
+
+@report lf_bb_125
+type observation
+observation lf_bb_125
+
+@report lf_bb_126
+type observation
+observation lf_bb_126
+
+@report lf_bb_127
+type observation
+observation lf_bb_127
+
+@report lf_bb_129
+type observation
+observation lf_bb_129
+
+@report lf_bb_130
+type observation
+observation lf_bb_130
+
+@report lf_bb_131
+type observation
+observation lf_bb_131
+
+@report lf_bb_135
+type observation
+observation lf_bb_135
+
+@report lf_bb_136
+type observation
+observation lf_bb_136
+
+@report lf_bb_137
+type observation
+observation lf_bb_137
+
+@report lf_bb_138
+type observation
+observation lf_bb_138
+
+@report lf_bb_139
+type observation
+observation lf_bb_139
+
+@report lf_bb_140
+type observation
+observation lf_bb_140
+
+@report lf_bb_141
+type observation
+observation lf_bb_141
+
+@report lf_bb_142
+type observation
+observation lf_bb_142
+
+@report lf_bb_143
+type observation
+observation lf_bb_143
+
+@report lf_bb_144
+type observation
+observation lf_bb_144
+
+@report lf_bb_145
+type observation
+observation lf_bb_145
+
+@report lf_bb_146
+type observation
+observation lf_bb_146
+
+@report lf_bb_147
+type observation
+observation lf_bb_147
+
+@report lf_bb_148
+type observation
+observation lf_bb_148
+
+@report lf_bb_149
+type observation
+observation lf_bb_149
+
+@report lf_bb_150
+type observation
+observation lf_bb_150
+
+@report lf_bb_151
+type observation
+observation lf_bb_151
+
+@report lf_bb_152
+type observation
+observation lf_bb_152
+
+@report lf_bb_153
+type observation
+observation lf_bb_153
+
+@report lf_bb_154
+type observation
+observation lf_bb_154
+
+@report lf_bb_155
+type observation
+observation lf_bb_155
+
+@report lf_bb_156
+type observation
+observation lf_bb_156
+
+@report lf_bb_157
+type observation
+observation lf_bb_157
+
+@report lf_bb_158
+type observation
+observation lf_bb_158
+
+@report lf_bb_159
+type observation
+observation lf_bb_159
+
+@report lf_bb_160
+type observation
+observation lf_bb_160
+
+@report lf_bb_161
+type observation
+observation lf_bb_161
+
+@report lf_bb_162
+type observation
+observation lf_bb_162
+
+@report lf_bb_163
+type observation
+observation lf_bb_163
+
+@report lf_bb_164
+type observation
+observation lf_bb_164
+
+@report lf_bb_165
+type observation
+observation lf_bb_165
+
+@report lf_bb_166
+type observation
+observation lf_bb_166
+
+@report lf_bb_167
+type observation
+observation lf_bb_167
+
+@report lf_bb_168
+type observation
+observation lf_bb_168
+
+@report lf_bb_169
+type observation
+observation lf_bb_169
+
+@report lf_bb_170
+type observation
+observation lf_bb_170
+
+@report lf_bb_171
+type observation
+observation lf_bb_171
+
+@report lf_bb_172
+type observation
+observation lf_bb_172
+
+@report lf_bb_173
+type observation
+observation lf_bb_173
+
+@report lf_bb_174
+type observation
+observation lf_bb_174
+
+@report lf_bb_175
+type observation
+observation lf_bb_175
+
+@report lf_bb_176
+type observation
+observation lf_bb_176
+
+@report lf_bb_177
+type observation
+observation lf_bb_177
+
+@report lf_bb_178
+type observation
+observation lf_bb_178
+
+@report lf_bb_179
+type observation
+observation lf_bb_179
+
+@report lf_bb_180
+type observation
+observation lf_bb_180
+
+@report lf_bb_193
+type observation
+observation lf_bb_193
+
+@report lf_bb_194
+type observation
+observation lf_bb_194
+
+@report lf_bb_195
+type observation
+observation lf_bb_195
+
+@report lf_bb_196
+type observation
+observation lf_bb_196
+
+@report lf_bb_197
+type observation
+observation lf_bb_197
+
+@report lf_bb_198
+type observation
+observation lf_bb_198
+
+@report lf_bb_199
+type observation
+observation lf_bb_199
+
+@report lf_bb_200
+type observation
+observation lf_bb_200
+
+@report lf_bb_201
+type observation
+observation lf_bb_201
+
+@report lf_bb_202
+type observation
+observation lf_bb_202
+
+@report lf_bb_203
+type observation
+observation lf_bb_203
+
+@report lf_bb_204
+type observation
+observation lf_bb_204
+
+@report lf_bb_205
+type observation
+observation lf_bb_205
+
+@report lf_bb_206
+type observation
+observation lf_bb_206
+
+@report lf_bb_207
+type observation
+observation lf_bb_207
+
+@report lf_bb_208
+type observation
+observation lf_bb_208
+
+@report lf_bb_209
+type observation
+observation lf_bb_209
+
+@report lf_bb_210
+type observation
+observation lf_bb_210
+
+@report lf_bb_211
+type observation
+observation lf_bb_211
+
+@report lf_bb_212
+type observation
+observation lf_bb_212
+
+@report lf_bb_213
+type observation
+observation lf_bb_213
+
+@report lf_bb_214
+type observation
+observation lf_bb_214
+
+@report lf_bb_215
+type observation
+observation lf_bb_215
+
+@report lf_bb_216
+type observation
+observation lf_bb_216
+
+@report lf_bb_217
+type observation
+observation lf_bb_217
+
+@report lf_bb_218
+type observation
+observation lf_bb_218
+
+@report lf_bb_219
+type observation
+observation lf_bb_219
+
+@report lf_bb_220
+type observation
+observation lf_bb_220
+
+@report lf_bb_221
+type observation
+observation lf_bb_221
+
+@report lf_bb_222
+type observation
+observation lf_bb_222
+
+@report lf_bb_223
+type observation
+observation lf_bb_223
+
+@report lf_bb_224
+type observation
+observation lf_bb_224
+
+@report lf_bb_225
+type observation
+observation lf_bb_225
+
+@report lf_bb_226
+type observation
+observation lf_bb_226
+
+@report lf_bb_227
+type observation
+observation lf_bb_227
+
+@report lf_bb_228
+type observation
+observation lf_bb_228
+
+@report lf_bb_229
+type observation
+observation lf_bb_229
+
+@report lf_bb_230
+type observation
+observation lf_bb_230
+
+@report lf_bb_231
+type observation
+observation lf_bb_231
+
+@report lf_bb_232
+type observation
+observation lf_bb_232
+
+@report lf_bb_233
+type observation
+observation lf_bb_233
+
+@report lf_bb_234
+type observation
+observation lf_bb_234
+
+@report lf_bb_235
+type observation
+observation lf_bb_235
+
+@report lf_bb_236
+type observation
+observation lf_bb_236
+
+@report lf_bb_237
+type observation
+observation lf_bb_237
+
+@report lf_bb_238
+type observation
+observation lf_bb_238
+
+@report lf_bb_239
+type observation
+observation lf_bb_239
+
+@report lf_bb_240
+type observation
+observation lf_bb_240
+
+@report lf_bb_241
+type observation
+observation lf_bb_241
+
+@report lf_bb_242
+type observation
+observation lf_bb_242
+
+@report lf_bb_243
+type observation
+observation lf_bb_243
+
+@report lf_bb_244
+type observation
+observation lf_bb_244
+
+@report lf_bb_245
+type observation
+observation lf_bb_245
+
+@report lf_bb_246
+type observation
+observation lf_bb_246
+
+@report lf_bb_247
+type observation
+observation lf_bb_247
+
+@report lf_bb_248
+type observation
+observation lf_bb_248
+
+@report lf_bb_249
+type observation
+observation lf_bb_249
+
+@report lf_bb_250
+type observation
+observation lf_bb_250
+
+@report lf_bb_251
+type observation
+observation lf_bb_251
+
+@report lf_bb_252
+type observation
+observation lf_bb_252
+
+@report lf_bb_253
+type observation
+observation lf_bb_253
+
+@report lf_bb_254
+type observation
+observation lf_bb_254
+
+@report lf_bb_255
+type observation
+observation lf_bb_255
+
+@report lf_bb_256
+type observation
+observation lf_bb_256
+
+@report lf_gill_93
+type observation
+observation lf_gill_93
+
+@report lf_gill_94
+type observation
+observation lf_gill_94
+
+@report lf_gill_95
+type observation
+observation lf_gill_95
+
+@report lf_gill_96
+type observation
+observation lf_gill_96
+
+@report lf_gill_97
+type observation
+observation lf_gill_97
+
+@report lf_gill_98
+type observation
+observation lf_gill_98
+
+@report lf_gill_99
+type observation
+observation lf_gill_99
+
+@report lf_gill_100
+type observation
+observation lf_gill_100
+
+@report lf_gill_101
+type observation
+observation lf_gill_101
+
+@report lf_gill_102
+type observation
+observation lf_gill_102
+
+@report lf_gill_103
+type observation
+observation lf_gill_103
+
+@report lf_gill_104
+type observation
+observation lf_gill_104
+
+@report lf_gill_105
+type observation
+observation lf_gill_105
+
+@report lf_gill_106
+type observation
+observation lf_gill_106
+
+@report lf_gill_107
+type observation
+observation lf_gill_107
+
+@report lf_gill_108
+type observation
+observation lf_gill_108
+
+@report lf_gill_109
+type observation
+observation lf_gill_109
+
+@report lf_gill_110
+type observation
+observation lf_gill_110
+
+@report lf_gill_111
+type observation
+observation lf_gill_111
+
+@report lf_gill_112
+type observation
+observation lf_gill_112
+
+@report lf_gill_113
+type observation
+observation lf_gill_113
+
+@report lf_gill_114
+type observation
+observation lf_gill_114
+
+@report lf_gill_115
+type observation
+observation lf_gill_115
+
+@report lf_gill_116
+type observation
+observation lf_gill_116
+
+@report lf_gill_117
+type observation
+observation lf_gill_117
+
+@report lf_gill_118
+type observation
+observation lf_gill_118
+
+@report lf_gill_119
+type observation
+observation lf_gill_119
+
+@report lf_gill_120
+type observation
+observation lf_gill_120
+
+@report lf_gill_143
+type observation
+observation lf_gill_143
+
+@report lf_gill_144
+type observation
+observation lf_gill_144
+
+@report lf_gill_145
+type observation
+observation lf_gill_145
+
+@report lf_gill_146
+type observation
+observation lf_gill_146
+
+@report lf_gill_147
+type observation
+observation lf_gill_147
+
+@report lf_gill_148
+type observation
+observation lf_gill_148
+
+@report lf_gill_149
+type observation
+observation lf_gill_149
+
+@report lf_gill_150
+type observation
+observation lf_gill_150
+
+@report lf_gill_151
+type observation
+observation lf_gill_151
+
+@report lf_gill_152
+type observation
+observation lf_gill_152
+
+@report lf_gill_153
+type observation
+observation lf_gill_153
+
+@report lf_gill_154
+type observation
+observation lf_gill_154
+
+@report lf_gill_155
+type observation
+observation lf_gill_155
+
+@report lf_gill_156
+type observation
+observation lf_gill_156
+
+@report lf_gill_157
+type observation
+observation lf_gill_157
+
+@report lf_gill_158
+type observation
+observation lf_gill_158
+
+@report lf_gill_159
+type observation
+observation lf_gill_159
+
+@report lf_gill_160
+type observation
+observation lf_gill_160
+
+@report lf_gill_161
+type observation
+observation lf_gill_161
+
+@report lf_gill_162
+type observation
+observation lf_gill_162
+
+@report lf_gill_163
+type observation
+observation lf_gill_163
+
+@report lf_gill_164
+type observation
+observation lf_gill_164
+
+@report lf_gill_165
+type observation
+observation lf_gill_165
+
+@report lf_gill_166
+type observation
+observation lf_gill_166
+
+@report lf_gill_167
+type observation
+observation lf_gill_167
+
+@report lf_gill_168
+type observation
+observation lf_gill_168
+
+@report lf_gill_205
+type observation
+observation lf_gill_205
+
+@report lf_gill_206
+type observation
+observation lf_gill_206
+
+@report lf_gill_228
+type observation
+observation lf_gill_228
+
+@report lf_gill_229
+type observation
+observation lf_gill_229
+
+@report lf_gill_230
+type observation
+observation lf_gill_230
+
+@report lf_gill_231
+type observation
+observation lf_gill_231
+
+@report lf_gill_232
+type observation
+observation lf_gill_232
+
+@report lf_ll_9
+type observation
+observation lf_ll_9
+
+@report lf_ll_10
+type observation
+observation lf_ll_10
+
+@report lf_ll_11
+type observation
+observation lf_ll_11
+
+@report lf_ll_12
+type observation
+observation lf_ll_12
+
+@report lf_ll_13
+type observation
+observation lf_ll_13
+
+@report lf_ll_14
+type observation
+observation lf_ll_14
+
+@report lf_ll_15
+type observation
+observation lf_ll_15
+
+@report lf_ll_16
+type observation
+observation lf_ll_16
+
+@report lf_ll_17
+type observation
+observation lf_ll_17
+
+@report lf_ll_18
+type observation
+observation lf_ll_18
+
+@report lf_ll_19
+type observation
+observation lf_ll_19
+
+@report lf_ll_20
+type observation
+observation lf_ll_20
+
+@report lf_ll_21
+type observation
+observation lf_ll_21
+
+@report lf_ll_22
+type observation
+observation lf_ll_22
+
+@report lf_ll_23
+type observation
+observation lf_ll_23
+
+@report lf_ll_24
+type observation
+observation lf_ll_24
+
+@report lf_ll_25
+type observation
+observation lf_ll_25
+
+@report lf_ll_26
+type observation
+observation lf_ll_26
+
+@report lf_ll_27
+type observation
+observation lf_ll_27
+
+@report lf_ll_28
+type observation
+observation lf_ll_28
+
+@report lf_ll_29
+type observation
+observation lf_ll_29
+
+@report lf_ll_30
+type observation
+observation lf_ll_30
+
+@report lf_ll_31
+type observation
+observation lf_ll_31
+
+@report lf_ll_32
+type observation
+observation lf_ll_32
+
+@report lf_ll_33
+type observation
+observation lf_ll_33
+
+@report lf_ll_34
+type observation
+observation lf_ll_34
+
+@report lf_ll_35
+type observation
+observation lf_ll_35
+
+@report lf_ll_36
+type observation
+observation lf_ll_36
+
+@report lf_ll_37
+type observation
+observation lf_ll_37
+
+@report lf_ll_38
+type observation
+observation lf_ll_38
+
+@report lf_ll_40
+type observation
+observation lf_ll_40
+
+@report lf_ll_41
+type observation
+observation lf_ll_41
+
+@report lf_ll_42
+type observation
+observation lf_ll_42
+
+@report lf_ll_43
+type observation
+observation lf_ll_43
+
+@report lf_ll_44
+type observation
+observation lf_ll_44
+
+@report lf_ll_45
+type observation
+observation lf_ll_45
+
+@report lf_ll_47
+type observation
+observation lf_ll_47
+
+@report lf_ll_48
+type observation
+observation lf_ll_48
+
+@report lf_ll_49
+type observation
+observation lf_ll_49
+
+@report lf_ll_50
+type observation
+observation lf_ll_50
+
+@report lf_ll_51
+type observation
+observation lf_ll_51
+
+@report lf_ll_52
+type observation
+observation lf_ll_52
+
+@report lf_ll_53
+type observation
+observation lf_ll_53
+
+@report lf_ll_54
+type observation
+observation lf_ll_54
+
+@report lf_ll_55
+type observation
+observation lf_ll_55
+
+@report lf_ll_56
+type observation
+observation lf_ll_56
+
+@report lf_ll_57
+type observation
+observation lf_ll_57
+
+@report lf_ll_58
+type observation
+observation lf_ll_58
+
+@report lf_ll_59
+type observation
+observation lf_ll_59
+
+@report lf_ll_60
+type observation
+observation lf_ll_60
+
+@report lf_ll_61
+type observation
+observation lf_ll_61
+
+@report lf_ll_62
+type observation
+observation lf_ll_62
+
+@report lf_ll_63
+type observation
+observation lf_ll_63
+
+@report lf_ll_64
+type observation
+observation lf_ll_64
+
+@report lf_ll_65
+type observation
+observation lf_ll_65
+
+@report lf_ll_66
+type observation
+observation lf_ll_66
+
+@report lf_ll_67
+type observation
+observation lf_ll_67
+
+@report lf_ll_68
+type observation
+observation lf_ll_68
+
+@report lf_ll_69
+type observation
+observation lf_ll_69
+
+@report lf_ll_70
+type observation
+observation lf_ll_70
+
+@report lf_ll_71
+type observation
+observation lf_ll_71
+
+@report lf_ll_72
+type observation
+observation lf_ll_72
+
+@report lf_ll_73
+type observation
+observation lf_ll_73
+
+@report lf_ll_74
+type observation
+observation lf_ll_74
+
+@report lf_ll_75
+type observation
+observation lf_ll_75
+
+@report lf_ll_76
+type observation
+observation lf_ll_76
+
+@report lf_ll_77
+type observation
+observation lf_ll_77
+
+@report lf_ll_78
+type observation
+observation lf_ll_78
+
+@report lf_ll_79
+type observation
+observation lf_ll_79
+
+@report lf_ll_80
+type observation
+observation lf_ll_80
+
+@report lf_ll_81
+type observation
+observation lf_ll_81
+
+@report lf_ll_82
+type observation
+observation lf_ll_82
+
+@report lf_ll_83
+type observation
+observation lf_ll_83
+
+@report lf_ll_84
+type observation
+observation lf_ll_84
+
+@report lf_ll_85
+type observation
+observation lf_ll_85
+
+@report lf_ll_87
+type observation
+observation lf_ll_87
+
+@report lf_ll_88
+type observation
+observation lf_ll_88
+
+@report lf_ll_89
+type observation
+observation lf_ll_89
+
+@report lf_ll_91
+type observation
+observation lf_ll_91
+
+@report lf_ll_92
+type observation
+observation lf_ll_92
+
+@report lf_ll_93
+type observation
+observation lf_ll_93
+
+@report lf_ll_94
+type observation
+observation lf_ll_94
+
+@report lf_ll_95
+type observation
+observation lf_ll_95
+
+@report lf_ll_96
+type observation
+observation lf_ll_96
+
+@report lf_ll_97
+type observation
+observation lf_ll_97
+
+@report lf_ll_98
+type observation
+observation lf_ll_98
+
+@report lf_ll_99
+type observation
+observation lf_ll_99
+
+@report lf_ll_101
+type observation
+observation lf_ll_101
+
+@report lf_ll_102
+type observation
+observation lf_ll_102
+
+@report lf_ll_103
+type observation
+observation lf_ll_103
+
+@report lf_ll_104
+type observation
+observation lf_ll_104
+
+@report lf_ll_105
+type observation
+observation lf_ll_105
+
+@report lf_ll_106
+type observation
+observation lf_ll_106
+
+@report lf_ll_107
+type observation
+observation lf_ll_107
+
+@report lf_ll_108
+type observation
+observation lf_ll_108
+
+@report lf_ll_109
+type observation
+observation lf_ll_109
+
+@report lf_ll_110
+type observation
+observation lf_ll_110
+
+@report lf_ll_111
+type observation
+observation lf_ll_111
+
+@report lf_ll_112
+type observation
+observation lf_ll_112
+
+@report lf_ll_113
+type observation
+observation lf_ll_113
+
+@report lf_ll_114
+type observation
+observation lf_ll_114
+
+@report lf_ll_115
+type observation
+observation lf_ll_115
+
+@report lf_ll_116
+type observation
+observation lf_ll_116
+
+@report lf_ll_117
+type observation
+observation lf_ll_117
+
+@report lf_ll_118
+type observation
+observation lf_ll_118
+
+@report lf_ll_119
+type observation
+observation lf_ll_119
+
+@report lf_ll_120
+type observation
+observation lf_ll_120
+
+@report lf_ll_121
+type observation
+observation lf_ll_121
+
+@report lf_ll_122
+type observation
+observation lf_ll_122
+
+@report lf_ll_123
+type observation
+observation lf_ll_123
+
+@report lf_ll_124
+type observation
+observation lf_ll_124
+
+@report lf_ll_125
+type observation
+observation lf_ll_125
+
+@report lf_ll_126
+type observation
+observation lf_ll_126
+
+@report lf_ll_127
+type observation
+observation lf_ll_127
+
+@report lf_ll_128
+type observation
+observation lf_ll_128
+
+@report lf_ll_129
+type observation
+observation lf_ll_129
+
+@report lf_ll_130
+type observation
+observation lf_ll_130
+
+@report lf_ll_131
+type observation
+observation lf_ll_131
+
+@report lf_ll_132
+type observation
+observation lf_ll_132
+
+@report lf_ll_133
+type observation
+observation lf_ll_133
+
+@report lf_ll_134
+type observation
+observation lf_ll_134
+
+@report lf_ll_135
+type observation
+observation lf_ll_135
+
+@report lf_ll_136
+type observation
+observation lf_ll_136
+
+@report lf_ll_137
+type observation
+observation lf_ll_137
+
+@report lf_ll_138
+type observation
+observation lf_ll_138
+
+@report lf_ll_139
+type observation
+observation lf_ll_139
+
+@report lf_ll_140
+type observation
+observation lf_ll_140
+
+@report lf_ll_141
+type observation
+observation lf_ll_141
+
+@report lf_ll_142
+type observation
+observation lf_ll_142
+
+@report lf_ll_143
+type observation
+observation lf_ll_143
+
+@report lf_ll_144
+type observation
+observation lf_ll_144
+
+@report lf_ll_145
+type observation
+observation lf_ll_145
+
+@report lf_ll_146
+type observation
+observation lf_ll_146
+
+@report lf_ll_147
+type observation
+observation lf_ll_147
+
+@report lf_ll_148
+type observation
+observation lf_ll_148
+
+@report lf_ll_149
+type observation
+observation lf_ll_149
+
+@report lf_ll_150
+type observation
+observation lf_ll_150
+
+@report lf_ll_152
+type observation
+observation lf_ll_152
+
+@report lf_ll_153
+type observation
+observation lf_ll_153
+
+@report lf_ll_154
+type observation
+observation lf_ll_154
+
+@report lf_ll_155
+type observation
+observation lf_ll_155
+
+@report lf_ll_156
+type observation
+observation lf_ll_156
+
+@report lf_ll_157
+type observation
+observation lf_ll_157
+
+@report lf_ll_158
+type observation
+observation lf_ll_158
+
+@report lf_ll_159
+type observation
+observation lf_ll_159
+
+@report lf_ll_160
+type observation
+observation lf_ll_160
+
+@report lf_ll_161
+type observation
+observation lf_ll_161
+
+@report lf_ll_162
+type observation
+observation lf_ll_162
+
+@report lf_ll_163
+type observation
+observation lf_ll_163
+
+@report lf_ll_164
+type observation
+observation lf_ll_164
+
+@report lf_ll_165
+type observation
+observation lf_ll_165
+
+@report lf_ll_166
+type observation
+observation lf_ll_166
+
+@report lf_ll_168
+type observation
+observation lf_ll_168
+
+@report lf_ll_169
+type observation
+observation lf_ll_169
+
+@report lf_ll_170
+type observation
+observation lf_ll_170
+
+@report lf_ll_171
+type observation
+observation lf_ll_171
+
+@report lf_ll_172
+type observation
+observation lf_ll_172
+
+@report lf_ll_173
+type observation
+observation lf_ll_173
+
+@report lf_ll_174
+type observation
+observation lf_ll_174
+
+@report lf_ll_175
+type observation
+observation lf_ll_175
+
+@report lf_ll_176
+type observation
+observation lf_ll_176
+
+@report lf_ll_177
+type observation
+observation lf_ll_177
+
+@report lf_ll_178
+type observation
+observation lf_ll_178
+
+@report lf_ll_180
+type observation
+observation lf_ll_180
+
+@report lf_ll_181
+type observation
+observation lf_ll_181
+
+@report lf_ll_182
+type observation
+observation lf_ll_182
+
+@report lf_ll_184
+type observation
+observation lf_ll_184
+
+@report lf_ll_185
+type observation
+observation lf_ll_185
+
+@report lf_ll_186
+type observation
+observation lf_ll_186
+
+@report lf_ll_187
+type observation
+observation lf_ll_187
+
+@report lf_ll_189
+type observation
+observation lf_ll_189
+
+@report lf_ll_190
+type observation
+observation lf_ll_190
+
+@report lf_ll_193
+type observation
+observation lf_ll_193
+
+@report lf_ll_194
+type observation
+observation lf_ll_194
+
+@report lf_ll_195
+type observation
+observation lf_ll_195
+
+@report lf_ll_196
+type observation
+observation lf_ll_196
+
+@report lf_ll_197
+type observation
+observation lf_ll_197
+
+@report lf_ll_198
+type observation
+observation lf_ll_198
+
+@report lf_ll_199
+type observation
+observation lf_ll_199
+
+@report lf_ll_200
+type observation
+observation lf_ll_200
+
+@report lf_ll_203
+type observation
+observation lf_ll_203
+
+@report lf_ll_204
+type observation
+observation lf_ll_204
+
+@report lf_ll_205
+type observation
+observation lf_ll_205
+
+@report lf_ll_208
+type observation
+observation lf_ll_208
+
+@report lf_ll_210
+type observation
+observation lf_ll_210
+
+@report lf_ll_211
+type observation
+observation lf_ll_211
+
+@report lf_ll_212
+type observation
+observation lf_ll_212
+
+@report lf_ll_214
+type observation
+observation lf_ll_214
+
+@report lf_ll_215
+type observation
+observation lf_ll_215
+
+@report lf_ll_217
+type observation
+observation lf_ll_217
+
+@report lf_ll_218
+type observation
+observation lf_ll_218
+
+@report lf_ll_219
+type observation
+observation lf_ll_219
+
+@report lf_ll_220
+type observation
+observation lf_ll_220
+
+@report lf_ll_221
+type observation
+observation lf_ll_221
+
+@report lf_ll_222
+type observation
+observation lf_ll_222
+
+@report lf_ll_223
+type observation
+observation lf_ll_223
+
+@report lf_ll_224
+type observation
+observation lf_ll_224
+
+@report lf_ll_225
+type observation
+observation lf_ll_225
+
+@report lf_ll_226
+type observation
+observation lf_ll_226
+
+@report lf_ll_229
+type observation
+observation lf_ll_229
+
+@report lf_ll_231
+type observation
+observation lf_ll_231
+
+@report lf_ll_232
+type observation
+observation lf_ll_232
+
+@report lf_ll_238
+type observation
+observation lf_ll_238
+
+@report lf_hand_205
+type observation
+observation lf_hand_205
+
+@report lf_hand_206
+type observation
+observation lf_hand_206
+
+@report lf_hand_207
+type observation
+observation lf_hand_207
+
+@report lf_hand_213
+type observation
+observation lf_hand_213
+
+@report lf_hand_214
+type observation
+observation lf_hand_214
+
+@report lf_hand_215
+type observation
+observation lf_hand_215
+
+@report lf_hand_216
+type observation
+observation lf_hand_216
+
+@report lf_hand_217
+type observation
+observation lf_hand_217
+
+@report lf_hand_218
+type observation
+observation lf_hand_218
+
+@report lf_hand_219
+type observation
+observation lf_hand_219
+
+@report lf_hand_220
+type observation
+observation lf_hand_220
+
+@report lf_hand_221
+type observation
+observation lf_hand_221
+
+@report lf_hand_222
+type observation
+observation lf_hand_222
+
+@report lf_hand_223
+type observation
+observation lf_hand_223
+
+@report lf_hand_224
+type observation
+observation lf_hand_224
+
+@report lf_hand_225
+type observation
+observation lf_hand_225
+
+@report lf_hand_226
+type observation
+observation lf_hand_226
+
+@report lf_hand_227
+type observation
+observation lf_hand_227
+
+@report lf_hand_228
+type observation
+observation lf_hand_228
+
+@report lf_hand_229
+type observation
+observation lf_hand_229
+
+@report lf_hand_230
+type observation
+observation lf_hand_230
+
+@report lf_hand_231
+type observation
+observation lf_hand_231
+
+@report lf_hand_232
+type observation
+observation lf_hand_232
+
+@report lf_hand_233
+type observation
+observation lf_hand_233
+
+@report lf_hand_234
+type observation
+observation lf_hand_234
+
+@report lf_hand_235
+type observation
+observation lf_hand_235
+
+@report lf_hand_236
+type observation
+observation lf_hand_236
+
+@report lf_hand_237
+type observation
+observation lf_hand_237
+
+@report lf_hand_238
+type observation
+observation lf_hand_238
+
+@report lf_hand_239
+type observation
+observation lf_hand_239
+
+@report lf_hand_240
+type observation
+observation lf_hand_240
+
+@report lf_hand_241
+type observation
+observation lf_hand_241
+
+@report lf_hand_242
+type observation
+observation lf_hand_242
+
+@report lf_hand_243
+type observation
+observation lf_hand_243
+
+@report lf_hand_244
+type observation
+observation lf_hand_244
+
+@report lf_hand_245
+type observation
+observation lf_hand_245
+
+@report lf_hand_246
+type observation
+observation lf_hand_246
+
+@report lf_hand_247
+type observation
+observation lf_hand_247
+
+@report lf_hand_248
+type observation
+observation lf_hand_248
+
+@report lf_hand_249
+type observation
+observation lf_hand_249
+
+@report lf_hand_250
+type observation
+observation lf_hand_250
+
+@report lf_hand_251
+type observation
+observation lf_hand_251
+
+@report lf_hand_252
+type observation
+observation lf_hand_252
+
+@report lf_hand_253
+type observation
+observation lf_hand_253
+
+@report lf_hand_254
+type observation
+observation lf_hand_254
+
+@report lf_hand_255
+type observation
+observation lf_hand_255
+
+@report lf_hand_256
+type observation
+observation lf_hand_256
+
+@report lf_other_138
+type observation
+observation lf_other_138
+
+@report lf_other_139
+type observation
+observation lf_other_139
+
+@report lf_other_140
+type observation
+observation lf_other_140
+
+@report lf_other_141
+type observation
+observation lf_other_141
+
+@report lf_other_142
+type observation
+observation lf_other_142
+
+@report lf_other_143
+type observation
+observation lf_other_143
+
+@report lf_other_144
+type observation
+observation lf_other_144
+
+@report lf_other_145
+type observation
+observation lf_other_145
+
+@report lf_other_146
+type observation
+observation lf_other_146
+
+@report lf_other_148
+type observation
+observation lf_other_148
+
+@report lf_other_149
+type observation
+observation lf_other_149
+
+@report lf_other_150
+type observation
+observation lf_other_150
+
+@report lf_other_151
+type observation
+observation lf_other_151
+
+@report lf_other_152
+type observation
+observation lf_other_152
+
+@report lf_other_153
+type observation
+observation lf_other_153
+
+@report lf_other_154
+type observation
+observation lf_other_154
+
+@report lf_other_155
+type observation
+observation lf_other_155
+
+@report lf_other_156
+type observation
+observation lf_other_156
+
+@report lf_other_157
+type observation
+observation lf_other_157
+
+@report lf_other_158
+type observation
+observation lf_other_158
+
+@report lf_other_159
+type observation
+observation lf_other_159
+
+@report lf_other_160
+type observation
+observation lf_other_160
+
+@report lf_other_161
+type observation
+observation lf_other_161
+
+@report lf_other_162
+type observation
+observation lf_other_162
+
+@report lf_other_163
+type observation
+observation lf_other_163
+
+@report lf_other_164
+type observation
+observation lf_other_164
+
+@report lf_other_165
+type observation
+observation lf_other_165
+
+@report lf_other_166
+type observation
+observation lf_other_166
+
+@report lf_other_167
+type observation
+observation lf_other_167
+
+@report lf_other_168
+type observation
+observation lf_other_168
+
+@report lf_other_169
+type observation
+observation lf_other_169
+
+@report lf_other_171
+type observation
+observation lf_other_171
+
+@report lf_other_172
+type observation
+observation lf_other_172
+
+@report lf_other_177
+type observation
+observation lf_other_177
+
+@report lf_other_178
+type observation
+observation lf_other_178
+
+@report lf_other_179
+type observation
+observation lf_other_179
+
+@report lf_other_180
+type observation
+observation lf_other_180
+
+@report lf_other_181
+type observation
+observation lf_other_181
+
+@report lf_other_182
+type observation
+observation lf_other_182
+
+@report lf_other_183
+type observation
+observation lf_other_183
+
+@report lf_other_184
+type observation
+observation lf_other_184
+
+@report lf_other_185
+type observation
+observation lf_other_185
+
+@report lf_other_186
+type observation
+observation lf_other_186
+
+@report lf_other_187
+type observation
+observation lf_other_187
+
+@report lf_other_188
+type observation
+observation lf_other_188
+
+@report lf_other_189
+type observation
+observation lf_other_189
+
+@report lf_other_190
+type observation
+observation lf_other_190
+
+@report lf_other_191
+type observation
+observation lf_other_191
+
+@report lf_other_192
+type observation
+observation lf_other_192
+
+@report lf_other_193
+type observation
+observation lf_other_193
+
+@report lf_other_194
+type observation
+observation lf_other_194
+
+@report lf_other_195
+type observation
+observation lf_other_195
+
+@report lf_other_196
+type observation
+observation lf_other_196
+
+@report lf_other_197
+type observation
+observation lf_other_197
+
+@report lf_other_198
+type observation
+observation lf_other_198
+
+@report lf_other_199
+type observation
+observation lf_other_199
+
+@report lf_other_201
+type observation
+observation lf_other_201
+
+@report lf_other_202
+type observation
+observation lf_other_202
+
+@report lf_other_203
+type observation
+observation lf_other_203
+
+@report lf_other_204
+type observation
+observation lf_other_204
+
+@report lf_other_205
+type observation
+observation lf_other_205
+
+@report lf_other_207
+type observation
+observation lf_other_207
+
+@report lf_other_208
+type observation
+observation lf_other_208
+
+@report lf_other_210
+type observation
+observation lf_other_210
+
+@report lf_other_218
+type observation
+observation lf_other_218
+
+@report lf_other_221
+type observation
+observation lf_other_221
+
+@report lf_other_224
+type observation
+observation lf_other_224
+
+@report lf_other_225
+type observation
+observation lf_other_225
+
+@report lf_other_227
+type observation
+observation lf_other_227
+
+@report lf_other_228
+type observation
+observation lf_other_228
+
+@report lf_other_229
+type observation
+observation lf_other_229
+
+@report lf_other_231
+type observation
+observation lf_other_231
+
+@report lf_other_233
+type observation
+observation lf_other_233
+
+@report lf_other_234
+type observation
+observation lf_other_234
+
+@report lf_other_235
+type observation
+observation lf_other_235
+
+@report lf_other_236
+type observation
+observation lf_other_236
+
+@report lf_other_237
+type observation
+observation lf_other_237
+
+@report lf_other_238
+type observation
+observation lf_other_238
+
+@report lf_other_239
+type observation
+observation lf_other_239
+
+@report lf_other_240
+type observation
+observation lf_other_240
+
+@report lf_other_241
+type observation
+observation lf_other_241
+
+@report lf_other_242
+type observation
+observation lf_other_242
+
+@report lf_other_243
+type observation
+observation lf_other_243
+
+@report lf_other_244
+type observation
+observation lf_other_244
+
+@report lf_other_245
+type observation
+observation lf_other_245
+
+@report lf_other_246
+type observation
+observation lf_other_246
+
+@report lf_other_247
+type observation
+observation lf_other_247
+
+@report lf_other_248
+type observation
+observation lf_other_248
+
+@report lf_other_249
+type observation
+observation lf_other_249
+
+@report lf_other_250
+type observation
+observation lf_other_250
+
+@report lf_other_251
+type observation
+observation lf_other_251
+
+@report lf_other_252
+type observation
+observation lf_other_252
+
+@report lf_other_253
+type observation
+observation lf_other_253
+
+@report lf_other_254
+type observation
+observation lf_other_254
+
+@report lf_other_255
+type observation
+observation lf_other_255
+
+@report lf_other_256
+type observation
+observation lf_other_256
+
+@report tag_recapture_214_in_215
+type observation
+observation tag_recapture_214_in_215
+
+@report tag_recapture_214_in_216
+type observation
+observation tag_recapture_214_in_216
+
+@report tag_recapture_215_in_216
+type observation
+observation tag_recapture_215_in_216
+
+@report tag_recapture_214_in_217
+type observation
+observation tag_recapture_214_in_217
+
+@report tag_recapture_215_in_217
+type observation
+observation tag_recapture_215_in_217
+
+@report tag_recapture_216_in_217
+type observation
+observation tag_recapture_216_in_217
+
+@report tag_recapture_214_in_218
+type observation
+observation tag_recapture_214_in_218
+
+@report tag_recapture_215_in_218
+type observation
+observation tag_recapture_215_in_218
+
+@report tag_recapture_216_in_218
+type observation
+observation tag_recapture_216_in_218
+
+@report tag_recapture_217_in_218
+type observation
+observation tag_recapture_217_in_218
+
+@report tag_recapture_214_in_219
+type observation
+observation tag_recapture_214_in_219
+
+@report tag_recapture_215_in_219
+type observation
+observation tag_recapture_215_in_219
+
+@report tag_recapture_216_in_219
+type observation
+observation tag_recapture_216_in_219
+
+@report tag_recapture_217_in_219
+type observation
+observation tag_recapture_217_in_219
+
+@report tag_recapture_218_in_219
+type observation
+observation tag_recapture_218_in_219
+
+@report tag_recapture_214_in_220
+type observation
+observation tag_recapture_214_in_220
+
+@report tag_recapture_215_in_220
+type observation
+observation tag_recapture_215_in_220
+
+@report tag_recapture_216_in_220
+type observation
+observation tag_recapture_216_in_220
+
+@report tag_recapture_217_in_220
+type observation
+observation tag_recapture_217_in_220
+
+@report tag_recapture_218_in_220
+type observation
+observation tag_recapture_218_in_220
+
+@report tag_recapture_219_in_220
+type observation
+observation tag_recapture_219_in_220
+
+@report tag_recapture_214_in_221
+type observation
+observation tag_recapture_214_in_221
+
+@report tag_recapture_215_in_221
+type observation
+observation tag_recapture_215_in_221
+
+@report tag_recapture_216_in_221
+type observation
+observation tag_recapture_216_in_221
+
+@report tag_recapture_217_in_221
+type observation
+observation tag_recapture_217_in_221
+
+@report tag_recapture_218_in_221
+type observation
+observation tag_recapture_218_in_221
+
+@report tag_recapture_219_in_221
+type observation
+observation tag_recapture_219_in_221
+
+@report tag_recapture_220_in_221
+type observation
+observation tag_recapture_220_in_221
+
+@report tag_recapture_214_in_222
+type observation
+observation tag_recapture_214_in_222
+
+@report tag_recapture_215_in_222
+type observation
+observation tag_recapture_215_in_222
+
+@report tag_recapture_216_in_222
+type observation
+observation tag_recapture_216_in_222
+
+@report tag_recapture_217_in_222
+type observation
+observation tag_recapture_217_in_222
+
+@report tag_recapture_218_in_222
+type observation
+observation tag_recapture_218_in_222
+
+@report tag_recapture_219_in_222
+type observation
+observation tag_recapture_219_in_222
+
+@report tag_recapture_220_in_222
+type observation
+observation tag_recapture_220_in_222
+
+@report tag_recapture_221_in_222
+type observation
+observation tag_recapture_221_in_222
+
+@report tag_recapture_214_in_223
+type observation
+observation tag_recapture_214_in_223
+
+@report tag_recapture_215_in_223
+type observation
+observation tag_recapture_215_in_223
+
+@report tag_recapture_216_in_223
+type observation
+observation tag_recapture_216_in_223
+
+@report tag_recapture_217_in_223
+type observation
+observation tag_recapture_217_in_223
+
+@report tag_recapture_218_in_223
+type observation
+observation tag_recapture_218_in_223
+
+@report tag_recapture_219_in_223
+type observation
+observation tag_recapture_219_in_223
+
+@report tag_recapture_220_in_223
+type observation
+observation tag_recapture_220_in_223
+
+@report tag_recapture_221_in_223
+type observation
+observation tag_recapture_221_in_223
+
+@report tag_recapture_222_in_223
+type observation
+observation tag_recapture_222_in_223
+
+@report tag_recapture_214_in_224
+type observation
+observation tag_recapture_214_in_224
+
+@report tag_recapture_215_in_224
+type observation
+observation tag_recapture_215_in_224
+
+@report tag_recapture_216_in_224
+type observation
+observation tag_recapture_216_in_224
+
+@report tag_recapture_217_in_224
+type observation
+observation tag_recapture_217_in_224
+
+@report tag_recapture_218_in_224
+type observation
+observation tag_recapture_218_in_224
+
+@report tag_recapture_219_in_224
+type observation
+observation tag_recapture_219_in_224
+
+@report tag_recapture_220_in_224
+type observation
+observation tag_recapture_220_in_224
+
+@report tag_recapture_221_in_224
+type observation
+observation tag_recapture_221_in_224
+
+@report tag_recapture_222_in_224
+type observation
+observation tag_recapture_222_in_224
+
+@report tag_recapture_223_in_224
+type observation
+observation tag_recapture_223_in_224
+
+@report tag_recapture_214_in_225
+type observation
+observation tag_recapture_214_in_225
+
+@report tag_recapture_215_in_225
+type observation
+observation tag_recapture_215_in_225
+
+@report tag_recapture_216_in_225
+type observation
+observation tag_recapture_216_in_225
+
+@report tag_recapture_217_in_225
+type observation
+observation tag_recapture_217_in_225
+
+@report tag_recapture_218_in_225
+type observation
+observation tag_recapture_218_in_225
+
+@report tag_recapture_219_in_225
+type observation
+observation tag_recapture_219_in_225
+
+@report tag_recapture_220_in_225
+type observation
+observation tag_recapture_220_in_225
+
+@report tag_recapture_221_in_225
+type observation
+observation tag_recapture_221_in_225
+
+@report tag_recapture_222_in_225
+type observation
+observation tag_recapture_222_in_225
+
+@report tag_recapture_223_in_225
+type observation
+observation tag_recapture_223_in_225
+
+@report tag_recapture_214_in_226
+type observation
+observation tag_recapture_214_in_226
+
+@report tag_recapture_215_in_226
+type observation
+observation tag_recapture_215_in_226
+
+@report tag_recapture_216_in_226
+type observation
+observation tag_recapture_216_in_226
+
+@report tag_recapture_217_in_226
+type observation
+observation tag_recapture_217_in_226
+
+@report tag_recapture_218_in_226
+type observation
+observation tag_recapture_218_in_226
+
+@report tag_recapture_219_in_226
+type observation
+observation tag_recapture_219_in_226
+
+@report tag_recapture_220_in_226
+type observation
+observation tag_recapture_220_in_226
+
+@report tag_recapture_221_in_226
+type observation
+observation tag_recapture_221_in_226
+
+@report tag_recapture_222_in_226
+type observation
+observation tag_recapture_222_in_226
+
+@report tag_recapture_223_in_226
+type observation
+observation tag_recapture_223_in_226
+
+@report tag_recapture_214_in_227
+type observation
+observation tag_recapture_214_in_227
+
+@report tag_recapture_215_in_227
+type observation
+observation tag_recapture_215_in_227
+
+@report tag_recapture_216_in_227
+type observation
+observation tag_recapture_216_in_227
+
+@report tag_recapture_217_in_227
+type observation
+observation tag_recapture_217_in_227
+
+@report tag_recapture_218_in_227
+type observation
+observation tag_recapture_218_in_227
+
+@report tag_recapture_219_in_227
+type observation
+observation tag_recapture_219_in_227
+
+@report tag_recapture_220_in_227
+type observation
+observation tag_recapture_220_in_227
+
+@report tag_recapture_221_in_227
+type observation
+observation tag_recapture_221_in_227
+
+@report tag_recapture_222_in_227
+type observation
+observation tag_recapture_222_in_227
+
+@report tag_recapture_223_in_227
+type observation
+observation tag_recapture_223_in_227
+
+@report tag_recapture_214_in_228
+type observation
+observation tag_recapture_214_in_228
+
+@report tag_recapture_215_in_228
+type observation
+observation tag_recapture_215_in_228
+
+@report tag_recapture_216_in_228
+type observation
+observation tag_recapture_216_in_228
+
+@report tag_recapture_217_in_228
+type observation
+observation tag_recapture_217_in_228
+
+@report tag_recapture_218_in_228
+type observation
+observation tag_recapture_218_in_228
+
+@report tag_recapture_219_in_228
+type observation
+observation tag_recapture_219_in_228
+
+@report tag_recapture_220_in_228
+type observation
+observation tag_recapture_220_in_228
+
+@report tag_recapture_221_in_228
+type observation
+observation tag_recapture_221_in_228
+
+@report tag_recapture_222_in_228
+type observation
+observation tag_recapture_222_in_228
+
+@report tag_recapture_223_in_228
+type observation
+observation tag_recapture_223_in_228
+
+@report tag_recapture_214_in_229
+type observation
+observation tag_recapture_214_in_229
+
+@report tag_recapture_215_in_229
+type observation
+observation tag_recapture_215_in_229
+
+@report tag_recapture_216_in_229
+type observation
+observation tag_recapture_216_in_229
+
+@report tag_recapture_217_in_229
+type observation
+observation tag_recapture_217_in_229
+
+@report tag_recapture_218_in_229
+type observation
+observation tag_recapture_218_in_229
+
+@report tag_recapture_219_in_229
+type observation
+observation tag_recapture_219_in_229
+
+@report tag_recapture_220_in_229
+type observation
+observation tag_recapture_220_in_229
+
+@report tag_recapture_221_in_229
+type observation
+observation tag_recapture_221_in_229
+
+@report tag_recapture_222_in_229
+type observation
+observation tag_recapture_222_in_229
+
+@report tag_recapture_223_in_229
+type observation
+observation tag_recapture_223_in_229
+
+@report tag_recapture_214_in_230
+type observation
+observation tag_recapture_214_in_230
+
+@report tag_recapture_215_in_230
+type observation
+observation tag_recapture_215_in_230
+
+@report tag_recapture_216_in_230
+type observation
+observation tag_recapture_216_in_230
+
+@report tag_recapture_217_in_230
+type observation
+observation tag_recapture_217_in_230
+
+@report tag_recapture_218_in_230
+type observation
+observation tag_recapture_218_in_230
+
+@report tag_recapture_219_in_230
+type observation
+observation tag_recapture_219_in_230
+
+@report tag_recapture_220_in_230
+type observation
+observation tag_recapture_220_in_230
+
+@report tag_recapture_221_in_230
+type observation
+observation tag_recapture_221_in_230
+
+@report tag_recapture_222_in_230
+type observation
+observation tag_recapture_222_in_230
+
+@report tag_recapture_223_in_230
+type observation
+observation tag_recapture_223_in_230
+
+@report tag_recapture_214_in_231
+type observation
+observation tag_recapture_214_in_231
+
+@report tag_recapture_215_in_231
+type observation
+observation tag_recapture_215_in_231
+
+@report tag_recapture_216_in_231
+type observation
+observation tag_recapture_216_in_231
+
+@report tag_recapture_217_in_231
+type observation
+observation tag_recapture_217_in_231
+
+@report tag_recapture_218_in_231
+type observation
+observation tag_recapture_218_in_231
+
+@report tag_recapture_219_in_231
+type observation
+observation tag_recapture_219_in_231
+
+@report tag_recapture_220_in_231
+type observation
+observation tag_recapture_220_in_231
+
+@report tag_recapture_221_in_231
+type observation
+observation tag_recapture_221_in_231
+
+@report tag_recapture_222_in_231
+type observation
+observation tag_recapture_222_in_231
+
+@report tag_recapture_223_in_231
+type observation
+observation tag_recapture_223_in_231
+
+@report tag_recapture_214_in_232
+type observation
+observation tag_recapture_214_in_232
+
+@report tag_recapture_215_in_232
+type observation
+observation tag_recapture_215_in_232
+
+@report tag_recapture_216_in_232
+type observation
+observation tag_recapture_216_in_232
+
+@report tag_recapture_217_in_232
+type observation
+observation tag_recapture_217_in_232
+
+@report tag_recapture_218_in_232
+type observation
+observation tag_recapture_218_in_232
+
+@report tag_recapture_219_in_232
+type observation
+observation tag_recapture_219_in_232
+
+@report tag_recapture_220_in_232
+type observation
+observation tag_recapture_220_in_232
+
+@report tag_recapture_221_in_232
+type observation
+observation tag_recapture_221_in_232
+
+@report tag_recapture_222_in_232
+type observation
+observation tag_recapture_222_in_232
+
+@report tag_recapture_223_in_232
+type observation
+observation tag_recapture_223_in_232
+
+@report tag_recapture_214_in_233
+type observation
+observation tag_recapture_214_in_233
+
+@report tag_recapture_215_in_233
+type observation
+observation tag_recapture_215_in_233
+
+@report tag_recapture_216_in_233
+type observation
+observation tag_recapture_216_in_233
+
+@report tag_recapture_217_in_233
+type observation
+observation tag_recapture_217_in_233
+
+@report tag_recapture_218_in_233
+type observation
+observation tag_recapture_218_in_233
+
+@report tag_recapture_219_in_233
+type observation
+observation tag_recapture_219_in_233
+
+@report tag_recapture_220_in_233
+type observation
+observation tag_recapture_220_in_233
+
+@report tag_recapture_221_in_233
+type observation
+observation tag_recapture_221_in_233
+
+@report tag_recapture_222_in_233
+type observation
+observation tag_recapture_222_in_233
+
+@report tag_recapture_223_in_233
+type observation
+observation tag_recapture_223_in_233
+
+@report tag_recapture_214_in_234
+type observation
+observation tag_recapture_214_in_234
+
+@report tag_recapture_215_in_234
+type observation
+observation tag_recapture_215_in_234
+
+@report tag_recapture_216_in_234
+type observation
+observation tag_recapture_216_in_234
+
+@report tag_recapture_217_in_234
+type observation
+observation tag_recapture_217_in_234
+
+@report tag_recapture_218_in_234
+type observation
+observation tag_recapture_218_in_234
+
+@report tag_recapture_219_in_234
+type observation
+observation tag_recapture_219_in_234
+
+@report tag_recapture_220_in_234
+type observation
+observation tag_recapture_220_in_234
+
+@report tag_recapture_221_in_234
+type observation
+observation tag_recapture_221_in_234
+
+@report tag_recapture_222_in_234
+type observation
+observation tag_recapture_222_in_234
+
+@report tag_recapture_223_in_234
+type observation
+observation tag_recapture_223_in_234
+
+@report tag_recapture_214_in_235
+type observation
+observation tag_recapture_214_in_235
+
+@report tag_recapture_215_in_235
+type observation
+observation tag_recapture_215_in_235
+
+@report tag_recapture_216_in_235
+type observation
+observation tag_recapture_216_in_235
+
+@report tag_recapture_217_in_235
+type observation
+observation tag_recapture_217_in_235
+
+@report tag_recapture_218_in_235
+type observation
+observation tag_recapture_218_in_235
+
+@report tag_recapture_219_in_235
+type observation
+observation tag_recapture_219_in_235
+
+@report tag_recapture_220_in_235
+type observation
+observation tag_recapture_220_in_235
+
+@report tag_recapture_221_in_235
+type observation
+observation tag_recapture_221_in_235
+
+@report tag_recapture_222_in_235
+type observation
+observation tag_recapture_222_in_235
+
+@report tag_recapture_223_in_235
+type observation
+observation tag_recapture_223_in_235
+
+@report tag_recapture_214_in_236
+type observation
+observation tag_recapture_214_in_236
+
+@report tag_recapture_215_in_236
+type observation
+observation tag_recapture_215_in_236
+
+@report tag_recapture_216_in_236
+type observation
+observation tag_recapture_216_in_236
+
+@report tag_recapture_217_in_236
+type observation
+observation tag_recapture_217_in_236
+
+@report tag_recapture_218_in_236
+type observation
+observation tag_recapture_218_in_236
+
+@report tag_recapture_219_in_236
+type observation
+observation tag_recapture_219_in_236
+
+@report tag_recapture_220_in_236
+type observation
+observation tag_recapture_220_in_236
+
+@report tag_recapture_221_in_236
+type observation
+observation tag_recapture_221_in_236
+
+@report tag_recapture_222_in_236
+type observation
+observation tag_recapture_222_in_236
+
+@report tag_recapture_223_in_236
+type observation
+observation tag_recapture_223_in_236
+
+@report tag_recapture_214_in_237
+type observation
+observation tag_recapture_214_in_237
+
+@report tag_recapture_215_in_237
+type observation
+observation tag_recapture_215_in_237
+
+@report tag_recapture_216_in_237
+type observation
+observation tag_recapture_216_in_237
+
+@report tag_recapture_217_in_237
+type observation
+observation tag_recapture_217_in_237
+
+@report tag_recapture_218_in_237
+type observation
+observation tag_recapture_218_in_237
+
+@report tag_recapture_219_in_237
+type observation
+observation tag_recapture_219_in_237
+
+@report tag_recapture_220_in_237
+type observation
+observation tag_recapture_220_in_237
+
+@report tag_recapture_221_in_237
+type observation
+observation tag_recapture_221_in_237
+
+@report tag_recapture_222_in_237
+type observation
+observation tag_recapture_222_in_237
+
+@report tag_recapture_223_in_237
+type observation
+observation tag_recapture_223_in_237
+
+@report tag_recapture_214_in_238
+type observation
+observation tag_recapture_214_in_238
+
+@report tag_recapture_215_in_238
+type observation
+observation tag_recapture_215_in_238
+
+@report tag_recapture_216_in_238
+type observation
+observation tag_recapture_216_in_238
+
+@report tag_recapture_217_in_238
+type observation
+observation tag_recapture_217_in_238
+
+@report tag_recapture_218_in_238
+type observation
+observation tag_recapture_218_in_238
+
+@report tag_recapture_219_in_238
+type observation
+observation tag_recapture_219_in_238
+
+@report tag_recapture_220_in_238
+type observation
+observation tag_recapture_220_in_238
+
+@report tag_recapture_221_in_238
+type observation
+observation tag_recapture_221_in_238
+
+@report tag_recapture_222_in_238
+type observation
+observation tag_recapture_222_in_238
+
+@report tag_recapture_223_in_238
+type observation
+observation tag_recapture_223_in_238
+
+@report tag_recapture_214_in_239
+type observation
+observation tag_recapture_214_in_239
+
+@report tag_recapture_215_in_239
+type observation
+observation tag_recapture_215_in_239
+
+@report tag_recapture_216_in_239
+type observation
+observation tag_recapture_216_in_239
+
+@report tag_recapture_217_in_239
+type observation
+observation tag_recapture_217_in_239
+
+@report tag_recapture_218_in_239
+type observation
+observation tag_recapture_218_in_239
+
+@report tag_recapture_219_in_239
+type observation
+observation tag_recapture_219_in_239
+
+@report tag_recapture_220_in_239
+type observation
+observation tag_recapture_220_in_239
+
+@report tag_recapture_221_in_239
+type observation
+observation tag_recapture_221_in_239
+
+@report tag_recapture_222_in_239
+type observation
+observation tag_recapture_222_in_239
+
+@report tag_recapture_223_in_239
+type observation
+observation tag_recapture_223_in_239
+
+@report tag_recapture_214_in_240
+type observation
+observation tag_recapture_214_in_240
+
+@report tag_recapture_215_in_240
+type observation
+observation tag_recapture_215_in_240
+
+@report tag_recapture_216_in_240
+type observation
+observation tag_recapture_216_in_240
+
+@report tag_recapture_217_in_240
+type observation
+observation tag_recapture_217_in_240
+
+@report tag_recapture_218_in_240
+type observation
+observation tag_recapture_218_in_240
+
+@report tag_recapture_219_in_240
+type observation
+observation tag_recapture_219_in_240
+
+@report tag_recapture_220_in_240
+type observation
+observation tag_recapture_220_in_240
+
+@report tag_recapture_221_in_240
+type observation
+observation tag_recapture_221_in_240
+
+@report tag_recapture_222_in_240
+type observation
+observation tag_recapture_222_in_240
+
+@report tag_recapture_223_in_240
+type observation
+observation tag_recapture_223_in_240
+
+@report tag_recapture_214_in_241
+type observation
+observation tag_recapture_214_in_241
+
+@report tag_recapture_215_in_241
+type observation
+observation tag_recapture_215_in_241
+
+@report tag_recapture_216_in_241
+type observation
+observation tag_recapture_216_in_241
+
+@report tag_recapture_217_in_241
+type observation
+observation tag_recapture_217_in_241
+
+@report tag_recapture_218_in_241
+type observation
+observation tag_recapture_218_in_241
+
+@report tag_recapture_219_in_241
+type observation
+observation tag_recapture_219_in_241
+
+@report tag_recapture_220_in_241
+type observation
+observation tag_recapture_220_in_241
+
+@report tag_recapture_221_in_241
+type observation
+observation tag_recapture_221_in_241
+
+@report tag_recapture_222_in_241
+type observation
+observation tag_recapture_222_in_241
+
+@report tag_recapture_223_in_241
+type observation
+observation tag_recapture_223_in_241
+
+@report tag_recapture_214_in_242
+type observation
+observation tag_recapture_214_in_242
+
+@report tag_recapture_215_in_242
+type observation
+observation tag_recapture_215_in_242
+
+@report tag_recapture_216_in_242
+type observation
+observation tag_recapture_216_in_242
+
+@report tag_recapture_217_in_242
+type observation
+observation tag_recapture_217_in_242
+
+@report tag_recapture_218_in_242
+type observation
+observation tag_recapture_218_in_242
+
+@report tag_recapture_219_in_242
+type observation
+observation tag_recapture_219_in_242
+
+@report tag_recapture_220_in_242
+type observation
+observation tag_recapture_220_in_242
+
+@report tag_recapture_221_in_242
+type observation
+observation tag_recapture_221_in_242
+
+@report tag_recapture_222_in_242
+type observation
+observation tag_recapture_222_in_242
+
+@report tag_recapture_223_in_242
+type observation
+observation tag_recapture_223_in_242
+
+@report tag_recapture_214_in_243
+type observation
+observation tag_recapture_214_in_243
+
+@report tag_recapture_215_in_243
+type observation
+observation tag_recapture_215_in_243
+
+@report tag_recapture_216_in_243
+type observation
+observation tag_recapture_216_in_243
+
+@report tag_recapture_217_in_243
+type observation
+observation tag_recapture_217_in_243
+
+@report tag_recapture_218_in_243
+type observation
+observation tag_recapture_218_in_243
+
+@report tag_recapture_219_in_243
+type observation
+observation tag_recapture_219_in_243
+
+@report tag_recapture_220_in_243
+type observation
+observation tag_recapture_220_in_243
+
+@report tag_recapture_221_in_243
+type observation
+observation tag_recapture_221_in_243
+
+@report tag_recapture_222_in_243
+type observation
+observation tag_recapture_222_in_243
+
+@report tag_recapture_223_in_243
+type observation
+observation tag_recapture_223_in_243
+
+@report tag_recapture_214_in_244
+type observation
+observation tag_recapture_214_in_244
+
+@report tag_recapture_215_in_244
+type observation
+observation tag_recapture_215_in_244
+
+@report tag_recapture_216_in_244
+type observation
+observation tag_recapture_216_in_244
+
+@report tag_recapture_217_in_244
+type observation
+observation tag_recapture_217_in_244
+
+@report tag_recapture_218_in_244
+type observation
+observation tag_recapture_218_in_244
+
+@report tag_recapture_219_in_244
+type observation
+observation tag_recapture_219_in_244
+
+@report tag_recapture_220_in_244
+type observation
+observation tag_recapture_220_in_244
+
+@report tag_recapture_221_in_244
+type observation
+observation tag_recapture_221_in_244
+
+@report tag_recapture_222_in_244
+type observation
+observation tag_recapture_222_in_244
+
+@report tag_recapture_223_in_244
+type observation
+observation tag_recapture_223_in_244
+
+@report tag_recapture_214_in_245
+type observation
+observation tag_recapture_214_in_245
+
+@report tag_recapture_215_in_245
+type observation
+observation tag_recapture_215_in_245
+
+@report tag_recapture_216_in_245
+type observation
+observation tag_recapture_216_in_245
+
+@report tag_recapture_217_in_245
+type observation
+observation tag_recapture_217_in_245
+
+@report tag_recapture_218_in_245
+type observation
+observation tag_recapture_218_in_245
+
+@report tag_recapture_219_in_245
+type observation
+observation tag_recapture_219_in_245
+
+@report tag_recapture_220_in_245
+type observation
+observation tag_recapture_220_in_245
+
+@report tag_recapture_221_in_245
+type observation
+observation tag_recapture_221_in_245
+
+@report tag_recapture_222_in_245
+type observation
+observation tag_recapture_222_in_245
+
+@report tag_recapture_223_in_245
+type observation
+observation tag_recapture_223_in_245
+
+@report tag_recapture_214_in_246
+type observation
+observation tag_recapture_214_in_246
+
+@report tag_recapture_215_in_246
+type observation
+observation tag_recapture_215_in_246
+
+@report tag_recapture_216_in_246
+type observation
+observation tag_recapture_216_in_246
+
+@report tag_recapture_217_in_246
+type observation
+observation tag_recapture_217_in_246
+
+@report tag_recapture_218_in_246
+type observation
+observation tag_recapture_218_in_246
+
+@report tag_recapture_219_in_246
+type observation
+observation tag_recapture_219_in_246
+
+@report tag_recapture_220_in_246
+type observation
+observation tag_recapture_220_in_246
+
+@report tag_recapture_221_in_246
+type observation
+observation tag_recapture_221_in_246
+
+@report tag_recapture_222_in_246
+type observation
+observation tag_recapture_222_in_246
+
+@report tag_recapture_223_in_246
+type observation
+observation tag_recapture_223_in_246
+
+@report tag_recapture_214_in_247
+type observation
+observation tag_recapture_214_in_247
+
+@report tag_recapture_215_in_247
+type observation
+observation tag_recapture_215_in_247
+
+@report tag_recapture_216_in_247
+type observation
+observation tag_recapture_216_in_247
+
+@report tag_recapture_217_in_247
+type observation
+observation tag_recapture_217_in_247
+
+@report tag_recapture_218_in_247
+type observation
+observation tag_recapture_218_in_247
+
+@report tag_recapture_219_in_247
+type observation
+observation tag_recapture_219_in_247
+
+@report tag_recapture_220_in_247
+type observation
+observation tag_recapture_220_in_247
+
+@report tag_recapture_221_in_247
+type observation
+observation tag_recapture_221_in_247
+
+@report tag_recapture_222_in_247
+type observation
+observation tag_recapture_222_in_247
+
+@report tag_recapture_223_in_247
+type observation
+observation tag_recapture_223_in_247
+
+@report tag_recapture_214_in_249
+type observation
+observation tag_recapture_214_in_249
+
+@report tag_recapture_215_in_249
+type observation
+observation tag_recapture_215_in_249
+
+@report tag_recapture_216_in_249
+type observation
+observation tag_recapture_216_in_249
+
+@report tag_recapture_217_in_249
+type observation
+observation tag_recapture_217_in_249
+
+@report tag_recapture_218_in_249
+type observation
+observation tag_recapture_218_in_249
+
+@report tag_recapture_219_in_249
+type observation
+observation tag_recapture_219_in_249
+
+@report tag_recapture_220_in_249
+type observation
+observation tag_recapture_220_in_249
+
+@report tag_recapture_221_in_249
+type observation
+observation tag_recapture_221_in_249
+
+@report tag_recapture_222_in_249
+type observation
+observation tag_recapture_222_in_249
+
+@report tag_recapture_223_in_249
+type observation
+observation tag_recapture_223_in_249
+
+@report tag_recapture_214_in_250
+type observation
+observation tag_recapture_214_in_250
+
+@report tag_recapture_215_in_250
+type observation
+observation tag_recapture_215_in_250
+
+@report tag_recapture_216_in_250
+type observation
+observation tag_recapture_216_in_250
+
+@report tag_recapture_217_in_250
+type observation
+observation tag_recapture_217_in_250
+
+@report tag_recapture_218_in_250
+type observation
+observation tag_recapture_218_in_250
+
+@report tag_recapture_219_in_250
+type observation
+observation tag_recapture_219_in_250
+
+@report tag_recapture_220_in_250
+type observation
+observation tag_recapture_220_in_250
+
+@report tag_recapture_221_in_250
+type observation
+observation tag_recapture_221_in_250
+
+@report tag_recapture_222_in_250
+type observation
+observation tag_recapture_222_in_250
+
+@report tag_recapture_223_in_250
+type observation
+observation tag_recapture_223_in_250
+
+@report tag_recapture_214_in_251
+type observation
+observation tag_recapture_214_in_251
+
+@report tag_recapture_215_in_251
+type observation
+observation tag_recapture_215_in_251
+
+@report tag_recapture_216_in_251
+type observation
+observation tag_recapture_216_in_251
+
+@report tag_recapture_217_in_251
+type observation
+observation tag_recapture_217_in_251
+
+@report tag_recapture_218_in_251
+type observation
+observation tag_recapture_218_in_251
+
+@report tag_recapture_219_in_251
+type observation
+observation tag_recapture_219_in_251
+
+@report tag_recapture_220_in_251
+type observation
+observation tag_recapture_220_in_251
+
+@report tag_recapture_221_in_251
+type observation
+observation tag_recapture_221_in_251
+
+@report tag_recapture_222_in_251
+type observation
+observation tag_recapture_222_in_251
+
+@report tag_recapture_223_in_251
+type observation
+observation tag_recapture_223_in_251
+
+@report tag_recapture_214_in_253
+type observation
+observation tag_recapture_214_in_253
+
+@report tag_recapture_215_in_253
+type observation
+observation tag_recapture_215_in_253
+
+@report tag_recapture_216_in_253
+type observation
+observation tag_recapture_216_in_253
+
+@report tag_recapture_217_in_253
+type observation
+observation tag_recapture_217_in_253
+
+@report tag_recapture_218_in_253
+type observation
+observation tag_recapture_218_in_253
+
+@report tag_recapture_219_in_253
+type observation
+observation tag_recapture_219_in_253
+
+@report tag_recapture_220_in_253
+type observation
+observation tag_recapture_220_in_253
+
+@report tag_recapture_221_in_253
+type observation
+observation tag_recapture_221_in_253
+
+@report tag_recapture_222_in_253
+type observation
+observation tag_recapture_222_in_253
+
+@report tag_recapture_223_in_253
+type observation
+observation tag_recapture_223_in_253
+
+@report tag_recapture_214_in_254
+type observation
+observation tag_recapture_214_in_254
+
+@report tag_recapture_215_in_254
+type observation
+observation tag_recapture_215_in_254
+
+@report tag_recapture_216_in_254
+type observation
+observation tag_recapture_216_in_254
+
+@report tag_recapture_217_in_254
+type observation
+observation tag_recapture_217_in_254
+
+@report tag_recapture_218_in_254
+type observation
+observation tag_recapture_218_in_254
+
+@report tag_recapture_219_in_254
+type observation
+observation tag_recapture_219_in_254
+
+@report tag_recapture_220_in_254
+type observation
+observation tag_recapture_220_in_254
+
+@report tag_recapture_221_in_254
+type observation
+observation tag_recapture_221_in_254
+
+@report tag_recapture_222_in_254
+type observation
+observation tag_recapture_222_in_254
+
+@report tag_recapture_223_in_254
+type observation
+observation tag_recapture_223_in_254
+
+

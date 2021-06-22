@@ -1,0 +1,211 @@
+# Model R1.00/model config 
+# Wed May 13 15:15:42 2020 
+
+@estimation 
+minimiser GammaDiff
+
+@minimiser GammaDiff
+type numerical_differences
+tolerance 0.02
+covariance True
+
+#@estimate process[BHrecruitment].r0
+#type uniform
+#lower_bound 1e3
+#upper_bound 1e10
+
+@estimate process[BHrecruitment].ycs_values
+type uniform
+lower_bound 0.01
+upper_bound 100
+
+@catchability ll_jpn_q
+q 0.1
+
+@estimate selectivity[fishing_ps_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_ps_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_ps_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_trol_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_trol_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_trol_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_bb_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_bb_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_bb_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_gill_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_gill_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_gill_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_ll_sel].a50
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_ll_sel].ato95
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_hand_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_hand_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_hand_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_other_sel].mu
+type uniform
+lower_bound 1
+upper_bound 30
+
+@estimate selectivity[fishing_other_sel].sigma_l
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate selectivity[fishing_other_sel].sigma_r
+type uniform
+lower_bound 1
+upper_bound 100
+
+@estimate preference_function[distanceMature].lambda
+lower_bound 1e-06
+upper_bound 10
+type uniform
+
+@estimate preference_function[SSTmature].a50
+lower_bound 5
+upper_bound 60
+type uniform
+
+@estimate preference_function[SSTmature].ato95
+lower_bound 1
+upper_bound 100
+type uniform
+
+@estimate preference_function[CLOmature].a50
+lower_bound -20
+upper_bound 20
+type uniform
+
+@estimate preference_function[CLOmature].ato95
+lower_bound 0.1
+upper_bound 100
+type uniform
+
+@estimate preference_function[distanceImmature].lambda
+lower_bound 1e-06
+upper_bound 10
+type uniform
+
+@estimate preference_function[SSTimmature].a50
+lower_bound 5
+upper_bound 60
+type uniform
+
+@estimate preference_function[SSTimmature].ato95
+lower_bound 1
+upper_bound 100
+type uniform
+
+@estimate preference_function[CLOimmature].a50
+lower_bound -20
+upper_bound 20
+type uniform
+
+@estimate preference_function[CLOimmature].ato95
+lower_bound 0.1
+upper_bound 100
+type uniform
+
+@estimate catchability[ll_jpn_q].q
+lower_bound 1e-07
+upper_bound 0.5
+type uniform
+
+@penalty fishing_ps_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_trol_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_bb_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_gill_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_ll_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_hand_penalty
+log_scale True
+multiplier 10
+
+@penalty fishing_other_penalty
+log_scale True
+multiplier 10
+
+@penalty tag_release_penalty
+log_scale True
+multiplier 10
+

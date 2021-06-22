@@ -73,12 +73,16 @@ def start():
 	elif build_target == "rlibrary":
 		rlibrary = RLibrary()
 		return rlibrary.start()
+	elif build_target == "rinstall":
+		Globals.install_r_library = "true"
+		rlibrary = RLibrary()
+		return rlibrary.start()
 	elif build_target == "installer":
 		installer = Installer()
 		return installer.start()
-	elif build_target == "deb":
-		deb_builder = DebBuilder()
-		return deb_builder.start(build_parameters)
+#	elif build_target == "deb":
+#		deb_builder = DebBuilder()
+#		return deb_builder.start(build_parameters)
 	elif build_target == "version":
 		version = Version()
 		return version.create_version_header()
