@@ -14,3 +14,4 @@ The suitable reference for citing the original version of SPM is: Dunn, A.; Rasm
 The current release version is 2.0.3. See the user manual for the more information, the most recent build, and a suitable reference for SPM.
 
 [![CodeFactor](https://www.codefactor.io/repository/github/alistairdunn1/spm/badge)](https://www.codefactor.io/repository/github/alistairdunn1/spm)
+[![Build Status](https://dev.azure.com/OceanEnvironmental/SPM/_apis/build/status/alistairdunn1.SPM?branchName=master)](https://dev.azure.com/OceanEnvironmental/SPM/_build/latest?definitionId=1&branchName=master)
